@@ -1,0 +1,3552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Himalayan Trek &amp; Yoga Immersion — Great D'Tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+
+    /* ===================================================
+       EXPERIENCE DETAIL PAGE
+       =================================================== */
+
+    /* ---- Hero Image ---- */
+    .exp-hero {
+      height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    /* ---- Title Section ---- */
+    .exp-title-section {
+      background: var(--white);
+      padding: 28px 0 24px;
+    }
+    .exp-title-section .container { max-width: 1280px; padding: 0 60px; }
+
+    .exp-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--warm-gray);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .exp-back:hover { color: var(--orange); }
+    .exp-back svg { flex-shrink: 0; }
+
+    .exp-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .exp-category {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .exp-title-h1 {
+      font-family: var(--font-sans);
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #101828;
+      margin-bottom: 14px;
+    }
+
+    .exp-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .exp-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: var(--warm-gray);
+    }
+    .exp-meta-item svg { flex-shrink: 0; color: var(--warm-gray); }
+
+    .exp-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .exp-rating__score {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    .exp-rating__count {
+      font-size: 12px;
+      color: #4a5565;
+    }
+    .exp-rating__stars {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      color: #f59e0b;
+      font-size: 14px;
+    }
+
+    .exp-share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--warm-gray);
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .exp-share-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ---- Sticky Tab Nav ---- */
+    .exp-tabs {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 99;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .exp-tabs .container { max-width: 1280px; padding: 0 60px; }
+    .exp-tabs__list {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .exp-tabs__item {
+      position: relative;
+      padding: 13px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: #364153;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s;
+      user-select: none;
+    }
+    .exp-tabs__item::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .exp-tabs__item:hover { color: var(--orange); }
+    .exp-tabs__item.active {
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .exp-tabs__item.active::after { opacity: 1; }
+
+    /* Tab panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ---- Main Layout ---- */
+    .exp-body {
+      background: #f9fafb;
+      padding: 40px 0 80px;
+    }
+    .exp-body .container { max-width: 1280px; padding: 0 60px; }
+
+    .exp-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ---- Content Column ---- */
+    .exp-content { min-width: 0; }
+
+    /* About Section */
+    .exp-section { margin-bottom: 48px; }
+    .exp-section__title {
+      font-family: var(--font-sans);
+      font-size: 22px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 20px;
+    }
+    .exp-about__text {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--warm-gray);
+      margin-bottom: 32px;
+    }
+
+    /* Trust badges */
+    .exp-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-bottom: 0;
+    }
+    .exp-trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .exp-trust-item__icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--orange);
+    }
+    .exp-trust-item__label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 2px;
+    }
+    .exp-trust-item__sub {
+      font-size: 12px;
+      color: var(--warm-gray);
+    }
+
+    /* Highlights */
+    .exp-highlights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .exp-highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .exp-highlight-dot {
+      width: 20px;
+      height: 20px;
+      background: #f69a39;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 11px;
+      color: white;
+      font-weight: 600;
+    }
+    .exp-highlight-text {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--warm-gray);
+    }
+
+    /* Divider */
+    .exp-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* Reviews */
+    .exp-reviews-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .exp-review-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .exp-review-card:last-child { margin-bottom: 0; }
+
+    .exp-review-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .exp-reviewer-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 2px;
+    }
+    .exp-reviewer-date {
+      font-size: 12px;
+      color: var(--warm-gray);
+    }
+    .exp-verified-badge {
+      display: inline-block;
+      background: rgba(34,197,94,0.1);
+      color: #22c55e;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 100px;
+      padding: 2px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .exp-review-stars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #f59e0b;
+      font-size: 14px;
+    }
+    .exp-review-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--warm-gray);
+    }
+
+    /* ---- Sidebar ---- */
+    .exp-sidebar {
+      position: sticky;
+      top: calc(var(--nav-h) + 48px);
+    }
+
+    .exp-booking-card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 1px 6px rgba(0,0,0,0.06);
+      padding: 32px;
+    }
+
+    .exp-price-row {
+      margin-bottom: 24px;
+    }
+    .exp-price-main {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0a0a0a;
+      display: inline;
+    }
+    .exp-price-per {
+      font-size: 15px;
+      color: var(--warm-gray);
+      margin-left: 6px;
+    }
+    .exp-price-note {
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-top: 4px;
+    }
+
+    /* Coupon section */
+    .exp-coupon-box {
+      background: #fef9f5;
+      border: 1px solid rgba(246,154,57,0.25);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .exp-coupon-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 12px;
+    }
+    .exp-coupon-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .exp-coupon-input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-family: var(--font-sans);
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .exp-coupon-input::placeholder { text-transform: uppercase; color: rgba(10,10,10,0.4); }
+    .exp-coupon-input:focus { border-color: var(--orange); }
+    .exp-coupon-apply {
+      background: #e5e5e5;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0a0a0a;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .exp-coupon-apply:hover { background: #d0d0d0; }
+
+    .exp-offers-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 8px;
+    }
+    .exp-offer-chip {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 7px 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .exp-offer-chip:last-child { margin-bottom: 0; }
+    .exp-offer-chip:hover { border-color: var(--orange); }
+    .exp-offer-chip__code {
+      font-size: 11px;
+      font-weight: 700;
+      color: #f69a39;
+    }
+    .exp-offer-chip__desc {
+      font-size: 10px;
+      color: var(--warm-gray);
+      margin-top: 2px;
+    }
+
+    /* CTA buttons */
+    .exp-book-btn {
+      display: block;
+      width: 100%;
+      background: var(--orange);
+      color: var(--white);
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+      padding: 18px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      margin-bottom: 12px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .exp-book-btn:hover { background: #d94000; transform: translateY(-1px); }
+
+    .exp-sidebar-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--white);
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0a0a0a;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      margin-bottom: 12px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .exp-sidebar-btn:last-of-type { margin-bottom: 0; }
+    .exp-sidebar-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* Why book with us */
+    .exp-why-box {
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+      padding-top: 24px;
+    }
+    .exp-why-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #0a0a0a;
+      margin-bottom: 14px;
+    }
+    .exp-why-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .exp-why-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--warm-gray);
+    }
+    .exp-why-list li::before {
+      content: '✓';
+      color: #f69a39;
+      font-size: 15px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* Host card */
+    .exp-host-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 20px;
+    }
+    .exp-host-inner {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .exp-host-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .exp-host-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #101828;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .exp-host-verified {
+      color: var(--orange);
+    }
+    .exp-host-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-top: 6px;
+    }
+    .exp-host-rating strong { color: #0a0a0a; font-size: 14px; }
+    .exp-host-since {
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-top: 4px;
+    }
+    .exp-host-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-top: 10px;
+      transition: gap 0.2s;
+    }
+    .exp-host-link:hover { gap: 8px; }
+
+    /* ---- "You Might Also Like" ---- */
+    .exp-similar {
+      background: var(--white);
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+    }
+    .exp-similar .container { max-width: 1280px; padding: 0 60px; }
+
+    .exp-similar__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .exp-similar__title {
+      font-family: var(--font-sans);
+      font-size: 26px;
+      font-weight: 600;
+      color: #101828;
+    }
+    .exp-similar__nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    .exp-similar__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* similar cards reuse .exp-card styles from main styles */
+    .sim-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .sim-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.10); transform: translateY(-3px); }
+    .sim-card__img {
+      height: 180px;
+      overflow: hidden;
+    }
+    .sim-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .sim-card:hover .sim-card__img img { transform: scale(1.04); }
+    .sim-card__body { padding: 14px 16px 16px; }
+    .sim-card__cat {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+    .sim-card__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .sim-card__loc {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-bottom: 12px;
+    }
+    .sim-card__footer {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sim-card__price {
+      font-size: 19px;
+      font-weight: 700;
+      color: #101828;
+    }
+    .sim-card__price-old {
+      font-size: 13px;
+      color: var(--warm-gray);
+      text-decoration: line-through;
+      margin-left: 6px;
+    }
+    .sim-card__badge {
+      background: rgba(34,197,94,0.1);
+      color: #22c55e;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 5px 8px;
+    }
+
+    /* ---- Footer (same as homepage) ---- */
+    .footer--detail {
+      background: #101828;
+      padding: 56px 0 32px;
+    }
+    .footer--detail .container { max-width: 1280px; padding: 0 60px; }
+
+    .footer-detail__top {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 80px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #1e2939;
+      margin-bottom: 32px;
+    }
+
+    .footer-detail__brand p {
+      font-size: 14px;
+      color: #d1d5dc;
+      line-height: 1.65;
+      margin: 12px 0 20px;
+      max-width: 260px;
+    }
+    .footer-detail__social {
+      display: flex;
+      gap: 16px;
+    }
+    .footer-detail__social a {
+      color: #d1d5dc;
+      transition: color 0.2s;
+    }
+    .footer-detail__social a:hover { color: var(--orange); }
+
+    .footer-detail__brand h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .footer-detail__links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .footer-detail__col h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-detail__col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-detail__col ul li a {
+      font-size: 14px;
+      color: #d1d5dc;
+      transition: color 0.2s;
+    }
+    .footer-detail__col ul li a:hover { color: var(--orange); }
+
+    .footer-detail__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .footer-detail__copy {
+      font-size: 13px;
+      color: #d1d5dc;
+    }
+    .footer-detail__legal {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-detail__legal a {
+      font-size: 13px;
+      color: #d1d5dc;
+      transition: color 0.2s;
+    }
+    .footer-detail__legal a:hover { color: var(--orange); }
+    .footer-detail__legal span { color: #4a5565; }
+
+    /* ===================================================
+       ITINERARY TAB
+       =================================================== */
+
+    /* Accordion section wrapper */
+    .itin-accordion {
+      margin-bottom: 48px;
+    }
+    .itin-accordion__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+      user-select: none;
+    }
+    .itin-accordion__header h2 {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 600;
+      color: #101828;
+    }
+    .itin-accordion__chevron {
+      flex-shrink: 0;
+      color: #364153;
+      transition: transform 0.3s;
+    }
+    .itin-accordion.open .itin-accordion__chevron { transform: rotate(180deg); }
+    .itin-accordion__body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+    .itin-accordion.open .itin-accordion__body { max-height: 3000px; }
+
+    /* Day-by-day list */
+    .itin-days { padding-top: 4px; }
+
+    .itin-day {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .itin-day:last-child { border-bottom: none; }
+    .itin-day:hover { background: #fafafa; }
+
+    .itin-day__num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff7f0;
+      border: 2px solid #f69a39;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: #f69a39;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .itin-day__content { flex: 1; min-width: 0; }
+    .itin-day__title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .itin-day__desc {
+      font-size: 14px;
+      color: var(--warm-gray);
+      line-height: 1.6;
+    }
+
+    /* Included / Excluded */
+    .itin-inclexcl {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      padding-top: 20px;
+    }
+
+    .itin-inclexcl__col h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 16px;
+    }
+
+    .itin-inclexcl__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .itin-inclexcl__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--warm-gray);
+      line-height: 1.5;
+    }
+
+    .itin-inclexcl__icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .itin-inclexcl__icon--yes {
+      background: rgba(34, 197, 94, 0.12);
+      color: #16a34a;
+    }
+    .itin-inclexcl__icon--no {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+    }
+
+    /* ===================================================
+       AVAILABILITY TAB
+       =================================================== */
+
+    /* Month selector grid */
+    .avail-section { margin-bottom: 40px; }
+    .avail-section__title {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 16px;
+    }
+
+    .avail-month-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .avail-month-card {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      background: var(--white);
+      user-select: none;
+    }
+    .avail-month-card:hover {
+      border-color: #f69a39;
+      box-shadow: 0 2px 10px rgba(245,73,0,0.08);
+    }
+    .avail-month-card.selected {
+      border-color: var(--orange);
+      background: #fef9f5;
+      box-shadow: 0 2px 10px rgba(245,73,0,0.12);
+    }
+    .avail-month-card__icon {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: var(--warm-gray);
+    }
+    .avail-month-card.selected .avail-month-card__icon { color: var(--orange); }
+    .avail-month-card__name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 2px;
+    }
+    .avail-month-card__slots {
+      font-size: 11px;
+      color: var(--warm-gray);
+    }
+    .avail-month-card.selected .avail-month-card__slots { color: var(--orange); font-weight: 600; }
+    .avail-month-card.sold-out { opacity: 0.5; cursor: not-allowed; }
+    .avail-month-card.sold-out:hover { border-color: var(--border); box-shadow: none; }
+
+    /* Slots list */
+    .avail-slots-list { display: flex; flex-direction: column; gap: 12px; }
+    .avail-slot-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .avail-slot-row:hover {
+      border-color: var(--orange);
+      box-shadow: 0 2px 10px rgba(245,73,0,0.08);
+    }
+    .avail-slot-row.slot-selected {
+      border-color: var(--orange);
+      background: #fef9f5;
+    }
+    .avail-slot-left { display: flex; align-items: center; gap: 14px; }
+    .avail-slot-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(34,197,94,0.12);
+      color: #16a34a;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 100px;
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+    .avail-slot-badge--low {
+      background: rgba(245,158,11,0.12);
+      color: #b45309;
+    }
+    .avail-slot-badge--sold {
+      background: rgba(239,68,68,0.1);
+      color: #dc2626;
+    }
+    .avail-slot__date {
+      font-size: 15px;
+      font-weight: 600;
+      color: #101828;
+    }
+    .avail-slot__nights {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-top: 2px;
+    }
+    .avail-slot__urgency {
+      font-size: 11px;
+      color: #b45309;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .avail-slot-right { display: flex; align-items: center; gap: 12px; }
+    .avail-slot__price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #101828;
+      text-align: right;
+    }
+    .avail-slot__price-per { font-size: 11px; font-weight: 400; color: var(--warm-gray); display: block; }
+    .avail-slot__select-btn {
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .avail-slot__select-btn:hover { background: #d94000; }
+    .avail-slot__select-btn.selected-btn {
+      background: #f5f5f5;
+      color: var(--orange);
+      border: 1px solid var(--orange);
+    }
+
+    /* Group size selector */
+    .avail-group-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .avail-group-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #101828;
+      flex: 1;
+    }
+    .avail-group-label span {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--warm-gray);
+      margin-top: 2px;
+    }
+    .avail-group-stepper {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .avail-group-stepper button {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #f9fafb;
+      color: #364153;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-family: var(--font-sans);
+      line-height: 1;
+    }
+    .avail-group-stepper button:hover { background: #ebebeb; }
+    .avail-group-stepper__val {
+      width: 48px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      color: #101828;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      padding: 0;
+      line-height: 36px;
+    }
+
+    /* Price summary bar (shows on slot selection) */
+    .avail-price-summary {
+      display: none;
+      background: #fef9f5;
+      border: 1.5px solid var(--orange);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+    }
+    .avail-price-summary.visible { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .avail-price-summary__label { font-size: 14px; color: var(--warm-gray); }
+    .avail-price-summary__label strong { color: #101828; font-size: 15px; font-weight: 600; display: block; }
+    .avail-price-summary__total { text-align: right; }
+    .avail-price-summary__total .total-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    .avail-price-summary__total .total-note { font-size: 11px; color: var(--warm-gray); }
+    .avail-price-summary__book {
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .avail-price-summary__book:hover { background: #d94000; }
+
+    /* Custom dates CTA card */
+    .avail-custom-card {
+      border: 1.5px solid var(--orange);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, #fff9f5 0%, #fff 60%);
+    }
+    .avail-custom-card__top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .avail-custom-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #fff0e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px;
+    }
+    .avail-custom-card__heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 6px;
+    }
+    .avail-custom-card__desc {
+      font-size: 14px;
+      color: var(--warm-gray);
+      line-height: 1.6;
+    }
+    .avail-custom-card__btns {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .avail-custom-btn-primary {
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background 0.2s;
+    }
+    .avail-custom-btn-primary:hover { background: #d94000; }
+    .avail-custom-btn-secondary {
+      background: white;
+      color: #101828;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .avail-custom-btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+    .avail-custom-benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+    }
+    .avail-custom-benefit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--warm-gray);
+    }
+    .avail-custom-benefit::before {
+      content: '✓';
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ===================================================
+       POLICIES TAB
+       =================================================== */
+
+    .policy-section { margin-bottom: 40px; }
+    .policy-section__header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .policy-section__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #fff7f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--orange);
+      font-size: 18px;
+    }
+    .policy-section__title {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 700;
+      color: #101828;
+    }
+    .policy-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .policy-table thead tr { background: #f9fafb; }
+    .policy-table th {
+      padding: 11px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #364153;
+      border-bottom: 1px solid var(--border);
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--warm-gray);
+      line-height: 1.5;
+    }
+    .policy-table tr:last-child td { border-bottom: none; }
+    .policy-table tr:hover td { background: #fafafa; }
+    .policy-table td:first-child { font-weight: 600; color: #101828; }
+    .policy-badge--red {
+      display: inline-block;
+      background: rgba(239,68,68,0.1);
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+    .policy-badge--amber {
+      display: inline-block;
+      background: rgba(245,158,11,0.12);
+      color: #b45309;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+    .policy-badge--green {
+      display: inline-block;
+      background: rgba(34,197,94,0.12);
+      color: #16a34a;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+    .policy-note {
+      background: #fef9f5;
+      border-left: 3px solid var(--orange);
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--warm-gray);
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+    .policy-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .policy-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--warm-gray);
+      line-height: 1.55;
+    }
+    .policy-bullets li::before {
+      content: '•';
+      color: var(--orange);
+      font-size: 18px;
+      font-weight: 700;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    /* ===================================================
+       FAQS TAB
+       =================================================== */
+
+    .faq-category { margin-bottom: 40px; }
+    .faq-category__title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      background: var(--white);
+      transition: box-shadow 0.2s;
+    }
+    .faq-item:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .faq-item.open { box-shadow: 0 2px 12px rgba(245,73,0,0.08); border-color: rgba(245,73,0,0.25); }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-question__text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #101828;
+      line-height: 1.4;
+    }
+    .faq-item.open .faq-question__text { color: var(--orange); }
+    .faq-chevron {
+      flex-shrink: 0;
+      color: #364153;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--orange); }
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 600px; }
+    .faq-answer__inner {
+      padding: 16px 20px 18px;
+      font-size: 14px;
+      color: var(--warm-gray);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+    }
+    .faq-contact-card {
+      background: linear-gradient(135deg, #101828 0%, #1e2939 100%);
+      border-radius: 10px;
+      padding: 32px;
+      text-align: center;
+      color: white;
+      margin-top: 8px;
+    }
+    .faq-contact-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .faq-contact-card p { font-size: 14px; color: #d1d5dc; margin-bottom: 20px; line-height: 1.6; }
+    .faq-contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .faq-contact-btn {
+      padding: 12px 22px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background 0.2s, border-color 0.2s;
+      border: none;
+    }
+    .faq-contact-btn--primary { background: var(--orange); color: white; }
+    .faq-contact-btn--primary:hover { background: #d94000; }
+    .faq-contact-btn--secondary { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
+    .faq-contact-btn--secondary:hover { border-color: white; }
+
+    /* ===================================================
+       PRICING TAB
+       =================================================== */
+
+    .pricing-section { margin-bottom: 48px; }
+    .pricing-section__header {
+      margin-bottom: 20px;
+    }
+    .pricing-section__label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+    .pricing-section__title {
+      font-family: var(--font-sans);
+      font-size: 22px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 6px;
+    }
+    .pricing-section__sub {
+      font-size: 14px;
+      color: var(--warm-gray);
+    }
+
+    /* Room option cards */
+    .pricing-cards { display: flex; flex-direction: column; gap: 12px; }
+
+    .pricing-card {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .pricing-card:hover {
+      border-color: #f69a39;
+      box-shadow: 0 2px 12px rgba(245,73,0,0.08);
+    }
+    .pricing-card.selected {
+      border-color: var(--orange);
+      background: #fef9f5;
+      box-shadow: 0 2px 14px rgba(245,73,0,0.1);
+    }
+    .pricing-card.popular {
+      border-color: var(--orange);
+    }
+    .pricing-card__badge {
+      position: absolute;
+      top: -11px;
+      left: 20px;
+      background: var(--orange);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 100px;
+      padding: 3px 12px;
+    }
+    .pricing-card__left { min-width: 0; }
+    .pricing-card__radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: white;
+      flex-shrink: 0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .pricing-card__radio::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .pricing-card.selected .pricing-card__radio { border-color: var(--orange); }
+    .pricing-card.selected .pricing-card__radio::after { opacity: 1; }
+    .pricing-card__name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 3px;
+    }
+    .pricing-card__desc {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-bottom: 10px;
+    }
+    .pricing-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .pricing-card__features li {
+      font-size: 13px;
+      color: var(--warm-gray);
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+    .pricing-card__features li::before {
+      content: '✓';
+      color: #16a34a;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .pricing-card__right { text-align: right; flex-shrink: 0; }
+    .pricing-card__price-main {
+      font-size: 26px;
+      font-weight: 700;
+      color: #101828;
+      line-height: 1;
+    }
+    .pricing-card__price-per {
+      font-size: 12px;
+      color: var(--warm-gray);
+      display: block;
+      margin-top: 3px;
+    }
+    .pricing-card__price-addon {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange);
+      margin-top: 4px;
+    }
+    .pricing-card__price-total {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-top: 2px;
+    }
+    .pricing-card__select-btn {
+      margin-top: 10px;
+      display: inline-block;
+      border: 1.5px solid var(--orange);
+      color: var(--orange);
+      border-radius: 4px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background 0.2s, color 0.2s;
+    }
+    .pricing-card.selected .pricing-card__select-btn,
+    .pricing-card__select-btn:hover {
+      background: var(--orange);
+      color: white;
+    }
+
+    /* Self-drive vehicle cards */
+    .vehicle-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .vehicle-card {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .vehicle-card:hover {
+      border-color: #f69a39;
+      box-shadow: 0 2px 12px rgba(245,73,0,0.08);
+    }
+    .vehicle-card.selected {
+      border-color: var(--orange);
+      background: #fef9f5;
+    }
+    .vehicle-card__badge {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 100px;
+      padding: 3px 12px;
+      white-space: nowrap;
+    }
+    .vehicle-card__emoji {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+    .vehicle-card__type {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+    .vehicle-card__name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 3px;
+    }
+    .vehicle-card__model {
+      font-size: 12px;
+      color: var(--warm-gray);
+      margin-bottom: 12px;
+    }
+    .vehicle-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+    .vehicle-card__features li {
+      font-size: 12px;
+      color: var(--warm-gray);
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+    .vehicle-card__features li::before {
+      content: '✓';
+      color: #16a34a;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .vehicle-card__price {
+      font-size: 22px;
+      font-weight: 700;
+      color: #101828;
+    }
+    .vehicle-card__price-per {
+      font-size: 12px;
+      color: var(--warm-gray);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Add-on cards */
+    .addon-cards { display: flex; flex-direction: column; gap: 12px; }
+    .addon-card {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .addon-card:hover {
+      border-color: #f69a39;
+      box-shadow: 0 2px 12px rgba(245,73,0,0.06);
+    }
+    .addon-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: #fff7f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .addon-card__body { flex: 1; min-width: 0; }
+    .addon-card__name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 4px;
+    }
+    .addon-card__desc {
+      font-size: 13px;
+      color: var(--warm-gray);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .addon-card__features {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .addon-card__features li {
+      font-size: 12px;
+      color: var(--warm-gray);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .addon-card__features li::before {
+      content: '✓';
+      color: #16a34a;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .addon-card__right { text-align: right; flex-shrink: 0; }
+    .addon-card__price {
+      font-size: 22px;
+      font-weight: 700;
+      color: #101828;
+    }
+    .addon-card__per {
+      font-size: 12px;
+      color: var(--warm-gray);
+      display: block;
+      margin-top: 2px;
+    }
+    .addon-card__add-btn {
+      margin-top: 8px;
+      border: 1.5px solid var(--border);
+      background: white;
+      border-radius: 4px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #101828;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .addon-card__add-btn:hover,
+    .addon-card__add-btn.added {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: white;
+    }
+
+    /* Pricing notes */
+    .pricing-notes {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 40px;
+    }
+    .pricing-notes__title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pricing-notes__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .pricing-notes__list li {
+      font-size: 13px;
+      color: var(--warm-gray);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .pricing-notes__list li::before {
+      content: '•';
+      color: var(--orange);
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    /* Notify me toast (sold-out) */
+    .avail-notify-modal {
+      display: none;
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 999;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      padding: 20px 24px;
+      max-width: 320px;
+      animation: slideUp 0.3s ease;
+    }
+    .avail-notify-modal.open { display: block; }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .avail-notify-modal__close {
+      position: absolute;
+      top: 10px; right: 12px;
+      background: none; border: none;
+      font-size: 18px; cursor: pointer; color: #364153;
+    }
+    .avail-notify-modal__title { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 6px; }
+    .avail-notify-modal__desc { font-size: 13px; color: var(--warm-gray); margin-bottom: 12px; }
+    .avail-notify-input { width: 100%; border: 1px solid var(--border); border-radius: 4px; padding: 9px 12px; font-size: 13px; font-family: var(--font-sans); outline: none; box-sizing: border-box; margin-bottom: 8px; }
+    .avail-notify-input:focus { border-color: var(--orange); }
+    .avail-notify-submit {
+      width: 100%;
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+    .avail-notify-submit:hover { background: #d94000; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAVIGATION ====== -->
+  <nav class="nav nav--page" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/GDT_logo_white.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-white" />
+        <img src="assets/GDT_logo_black.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-dark" />
+      </a>
+      <div class="nav__links">
+        <a href="experiences.html" class="nav__link">Experiences</a>
+        <a href="field-notes.html" class="nav__link">Field Notes</a>
+        <a href="about.html" class="nav__link">About Us</a>
+        <a href="host.html" class="nav__cta">Become a Host</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====== HERO IMAGE ====== -->
+  <div class="exp-hero" style="margin-top: 76px;">
+    <img src="assets/images/hero-adventure.jpg" alt="Himalayan Trek &amp; Yoga Immersion" />
+  </div>
+
+  <!-- ====== TITLE SECTION ====== -->
+  <div class="exp-title-section">
+    <div class="container">
+      <a href="experiences.html" class="exp-back">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to Experiences
+      </a>
+
+      <div class="exp-title-row">
+        <div>
+          <p class="exp-category">Adventure</p>
+          <h1 class="exp-title-h1">Himalayan Trek &amp; Yoga Immersion</h1>
+          <div class="exp-meta-row">
+            <div class="exp-meta-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.625 4.5 9 4.5 9s4.5-5.375 4.5-9c0-2.485-2.015-4.5-4.5-4.5zm0 6.125a1.625 1.625 0 1 1 0-3.25 1.625 1.625 0 0 1 0 3.25z" fill="currentColor"/></svg>
+              Himachal Pradesh
+            </div>
+            <div class="exp-meta-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              7N / 8D
+            </div>
+            <div class="exp-rating">
+              <span class="exp-rating__stars">★★★★★</span>
+              <span class="exp-rating__score">4.9</span>
+              <span class="exp-rating__count">(127 reviews)</span>
+            </div>
+          </div>
+        </div>
+        <button class="exp-share-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="14" cy="3.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="9" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="14" cy="14.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><path d="M5.6 9.87L12.4 13.6M5.6 8.13L12.4 4.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Share
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== STICKY TABS ====== -->
+  <div class="exp-tabs">
+    <div class="container">
+      <ul class="exp-tabs__list">
+        <li class="exp-tabs__item active" data-tab="overview">Overview</li>
+        <li class="exp-tabs__item" data-tab="itinerary">Itinerary</li>
+        <li class="exp-tabs__item" data-tab="availability">Availability</li>
+        <li class="exp-tabs__item" data-tab="pricing">Pricing</li>
+        <li class="exp-tabs__item" data-tab="policies">Policies</li>
+        <li class="exp-tabs__item" data-tab="faqs">FAQs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ====== BODY (two-column) ====== -->
+  <div class="exp-body">
+    <div class="container">
+      <div class="exp-layout">
+
+        <!-- ---- Left: Content ---- -->
+        <div class="exp-content">
+
+          <!-- ===== OVERVIEW TAB ===== -->
+          <div class="tab-panel active" id="panel-overview">
+
+          <!-- About This Trip -->
+          <div class="exp-section" id="tab-overview">
+            <h2 class="exp-section__title">About this trip</h2>
+            <p class="exp-about__text">
+              Experience the perfect blend of adventure and mindfulness in the stunning Himalayas. This 8-day journey takes you through pristine mountain trails by day and into deep yoga practice by evening. Led by experienced mountain guides and certified yoga instructors, you'll discover ancient paths while cultivating inner peace.
+            </p>
+
+            <!-- Trust Badges -->
+            <div class="exp-trust-grid">
+              <div class="exp-trust-item">
+                <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5H18L13.5 11L15.5 17L10 13.5L4.5 17L6.5 11L2 7.5H7.5L10 2Z" stroke="#f69a39" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                <div>
+                  <div class="exp-trust-item__label">Verified Host</div>
+                  <div class="exp-trust-item__sub">Background checked</div>
+                </div>
+              </div>
+              <div class="exp-trust-item">
+                <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6H18l-5 3.5 2 6L10 14l-5 3.5 2-6L2 8h6l2-6z" stroke="#f69a39" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="10" r="8" stroke="#f69a39" stroke-width="1.3"/></svg>
+                <div>
+                  <div class="exp-trust-item__label">Difficulty: Moderate</div>
+                  <div class="exp-trust-item__sub">Fitness level required</div>
+                </div>
+              </div>
+              <div class="exp-trust-item">
+                <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="#f69a39" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="#f69a39" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <div>
+                  <div class="exp-trust-item__label">Best Time</div>
+                  <div class="exp-trust-item__sub">March to June, Sept to Nov</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="exp-divider" />
+
+          <!-- Experience Highlights -->
+          <div class="exp-section">
+            <h2 class="exp-section__title">Experience Highlights</h2>
+            <div class="exp-highlights-grid">
+              <div class="exp-highlight-item">
+                <div class="exp-highlight-dot">✓</div>
+                <p class="exp-highlight-text">Daily sunrise yoga sessions with panoramic mountain views</p>
+              </div>
+              <div class="exp-highlight-item">
+                <div class="exp-highlight-dot">✓</div>
+                <p class="exp-highlight-text">Trek through remote villages and pine forests</p>
+              </div>
+              <div class="exp-highlight-item">
+                <div class="exp-highlight-dot">✓</div>
+                <p class="exp-highlight-text">Learn meditation techniques from experienced practitioners</p>
+              </div>
+              <div class="exp-highlight-item">
+                <div class="exp-highlight-dot">✓</div>
+                <p class="exp-highlight-text">Authentic local cuisine and homestay experiences</p>
+              </div>
+              <div class="exp-highlight-item">
+                <div class="exp-highlight-dot">✓</div>
+                <p class="exp-highlight-text">Small group size for personalized attention</p>
+              </div>
+              <div class="exp-highlight-item">
+                <div class="exp-highlight-dot">✓</div>
+                <p class="exp-highlight-text">All safety equipment and permits included</p>
+              </div>
+            </div>
+          </div>
+
+          <hr class="exp-divider" />
+
+          <!-- Traveler Reviews -->
+          <div class="exp-section">
+            <div class="exp-reviews-header">
+              <h2 class="exp-section__title" style="margin-bottom:0">Traveler Reviews</h2>
+            </div>
+
+            <div class="exp-review-card">
+              <div class="exp-review-header">
+                <div>
+                  <div class="exp-reviewer-name">
+                    Priya Sharma
+                    <span class="exp-verified-badge">VERIFIED</span>
+                  </div>
+                  <div class="exp-reviewer-date">October 2024</div>
+                </div>
+                <div class="exp-review-stars">★★★★★</div>
+              </div>
+              <p class="exp-review-text">Life-changing experience! The yoga sessions at sunrise with mountain views were magical. Our guide Ravi was incredibly knowledgeable.</p>
+            </div>
+
+            <div class="exp-review-card">
+              <div class="exp-review-header">
+                <div>
+                  <div class="exp-reviewer-name">
+                    Rahul Mehta
+                    <span class="exp-verified-badge">VERIFIED</span>
+                  </div>
+                  <div class="exp-reviewer-date">September 2024</div>
+                </div>
+                <div class="exp-review-stars">★★★★★</div>
+              </div>
+              <p class="exp-review-text">Perfect blend of adventure and mindfulness. The group size was ideal, and the food was surprisingly good for a trek!</p>
+            </div>
+
+            <div class="exp-review-card">
+              <div class="exp-review-header">
+                <div>
+                  <div class="exp-reviewer-name">
+                    Ananya Desai
+                    <span class="exp-verified-badge">VERIFIED</span>
+                  </div>
+                  <div class="exp-reviewer-date">August 2024</div>
+                </div>
+                <div class="exp-review-stars">★★★★<span style="color:#d1d5dc">★</span></div>
+              </div>
+              <p class="exp-review-text">Amazing trek! Only suggestion would be more time at the summit. Otherwise, absolutely perfect.</p>
+            </div>
+          </div><!-- /exp-section reviews -->
+
+          </div><!-- /panel-overview -->
+
+          <!-- ===== ITINERARY TAB ===== -->
+          <div class="tab-panel" id="panel-itinerary">
+
+            <!-- Day-by-Day Accordion -->
+            <div class="itin-accordion open">
+              <div class="itin-accordion__header" onclick="toggleAccordion(this)">
+                <h2>Day-by-Day Itinerary</h2>
+                <svg class="itin-accordion__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="itin-accordion__body">
+                <div class="itin-days">
+                  <div class="itin-day">
+                    <div class="itin-day__num">1</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Arrival in Manali</div>
+                      <div class="itin-day__desc">Welcome dinner and trip orientation. Meet your group and guides over a traditional Himachali meal. Evening briefing on safety protocols and trek overview.</div>
+                    </div>
+                  </div>
+                  <div class="itin-day">
+                    <div class="itin-day__num">2</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Acclimatization &amp; Yoga</div>
+                      <div class="itin-day__desc">Light hiking and evening yoga session. Introduction to pranayama breathing techniques to aid altitude acclimatization. Gentle 3 km nature walk through apple orchards.</div>
+                    </div>
+                  </div>
+                  <div class="itin-day">
+                    <div class="itin-day__num">3</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Trek to Base Camp</div>
+                      <div class="itin-day__desc">5-hour trek through pine forests. Evening meditation session under the stars at 3,200m elevation. Overnight in tented camps with hot meals provided.</div>
+                    </div>
+                  </div>
+                  <div class="itin-day">
+                    <div class="itin-day__num">4</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Mountain Exploration</div>
+                      <div class="itin-day__desc">Sunrise yoga and local village visit. Cultural immersion with the Gaddi shepherd community — learn about their ancient migratory traditions and nomadic lifestyle.</div>
+                    </div>
+                  </div>
+                  <div class="itin-day">
+                    <div class="itin-day__num">5</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Summit Day</div>
+                      <div class="itin-day__desc">Early morning summit attempt and celebration. Sunrise yoga at the peak with panoramic 360° Himalayan views. This is the highlight of the trek — prepare for an unforgettable sunrise.</div>
+                    </div>
+                  </div>
+                  <div class="itin-day">
+                    <div class="itin-day__num">6</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Descent &amp; Relaxation</div>
+                      <div class="itin-day__desc">Return trek and restorative yoga. Hot spring visit in the evening for well-deserved relaxation. Overnight in a comfortable mountain guesthouse with hot showers.</div>
+                    </div>
+                  </div>
+                  <div class="itin-day">
+                    <div class="itin-day__num">7</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Cultural Immersion</div>
+                      <div class="itin-day__desc">Visit to local monastery and meditation. Traditional weaving and craft workshop with local artisans. Farewell group dinner with cultural folk performances.</div>
+                    </div>
+                  </div>
+                  <div class="itin-day">
+                    <div class="itin-day__num">8</div>
+                    <div class="itin-day__content">
+                      <div class="itin-day__title">Departure</div>
+                      <div class="itin-day__desc">Farewell breakfast and transfer to Manali. Group photo session and certificates of completion. Drop-off at Manali bus stand or airport by 10 AM.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- What's Included & Excluded -->
+            <div class="itin-accordion open">
+              <div class="itin-accordion__header" onclick="toggleAccordion(this)">
+                <h2>What's Included &amp; Excluded</h2>
+                <svg class="itin-accordion__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="itin-accordion__body">
+                <div class="itin-inclexcl">
+                  <div class="itin-inclexcl__col">
+                    <h3>What's Included</h3>
+                    <ul class="itin-inclexcl__list">
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--yes">✓</span>
+                        7 nights accommodation (mix of hotels and camps)
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--yes">✓</span>
+                        All meals during trek (breakfast, lunch, dinner)
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--yes">✓</span>
+                        Professional trek guide and support staff
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--yes">✓</span>
+                        Certified yoga instructor
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--yes">✓</span>
+                        Permits and entry fees
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--yes">✓</span>
+                        Safety equipment (ropes, first aid)
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--yes">✓</span>
+                        Airport/station transfers
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="itin-inclexcl__col">
+                    <h3>Not Included</h3>
+                    <ul class="itin-inclexcl__list">
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--no">✕</span>
+                        Travel to/from Manali
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--no">✕</span>
+                        Personal expenses and tips
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--no">✕</span>
+                        Travel insurance (mandatory)
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--no">✕</span>
+                        Tips for guides and staff
+                      </li>
+                      <li class="itin-inclexcl__item">
+                        <span class="itin-inclexcl__icon itin-inclexcl__icon--no">✕</span>
+                        Personal trekking gear
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- Reviews on Itinerary tab -->
+            <div class="exp-section">
+              <h2 class="exp-section__title">Traveler Reviews</h2>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Priya Sharma <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">October 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">Life-changing experience! The yoga sessions at sunrise with mountain views were magical. Our guide Ravi was incredibly knowledgeable.</p>
+              </div>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Rahul Mehta <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">September 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">Perfect blend of adventure and mindfulness. The group size was ideal, and the food was surprisingly good for a trek!</p>
+              </div>
+            </div>
+
+          </div><!-- /panel-itinerary -->
+
+          <!-- ===== AVAILABILITY TAB ===== -->
+          <div class="tab-panel" id="panel-availability">
+
+            <!-- Month selector -->
+            <div class="avail-section">
+              <h2 class="avail-section__title">Select a Month</h2>
+              <div class="avail-month-grid" id="availMonthGrid">
+                <div class="avail-month-card selected" data-month="march" data-slots="2" onclick="selectMonth(this)">
+                  <div class="avail-month-card__icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="avail-month-card__name">March 2025</div>
+                  <div class="avail-month-card__slots">2 slots</div>
+                </div>
+                <div class="avail-month-card" data-month="april" data-slots="2" onclick="selectMonth(this)">
+                  <div class="avail-month-card__icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="avail-month-card__name">April 2025</div>
+                  <div class="avail-month-card__slots">2 slots</div>
+                </div>
+                <div class="avail-month-card" data-month="may" data-slots="1" onclick="selectMonth(this)">
+                  <div class="avail-month-card__icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="avail-month-card__name">May 2025</div>
+                  <div class="avail-month-card__slots">1 slot</div>
+                </div>
+                <div class="avail-month-card" data-month="september" data-slots="3" onclick="selectMonth(this)">
+                  <div class="avail-month-card__icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="avail-month-card__name">September 2025</div>
+                  <div class="avail-month-card__slots">3 slots</div>
+                </div>
+                <div class="avail-month-card sold-out" data-month="october" data-slots="0" onclick="openNotifyModal('October 2025')">
+                  <div class="avail-month-card__icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="avail-month-card__name">October 2025</div>
+                  <div class="avail-month-card__slots" style="color:#dc2626;font-weight:600;">Sold Out</div>
+                </div>
+              </div>
+
+              <!-- Group size -->
+              <div class="avail-group-row">
+                <div class="avail-group-label">
+                  How many travellers?
+                  <span>Max 12 per group. Price per person stays the same.</span>
+                </div>
+                <div class="avail-group-stepper">
+                  <button onclick="changeGroup(-1)" aria-label="Decrease">−</button>
+                  <div class="avail-group-stepper__val" id="groupVal">2</div>
+                  <button onclick="changeGroup(1)" aria-label="Increase">+</button>
+                </div>
+              </div>
+
+              <!-- Price summary (shown on slot select) -->
+              <div class="avail-price-summary" id="availPriceSummary">
+                <div class="avail-price-summary__label">
+                  <strong id="summaryDateRange">15 – 22 March 2025</strong>
+                  <span id="summaryPeople">2 travellers × ₹31,500</span>
+                </div>
+                <div class="avail-price-summary__total">
+                  <div class="total-val" id="summaryTotal">₹63,000</div>
+                  <div class="total-note">Total (taxes incl.)</div>
+                </div>
+                <button class="avail-price-summary__book" onclick="window.location.href='booking.html'">Book This Slot</button>
+              </div>
+
+              <!-- Available slots list -->
+              <h2 class="avail-section__title" style="margin-top: 8px;">Available Slots</h2>
+              <div class="avail-slots-list" id="availSlotsList">
+                <!-- Populated by JS based on selected month -->
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- Custom dates CTA -->
+            <div class="avail-custom-card">
+              <div class="avail-custom-card__top">
+                <div class="avail-custom-card__icon">🗓️</div>
+                <div>
+                  <div class="avail-custom-card__heading">Don't see your preferred dates?</div>
+                  <div class="avail-custom-card__desc">We offer private and custom departures for groups, families, and special occasions. Tell us your ideal dates and we'll plan around you.</div>
+                </div>
+              </div>
+              <div class="avail-custom-card__btns">
+                <button class="avail-custom-btn-primary">Request Custom Dates</button>
+                <button class="avail-custom-btn-secondary">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align: -2px; margin-right: 4px;"><path d="M12.25 9.625c0 .226-.05.448-.148.66a1.742 1.742 0 0 1-.41.56c-.31.28-.648.415-1.005.415-.253 0-.525-.064-.815-.196a8.032 8.032 0 0 1-.815-.5 12.71 12.71 0 0 1-.78-.63 12.437 12.437 0 0 1-.626-.78 7.9 7.9 0 0 1-.494-.808c-.13-.284-.196-.554-.196-.805 0-.246.06-.48.183-.693a1.256 1.256 0 0 1 .553-.49c.234-.11.488-.165.752-.165.105 0 .21.022.305.064.1.042.19.11.26.205l.9 1.27a.977.977 0 0 1 .197.38.72.72 0 0 1 .018.35.717.717 0 0 1-.1.256 1.635 1.635 0 0 1-.195.252l-.266.276a.182.182 0 0 0-.053.136c0 .026.004.05.01.073l.015.047c.05.09.132.208.247.354.118.146.243.295.376.443.138.147.281.29.43.43.147.134.267.258.364.37.028.037.06.064.088.082a.2.2 0 0 0 .083.017.186.186 0 0 0 .13-.054l.267-.27a1.6 1.6 0 0 1 .258-.196.72.72 0 0 1 .598-.082.97.97 0 0 1 .376.198l1.285.912c.097.07.163.16.2.26.042.097.063.2.063.31z" fill="currentColor"/></svg>
+                  Email Us
+                </button>
+              </div>
+              <div class="avail-custom-benefits">
+                <div class="avail-custom-benefit">Flexible scheduling</div>
+                <div class="avail-custom-benefit">Private group options</div>
+                <div class="avail-custom-benefit">Personalized itinerary</div>
+                <div class="avail-custom-benefit">Special occasion bookings</div>
+              </div>
+            </div>
+
+            <!-- Reviews -->
+            <div class="exp-section">
+              <h2 class="exp-section__title">Traveler Reviews</h2>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Priya Sharma <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">October 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">Life-changing experience! The yoga sessions at sunrise with mountain views were magical. Our guide Ravi was incredibly knowledgeable.</p>
+              </div>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Rahul Mehta <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">September 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">Booking was seamless. The team was responsive and helped us choose the right batch for our anniversary trip.</p>
+              </div>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Ananya Desai <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">August 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★<span style="color:#d1d5dc">★</span></div>
+                </div>
+                <p class="exp-review-text">Great availability options. We booked for a group of 6 and the custom dates feature made it really easy to coordinate.</p>
+              </div>
+            </div>
+
+          </div><!-- /panel-availability -->
+
+          <!-- ===== POLICIES TAB ===== -->
+          <div class="tab-panel" id="panel-policies">
+
+            <!-- Cancellation Policy -->
+            <div class="policy-section">
+              <div class="policy-section__header">
+                <div class="policy-section__icon">↩</div>
+                <h2 class="policy-section__title">Cancellation Policy</h2>
+              </div>
+              <table class="policy-table">
+                <thead>
+                  <tr>
+                    <th>Cancellation Period</th>
+                    <th>Charge</th>
+                    <th>Refund</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>30+ days before trip</td>
+                    <td>Booking amount only</td>
+                    <td><span class="policy-badge--green">100% refund</span></td>
+                  </tr>
+                  <tr>
+                    <td>15–29 days before trip</td>
+                    <td>50% of total cost</td>
+                    <td><span class="policy-badge--amber">50% refund</span></td>
+                  </tr>
+                  <tr>
+                    <td>8–14 days before trip</td>
+                    <td>75% of total cost</td>
+                    <td><span class="policy-badge--amber">25% refund</span></td>
+                  </tr>
+                  <tr>
+                    <td>0–7 days before trip</td>
+                    <td>100% of total cost</td>
+                    <td><span class="policy-badge--red">No Refund</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="policy-note">
+                Note: Refunds will be processed within 7–10 business days. Booking amount is non-refundable in all cases as it covers administrative and planning costs incurred at the time of booking.
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- Date Change Policy -->
+            <div class="policy-section">
+              <div class="policy-section__header">
+                <div class="policy-section__icon">📅</div>
+                <h2 class="policy-section__title">Date Change Policy</h2>
+              </div>
+              <table class="policy-table">
+                <thead>
+                  <tr>
+                    <th>Date Change Request</th>
+                    <th>Change Fee</th>
+                    <th>Availability</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>45+ days before trip</td>
+                    <td><span class="policy-badge--green">Free (1st change)</span></td>
+                    <td>Subject to availability</td>
+                  </tr>
+                  <tr>
+                    <td>30–44 days before trip</td>
+                    <td>₹2,500 per person</td>
+                    <td>Subject to availability</td>
+                  </tr>
+                  <tr>
+                    <td>15–29 days before trip</td>
+                    <td>₹5,000 per person</td>
+                    <td>Subject to availability</td>
+                  </tr>
+                  <tr>
+                    <td>Less than 15 days</td>
+                    <td><span class="policy-badge--red">Not Allowed</span></td>
+                    <td>—</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="policy-note">
+                Date changes are subject to availability on the requested dates. Only one free date change is permitted per booking. Subsequent changes are charged at the applicable fee regardless of notice period.
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- Payment Policy -->
+            <div class="policy-section">
+              <div class="policy-section__header">
+                <div class="policy-section__icon">💳</div>
+                <h2 class="policy-section__title">Payment Policy</h2>
+              </div>
+              <ul class="policy-bullets">
+                <li>30% advance payment required to confirm your booking</li>
+                <li>Remaining 70% is due 60 days before the trip start date</li>
+                <li>All major payment methods accepted: credit/debit cards, UPI, net banking, and EMI</li>
+                <li>Bookings made within 60 days of departure require full payment upfront</li>
+                <li>GST of 5% is applicable on the total trip cost</li>
+              </ul>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- Travel Insurance -->
+            <div class="policy-section">
+              <div class="policy-section__header">
+                <div class="policy-section__icon">🛡</div>
+                <h2 class="policy-section__title">Travel Insurance</h2>
+              </div>
+              <ul class="policy-bullets">
+                <li>Travel insurance is <strong style="color:#101828;">mandatory</strong> for all participants on this trip</li>
+                <li>Your policy must cover medical emergencies, trip cancellation, and personal liability</li>
+                <li>Minimum medical coverage of ₹20 lakh recommended for high-altitude treks</li>
+                <li>We can assist with insurance recommendations — contact us for preferred providers</li>
+                <li>Proof of insurance must be submitted at least 7 days before departure</li>
+              </ul>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- Health & Fitness -->
+            <div class="policy-section">
+              <div class="policy-section__header">
+                <div class="policy-section__icon">🏃</div>
+                <h2 class="policy-section__title">Health &amp; Fitness</h2>
+              </div>
+              <ul class="policy-bullets">
+                <li>Moderate fitness level is required for this trek — you should be comfortable walking 10–15 km/day</li>
+                <li>A medical fitness certificate from a registered physician may be required for participants over 55</li>
+                <li>Please inform us of any pre-existing medical conditions at the time of booking</li>
+                <li>Participants with heart conditions, asthma, or altitude sensitivity should consult a doctor before booking</li>
+              </ul>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- General Terms -->
+            <div class="policy-section">
+              <div class="policy-section__header">
+                <div class="policy-section__icon">📋</div>
+                <h2 class="policy-section__title">General Terms</h2>
+              </div>
+              <ul class="policy-bullets">
+                <li>Minimum age: 18 years. Participants aged 16–17 may join with a guardian's written consent</li>
+                <li>Valid government-issued photo ID is mandatory and must be presented at check-in</li>
+                <li>We reserve the right to modify the itinerary for safety, weather, or operational reasons without prior notice</li>
+                <li>Great D'Tour is not liable for delays, losses, or injuries caused by circumstances beyond our control (force majeure)</li>
+                <li>By booking, you agree to the full Terms of Service and Privacy Policy of Great D'Tour / Chimpya Innovation Labs LLP</li>
+              </ul>
+            </div>
+
+            <!-- Reviews -->
+            <div class="exp-section">
+              <h2 class="exp-section__title">Traveler Reviews</h2>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Priya Sharma <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">October 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">The cancellation policy was very clear and transparent. Had to reschedule once and the team handled it smoothly with no hassle.</p>
+              </div>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Rahul Mehta <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">September 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">Great D'Tour's policies are fair and the team goes out of their way to accommodate changes. Very professional.</p>
+              </div>
+            </div>
+
+          </div><!-- /panel-policies -->
+
+          <!-- ===== FAQS TAB ===== -->
+          <div class="tab-panel" id="panel-faqs">
+
+            <!-- Booking & Payments -->
+            <div class="faq-category">
+              <div class="faq-category__title">Booking &amp; Payments</div>
+
+              <div class="faq-item open">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">How do I confirm my booking?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">Pay a 30% advance online to hold your slot. You'll receive a booking confirmation email within 24 hours. The remaining 70% is due 60 days before the trip start date. For bookings made less than 60 days in advance, full payment is required upfront.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">What payment methods do you accept?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">We accept all major credit and debit cards (Visa, Mastercard, Amex), UPI (GPay, PhonePe, Paytm), net banking, and no-cost EMI on select banks. All transactions are secured and encrypted.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">Is GST included in the displayed price?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">The displayed price (₹31,500 per person) is exclusive of GST. A 5% GST is applicable on the total amount and will be shown at checkout. A GST invoice will be provided for all bookings.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trip Logistics -->
+            <div class="faq-category">
+              <div class="faq-category__title">Trip Logistics</div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">Where does the trip start and end?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">The trip starts and ends in Manali, Himachal Pradesh. We provide complimentary transfers from Manali bus stand and Bhuntar Airport. Travel to and from Manali is not included in the package cost.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">What is the group size?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">We cap each batch at 12 travellers to maintain the quality of experience and ensure personalised attention. A minimum of 4 confirmed participants is required for a batch to depart. If your batch doesn't meet the minimum, you'll be offered an alternative date or a full refund.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">What's the accommodation like on the trek?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">Nights 1 and 2 are in a comfortable hotel in Manali with en-suite bathrooms. Nights 3–6 are in insulated high-altitude tents (twin-sharing) with sleeping bags and mats provided. Night 7 is in a guesthouse near Manali with hot showers. All accommodation is twin-sharing; single supplements are available on request for ₹4,000 extra.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">What kind of food is served during the trek?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">All meals are freshly prepared by our trek cook. We serve a mix of North Indian and Himachali cuisine — think hot dal-roti, sabzi, khichdi, and oatmeal for breakfast. We cater to vegetarian, vegan, and gluten-free dietary needs if notified at booking. Non-vegetarian options are not available on the trek portion.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Health & Safety -->
+            <div class="faq-category">
+              <div class="faq-category__title">Health &amp; Safety</div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">How fit do I need to be for this trek?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">This is a moderate-difficulty trek. You should be comfortable walking 10–15 km per day with a light daypack and gentle elevation gains. Prior trekking experience is helpful but not essential. We recommend starting brisk walks of 5–8 km/day at least 4 weeks before the trip. No prior yoga experience is needed.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">What happens if I experience altitude sickness?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">Our guides are trained in wilderness first aid and altitude sickness management. Day 2 is specifically designed for acclimatisation with pranayama breathing. If a participant experiences severe AMS (Acute Mountain Sickness), we will descend to a lower altitude immediately. Our first-aid kit includes altitude medication. Emergency evacuation is possible within 4–6 hours from most points on the route.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">Is travel insurance compulsory?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">Yes, travel insurance is mandatory for all participants. Your policy must cover medical emergencies, hospitalisation, trip cancellation, and personal liability. We strongly recommend a minimum medical cover of ₹20 lakh for high-altitude trekking. Proof of insurance must be submitted at least 7 days before departure. We can connect you with our preferred insurance partners.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- General -->
+            <div class="faq-category">
+              <div class="faq-category__title">General</div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">Can I book a private/customised trip for my group?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">Absolutely. We offer fully private departures for groups of 4 or more. You pick the dates, we plan around you. We can also customise the duration, difficulty level, yoga intensity, and accommodation type. Use the "Request Custom Dates" option in the Availability tab or contact us directly.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">What should I pack for this trip?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">We'll send you a detailed packing list after booking. Key items: layered warm clothing (it can drop to -5°C at night), waterproof jacket, trekking shoes (ankle support essential), sunscreen SPF 50+, sunglasses, personal medications, a 40L backpack for day hikes, and yoga wear. Sleeping bags and trek poles are provided. Porter services are available to carry your main bag at ₹1,000/day.</div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                  <span class="faq-question__text">Is there mobile network connectivity on the trek?</span>
+                  <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer__inner">BSNL has the best coverage in this region — we recommend picking up a local SIM if you need connectivity. Days 3–6 (high-altitude section) will have little to no mobile signal. We consider this part of the experience! Our guides carry a satellite communicator for emergencies.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Still have questions CTA -->
+            <div class="faq-contact-card">
+              <h3>Still have questions?</h3>
+              <p>Our trip specialists know this route inside out. Drop us a message and we'll get back to you within a few hours.</p>
+              <div class="faq-contact-btns">
+                <button class="faq-contact-btn faq-contact-btn--primary">Chat with Us</button>
+                <button class="faq-contact-btn faq-contact-btn--secondary">Send an Email</button>
+              </div>
+            </div>
+
+          </div><!-- /panel-faqs -->
+
+          <!-- ===== PRICING TAB ===== -->
+          <div class="tab-panel" id="panel-pricing">
+
+            <!-- Intro heading -->
+            <div class="pricing-section__header" style="margin-bottom:28px;">
+              <div class="pricing-section__label">Transparent Pricing</div>
+              <h2 class="pricing-section__title">Pricing Options</h2>
+              <p class="pricing-section__sub">Choose the option that best suits your travel style and budget. All prices include GST.</p>
+            </div>
+
+            <!-- ---- Room Sharing Options ---- -->
+            <div class="pricing-section">
+              <div class="pricing-section__header">
+                <h3 class="pricing-section__title" style="font-size:18px;">Room Sharing Options</h3>
+              </div>
+              <div class="pricing-cards" id="roomCards">
+
+                <!-- Triple Sharing -->
+                <div class="pricing-card" data-room="triple" data-price="35000" onclick="selectRoomCard(this)">
+                  <div class="pricing-card__left">
+                    <div class="pricing-card__radio"></div>
+                    <div class="pricing-card__name">Triple Sharing</div>
+                    <div class="pricing-card__desc">Shared room with 2 other travellers</div>
+                    <ul class="pricing-card__features">
+                      <li>Budget-friendly option</li>
+                      <li>Social atmosphere</li>
+                    </ul>
+                  </div>
+                  <div class="pricing-card__right">
+                    <div class="pricing-card__price-main">₹31,500</div>
+                    <span class="pricing-card__price-per">base price</span>
+                    <div class="pricing-card__price-addon">+₹3,500</div>
+                    <div class="pricing-card__price-total">Total ₹35,000</div>
+                    <button class="pricing-card__select-btn">Select</button>
+                  </div>
+                </div>
+
+                <!-- Double Sharing — Popular -->
+                <div class="pricing-card popular selected" data-room="double" data-price="31500" onclick="selectRoomCard(this)">
+                  <span class="pricing-card__badge">Most Popular</span>
+                  <div class="pricing-card__left">
+                    <div class="pricing-card__radio"></div>
+                    <div class="pricing-card__name">Double Sharing</div>
+                    <div class="pricing-card__desc">Shared room with 1 other traveller</div>
+                    <ul class="pricing-card__features">
+                      <li>Comfortable twin-sharing accommodation</li>
+                      <li>Meet fellow travellers</li>
+                    </ul>
+                  </div>
+                  <div class="pricing-card__right">
+                    <div class="pricing-card__price-main">₹31,500</div>
+                    <span class="pricing-card__price-per">per person</span>
+                    <div class="pricing-card__price-total" style="color:#16a34a;font-weight:600;">Included</div>
+                    <button class="pricing-card__select-btn">Selected ✓</button>
+                  </div>
+                </div>
+
+                <!-- Solo Occupancy -->
+                <div class="pricing-card" data-room="solo" data-price="45000" onclick="selectRoomCard(this)">
+                  <div class="pricing-card__left">
+                    <div class="pricing-card__radio"></div>
+                    <div class="pricing-card__name">Solo Occupancy</div>
+                    <div class="pricing-card__desc">Private room (subject to availability)</div>
+                    <ul class="pricing-card__features">
+                      <li>No roommate sharing required</li>
+                      <li>Extra privacy and comfort</li>
+                    </ul>
+                  </div>
+                  <div class="pricing-card__right">
+                    <div class="pricing-card__price-main">₹31,500</div>
+                    <span class="pricing-card__price-per">base price</span>
+                    <div class="pricing-card__price-addon">+₹13,500</div>
+                    <div class="pricing-card__price-total">Total ₹45,000</div>
+                    <button class="pricing-card__select-btn">Select</button>
+                  </div>
+                </div>
+
+                <!-- Group Bookings -->
+                <div class="pricing-card" data-room="group" data-price="29750" onclick="selectRoomCard(this)">
+                  <span class="pricing-card__badge" style="background:#16a34a;">Best Value</span>
+                  <div class="pricing-card__left">
+                    <div class="pricing-card__radio"></div>
+                    <div class="pricing-card__name">Group Bookings</div>
+                    <div class="pricing-card__desc">Book for 6+ people together</div>
+                    <ul class="pricing-card__features">
+                      <li>Best value for groups</li>
+                      <li>Customization options available</li>
+                    </ul>
+                  </div>
+                  <div class="pricing-card__right">
+                    <div class="pricing-card__price-main">₹29,750</div>
+                    <span class="pricing-card__price-per">per person in group</span>
+                    <div class="pricing-card__price-total" style="color:#16a34a;font-weight:600;">Save ₹1,750/person</div>
+                    <button class="pricing-card__select-btn">Select</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- ---- Self-Drive Options ---- -->
+            <div class="pricing-section">
+              <div class="pricing-section__header">
+                <h3 class="pricing-section__title" style="font-size:18px;">Self-Drive Options</h3>
+                <p class="pricing-section__sub">Explore at your own pace with our self-drive packages. All vehicles come fully equipped.</p>
+              </div>
+
+              <!-- What's included -->
+              <div style="background:#f9fafb;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:20px;">
+                <div style="font-size:13px;font-weight:700;color:#101828;margin-bottom:10px;">Self-Drive Package Includes</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;">
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> Vehicle rental for entire duration (8 days)</span>
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> GPS navigation with pre-loaded routes</span>
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> Fuel for entire route</span>
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> 24/7 roadside assistance</span>
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> Road taxes, tolls &amp; parking charges</span>
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> Accommodation at all stops (double sharing)</span>
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> Comprehensive insurance (zero dep.)</span>
+                  <span style="font-size:12px;color:var(--warm-gray);display:flex;align-items:center;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> All permits and entry fees</span>
+                </div>
+                <div style="font-size:12px;color:#b45309;margin-top:10px;font-weight:600;">⚠ Valid driving licence required (min. 1 year old)</div>
+              </div>
+
+              <div class="vehicle-cards">
+
+                <div class="vehicle-card" onclick="selectVehicle(this)">
+                  <div class="vehicle-card__emoji">🚗</div>
+                  <div class="vehicle-card__type">Sedan</div>
+                  <div class="vehicle-card__name">Compact Sedan</div>
+                  <div class="vehicle-card__model">Swift Dzire, Honda Amaze or similar</div>
+                  <ul class="vehicle-card__features">
+                    <li>4 seater capacity</li>
+                    <li>AC, GPS navigation</li>
+                    <li>Fuel &amp; tolls included</li>
+                  </ul>
+                  <div class="vehicle-card__price">₹28,500</div>
+                  <span class="vehicle-card__price-per">per vehicle</span>
+                </div>
+
+                <div class="vehicle-card selected" onclick="selectVehicle(this)">
+                  <span class="vehicle-card__badge">Most Booked</span>
+                  <div class="vehicle-card__emoji">🚙</div>
+                  <div class="vehicle-card__type">SUV</div>
+                  <div class="vehicle-card__name">Compact SUV</div>
+                  <div class="vehicle-card__model">Creta, Seltos, XUV or similar</div>
+                  <ul class="vehicle-card__features">
+                    <li>6–7 seater capacity</li>
+                    <li>AC, GPS, music system</li>
+                    <li>Fuel, tolls &amp; insurance</li>
+                  </ul>
+                  <div class="vehicle-card__price">₹39,000</div>
+                  <span class="vehicle-card__price-per">per vehicle</span>
+                </div>
+
+                <div class="vehicle-card" onclick="selectVehicle(this)">
+                  <div class="vehicle-card__emoji">🏔️</div>
+                  <div class="vehicle-card__type">4x4 Premium</div>
+                  <div class="vehicle-card__name">Premium 4x4</div>
+                  <div class="vehicle-card__model">Fortuner, Endeavour or similar</div>
+                  <ul class="vehicle-card__features">
+                    <li>7 seater luxury capacity</li>
+                    <li>Premium features &amp; comfort</li>
+                    <li>Fuel, tolls &amp; premium insurance</li>
+                  </ul>
+                  <div class="vehicle-card__price">₹42,000</div>
+                  <span class="vehicle-card__price-per">per vehicle</span>
+                </div>
+
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <!-- ---- Optional Add-Ons ---- -->
+            <div class="pricing-section">
+              <div class="pricing-section__header">
+                <h3 class="pricing-section__title" style="font-size:18px;">Optional Add-Ons</h3>
+                <p class="pricing-section__sub">Enhance your experience with these optional extras.</p>
+              </div>
+              <div class="addon-cards">
+
+                <div class="addon-card">
+                  <div class="addon-card__icon">📸</div>
+                  <div class="addon-card__body">
+                    <div class="addon-card__name">Professional Photography</div>
+                    <div class="addon-card__desc">Capture your journey with a professional photographer. Includes 200+ edited photos delivered to an online gallery.</div>
+                    <ul class="addon-card__features">
+                      <li>Full-day coverage</li>
+                      <li>Online gallery delivery</li>
+                    </ul>
+                  </div>
+                  <div class="addon-card__right">
+                    <div class="addon-card__price">₹8,500</div>
+                    <span class="addon-card__per">per group</span>
+                    <button class="addon-card__add-btn" onclick="toggleAddon(this)">+ Add</button>
+                  </div>
+                </div>
+
+                <div class="addon-card">
+                  <div class="addon-card__icon">🚐</div>
+                  <div class="addon-card__body">
+                    <div class="addon-card__name">Private Transportation</div>
+                    <div class="addon-card__desc">Upgrade to a private vehicle with a dedicated driver for your group's exclusive use throughout the trip.</div>
+                    <ul class="addon-card__features">
+                      <li>Flexible schedule</li>
+                      <li>Extra stops allowed</li>
+                    </ul>
+                  </div>
+                  <div class="addon-card__right">
+                    <div class="addon-card__price">₹12,000</div>
+                    <span class="addon-card__per">per trip</span>
+                    <button class="addon-card__add-btn" onclick="toggleAddon(this)">+ Add</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ---- Pricing Notes ---- -->
+            <div class="pricing-notes">
+              <div class="pricing-notes__title">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#f69a39" stroke-width="1.2"/><path d="M8 7v4M8 5.5v.5" stroke="#f69a39" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Pricing Notes
+              </div>
+              <ul class="pricing-notes__list">
+                <li>All prices include 5% GST. A GST invoice will be issued for all bookings.</li>
+                <li>Pay 30% to confirm your booking; the remaining 70% is due 60 days before departure.</li>
+                <li>Group discounts apply to bookings of 6 or more people travelling together.</li>
+                <li>Solo occupancy rooms are subject to availability and must be requested at the time of booking.</li>
+                <li>Add-on prices are per group unless otherwise specified. Add-ons can be requested up to 14 days before the trip.</li>
+              </ul>
+            </div>
+
+            <!-- Reviews -->
+            <div class="exp-section">
+              <h2 class="exp-section__title">Traveler Reviews</h2>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Priya Sharma <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">October 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">The pricing was completely transparent — no hidden charges. The double sharing room was very comfortable for the price.</p>
+              </div>
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Rahul Mehta <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">September 2024</div>
+                  </div>
+                  <div class="exp-review-stars">★★★★★</div>
+                </div>
+                <p class="exp-review-text">Booked the professional photography add-on and it was worth every rupee. The photos are incredible memories from the summit.</p>
+              </div>
+            </div>
+
+          </div><!-- /panel-pricing -->
+
+        </div><!-- /exp-content -->
+
+        <!-- ---- Right: Booking Sidebar ---- -->
+        <div class="exp-sidebar">
+          <div class="exp-booking-card">
+
+            <!-- Price -->
+            <div class="exp-price-row">
+              <span class="exp-price-main" id="sidebarPriceMain">₹31,500</span>
+              <span class="exp-price-per">per person</span>
+              <p class="exp-price-note" id="sidebarPriceNote">All-inclusive pricing</p>
+            </div>
+
+            <!-- Pricing breakdown (shows when on pricing tab) -->
+            <div id="sidebarPricingBreakdown" style="display:none;background:#f9fafb;border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:20px;">
+              <div style="font-size:12px;font-weight:700;color:#101828;margin-bottom:10px;letter-spacing:0.3px;text-transform:uppercase;">Your Selection</div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--warm-gray);margin-bottom:7px;">
+                <span>Room type</span><strong style="color:#101828;" id="sbRoomType">Double Sharing</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--warm-gray);margin-bottom:7px;">
+                <span>Base price</span><strong style="color:#101828;" id="sbBasePrice">₹31,500</strong>
+              </div>
+              <div id="sbAddonsRow" style="display:none;justify-content:space-between;font-size:13px;color:var(--warm-gray);margin-bottom:7px;">
+                <span>Add-ons</span><strong style="color:var(--orange);" id="sbAddonsAmt">+₹0</strong>
+              </div>
+              <div style="border-top:1px solid var(--border);margin:10px 0;"></div>
+              <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;color:#101828;">
+                <span>Total</span><span id="sbTotal" style="color:var(--orange);">₹31,500</span>
+              </div>
+            </div>
+
+            <!-- Coupon -->
+            <div class="exp-coupon-box">
+              <div class="exp-coupon-label">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 8.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8.5a.5.5 0 0 1 .5-.5H3V6a5 5 0 0 1 10 0v2h.5a.5.5 0 0 1 .5.5z" stroke="#f69a39" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                Have a Coupon Code?
+              </div>
+              <div class="exp-coupon-input-row">
+                <input type="text" class="exp-coupon-input" placeholder="Enter code" id="couponInput" />
+                <button class="exp-coupon-apply" onclick="applyCoupon()">Apply</button>
+              </div>
+              <div class="exp-offers-title">Available Offers:</div>
+              <div class="exp-offer-chip" onclick="fillCoupon('ADVENTURE10')">
+                <div class="exp-offer-chip__code">ADVENTURE10</div>
+                <div class="exp-offer-chip__desc">10% off on Adventure trips</div>
+              </div>
+              <div class="exp-offer-chip" onclick="fillCoupon('FIRST15')">
+                <div class="exp-offer-chip__code">FIRST15</div>
+                <div class="exp-offer-chip__desc">15% off for first-time users</div>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <button class="exp-book-btn" onclick="window.location.href='booking.html'">Book Now</button>
+            <button class="exp-sidebar-btn">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 15.5s-6.5-4-6.5-8.5a6.5 6.5 0 0 1 13 0c0 4.5-6.5 8.5-6.5 8.5z" stroke="currentColor" stroke-width="1.3"/></svg>
+              Add to Favorites
+            </button>
+            <button class="exp-sidebar-btn">Ask a Question</button>
+
+            <!-- Why Book -->
+            <div class="exp-why-box">
+              <h4 class="exp-why-title">Why Book With Us?</h4>
+              <ul class="exp-why-list">
+                <li>Verified &amp; trusted hosts</li>
+                <li>Secure payment processing</li>
+                <li>24/7 customer support</li>
+                <li>Clear refund policy</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Host Card -->
+          <div class="exp-host-card">
+            <div class="exp-host-inner">
+              <img src="assets/images/trek1.jpg" alt="Mountain Spirit Adventures" class="exp-host-avatar" />
+              <div>
+                <div class="exp-host-name">
+                  Mountain Spirit Adventures
+                  <svg class="exp-host-verified" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L9.8 5.2H14.4L10.8 7.8L12.2 12.2L8 9.6L3.8 12.2L5.2 7.8L1.6 5.2H6.2L8 1Z" fill="#f54900"/></svg>
+                </div>
+                <div class="exp-host-rating">
+                  <span style="color:#f59e0b;">★</span>
+                  <strong>4.8</strong>
+                  <span>(342 reviews)</span>
+                </div>
+                <div class="exp-host-since">Member since 2015</div>
+                <a href="#" class="exp-host-link">
+                  View full profile
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /exp-sidebar -->
+
+      </div><!-- /exp-layout -->
+    </div>
+  </div>
+
+  <!-- ====== YOU MIGHT ALSO LIKE ====== -->
+  <section class="exp-similar">
+    <div class="container">
+      <div class="exp-similar__header">
+        <h2 class="exp-similar__title">You Might Also Like</h2>
+        <div class="exp-similar__nav">
+          <button class="carousel-btn" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="carousel-btn" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="exp-similar__grid">
+
+        <a href="experience-detail.html" class="sim-card">
+          <div class="sim-card__img">
+            <img src="assets/images/retreat1.jpg" alt="Kerala Backwaters &amp; Ayurveda" />
+          </div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">Retreat</p>
+            <h3 class="sim-card__title">Kerala Backwaters &amp; Ayurveda</h3>
+            <div class="sim-card__loc">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg>
+              Kerala
+            </div>
+            <div class="sim-card__footer">
+              <div>
+                <span class="sim-card__price">₹42,000</span>
+                <span class="sim-card__price-old">₹48,000</span>
+              </div>
+              <span class="sim-card__badge">13% OFF</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="experience-detail.html" class="sim-card">
+          <div class="sim-card__img">
+            <img src="assets/images/landscape.jpg" alt="Desert Safari &amp; Folk Culture" />
+          </div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">Cultural</p>
+            <h3 class="sim-card__title">Desert Safari &amp; Folk Culture</h3>
+            <div class="sim-card__loc">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg>
+              Rajasthan
+            </div>
+            <div class="sim-card__footer">
+              <div>
+                <span class="sim-card__price">₹28,000</span>
+                <span class="sim-card__price-old">₹32,000</span>
+              </div>
+              <span class="sim-card__badge">13% OFF</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="experience-detail.html" class="sim-card">
+          <div class="sim-card__img">
+            <img src="assets/images/trek2.jpg" alt="Campfire &amp; Stargazing Expedition" />
+          </div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">Adventure</p>
+            <h3 class="sim-card__title">Campfire &amp; Stargazing Expedition</h3>
+            <div class="sim-card__loc">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg>
+              Uttarakhand
+            </div>
+            <div class="sim-card__footer">
+              <div>
+                <span class="sim-card__price">₹18,000</span>
+                <span class="sim-card__price-old">₹22,000</span>
+              </div>
+              <span class="sim-card__badge">18% OFF</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="experience-detail.html" class="sim-card">
+          <div class="sim-card__img">
+            <img src="assets/images/cultural1.jpg" alt="Varanasi Spiritual Journey" />
+          </div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">Immersion</p>
+            <h3 class="sim-card__title">Varanasi Spiritual Journey</h3>
+            <div class="sim-card__loc">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg>
+              Uttar Pradesh
+            </div>
+            <div class="sim-card__footer">
+              <div>
+                <span class="sim-card__price">₹24,000</span>
+                <span class="sim-card__price-old">₹29,000</span>
+              </div>
+              <span class="sim-card__badge">17% OFF</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer--detail">
+    <div class="container">
+      <div class="footer-detail__top">
+        <div class="footer-detail__brand">
+          <h3>Great D'Tour</h3>
+          <p>Follow our journey as we curate India's most unique travel stories.</p>
+          <div class="footer-detail__social">
+            <a href="https://instagram.com/greatdtour" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://facebook.com/greatdtour" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://youtube.com/greatdtour" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45a2.78 2.78 0 0 0-1.95 1.97A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://linkedin.com/company/greatdtour" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-detail__links">
+          <div class="footer-detail__col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="field-notes.html">Field Notes</a></li>
+              <li><a href="about.html">Our Story</a></li>
+              <li><a href="#">Share your Story</a></li>
+              <li><a href="host.html">Partner with Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-detail__col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
+          <div class="footer-detail__col">
+            <h4>Connect</h4>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Advertise</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-detail__bottom">
+        <p class="footer-detail__copy">© 2026 Great D'Tour. All Rights Reserved by Chimpya Innovation Labs LLP, Bengaluru, India</p>
+        <div class="footer-detail__legal">
+          <a href="#">Privacy</a>
+          <span>|</span>
+          <a href="#">Terms</a>
+          <span>|</span>
+          <a href="#">Cookies</a>
+          <span>|</span>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== NOTIFY ME MODAL ====== -->
+  <div class="avail-notify-modal" id="notifyModal">
+    <button class="avail-notify-modal__close" onclick="closeNotifyModal()" aria-label="Close">✕</button>
+    <div class="avail-notify-modal__title">Get notified for <span id="notifyMonthLabel">October 2025</span></div>
+    <div class="avail-notify-modal__desc">We'll email you the moment new slots open for this month.</div>
+    <input type="email" class="avail-notify-input" placeholder="Your email address" id="notifyEmail" />
+    <button class="avail-notify-submit" onclick="submitNotify()">Notify Me</button>
+  </div>
+
+  <script src="assets/main.js"></script>
+  <script>
+    // ---- Tab switching with panel show/hide ----
+    const tabItems = document.querySelectorAll('.exp-tabs__item');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabItems.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+
+        // Update active tab
+        tabItems.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        // Show matching panel, hide others
+        tabPanels.forEach(panel => {
+          if (panel.id === 'panel-' + target) {
+            panel.classList.add('active');
+          } else {
+            panel.classList.remove('active');
+          }
+        });
+
+        // Scroll to content (below sticky nav + tabs)
+        const bodyEl = document.querySelector('.exp-body');
+        if (bodyEl) {
+          const offset = document.querySelector('.exp-tabs').offsetHeight +
+                         document.querySelector('nav').offsetHeight;
+          const top = bodyEl.getBoundingClientRect().top + window.scrollY - offset - 16;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ---- Accordion toggle ----
+    function toggleAccordion(headerEl) {
+      headerEl.closest('.itin-accordion').classList.toggle('open');
+    }
+
+    // ---- FAQ toggle ----
+    function toggleFaq(questionEl) {
+      const item = questionEl.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      // Close all in this category first (optional: remove for multi-open)
+      item.closest('.faq-category').querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ---- Coupon helpers ----
+    function fillCoupon(code) {
+      document.getElementById('couponInput').value = code;
+    }
+    function applyCoupon() {
+      const code = document.getElementById('couponInput').value.trim().toUpperCase();
+      if (code === 'ADVENTURE10' || code === 'FIRST15') {
+        alert('Coupon "' + code + '" applied successfully!');
+      } else if (code) {
+        alert('Invalid coupon code. Please try again.');
+      }
+    }
+
+    // ---- Availability Tab ----
+    const SLOT_DATA = {
+      march: [
+        { date: '15 – 22 March 2025', nights: '7 nights / 8 days', badge: '2 Available Slots', type: 'available', urgency: null, price: 31500 },
+        { date: '25 March – 1 April 2025', nights: '7 nights / 8 days', badge: '2 Available Slots', type: 'available', urgency: null, price: 31500 }
+      ],
+      april: [
+        { date: '5 – 12 April 2025', nights: '7 nights / 8 days', badge: '2 Available Slots', type: 'available', urgency: null, price: 31500 },
+        { date: '19 – 26 April 2025', nights: '7 nights / 8 days', badge: 'Only 2 Spots Left!', type: 'low', urgency: '🔥 Filling fast', price: 31500 }
+      ],
+      may: [
+        { date: '10 – 17 May 2025', nights: '7 nights / 8 days', badge: '1 Available Slot', type: 'low', urgency: '⚡ Last slot!', price: 31500 }
+      ],
+      september: [
+        { date: '6 – 13 September 2025', nights: '7 nights / 8 days', badge: '3 Available Slots', type: 'available', urgency: null, price: 31500 },
+        { date: '20 – 27 September 2025', nights: '7 nights / 8 days', badge: '3 Available Slots', type: 'available', urgency: null, price: 31500 },
+        { date: '27 September – 4 October 2025', nights: '7 nights / 8 days', badge: 'New Batch!', type: 'available', urgency: null, price: 31500 }
+      ],
+      october: []
+    };
+
+    let selectedSlot = null;
+    let groupCount = 2;
+    const PRICE_PER_PERSON = 31500;
+
+    function renderSlots(month) {
+      const list = document.getElementById('availSlotsList');
+      const slots = SLOT_DATA[month] || [];
+      list.innerHTML = '';
+      selectedSlot = null;
+      hidePriceSummary();
+
+      if (!slots.length) {
+        list.innerHTML = '<p style="font-size:14px;color:var(--warm-gray);padding:20px 0;">No slots available for this month. Use the custom dates option below.</p>';
+        return;
+      }
+
+      slots.forEach((slot, i) => {
+        const badgeClass = slot.type === 'low' ? 'avail-slot-badge avail-slot-badge--low' : 'avail-slot-badge';
+        const urgencyHTML = slot.urgency ? `<div class="avail-slot__urgency">${slot.urgency}</div>` : '';
+        const row = document.createElement('div');
+        row.className = 'avail-slot-row';
+        row.dataset.index = i;
+        row.dataset.month = month;
+        row.innerHTML = `
+          <div class="avail-slot-left">
+            <span class="${badgeClass}">${slot.badge}</span>
+            <div>
+              <div class="avail-slot__date">${slot.date}</div>
+              <div class="avail-slot__nights">${slot.nights}</div>
+              ${urgencyHTML}
+            </div>
+          </div>
+          <div class="avail-slot-right">
+            <div class="avail-slot__price">
+              ₹${slot.price.toLocaleString('en-IN')}
+              <span class="avail-slot__price-per">per person</span>
+            </div>
+            <button class="avail-slot__select-btn" onclick="selectSlot(this, '${slot.date}', ${slot.price})">Select</button>
+          </div>`;
+        list.appendChild(row);
+      });
+    }
+
+    function selectMonth(card) {
+      if (card.classList.contains('sold-out')) return;
+      document.querySelectorAll('.avail-month-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      renderSlots(card.dataset.month);
+    }
+
+    function selectSlot(btn, dateRange, price) {
+      const allBtns = document.querySelectorAll('.avail-slot__select-btn');
+      const allRows = document.querySelectorAll('.avail-slot-row');
+      allBtns.forEach(b => { b.textContent = 'Select'; b.classList.remove('selected-btn'); });
+      allRows.forEach(r => r.classList.remove('slot-selected'));
+
+      btn.textContent = 'Selected ✓';
+      btn.classList.add('selected-btn');
+      btn.closest('.avail-slot-row').classList.add('slot-selected');
+
+      selectedSlot = { date: dateRange, price };
+      showPriceSummary();
+    }
+
+    function showPriceSummary() {
+      if (!selectedSlot) return;
+      const total = selectedSlot.price * groupCount;
+      document.getElementById('summaryDateRange').textContent = selectedSlot.date;
+      document.getElementById('summaryPeople').textContent = `${groupCount} traveller${groupCount > 1 ? 's' : ''} × ₹${selectedSlot.price.toLocaleString('en-IN')}`;
+      document.getElementById('summaryTotal').textContent = '₹' + total.toLocaleString('en-IN');
+      document.getElementById('availPriceSummary').classList.add('visible');
+    }
+
+    function hidePriceSummary() {
+      document.getElementById('availPriceSummary').classList.remove('visible');
+    }
+
+    function changeGroup(delta) {
+      groupCount = Math.max(1, Math.min(12, groupCount + delta));
+      document.getElementById('groupVal').textContent = groupCount;
+      if (selectedSlot) showPriceSummary();
+    }
+
+    function openNotifyModal(month) {
+      document.getElementById('notifyMonthLabel').textContent = month;
+      document.getElementById('notifyModal').classList.add('open');
+    }
+
+    function closeNotifyModal() {
+      document.getElementById('notifyModal').classList.remove('open');
+    }
+
+    function submitNotify() {
+      const email = document.getElementById('notifyEmail').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      closeNotifyModal();
+      // Prototype feedback
+      const toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;bottom:32px;right:32px;background:#101828;color:white;padding:14px 20px;border-radius:8px;font-size:14px;font-family:var(--font-sans);z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.2);';
+      toast.textContent = '✓ You\'ll be notified when slots open.';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Initialize with March selected
+    renderSlots('march');
+
+    // ---- Pricing Tab ----
+    const ROOM_LABELS = {
+      triple: 'Triple Sharing',
+      double: 'Double Sharing',
+      solo:   'Solo Occupancy',
+      group:  'Group (6+)'
+    };
+    let selectedRoomPrice = 31500;
+    let addonTotal = 0;
+
+    function selectRoomCard(card) {
+      document.querySelectorAll('#roomCards .pricing-card').forEach(c => {
+        c.classList.remove('selected');
+        const btn = c.querySelector('.pricing-card__select-btn');
+        if (btn) btn.textContent = 'Select';
+      });
+      card.classList.add('selected');
+      const btn = card.querySelector('.pricing-card__select-btn');
+      if (btn) btn.textContent = 'Selected ✓';
+      selectedRoomPrice = parseInt(card.dataset.price, 10);
+      updatePricingSidebar(card.dataset.room);
+    }
+
+    function selectVehicle(card) {
+      document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+    }
+
+    function toggleAddon(btn) {
+      const isAdded = btn.classList.contains('added');
+      const card = btn.closest('.addon-card');
+      const price = parseInt(card.querySelector('.addon-card__price').textContent.replace(/[^\d]/g, ''), 10);
+      if (isAdded) {
+        btn.classList.remove('added');
+        btn.textContent = '+ Add';
+        addonTotal -= price;
+      } else {
+        btn.classList.add('added');
+        btn.textContent = '✓ Added';
+        addonTotal += price;
+      }
+      const selCard = document.querySelector('#roomCards .pricing-card.selected');
+      updatePricingSidebar(selCard ? selCard.dataset.room : 'double');
+    }
+
+    function updatePricingSidebar(roomKey) {
+      const total = selectedRoomPrice + addonTotal;
+      const roomLabel = ROOM_LABELS[roomKey] || 'Double Sharing';
+
+      // Update main price display
+      document.getElementById('sidebarPriceMain').textContent = '₹' + selectedRoomPrice.toLocaleString('en-IN');
+      document.getElementById('sidebarPriceNote').textContent = roomLabel + ' · All-inclusive';
+
+      // Show breakdown panel
+      document.getElementById('sidebarPricingBreakdown').style.display = 'block';
+      document.getElementById('sbRoomType').textContent = roomLabel;
+      document.getElementById('sbBasePrice').textContent = '₹' + selectedRoomPrice.toLocaleString('en-IN');
+
+      // Add-ons row
+      const addonsRow = document.getElementById('sbAddonsRow');
+      if (addonTotal > 0) {
+        addonsRow.style.display = 'flex';
+        document.getElementById('sbAddonsAmt').textContent = '+₹' + addonTotal.toLocaleString('en-IN');
+      } else {
+        addonsRow.style.display = 'none';
+      }
+
+      document.getElementById('sbTotal').textContent = '₹' + total.toLocaleString('en-IN');
+    }
+
+    // Show/hide breakdown when switching tabs
+    const pricingTabItem = document.querySelector('[data-tab="pricing"]');
+    if (pricingTabItem) {
+      pricingTabItem.addEventListener('click', () => {
+        // Trigger sidebar update on tab open
+        const selCard = document.querySelector('#roomCards .pricing-card.selected');
+        if (selCard) updatePricingSidebar(selCard.dataset.room);
+        else document.getElementById('sidebarPricingBreakdown').style.display = 'block';
+      });
+    }
+
+    // Hide breakdown when switching away from pricing tab
+    tabItems.forEach(tab => {
+      if (tab.dataset.tab !== 'pricing') {
+        tab.addEventListener('click', () => {
+          document.getElementById('sidebarPricingBreakdown').style.display = 'none';
+          document.getElementById('sidebarPriceMain').textContent = '₹31,500';
+          document.getElementById('sidebarPriceNote').textContent = 'All-inclusive pricing';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

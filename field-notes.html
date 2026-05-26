@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Notes — Great D'Tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* ===== FIELD NOTES PAGE ===== */
+    :root {
+      --fn-dark: #121929;
+      --fn-dark2: #1e2939;
+      --fn-dark3: #364153;
+      --fn-text-dim: #d1d5dc;
+      --fn-text-muted: #6a7282;
+      --fn-gold: #ffb900;
+      --fn-orange: #f54900;
+    }
+    body { background: #fff; }
+
+    /* STRIP */
+    .fn-strip {
+      background: linear-gradient(to right, #ff3400, #f36800);
+      padding: 8px 32px; display: flex; align-items: center; gap: 8px;
+    }
+    .fn-strip__text { font-size: 14px; color: #fff; line-height: 1.4; flex: 1; }
+    .fn-strip__text strong { font-weight: 700; cursor: pointer; }
+    .fn-strip__close {
+      background: none; border: none; color: rgba(255,255,255,0.8);
+      font-size: 20px; cursor: pointer; padding: 0 4px; line-height: 1;
+    }
+
+    /* HERO */
+    .fn-hero { background: var(--fn-dark); padding: 48px 0 0; overflow: hidden; }
+    .fn-hero__inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 80px;
+      display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start;
+    }
+    .fn-featured { display: flex; flex-direction: column; gap: 16px; }
+    .fn-featured__img {
+      position: relative; height: 520px; border-radius: 8px; overflow: hidden;
+      display: block; text-decoration: none;
+    }
+    .fn-featured__img img { width: 100%; height: 100%; object-fit: cover; }
+    .fn-featured__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+    }
+    .fn-featured__info { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; }
+    .fn-featured__tag {
+      display: inline-block; background: #fff7ed; color: var(--fn-orange);
+      font-size: 10px; font-weight: 400; letter-spacing: 1.1px; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 4px; margin-bottom: 16px;
+    }
+    .fn-featured__title {
+      font-family: 'Inter', sans-serif; font-size: 30px; font-weight: 500; color: #fff;
+      line-height: 1.2; margin-bottom: 12px; letter-spacing: 0.37px; max-width: 560px;
+    }
+    .fn-featured__excerpt { font-size: 14px; color: #d1d5dc; line-height: 1.6; max-width: 440px; }
+    .fn-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fn-secondary__card {
+      position: relative; height: 220px; border-radius: 8px; overflow: hidden; text-decoration: none; display: block;
+    }
+    .fn-secondary__card img { width: 100%; height: 100%; object-fit: cover; }
+    .fn-secondary__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+    }
+    .fn-secondary__info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; }
+    .fn-secondary__cat {
+      font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--fn-gold); margin-bottom: 6px;
+    }
+    .fn-secondary__title {
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; color: #fff; line-height: 1.3;
+    }
+
+    /* SIDEBAR */
+    .fn-latest { padding-top: 8px; }
+    .fn-latest__header { padding-left: 16px; border-left: 4px solid var(--fn-orange); margin-bottom: 20px; }
+    .fn-latest__title {
+      font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 500; color: #fff;
+      text-transform: uppercase; letter-spacing: -0.53px;
+    }
+    .fn-latest__list { display: flex; flex-direction: column; }
+    .fn-latest__item {
+      display: flex; gap: 12px; padding: 14px 0;
+      border-bottom: 1px solid var(--fn-dark3); text-decoration: none;
+    }
+    .fn-latest__item:last-child { border-bottom: none; }
+    .fn-latest__thumb { width: 80px; height: 56px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+    .fn-latest__thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .fn-latest__cat {
+      display: block; font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--fn-gold); margin-bottom: 4px;
+    }
+    .fn-latest__name {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      color: #e5e7eb; line-height: 1.4;
+    }
+
+    /* TRENDING */
+    .fn-trending {
+      background: #fff; padding: 40px 0;
+      border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;
+    }
+    .fn-trending__inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+    .fn-trending__header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;
+    }
+    .fn-trending__label { display: flex; align-items: center; gap: 12px; }
+    .fn-trending__line { width: 24px; height: 2px; background: var(--fn-orange); }
+    .fn-trending__title {
+      font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500;
+      color: #101828; text-transform: uppercase; letter-spacing: 2.26px;
+    }
+    .fn-trending__nav { display: flex; gap: 8px; }
+    .fn-trending__btn {
+      width: 32px; height: 32px; border: 1px solid #d1d5dc; border-radius: 50%;
+      background: none; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .fn-trending__btn:hover { background: #f3f4f6; }
+    .fn-trending__scroll-wrap { overflow: hidden; }
+    .fn-trending__scroll { display: flex; gap: 16px; transition: transform 0.35s ease; }
+    .fn-trend-card { flex-shrink: 0; width: 220px; text-decoration: none; }
+    .fn-trend-card__img {
+      position: relative; height: 140px; border-radius: 8px; overflow: hidden; margin-bottom: 10px;
+    }
+    .fn-trend-card__img img { width: 100%; height: 100%; object-fit: cover; }
+    .fn-trend-card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0));
+    }
+    .fn-trend-card__badge {
+      position: absolute; bottom: 8px; left: 8px; background: rgba(255,255,255,0.2);
+      color: #fff; font-size: 10px; letter-spacing: 0.62px; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 4px;
+    }
+    .fn-trend-card__title {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      color: #101828; line-height: 1.4;
+    }
+
+    /* FILTER BAR */
+    .fn-filter-bar {
+      background: #fff; border-bottom: 1px solid #e5e7eb;
+      padding: 14px 0; position: sticky; top: 64px; z-index: 90;
+    }
+    .fn-filter-bar__inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 80px;
+      display: flex; align-items: center; gap: 12px; flex-wrap: nowrap;
+    }
+    .fn-search { position: relative; flex-shrink: 0; }
+    .fn-search__icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: #6a7282; pointer-events: none;
+    }
+    .fn-search__clear {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; display: none;
+      align-items: center; justify-content: center; padding: 2px;
+    }
+    .fn-search__clear.visible { display: flex; }
+    .fn-search__input {
+      width: 220px; height: 42px; border: 1px solid #d1d5dc; border-radius: 999px;
+      padding: 0 36px 0 44px; font-size: 14px; font-family: 'Inter', sans-serif;
+      color: #101828; background: #fff; outline: none; transition: border-color 0.2s;
+    }
+    .fn-search__input::placeholder { color: rgba(10,10,10,0.5); }
+    .fn-search__input:focus { border-color: var(--fn-orange); }
+    .fn-pills { display: flex; gap: 8px; flex: 1; }
+    .fn-pill {
+      height: 40px; padding: 0 16px; border-radius: 999px; border: none;
+      background: #f3f4f6; color: #364153; font-size: 13px; font-weight: 500;
+      font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.15s, color 0.15s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .fn-pill:hover { background: #e5e7eb; }
+    .fn-pill--active { background: #101828; color: #fff; }
+    .fn-filter-actions { display: flex; gap: 8px; flex-shrink: 0; margin-left: auto; }
+
+    /* Dropdowns */
+    .fn-dropdown { position: relative; }
+    .fn-dropdown__btn {
+      height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #d1d5dc;
+      background: #fff; color: #364153; font-size: 13px; font-weight: 500;
+      font-family: 'Inter', sans-serif; cursor: pointer;
+      display: flex; align-items: center; gap: 6px; white-space: nowrap;
+      transition: border-color 0.15s;
+    }
+    .fn-dropdown__btn:hover { border-color: #9ca3af; }
+    .fn-dropdown__btn--active { border-color: #101828; color: #101828; }
+    .fn-dropdown__chevron { transition: transform 0.2s; flex-shrink: 0; }
+    .fn-dropdown--open .fn-dropdown__chevron { transform: rotate(180deg); }
+    .fn-dropdown__menu {
+      position: absolute; top: calc(100% + 6px); right: 0; min-width: 160px;
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10); padding: 6px;
+      opacity: 0; transform: translateY(-6px); pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s; z-index: 100;
+    }
+    .fn-dropdown--open .fn-dropdown__menu { opacity: 1; transform: none; pointer-events: auto; }
+    .fn-dropdown__item {
+      display: block; width: 100%; text-align: left; padding: 9px 14px;
+      border: none; background: none; border-radius: 8px;
+      font-size: 13px; font-family: 'Inter', sans-serif; color: #364153;
+      cursor: pointer; transition: background 0.12s;
+    }
+    .fn-dropdown__item:hover { background: #f3f4f6; }
+    .fn-dropdown__item--active { background: #f3f4f6; font-weight: 600; color: #101828; }
+
+    /* STORIES GRID */
+    .fn-stories { background: #fff; padding: 48px 0 0; }
+    .fn-stories__inner { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
+    .fn-stories__heading { margin-bottom: 32px; }
+    .fn-stories__title {
+      font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 500;
+      color: #101828; letter-spacing: 0.4px; margin-bottom: 4px;
+    }
+    .fn-stories__count { font-size: 14px; color: #6a7282; }
+    .fn-articles-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 20px;
+      align-items: stretch;
+    }
+    .fn-article {
+      display: flex; flex-direction: column; gap: 10px; text-decoration: none;
+      background: #fff; border-radius: 12px; overflow: hidden;
+      border: 1px solid #f0f0f0; transition: box-shadow 0.2s;
+    }
+    .fn-article:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .fn-article__img {
+      position: relative; height: 200px; border-radius: 0; overflow: hidden; flex-shrink: 0;
+    }
+    .fn-article__img img { width: 100%; height: 100%; object-fit: cover; }
+    .fn-article__cat-badge {
+      position: absolute; top: 14px; left: 10px; background: rgba(255,255,255,0.9);
+      color: #101828; font-size: 9px; font-weight: 400; letter-spacing: 0.62px;
+      text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .fn-article__read-bar {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+      display: flex; align-items: center; gap: 6px;
+    }
+    .fn-article__read-time { font-size: 10px; color: rgba(255,255,255,0.8); letter-spacing: 0.12px; }
+    .fn-article__body { display: flex; flex-direction: column; gap: 6px; flex: 1; padding: 12px 14px 14px; }
+    .fn-article__tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .fn-article__tag {
+      background: #f3f4f6; color: #6a7282; font-size: 10px; font-weight: 500;
+      padding: 2px 10px; border-radius: 999px; letter-spacing: 0.12px;
+    }
+    .fn-article__title {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      color: #101828; line-height: 1.45;
+    }
+    .fn-article__excerpt {
+      font-size: 11px; color: #6a7282; line-height: 1.65; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .fn-article__meta { display: flex; align-items: center; gap: 6px; font-size: 10px; margin-top: auto; }
+    .fn-article__author { color: #364153; }
+    .fn-article__sep { color: #99a1af; }
+    .fn-article__date { color: #99a1af; }
+
+    /* WRITE CTA */
+    .fn-write-cta-wrap { padding: 48px 64px 80px; max-width: 1280px; margin: 0 auto; }
+    .fn-write-cta {
+      background: linear-gradient(161deg, #f54900 0%, #e17100 100%);
+      border-radius: 16px; padding: 60px 40px; text-align: center;
+    }
+    .fn-write-cta__icon { margin: 0 auto 24px; }
+    .fn-write-cta__heading {
+      font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 500;
+      color: #fff; margin-bottom: 14px; letter-spacing: 0.4px;
+    }
+    .fn-write-cta__sub {
+      font-size: 16px; color: rgba(255,255,255,0.9); line-height: 1.65;
+      max-width: 620px; margin: 0 auto 36px;
+    }
+    .fn-write-cta__btn {
+      display: inline-block; background: #fff; color: var(--fn-orange);
+      font-size: 16px; font-weight: 500; font-family: 'Inter', sans-serif;
+      padding: 16px 36px; border-radius: 999px; text-decoration: none; transition: opacity 0.2s;
+    }
+    .fn-write-cta__btn:hover { opacity: 0.92; }
+
+    /* FOOTER */
+    .fn-footer { background: #101828; padding: 60px 0 32px; }
+    .fn-footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .fn-footer__grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 48px;
+      padding-bottom: 36px; border-bottom: 1px solid #364153; margin-bottom: 32px;
+    }
+    .fn-footer__brand-name { font-size: 20px; font-weight: 500; color: #fff; margin-bottom: 12px; }
+    .fn-footer__brand-desc { font-size: 14px; color: #d1d5dc; line-height: 1.65; margin-bottom: 16px; }
+    .fn-footer__socials { display: flex; gap: 16px; }
+    .fn-footer__social { color: #d1d5dc; text-decoration: none; transition: color 0.2s; }
+    .fn-footer__social:hover { color: #fff; }
+    .fn-footer__col-title { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 14px; }
+    .fn-footer__link {
+      display: block; font-size: 14px; color: #d1d5dc; text-decoration: none;
+      margin-bottom: 8px; transition: color 0.2s;
+    }
+    .fn-footer__link:hover { color: #fff; }
+    .fn-footer__bottom { font-size: 14px; color: #d1d5dc; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .fn-hero__inner { padding: 0 40px; grid-template-columns: 1fr 280px; }
+      .fn-stories__inner { padding: 0 40px; }
+      .fn-write-cta-wrap { padding: 48px 40px 80px; }
+      .fn-articles-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .fn-hero__inner { grid-template-columns: 1fr; }
+      .fn-latest { display: none; }
+      .fn-articles-grid { grid-template-columns: repeat(2, 1fr); }
+      .fn-footer__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .fn-articles-grid { grid-template-columns: 1fr; }
+      .fn-footer__grid { grid-template-columns: 1fr; }
+      .fn-search__input { width: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav nav--page" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/GDT_logo_black.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-dark" />
+      </a>
+      <div class="nav__links">
+        <a href="experiences.html" class="nav__link">Experiences</a>
+        <a href="field-notes.html" class="nav__link" style="color: var(--orange);">Field Notes</a>
+        <a href="about.html" class="nav__link">About Us</a>
+        <a href="host.html" class="nav__cta">Become a Host</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ANNOUNCEMENT STRIP -->
+  <div class="fn-strip" id="fnStrip">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><path d="M8 2l1.8 4H14l-3.6 2.6 1.4 4.2L8 10.4l-3.8 2.4 1.4-4.2L2 6h4.2L8 2z" fill="white"/></svg>
+    <p class="fn-strip__text">Have an amazing travel story to share? Request an invite to write.&nbsp;<strong>Learn More</strong></p>
+    <button class="fn-strip__close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="fn-hero">
+    <div class="fn-hero__inner">
+
+      <!-- Featured article -->
+      <div class="fn-featured">
+        <a href="field-notes-detail.html" class="fn-featured__img">
+          <img src="assets/images/trek1.jpg" alt="Patagonia" />
+          <div class="fn-featured__overlay"></div>
+          <div class="fn-featured__info">
+            <span class="fn-featured__tag">Adventure</span>
+            <h1 class="fn-featured__title">Into the Wild: 30 Days Trekking Through Patagonia</h1>
+            <p class="fn-featured__excerpt">An unforgettable journey through one of the world's most dramatic landscapes, where towering peaks meet endless glaciers and the wind carries stories of ancient explorers.</p>
+          </div>
+        </a>
+        <div class="fn-secondary">
+          <a href="#article-iceland" class="fn-secondary__card">
+            <img src="assets/images/retreat2.jpg" alt="Iceland" />
+            <div class="fn-secondary__overlay"></div>
+            <div class="fn-secondary__info">
+              <p class="fn-secondary__cat">Adventure</p>
+              <h3 class="fn-secondary__title">Chasing Northern Lights in Iceland</h3>
+            </div>
+          </a>
+          <a href="#article-ceramics" class="fn-secondary__card">
+            <img src="assets/images/cultural1.jpg" alt="Ceramics" />
+            <div class="fn-secondary__overlay"></div>
+            <div class="fn-secondary__info">
+              <p class="fn-secondary__cat">Cultural</p>
+              <h3 class="fn-secondary__title">The Art of Portuguese Ceramics</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Latest stories sidebar -->
+      <aside class="fn-latest">
+        <div class="fn-latest__header">
+          <h2 class="fn-latest__title">Latest Stories</h2>
+        </div>
+        <div class="fn-latest__list">
+          <a href="#" class="fn-latest__item">
+            <div class="fn-latest__thumb"><img src="assets/images/yoga-retreat.jpg" alt="" /></div>
+            <div><span class="fn-latest__cat">Retreat</span><p class="fn-latest__name">Finding Peace in the Japanese Countryside</p></div>
+          </a>
+          <a href="#" class="fn-latest__item">
+            <div class="fn-latest__thumb"><img src="assets/images/post4.jpg" alt="" /></div>
+            <div><span class="fn-latest__cat">Cultural</span><p class="fn-latest__name">The Colors of Holi: A Festival Immersion</p></div>
+          </a>
+          <a href="#" class="fn-latest__item">
+            <div class="fn-latest__thumb"><img src="assets/images/retreat1.jpg" alt="" /></div>
+            <div><span class="fn-latest__cat">Retreat</span><p class="fn-latest__name">Finding Peace in the Japanese Countryside</p></div>
+          </a>
+          <a href="#" class="fn-latest__item">
+            <div class="fn-latest__thumb"><img src="assets/images/landscape.jpg" alt="" /></div>
+            <div><span class="fn-latest__cat">Immersive</span><p class="fn-latest__name">Living with Nomads in the Sahara</p></div>
+          </a>
+          <a href="#" class="fn-latest__item">
+            <div class="fn-latest__thumb"><img src="assets/images/post1.jpg" alt="" /></div>
+            <div><span class="fn-latest__cat">Reflections</span><p class="fn-latest__name">Solo Travel and Self-Discovery</p></div>
+          </a>
+          <a href="#" class="fn-latest__item">
+            <div class="fn-latest__thumb"><img src="assets/images/post3.jpg" alt="" /></div>
+            <div><span class="fn-latest__cat">Cultural</span><p class="fn-latest__name">The Colors of Holi: A Festival Immersion</p></div>
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- TRENDING NOW -->
+  <section class="fn-trending">
+    <div class="fn-trending__inner">
+      <div class="fn-trending__header">
+        <div class="fn-trending__label">
+          <div class="fn-trending__line"></div>
+          <h2 class="fn-trending__title">Trending Now</h2>
+        </div>
+        <div class="fn-trending__nav">
+          <button class="fn-trending__btn" id="trendPrev" aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="fn-trending__btn" id="trendNext" aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="fn-trending__scroll-wrap">
+        <div class="fn-trending__scroll" id="trendScroll">
+          <a href="#" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/trek2.jpg" alt="Marrakech" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Adventure</span></div>
+            <p class="fn-trend-card__title">The Last Train to Marrakech</p>
+          </a>
+          <a href="#" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/retreat2.jpg" alt="Swiss Alps" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Retreat</span></div>
+            <p class="fn-trend-card__title">Silence in the Swiss Alps</p>
+          </a>
+          <a href="#" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/post6.jpg" alt="Bangkok" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Immersive</span></div>
+            <p class="fn-trend-card__title">Street Food Chronicles: Bangkok After Dark</p>
+          </a>
+          <a href="#" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/cultural1.jpg" alt="Angkor" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Cultural</span></div>
+            <p class="fn-trend-card__title">Ruins of Angkor at Dawn</p>
+          </a>
+          <a href="#" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/post5.jpg" alt="Amalfi" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Reflections</span></div>
+            <p class="fn-trend-card__title">Letters from the Amalfi Coast</p>
+          </a>
+          <a href="#" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/landscape.jpg" alt="Sahara" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Adventure</span></div>
+            <p class="fn-trend-card__title">Nomad's Guide to the Sahara</p>
+          </a>
+          <a href="#" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/post3.jpg" alt="Portugal" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Cultural</span></div>
+            <p class="fn-trend-card__title">The Pottery Villages of Portugal</p>
+          </a>
+          <a href="field-notes-detail.html" class="fn-trend-card">
+            <div class="fn-trend-card__img"><img src="assets/images/yoga-retreat.jpg" alt="Patagonia" /><div class="fn-trend-card__overlay"></div><span class="fn-trend-card__badge">Reflections</span></div>
+            <p class="fn-trend-card__title">Finding Myself in Patagonia</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <div class="fn-filter-bar">
+    <div class="fn-filter-bar__inner">
+      <div class="fn-search">
+        <svg class="fn-search__icon" width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="#6a7282" stroke-width="1.5"/><path d="M13 13l3 3" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" class="fn-search__input" id="fnSearch" placeholder="Search stories…" autocomplete="off" />
+        <button class="fn-search__clear" id="fnSearchClear" aria-label="Clear">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="fn-pills" id="fnPills">
+        <button class="fn-pill fn-pill--active" data-cat="all">All</button>
+        <button class="fn-pill" data-cat="adventure">Adventure</button>
+        <button class="fn-pill" data-cat="retreat">Retreat</button>
+        <button class="fn-pill" data-cat="immersive">Immersive</button>
+        <button class="fn-pill" data-cat="cultural">Cultural</button>
+        <button class="fn-pill" data-cat="reflections">Reflections</button>
+      </div>
+      <div class="fn-filter-actions">
+        <!-- Read time dropdown -->
+        <div class="fn-dropdown" id="readDropdown">
+          <button class="fn-dropdown__btn" id="readBtn">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span id="readLabel">Read time</span>
+            <svg class="fn-dropdown__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="fn-dropdown__menu" id="readMenu">
+            <button class="fn-dropdown__item fn-dropdown__item--active" data-read="all">Any length</button>
+            <button class="fn-dropdown__item" data-read="short">Under 8 min</button>
+            <button class="fn-dropdown__item" data-read="long">8 min or more</button>
+          </div>
+        </div>
+        <!-- Sort dropdown -->
+        <div class="fn-dropdown" id="sortDropdown">
+          <button class="fn-dropdown__btn" id="sortBtn">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M4 7h6M6 10h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span id="sortLabel">Newest</span>
+            <svg class="fn-dropdown__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="fn-dropdown__menu" id="sortMenu">
+            <button class="fn-dropdown__item fn-dropdown__item--active" data-sort="newest">Newest first</button>
+            <button class="fn-dropdown__item" data-sort="oldest">Oldest first</button>
+            <button class="fn-dropdown__item" data-sort="shortest">Shortest read</button>
+            <button class="fn-dropdown__item" data-sort="longest">Longest read</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL STORIES -->
+  <section class="fn-stories">
+    <div class="fn-stories__inner">
+      <div class="fn-stories__heading">
+        <h2 class="fn-stories__title">All Stories</h2>
+        <p class="fn-stories__count" id="storiesCount">9 stories found</p>
+      </div>
+      <div class="fn-articles-grid" id="storiesGrid">
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="reflections" data-read="7" data-date="20241220">
+          <div class="fn-article__img">
+            <img src="assets/images/post1.jpg" alt="Solo Travel" />
+            <span class="fn-article__cat-badge">Reflections</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">7 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Personal</span><span class="fn-article__tag">Journey</span></div>
+            <h3 class="fn-article__title">Solo Travel and Self-Discovery</h3>
+            <p class="fn-article__excerpt">What six months of traveling alone taught me about courage, independence, and the beauty of uncertainty.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">Emma Thompson</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 20, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="adventure" data-read="9" data-date="20241219">
+          <div class="fn-article__img">
+            <img src="assets/images/post2.jpg" alt="Northern Lights" />
+            <span class="fn-article__cat-badge">Adventure</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">9 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Hiking</span><span class="fn-article__tag">Mountain</span></div>
+            <h3 class="fn-article__title">Chasing Northern Lights in Iceland</h3>
+            <p class="fn-article__excerpt">A winter adventure through volcanic landscapes and frozen waterfalls in search of aurora borealis.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">Lars Bjornsson</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 19, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="retreat" data-read="8" data-date="20241218">
+          <div class="fn-article__img">
+            <img src="assets/images/yoga-retreat.jpg" alt="Japan" />
+            <span class="fn-article__cat-badge">Retreat</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">8 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Wellness</span><span class="fn-article__tag">Meditation</span></div>
+            <h3 class="fn-article__title">Finding Peace in the Japanese Countryside</h3>
+            <p class="fn-article__excerpt">A month-long retreat in a traditional ryokan, discovering the art of slow living and mindful existence.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">James Chen</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 18, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="retreat" data-read="8" data-date="20241217">
+          <div class="fn-article__img">
+            <img src="assets/images/retreat1.jpg" alt="Spiti" />
+            <span class="fn-article__cat-badge">Retreat</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">8 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Wellness</span><span class="fn-article__tag">Meditation</span></div>
+            <h3 class="fn-article__title">Spiti Valley in Winter</h3>
+            <p class="fn-article__excerpt">A month-long retreat in a traditional ryokan, discovering the art of slow living and mindful existence.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">James Chen</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 18, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="cultural" data-read="6" data-date="20241216">
+          <div class="fn-article__img">
+            <img src="assets/images/post3.jpg" alt="Ceramics" />
+            <span class="fn-article__cat-badge">Cultural</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">6 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Heritage</span><span class="fn-article__tag">Art</span></div>
+            <h3 class="fn-article__title">The Art of Portuguese Ceramics</h3>
+            <p class="fn-article__excerpt">Learning traditional pottery in a small village where craftsmanship has been passed down through generations.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">Sofia Rodriguez</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 17, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="adventure" data-read="12" data-date="20241215">
+          <div class="fn-article__img">
+            <img src="assets/images/trek1.jpg" alt="Patagonia" />
+            <span class="fn-article__cat-badge">Adventure</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">12 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Hiking</span><span class="fn-article__tag">Mountain</span></div>
+            <h3 class="fn-article__title">Into the Wild: 30 Days Trekking Through Patagonia</h3>
+            <p class="fn-article__excerpt">An unforgettable journey through one of the world's most dramatic landscapes, where towering peaks meet endless glaciers.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">Sarah Mitchell</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 15, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="cultural" data-read="10" data-date="20241212">
+          <div class="fn-article__img">
+            <img src="assets/images/post4.jpg" alt="Holi" />
+            <span class="fn-article__cat-badge">Cultural</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">10 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Heritage</span><span class="fn-article__tag">Art</span></div>
+            <h3 class="fn-article__title">The Colors of Holi: A Festival Immersion</h3>
+            <p class="fn-article__excerpt">Experiencing India's most vibrant celebration from within a local community, far from the tourist crowds.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">Priya Sharma</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 12, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="immersive" data-read="15" data-date="20241210">
+          <div class="fn-article__img">
+            <img src="assets/images/landscape.jpg" alt="Sahara" />
+            <span class="fn-article__cat-badge">Immersive</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">15 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Culture</span><span class="fn-article__tag">Local Life</span></div>
+            <h3 class="fn-article__title">Living with Nomads in the Sahara</h3>
+            <p class="fn-article__excerpt">Three weeks embedded with a Berber family, learning ancient traditions and a way of life unchanged for centuries.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">Marcus Anderson</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 10, 2024</span></div>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="fn-article" data-cat="reflections" data-read="7" data-date="20241208">
+          <div class="fn-article__img">
+            <img src="assets/images/post5.jpg" alt="Coastal" />
+            <span class="fn-article__cat-badge">Reflections</span>
+            <div class="fn-article__read-bar">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M6 3.5v2.5l1.5 1" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+              <span class="fn-article__read-time">7 min read</span>
+            </div>
+          </div>
+          <div class="fn-article__body">
+            <div class="fn-article__tags"><span class="fn-article__tag">Wellness</span><span class="fn-article__tag">Coastal</span></div>
+            <h3 class="fn-article__title">What Slowing Down Actually Feels Like</h3>
+            <p class="fn-article__excerpt">One week in a quiet fishing village in Goa, away from tourists, close to something real.</p>
+            <div class="fn-article__meta"><span class="fn-article__author">Ananya Desai</span><span class="fn-article__sep">·</span><span class="fn-article__date">Dec 8, 2024</span></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITE CTA -->
+  <div class="fn-write-cta-wrap">
+    <div class="fn-write-cta">
+      <div class="fn-write-cta__icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M36 6l6 6-24 24H12v-6L36 6z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M30 12l6 6" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 class="fn-write-cta__heading">Ready to Share Your Story?</h2>
+      <p class="fn-write-cta__sub">Tell us about the experience that changed you. We're looking for authentic voices with compelling narratives that deserve to be heard.</p>
+      <a href="host.html" class="fn-write-cta__btn">Request an Invite to Write</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="fn-footer">
+    <div class="fn-footer__inner">
+      <div class="fn-footer__grid">
+        <div>
+          <p class="fn-footer__brand-name">Great D'Tour</p>
+          <p class="fn-footer__brand-desc">Follow our journey as we curate India's most unique travel stories.</p>
+          <div class="fn-footer__socials">
+            <a href="#" class="fn-footer__social" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="fn-footer__social" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45a2.78 2.78 0 0 0-1.95 1.97A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="fn-footer__social" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="fn-footer__social" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="fn-footer__col-title">Explore</h4>
+          <a href="index.html" class="fn-footer__link">Home</a>
+          <a href="field-notes.html" class="fn-footer__link">Field Notes</a>
+          <a href="about.html" class="fn-footer__link">Our Story</a>
+          <a href="host.html" class="fn-footer__link">Share your Story</a>
+          <a href="host.html" class="fn-footer__link">Become a Host</a>
+          <a href="#" class="fn-footer__link">Sitemap</a>
+        </div>
+        <div>
+          <h4 class="fn-footer__col-title">Legal</h4>
+          <a href="#" class="fn-footer__link">Privacy Policy</a>
+          <a href="#" class="fn-footer__link">Terms &amp; Conditions</a>
+          <a href="#" class="fn-footer__link">Cancellation &amp; Refund</a>
+          <a href="#" class="fn-footer__link">Cookie Policy</a>
+          <a href="#" class="fn-footer__link">Disclaimer</a>
+        </div>
+        <div>
+          <h4 class="fn-footer__col-title">Connect</h4>
+          <a href="#" class="fn-footer__link">Traveller</a>
+          <a href="#" class="fn-footer__link">Hosts</a>
+          <a href="#" class="fn-footer__link">Contributor</a>
+          <a href="#" class="fn-footer__link">Sponsor</a>
+        </div>
+      </div>
+      <div class="fn-footer__bottom">
+        <p>© 2026 Field Notes. All Rights Reserved by Chimpya Innovation Labs LLP, Bengaluru, India.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+  <script>
+    // Trending carousel
+    const trendScroll = document.getElementById('trendScroll');
+    const CARD_W = 236;
+    let trendOffset = 0;
+    const maxOff = (8 - 5) * CARD_W;
+    document.getElementById('trendNext').addEventListener('click', () => {
+      trendOffset = Math.min(trendOffset + CARD_W * 2, maxOff);
+      trendScroll.style.transform = `translateX(-${trendOffset}px)`;
+    });
+    document.getElementById('trendPrev').addEventListener('click', () => {
+      trendOffset = Math.max(trendOffset - CARD_W * 2, 0);
+      trendScroll.style.transform = `translateX(-${trendOffset}px)`;
+    });
+
+    // ── FILTER STATE ──────────────────────────────────────────────
+    const state = { cat: 'all', read: 'all', sort: 'newest', search: '' };
+    const grid = document.getElementById('storiesGrid');
+    const countEl = document.getElementById('storiesCount');
+
+    function allArticles() { return [...grid.querySelectorAll('.fn-article')]; }
+
+    function applyFilters() {
+      const articles = allArticles();
+      let visible = articles.filter(a => {
+        const catOk  = state.cat === 'all' || a.dataset.cat === state.cat;
+        const readMin = parseInt(a.dataset.read, 10);
+        const readOk  = state.read === 'all'
+          || (state.read === 'short' && readMin < 8)
+          || (state.read === 'long'  && readMin >= 8);
+        const textOk  = !state.search || a.textContent.toLowerCase().includes(state.search);
+        return catOk && readOk && textOk;
+      });
+
+      // Sort
+      visible.sort((a, b) => {
+        if (state.sort === 'newest')   return parseInt(b.dataset.date) - parseInt(a.dataset.date);
+        if (state.sort === 'oldest')   return parseInt(a.dataset.date) - parseInt(b.dataset.date);
+        if (state.sort === 'shortest') return parseInt(a.dataset.read) - parseInt(b.dataset.read);
+        if (state.sort === 'longest')  return parseInt(b.dataset.read) - parseInt(a.dataset.read);
+        return 0;
+      });
+
+      // Show/hide and re-order
+      articles.forEach(a => { a.style.display = 'none'; });
+      visible.forEach(a => { a.style.display = ''; grid.appendChild(a); });
+
+      const n = visible.length;
+      countEl.textContent = `${n} ${n === 1 ? 'story' : 'stories'} found`;
+    }
+
+    // ── CATEGORY PILLS ────────────────────────────────────────────
+    document.getElementById('fnPills').addEventListener('click', e => {
+      const pill = e.target.closest('.fn-pill');
+      if (!pill) return;
+      document.querySelectorAll('.fn-pill').forEach(p => p.classList.remove('fn-pill--active'));
+      pill.classList.add('fn-pill--active');
+      state.cat = pill.dataset.cat;
+      applyFilters();
+    });
+
+    // ── SEARCH ────────────────────────────────────────────────────
+    const searchInput = document.getElementById('fnSearch');
+    const searchClear = document.getElementById('fnSearchClear');
+    searchInput.addEventListener('input', function() {
+      state.search = this.value.toLowerCase().trim();
+      searchClear.classList.toggle('visible', this.value.length > 0);
+      applyFilters();
+    });
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      state.search = '';
+      searchClear.classList.remove('visible');
+      applyFilters();
+    });
+
+    // ── DROPDOWNS ─────────────────────────────────────────────────
+    function setupDropdown(wrapperId, menuId, btnId, onSelect) {
+      const wrapper = document.getElementById(wrapperId);
+      const menu    = document.getElementById(menuId);
+      const btn     = document.getElementById(btnId);
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = wrapper.classList.contains('fn-dropdown--open');
+        document.querySelectorAll('.fn-dropdown--open').forEach(d => d.classList.remove('fn-dropdown--open'));
+        if (!isOpen) wrapper.classList.add('fn-dropdown--open');
+      });
+      menu.addEventListener('click', e => {
+        const item = e.target.closest('.fn-dropdown__item');
+        if (!item) return;
+        menu.querySelectorAll('.fn-dropdown__item').forEach(i => i.classList.remove('fn-dropdown__item--active'));
+        item.classList.add('fn-dropdown__item--active');
+        wrapper.classList.remove('fn-dropdown--open');
+        onSelect(item);
+        applyFilters();
+      });
+    }
+
+    setupDropdown('readDropdown', 'readMenu', 'readBtn', (item) => {
+      state.read = item.dataset.read;
+      const label = { all: 'Read time', short: '< 8 min', long: '8+ min' }[state.read];
+      document.getElementById('readLabel').textContent = label;
+      document.getElementById('readBtn').classList.toggle('fn-dropdown__btn--active', state.read !== 'all');
+    });
+
+    setupDropdown('sortDropdown', 'sortMenu', 'sortBtn', (item) => {
+      state.sort = item.dataset.sort;
+      const labels = { newest: 'Newest', oldest: 'Oldest', shortest: 'Shortest', longest: 'Longest' };
+      document.getElementById('sortLabel').textContent = labels[state.sort];
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.fn-dropdown--open').forEach(d => d.classList.remove('fn-dropdown--open'));
+    });
+
+    applyFilters();
+  </script>
+</body>
+</html>

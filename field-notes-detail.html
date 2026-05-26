@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Into the Wild: 30 Days Trekking Through Patagonia — Field Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* ── Page body ── */
+    body { background: #fff; }
+
+    /* ── Announcement strip ── */
+    .fn-strip {
+      background: linear-gradient(90deg, #ff3400, #f36800);
+      padding: 10px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .fn-strip__text {
+      font-size: 14px;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .fn-strip__text strong { font-weight: 600; }
+    .fn-strip__close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.8);
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 16px;
+      line-height: 1;
+      padding: 0 4px;
+    }
+    .fn-strip__close:hover { color: #fff; }
+
+    /* ── Article layout ── */
+    .article-page {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Back button ── */
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #4a5565;
+      text-decoration: none;
+      margin-bottom: 36px;
+    }
+    .article-back:hover { color: var(--orange); }
+    .article-back svg { flex-shrink: 0; }
+
+    /* ── Article header ── */
+    .article-header { margin-bottom: 32px; }
+    .article-header__cat {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: 0.55px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .article-header__title {
+      font-family: var(--font-sans);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #101828;
+      margin-bottom: 20px;
+    }
+    .article-header__subtitle {
+      font-size: 18px;
+      color: #4a5565;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 720px;
+    }
+
+    /* ── Author row ── */
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 32px;
+    }
+    .article-meta__author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .article-meta__avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--sand);
+    }
+    .article-meta__avatar-placeholder {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f54900 0%, #e17100 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .article-meta__name {
+      font-size: 15px;
+      font-weight: 500;
+      color: #101828;
+      margin-bottom: 4px;
+    }
+    .article-meta__info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #6a7282;
+    }
+    .article-meta__info span { display: flex; align-items: center; gap: 4px; }
+    .article-meta__actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .article-action-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #4a5565;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .article-action-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── TOC toggle button ── */
+    .toc-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 200;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #101828;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      transition: background 0.15s, transform 0.15s;
+    }
+    .toc-btn:hover { background: var(--orange); transform: scale(1.06); }
+    .toc-btn svg { pointer-events: none; }
+
+    /* ── TOC panel ── */
+    .toc-panel {
+      position: fixed;
+      bottom: 92px;
+      right: 32px;
+      z-index: 199;
+      width: 260px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .toc-panel--open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .toc-panel__heading {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6a7282;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .toc-panel__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .toc-panel__item a {
+      display: block;
+      font-size: 14px;
+      color: #364153;
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 7px;
+      line-height: 1.4;
+      transition: background 0.12s, color 0.12s;
+    }
+    .toc-panel__item a:hover { background: #fff7ed; color: var(--orange); }
+    .toc-panel__item a.toc-active { background: #fff7ed; color: var(--orange); font-weight: 500; }
+
+    /* ── Hero image ── */
+    .article-hero {
+      width: 100%;
+      height: 480px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-bottom: 40px;
+    }
+
+    /* ── Article body ── */
+    .article-body {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #364153;
+    }
+    .article-body p { margin-bottom: 28px; }
+    .article-body h2 {
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 700;
+      color: #101828;
+      margin: 44px 0 20px;
+      line-height: 1.4;
+    }
+    .article-body blockquote {
+      border-left: 4px solid var(--orange);
+      margin: 36px 0;
+      padding: 4px 0 4px 24px;
+      font-size: 20px;
+      font-style: italic;
+      color: #1e2939;
+      line-height: 1.5;
+    }
+
+    /* ── Inline figure ── */
+    .article-figure {
+      margin: 36px 0;
+    }
+    .article-figure img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+    }
+    .article-figure figcaption {
+      text-align: center;
+      font-size: 13px;
+      color: #6a7282;
+      margin-top: 12px;
+    }
+
+    /* ── Author bio ── */
+    .article-author-bio {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding-top: 40px;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 56px;
+    }
+    .article-author-bio__avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .article-author-bio__avatar-placeholder {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f54900 0%, #e17100 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 600;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .article-author-bio__name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 10px;
+    }
+    .article-author-bio__desc {
+      font-size: 15px;
+      color: #4a5565;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .article-author-bio__follow {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .article-author-bio__follow:hover { text-decoration: underline; }
+
+    /* ── Dark footer (same as field-notes.html) ── */
+    .fn-footer {
+      background: #101828;
+      padding: 56px 0 0;
+      margin-top: 0;
+    }
+    .fn-footer__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .fn-footer__grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 36px;
+    }
+    .fn-footer__brand-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .fn-footer__brand-desc {
+      font-size: 14px;
+      color: #d1d5dc;
+      line-height: 1.65;
+      margin-bottom: 18px;
+      max-width: 268px;
+    }
+    .fn-footer__socials {
+      display: flex;
+      gap: 16px;
+    }
+    .fn-footer__social {
+      color: #d1d5dc;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+    }
+    .fn-footer__social:hover { color: #fff; }
+    .fn-footer__col-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .fn-footer__link {
+      display: block;
+      font-size: 14px;
+      color: #d1d5dc;
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: color 0.15s;
+    }
+    .fn-footer__link:hover { color: #fff; }
+    .fn-footer__bottom {
+      border-top: 1px solid #364153;
+      padding: 28px 0;
+      font-size: 13px;
+      color: #d1d5dc;
+    }
+
+    @media (max-width: 768px) {
+      .article-meta { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .article-hero { height: 260px; }
+      .article-figure img { height: 240px; }
+      .fn-footer__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .fn-footer__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav nav--page" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/GDT_logo_black.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-dark" />
+      </a>
+      <div class="nav__links">
+        <a href="experiences.html" class="nav__link">Experiences</a>
+        <a href="field-notes.html" class="nav__link" style="color: var(--orange);">Field Notes</a>
+        <a href="about.html" class="nav__link">About Us</a>
+        <a href="host.html" class="nav__cta">Become a Host</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Announcement Strip -->
+  <div class="fn-strip" id="fnStrip">
+    <span class="fn-strip__text">Have an amazing travel story to share? Request an invite to write. <strong>Learn More</strong></span>
+    <button class="fn-strip__close" onclick="document.getElementById('fnStrip').style.display='none'" aria-label="Dismiss">×</button>
+  </div>
+
+  <!-- Article -->
+  <main class="article-page">
+
+    <a href="field-notes.html" class="article-back">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+
+    <div class="article-header">
+      <span class="article-header__cat">Adventure</span>
+      <h1 class="article-header__title">Into the Wild: 30 Days Trekking Through Patagonia</h1>
+      <p class="article-header__subtitle">An unforgettable journey through one of the world's most dramatic landscapes, where towering peaks meet endless glaciers and the wind carries stories of ancient explorers.</p>
+    </div>
+
+    <!-- Author / meta row -->
+    <div class="article-meta">
+      <div class="article-meta__author">
+        <div class="article-meta__avatar-placeholder">S</div>
+        <div>
+          <p class="article-meta__name">Sarah Mitchell</p>
+          <div class="article-meta__info">
+            <span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 1.5V4M11 1.5V4M2 7h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              Dec 15, 2024
+            </span>
+            <span>·</span>
+            <span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              12 min read
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="article-meta__actions">
+        <button class="article-action-btn" title="Bookmark">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2h10v12.5L8 11.5 3 14.5V2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="article-action-btn" title="Like">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13.5S2 9.8 2 5.8a3 3 0 0 1 6-0.3 3 3 0 0 1 6 0.3c0 4-6 7.7-6 7.7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="article-action-btn" title="Share">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="12" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="13" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="4" cy="8" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M10.5 3.75L5.5 7.25M10.5 12.25L5.5 8.75" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hero image -->
+    <img src="assets/images/trek1.jpg" alt="Patagonia trek" class="article-hero" />
+
+    <!-- Body -->
+    <div class="article-body">
+      <p>The wind hits you first. Not a gentle breeze, but a relentless force that shapes everything in Patagonia — the trees, the mountains, even the way you walk. As I stood at the trailhead of the Torres del Paine Circuit, watching storm clouds gather over the granite spires, I knew the next 30 days would test every limit I had.</p>
+
+      <p>Patagonia isn't just a destination; it's a state of mind. Located at the southern tip of South America, straddling Chile and Argentina, this region represents one of the last true wildernesses on Earth. Where condors soar over electric-blue glaciers and guanacos graze beneath peaks that seem to pierce the sky itself.</p>
+
+      <h2 id="first-week">The First Week: Finding Your Rhythm</h2>
+
+      <p>Day one was humbling. My pack felt impossibly heavy, my legs protested every uphill step, and the wind made setting up camp feel like wrestling an angry beast. But by day three, something shifted. My body adapted to the rhythm of walking, breathing, existing in this vast landscape.</p>
+
+      <figure class="article-figure">
+        <img src="assets/images/trek2.jpg" alt="Dawn breaks over the Torres del Paine" />
+        <figcaption>Dawn breaks over the Torres del Paine, revealing the iconic granite towers</figcaption>
+      </figure>
+
+      <p>The trail took me through landscapes that seemed alien — turquoise lakes fed by ancient glaciers, forests of twisted lenga trees battered into surreal shapes by decades of wind, and vast pampa grasslands where the horizon stretched endlessly in every direction.</p>
+
+      <blockquote>In Patagonia, you don't conquer the mountains. You simply pass through them with respect and gratitude.</blockquote>
+
+      <h2 id="lessons">Lessons from the Trail</h2>
+
+      <p>What I discovered over those 30 days went beyond spectacular views and physical endurance. I learned that silence can be comfortable, that solitude doesn't mean loneliness, and that nature has a way of putting everything else into perspective.</p>
+
+      <p>I met fellow trekkers from every corner of the world — a retired teacher from Japan celebrating his 70th birthday, a young couple from Germany on their honeymoon, and a solo traveler from Brazil who had been walking for six months. Each had their own story, their own reasons for being there, but we all shared the same reverence for this extraordinary place.</p>
+
+      <figure class="article-figure">
+        <img src="assets/images/landscape.jpg" alt="The trail winds through valleys carved by ancient glaciers" />
+        <figcaption>The trail winds through valleys carved by ancient glaciers</figcaption>
+      </figure>
+
+      <h2 id="final-days">The Final Days</h2>
+
+      <p>As the trek neared its end, I felt a strange mix of relief and sadness. My body was ready to rest, but my spirit wasn't ready to leave. On the final morning, I woke before dawn and hiked to a viewpoint I'd been saving. As the first light touched the peaks, painting them in shades of gold and pink, I understood why people return to Patagonia again and again.</p>
+
+      <p>This land changes you. It strips away the unnecessary and reminds you of what truly matters. The simple joy of a warm meal after a long day. The profound beauty of a sunrise over mountains. The deep satisfaction of pushing beyond what you thought possible.</p>
+
+      <p>Patagonia taught me that the greatest adventures aren't about reaching a destination — they're about becoming someone new along the way. And as I packed my bags for the journey home, I knew a part of me would always remain here, walking among the winds and the wild.</p>
+    </div>
+
+    <!-- Author bio -->
+    <div class="article-author-bio">
+      <div class="article-author-bio__avatar-placeholder">S</div>
+      <div>
+        <p class="article-author-bio__name">Written by Sarah Mitchell</p>
+        <p class="article-author-bio__desc">Adventure journalist and photographer based in Denver. Sarah has trekked across six continents and contributes to National Geographic and Outside Magazine.</p>
+        <a href="#" class="article-author-bio__follow">Follow</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="fn-footer">
+    <div class="fn-footer__inner">
+      <div class="fn-footer__grid">
+        <div>
+          <p class="fn-footer__brand-name">Great D'Tour</p>
+          <p class="fn-footer__brand-desc">Follow our journey as we curate India's most unique travel stories.</p>
+          <div class="fn-footer__socials">
+            <a href="#" class="fn-footer__social" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="fn-footer__social" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45a2.78 2.78 0 0 0-1.95 1.97A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="fn-footer__social" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="fn-footer__social" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="fn-footer__col-title">Explore</h4>
+          <a href="index.html" class="fn-footer__link">Home</a>
+          <a href="field-notes.html" class="fn-footer__link">Field Notes</a>
+          <a href="about.html" class="fn-footer__link">About Us</a>
+          <a href="host.html" class="fn-footer__link">Become a Host</a>
+        </div>
+        <div>
+          <h4 class="fn-footer__col-title">Legal</h4>
+          <a href="#" class="fn-footer__link">Privacy Policy</a>
+          <a href="#" class="fn-footer__link">Terms &amp; Conditions</a>
+          <a href="#" class="fn-footer__link">Cancellation &amp; Refund</a>
+          <a href="#" class="fn-footer__link">Cookie Policy</a>
+          <a href="#" class="fn-footer__link">Disclaimer</a>
+        </div>
+        <div>
+          <h4 class="fn-footer__col-title">Connect</h4>
+          <a href="#" class="fn-footer__link">Traveller</a>
+          <a href="#" class="fn-footer__link">Hosts</a>
+          <a href="#" class="fn-footer__link">Contributor</a>
+          <a href="#" class="fn-footer__link">Sponsor</a>
+        </div>
+      </div>
+      <div class="fn-footer__bottom">
+        <p>© 2026 Great D'Tour. All rights reserved by Chimpya Innovation Labs LLP, Bengaluru, India.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOC toggle button -->
+  <button class="toc-btn" id="tocBtn" aria-label="Table of contents" title="Table of contents">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M3 5h14M3 10h10M3 15h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <!-- TOC panel -->
+  <nav class="toc-panel" id="tocPanel" aria-label="Table of contents">
+    <p class="toc-panel__heading">Contents</p>
+    <ul class="toc-panel__list" id="tocList"></ul>
+  </nav>
+
+  <script src="assets/main.js"></script>
+  <script>
+    // ── Build TOC from article h2s ──
+    const headings = document.querySelectorAll('.article-body h2');
+    const tocList = document.getElementById('tocList');
+    headings.forEach(h => {
+      const li = document.createElement('li');
+      li.className = 'toc-panel__item';
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      a.addEventListener('click', () => {
+        tocPanel.classList.remove('toc-panel--open');
+      });
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    // ── Toggle panel ──
+    const tocBtn = document.getElementById('tocBtn');
+    const tocPanel = document.getElementById('tocPanel');
+    tocBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      tocPanel.classList.toggle('toc-panel--open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!tocPanel.contains(e.target) && e.target !== tocBtn) {
+        tocPanel.classList.remove('toc-panel--open');
+      }
+    });
+
+    // ── Highlight active section on scroll ──
+    const tocLinks = tocList.querySelectorAll('a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(a => a.classList.remove('toc-active'));
+          const active = tocList.querySelector(`a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+</body>
+</html>

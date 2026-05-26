@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply — Tiger Conservation Program — Great D'Tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+
+    :root {
+      --vol-green: #2E7D32;
+      --vol-green-light: rgba(46, 125, 50, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+    body { background: #f9fafb; font-family: var(--font-sans); color: var(--dark); }
+
+    /* ---- Top bar ---- */
+    .bk-topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      padding: 0 60px;
+    }
+    .bk-topbar__inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; gap: 20px;
+    }
+    .bk-topbar__left { display: flex; align-items: center; gap: 16px; min-width: 0; }
+    .bk-topbar__thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+    .bk-topbar__title { font-size: 15px; font-weight: 700; color: #101828; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bk-topbar__meta { font-size: 13px; color: var(--warm-gray); display: flex; align-items: center; gap: 12px; margin-top: 2px; }
+    .bk-topbar__back { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--warm-gray); white-space: nowrap; transition: color 0.2s; }
+    .bk-topbar__back:hover { color: var(--vol-green); }
+
+    /* ---- Page layout ---- */
+    .bk-page {
+      max-width: 1280px; margin: 0 auto;
+      padding: 36px 60px 80px;
+      display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start;
+    }
+
+    /* ---- Step progress ---- */
+    .bk-steps {
+      display: flex; align-items: center; gap: 0; margin-bottom: 28px;
+    }
+    .bk-step { display: flex; align-items: center; }
+    .bk-step__inner { display: flex; align-items: center; gap: 10px; }
+    .bk-step__num {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+      background: #e5e7eb; color: #6b7280;
+      transition: background 0.2s, color 0.2s;
+    }
+    .bk-step.active .bk-step__num { background: var(--vol-green); color: white; }
+    .bk-step.done .bk-step__num { background: var(--vol-green); color: white; font-size: 16px; }
+    .bk-step__label { font-size: 13px; font-weight: 600; color: #9ca3af; white-space: nowrap; }
+    .bk-step.active .bk-step__label { color: #101828; }
+    .bk-step.done .bk-step__label { color: var(--vol-green); }
+    .bk-step__sep { flex: 1; height: 1px; background: #e5e7eb; margin: 0 10px; min-width: 20px; }
+
+    /* ---- Step cards ---- */
+    .bk-step-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .bk-step-card.active-card { border-color: var(--vol-green); box-shadow: 0 2px 12px rgba(46,125,50,0.1); }
+    .bk-step-card.done-card { border-color: #d1fae5; }
+
+    .bk-step-card__header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; gap: 12px;
+    }
+    .bk-step-card__num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #e5e7eb; color: #6b7280;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .active-card .bk-step-card__num { background: var(--vol-green); color: white; }
+    .done-card .bk-step-card__num { background: var(--vol-green); color: white; font-size: 16px; }
+    .bk-step-card__info { flex: 1; }
+    .bk-step-card__title { font-size: 16px; font-weight: 700; color: #101828; }
+    .bk-step-card__sub { font-size: 13px; color: var(--warm-gray); margin-top: 2px; }
+    .bk-step-card__edit { font-size: 13px; font-weight: 600; color: var(--vol-green); cursor: pointer; white-space: nowrap; }
+    .bk-step-card__edit:hover { text-decoration: underline; }
+
+    .bk-step-card__summary { padding: 0 24px 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .bk-summary-tag {
+      background: var(--vol-green-light);
+      color: var(--vol-green);
+      border: 1px solid rgba(46,125,50,0.2);
+      border-radius: 100px;
+      padding: 4px 12px; font-size: 12px; font-weight: 600;
+    }
+
+    .bk-step-body { padding: 0 24px 24px; }
+
+    /* ---- Stepper ---- */
+    .bk-travellers-row { display: flex; gap: 24px; margin-bottom: 28px; }
+    .bk-traveller-group { flex: 1; }
+    .bk-traveller-label { font-size: 14px; font-weight: 600; color: #101828; margin-bottom: 4px; }
+    .bk-traveller-sub { font-size: 12px; color: var(--warm-gray); margin-bottom: 12px; }
+    .bk-stepper { display: flex; align-items: center; gap: 14px; }
+    .bk-stepper__btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--border); background: var(--white);
+      font-size: 18px; font-weight: 600; color: #101828;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .bk-stepper__btn:hover { border-color: var(--vol-green); color: var(--vol-green); }
+    .bk-stepper__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .bk-stepper__val { font-size: 22px; font-weight: 700; color: #101828; min-width: 28px; text-align: center; }
+
+    /* Batch selector */
+    .bk-step-section-title { font-size: 14px; font-weight: 700; color: #101828; margin-bottom: 14px; }
+    .bk-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .bk-month-btn {
+      border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 14px 12px; text-align: center; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--white);
+    }
+    .bk-month-btn:hover { border-color: var(--vol-green); }
+    .bk-month-btn.selected { border-color: var(--vol-green); background: var(--vol-green-light); }
+    .bk-month-btn__name { font-size: 14px; font-weight: 700; color: #101828; }
+    .bk-month-btn__sub { font-size: 11px; color: var(--warm-gray); margin-top: 3px; }
+    .bk-month-btn.full .bk-month-btn__name { color: #9ca3af; }
+    .bk-month-btn.full .bk-month-btn__sub { color: #ef4444; }
+    .bk-month-btn.full { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+
+    /* Batch detail card */
+    .bk-date-grid { margin-bottom: 20px; }
+    .vol-batch-selected-card {
+      border: 1.5px solid var(--vol-green);
+      border-radius: 8px; padding: 16px 20px;
+      background: var(--vol-green-light);
+    }
+    .vol-batch-selected-card__name { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 10px; }
+    .vol-batch-selected-card__row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; }
+    .vol-batch-selected-card__row span { color: var(--warm-gray); }
+    .vol-batch-selected-card__row strong { color: #101828; }
+
+    .bk-next-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; background: var(--vol-green);
+      color: white; border: none; border-radius: 4px;
+      padding: 16px; font-size: 16px; font-weight: 600;
+      cursor: pointer; font-family: var(--font-sans);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .bk-next-btn:hover { background: #1b5e20; transform: translateY(-1px); }
+    .bk-next-btn:disabled { background: #9ca3af; cursor: not-allowed; transform: none; }
+
+    /* ---- Role cards (Step 2) ---- */
+    .bk-pkg-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .bk-pkg-card {
+      border: 1.5px solid var(--border); border-radius: 8px; padding: 18px;
+      cursor: pointer; position: relative;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .bk-pkg-card:hover { border-color: var(--vol-green); }
+    .bk-pkg-card.selected { border-color: var(--vol-green); background: var(--vol-green-light); }
+    .bk-pkg-radio {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid #d1d5db; flex-shrink: 0; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .bk-pkg-card.selected .bk-pkg-radio { border-color: var(--vol-green); }
+    .bk-pkg-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--vol-green); opacity: 0; transition: opacity 0.15s; }
+    .bk-pkg-card.selected .bk-pkg-radio::after { opacity: 1; }
+    .bk-pkg-card__body { flex: 1; min-width: 0; }
+    .bk-pkg-card__name { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .bk-pkg-card__desc { font-size: 13px; color: var(--warm-gray); line-height: 1.55; }
+    .bk-pkg-card__badge {
+      position: absolute; top: -1px; left: 14px;
+      background: var(--vol-green); color: white;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+      padding: 2px 8px; border-radius: 0 0 4px 4px;
+    }
+
+    /* ---- Profile form (Step 3) ---- */
+    .bk-form { display: flex; flex-direction: column; gap: 20px; }
+    .bk-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .bk-form-group { display: flex; flex-direction: column; gap: 6px; }
+    .bk-form-group.full { grid-column: 1 / -1; }
+    .bk-label { font-size: 13px; font-weight: 600; color: #374151; }
+    .bk-label span { color: #ef4444; }
+    .bk-input, .bk-select, .bk-textarea {
+      border: 1.5px solid #d1d5db; border-radius: 6px;
+      padding: 10px 14px; font-size: 14px; font-family: var(--font-sans);
+      color: var(--dark); outline: none; transition: border-color 0.2s;
+      width: 100%;
+    }
+    .bk-input:focus, .bk-select:focus, .bk-textarea:focus { border-color: var(--vol-green); }
+    .bk-textarea { min-height: 90px; resize: vertical; }
+    .bk-input.error, .bk-select.error, .bk-textarea.error { border-color: #ef4444; }
+
+    .bk-emergency-divider {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 13px; font-weight: 700; color: #101828; margin: 8px 0;
+    }
+    .bk-emergency-divider::before, .bk-emergency-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* Skills pills (interactive) */
+    .vol-skills-section { margin-top: 4px; }
+    .vol-skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .vol-skill-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1.5px solid var(--border); border-radius: 100px;
+      padding: 7px 14px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s;
+      user-select: none;
+    }
+    .vol-skill-pill:hover { border-color: var(--vol-green); color: var(--vol-green); }
+    .vol-skill-pill.checked { border-color: var(--vol-green); background: var(--vol-green-light); color: var(--vol-green); }
+
+    .bk-checkbox-row { display: flex; align-items: flex-start; gap: 12px; }
+    .bk-checkbox-row input[type="checkbox"] { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--vol-green); flex-shrink: 0; }
+    .bk-checkbox-row label { font-size: 13px; color: var(--warm-gray); line-height: 1.6; cursor: pointer; }
+    .bk-checkbox-row label a { color: var(--vol-green); }
+
+    /* ---- Pledge (Step 4) ---- */
+    .vol-pledge-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .vol-pledge-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 14px 16px; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .vol-pledge-item:hover { border-color: var(--vol-green); }
+    .vol-pledge-item.checked { border-color: var(--vol-green); background: var(--vol-green-light); }
+    .vol-pledge-item__checkbox {
+      width: 20px; height: 20px; border-radius: 4px;
+      border: 2px solid #d1d5db; flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s; font-size: 12px;
+    }
+    .vol-pledge-item.checked .vol-pledge-item__checkbox {
+      border-color: var(--vol-green); background: var(--vol-green); color: white;
+    }
+    .vol-pledge-item__text { font-size: 14px; color: var(--warm-gray); line-height: 1.55; }
+    .vol-pledge-item.checked .vol-pledge-item__text { color: #101828; }
+
+    .vol-pledge-note {
+      background: #fffbf5; border: 1px solid rgba(246,154,57,0.3);
+      border-radius: 6px; padding: 12px 16px;
+      font-size: 13px; color: var(--warm-gray); margin-bottom: 20px; line-height: 1.6;
+    }
+
+    /* ---- Sidebar ---- */
+    .bk-sidebar { position: sticky; top: 108px; }
+    .bk-summary-card { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--white); }
+    .bk-summary-card__header {
+      background: #101828; padding: 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .bk-summary-card__thumb { width: 52px; height: 52px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
+    .bk-summary-card__trip-name { font-size: 14px; font-weight: 700; color: white; margin-bottom: 4px; }
+    .bk-summary-card__trip-meta { font-size: 12px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 8px; }
+    .bk-summary-card__body { padding: 20px; }
+
+    .bk-summary-lines { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .bk-summary-line { display: flex; justify-content: space-between; font-size: 13px; }
+    .bk-summary-line span { color: var(--warm-gray); }
+    .bk-summary-line strong { color: #101828; text-align: right; }
+    .bk-summary-divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+    .vol-contact-box {
+      background: var(--vol-green-light);
+      border: 1px solid rgba(46,125,50,0.2);
+      border-radius: 8px; padding: 14px 16px; margin-bottom: 16px;
+    }
+    .vol-contact-box__title { font-size: 12px; font-weight: 700; color: var(--vol-green); margin-bottom: 6px; }
+    .vol-contact-box p { font-size: 13px; color: var(--warm-gray); }
+    .vol-contact-box a { color: var(--vol-green); font-weight: 600; }
+
+    .bk-host-row { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .bk-host-avatar { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+    .bk-host-name { font-size: 13px; font-weight: 700; color: #101828; }
+    .bk-host-since { font-size: 11px; color: var(--warm-gray); }
+
+    /* ---- Success screen ---- */
+    .bk-success {
+      display: none; text-align: center;
+      background: var(--white); border-radius: 10px;
+      border: 1px solid var(--border); padding: 60px 40px;
+      grid-column: 1 / -1;
+    }
+    .bk-success.visible { display: block; }
+    .bk-success__icon { font-size: 56px; margin-bottom: 20px; }
+    .bk-success__title { font-family: var(--font-serif); font-size: 32px; color: #101828; margin-bottom: 12px; }
+    .bk-success__sub { font-size: 16px; color: var(--warm-gray); line-height: 1.7; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .bk-success__ref { font-size: 13px; color: var(--warm-gray); margin-bottom: 8px; }
+    .bk-success__ref-num { font-size: 24px; font-weight: 700; color: var(--vol-green); letter-spacing: 2px; margin-bottom: 32px; }
+    .bk-success__btns { display: flex; justify-content: center; gap: 12px; }
+    .bk-success__btn-primary {
+      background: var(--vol-green); color: white; border: none;
+      padding: 14px 28px; border-radius: 4px; font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: var(--font-sans);
+    }
+    .bk-success__btn-secondary {
+      background: white; color: #101828; border: 1.5px solid var(--border);
+      padding: 14px 28px; border-radius: 4px; font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: var(--font-sans);
+    }
+
+    /* Error messages */
+    .bk-field-error { font-size: 12px; color: #ef4444; margin-top: 3px; display: none; }
+    .bk-field-error.visible { display: block; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ====== TOP BAR ====== -->
+  <div class="bk-topbar">
+    <div class="bk-topbar__inner">
+      <div class="bk-topbar__left">
+        <img src="assets/images/landscape.jpg" alt="Tiger Conservation" class="bk-topbar__thumb" />
+        <div>
+          <div class="bk-topbar__title">Tiger Conservation Program — Ranthambore</div>
+          <div class="bk-topbar__meta">
+            <span>🌿 Volunteering</span>
+            <span>·</span>
+            <span>Ranthambore NP, Rajasthan</span>
+            <span>·</span>
+            <span>4 Weeks</span>
+          </div>
+        </div>
+      </div>
+      <a href="volunteer-detail.html" class="bk-topbar__back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to Program
+      </a>
+    </div>
+  </div>
+
+  <!-- ====== PAGE ====== -->
+  <div class="bk-page" id="bkPage">
+
+    <!-- ---- Left: Steps ---- -->
+    <div>
+
+      <!-- Progress -->
+      <div class="bk-steps" id="bkSteps">
+        <div class="bk-step active" id="sp1">
+          <div class="bk-step__inner">
+            <div class="bk-step__num">1</div>
+            <div class="bk-step__label">Program Details</div>
+          </div>
+        </div>
+        <div class="bk-step__sep"></div>
+        <div class="bk-step" id="sp2">
+          <div class="bk-step__inner">
+            <div class="bk-step__num">2</div>
+            <div class="bk-step__label">Volunteer Role</div>
+          </div>
+        </div>
+        <div class="bk-step__sep"></div>
+        <div class="bk-step" id="sp3">
+          <div class="bk-step__inner">
+            <div class="bk-step__num">3</div>
+            <div class="bk-step__label">Your Profile</div>
+          </div>
+        </div>
+        <div class="bk-step__sep"></div>
+        <div class="bk-step" id="sp4">
+          <div class="bk-step__inner">
+            <div class="bk-step__num">4</div>
+            <div class="bk-step__label">Commitment</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Program Details -->
+      <div class="bk-step-card active-card" id="card1">
+        <div class="bk-step-card__header">
+          <div class="bk-step-card__num">1</div>
+          <div class="bk-step-card__info">
+            <div class="bk-step-card__title">Program Details</div>
+            <div class="bk-step-card__sub">Select your batch and group size</div>
+          </div>
+        </div>
+        <div class="bk-step-card__summary" id="sum1" style="display:none"></div>
+        <div class="bk-step-body" id="body1">
+
+          <div class="bk-travellers-row">
+            <div class="bk-traveller-group">
+              <div class="bk-traveller-label">Volunteer Group Size</div>
+              <div class="bk-traveller-sub">Applying solo or with friends? Max 4 per group.</div>
+              <div class="bk-stepper">
+                <button class="bk-stepper__btn" id="volMinus" onclick="changeCount(-1)" disabled>−</button>
+                <span class="bk-stepper__val" id="volCount">1</span>
+                <button class="bk-stepper__btn" id="volPlus" onclick="changeCount(1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bk-step-section-title">Choose Your Batch</div>
+          <div class="bk-months" id="bkBatchGrid">
+            <div class="bk-month-btn" data-batch="jun" onclick="selectBatch(this)">
+              <div class="bk-month-btn__name">Jun 2025</div>
+              <div class="bk-month-btn__sub">8 spots left</div>
+            </div>
+            <div class="bk-month-btn" data-batch="aug" onclick="selectBatch(this)">
+              <div class="bk-month-btn__name">Aug 2025</div>
+              <div class="bk-month-btn__sub">12 spots left</div>
+            </div>
+            <div class="bk-month-btn full">
+              <div class="bk-month-btn__name" style="color:#9ca3af;">Oct 2025</div>
+              <div class="bk-month-btn__sub" style="color:#ef4444;">Full</div>
+            </div>
+          </div>
+
+          <div class="bk-date-grid" id="batchDetailBox" style="display:none;">
+            <div class="vol-batch-selected-card">
+              <div class="vol-batch-selected-card__name" id="selBatchName">Jun 2025 Batch</div>
+              <div class="vol-batch-selected-card__row"><span>Dates</span><strong id="selBatchDates">1 Jun – 28 Jun 2025</strong></div>
+              <div class="vol-batch-selected-card__row"><span>Duration</span><strong>4 Weeks (28 days)</strong></div>
+              <div class="vol-batch-selected-card__row"><span>Spots remaining</span><strong id="selBatchSpots" style="color:var(--vol-green)">8 of 12</strong></div>
+            </div>
+          </div>
+
+          <button class="bk-next-btn" id="nextBtn1" onclick="goToStep(2)" disabled>
+            Continue to Volunteer Role
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 13.5L12.5 9L7 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Volunteer Role -->
+      <div class="bk-step-card" id="card2">
+        <div class="bk-step-card__header">
+          <div class="bk-step-card__num">2</div>
+          <div class="bk-step-card__info">
+            <div class="bk-step-card__title">Volunteer Role</div>
+            <div class="bk-step-card__sub">Choose the type of work you'd like to do</div>
+          </div>
+          <span class="bk-step-card__edit" onclick="editStep(2)" style="display:none" id="edit2">Edit</span>
+        </div>
+        <div class="bk-step-card__summary" id="sum2" style="display:none"></div>
+        <div class="bk-step-body" id="body2" style="display:none">
+
+          <div class="bk-pkg-cards">
+            <div class="bk-pkg-card" data-role="field" onclick="selectRole(this)">
+              <div class="bk-pkg-card__badge">Most Popular</div>
+              <div class="bk-pkg-radio"></div>
+              <div class="bk-pkg-card__body">
+                <div class="bk-pkg-card__name">🔬 Field Researcher</div>
+                <div class="bk-pkg-card__desc">Wildlife monitoring, camera trap operations, tiger census work, and ecological data collection. Best for science or data-oriented volunteers.</div>
+              </div>
+            </div>
+            <div class="bk-pkg-card" data-role="community" onclick="selectRole(this)">
+              <div class="bk-pkg-radio"></div>
+              <div class="bk-pkg-card__body">
+                <div class="bk-pkg-card__name">🏫 Community Educator</div>
+                <div class="bk-pkg-card__desc">Education workshops in buffer-zone villages, engaging local families on conservation, human–wildlife coexistence. Best for those with teaching or communication backgrounds.</div>
+              </div>
+            </div>
+            <div class="bk-pkg-card" data-role="documentation" onclick="selectRole(this)">
+              <div class="bk-pkg-radio"></div>
+              <div class="bk-pkg-card__body">
+                <div class="bk-pkg-card__name">📷 Documentation Specialist</div>
+                <div class="bk-pkg-card__desc">Photo and video documentation of field activities, habitat restoration, and community work. Your footage is used in advocacy and fundraising. Bring your own camera.</div>
+              </div>
+            </div>
+            <div class="bk-pkg-card" data-role="coordinator" onclick="selectRole(this)">
+              <div class="bk-pkg-radio"></div>
+              <div class="bk-pkg-card__body">
+                <div class="bk-pkg-card__name">🗂️ Camp Coordinator</div>
+                <div class="bk-pkg-card__desc">Logistics support, equipment management, volunteer welfare, and daily camp operations. Best for organised, detail-oriented volunteers. Less field time, more systems work.</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="bk-next-btn" id="nextBtn2" onclick="goToStep(3)" disabled>
+            Continue to Your Profile
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 13.5L12.5 9L7 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Your Profile -->
+      <div class="bk-step-card" id="card3">
+        <div class="bk-step-card__header">
+          <div class="bk-step-card__num">3</div>
+          <div class="bk-step-card__info">
+            <div class="bk-step-card__title">Your Profile</div>
+            <div class="bk-step-card__sub">Tell us about yourself</div>
+          </div>
+          <span class="bk-step-card__edit" onclick="editStep(3)" style="display:none" id="edit3">Edit</span>
+        </div>
+        <div class="bk-step-card__summary" id="sum3" style="display:none"></div>
+        <div class="bk-step-body" id="body3" style="display:none">
+
+          <form class="bk-form" onsubmit="return false;">
+
+            <div class="bk-form-row">
+              <div class="bk-form-group">
+                <label class="bk-label" for="firstName">First Name <span>*</span></label>
+                <input class="bk-input" type="text" id="firstName" placeholder="Arjun" />
+                <span class="bk-field-error" id="err-firstName">Required</span>
+              </div>
+              <div class="bk-form-group">
+                <label class="bk-label" for="lastName">Last Name <span>*</span></label>
+                <input class="bk-input" type="text" id="lastName" placeholder="Nair" />
+                <span class="bk-field-error" id="err-lastName">Required</span>
+              </div>
+            </div>
+
+            <div class="bk-form-row">
+              <div class="bk-form-group">
+                <label class="bk-label" for="email">Email Address <span>*</span></label>
+                <input class="bk-input" type="email" id="email" placeholder="arjun@example.com" />
+                <span class="bk-field-error" id="err-email">Valid email required</span>
+              </div>
+              <div class="bk-form-group">
+                <label class="bk-label" for="phone">Phone Number <span>*</span></label>
+                <input class="bk-input" type="tel" id="phone" placeholder="+91 98765 43210" />
+                <span class="bk-field-error" id="err-phone">Required</span>
+              </div>
+            </div>
+
+            <div class="bk-form-row">
+              <div class="bk-form-group">
+                <label class="bk-label" for="city">City / Town</label>
+                <input class="bk-input" type="text" id="city" placeholder="Bengaluru" />
+              </div>
+              <div class="bk-form-group">
+                <label class="bk-label" for="dietary">Dietary Preference</label>
+                <select class="bk-select" id="dietary">
+                  <option value="">Select…</option>
+                  <option>Vegetarian</option>
+                  <option>Non-Vegetarian</option>
+                  <option>Vegan</option>
+                  <option>Jain</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="bk-form-group full">
+              <div class="bk-emergency-divider">Skills &amp; Experience</div>
+            </div>
+
+            <div class="bk-form-group full">
+              <label class="bk-label">Relevant Skills <span style="font-weight:400;color:var(--warm-gray)">(select all that apply)</span></label>
+              <div class="vol-skills-grid">
+                <span class="vol-skill-pill" onclick="this.classList.toggle('checked')">🔬 Field Research</span>
+                <span class="vol-skill-pill" onclick="this.classList.toggle('checked')">📷 Photography</span>
+                <span class="vol-skill-pill" onclick="this.classList.toggle('checked')">📊 Data Entry</span>
+                <span class="vol-skill-pill" onclick="this.classList.toggle('checked')">🏫 Teaching</span>
+                <span class="vol-skill-pill" onclick="this.classList.toggle('checked')">🩺 First Aid</span>
+                <span class="vol-skill-pill" onclick="this.classList.toggle('checked')">🗺️ GIS / Mapping</span>
+              </div>
+            </div>
+
+            <div class="bk-form-group full">
+              <label class="bk-label" for="prevExp">Previous Volunteering Experience</label>
+              <select class="bk-select" id="prevExp" onchange="togglePrevExpDesc()">
+                <option value="none">None — this is my first volunteering experience</option>
+                <option value="lt6">Less than 6 months</option>
+                <option value="6to24">6 months – 2 years</option>
+                <option value="gt24">2+ years</option>
+              </select>
+            </div>
+
+            <div class="bk-form-group full" id="prevExpDescGroup" style="display:none;">
+              <label class="bk-label" for="prevExpDesc">Briefly describe your experience</label>
+              <textarea class="bk-textarea" id="prevExpDesc" placeholder="What did you work on, where, and when?"></textarea>
+            </div>
+
+            <div class="bk-form-group full">
+              <label class="bk-label" for="motivation">Why do you want to join this program? <span>*</span></label>
+              <textarea class="bk-textarea" id="motivation" style="min-height:110px;" placeholder="Tell us what draws you to tiger conservation and what you hope to contribute…"></textarea>
+              <span class="bk-field-error" id="err-motivation">Please write at least 50 characters</span>
+            </div>
+
+            <div class="bk-form-group full">
+              <div class="bk-emergency-divider">Emergency Contact</div>
+            </div>
+
+            <div class="bk-form-row">
+              <div class="bk-form-group">
+                <label class="bk-label" for="emName">Contact Name <span>*</span></label>
+                <input class="bk-input" type="text" id="emName" placeholder="Full name" />
+                <span class="bk-field-error" id="err-emName">Required</span>
+              </div>
+              <div class="bk-form-group">
+                <label class="bk-label" for="emPhone">Contact Phone <span>*</span></label>
+                <input class="bk-input" type="tel" id="emPhone" placeholder="+91 98765 43210" />
+                <span class="bk-field-error" id="err-emPhone">Required</span>
+              </div>
+            </div>
+
+            <div class="bk-form-group full">
+              <div class="bk-checkbox-row">
+                <input type="checkbox" id="termsChk" />
+                <label for="termsChk">I agree to the <a href="#">Volunteering Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a> of Great D'Tour and Wildlife Conservation India.</label>
+              </div>
+              <span class="bk-field-error" id="err-terms">Please accept the terms to continue</span>
+            </div>
+
+          </form>
+
+          <div style="margin-top:20px;">
+            <button class="bk-next-btn" onclick="submitProfile()">
+              Continue to Commitment
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 13.5L12.5 9L7 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Commitment -->
+      <div class="bk-step-card" id="card4">
+        <div class="bk-step-card__header">
+          <div class="bk-step-card__num">4</div>
+          <div class="bk-step-card__info">
+            <div class="bk-step-card__title">Commitment</div>
+            <div class="bk-step-card__sub">Confirm your commitment to the program</div>
+          </div>
+          <span class="bk-step-card__edit" onclick="editStep(4)" style="display:none" id="edit4">Edit</span>
+        </div>
+        <div class="bk-step-card__summary" id="sum4" style="display:none"></div>
+        <div class="bk-step-body" id="body4" style="display:none">
+
+          <p style="font-size:14px;color:var(--warm-gray);line-height:1.7;margin-bottom:20px;">Before we submit your application, please read and confirm each commitment. Click each item to acknowledge it.</p>
+
+          <div class="vol-pledge-list">
+            <div class="vol-pledge-item" onclick="togglePledge(this)">
+              <div class="vol-pledge-item__checkbox"></div>
+              <div class="vol-pledge-item__text">I commit to attending the full 4-week program. I understand that early departure without a genuine emergency forfeits my stipend.</div>
+            </div>
+            <div class="vol-pledge-item" onclick="togglePledge(this)">
+              <div class="vol-pledge-item__checkbox"></div>
+              <div class="vol-pledge-item__text">I will follow all safety and wildlife protocols provided during induction. I accept that field conditions can be unpredictable.</div>
+            </div>
+            <div class="vol-pledge-item" onclick="togglePledge(this)">
+              <div class="vol-pledge-item__checkbox"></div>
+              <div class="vol-pledge-item__text">I will participate actively and reliably in all scheduled program activities, including early morning field sessions.</div>
+            </div>
+            <div class="vol-pledge-item" onclick="togglePledge(this)">
+              <div class="vol-pledge-item__checkbox"></div>
+              <div class="vol-pledge-item__text">I have read and accept the <a href="#" onclick="return false;" style="color:var(--vol-green);">Volunteering Program Policies</a> set by Wildlife Conservation India and Great D'Tour.</div>
+            </div>
+            <div class="vol-pledge-item" onclick="togglePledge(this)">
+              <div class="vol-pledge-item__checkbox"></div>
+              <div class="vol-pledge-item__text">I will not publicly share sensitive wildlife location data (GPS coordinates of dens, corridors) beyond what is permitted by WCI's data policy.</div>
+            </div>
+          </div>
+
+          <div class="vol-pledge-note">
+            ✅ Check all five items to enable the Submit button. Your application is reviewed by the WCI team within 5 working days.
+          </div>
+
+          <button class="bk-next-btn" id="submitAppBtn" onclick="submitApplication()" disabled style="background:var(--vol-green);">
+            Submit Application
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9l4.5 4.5 6-7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /left -->
+
+    <!-- ---- Sidebar ---- -->
+    <div class="bk-sidebar" id="bkSidebar">
+      <div class="bk-summary-card">
+        <div class="bk-summary-card__header">
+          <img src="assets/images/landscape.jpg" alt="Tiger Conservation" class="bk-summary-card__thumb" />
+          <div>
+            <div class="bk-summary-card__trip-name">Tiger Conservation Program</div>
+            <div class="bk-summary-card__trip-meta">
+              <span>🌿 Volunteering</span>
+              <span>Rajasthan</span>
+            </div>
+          </div>
+        </div>
+        <div class="bk-summary-card__body">
+          <div class="bk-summary-lines" id="sbLines">
+            <div class="bk-summary-line"><span>Batch</span><strong id="sbBatch">—</strong></div>
+            <div class="bk-summary-line"><span>Volunteers</span><strong id="sbVols">1</strong></div>
+            <div class="bk-summary-line"><span>Role</span><strong id="sbRole">—</strong></div>
+            <div class="bk-summary-line"><span>Duration</span><strong>4 Weeks</strong></div>
+            <div class="bk-summary-line"><span>Program Fee</span><strong style="color:var(--vol-green);">₹0 — Funded</strong></div>
+          </div>
+          <hr class="bk-summary-divider" />
+
+          <div class="vol-contact-box">
+            <div class="vol-contact-box__title">QUESTIONS?</div>
+            <p>Email us at <a href="mailto:volunteer@greatdtour.com">volunteer@greatdtour.com</a> or WhatsApp +91 98765 00000</p>
+          </div>
+
+          <div class="bk-host-row">
+            <img src="assets/images/trek1.jpg" alt="WCI" class="bk-host-avatar" />
+            <div>
+              <div class="bk-host-name">Wildlife Conservation India</div>
+              <div class="bk-host-since">Verified NGO · Est. 2009</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success screen (spans full width) -->
+    <div class="bk-success" id="successScreen">
+      <div class="bk-success__icon">🌿</div>
+      <h2 class="bk-success__title">Application Submitted!</h2>
+      <p class="bk-success__sub">Thank you for applying to the Tiger Conservation Program. The Wildlife Conservation India team will review your application within 5 working days. Check your email for confirmation.</p>
+      <div class="bk-success__ref">Your Application Reference</div>
+      <div class="bk-success__ref-num" id="successRef">VLT-2025-0000</div>
+      <div class="bk-success__btns">
+        <button class="bk-success__btn-primary" onclick="window.location.href='volunteer-detail.html'">View Other Programs</button>
+        <button class="bk-success__btn-secondary" onclick="window.location.href='index.html'">Back to Home</button>
+      </div>
+    </div>
+
+  </div><!-- /bk-page -->
+
+  <script src="assets/main.js"></script>
+  <script>
+
+    let volunteers = 1;
+    let selectedBatch = null;
+    let selectedRole = null;
+    let currentStep = 1;
+
+    const BATCH_INFO = {
+      jun: { name: 'Jun 2025 Batch', dates: '1 Jun – 28 Jun 2025', spots: '8 of 12' },
+      aug: { name: 'Aug 2025 Batch', dates: '1 Aug – 28 Aug 2025', spots: '12 of 12' }
+    };
+
+    const ROLE_NAMES = {
+      field: 'Field Researcher',
+      community: 'Community Educator',
+      documentation: 'Documentation Specialist',
+      coordinator: 'Camp Coordinator'
+    };
+
+    // ---- Stepper ----
+    function changeCount(delta) {
+      volunteers = Math.max(1, Math.min(4, volunteers + delta));
+      document.getElementById('volCount').textContent = volunteers;
+      document.getElementById('volMinus').disabled = volunteers <= 1;
+      document.getElementById('volPlus').disabled = volunteers >= 4;
+      updateSidebar();
+    }
+
+    // ---- Batch selector ----
+    function selectBatch(btn) {
+      document.querySelectorAll('.bk-month-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedBatch = btn.dataset.batch;
+      const d = BATCH_INFO[selectedBatch];
+      document.getElementById('selBatchName').textContent = d.name;
+      document.getElementById('selBatchDates').textContent = d.dates;
+      document.getElementById('selBatchSpots').textContent = d.spots;
+      document.getElementById('batchDetailBox').style.display = 'block';
+      document.getElementById('nextBtn1').disabled = false;
+      updateSidebar();
+    }
+
+    // ---- Role selector ----
+    function selectRole(card) {
+      document.querySelectorAll('.bk-pkg-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedRole = card.dataset.role;
+      document.getElementById('nextBtn2').disabled = false;
+      updateSidebar();
+    }
+
+    // ---- Step navigation ----
+    function goToStep(step) {
+      if (step === 2) setSummary1();
+      if (step === 3) setSummary2();
+      setDone(currentStep);
+      currentStep = step;
+      openCard(step);
+      updateProgress();
+    }
+
+    function editStep(step) {
+      closeCard(currentStep);
+      currentStep = step;
+      undoDone(step);
+      openCard(step);
+      updateProgress();
+    }
+
+    function openCard(step) {
+      const card = document.getElementById('card' + step);
+      card.classList.add('active-card');
+      card.classList.remove('done-card');
+      document.getElementById('body' + step).style.display = 'block';
+      document.getElementById('sum' + step).style.display = 'none';
+      const editEl = document.getElementById('edit' + step);
+      if (editEl) editEl.style.display = 'none';
+      // scroll to card
+      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
+
+    function closeCard(step) {
+      const card = document.getElementById('card' + step);
+      card.classList.remove('active-card');
+      document.getElementById('body' + step).style.display = 'none';
+    }
+
+    function setDone(step) {
+      const card = document.getElementById('card' + step);
+      card.classList.remove('active-card');
+      card.classList.add('done-card');
+      document.getElementById('body' + step).style.display = 'none';
+      document.getElementById('sum' + step).style.display = 'flex';
+      const editEl = document.getElementById('edit' + step);
+      if (editEl) editEl.style.display = 'block';
+      const numEl = card.querySelector('.bk-step-card__num');
+      numEl.textContent = '✓';
+    }
+
+    function undoDone(step) {
+      const card = document.getElementById('card' + step);
+      card.classList.remove('done-card');
+      document.getElementById('sum' + step).style.display = 'none';
+      const numEl = card.querySelector('.bk-step-card__num');
+      numEl.textContent = step;
+    }
+
+    function updateProgress() {
+      for (let i = 1; i <= 4; i++) {
+        const sp = document.getElementById('sp' + i);
+        sp.classList.remove('active', 'done');
+        if (i < currentStep) sp.classList.add('done');
+        else if (i === currentStep) sp.classList.add('active');
+        const num = sp.querySelector('.bk-step__num');
+        num.textContent = i < currentStep ? '✓' : i;
+      }
+    }
+
+    // ---- Summary tags ----
+    function setSummary1() {
+      const d = BATCH_INFO[selectedBatch];
+      const html = `<span class="bk-summary-tag">${d.name}</span><span class="bk-summary-tag">${volunteers} volunteer${volunteers > 1 ? 's' : ''}</span>`;
+      document.getElementById('sum1').innerHTML = html;
+    }
+
+    function setSummary2() {
+      const html = `<span class="bk-summary-tag">${ROLE_NAMES[selectedRole]}</span>`;
+      document.getElementById('sum2').innerHTML = html;
+    }
+
+    // ---- Profile form validation ----
+    function submitProfile() {
+      let ok = true;
+
+      const required = [
+        ['firstName', v => v.trim().length > 0],
+        ['lastName', v => v.trim().length > 0],
+        ['email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)],
+        ['phone', v => v.trim().length > 0],
+        ['motivation', v => v.trim().length >= 50],
+        ['emName', v => v.trim().length > 0],
+        ['emPhone', v => v.trim().length > 0],
+      ];
+
+      required.forEach(([id, validator]) => {
+        const el = document.getElementById(id);
+        const errEl = document.getElementById('err-' + id);
+        if (!validator(el.value)) {
+          el.classList.add('error');
+          if (errEl) errEl.classList.add('visible');
+          ok = false;
+        } else {
+          el.classList.remove('error');
+          if (errEl) errEl.classList.remove('visible');
+        }
+      });
+
+      const terms = document.getElementById('termsChk');
+      const termsErr = document.getElementById('err-terms');
+      if (!terms.checked) {
+        termsErr.classList.add('visible');
+        ok = false;
+      } else {
+        termsErr.classList.remove('visible');
+      }
+
+      if (!ok) return;
+
+      const name = document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim();
+      const sum3 = document.getElementById('sum3');
+      sum3.innerHTML = `<span class="bk-summary-tag">${name}</span>`;
+
+      setDone(3);
+      currentStep = 4;
+      openCard(4);
+      updateProgress();
+    }
+
+    // ---- Pledge gate ----
+    function togglePledge(item) {
+      item.classList.toggle('checked');
+      const cb = item.querySelector('.vol-pledge-item__checkbox');
+      cb.textContent = item.classList.contains('checked') ? '✓' : '';
+      updatePledgeGate();
+    }
+
+    function updatePledgeGate() {
+      const total = document.querySelectorAll('.vol-pledge-item').length;
+      const checked = document.querySelectorAll('.vol-pledge-item.checked').length;
+      document.getElementById('submitAppBtn').disabled = checked < total;
+    }
+
+    // ---- Submit application ----
+    function submitApplication() {
+      const ref = 'VLT-2025-' + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('successRef').textContent = ref;
+
+      // Hide steps and sidebar, show success
+      document.getElementById('bkSteps').style.display = 'none';
+      document.querySelectorAll('.bk-step-card').forEach(c => c.style.display = 'none');
+      document.getElementById('bkSidebar').style.display = 'none';
+      document.getElementById('successScreen').classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ---- Sidebar update ----
+    function updateSidebar() {
+      document.getElementById('sbVols').textContent = volunteers;
+      document.getElementById('sbBatch').textContent = selectedBatch ? BATCH_INFO[selectedBatch].name : '—';
+      document.getElementById('sbRole').textContent = selectedRole ? ROLE_NAMES[selectedRole] : '—';
+    }
+
+    // ---- Previous exp conditional ----
+    function togglePrevExpDesc() {
+      const val = document.getElementById('prevExp').value;
+      document.getElementById('prevExpDescGroup').style.display = val !== 'none' ? 'block' : 'none';
+    }
+
+    // ---- Clear errors on input ----
+    ['firstName','lastName','email','phone','motivation','emName','emPhone'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', () => {
+        el.classList.remove('error');
+        const err = document.getElementById('err-' + id);
+        if (err) err.classList.remove('visible');
+      });
+    });
+
+  </script>
+</body>
+</html>

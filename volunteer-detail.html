@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiger Conservation Program — Great D'Tour Volunteering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+
+    :root {
+      --vol-green: #2E7D32;
+      --vol-green-light: rgba(46, 125, 50, 0.10);
+    }
+
+    /* ---- Hero ---- */
+    .exp-hero { height: 420px; position: relative; overflow: hidden; }
+    .exp-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+
+    /* ---- Title Section ---- */
+    .exp-title-section { background: var(--white); padding: 28px 0 24px; }
+    .exp-title-section .container { max-width: 1280px; padding: 0 60px; }
+
+    .exp-back { display: inline-flex; align-items: center; gap: 8px; color: var(--warm-gray); font-size: 14px; font-weight: 500; margin-bottom: 24px; transition: color 0.2s; }
+    .exp-back:hover { color: var(--vol-green); }
+
+    .exp-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 16px; }
+
+    .exp-category { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--vol-green); margin-bottom: 6px; }
+    .exp-title-h1 { font-family: var(--font-sans); font-size: 42px; font-weight: 700; line-height: 1.15; color: #101828; margin-bottom: 14px; }
+
+    .exp-meta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .exp-meta-item { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--warm-gray); }
+    .exp-meta-item svg { flex-shrink: 0; }
+
+    .exp-share-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 4px; padding: 12px 20px; font-size: 14px; font-weight: 600; color: var(--warm-gray); background: var(--white); cursor: pointer; transition: border-color 0.2s, color 0.2s; white-space: nowrap; flex-shrink: 0; }
+    .exp-share-btn:hover { border-color: var(--vol-green); color: var(--vol-green); }
+
+    /* Volunteering cause tags */
+    .vol-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .vol-tag { display: inline-block; padding: 5px 12px; border-radius: 100px; border: 1.5px solid var(--vol-green); color: var(--vol-green); font-size: 12px; font-weight: 600; }
+
+    /* ---- Sticky Tabs ---- */
+    .exp-tabs { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: var(--nav-h); z-index: 99; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .exp-tabs .container { max-width: 1280px; padding: 0 60px; }
+    .exp-tabs__list { display: flex; gap: 32px; list-style: none; }
+    .exp-tabs__item { position: relative; padding: 13px 0; font-size: 15px; font-weight: 500; color: #364153; cursor: pointer; white-space: nowrap; transition: color 0.2s; user-select: none; }
+    .exp-tabs__item::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--vol-green); opacity: 0; transition: opacity 0.2s; }
+    .exp-tabs__item:hover { color: var(--vol-green); }
+    .exp-tabs__item.active { color: var(--vol-green); font-weight: 600; }
+    .exp-tabs__item.active::after { opacity: 1; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ---- Layout ---- */
+    .exp-body { background: #f9fafb; padding: 40px 0 80px; }
+    .exp-body .container { max-width: 1280px; padding: 0 60px; }
+    .exp-layout { display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start; }
+    .exp-content { min-width: 0; }
+
+    .exp-section { margin-bottom: 48px; }
+    .exp-section__title { font-family: var(--font-sans); font-size: 22px; font-weight: 600; color: #101828; margin-bottom: 20px; }
+    .exp-about__text { font-size: 17px; line-height: 1.75; color: var(--warm-gray); margin-bottom: 32px; }
+    .exp-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+    /* Trust grid */
+    .exp-trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .exp-trust-item { display: flex; align-items: flex-start; gap: 12px; }
+    .exp-trust-item__icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--vol-green); }
+    .exp-trust-item__label { font-size: 14px; font-weight: 700; color: #0a0a0a; margin-bottom: 2px; }
+    .exp-trust-item__sub { font-size: 12px; color: var(--warm-gray); }
+
+    /* Impact bar */
+    .vol-impact-bar { display: flex; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 28px 0; }
+    .vol-impact-item { flex: 1; display: flex; align-items: center; gap: 12px; padding: 18px 20px; border-right: 1px solid var(--border); }
+    .vol-impact-item:last-child { border-right: none; }
+    .vol-impact-icon { font-size: 24px; flex-shrink: 0; }
+    .vol-impact-num { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--vol-green); line-height: 1; }
+    .vol-impact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--warm-gray); margin-top: 3px; }
+
+    /* Org card */
+    .vol-org-card { border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 32px; display: flex; gap: 18px; align-items: flex-start; }
+    .vol-org-logo { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .vol-org-name { font-size: 17px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .vol-org-verified { display: inline-block; background: var(--vol-green-light); color: var(--vol-green); font-size: 10px; font-weight: 700; letter-spacing: 0.5px; border-radius: 100px; padding: 2px 8px; margin-left: 6px; vertical-align: middle; }
+    .vol-org-desc { font-size: 13px; color: var(--warm-gray); line-height: 1.55; margin-bottom: 10px; }
+    .vol-org-stat-row { display: flex; gap: 20px; }
+    .vol-org-stat strong { font-size: 15px; font-weight: 700; color: #101828; display: block; }
+    .vol-org-stat span { font-size: 11px; color: var(--warm-gray); }
+
+    /* Highlights */
+    .exp-highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .exp-highlight-item { display: flex; align-items: flex-start; gap: 12px; }
+    .exp-highlight-dot { width: 20px; height: 20px; background: var(--vol-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 11px; color: white; font-weight: 600; }
+    .exp-highlight-text { font-size: 15px; line-height: 1.55; color: var(--warm-gray); }
+
+    /* Review cards */
+    .exp-reviews-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .exp-review-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+    .exp-review-card:last-child { margin-bottom: 0; }
+    .exp-review-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+    .exp-reviewer-name { font-size: 15px; font-weight: 700; color: #0a0a0a; margin-bottom: 2px; }
+    .exp-reviewer-date { font-size: 12px; color: var(--warm-gray); }
+    .exp-verified-badge { display: inline-block; background: rgba(46,125,50,0.1); color: var(--vol-green); font-size: 10px; font-weight: 600; letter-spacing: 0.5px; border-radius: 100px; padding: 2px 8px; margin-left: 8px; vertical-align: middle; }
+    .exp-review-text { font-size: 14px; line-height: 1.65; color: var(--warm-gray); }
+
+    /* ---- Program Tab (week cards) ---- */
+    .itin-accordion { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+    .itin-accordion__header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; cursor: pointer; background: var(--white); user-select: none; }
+    .itin-accordion__header:hover { background: #fafafa; }
+    .itin-accordion__title { font-size: 16px; font-weight: 600; color: #101828; }
+    .itin-accordion__chevron { width: 20px; height: 20px; color: var(--warm-gray); transition: transform 0.25s; }
+    .itin-accordion.open .itin-accordion__chevron { transform: rotate(180deg); }
+    .itin-accordion__body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .itin-accordion.open .itin-accordion__body { max-height: 3000px; }
+
+    .vol-week { display: flex; gap: 20px; align-items: flex-start; padding: 20px 24px; border-bottom: 1px solid var(--border); }
+    .vol-week:last-child { border-bottom: none; }
+    .vol-week__badge { width: 52px; height: 52px; border-radius: 10px; background: var(--vol-green-light); border: 2px solid var(--vol-green); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
+    .vol-week__badge-label { font-size: 9px; font-weight: 700; text-transform: uppercase; color: var(--vol-green); letter-spacing: 1px; }
+    .vol-week__badge-num { font-size: 20px; font-weight: 700; color: var(--vol-green); line-height: 1; }
+    .vol-week__theme { font-size: 16px; font-weight: 600; color: #101828; margin-bottom: 6px; }
+    .vol-week__sub { font-size: 13px; color: var(--warm-gray); margin-bottom: 10px; }
+    .vol-week__activities { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .vol-week__activities li { font-size: 14px; color: var(--warm-gray); padding-left: 16px; position: relative; line-height: 1.5; }
+    .vol-week__activities li::before { content: '–'; position: absolute; left: 0; color: var(--vol-green); font-weight: 600; }
+
+    /* Included/Excluded */
+    .itin-inclexcl { padding: 20px 24px; }
+    .itin-inclexcl__title { font-size: 15px; font-weight: 600; color: #101828; margin-bottom: 12px; }
+    .itin-inclexcl__list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .itin-inclexcl__item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--warm-gray); }
+    .itin-inclexcl__icon--yes { color: var(--vol-green); font-weight: 700; flex-shrink: 0; }
+    .itin-inclexcl__icon--no { color: #ef4444; font-weight: 700; flex-shrink: 0; }
+
+    /* ---- Apply Tab (batch cards) ---- */
+    .vol-batch-section__title { font-size: 16px; font-weight: 600; color: #101828; margin-bottom: 16px; }
+    .vol-batch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .vol-batch-card { border: 1.5px solid var(--border); border-radius: 10px; padding: 16px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .vol-batch-card:hover { border-color: var(--vol-green); }
+    .vol-batch-card.selected { border-color: var(--vol-green); background: var(--vol-green-light); }
+    .vol-batch-card__intake { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--vol-green); margin-bottom: 5px; }
+    .vol-batch-card__dates { font-size: 14px; font-weight: 600; color: #101828; margin-bottom: 4px; }
+    .vol-batch-card__spots { font-size: 12px; color: var(--warm-gray); }
+    .vol-batch-card.full { opacity: 0.5; cursor: not-allowed; }
+    .vol-batch-card.full .vol-batch-card__intake { color: #ef4444; }
+
+    .vol-batch-detail { border: 1.5px solid var(--vol-green); border-radius: 10px; padding: 20px 24px; background: var(--vol-green-light); margin-bottom: 24px; display: none; }
+    .vol-batch-detail.visible { display: block; }
+    .vol-batch-detail__title { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 12px; }
+    .vol-batch-detail__row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding: 6px 0; border-bottom: 1px solid rgba(46,125,50,0.15); }
+    .vol-batch-detail__row:last-child { border-bottom: none; }
+    .vol-batch-detail__row span { color: var(--warm-gray); }
+    .vol-batch-detail__row strong { color: #101828; }
+
+    .vol-apply-cta { display: block; width: 100%; background: var(--vol-green); color: var(--white); text-align: center; font-size: 16px; font-weight: 600; padding: 16px; border-radius: 4px; border: none; cursor: pointer; font-family: var(--font-sans); margin-top: 16px; transition: background 0.2s, transform 0.15s; }
+    .vol-apply-cta:hover { background: #1b5e20; transform: translateY(-1px); }
+
+    .vol-cant-find { border: 1px dashed var(--border); border-radius: 10px; padding: 20px 24px; text-align: center; margin-top: 12px; }
+    .vol-cant-find p { font-size: 14px; color: var(--warm-gray); margin-bottom: 10px; }
+    .vol-cant-find a { font-size: 14px; font-weight: 600; color: var(--vol-green); }
+
+    /* ---- Commitment Tab ---- */
+    .vol-covered-card { border: 1.5px solid var(--border); border-radius: 10px; padding: 20px 24px; background: var(--white); margin-bottom: 12px; }
+    .vol-covered-card.highlight { border-color: var(--vol-green); background: var(--vol-green-light); }
+    .vol-covered-card__tag { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--vol-green); margin-bottom: 6px; }
+    .vol-covered-card__title { font-size: 18px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .vol-covered-card__sub { font-size: 13px; color: var(--warm-gray); margin-bottom: 14px; }
+    .vol-covered-card__items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .vol-covered-card__items li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--warm-gray); }
+    .vol-covered-card__items li::before { content: '✓'; color: var(--vol-green); font-weight: 700; flex-shrink: 0; }
+    .vol-covered-card__price { font-size: 28px; font-weight: 700; color: var(--vol-green); margin-top: 10px; }
+    .vol-covered-card__price span { font-size: 14px; font-weight: 400; color: var(--warm-gray); }
+
+    .vol-aid-note { background: #fffbf5; border: 1px solid rgba(246,154,57,0.3); border-radius: 8px; padding: 16px 20px; margin-top: 16px; font-size: 14px; color: var(--warm-gray); line-height: 1.6; }
+    .vol-aid-note strong { color: #101828; }
+
+    /* ---- Requirements Tab ---- */
+    .policy-section { margin-bottom: 36px; }
+    .policy-section__title { font-size: 18px; font-weight: 600; color: #101828; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .policy-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .policy-table td { padding: 10px 0; border-bottom: 1px solid var(--border); color: var(--warm-gray); vertical-align: top; }
+    .policy-table td:first-child { font-weight: 600; color: #101828; width: 40%; }
+    .policy-table tr:last-child td { border-bottom: none; }
+    .policy-note { background: var(--vol-green-light); border-left: 3px solid var(--vol-green); border-radius: 0 6px 6px 0; padding: 14px 16px; font-size: 14px; color: var(--warm-gray); line-height: 1.6; margin-top: 16px; }
+    .policy-note strong { color: var(--vol-green); }
+
+    .vol-skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .vol-skill-pill { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--border); border-radius: 100px; padding: 7px 14px; font-size: 13px; font-weight: 500; color: var(--warm-gray); background: var(--white); }
+
+    /* ---- FAQ Tab ---- */
+    .faq-category { margin-bottom: 32px; }
+    .faq-category__title { font-size: 16px; font-weight: 700; color: #101828; margin-bottom: 8px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; cursor: pointer; gap: 16px; }
+    .faq-question__text { font-size: 15px; font-weight: 500; color: #101828; }
+    .faq-chevron { color: var(--warm-gray); font-size: 18px; transition: transform 0.2s; flex-shrink: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--vol-green); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-item.open .faq-answer { max-height: 500px; }
+    .faq-answer p { font-size: 14px; color: var(--warm-gray); line-height: 1.7; padding-bottom: 16px; }
+
+    /* ---- Sidebar ---- */
+    .exp-sidebar { position: sticky; top: calc(var(--nav-h) + 48px); }
+    .exp-booking-card { background: var(--white); border-radius: 8px; box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 1px 6px rgba(0,0,0,0.06); padding: 32px; }
+
+    .vol-glance { background: var(--vol-green-light); border: 1px solid rgba(46,125,50,0.2); border-radius: 8px; padding: 18px; margin-bottom: 20px; }
+    .vol-glance__title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--vol-green); margin-bottom: 12px; }
+    .vol-glance__row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid rgba(46,125,50,0.12); }
+    .vol-glance__row:last-child { border-bottom: none; }
+    .vol-glance__label { font-size: 13px; color: var(--warm-gray); display: flex; align-items: center; gap: 6px; }
+    .vol-glance__value { font-size: 14px; font-weight: 700; color: #101828; }
+    .vol-glance__spots { color: var(--vol-green); font-weight: 700; }
+
+    .exp-book-btn { display: block; width: 100%; background: var(--vol-green); color: var(--white); text-align: center; font-size: 17px; font-weight: 600; padding: 18px; border-radius: 4px; border: none; cursor: pointer; font-family: var(--font-sans); margin-bottom: 12px; transition: background 0.2s, transform 0.15s; }
+    .exp-book-btn:hover { background: #1b5e20; transform: translateY(-1px); }
+
+    .exp-sidebar-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: var(--white); border: 1px solid #d9d9d9; border-radius: 4px; padding: 16px; font-size: 15px; font-weight: 600; color: #0a0a0a; cursor: pointer; font-family: var(--font-sans); margin-bottom: 12px; transition: border-color 0.2s, color 0.2s; }
+    .exp-sidebar-btn:hover { border-color: var(--vol-green); color: var(--vol-green); }
+
+    .exp-why-box { border-top: 1px solid var(--border); margin-top: 24px; padding-top: 24px; }
+    .exp-why-title { font-size: 17px; font-weight: 600; color: #0a0a0a; margin-bottom: 14px; }
+    .exp-why-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .exp-why-list li { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--warm-gray); }
+    .exp-why-list li::before { content: '✓'; color: var(--vol-green); font-size: 15px; font-weight: 600; flex-shrink: 0; }
+
+    /* Sidebar org card */
+    .vol-sidebar-org { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-top: 20px; }
+    .vol-sidebar-org__inner { display: flex; gap: 16px; align-items: flex-start; }
+    .vol-sidebar-org__logo { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .vol-sidebar-org__name { font-size: 16px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .vol-sidebar-org__badge { display: inline-block; background: var(--vol-green-light); color: var(--vol-green); font-size: 10px; font-weight: 700; border-radius: 100px; padding: 2px 8px; }
+    .vol-sidebar-org__meta { font-size: 13px; color: var(--warm-gray); margin-top: 6px; }
+    .vol-sidebar-org__link { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700; color: var(--vol-green); margin-top: 10px; transition: gap 0.2s; }
+    .vol-sidebar-org__link:hover { gap: 8px; }
+
+    /* ---- Similar Programs ---- */
+    .exp-similar { background: var(--white); padding: 56px 0; border-top: 1px solid var(--border); }
+    .exp-similar .container { max-width: 1280px; padding: 0 60px; }
+    .exp-similar__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .exp-similar__title { font-family: var(--font-sans); font-size: 26px; font-weight: 600; color: #101828; }
+    .exp-similar__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+    .sim-card { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--white); display: block; transition: transform 0.2s, box-shadow 0.2s; }
+    .sim-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .sim-card__img { height: 180px; overflow: hidden; }
+    .sim-card__img img { width: 100%; height: 100%; object-fit: cover; }
+    .sim-card__body { padding: 16px; }
+    .sim-card__cat { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--vol-green); margin-bottom: 6px; }
+    .sim-card__title { font-size: 15px; font-weight: 600; color: #101828; margin-bottom: 8px; line-height: 1.4; }
+    .sim-card__loc { font-size: 12px; color: var(--warm-gray); display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
+    .sim-card__footer { display: flex; align-items: center; justify-content: space-between; }
+    .sim-card__duration { font-size: 13px; font-weight: 600; color: var(--vol-green); }
+    .sim-card__spots { font-size: 12px; color: var(--warm-gray); }
+
+    /* ---- Footer ---- */
+    .footer--detail { background: #0a0a0a; color: rgba(255,255,255,0.7); padding: 56px 0 0; }
+    .footer--detail .container { max-width: 1280px; padding: 0 60px; }
+    .footer-detail__top { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-detail__brand h3 { font-family: var(--font-serif); font-size: 22px; color: white; margin-bottom: 12px; }
+    .footer-detail__brand p { font-size: 14px; line-height: 1.7; }
+    .footer-detail__social { display: flex; gap: 16px; margin-top: 20px; }
+    .footer-detail__social a { color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-detail__social a:hover { color: white; }
+    .footer-detail__links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer-detail__col h4 { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: white; margin-bottom: 16px; }
+    .footer-detail__col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-detail__col a { font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.2s; }
+    .footer-detail__col a:hover { color: white; }
+    .footer-detail__bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+    .footer-detail__copy { font-size: 12px; color: rgba(255,255,255,0.4); }
+    .footer-detail__legal { display: flex; gap: 16px; align-items: center; }
+    .footer-detail__legal a { font-size: 12px; color: rgba(255,255,255,0.4); }
+    .footer-detail__legal span { color: rgba(255,255,255,0.2); }
+
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAVIGATION ====== -->
+  <nav class="nav nav--page" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/GDT_logo_white.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-white" />
+        <img src="assets/GDT_logo_black.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-dark" />
+      </a>
+      <div class="nav__links">
+        <a href="experiences.html" class="nav__link">Experiences</a>
+        <a href="#" class="nav__link">Volunteering</a>
+        <a href="field-notes.html" class="nav__link">Field Notes</a>
+        <a href="about.html" class="nav__link">About Us</a>
+        <a href="host.html" class="nav__cta">Become a Host</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <div class="exp-hero" style="margin-top: 76px;">
+    <img src="assets/images/landscape.jpg" alt="Tiger Conservation Program — Ranthambore" />
+  </div>
+
+  <!-- ====== TITLE SECTION ====== -->
+  <div class="exp-title-section">
+    <div class="container">
+      <a href="experiences.html" class="exp-back">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to Volunteering Programs
+      </a>
+      <div class="exp-title-row">
+        <div>
+          <p class="exp-category">🌿 Volunteering</p>
+          <h1 class="exp-title-h1">Tiger Conservation Program — Ranthambore</h1>
+          <div class="exp-meta-row">
+            <div class="exp-meta-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.625 4.5 9 4.5 9s4.5-5.375 4.5-9c0-2.485-2.015-4.5-4.5-4.5zm0 6.125a1.625 1.625 0 1 1 0-3.25 1.625 1.625 0 0 1 0 3.25z" fill="currentColor"/></svg>
+              Ranthambore NP, Rajasthan
+            </div>
+            <div class="exp-meta-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              4 Weeks
+            </div>
+            <div class="exp-meta-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 2a5 5 0 1 1 0 10A5 5 0 0 1 8 3zm-1 2v4l3 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              12 Volunteer Spots
+            </div>
+            <div class="exp-meta-item">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M2 6h12M5 1v3M11 1v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              Apply by 15 May 2025
+            </div>
+          </div>
+          <div class="vol-tags">
+            <span class="vol-tag">Wildlife Conservation</span>
+            <span class="vol-tag">Ranthambore NP</span>
+            <span class="vol-tag">Field Work</span>
+            <span class="vol-tag">Fully Funded</span>
+          </div>
+        </div>
+        <button class="exp-share-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="14" cy="3.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="9" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="14" cy="14.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><path d="M5.6 9.87L12.4 13.6M5.6 8.13L12.4 4.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Share
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== STICKY TABS ====== -->
+  <div class="exp-tabs">
+    <div class="container">
+      <ul class="exp-tabs__list">
+        <li class="exp-tabs__item active" data-tab="overview">Overview</li>
+        <li class="exp-tabs__item" data-tab="program">Program</li>
+        <li class="exp-tabs__item" data-tab="apply">Apply</li>
+        <li class="exp-tabs__item" data-tab="commitment">Commitment</li>
+        <li class="exp-tabs__item" data-tab="requirements">Requirements</li>
+        <li class="exp-tabs__item" data-tab="faqs">FAQs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ====== BODY ====== -->
+  <div class="exp-body">
+    <div class="container">
+      <div class="exp-layout">
+
+        <!-- ---- Content ---- -->
+        <div class="exp-content">
+
+          <!-- ===== OVERVIEW ===== -->
+          <div class="tab-panel active" id="panel-overview">
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">About this program</h2>
+              <p class="exp-about__text">
+                Join one of India's most impactful wildlife conservation programs in the heart of Ranthambore National Park. Over four weeks you'll work alongside field biologists and park rangers to monitor tiger populations, restore degraded habitats, and engage local communities in conservation. This is not tourism with a green veneer — it is real, unglamorous, meaningful fieldwork.
+              </p>
+
+              <div class="exp-trust-grid">
+                <div class="exp-trust-item">
+                  <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6h6l-5 3.5 2 6L10 14l-5 3.5 2-6L2 8h6l2-6z" fill="none" stroke="#2E7D32" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                  <div>
+                    <div class="exp-trust-item__label">Verified NGO</div>
+                    <div class="exp-trust-item__sub">Registered & audited</div>
+                  </div>
+                </div>
+                <div class="exp-trust-item">
+                  <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" stroke="#2E7D32" stroke-width="1.3"/></svg>
+                  <div>
+                    <div class="exp-trust-item__label">Experience Level</div>
+                    <div class="exp-trust-item__sub">Beginner to intermediate</div>
+                  </div>
+                </div>
+                <div class="exp-trust-item">
+                  <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="#2E7D32" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="#2E7D32" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  <div>
+                    <div class="exp-trust-item__label">Next Intake</div>
+                    <div class="exp-trust-item__sub">Jun 2025 — 8 spots left</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Impact bar -->
+            <div class="vol-impact-bar">
+              <div class="vol-impact-item">
+                <div class="vol-impact-icon">🐅</div>
+                <div>
+                  <div class="vol-impact-num">120</div>
+                  <div class="vol-impact-label">Tigers Protected</div>
+                </div>
+              </div>
+              <div class="vol-impact-item">
+                <div class="vol-impact-icon">🌳</div>
+                <div>
+                  <div class="vol-impact-num">5,000</div>
+                  <div class="vol-impact-label">Trees Planted</div>
+                </div>
+              </div>
+              <div class="vol-impact-item">
+                <div class="vol-impact-icon">👥</div>
+                <div>
+                  <div class="vol-impact-num">200+</div>
+                  <div class="vol-impact-label">Volunteers to Date</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Org card -->
+            <div class="vol-org-card">
+              <img src="assets/images/trek1.jpg" alt="Wildlife Conservation India" class="vol-org-logo" />
+              <div>
+                <div class="vol-org-name">Wildlife Conservation India <span class="vol-org-verified">VERIFIED NGO</span></div>
+                <p class="vol-org-desc">A grassroots conservation organisation working in partnership with the Forest Department of Rajasthan since 2009. Awarded the National Wildlife Conservation Award in 2022.</p>
+                <div class="vol-org-stat-row">
+                  <div class="vol-org-stat"><strong>15+</strong><span>Years active</span></div>
+                  <div class="vol-org-stat"><strong>8</strong><span>Active programs</span></div>
+                  <div class="vol-org-stat"><strong>200+</strong><span>Alumni volunteers</span></div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">Program Highlights</h2>
+              <div class="exp-highlights-grid">
+                <div class="exp-highlight-item">
+                  <div class="exp-highlight-dot">✓</div>
+                  <p class="exp-highlight-text">Wildlife census using camera traps and direct observation</p>
+                </div>
+                <div class="exp-highlight-item">
+                  <div class="exp-highlight-dot">✓</div>
+                  <p class="exp-highlight-text">Habitat restoration — native plantings and waterhole maintenance</p>
+                </div>
+                <div class="exp-highlight-item">
+                  <div class="exp-highlight-dot">✓</div>
+                  <p class="exp-highlight-text">Community outreach in buffer-zone villages</p>
+                </div>
+                <div class="exp-highlight-item">
+                  <div class="exp-highlight-dot">✓</div>
+                  <p class="exp-highlight-text">Data analysis and field report writing</p>
+                </div>
+                <div class="exp-highlight-item">
+                  <div class="exp-highlight-dot">✓</div>
+                  <p class="exp-highlight-text">Training from senior wildlife biologists</p>
+                </div>
+                <div class="exp-highlight-item">
+                  <div class="exp-highlight-dot">✓</div>
+                  <p class="exp-highlight-text">Certificate of participation from Wildlife Conservation India</p>
+                </div>
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <div class="exp-section">
+              <div class="exp-reviews-header">
+                <h2 class="exp-section__title" style="margin-bottom:0">Volunteer Stories</h2>
+              </div>
+
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Meera Pillai <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">Aug 2025 Batch</div>
+                  </div>
+                </div>
+                <p class="exp-review-text">Four weeks in Ranthambore changed my perspective on what conservation actually means. I came expecting safaris, and instead I was waist-deep in waterhole data. It was the hardest and most rewarding month of my life.</p>
+              </div>
+
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Arjun Nair <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">Jun 2025 Batch</div>
+                  </div>
+                </div>
+                <p class="exp-review-text">The community education sessions were unexpectedly moving. When a child in a buffer-zone village tells you they now want to be a wildlife biologist — you realise your work here echoes beyond the park boundary.</p>
+              </div>
+
+              <div class="exp-review-card">
+                <div class="exp-review-header">
+                  <div>
+                    <div class="exp-reviewer-name">Divya Krishnan <span class="exp-verified-badge">VERIFIED</span></div>
+                    <div class="exp-reviewer-date">Mar 2025 Batch</div>
+                  </div>
+                </div>
+                <p class="exp-review-text">I'm a software engineer with no biology background. The team didn't care. They needed someone patient with data and spreadsheets, and I could do that. Don't talk yourself out of applying.</p>
+              </div>
+            </div>
+
+          </div><!-- /panel-overview -->
+
+          <!-- ===== PROGRAM TAB ===== -->
+          <div class="tab-panel" id="panel-program">
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">4-Week Program Schedule</h2>
+              <p style="font-size:14px;color:var(--warm-gray);margin-bottom:24px;line-height:1.7;">Each week has a defined focus. Days run from 05:30 field start to evening debrief. Weekends include rest time and optional excursions.</p>
+
+              <div class="itin-accordion open" onclick="toggleAccordion(this.querySelector('.itin-accordion__header'))">
+                <div class="itin-accordion__header">
+                  <span class="itin-accordion__title">Weeks 1–4: Full Program Breakdown</span>
+                  <svg class="itin-accordion__chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="itin-accordion__body">
+
+                  <div class="vol-week">
+                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">1</span></div>
+                    <div>
+                      <div class="vol-week__theme">Orientation & Field Fundamentals</div>
+                      <div class="vol-week__sub">Getting your bearings in the park and mastering the tools.</div>
+                      <ul class="vol-week__activities">
+                        <li>Park induction with head biologist Dr. Rajan Mehta</li>
+                        <li>Camera trap placement and maintenance training</li>
+                        <li>Introduction to wildlife tracking and scat identification</li>
+                        <li>Field safety protocols and zone geography</li>
+                        <li>First data collection exercise (transect walk)</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="vol-week">
+                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">2</span></div>
+                    <div>
+                      <div class="vol-week__theme">Wildlife Census & Monitoring</div>
+                      <div class="vol-week__sub">Deep fieldwork on tiger population tracking and prey base analysis.</div>
+                      <ul class="vol-week__activities">
+                        <li>Morning camera trap rounds (4:30 am starts)</li>
+                        <li>Individual tiger ID from stripe pattern analysis</li>
+                        <li>Prey density count — sambar, chital, nilgai</li>
+                        <li>Waterhole activity logging and occupancy maps</li>
+                        <li>Evening data entry and pattern review sessions</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="vol-week">
+                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">3</span></div>
+                    <div>
+                      <div class="vol-week__theme">Habitat Restoration</div>
+                      <div class="vol-week__sub">Hands-on ecological work — replanting, waterhole maintenance, invasive species removal.</div>
+                      <ul class="vol-week__activities">
+                        <li>Native sapling planting in degraded zones (approx. 500 trees)</li>
+                        <li>Invasive Lantana removal from core tiger corridors</li>
+                        <li>Waterhole deepening and desilting with hand tools</li>
+                        <li>Soil moisture and vegetation cover mapping</li>
+                        <li>Before/after photographic documentation</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="vol-week">
+                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">4</span></div>
+                    <div>
+                      <div class="vol-week__theme">Community Outreach & Reporting</div>
+                      <div class="vol-week__sub">Village engagement, education sessions, and presenting your field findings.</div>
+                      <ul class="vol-week__activities">
+                        <li>Wildlife education workshops in 3 buffer-zone villages</li>
+                        <li>Human–wildlife conflict mediation training</li>
+                        <li>Eco-tourism livelihood sessions for local families</li>
+                        <li>Individual field report writing (submitted to WCI)</li>
+                        <li>Closing ceremony and certificate presentation</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <hr class="exp-divider" />
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">Covered &amp; Not Covered</h2>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+                <div>
+                  <div class="itin-inclexcl__title" style="color:var(--vol-green);">✓ Covered by the Program</div>
+                  <ul class="itin-inclexcl__list">
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Shared accommodation in base camp</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>All meals (breakfast, lunch, field dinner)</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Field equipment and safety gear</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Park entry permits and vehicle costs</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Professional training and mentorship</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Monthly stipend of ₹5,000</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Certificate of participation</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="itin-inclexcl__title" style="color:#ef4444;">✗ Not Covered</div>
+                  <ul class="itin-inclexcl__list">
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Travel to/from Sawai Madhopur</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Personal travel insurance</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Personal toiletries and clothing</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Leisure activities on weekends</li>
+                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Personal camera equipment</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /panel-program -->
+
+          <!-- ===== APPLY TAB ===== -->
+          <div class="tab-panel" id="panel-apply">
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">Upcoming Batches</h2>
+              <p style="font-size:14px;color:var(--warm-gray);margin-bottom:20px;line-height:1.7;">Select an intake below to view batch details and apply. Applications close 3 weeks before start date.</p>
+
+              <div class="vol-batch-grid" id="batchGrid">
+                <div class="vol-batch-card" data-batch="jun" onclick="selectBatch(this)">
+                  <div class="vol-batch-card__intake">Jun 2025 Batch</div>
+                  <div class="vol-batch-card__dates">1 Jun – 28 Jun 2025</div>
+                  <div class="vol-batch-card__spots">8 of 12 spots remaining</div>
+                </div>
+                <div class="vol-batch-card" data-batch="aug" onclick="selectBatch(this)">
+                  <div class="vol-batch-card__intake">Aug 2025 Batch</div>
+                  <div class="vol-batch-card__dates">1 Aug – 28 Aug 2025</div>
+                  <div class="vol-batch-card__spots">12 of 12 spots remaining</div>
+                </div>
+                <div class="vol-batch-card full" data-batch="oct">
+                  <div class="vol-batch-card__intake" style="color:#ef4444;">Oct 2025 — Full</div>
+                  <div class="vol-batch-card__dates">3 Oct – 30 Oct 2025</div>
+                  <div class="vol-batch-card__spots">0 spots remaining</div>
+                </div>
+              </div>
+
+              <div class="vol-batch-detail" id="batchDetail">
+                <div class="vol-batch-detail__title" id="batchDetailTitle">Jun 2025 Batch</div>
+                <div class="vol-batch-detail__row"><span>Start date</span><strong id="batchStart">1 Jun 2025</strong></div>
+                <div class="vol-batch-detail__row"><span>End date</span><strong id="batchEnd">28 Jun 2025</strong></div>
+                <div class="vol-batch-detail__row"><span>Duration</span><strong>4 weeks (28 days)</strong></div>
+                <div class="vol-batch-detail__row"><span>Spots remaining</span><strong class="vol-glance__spots" id="batchSpots">8 of 12</strong></div>
+                <div class="vol-batch-detail__row"><span>Application deadline</span><strong id="batchDeadline">10 May 2025</strong></div>
+                <button class="vol-apply-cta" onclick="window.location.href='volunteer-application.html'">Apply for this Batch →</button>
+              </div>
+
+              <div class="vol-cant-find">
+                <p>Not the right time? We run batches throughout the year.</p>
+                <a href="mailto:volunteer@greatdtour.com">Contact us for future dates →</a>
+              </div>
+            </div>
+
+          </div><!-- /panel-apply -->
+
+          <!-- ===== COMMITMENT TAB ===== -->
+          <div class="tab-panel" id="panel-commitment">
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">Financial Commitment</h2>
+              <p style="font-size:14px;color:var(--warm-gray);margin-bottom:24px;line-height:1.7;">We believe cost should not be a barrier to meaningful contribution. Here is exactly what this program costs and provides.</p>
+
+              <div class="vol-covered-card highlight">
+                <div class="vol-covered-card__tag">Fully Covered by WCI</div>
+                <div class="vol-covered-card__title">What You Get — At No Cost</div>
+                <div class="vol-covered-card__sub">Wildlife Conservation India covers all program operational costs.</div>
+                <ul class="vol-covered-card__items">
+                  <li>Shared accommodation in the Ranthambore base camp (6-person dorms)</li>
+                  <li>Three meals per day — simple, nutritious field camp food</li>
+                  <li>All field equipment: binoculars, GPS, camera traps, data notebooks</li>
+                  <li>National Park entry permits and vehicle costs for all field days</li>
+                  <li>Professional training and mentorship from senior biologists</li>
+                  <li>Emergency medical support and first aid on-site</li>
+                </ul>
+                <div class="vol-covered-card__price">₹0 <span>program fee</span></div>
+              </div>
+
+              <div class="vol-covered-card">
+                <div class="vol-covered-card__tag">Monthly Stipend</div>
+                <div class="vol-covered-card__title">You Receive ₹5,000 / month</div>
+                <div class="vol-covered-card__sub">A modest stipend to cover personal expenses and transport within Sawai Madhopur town.</div>
+                <ul class="vol-covered-card__items">
+                  <li>Paid at the end of each calendar month</li>
+                  <li>Directly to your bank account (NEFT)</li>
+                  <li>Applicable to volunteers completing at least 3 of 4 weeks</li>
+                </ul>
+              </div>
+
+              <div class="vol-covered-card">
+                <div class="vol-covered-card__tag">Your Responsibility</div>
+                <div class="vol-covered-card__title">What You Arrange</div>
+                <div class="vol-covered-card__sub">These are not large costs, but plan ahead.</div>
+                <ul class="vol-covered-card__items">
+                  <li>Travel to Sawai Madhopur Railway Station (WCI will arrange pickup from there)</li>
+                  <li>Personal travel insurance covering field activities (we can recommend providers)</li>
+                  <li>Personal clothing appropriate for outdoor work (list provided on acceptance)</li>
+                </ul>
+              </div>
+
+              <div class="vol-aid-note">
+                <strong>Financial Aid Available.</strong> For volunteers who cannot afford travel to Ranthambore, WCI offers limited travel grants. Mention this in your application — it does not affect your selection chances.
+              </div>
+            </div>
+
+          </div><!-- /panel-commitment -->
+
+          <!-- ===== REQUIREMENTS TAB ===== -->
+          <div class="tab-panel" id="panel-requirements">
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">Who Should Apply</h2>
+
+              <div class="policy-section">
+                <h3 class="policy-section__title">Basic Requirements</h3>
+                <table class="policy-table">
+                  <tr><td>Age Range</td><td>18 – 45 years</td></tr>
+                  <tr><td>Commitment</td><td>Full 4 weeks — no partial programs</td></tr>
+                  <tr><td>Working Hours</td><td>~8–10 hours/day in the field (6 days/week)</td></tr>
+                  <tr><td>Physical Fitness</td><td>Moderate. Must be able to walk 8–10 km over uneven terrain daily</td></tr>
+                  <tr><td>Language</td><td>English (working proficiency) + basic Hindi is a bonus</td></tr>
+                  <tr><td>Nationality</td><td>Open to Indian and international volunteers</td></tr>
+                </table>
+                <div class="policy-note"><strong>No prior conservation experience required.</strong> We train you. What we do require is reliability, adaptability, and genuine interest in the cause.</div>
+              </div>
+
+              <div class="policy-section">
+                <h3 class="policy-section__title">Skills We Value</h3>
+                <p style="font-size:14px;color:var(--warm-gray);margin-bottom:14px;">These are not requirements — but if you have them, mention them in your application.</p>
+                <div class="vol-skills-grid">
+                  <span class="vol-skill-pill">🔬 Field Research</span>
+                  <span class="vol-skill-pill">📷 Wildlife Photography</span>
+                  <span class="vol-skill-pill">📊 Data Entry / Excel</span>
+                  <span class="vol-skill-pill">🏫 Teaching / Education</span>
+                  <span class="vol-skill-pill">🩺 First Aid / Wilderness Medicine</span>
+                  <span class="vol-skill-pill">🗺️ GIS / Mapping</span>
+                  <span class="vol-skill-pill">🎬 Video Documentation</span>
+                  <span class="vol-skill-pill">🌱 Botany / Ecology</span>
+                </div>
+              </div>
+
+              <div class="policy-section">
+                <h3 class="policy-section__title">Health & Safety</h3>
+                <table class="policy-table">
+                  <tr><td>Vaccinations</td><td>Typhoid and Hepatitis A recommended (not mandatory)</td></tr>
+                  <tr><td>Medical Conditions</td><td>Disclose any conditions on application — we will advise if suitable</td></tr>
+                  <tr><td>Wildlife Safety</td><td>Full orientation provided. You are never in the field alone</td></tr>
+                  <tr><td>Allergies</td><td>Inform us at application — camp food can accommodate dietary needs</td></tr>
+                </table>
+              </div>
+
+            </div>
+
+          </div><!-- /panel-requirements -->
+
+          <!-- ===== FAQs TAB ===== -->
+          <div class="tab-panel" id="panel-faqs">
+
+            <div class="exp-section">
+              <h2 class="exp-section__title">Frequently Asked Questions</h2>
+
+              <div class="faq-category">
+                <div class="faq-category__title">Application Process</div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">How competitive is the application?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>We receive 50–80 applications per batch and select 12. We prioritise commitment and motivation over qualifications. A well-written motivation section matters more than a CV.</p></div>
+                </div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">How long does the review process take?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>We review applications on a rolling basis and aim to respond within 5 working days. Shortlisted applicants will have a short 20-minute video call with our program coordinator.</p></div>
+                </div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">Can I apply as a group or with a friend?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>Yes. Groups of up to 4 can apply together using our group application. Each person must complete their own profile and motivation section — but your applications are reviewed together and we try to accept full groups when possible.</p></div>
+                </div>
+              </div>
+
+              <div class="faq-category">
+                <div class="faq-category__title">Life at Camp</div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">What are the living conditions like?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>Basic but comfortable. Shared 6-person dorms, common bathroom facilities with hot water, a communal mess area, and reliable electricity. WiFi is available in the evening only — daytime field hours are screen-free. This is not a hotel, but it is safe and well-maintained.</p></div>
+                </div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">What if I need to leave early?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>We understand emergencies happen. In case of a genuine emergency you may leave early without penalty. Leaving for non-emergency reasons forfeits any remaining stipend. We take commitment seriously — please only apply if you can complete the full program.</p></div>
+                </div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">Is there free time? Can I explore Ranthambore?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>Sundays are rest days and you can explore Sawai Madhopur town or the park gate area on your own. WCI organises one optional group excursion per batch. Personal safari bookings are discouraged during program weeks — you'll see more wildlife doing fieldwork than on any safari.</p></div>
+                </div>
+              </div>
+
+              <div class="faq-category">
+                <div class="faq-category__title">Stipend & Logistics</div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">When and how is the stipend paid?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>Stipend of ₹5,000 is paid via NEFT on the last working day of the month. You must have an Indian bank account. International volunteers can arrange a transfer to a trusted local account or use a borderless banking service — our coordinator will assist.</p></div>
+                </div>
+
+                <div class="faq-item">
+                  <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question__text">How do I get to Ranthambore?</span>
+                    <span class="faq-chevron">▾</span>
+                  </div>
+                  <div class="faq-answer"><p>The nearest station is Sawai Madhopur Railway Junction, well connected to Delhi (3.5 hrs), Jaipur (2 hrs), and Mumbai. WCI will arrange a pickup from the station on your arrival day. We send full travel guidance 2 weeks before your start date.</p></div>
+                </div>
+              </div>
+
+              <div style="background:#f9fafb;border-radius:10px;padding:24px;margin-top:24px;text-align:center;">
+                <div style="font-size:16px;font-weight:600;color:#101828;margin-bottom:8px;">Still have questions?</div>
+                <div style="font-size:14px;color:var(--warm-gray);margin-bottom:16px;">Write to our volunteer coordinator directly.</div>
+                <a href="mailto:volunteer@greatdtour.com" style="display:inline-block;background:var(--vol-green);color:white;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:600;">Email Us →</a>
+              </div>
+
+            </div>
+
+          </div><!-- /panel-faqs -->
+
+        </div><!-- /exp-content -->
+
+        <!-- ---- Sidebar ---- -->
+        <div class="exp-sidebar">
+          <div class="exp-booking-card">
+
+            <div class="vol-glance">
+              <div class="vol-glance__title">Program at a Glance</div>
+              <div class="vol-glance__row">
+                <span class="vol-glance__label">📅 Duration</span>
+                <span class="vol-glance__value">4 Weeks</span>
+              </div>
+              <div class="vol-glance__row">
+                <span class="vol-glance__label">💰 Monthly Stipend</span>
+                <span class="vol-glance__value">₹5,000/month</span>
+              </div>
+              <div class="vol-glance__row">
+                <span class="vol-glance__label">👥 Spots Left</span>
+                <span class="vol-glance__spots">8 / 12 (Jun batch)</span>
+              </div>
+              <div class="vol-glance__row">
+                <span class="vol-glance__label">📋 Apply by</span>
+                <span class="vol-glance__value">15 May 2025</span>
+              </div>
+              <div class="vol-glance__row">
+                <span class="vol-glance__label">💵 Program Fee</span>
+                <span class="vol-glance__value" style="color:var(--vol-green);">₹0 — Fully Funded</span>
+              </div>
+            </div>
+
+            <button class="exp-book-btn" onclick="window.location.href='volunteer-application.html'">Apply Now →</button>
+            <button class="exp-sidebar-btn">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="14" cy="3.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="9" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="14" cy="14.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><path d="M5.6 9.87L12.4 13.6M5.6 8.13L12.4 4.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Share Program
+            </button>
+            <button class="exp-sidebar-btn">Contact the NGO</button>
+
+            <div class="exp-why-box">
+              <h4 class="exp-why-title">Why Volunteer With Us?</h4>
+              <ul class="exp-why-list">
+                <li>Fully funded — ₹0 program fee</li>
+                <li>Real fieldwork, not guided tourism</li>
+                <li>Mentorship from senior biologists</li>
+                <li>Verifiable certificate of participation</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Org card in sidebar -->
+          <div class="vol-sidebar-org">
+            <div class="vol-sidebar-org__inner">
+              <img src="assets/images/trek1.jpg" alt="Wildlife Conservation India" class="vol-sidebar-org__logo" />
+              <div>
+                <div class="vol-sidebar-org__name">Wildlife Conservation India</div>
+                <span class="vol-sidebar-org__badge">VERIFIED NGO</span>
+                <div class="vol-sidebar-org__meta">Est. 2009 · 8 active programs · 200+ volunteers</div>
+                <a href="#" class="vol-sidebar-org__link">
+                  View organisation profile
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /exp-layout -->
+    </div>
+  </div>
+
+  <!-- ====== OTHER PROGRAMS ====== -->
+  <section class="exp-similar">
+    <div class="container">
+      <div class="exp-similar__header">
+        <h2 class="exp-similar__title">Other Volunteer Programs</h2>
+      </div>
+      <div class="exp-similar__grid">
+        <a href="volunteer-detail.html" class="sim-card">
+          <div class="sim-card__img"><img src="assets/images/retreat1.jpg" alt="Marine Conservation" /></div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">Marine Conservation</p>
+            <h3 class="sim-card__title">Coral Reef Restoration — Lakshadweep</h3>
+            <div class="sim-card__loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg> Lakshadweep</div>
+            <div class="sim-card__footer">
+              <span class="sim-card__duration">6 Weeks</span>
+              <span class="sim-card__spots">10 spots left</span>
+            </div>
+          </div>
+        </a>
+        <a href="volunteer-detail.html" class="sim-card">
+          <div class="sim-card__img"><img src="assets/images/landscape.jpg" alt="Snow Leopard Program" /></div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">High Altitude Conservation</p>
+            <h3 class="sim-card__title">Snow Leopard Survey — Spiti Valley</h3>
+            <div class="sim-card__loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg> Himachal Pradesh</div>
+            <div class="sim-card__footer">
+              <span class="sim-card__duration">3 Weeks</span>
+              <span class="sim-card__spots">6 spots left</span>
+            </div>
+          </div>
+        </a>
+        <a href="volunteer-detail.html" class="sim-card">
+          <div class="sim-card__img"><img src="assets/images/cultural1.jpg" alt="Community Education" /></div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">Community Development</p>
+            <h3 class="sim-card__title">Rural Education Initiative — Sundarbans</h3>
+            <div class="sim-card__loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg> West Bengal</div>
+            <div class="sim-card__footer">
+              <span class="sim-card__duration">4 Weeks</span>
+              <span class="sim-card__spots">12 spots left</span>
+            </div>
+          </div>
+        </a>
+        <a href="volunteer-detail.html" class="sim-card">
+          <div class="sim-card__img"><img src="assets/images/trek2.jpg" alt="River Conservation" /></div>
+          <div class="sim-card__body">
+            <p class="sim-card__cat">River Ecology</p>
+            <h3 class="sim-card__title">Gangetic Dolphin Monitoring — Varanasi</h3>
+            <div class="sim-card__loc"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C4.34 1 3 2.34 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.66-1.34-3-3-3z" fill="#615841"/></svg> Uttar Pradesh</div>
+            <div class="sim-card__footer">
+              <span class="sim-card__duration">2 Weeks</span>
+              <span class="sim-card__spots">8 spots left</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer--detail">
+    <div class="container">
+      <div class="footer-detail__top">
+        <div class="footer-detail__brand">
+          <h3>Great D'Tour</h3>
+          <p>Follow our journey as we curate India's most unique travel stories.</p>
+          <div class="footer-detail__social">
+            <a href="https://instagram.com/greatdtour" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://facebook.com/greatdtour" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-detail__links">
+          <div class="footer-detail__col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="experiences.html">Experiences</a></li>
+              <li><a href="#">Volunteering</a></li>
+              <li><a href="about.html">Our Story</a></li>
+            </ul>
+          </div>
+          <div class="footer-detail__col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-detail__col">
+            <h4>Connect</h4>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="mailto:volunteer@greatdtour.com">Volunteer Enquiries</a></li>
+              <li><a href="#">Support</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-detail__bottom">
+        <p class="footer-detail__copy">© 2026 Great D'Tour. All Rights Reserved by Chimpya Innovation Labs LLP, Bengaluru, India</p>
+        <div class="footer-detail__legal">
+          <a href="#">Privacy</a><span>|</span><a href="#">Terms</a><span>|</span><a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+  <script>
+    // ---- Tab switching ----
+    const tabItems = document.querySelectorAll('.exp-tabs__item');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    tabItems.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabItems.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        tabPanels.forEach(panel => {
+          panel.classList.toggle('active', panel.id === 'panel-' + target);
+        });
+        const bodyEl = document.querySelector('.exp-body');
+        if (bodyEl) {
+          const offset = document.querySelector('.exp-tabs').offsetHeight + document.querySelector('nav').offsetHeight;
+          const top = bodyEl.getBoundingClientRect().top + window.scrollY - offset - 16;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ---- Accordion toggle ----
+    function toggleAccordion(headerEl) {
+      headerEl.closest('.itin-accordion').classList.toggle('open');
+    }
+
+    // ---- FAQ toggle ----
+    function toggleFaq(questionEl) {
+      const item = questionEl.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      item.closest('.faq-category').querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ---- Batch selector ----
+    const BATCH_DATA = {
+      jun: { title: 'Jun 2025 Batch', start: '1 Jun 2025', end: '28 Jun 2025', spots: '8 of 12', deadline: '10 May 2025' },
+      aug: { title: 'Aug 2025 Batch', start: '1 Aug 2025', end: '28 Aug 2025', spots: '12 of 12', deadline: '10 Jul 2025' }
+    };
+
+    function selectBatch(card) {
+      if (card.classList.contains('full')) return;
+      document.querySelectorAll('.vol-batch-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const key = card.dataset.batch;
+      const d = BATCH_DATA[key];
+      if (!d) return;
+      document.getElementById('batchDetailTitle').textContent = d.title;
+      document.getElementById('batchStart').textContent = d.start;
+      document.getElementById('batchEnd').textContent = d.end;
+      document.getElementById('batchSpots').textContent = d.spots;
+      document.getElementById('batchDeadline').textContent = d.deadline;
+      document.getElementById('batchDetail').classList.add('visible');
+    }
+  </script>
+</body>
+</html>
