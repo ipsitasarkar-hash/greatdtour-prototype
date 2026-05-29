@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Host Application — Great D'Tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f9fafb; color: #101828; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── TOP NAV ── */
+    .tha-nav {
+      background: #101828;
+      padding: 0 40px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .tha-nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .tha-nav__logo {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #fe9a00; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: #101828; flex-shrink: 0;
+    }
+    .tha-nav__title-wrap { display: flex; flex-direction: column; }
+    .tha-nav__title { font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.2; }
+    .tha-nav__subtitle { font-size: 11px; color: #8a9ab0; font-weight: 400; }
+    .tha-nav__step-counter { font-size: 13px; color: #8a9ab0; font-weight: 500; }
+    .tha-nav__step-counter span { color: #ffffff; font-weight: 600; }
+
+    /* ── PROGRESS BAR ── */
+    .tha-progress { background: #1e2d40; height: 6px; width: 100%; }
+    .tha-progress__fill { background: #fe9a00; height: 100%; transition: width 0.4s ease; }
+
+    /* ── TAB BAR ── */
+    .tha-tabs { background: #101828; border-bottom: 1px solid #1e2d40; padding: 0 40px; overflow-x: auto; white-space: nowrap; }
+    .tha-tabs::-webkit-scrollbar { display: none; }
+    .tha-tabs__inner { display: inline-flex; gap: 0; min-width: 100%; }
+    .tha-tab {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 12px 20px; font-size: 13px; font-weight: 500;
+      color: #4b6173; cursor: pointer; border-bottom: 2px solid transparent;
+      transition: all 0.2s; white-space: nowrap; user-select: none;
+    }
+    .tha-tab.is-done { color: #6b7e8f; }
+    .tha-tab.is-done .tha-tab__num { background: #2E7D32; color: #fff; border-color: #2E7D32; }
+    .tha-tab.is-done .tha-tab__num::after { content: '✓'; }
+    .tha-tab.is-active { color: #f9fafb; background: rgba(255,255,255,0.05); border-bottom-color: #fe9a00; }
+    .tha-tab.is-active .tha-tab__num { background: #fe9a00; color: #101828; border-color: #fe9a00; }
+    .tha-tab__num {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 1.5px solid #4b6173; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0; transition: all 0.2s;
+    }
+    .tha-tab.is-done .tha-tab__num .tab-num-text { display: none; }
+
+    /* ── MAIN CONTENT ── */
+    .tha-main { flex: 1; padding: 40px 20px 120px; }
+    .tha-card {
+      max-width: 768px; margin: 0 auto;
+      background: #ffffff; border-radius: 14px; border: 1px solid #e5e7eb;
+      padding: 40px 48px; position: relative;
+    }
+
+    /* ── SECTION LABELS ── */
+    .sec-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.8px; color: #f54900; margin-bottom: 18px; margin-top: 32px;
+    }
+    .sec-label:first-child { margin-top: 0; }
+    .sec-divider { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+
+    /* ── STEP 1: INTRO ── */
+    .intro-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fffbeb; border: 1px solid #fee685; border-radius: 999px;
+      padding: 4px 12px; font-size: 12px; font-weight: 600; color: #973c00;
+      margin-bottom: 24px;
+    }
+    .intro-card { background: #f9fafb; border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; }
+    .intro-card h2 { font-size: 22px; font-weight: 700; color: #101828; margin-bottom: 8px; }
+    .intro-card p { font-size: 15px; color: #4b5563; line-height: 1.6; }
+    .intro-encourages { margin-bottom: 24px; }
+    .intro-encourages h4 { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 12px; }
+    .intro-encourage-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 14px; color: #4b5563; }
+    .intro-encourage-item::before { content: '✓'; color: #2E7D32; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .intro-badges-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .intro-info-badge {
+      flex: 1; min-width: 160px; background: #f9fafb; border: 1px solid #e5e7eb;
+      border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .intro-info-badge__icon { font-size: 18px; margin-bottom: 4px; }
+    .intro-info-badge__label { font-size: 13px; font-weight: 600; color: #101828; }
+    .intro-info-badge__desc { font-size: 12px; color: #6b7280; }
+
+    /* ── FORM ELEMENTS ── */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .form-row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 13px; font-weight: 500; color: #374151; }
+    .form-group label .req { color: #f54900; margin-left: 2px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px;
+      font-size: 14px; font-family: 'Inter', sans-serif; color: #101828;
+      outline: none; transition: border-color 0.2s; background: #fff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: #fe9a00; box-shadow: 0 0 0 3px rgba(254,154,0,0.12); }
+    .form-group textarea { resize: vertical; min-height: 88px; }
+    .form-hint { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+
+    /* ── RADIO & CHECKBOX ── */
+    .radio-group, .check-group { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+    .radio-group.inline, .check-group.inline { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+    .radio-item, .check-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border: 1px solid #e5e7eb; border-radius: 8px;
+      cursor: pointer; transition: all 0.15s; font-size: 14px; color: #374151;
+    }
+    .radio-item:hover, .check-item:hover { border-color: #fe9a00; background: #fffbeb; }
+    .radio-item.is-selected, .check-item.is-selected { border-color: #fe9a00; background: #fffbeb; }
+    .radio-item input, .check-item input { margin-top: 2px; accent-color: #fe9a00; flex-shrink: 0; }
+    .radio-item__label { font-size: 14px; color: #101828; font-weight: 500; }
+    .radio-item__desc { font-size: 12px; color: #6b7280; margin-top: 2px; }
+
+    /* ── TAG CHIP INPUTS ── */
+    .tag-input-wrap {
+      display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+      padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 8px;
+      min-height: 44px; background: #fff; cursor: text;
+    }
+    .tag-input-wrap:focus-within { border-color: #fe9a00; box-shadow: 0 0 0 3px rgba(254,154,0,0.12); }
+    .tag-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #fffbeb; border: 1px solid #fee685; border-radius: 999px;
+      padding: 3px 10px; font-size: 12px; font-weight: 600; color: #973c00;
+    }
+    .tag-chip__remove {
+      cursor: pointer; font-size: 14px; line-height: 1; color: #b45309;
+      background: none; border: none; padding: 0; display: flex; align-items: center;
+    }
+    .tag-chip__remove:hover { color: #f54900; }
+    .tag-input-field {
+      border: none; outline: none; font-size: 13px; font-family: 'Inter', sans-serif;
+      flex: 1; min-width: 100px; background: transparent; color: #101828;
+    }
+    .tag-help { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+
+    /* ── EXPANDABLE CATEGORY ── */
+    .cat-item { border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+    .cat-item__header {
+      display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+      cursor: pointer; background: #fff; transition: background 0.15s;
+    }
+    .cat-item__header:hover { background: #f9fafb; }
+    .cat-item__header input[type="checkbox"] { width: 16px; height: 16px; accent-color: #fe9a00; flex-shrink: 0; }
+    .cat-item__label { font-size: 14px; font-weight: 500; color: #101828; flex: 1; }
+    .cat-item__chevron { color: #9ca3af; transition: transform 0.2s; font-size: 12px; }
+    .cat-item.is-open .cat-item__chevron { transform: rotate(180deg); }
+    .cat-item.is-open .cat-item__header { background: #fffbeb; }
+    .cat-item__body { padding: 0 16px 16px; background: #fffcf5; display: none; }
+    .cat-item.is-open .cat-item__body { display: block; }
+    .cat-item__body-label { font-size: 12px; color: #6b7280; margin-bottom: 8px; margin-top: 12px; }
+
+    /* ── STEP PANELS ── */
+    .step-panel { display: none; }
+    .step-panel.is-active { display: block; }
+
+    /* ── STICKY FOOTER ── */
+    .tha-footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 1px solid #e5e7eb;
+      padding: 16px 40px; display: flex; align-items: center;
+      justify-content: space-between; z-index: 99;
+    }
+    .tha-footer__back {
+      background: none; border: none; font-size: 14px; font-weight: 500;
+      color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 6px;
+      padding: 10px 16px; border-radius: 8px; transition: all 0.15s;
+    }
+    .tha-footer__back:hover { background: #f3f4f6; color: #374151; }
+    .tha-footer__continue {
+      background: #101828; color: #ffffff; border: none;
+      padding: 0 32px; height: 48px; border-radius: 8px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; transition: background 0.2s;
+    }
+    .tha-footer__continue:hover { background: #1e2d40; }
+    .tha-footer__continue.is-primary { background: #f54900; }
+    .tha-footer__continue.is-primary:hover { background: #d43d00; }
+    .tha-footer__hint { font-size: 12px; color: #9ca3af; }
+
+    /* ── SUCCESS SCREEN ── */
+    .success-screen {
+      display: none; max-width: 520px; margin: 60px auto 0;
+      text-align: center; padding: 0 20px;
+    }
+    .success-screen.is-active { display: block; }
+    .success-icon { font-size: 56px; margin-bottom: 20px; }
+    .success-screen h2 { font-size: 28px; font-weight: 700; color: #101828; margin-bottom: 12px; }
+    .success-screen p { font-size: 15px; color: #4b5563; line-height: 1.65; margin-bottom: 24px; }
+    .success-ref {
+      display: inline-block; background: #fffbeb; border: 1px solid #fee685;
+      border-radius: 8px; padding: 10px 20px; font-size: 14px; font-weight: 700;
+      color: #973c00; margin-bottom: 32px; letter-spacing: 1px;
+    }
+    .success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .success-btn {
+      padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none; border: 1px solid #e5e7eb;
+      background: #fff; color: #374151; transition: all 0.15s;
+    }
+    .success-btn:hover { background: #f9fafb; }
+    .success-btn.primary { background: #101828; color: #fff; border-color: #101828; }
+    .success-btn.primary:hover { background: #1e2d40; }
+
+    /* ── MISC ── */
+    .step-title { font-size: 20px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .step-desc { font-size: 14px; color: #6b7280; margin-bottom: 32px; line-height: 1.5; }
+    .field-note { font-size: 12px; color: #6b7280; background: #f3f4f6; border-radius: 6px; padding: 8px 12px; margin-top: 12px; }
+    .info-banner {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+      padding: 14px 16px; margin-bottom: 24px; font-size: 13px; color: #1e40af; line-height: 1.55;
+    }
+    .info-banner__icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .capacity-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .capacity-group h4 { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 10px; }
+    .char-count { font-size: 12px; color: #9ca3af; text-align: right; margin-top: 4px; }
+
+    @media (max-width: 640px) {
+      .tha-card { padding: 24px 20px; }
+      .tha-nav { padding: 0 20px; }
+      .tha-tabs { padding: 0 20px; }
+      .tha-footer { padding: 12px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-row.three { grid-template-columns: 1fr; }
+      .capacity-row { grid-template-columns: 1fr; }
+      .intro-badges-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP NAV ── -->
+  <nav class="tha-nav">
+    <a href="host.html" class="tha-nav__brand">
+      <div class="tha-nav__logo">GD</div>
+      <div class="tha-nav__title-wrap">
+        <span class="tha-nav__title">Host Onboarding Application</span>
+        <span class="tha-nav__subtitle">Pre-Launch Partner Cohort</span>
+      </div>
+    </a>
+    <span class="tha-nav__step-counter">Step <span id="navStepCurrent">1</span> of 7</span>
+  </nav>
+
+  <!-- ── PROGRESS BAR ── -->
+  <div class="tha-progress">
+    <div class="tha-progress__fill" id="progressFill" style="width: 14.28%"></div>
+  </div>
+
+  <!-- ── TAB BAR ── -->
+  <div class="tha-tabs">
+    <div class="tha-tabs__inner" id="tabsInner">
+      <!-- generated by JS -->
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main class="tha-main" id="thaMain">
+
+    <!-- SUCCESS SCREEN -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">🎉</div>
+      <h2>Application Submitted!</h2>
+      <p>Thank you for applying to the Great D'Tour Pre-Launch Partner Cohort. Our team will review your application and get back to you within 3–5 business days.</p>
+      <div class="success-ref" id="successRef">TH-2025-XXXX</div>
+      <div class="success-actions">
+        <a href="experiences.html" class="success-btn">Explore Experiences</a>
+        <a href="index.html" class="success-btn primary">Back to Home</a>
+      </div>
+    </div>
+
+    <!-- STEP 1: INTRODUCTION -->
+    <div class="tha-card step-panel is-active" id="step-1">
+      <div class="intro-badge">
+        <span>🏔️</span> Travel Experience Host
+      </div>
+      <div class="intro-card">
+        <h2>List and Sell your Experiences</h2>
+        <p>Join the Great D'Tour marketplace as an experience host. Reach travellers looking for authentic, curated journeys — and grow your business with our platform.</p>
+      </div>
+      <div class="intro-encourages">
+        <h4>We Encourage Applications From</h4>
+        <div class="intro-encourage-item">Tour operators, travel companies, and independent guides</div>
+        <div class="intro-encourage-item">Retreat centres, wellness providers, and cultural experience creators</div>
+        <div class="intro-encourage-item">Adventure sports outfitters and expedition organisers</div>
+        <div class="intro-encourage-item">Local experience makers offering unique, off-the-beaten-path journeys</div>
+      </div>
+      <div class="intro-badges-row">
+        <div class="intro-info-badge">
+          <div class="intro-info-badge__icon">⏱️</div>
+          <div class="intro-info-badge__label">~10 Minutes</div>
+          <div class="intro-info-badge__desc">To complete this form</div>
+        </div>
+        <div class="intro-info-badge">
+          <div class="intro-info-badge__icon">✅</div>
+          <div class="intro-info-badge__label">Reviewed by GDT</div>
+          <div class="intro-info-badge__desc">Every application is manually vetted</div>
+        </div>
+        <div class="intro-info-badge">
+          <div class="intro-info-badge__icon">🔒</div>
+          <div class="intro-info-badge__label">Confidential</div>
+          <div class="intro-info-badge__desc">Your data is secure with us</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: ABOUT YOUR BUSINESS -->
+    <div class="tha-card step-panel" id="step-2">
+      <h3 class="step-title">About Your Business</h3>
+      <p class="step-desc">Tell us about yourself and your operation. This helps us understand who you are and tailor your onboarding.</p>
+
+      <div class="sec-label">Personal Details</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" placeholder="e.g. Priya Sharma" />
+        </div>
+        <div class="form-group">
+          <label>Your Role <span class="req">*</span></label>
+          <input type="text" placeholder="e.g. Founder & Lead Guide" />
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Business Details</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Business / Brand Name <span class="req">*</span></label>
+          <input type="text" placeholder="e.g. Wild Trails India" />
+        </div>
+        <div class="form-group">
+          <label>Business Email <span class="req">*</span></label>
+          <input type="email" placeholder="e.g. hello@wildtrails.in" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" placeholder="+91 98765 43210" />
+        </div>
+        <div class="form-group">
+          <label>Website / Social Handle</label>
+          <input type="text" placeholder="e.g. instagram.com/wildtrailsindia" />
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>Regions of Operation <span class="req">*</span></label>
+        <div class="tag-input-wrap" id="regionTagWrap" onclick="document.getElementById('regionInput').focus()">
+          <input class="tag-input-field" id="regionInput" placeholder="Type a region and press Enter…" onkeydown="handleTagInput(event,'regions','regionTagWrap')" />
+        </div>
+        <div class="tag-help">Press Enter after each region (e.g. Rajasthan, Ladakh, Northeast India)</div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Business Profile</div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>How long have you been operating? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="op_years" value="lt1" /> Less than 1 year</label>
+          <label class="radio-item"><input type="radio" name="op_years" value="1-3" /> 1–3 years</label>
+          <label class="radio-item"><input type="radio" name="op_years" value="3-5" /> 3–5 years</label>
+          <label class="radio-item"><input type="radio" name="op_years" value="5plus" /> 5+ years</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Legal Status</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Legal Structure <span class="req">*</span></label>
+          <select>
+            <option value="">Select structure</option>
+            <option>Sole Proprietorship</option>
+            <option>Partnership Firm</option>
+            <option>Private Limited Company</option>
+            <option>LLP</option>
+            <option>Trust / NGO</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>GST Registration</label>
+          <select>
+            <option value="">Select status</option>
+            <option>Registered — GST number available</option>
+            <option>Not registered — eligible</option>
+            <option>Not registered — not applicable</option>
+            <option>In process</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: YOUR CATEGORY -->
+    <div class="tha-card step-panel" id="step-3">
+      <h3 class="step-title">Your Category</h3>
+      <p class="step-desc">Select all experience categories you offer. You can expand each to add specific sub-categories or focus areas.</p>
+
+      <div class="sec-label">Experience Categories <span style="font-weight:400;color:#9ca3af;letter-spacing:0;">(select all that apply)</span></div>
+
+      <div class="cat-item" id="cat-adventure">
+        <div class="cat-item__header" onclick="toggleCat('cat-adventure')">
+          <input type="checkbox" onclick="event.stopPropagation(); catCheck(this,'cat-adventure')" />
+          <span class="cat-item__label">Adventure Sports</span>
+          <span class="cat-item__chevron">▼</span>
+        </div>
+        <div class="cat-item__body">
+          <div class="cat-item__body-label">Add specific activities (press Enter after each)</div>
+          <div class="tag-input-wrap" onclick="this.querySelector('input').focus()">
+            <input class="tag-input-field" placeholder="e.g. Trekking, Rock Climbing, River Rafting…" onkeydown="handleTagInput(event,'adv-tags',this.parentElement)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-item" id="cat-wellness">
+        <div class="cat-item__header" onclick="toggleCat('cat-wellness')">
+          <input type="checkbox" onclick="event.stopPropagation(); catCheck(this,'cat-wellness')" />
+          <span class="cat-item__label">Wellness Retreat</span>
+          <span class="cat-item__chevron">▼</span>
+        </div>
+        <div class="cat-item__body">
+          <div class="cat-item__body-label">Add specific offerings (press Enter after each)</div>
+          <div class="tag-input-wrap" onclick="this.querySelector('input').focus()">
+            <input class="tag-input-field" placeholder="e.g. Yoga, Meditation, Ayurveda…" onkeydown="handleTagInput(event,'well-tags',this.parentElement)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-item" id="cat-cultural">
+        <div class="cat-item__header" onclick="toggleCat('cat-cultural')">
+          <input type="checkbox" onclick="event.stopPropagation(); catCheck(this,'cat-cultural')" />
+          <span class="cat-item__label">Cultural Events</span>
+          <span class="cat-item__chevron">▼</span>
+        </div>
+        <div class="cat-item__body">
+          <div class="cat-item__body-label">Add specific events or themes (press Enter after each)</div>
+          <div class="tag-input-wrap" onclick="this.querySelector('input').focus()">
+            <input class="tag-input-field" placeholder="e.g. Tribal Art Walks, Festivals, Craft Workshops…" onkeydown="handleTagInput(event,'cult-tags',this.parentElement)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-item" id="cat-social">
+        <div class="cat-item__header" onclick="toggleCat('cat-social')">
+          <input type="checkbox" onclick="event.stopPropagation(); catCheck(this,'cat-social')" />
+          <span class="cat-item__label">Social Immersion</span>
+          <span class="cat-item__chevron">▼</span>
+        </div>
+        <div class="cat-item__body">
+          <div class="cat-item__body-label">Add specific programmes (press Enter after each)</div>
+          <div class="tag-input-wrap" onclick="this.querySelector('input').focus()">
+            <input class="tag-input-field" placeholder="e.g. Village Homestays, Community Volunteering…" onkeydown="handleTagInput(event,'social-tags',this.parentElement)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-item" id="cat-others">
+        <div class="cat-item__header" onclick="toggleCat('cat-others')">
+          <input type="checkbox" onclick="event.stopPropagation(); catCheck(this,'cat-others')" />
+          <span class="cat-item__label">Others</span>
+          <span class="cat-item__chevron">▼</span>
+        </div>
+        <div class="cat-item__body">
+          <div class="cat-item__body-label">Describe your category (press Enter after each)</div>
+          <div class="tag-input-wrap" onclick="this.querySelector('input').focus()">
+            <input class="tag-input-field" placeholder="e.g. Wildlife Photography, Culinary Tours…" onkeydown="handleTagInput(event,'other-tags',this.parentElement)" />
+          </div>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Operator Profile</div>
+      <div class="form-group">
+        <label>Which best describes you? <span class="req">*</span></label>
+        <div class="radio-group" style="margin-top:8px;">
+          <label class="radio-item"><input type="radio" name="op_type" /> <div><div class="radio-item__label">Independent Guide / Freelancer</div><div class="radio-item__desc">Solo or micro-team running experiences personally</div></div></label>
+          <label class="radio-item"><input type="radio" name="op_type" /> <div><div class="radio-item__label">Small Tour Operator</div><div class="radio-item__desc">Company with 1–10 employees offering regular tours</div></div></label>
+          <label class="radio-item"><input type="radio" name="op_type" /> <div><div class="radio-item__label">Established Travel Company</div><div class="radio-item__desc">10+ employees, multiple programmes across regions</div></div></label>
+          <label class="radio-item"><input type="radio" name="op_type" /> <div><div class="radio-item__label">Retreat / Wellness Centre</div><div class="radio-item__desc">Fixed venue offering immersive wellness programmes</div></div></label>
+          <label class="radio-item"><input type="radio" name="op_type" /> <div><div class="radio-item__label">NGO / Social Enterprise</div><div class="radio-item__desc">Impact-driven experiences tied to community or conservation</div></div></label>
+          <label class="radio-item"><input type="radio" name="op_type" /> <div><div class="radio-item__label">Content Creator / Influencer</div><div class="radio-item__desc">Audience-led travel experiences or creator retreats</div></div></label>
+          <label class="radio-item"><input type="radio" name="op_type" /> <div><div class="radio-item__label">Other</div></div></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: YOUR PRODUCT -->
+    <div class="tha-card step-panel" id="step-4">
+      <h3 class="step-title">Your Product</h3>
+      <p class="step-desc">Help us understand the format and scale of what you offer. This shapes how we showcase you on the platform.</p>
+
+      <div class="sec-label">Experience Format <span style="font-weight:400;color:#9ca3af;letter-spacing:0;">(select all that apply)</span></div>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox" /> Day Experiences (under 24 hours)</label>
+        <label class="check-item"><input type="checkbox" /> Multi-day Trips (2–6 nights)</label>
+        <label class="check-item"><input type="checkbox" /> Extended Expeditions (7+ nights)</label>
+        <label class="check-item"><input type="checkbox" /> Retreats (fixed-schedule programmes)</label>
+        <label class="check-item"><input type="checkbox" /> Online / Hybrid Experiences</label>
+        <label class="check-item"><input type="checkbox" /> Private / Custom Itineraries</label>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Capacity &amp; Scale</div>
+      <div class="capacity-row">
+        <div class="capacity-group">
+          <h4>Typical group size per booking</h4>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="grp_size" /> Solo (1 person)</label>
+            <label class="radio-item"><input type="radio" name="grp_size" /> Small (2–6 people)</label>
+            <label class="radio-item"><input type="radio" name="grp_size" /> Medium (7–15 people)</label>
+            <label class="radio-item"><input type="radio" name="grp_size" /> Large (16–30 people)</label>
+            <label class="radio-item"><input type="radio" name="grp_size" /> 30+ people</label>
+          </div>
+        </div>
+        <div class="capacity-group">
+          <h4>Number of active listings planned</h4>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="listing_count" /> 1–2 experiences</label>
+            <label class="radio-item"><input type="radio" name="listing_count" /> 3–5 experiences</label>
+            <label class="radio-item"><input type="radio" name="listing_count" /> 6–10 experiences</label>
+            <label class="radio-item"><input type="radio" name="listing_count" /> 11–20 experiences</label>
+            <label class="radio-item"><input type="radio" name="listing_count" /> 20+ experiences</label>
+          </div>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Pricing</div>
+      <div class="form-group">
+        <label>Typical price per person <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="pricing" /> Under ₹2,000</label>
+          <label class="radio-item"><input type="radio" name="pricing" /> ₹2,000–₹5,000</label>
+          <label class="radio-item"><input type="radio" name="pricing" /> ₹5,000–₹15,000</label>
+          <label class="radio-item"><input type="radio" name="pricing" /> ₹15,000–₹50,000</label>
+          <label class="radio-item"><input type="radio" name="pricing" /> ₹50,000+</label>
+          <label class="radio-item"><input type="radio" name="pricing" /> Varies widely</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Listing Readiness</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Where are you currently listed?</label>
+          <div class="tag-input-wrap" onclick="this.querySelector('input').focus()">
+            <input class="tag-input-field" placeholder="e.g. Airbnb, Viator, Own website…" onkeydown="handleTagInput(event,'listing-tags',this.parentElement)" />
+          </div>
+          <div class="tag-help">Press Enter after each platform</div>
+        </div>
+        <div class="form-group">
+          <label>Do you have a ready itinerary? <span class="req">*</span></label>
+          <select>
+            <option value="">Select</option>
+            <option>Yes — detailed itinerary ready</option>
+            <option>Partially — draft available</option>
+            <option>No — will create for GDT</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top: 4px;">
+        <label>Professional photography available?</label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="photography" /> Yes — multiple high-res images</label>
+          <label class="radio-item"><input type="radio" name="photography" /> Partial — some photos available</label>
+          <label class="radio-item"><input type="radio" name="photography" /> No — will arrange</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: OPERATIONS -->
+    <div class="tha-card step-panel" id="step-5">
+      <h3 class="step-title">Operations</h3>
+      <p class="step-desc">Tell us how you currently reach and manage your customers. This helps us understand where GDT fits in your workflow.</p>
+
+      <div class="sec-label">Marketing &amp; Channels</div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>Social media presence <span style="font-weight:400;color:#9ca3af;">(select all active)</span></label>
+        <div class="check-group inline">
+          <label class="check-item"><input type="checkbox" /> Instagram</label>
+          <label class="check-item"><input type="checkbox" /> Facebook</label>
+          <label class="check-item"><input type="checkbox" /> YouTube</label>
+          <label class="check-item"><input type="checkbox" /> LinkedIn</label>
+          <label class="check-item"><input type="checkbox" /> WhatsApp Business</label>
+          <label class="check-item"><input type="checkbox" /> None</label>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>Combined social media followers (approximate)</label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="followers" /> Under 1K</label>
+          <label class="radio-item"><input type="radio" name="followers" /> 1K–10K</label>
+          <label class="radio-item"><input type="radio" name="followers" /> 10K–50K</label>
+          <label class="radio-item"><input type="radio" name="followers" /> 50K–200K</label>
+          <label class="radio-item"><input type="radio" name="followers" /> 200K+</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Current Booking Process</div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>How do customers currently book with you? <span style="font-weight:400;color:#9ca3af;">(select all that apply)</span></label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" /> Direct website / booking engine</label>
+          <label class="check-item"><input type="checkbox" /> WhatsApp / phone inquiry</label>
+          <label class="check-item"><input type="checkbox" /> OTA platforms (MakeMyTrip, Booking.com, etc.)</label>
+          <label class="check-item"><input type="checkbox" /> Email enquiry</label>
+          <label class="check-item"><input type="checkbox" /> Walk-in / in-person</label>
+          <label class="check-item"><input type="checkbox" /> Agent / B2B referral</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Booking Volume</div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>Approximate bookings per month <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="volume" /> Under 5</label>
+          <label class="radio-item"><input type="radio" name="volume" /> 5–20</label>
+          <label class="radio-item"><input type="radio" name="volume" /> 20–50</label>
+          <label class="radio-item"><input type="radio" name="volume" /> 50–100</label>
+          <label class="radio-item"><input type="radio" name="volume" /> 100+</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Revenue</div>
+      <div class="form-group">
+        <label>Annual revenue from travel experiences (approximate) <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="revenue" /> Under ₹5L</label>
+          <label class="radio-item"><input type="radio" name="revenue" /> ₹5L–₹25L</label>
+          <label class="radio-item"><input type="radio" name="revenue" /> ₹25L–₹1Cr</label>
+          <label class="radio-item"><input type="radio" name="revenue" /> ₹1Cr–₹5Cr</label>
+          <label class="radio-item"><input type="radio" name="revenue" /> ₹5Cr+</label>
+          <label class="radio-item"><input type="radio" name="revenue" /> Prefer not to say</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6: SAFETY & CREDENTIALS -->
+    <div class="tha-card step-panel" id="step-6">
+      <h3 class="step-title">Safety &amp; Credentials</h3>
+      <p class="step-desc">Travellers trust GDT because we verify what operators claim. Please be accurate — credentials will be checked during onboarding.</p>
+
+      <div class="info-banner">
+        <span class="info-banner__icon">ℹ️</span>
+        <span>All certifications and safety information provided here are treated as declarations. Verified documents will be requested during the onboarding call. Misrepresentation may disqualify your application.</span>
+      </div>
+
+      <div class="sec-label">Certifications &amp; Licences <span style="font-weight:400;color:#9ca3af;letter-spacing:0;">(select all you hold)</span></div>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox" /> Ministry of Tourism — Approved Tour Operator</label>
+        <label class="check-item"><input type="checkbox" /> IATA Member</label>
+        <label class="check-item"><input type="checkbox" /> Adventure Tourism Operator Certification (ATOC)</label>
+        <label class="check-item"><input type="checkbox" /> Wilderness First Responder (WFR)</label>
+        <label class="check-item"><input type="checkbox" /> First Aid &amp; CPR Certified (any team member)</label>
+        <label class="check-item"><input type="checkbox" /> ISO 21101 (Adventure Tourism Safety)</label>
+        <label class="check-item"><input type="checkbox" /> Forest Department Permit / Wildlife Operator License</label>
+        <label class="check-item"><input type="checkbox" /> PADI / SSI (Water Sports)</label>
+        <label class="check-item"><input type="checkbox" /> AAAR / IMF (Mountaineering)</label>
+        <label class="check-item"><input type="checkbox" /> Yoga Alliance (Wellness)</label>
+        <label class="check-item"><input type="checkbox" /> Other certification</label>
+      </div>
+      <div class="form-group" style="margin-top: 14px; margin-bottom: 16px;">
+        <label>List any other certifications, licences, or awards</label>
+        <input type="text" placeholder="e.g. State Tourism Award 2023, Responsible Tourism Pledge…" />
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Safety &amp; Risk Management</div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>Do you have a documented safety protocol? <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="safety_protocol" /> Yes — written protocol, available on request</label>
+          <label class="radio-item"><input type="radio" name="safety_protocol" /> Yes — informal / verbal protocol in practice</label>
+          <label class="radio-item"><input type="radio" name="safety_protocol" /> No — but willing to create one for GDT listing</label>
+          <label class="radio-item"><input type="radio" name="safety_protocol" /> Not applicable for my experience type</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Insurance</div>
+      <div class="form-group">
+        <label>Type of insurance coverage held <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="insurance" /> Public Liability Insurance (active policy)</label>
+          <label class="radio-item"><input type="radio" name="insurance" /> Third-party / travel accident insurance for guests</label>
+          <label class="radio-item"><input type="radio" name="insurance" /> No insurance currently — will arrange before listing</label>
+          <label class="radio-item"><input type="radio" name="insurance" /> No insurance — need guidance from GDT</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7: ADDITIONAL INFORMATION -->
+    <div class="tha-card step-panel" id="step-7">
+      <h3 class="step-title">Additional Information</h3>
+      <p class="step-desc">Almost done! A few final questions to complete your application.</p>
+
+      <div class="sec-label">How Did You Hear About Us?</div>
+      <div class="form-group" style="margin-bottom: 24px;">
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="referral" /> Social Media (Instagram, LinkedIn, etc.)</label>
+          <label class="radio-item"><input type="radio" name="referral" /> Friend or peer recommendation</label>
+          <label class="radio-item"><input type="radio" name="referral" /> Google / Online Search</label>
+          <label class="radio-item"><input type="radio" name="referral" /> Travel event or conference</label>
+          <label class="radio-item"><input type="radio" name="referral" /> GDT reached out to me directly</label>
+          <label class="radio-item"><input type="radio" name="referral" /> Other</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">In Your Own Words</div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>Why do you want to list on Great D'Tour? <span class="req">*</span></label>
+        <textarea id="motivationText" rows="5" placeholder="Tell us what makes your experiences special and why GDT is the right platform for you. (minimum 80 characters)" oninput="updateCharCount('motivationText','motivationCount',80)"></textarea>
+        <div class="char-count"><span id="motivationCount">0</span> / 80 min</div>
+      </div>
+      <div class="form-group">
+        <label>Anything else you'd like us to know? <span style="color:#9ca3af;font-weight:400;">(optional)</span></label>
+        <textarea rows="4" placeholder="Awards, press features, notable guests, upcoming expansion plans, or anything that sets you apart…" oninput="updateCharCount(this,null,0)"></textarea>
+      </div>
+
+      <div class="field-note" style="margin-top: 20px;">
+        By clicking "Review Application", you confirm that all information provided is accurate to the best of your knowledge. A GDT team member will reach out within 3–5 business days.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── STICKY FOOTER ── -->
+  <footer class="tha-footer" id="thaFooter">
+    <button class="tha-footer__back" id="footerBack" onclick="goStep(-1)">
+      ← Back
+    </button>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span class="tha-footer__hint" id="footerHint"></span>
+      <button class="tha-footer__continue" id="footerContinue" onclick="goStep(1)">
+        Begin Application →
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    const STEPS = [
+      { num: 1, label: 'Introduction' },
+      { num: 2, label: 'About Business' },
+      { num: 3, label: 'Your Category' },
+      { num: 4, label: 'Your Product' },
+      { num: 5, label: 'Operations' },
+      { num: 6, label: 'Safety' },
+      { num: 7, label: 'Final Details' },
+    ];
+    let currentStep = 1;
+    const tagStore = {};
+
+    function renderTabs() {
+      const inner = document.getElementById('tabsInner');
+      inner.innerHTML = STEPS.map(s => {
+        let cls = 'tha-tab';
+        if (s.num < currentStep) cls += ' is-done';
+        else if (s.num === currentStep) cls += ' is-active';
+        const numContent = s.num < currentStep
+          ? `<span class="tha-tab__num"><span class="tab-num-text">✓</span></span>`
+          : `<span class="tha-tab__num"><span class="tab-num-text">${s.num}</span></span>`;
+        return `<div class="${cls}" onclick="jumpToStep(${s.num})">${numContent} ${s.label}</div>`;
+      }).join('');
+    }
+
+    function renderProgress() {
+      const pct = (currentStep / 7) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('navStepCurrent').textContent = currentStep;
+    }
+
+    function renderFooter() {
+      const back = document.getElementById('footerBack');
+      const cont = document.getElementById('footerContinue');
+      const hint = document.getElementById('footerHint');
+
+      if (currentStep === 1) {
+        back.style.visibility = 'hidden';
+        cont.textContent = 'Begin Application →';
+        cont.classList.remove('is-primary');
+      } else if (currentStep === 7) {
+        back.style.visibility = 'visible';
+        cont.textContent = 'Review Application →';
+        cont.classList.add('is-primary');
+      } else {
+        back.style.visibility = 'visible';
+        cont.textContent = 'Continue →';
+        cont.classList.remove('is-primary');
+      }
+      hint.textContent = currentStep < 7 ? `Step ${currentStep} of 7` : 'Last step';
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('is-active'));
+      const panel = document.getElementById('step-' + n);
+      if (panel) panel.classList.add('is-active');
+      document.getElementById('successScreen').classList.remove('is-active');
+    }
+
+    function goStep(dir) {
+      if (dir === 1 && currentStep === 7) {
+        submitApplication();
+        return;
+      }
+      const next = currentStep + dir;
+      if (next < 1) return;
+      currentStep = next;
+      showStep(currentStep);
+      renderTabs();
+      renderProgress();
+      renderFooter();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function jumpToStep(n) {
+      if (n > currentStep) return; // can only go back
+      currentStep = n;
+      showStep(currentStep);
+      renderTabs();
+      renderProgress();
+      renderFooter();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function submitApplication() {
+      const ref = 'TH-2025-' + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('successRef').textContent = ref;
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('is-active'));
+      document.getElementById('successScreen').classList.add('is-active');
+      document.getElementById('thaFooter').style.display = 'none';
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('navStepCurrent').textContent = '✓';
+      // update tabs to all done
+      currentStep = 8;
+      renderTabs();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Tag chip input
+    function handleTagInput(e, storeKey, wrapOrId) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const input = e.target;
+        const val = input.value.trim();
+        if (!val) return;
+        const wrap = typeof wrapOrId === 'string' ? document.getElementById(wrapOrId) : wrapOrId;
+        if (!tagStore[storeKey]) tagStore[storeKey] = [];
+        tagStore[storeKey].push(val);
+        const chip = document.createElement('div');
+        chip.className = 'tag-chip';
+        chip.innerHTML = `${val}<button class="tag-chip__remove" onclick="removeTag('${storeKey}','${val}',this.parentElement,this.closest('.tag-input-wrap'))">×</button>`;
+        wrap.insertBefore(chip, input);
+        input.value = '';
+      }
+    }
+
+    function removeTag(storeKey, val, chip) {
+      if (tagStore[storeKey]) tagStore[storeKey] = tagStore[storeKey].filter(v => v !== val);
+      chip.remove();
+    }
+
+    // Category expand/collapse
+    function toggleCat(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('is-open');
+    }
+
+    function catCheck(cb, id) {
+      const el = document.getElementById(id);
+      if (cb.checked) el.classList.add('is-open');
+      else el.classList.remove('is-open');
+    }
+
+    // Radio / checkbox interactive highlight
+    document.addEventListener('change', function(e) {
+      const target = e.target;
+      if (target.type === 'radio') {
+        const name = target.name;
+        document.querySelectorAll(`input[type="radio"][name="${name}"]`).forEach(r => {
+          r.closest('.radio-item').classList.toggle('is-selected', r.checked);
+        });
+      }
+      if (target.type === 'checkbox' && target.closest('.check-item')) {
+        target.closest('.check-item').classList.toggle('is-selected', target.checked);
+      }
+    });
+
+    function updateCharCount(inputOrId, countId, min) {
+      const el = typeof inputOrId === 'string' ? document.getElementById(inputOrId) : inputOrId;
+      const count = el.value.length;
+      if (countId) {
+        const counter = document.getElementById(countId);
+        if (counter) {
+          counter.textContent = count;
+          counter.style.color = count >= min ? '#2E7D32' : '#f54900';
+        }
+      }
+    }
+
+    // Init
+    renderTabs();
+    renderProgress();
+    renderFooter();
+  </script>
+</body>
+</html>
