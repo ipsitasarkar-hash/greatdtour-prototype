@@ -3,673 +3,375 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>List a Volunteering Program — Great D'Tour</title>
+  <title>Become a Host — Great D'Tour</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
-
-    /* ─── GLOBAL ─────────────────────────────────────── */
     :root {
       --orange: #f54900;
+      --green: #2E7D32;
+      --green-light: rgba(46,125,50,0.10);
+      --green-border: rgba(46,125,50,0.30);
       --dark: #171717;
-      --dark2: #262626;
+      --dark2: #1a2f1a;
       --text: #525252;
       --muted: #737373;
       --light-bg: #fafafa;
       --white: #ffffff;
-      --border: #f5f5f5;
+      --border: #f0f0f0;
       --border2: #e5e5e5;
-      --section-px: 255px;
-      --section-pad: 96px 0;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #fafafa; color: var(--dark); }
+    body { font-family: 'Inter', sans-serif; background: var(--light-bg); color: var(--dark); }
 
-    .h-container {
+    .h-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    /* ── TAB SWITCHER ──────────────────────────────────── */
+    .host-tabs {
+      background: var(--white);
+      border-bottom: 1px solid var(--border2);
+      position: sticky;
+      top: 76px;
+      z-index: 90;
+    }
+    .host-tabs__inner {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 40px;
+      display: flex;
+      gap: 0;
     }
-
-    /* ─── OVERLINE ───────────────────────────────────── */
-    .overline-tag {
-      font-size: 13px;
+    .host-tab {
+      padding: 18px 28px;
+      font-size: 15px;
       font-weight: 600;
-      color: var(--orange);
-      letter-spacing: 1.3px;
+      color: var(--muted);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color 0.18s, border-color 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .host-tab:hover { color: var(--dark); }
+    .host-tab.active[data-flow="travel"] { color: var(--orange); border-bottom-color: var(--orange); }
+    .host-tab.active[data-flow="volunteer"] { color: var(--green); border-bottom-color: var(--green); }
+    .host-tab__dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .host-tab[data-flow="travel"] .host-tab__dot { background: var(--orange); }
+    .host-tab[data-flow="volunteer"] .host-tab__dot { background: var(--green); }
+
+    /* ── FLOW PANELS ───────────────────────────────────── */
+    .flow { display: none; }
+    .flow.active { display: block; }
+
+    /* ── SHARED SECTION STYLES ─────────────────────────── */
+    .overline-tag {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       display: block;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
+    .travel .overline-tag { color: var(--orange); }
+    .volunteer .overline-tag { color: var(--green); }
 
-    /* ─── SECTION HEADER (centered) ─────────────────── */
-    .section-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
+    .section-header { text-align: center; margin-bottom: 52px; }
     .section-header h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 3.5vw, 44px);
+      font-size: clamp(28px, 3vw, 40px);
       font-weight: 700;
       color: var(--dark);
       line-height: 1.18;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
-    .section-header p {
-      font-size: 18px;
-      color: var(--text);
-      line-height: 1.6;
-      max-width: 560px;
-      margin: 0 auto;
-    }
+    .section-header p { font-size: 16px; color: var(--text); line-height: 1.6; max-width: 520px; margin: 0 auto; }
 
-    /* ─── HERO ─────────────────────────────────────── */
-    :root {
-      --vol-green: #2E7D32;
-      --vol-green-mid: #388E3C;
-      --vol-green-light: rgba(46,125,50,0.10);
-      --vol-green-border: rgba(46,125,50,0.30);
-    }
-
-    .host-hero {
-      background: linear-gradient(163deg, #1a2f1a 0%, #0d1f0d 100%);
-      padding: 122px 0 80px;
-      position: relative;
-      overflow: hidden;
-    }
+    /* ── HERO ──────────────────────────────────────────── */
+    .host-hero { padding: 100px 0 72px; position: relative; overflow: hidden; }
+    .travel .host-hero { background: linear-gradient(160deg, #171717 0%, #262626 100%); }
+    .volunteer .host-hero { background: linear-gradient(160deg, #0d1f0d 0%, #1a2f1a 100%); }
     .host-hero::after {
       content: '';
       position: absolute;
-      top: -300px; right: -100px;
-      width: 600px; height: 600px;
-      background: rgba(46,125,50,0.15);
+      top: -200px; right: -80px;
+      width: 500px; height: 500px;
       border-radius: 50%;
-      filter: blur(120px);
+      filter: blur(110px);
       pointer-events: none;
     }
+    .travel .host-hero::after { background: rgba(245,73,0,0.12); }
+    .volunteer .host-hero::after { background: rgba(46,125,50,0.16); }
+
     .host-hero__inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 80px;
-      align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 72px; align-items: center;
+      position: relative; z-index: 1;
     }
     .host-hero__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(46,125,50,0.18);
-      border: 1px solid rgba(46,125,50,0.35);
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #66bb6a;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 999px; padding: 5px 14px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.6px;
+      text-transform: uppercase; margin-bottom: 24px;
     }
-    .host-hero__badge svg { flex-shrink: 0; }
+    .travel .host-hero__badge {
+      background: rgba(245,73,0,0.15); border: 1px solid rgba(245,73,0,0.3); color: #ff7043;
+    }
+    .volunteer .host-hero__badge {
+      background: rgba(46,125,50,0.18); border: 1px solid rgba(46,125,50,0.35); color: #66bb6a;
+    }
     .host-hero__title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(40px, 4.5vw, 56px);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.14;
-      margin-bottom: 24px;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 700; color: #fff; line-height: 1.14; margin-bottom: 20px;
     }
-    .host-hero__title em { font-style: normal; color: #66bb6a; }
-    .host-hero__sub {
-      font-size: 18px;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.67;
-      max-width: 480px;
-      margin-bottom: 40px;
-    }
-    .host-hero__actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    .travel .host-hero__title em { font-style: normal; color: #ff7043; }
+    .volunteer .host-hero__title em { font-style: normal; color: #66bb6a; }
+    .host-hero__sub { font-size: 17px; color: rgba(255,255,255,0.78); line-height: 1.65; max-width: 460px; margin-bottom: 36px; }
+    .host-hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--vol-green);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 600;
-      padding: 20px 32px;
-      border-radius: 8px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: opacity 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #fff; font-size: 15px; font-weight: 600;
+      padding: 16px 28px; border-radius: 8px; text-decoration: none;
+      border: none; cursor: pointer; transition: opacity 0.2s;
     }
-    .btn-primary:hover { opacity: 0.9; }
+    .btn-primary:hover { opacity: 0.88; }
+    .travel .btn-primary { background: var(--orange); }
+    .volunteer .btn-primary { background: var(--green); }
+
     .btn-outline-dark {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 600;
-      padding: 20px 32px;
-      border-radius: 8px;
-      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.18);
+      color: #fff; font-size: 15px; font-weight: 500;
+      padding: 16px 28px; border-radius: 8px; text-decoration: none;
       transition: background 0.2s;
     }
-    .btn-outline-dark:hover { background: rgba(255,255,255,0.16); }
+    .btn-outline-dark:hover { background: rgba(255,255,255,0.15); }
 
-    /* Hero image mosaic */
-    .host-hero__mosaic {
-      display: flex;
-      gap: 12px;
-      height: 424px;
-      flex-shrink: 0;
+    /* Hero mosaic */
+    .host-hero__mosaic { display: flex; gap: 10px; height: 380px; flex-shrink: 0; }
+    .hero-col { display: flex; flex-direction: column; gap: 10px; width: 240px; }
+    .hero-col--offset { padding-top: 28px; }
+    .hero-img { border-radius: 10px; overflow: hidden; background: #404040; flex-shrink: 0; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.88; }
+    .hero-img--tall { height: 200px; }
+    .hero-img--short { height: 148px; }
+    .hero-mosaic-wrap { position: relative; }
+    .hero-badge {
+      position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+      background: #fff; border-radius: 10px; padding: 12px 18px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18); white-space: nowrap;
     }
-    .hero-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 266px;
-    }
-    .hero-col--offset { padding-top: 32px; }
-    .hero-img {
-      border-radius: 12px;
-      overflow: hidden;
-      background: #404040;
-      flex-shrink: 0;
-    }
-    .hero-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.9;
-    }
-    .hero-img--tall { height: 220px; }
-    .hero-img--short { height: 160px; }
+    .hero-badge__label { font-size: 10px; color: var(--muted); margin-bottom: 3px; }
+    .hero-badge__num { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--dark); }
+    .hero-badge__num span { font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 500; color: #00a63e; }
 
-    /* Earnings badge */
-    .hero-earnings {
-      position: absolute;
-      bottom: -24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff;
-      border-radius: 12px;
-      padding: 14px 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
-      white-space: nowrap;
-    }
-    .hero-earnings__label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
-    .hero-earnings__num {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--dark);
-    }
-    .hero-earnings__num span { font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 400; color: #00a63e; }
-    .hero-mosaic-wrap {
-      position: relative;
-    }
-
-    /* ─── WHY CHOOSE US ──────────────────────────────── */
-    .host-why {
-      background: var(--light-bg);
-      padding: 96px 0;
-    }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
+    /* ── WHY CARDS ─────────────────────────────────────── */
+    .host-why { background: var(--light-bg); padding: 80px 0; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .why-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px;
     }
-    .why-card__icon-wrap {
-      width: 52px; height: 52px;
-      background: rgba(46,125,50,0.10);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 24px;
+    .why-card__icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
     }
+    .travel .why-card__icon { background: rgba(245,73,0,0.08); }
+    .volunteer .why-card__icon { background: rgba(46,125,50,0.10); }
     .why-card__stat {
       font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.2;
-      margin-bottom: 4px;
+      font-size: 26px; font-weight: 700; color: var(--dark);
+      line-height: 1.2; margin-bottom: 2px;
     }
-    .why-card__stat-sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    .why-card__title {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 10px;
-    }
-    .why-card__desc {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.57;
-    }
+    .why-card__stat-sub { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+    .why-card__title { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+    .why-card__desc { font-size: 13px; color: var(--text); line-height: 1.55; }
 
-    /* ─── PROCESS ────────────────────────────────────── */
-    .host-process {
-      background: var(--white);
-      padding: 96px 0;
-    }
+    /* ── PROCESS ───────────────────────────────────────── */
+    .host-process { background: var(--white); padding: 80px 0; }
     .process-track {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; position: relative;
     }
     .process-track::before {
-      content: '';
-      position: absolute;
-      top: 52px;
-      left: 13%;
-      right: 13%;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(46,125,50,0.2) 0%, rgba(46,125,50,0.6) 50%, rgba(46,125,50,0.2) 100%);
+      content: ''; position: absolute;
+      top: 48px; left: 13%; right: 13%; height: 2px;
     }
-    .process-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 0 16px;
-    }
+    .travel .process-track::before { background: linear-gradient(90deg, rgba(245,73,0,0.15) 0%, rgba(245,73,0,0.5) 50%, rgba(245,73,0,0.15) 100%); }
+    .volunteer .process-track::before { background: linear-gradient(90deg, rgba(46,125,50,0.15) 0%, rgba(46,125,50,0.5) 50%, rgba(46,125,50,0.15) 100%); }
+    .process-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
     .process-step__circle {
-      width: 104px; height: 104px;
-      border-radius: 50%;
-      border: 2px solid rgba(46,125,50,0.25);
-      background: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 24px;
-      position: relative;
-      z-index: 1;
+      width: 96px; height: 96px; border-radius: 50%;
+      background: var(--white); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; position: relative; z-index: 1;
     }
+    .travel .process-step__circle { border: 2px solid rgba(245,73,0,0.2); }
+    .volunteer .process-step__circle { border: 2px solid rgba(46,125,50,0.22); }
     .process-step__num {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--vol-green);
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;
     }
+    .travel .process-step__num { color: var(--orange); }
+    .volunteer .process-step__num { color: var(--green); }
     .process-step__time {
-      display: inline-block;
-      background: var(--light-bg);
-      border: 1px solid var(--border2);
-      border-radius: 999px;
-      font-size: 11px;
-      color: var(--muted);
-      padding: 4px 12px;
-      margin-bottom: 16px;
+      display: inline-block; background: var(--light-bg); border: 1px solid var(--border2);
+      border-radius: 999px; font-size: 11px; color: var(--muted); padding: 3px 10px; margin-bottom: 12px;
     }
-    .process-step__title {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 10px;
-    }
-    .process-step__desc {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.57;
-    }
-    .process-cta {
-      text-align: center;
-      margin-top: 56px;
-    }
-    .process-cta__note {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 12px;
-    }
+    .process-step__title { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+    .process-step__desc { font-size: 13px; color: var(--text); line-height: 1.55; }
+    .process-cta { text-align: center; margin-top: 48px; }
+    .process-cta__note { font-size: 12px; color: var(--muted); margin-top: 10px; }
 
-    /* ─── WHO THRIVES ────────────────────────────────── */
-    .host-who {
-      background: var(--light-bg);
-      padding: 96px 0;
-    }
-    .who-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
+    /* ── WHO CARD GRID ─────────────────────────────────── */
+    .host-who { background: var(--light-bg); padding: 80px 0; }
+    .who-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .who-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 37px;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 32px;
     }
-    .who-card__top {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-    .who-card__emoji-wrap {
-      width: 56px; height: 56px;
-      background: rgba(46,125,50,0.10);
-      border-radius: 14px;
+    .who-card__top { display: flex; gap: 18px; align-items: flex-start; }
+    .who-card__emoji {
+      width: 50px; height: 50px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 28px;
-      flex-shrink: 0;
+      font-size: 24px; flex-shrink: 0;
     }
-    .who-card__body { flex: 1; }
-    .who-card__title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 12px;
-    }
-    .who-card__desc {
-      font-size: 15px;
-      color: var(--text);
-      line-height: 1.6;
-      margin-bottom: 18px;
-    }
-    .who-card__tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .travel .who-card__emoji { background: rgba(245,73,0,0.08); }
+    .volunteer .who-card__emoji { background: rgba(46,125,50,0.10); }
+    .who-card__title { font-size: 17px; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+    .who-card__desc { font-size: 13px; color: var(--text); line-height: 1.55; margin-bottom: 14px; }
+    .who-card__tags { display: flex; flex-wrap: wrap; gap: 7px; }
     .who-tag {
-      background: rgba(46,125,50,0.10);
-      color: var(--vol-green);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 4px 12px;
-      border-radius: 999px;
+      font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 999px;
     }
+    .travel .who-tag { background: rgba(245,73,0,0.08); color: var(--orange); }
+    .volunteer .who-tag { background: rgba(46,125,50,0.10); color: var(--green); }
 
-    /* ─── PARTNER GUIDE CARD ─────────────────────────── */
-    .host-guide {
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 72px 0;
-    }
+    /* ── GUIDE CARD ────────────────────────────────────── */
+    .host-guide { background: var(--white); border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2); padding: 64px 0; }
     .guide-card {
-      background: linear-gradient(163deg, #1a2f1a 0%, #0d1f0d 100%);
-      border-radius: 20px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 48px;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
+      border-radius: 18px; padding: 44px;
+      display: grid; grid-template-columns: auto 1fr; gap: 44px;
+      align-items: center; position: relative; overflow: hidden;
     }
+    .travel .guide-card { background: linear-gradient(160deg, #171717 0%, #262626 100%); }
+    .volunteer .guide-card { background: linear-gradient(160deg, #0d1f0d 0%, #1a2f1a 100%); }
     .guide-card::after {
-      content: '';
-      position: absolute;
-      top: -100px; right: -100px;
-      width: 300px; height: 300px;
-      background: rgba(46,125,50,0.25);
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 260px; height: 260px; border-radius: 50%; filter: blur(70px); pointer-events: none;
     }
+    .travel .guide-card::after { background: rgba(245,73,0,0.2); }
+    .volunteer .guide-card::after { background: rgba(46,125,50,0.25); }
     .guide-card__pdf {
-      width: 80px;
-      background: rgba(46,125,50,0.25);
-      border: 1px solid rgba(46,125,50,0.4);
-      border-radius: 8px;
-      padding: 10px;
-      position: relative;
-      flex-shrink: 0;
-      aspect-ratio: 4/5;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding-bottom: 8px;
+      width: 72px; border-radius: 8px; padding: 8px; position: relative;
+      flex-shrink: 0; aspect-ratio: 4/5;
+      display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 6px;
     }
-    .guide-card__pdf-lines { display: flex; flex-direction: column; gap: 4px; padding: 8px 8px 0; }
-    .guide-card__pdf-line {
-      height: 3px;
-      border-radius: 4px;
-      background: rgba(255,255,255,0.3);
-    }
-    .guide-card__pdf-label {
-      font-size: 8px;
-      font-weight: 700;
-      color: #66bb6a;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      text-align: center;
-    }
+    .travel .guide-card__pdf { background: rgba(245,73,0,0.2); border: 1px solid rgba(245,73,0,0.3); }
+    .volunteer .guide-card__pdf { background: rgba(46,125,50,0.25); border: 1px solid rgba(46,125,50,0.4); }
+    .guide-card__pdf-lines { display: flex; flex-direction: column; gap: 3px; padding: 6px 6px 0; }
+    .guide-card__pdf-line { height: 3px; border-radius: 4px; background: rgba(255,255,255,0.25); }
+    .guide-card__pdf-label { font-size: 7px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; text-align: center; }
+    .travel .guide-card__pdf-label { color: #ff7043; }
+    .volunteer .guide-card__pdf-label { color: #66bb6a; }
     .guide-card__badge {
-      position: absolute;
-      top: -6px; right: -6px;
-      width: 24px; height: 24px;
-      background: var(--vol-green);
-      border-radius: 50%;
+      position: absolute; top: -5px; right: -5px;
+      width: 20px; height: 20px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
     }
+    .travel .guide-card__badge { background: var(--orange); }
+    .volunteer .guide-card__badge { background: var(--green); }
     .guide-card__content { position: relative; z-index: 1; }
-    .guide-card__title {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 14px;
-    }
-    .guide-card__desc {
-      font-size: 15px;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.6;
-      max-width: 636px;
-      margin-bottom: 28px;
-    }
-    .guide-card__actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .guide-card__title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .guide-card__desc { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.6; max-width: 580px; margin-bottom: 24px; }
+    .guide-card__actions { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn-guide-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--vol-green);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      padding: 14px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.2s;
+      display: inline-flex; align-items: center; gap: 7px;
+      color: #fff; font-size: 14px; font-weight: 600;
+      padding: 12px 22px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s;
     }
-    .btn-guide-primary:hover { opacity: 0.9; }
+    .btn-guide-primary:hover { opacity: 0.88; }
+    .travel .btn-guide-primary { background: var(--orange); }
+    .volunteer .btn-guide-primary { background: var(--green); }
     .btn-guide-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      padding: 14px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.2s;
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+      color: #fff; font-size: 14px; font-weight: 500;
+      padding: 12px 22px; border-radius: 8px; text-decoration: none; transition: background 0.2s;
     }
     .btn-guide-outline:hover { background: rgba(255,255,255,0.16); }
 
-    /* ─── FAQ ────────────────────────────────────────── */
-    .host-faq {
-      background: var(--light-bg);
-      padding: 96px 0;
-    }
-    .host-faq .h-container { max-width: 800px; }
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .faq-item {
-      background: var(--white);
-      border: 1px solid var(--border2);
-      border-radius: 12px;
-      overflow: hidden;
-    }
+    /* ── FAQ ───────────────────────────────────────────── */
+    .host-faq { background: var(--light-bg); padding: 80px 0; }
+    .host-faq .h-container { max-width: 760px; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item { background: var(--white); border: 1px solid var(--border2); border-radius: 10px; overflow: hidden; }
     .faq-item__btn {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 28px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      gap: 16px;
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; background: none; border: none; cursor: pointer; text-align: left; gap: 16px;
     }
-    .faq-item__q {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--dark);
-      line-height: 1.5;
-    }
-    .faq-item__icon {
-      width: 20px; height: 20px;
-      flex-shrink: 0;
-      color: var(--muted);
-      transition: transform 0.2s;
-    }
-    .faq-item--open .faq-item__icon { transform: rotate(45deg); color: var(--vol-green); }
+    .faq-item__q { font-size: 15px; font-weight: 600; color: var(--dark); line-height: 1.4; }
+    .faq-item__icon { width: 18px; height: 18px; flex-shrink: 0; color: var(--muted); transition: transform 0.2s; }
+    .travel .faq-item--open .faq-item__icon { transform: rotate(45deg); color: var(--orange); }
+    .volunteer .faq-item--open .faq-item__icon { transform: rotate(45deg); color: var(--green); }
     .faq-item__answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.28s ease, padding 0.28s;
-      font-size: 15px;
-      color: var(--text);
-      line-height: 1.7;
-      padding: 0 28px;
+      max-height: 0; overflow: hidden; transition: max-height 0.28s ease, padding 0.28s;
+      font-size: 14px; color: var(--text); line-height: 1.65; padding: 0 24px;
     }
-    .faq-item--open .faq-item__answer {
-      max-height: 400px;
-      padding: 0 28px 22px;
-    }
+    .faq-item--open .faq-item__answer { max-height: 300px; padding: 0 24px 18px; }
 
-    /* ─── FINAL CTA ──────────────────────────────────── */
-    .host-cta {
-      background: linear-gradient(163deg, #1a2f1a 0%, #0d1f0d 100%);
-      padding: 96px 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+    /* ── FINAL CTA ─────────────────────────────────────── */
+    .host-cta { padding: 88px 0; text-align: center; position: relative; overflow: hidden; }
+    .travel .host-cta { background: linear-gradient(160deg, #171717 0%, #262626 100%); }
+    .volunteer .host-cta { background: linear-gradient(160deg, #0d1f0d 0%, #1a2f1a 100%); }
     .host-cta::after {
-      content: '';
-      position: absolute;
-      top: -100px; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 400px;
-      background: rgba(46,125,50,0.18);
-      border-radius: 50%;
-      filter: blur(100px);
-      pointer-events: none;
+      content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+      width: 560px; height: 340px; border-radius: 50%; filter: blur(90px); pointer-events: none;
     }
-    .host-cta__inner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0 40px; }
+    .travel .host-cta::after { background: rgba(245,73,0,0.12); }
+    .volunteer .host-cta::after { background: rgba(46,125,50,0.16); }
+    .host-cta__inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 0 40px; }
     .host-cta__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(46,125,50,0.18);
-      border: 1px solid rgba(46,125,50,0.35);
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #66bb6a;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 999px; padding: 5px 14px; margin-bottom: 24px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase;
     }
-    .host-cta__title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .host-cta__sub {
-      font-size: 18px;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.67;
-      margin-bottom: 40px;
-    }
-    .host-cta__actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+    .travel .host-cta__badge { background: rgba(245,73,0,0.15); border: 1px solid rgba(245,73,0,0.3); color: #ff7043; }
+    .volunteer .host-cta__badge { background: rgba(46,125,50,0.18); border: 1px solid rgba(46,125,50,0.35); color: #66bb6a; }
+    .host-cta__title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 3.5vw, 46px); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 16px; }
+    .host-cta__sub { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.65; margin-bottom: 36px; }
+    .host-cta__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
     .btn-cta-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--vol-green);
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 22px 40px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #fff; font-size: 17px; font-weight: 700;
+      padding: 20px 36px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s;
     }
-    .btn-cta-primary:hover { opacity: 0.9; }
+    .btn-cta-primary:hover { opacity: 0.88; }
+    .travel .btn-cta-primary { background: var(--orange); }
+    .volunteer .btn-cta-primary { background: var(--green); }
     .btn-cta-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      font-size: 18px;
-      font-weight: 600;
-      padding: 22px 40px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 17px; font-weight: 600;
+      padding: 20px 36px; border-radius: 8px; text-decoration: none; transition: background 0.2s;
     }
     .btn-cta-outline:hover { background: rgba(255,255,255,0.16); }
-    .host-cta__note {
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
-    }
+    .host-cta__note { font-size: 12px; color: rgba(255,255,255,0.45); }
 
-    /* ─── FOOTER ─────────────────────────────────────── */
+    /* ── FOOTER ────────────────────────────────────────── */
     .site-footer { background: #0a0a0a; padding: 56px 0 0; }
     .site-footer__inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    .site-footer__grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 36px;
-    }
+    .site-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 36px; }
     .footer-brand__name { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 10px; }
     .footer-brand__desc { font-size: 14px; color: #d1d5dc; line-height: 1.65; margin-bottom: 18px; max-width: 268px; }
     .footer-socials { display: flex; gap: 16px; }
@@ -680,25 +382,27 @@
     .footer-col__link:hover { color: #fff; }
     .site-footer__bottom { border-top: 1px solid #364153; padding: 24px 0; font-size: 13px; color: #d1d5dc; }
 
-    /* ─── RESPONSIVE ─────────────────────────────────── */
-    @media (max-width: 1100px) {
+    /* ── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 1000px) {
       .host-hero__inner { grid-template-columns: 1fr; gap: 40px; }
       .host-hero__mosaic { display: none; }
       .guide-card { grid-template-columns: 1fr; }
       .guide-card__pdf { display: none; }
     }
-    @media (max-width: 900px) {
+    @media (max-width: 860px) {
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .who-grid { grid-template-columns: 1fr; }
-      .process-track { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .process-track { grid-template-columns: repeat(2, 1fr); gap: 36px; }
       .process-track::before { display: none; }
       .site-footer__grid { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 560px) {
       .why-grid { grid-template-columns: 1fr; }
       .process-track { grid-template-columns: 1fr; }
       .host-cta__actions { flex-direction: column; align-items: center; }
       .site-footer__grid { grid-template-columns: 1fr; }
+      .h-container { padding: 0 20px; }
+      .host-tabs__inner { padding: 0 20px; }
     }
   </style>
 </head>
@@ -721,410 +425,652 @@
     </div>
   </nav>
 
-  <!-- ─── HERO ─────────────────────────────────────── -->
-  <section class="host-hero">
-    <div class="host-hero__inner">
-      <div class="host-hero__text">
-        <div class="host-hero__badge">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4" fill="none"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
-          Volunteer Partner Programme
+  <!-- ── TAB SWITCHER ──────────────────────────────────── -->
+  <div class="host-tabs">
+    <div class="host-tabs__inner">
+      <button class="host-tab active" data-flow="travel" onclick="switchFlow('travel')">
+        <span class="host-tab__dot"></span>
+        Travel Host
+      </button>
+      <button class="host-tab" data-flow="volunteer" onclick="switchFlow('volunteer')">
+        <span class="host-tab__dot"></span>
+        Volunteer Partner
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       FLOW A — TRAVEL HOST
+  ═══════════════════════════════════════════════════════ -->
+  <div class="flow travel active" id="flow-travel">
+
+    <!-- HERO -->
+    <section class="host-hero">
+      <div class="host-hero__inner">
+        <div class="host-hero__text">
+          <div class="host-hero__badge">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.4l-3 2.9.7 4.1L8 10.4l-3.7 2 .7-4.1-3-2.9 4.2-.8z" fill="#ff7043"/></svg>
+            Partner Programme
+          </div>
+          <h1 class="host-hero__title">Share Your World.<br /><em>Earn Doing It.</em></h1>
+          <p class="host-hero__sub">Turn your local knowledge into a thriving experience business. Join 850+ hosts earning from what they love.</p>
+          <div class="host-hero__actions">
+            <a href="#travel-apply" class="btn-primary">
+              Start Your Application
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="assets/Partnership_Guide.pdf" download class="btn-outline-dark">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 2v9M5.25 7.5L9 11.25l3.75-3.75M3 14.5h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Download Partner Guide
+            </a>
+          </div>
         </div>
-        <h1 class="host-hero__title">Reach More Volunteers.<br /><em>Amplify Your Impact.</em></h1>
-        <p class="host-hero__sub">List your NGO's volunteering program on Great D'Tour and connect with motivated, verified volunteers from across India who are ready to contribute to your cause.</p>
-        <div class="host-hero__actions">
-          <a href="#apply" class="btn-primary">
-            List Your Program
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="hero-mosaic-wrap">
+          <div class="host-hero__mosaic">
+            <div class="hero-col">
+              <div class="hero-img hero-img--tall"><img src="assets/images/cultural1.jpg" alt="" /></div>
+              <div class="hero-img hero-img--short"><img src="assets/images/immersion2.jpg" alt="" /></div>
+            </div>
+            <div class="hero-col hero-col--offset">
+              <div class="hero-img hero-img--short"><img src="assets/images/trek1.jpg" alt="" /></div>
+              <div class="hero-img hero-img--tall"><img src="assets/images/landscape.jpg" alt="" /></div>
+            </div>
+          </div>
+          <div class="hero-badge">
+            <p class="hero-badge__label">Top host last month</p>
+            <p class="hero-badge__num">₹68,400 <span>↑ 24%</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="host-why">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">Why List With Us</span>
+          <h2>Built for Hosts, Not Just Travelers</h2>
+          <p>Every tool on GDT is designed to help you earn more and worry less.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="#f54900" stroke-width="1.8"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <p class="why-card__stat">50,000+</p>
+            <p class="why-card__stat-sub">active travelers</p>
+            <p class="why-card__title">Global Reach</p>
+            <p class="why-card__desc">Connect with high-intent travelers from 42 countries actively seeking authentic experiences.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="2" stroke="#f54900" stroke-width="1.8"/><path d="M4 11h20M9 16h4M9 19h6" stroke="#f54900" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <p class="why-card__stat">₹4.2L</p>
+            <p class="why-card__stat-sub">avg. annual host earnings</p>
+            <p class="why-card__title">Real Revenue</p>
+            <p class="why-card__desc">Pricing tools and demand forecasting help you maximize yield all year round.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M14 4v8l4 4" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/><circle cx="14" cy="14" r="10" stroke="#f54900" stroke-width="1.8"/></svg>
+            </div>
+            <p class="why-card__stat">Zero</p>
+            <p class="why-card__stat-sub">admin overhead</p>
+            <p class="why-card__title">We Handle the Rest</p>
+            <p class="why-card__desc">Bookings, payments, reminders — all managed by us. You focus on the experience.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M4 14h4l3 6 4-12 3 6h6" stroke="#f54900" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="why-card__stat">24/7</p>
+            <p class="why-card__stat-sub">partner support</p>
+            <p class="why-card__title">Dedicated Support</p>
+            <p class="why-card__desc">Your account manager helps with listings, pricing, and scaling your business.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6L9 19.2l.9-5.5-4-3.9 5.5-.8z" stroke="#f54900" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="why-card__stat">5–7</p>
+            <p class="why-card__stat-sub">days to your account</p>
+            <p class="why-card__title">Secure Payouts</p>
+            <p class="why-card__desc">Payments transferred within 5–7 business days of completion. No chasing invoices.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M12 14l3 3 6-6" stroke="#f54900" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="14" r="10" stroke="#f54900" stroke-width="1.8"/></svg>
+            </div>
+            <p class="why-card__stat">4.8★</p>
+            <p class="why-card__stat-sub">platform trust rating</p>
+            <p class="why-card__title">Trusted Brand</p>
+            <p class="why-card__desc">The GDT verified badge signals quality to discerning travelers before they even click.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="host-process">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">How It Works</span>
+          <h2>From Application to First Booking</h2>
+          <p>A guided path from your first click to your first 5-star review.</p>
+        </div>
+        <div class="process-track">
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">01</span></div>
+            <span class="process-step__time">~10 min</span>
+            <p class="process-step__title">Apply</p>
+            <p class="process-step__desc">Tell us your expertise, location, and what experiences you want to offer.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">02</span></div>
+            <span class="process-step__time">3–5 days</span>
+            <p class="process-step__title">Get Verified</p>
+            <p class="process-step__desc">Our team reviews your profile, schedules an onboarding call, and verifies credentials.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">03</span></div>
+            <span class="process-step__time">1–2 weeks</span>
+            <p class="process-step__title">Build Your Listing</p>
+            <p class="process-step__desc">Work with our team to craft compelling itineraries, photos, and pricing.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">04</span></div>
+            <span class="process-step__time">Ongoing</span>
+            <p class="process-step__title">Go Live & Earn</p>
+            <p class="process-step__desc">Accept bookings, receive payouts, and grow with built-in analytics tools.</p>
+          </div>
+        </div>
+        <div class="process-cta">
+          <a href="#travel-apply" class="btn-primary">Start Your Application
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="assets/Partnership_Guide.pdf" download class="btn-outline-dark">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v9M5.25 7.5L9 11.25l3.75-3.75M3 14.5h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p class="process-cta__note">Free to join · 10-min application · Live within 3 weeks</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO THRIVES -->
+    <section class="host-who">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">Who It's For</span>
+          <h2>Who Thrives on Great D'Tour?</h2>
+          <p>Individual hosts to established operators — there's a place for you.</p>
+        </div>
+        <div class="who-grid">
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">🏡</div>
+              <div>
+                <p class="who-card__title">Local Hosts</p>
+                <p class="who-card__desc">Share cultural experiences — home-cooking, village treks, craft workshops — from your doorstep.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Homestay</span>
+                  <span class="who-tag">Cultural tours</span>
+                  <span class="who-tag">Craft workshops</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">✈️</div>
+              <div>
+                <p class="who-card__title">Travel Agents</p>
+                <p class="who-card__desc">Reach a global audience with curated multi-day itineraries and custom group journeys.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Multi-day packages</span>
+                  <span class="who-tag">Custom itineraries</span>
+                  <span class="who-tag">Group bookings</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">🎥</div>
+              <div>
+                <p class="who-card__title">Creators & Influencers</p>
+                <p class="who-card__desc">Monetize your travel passion by hosting exclusive experiences for your community.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Photo walks</span>
+                  <span class="who-tag">Creator retreats</span>
+                  <span class="who-tag">Fan experiences</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">🧭</div>
+              <div>
+                <p class="who-card__title">Tour Operators</p>
+                <p class="who-card__desc">Expand distribution and access ready-to-book travelers for specialized tours.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Trekking tours</span>
+                  <span class="who-tag">Wellness retreats</span>
+                  <span class="who-tag">Heritage walks</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDE CARD -->
+    <section class="host-guide">
+      <div class="h-container">
+        <div class="guide-card">
+          <div class="guide-card__pdf">
+            <div class="guide-card__badge"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v6M3 4l3 3 3-3M1 10h10" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="guide-card__pdf-lines">
+              <div class="guide-card__pdf-line" style="width:100%"></div>
+              <div class="guide-card__pdf-line" style="width:80%"></div>
+              <div class="guide-card__pdf-line" style="width:90%"></div>
+            </div>
+            <p class="guide-card__pdf-label">PDF</p>
+          </div>
+          <div class="guide-card__content">
+            <p class="guide-card__title">The Complete Partner Guide</p>
+            <p class="guide-card__desc">Commission structures, platform features, success strategies, and real host stories. Everything you need to decide if GDT is right for you — in one download.</p>
+            <div class="guide-card__actions">
+              <a href="assets/Partnership_Guide.pdf" download class="btn-guide-primary">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M2 13h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Download Partner Guide
+              </a>
+              <a href="#travel-apply" class="btn-guide-outline">Apply Now Instead
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="host-faq">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">FAQ</span>
+          <h2>Common Questions</h2>
+          <p>Everything you need before applying.</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">How much does it cost to join?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">Completely free to apply. We operate on commission only — a percentage of each completed booking. No listing fee, no subscription.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">What experiences can I offer?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">Adventure treks, wellness retreats, cultural immersions, wildlife safaris, culinary trails, craft workshops, heritage walks — if it's authentic and bookable, it fits.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">How long does verification take?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">We review applications within 5 business days. Most partners go live within 3 weeks of applying.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">How do I set pricing?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">You set your own prices. We provide category benchmarks, demand data, and support seasonal or early-bird rates.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">When do I get paid?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">Payments settle within 5–7 business days after the experience completes, directly to your bank account.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="host-cta" id="travel-apply">
+      <div class="host-cta__inner">
+        <div class="host-cta__badge">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#ff7043" stroke-width="1.4"/><path d="M8 5v3l2 1.5" stroke="#ff7043" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Limited Spots This Quarter
+        </div>
+        <h2 class="host-cta__title">Ready to Start Hosting?</h2>
+        <p class="host-cta__sub">Next cohort onboards June 2026. Apply today and we'll reach out within 5 days.</p>
+        <div class="host-cta__actions">
+          <a href="mailto:hello@greatdtour.com?subject=Host Application" class="btn-cta-primary">
+            Apply to Become a Host
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10.5 5l4.5 5-4.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="assets/Partnership_Guide.pdf" download class="btn-cta-outline">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2v10M5.5 8.5L10 13l4.5-4.5M3 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Guide
+          </a>
+        </div>
+        <p class="host-cta__note">Free to apply · No upfront cost · Join 850+ partners</p>
+      </div>
+    </section>
+
+  </div><!-- /flow-travel -->
+
+
+  <!-- ════════════════════════════════════════════════════
+       FLOW B — VOLUNTEER PARTNER
+  ═══════════════════════════════════════════════════════ -->
+  <div class="flow volunteer" id="flow-volunteer">
+
+    <!-- HERO -->
+    <section class="host-hero">
+      <div class="host-hero__inner">
+        <div class="host-hero__text">
+          <div class="host-hero__badge">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
+            Volunteer Partner Programme
+          </div>
+          <h1 class="host-hero__title">Reach More Volunteers.<br /><em>Amplify Your Impact.</em></h1>
+          <p class="host-hero__sub">List your program on GDT and connect with motivated, verified volunteers ready to contribute to your cause.</p>
+          <div class="host-hero__actions">
+            <a href="#vol-apply" class="btn-primary">
+              Register Your NGO
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="assets/Partnership_Guide.pdf" download class="btn-outline-dark">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 2v9M5.25 7.5L9 11.25l3.75-3.75M3 14.5h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Download NGO Guide
+            </a>
+          </div>
+        </div>
+        <div class="hero-mosaic-wrap">
+          <div class="host-hero__mosaic">
+            <div class="hero-col">
+              <div class="hero-img hero-img--tall"><img src="assets/images/trek1.jpg" alt="" /></div>
+              <div class="hero-img hero-img--short"><img src="assets/images/immersion2.jpg" alt="" /></div>
+            </div>
+            <div class="hero-col hero-col--offset">
+              <div class="hero-img hero-img--short"><img src="assets/images/cultural1.jpg" alt="" /></div>
+              <div class="hero-img hero-img--tall"><img src="assets/images/landscape.jpg" alt="" /></div>
+            </div>
+          </div>
+          <div class="hero-badge">
+            <p class="hero-badge__label">Volunteers placed this year</p>
+            <p class="hero-badge__num">2,400+ <span>↑ 38%</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="host-why">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">Why List With Us</span>
+          <h2>Built for Impact Organisations</h2>
+          <p>Tools that help you recruit better volunteers and run stronger programs.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="#2E7D32" stroke-width="1.8"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <p class="why-card__stat">12,000+</p>
+            <p class="why-card__stat-sub">registered volunteers</p>
+            <p class="why-card__title">Verified Volunteer Pool</p>
+            <p class="why-card__desc">Screened volunteers with declared skills — students, professionals, retirees — all ready to apply.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M14 4v8l4 4" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/><circle cx="14" cy="14" r="10" stroke="#2E7D32" stroke-width="1.8"/></svg>
+            </div>
+            <p class="why-card__stat">Free</p>
+            <p class="why-card__stat-sub">to list your program</p>
+            <p class="why-card__title">No Upfront Cost</p>
+            <p class="why-card__desc">Listing is free. A small platform fee applies only when a volunteer confirms — nothing before.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="2" stroke="#2E7D32" stroke-width="1.8"/><path d="M4 11h20M9 16h4M9 19h6" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <p class="why-card__stat">100%</p>
+            <p class="why-card__stat-sub">application management</p>
+            <p class="why-card__title">Zero Admin Load</p>
+            <p class="why-card__desc">We handle inbound applications, screening, and batch confirmations. You run the program.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M4 14h4l3 6 4-12 3 6h6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="why-card__stat">3×</p>
+            <p class="why-card__stat-sub">more applicants vs. social only</p>
+            <p class="why-card__title">Wider Reach</p>
+            <p class="why-card__desc">Programs on GDT attract 3× more applicants with better quality and completion rates.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M12 14l3 3 6-6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="14" r="10" stroke="#2E7D32" stroke-width="1.8"/></svg>
+            </div>
+            <p class="why-card__stat">GDT</p>
+            <p class="why-card__stat-sub">Verified NGO badge</p>
+            <p class="why-card__title">Trust Signal</p>
+            <p class="why-card__desc">The GDT Verified NGO badge tells volunteers your program meets our quality standards.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6L9 19.2l.9-5.5-4-3.9 5.5-.8z" stroke="#2E7D32" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="why-card__stat">24/7</p>
+            <p class="why-card__stat-sub">partner success support</p>
+            <p class="why-card__title">Dedicated Support</p>
+            <p class="why-card__desc">Your partner manager helps with listing quality, batch planning, and program growth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="host-process">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">How It Works</span>
+          <h2>From Registration to First Batch</h2>
+          <p>A simple, supported path from registration to your first confirmed volunteers.</p>
+        </div>
+        <div class="process-track">
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">01</span></div>
+            <span class="process-step__time">~15 min</span>
+            <p class="process-step__title">Register Your NGO</p>
+            <p class="process-step__desc">Submit your org details, cause area, and program type. Quick 15-minute form.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">02</span></div>
+            <span class="process-step__time">3–5 days</span>
+            <p class="process-step__title">Get Verified</p>
+            <p class="process-step__desc">We check your NGO certificate and past program evidence. Approved orgs get the GDT badge.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">03</span></div>
+            <span class="process-step__time">1–2 weeks</span>
+            <p class="process-step__title">Build Your Listings</p>
+            <p class="process-step__desc">Set up program pages with roles, batches, eligibility, and stipend details — guided by our team.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__circle"><span class="process-step__num">04</span></div>
+            <span class="process-step__time">Ongoing</span>
+            <p class="process-step__title">Go Live & Recruit</p>
+            <p class="process-step__desc">Review applications in your dashboard, confirm batches, and track cohorts end-to-end.</p>
+          </div>
+        </div>
+        <div class="process-cta">
+          <a href="#vol-apply" class="btn-primary">Register Your Organisation
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="process-cta__note">Free to list · 15-min registration · Verification within 5 days</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO -->
+    <section class="host-who">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">Who Can Register</span>
+          <h2>Which Organisations Are We Looking For?</h2>
+          <p>Registered NGOs, conservation bodies, social enterprises, and research institutions.</p>
+        </div>
+        <div class="who-grid">
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">🌿</div>
+              <div>
+                <p class="who-card__title">Wildlife & Conservation NGOs</p>
+                <p class="who-card__desc">Run field programs in national parks or coastal ecosystems? Attract field researchers and conservation educators.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Tiger / Elephant corridors</span>
+                  <span class="who-tag">Marine conservation</span>
+                  <span class="who-tag">Forest restoration</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">🏘️</div>
+              <div>
+                <p class="who-card__title">Community Development Orgs</p>
+                <p class="who-card__desc">Working on rural livelihoods or education? Find volunteers for outreach, teaching, and documentation.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Rural education</span>
+                  <span class="who-tag">Women's empowerment</span>
+                  <span class="who-tag">Livelihood programs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">🔬</div>
+              <div>
+                <p class="who-card__title">Research Institutions</p>
+                <p class="who-card__desc">Need citizen science contributors or field data collectors? Reach students and professionals with domain skills.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Biodiversity surveys</span>
+                  <span class="who-tag">Citizen science</span>
+                  <span class="who-tag">Climate data</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="who-card">
+            <div class="who-card__top">
+              <div class="who-card__emoji">♻️</div>
+              <div>
+                <p class="who-card__title">Social Enterprises</p>
+                <p class="who-card__desc">Running sustainability or impact programs? Find motivated volunteers aligned with your mission.</p>
+                <div class="who-card__tags">
+                  <span class="who-tag">Sustainability programs</span>
+                  <span class="who-tag">Clean energy</span>
+                  <span class="who-tag">Impact documentation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDE CARD -->
+    <section class="host-guide">
+      <div class="h-container">
+        <div class="guide-card">
+          <div class="guide-card__pdf">
+            <div class="guide-card__badge"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v6M3 4l3 3 3-3M1 10h10" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="guide-card__pdf-lines">
+              <div class="guide-card__pdf-line" style="width:100%"></div>
+              <div class="guide-card__pdf-line" style="width:75%"></div>
+              <div class="guide-card__pdf-line" style="width:88%"></div>
+            </div>
+            <p class="guide-card__pdf-label">PDF</p>
+          </div>
+          <div class="guide-card__content">
+            <p class="guide-card__title">The NGO Partner Guide</p>
+            <p class="guide-card__desc">Registration requirements, volunteer management tools, verification checklist, impact reporting features, and partner stories — everything to decide if GDT is right for your organisation.</p>
+            <div class="guide-card__actions">
+              <a href="assets/Partnership_Guide.pdf" download class="btn-guide-primary">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M2 13h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Download NGO Guide
+              </a>
+              <a href="#vol-apply" class="btn-guide-outline">Register Now Instead
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="host-faq">
+      <div class="h-container">
+        <div class="section-header">
+          <span class="overline-tag">FAQ</span>
+          <h2>Common Questions From NGOs</h2>
+          <p>What organisations ask before registering.</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">Is it free to list our program?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">Yes — listing is free. A small platform fee applies only when a volunteer confirms. No subscription, no upfront costs.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">What documents do we need?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">NGO registration certificate, a brief org description, program coordinator contact, and optionally past program photos or reports. Our team guides you through the checklist.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">What kinds of programs can we list?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">Wildlife conservation, community development, rural education, research, environmental restoration, women's empowerment, and more — any structured program with defined roles and duration.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">Can we set eligibility criteria?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">Yes. Set minimum age, skills, fitness level, and up to 5 custom screening questions that applicants must answer — so only suitable candidates apply.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">How do stipends and fees work?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">You set the terms — fully funded (₹0 fee + stipend), partially funded, or cost-recovery. All models are supported. Stipend details appear prominently on your listing.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-item__btn"><span class="faq-item__q">How long does verification take?</span><svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <div class="faq-item__answer">Document verification completes within 3–5 business days. Most organisations go live within 2 weeks of registering.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="host-cta" id="vol-apply">
+      <div class="host-cta__inner">
+        <div class="host-cta__badge">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
+          Open For Registrations
+        </div>
+        <h2 class="host-cta__title">Ready to Find Your Next Volunteer Cohort?</h2>
+        <p class="host-cta__sub">Free to list. Takes 15 minutes. Your first verified batch could be live within 2 weeks.</p>
+        <div class="host-cta__actions">
+          <a href="mailto:volunteer@greatdtour.com?subject=NGO Vendor Registration" class="btn-cta-primary">
+            Register Your Organisation
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10.5 5l4.5 5-4.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="assets/Partnership_Guide.pdf" download class="btn-cta-outline">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2v10M5.5 8.5L10 13l4.5-4.5M3 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Download NGO Guide
           </a>
         </div>
+        <p class="host-cta__note">Free to list · GDT Verified NGO badge included · No upfront cost</p>
       </div>
+    </section>
 
-      <!-- Image mosaic -->
-      <div class="hero-mosaic-wrap">
-        <div class="host-hero__mosaic">
-          <div class="hero-col">
-            <div class="hero-img hero-img--tall">
-              <img src="assets/images/cultural1.jpg" alt="Local host sharing experience" />
-            </div>
-            <div class="hero-img hero-img--short">
-              <img src="assets/images/immersion2.jpg" alt="Group cultural experience" />
-            </div>
-          </div>
-          <div class="hero-col hero-col--offset">
-            <div class="hero-img hero-img--short">
-              <img src="assets/images/trek1.jpg" alt="Travel host guiding guests" />
-            </div>
-            <div class="hero-img hero-img--tall">
-              <img src="assets/images/landscape.jpg" alt="Mountain landscape" />
-            </div>
-          </div>
-        </div>
-        <!-- Volunteers badge -->
-        <div class="hero-earnings">
-          <p class="hero-earnings__label">Volunteers placed this year</p>
-          <p class="hero-earnings__num">2,400+ <span>↑ 38%</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div><!-- /flow-volunteer -->
 
-  <!-- ─── WHY CHOOSE US ────────────────────────────── -->
-  <section class="host-why">
-    <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">Why List With Us</span>
-        <h2>What We Offer NGOs & Conservation Orgs</h2>
-        <p>We built Great D'Tour's volunteer platform for impact-first organisations. Every feature helps you attract the right volunteers and run better programs.</p>
-      </div>
-      <div class="why-grid">
 
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="#2E7D32" stroke-width="1.8"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="8" r="3" stroke="#2E7D32" stroke-width="1.5"/><path d="M24 20c1.5.5 3 1.5 3 3" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <p class="why-card__stat">12,000+<span class="why-card__stat-sub"> registered volunteers</span></p>
-          <p class="why-card__title">Verified Volunteer Pool</p>
-          <p class="why-card__desc">Access our growing community of screened, passionate volunteers — from students and working professionals to retirees — all with verified profiles and declared skills.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4v8l4 4" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/><circle cx="14" cy="14" r="10" stroke="#2E7D32" stroke-width="1.8"/></svg>
-          </div>
-          <p class="why-card__stat">Zero<span class="why-card__stat-sub"> listing or subscription fee</span></p>
-          <p class="why-card__title">Free to List</p>
-          <p class="why-card__desc">Listing your program on Great D'Tour is completely free. We only charge a small platform fee when a volunteer confirms — no upfront costs, no monthly charges.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="2" stroke="#2E7D32" stroke-width="1.8"/><path d="M4 11h20" stroke="#2E7D32" stroke-width="1.8"/><path d="M9 16h4M9 19h6" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <p class="why-card__stat">100%<span class="why-card__stat-sub"> application management</span></p>
-          <p class="why-card__title">Zero Admin Load</p>
-          <p class="why-card__desc">We handle inbound applications, candidate screening questions, batch confirmations, and communications. You focus on running your program.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14h4l3 6 4-12 3 6h6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="why-card__stat">3x<span class="why-card__stat-sub"> more applicants per program</span></p>
-          <p class="why-card__title">Wider Reach</p>
-          <p class="why-card__desc">Programs listed on Great D'Tour receive 3× more applicants on average than social-media-only outreach, with better candidate quality and completion rates.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M12 14l3 3 6-6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="14" r="10" stroke="#2E7D32" stroke-width="1.8"/></svg>
-          </div>
-          <p class="why-card__stat">GDT<span class="why-card__stat-sub"> Verified NGO badge</span></p>
-          <p class="why-card__title">Trust & Credibility</p>
-          <p class="why-card__desc">Earn the GDT Verified NGO badge after a one-time credential check. Volunteers can apply with confidence knowing your program meets our quality standards.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6L9 19.2l.9-5.5-4-3.9 5.5-.8z" stroke="#2E7D32" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="why-card__stat">24/7<span class="why-card__stat-sub"> partner support team</span></p>
-          <p class="why-card__title">Dedicated Support</p>
-          <p class="why-card__desc">Your assigned partner success manager helps with listing quality, batch planning, volunteer screening criteria, and growing your program year on year.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── PROCESS ───────────────────────────────────── -->
-  <section class="host-process">
-    <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">The Process</span>
-        <h2>From Registration to First Batch</h2>
-        <p>A clear, supported path from your first click to receiving your first confirmed volunteer cohort.</p>
-      </div>
-      <div class="process-track">
-
-        <div class="process-step">
-          <div class="process-step__circle">
-            <span class="process-step__num">01</span>
-          </div>
-          <span class="process-step__time">~15 min</span>
-          <p class="process-step__title">Register Your NGO</p>
-          <p class="process-step__desc">Complete our vendor registration form with your organization details, program categories, and cause areas. It takes under 15 minutes.</p>
-        </div>
-
-        <div class="process-step">
-          <div class="process-step__circle">
-            <span class="process-step__num">02</span>
-          </div>
-          <span class="process-step__time">3–5 days</span>
-          <p class="process-step__title">Verification & NGO Badge</p>
-          <p class="process-step__desc">Our team reviews your registration documents, NGO certificate, and past program evidence. Verified orgs receive the GDT NGO badge.</p>
-        </div>
-
-        <div class="process-step">
-          <div class="process-step__circle">
-            <span class="process-step__num">03</span>
-          </div>
-          <span class="process-step__time">1–2 weeks</span>
-          <p class="process-step__title">Build Your Program Listings</p>
-          <p class="process-step__desc">Work with our partner team to craft compelling program pages — roles, batches, eligibility, stipend details, and requirements — all guided.</p>
-        </div>
-
-        <div class="process-step">
-          <div class="process-step__circle">
-            <span class="process-step__num">04</span>
-          </div>
-          <span class="process-step__time">Ongoing</span>
-          <p class="process-step__title">Go Live & Receive Applications</p>
-          <p class="process-step__desc">Your programs publish to our volunteer marketplace. Review applications in your dashboard, confirm batches, and track volunteer cohorts end-to-end.</p>
-        </div>
-
-      </div>
-      <div class="process-cta">
-          <a href="#apply" class="btn-primary">
-            Register Your NGO
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <p class="process-cta__note">Free to list · 15-minute registration · Verification within 5 days</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── WHO THRIVES ───────────────────────────────── -->
-  <section class="host-who">
-    <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">Who Can Register</span>
-        <h2>Which Organisations Are We Looking For?</h2>
-        <p>We partner with registered NGOs, conservation bodies, social enterprises, and research institutions that run structured volunteer programs.</p>
-      </div>
-      <div class="who-grid">
-
-        <div class="who-card">
-          <div class="who-card__top">
-            <div class="who-card__emoji-wrap">🌿</div>
-            <div class="who-card__body">
-              <p class="who-card__title">Wildlife & Conservation NGOs</p>
-              <p class="who-card__desc">Run field programs in national parks, wildlife sanctuaries, or coastal ecosystems? List your volunteer roles and attract skilled field researchers, educators, and conservation enthusiasts.</p>
-              <div class="who-card__tags">
-                <span class="who-tag">Tiger / Elephant corridors</span>
-                <span class="who-tag">Marine conservation</span>
-                <span class="who-tag">Forest restoration</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="who-card">
-          <div class="who-card__top">
-            <div class="who-card__emoji-wrap">🏘️</div>
-            <div class="who-card__body">
-              <p class="who-card__title">Community Development Orgs</p>
-              <p class="who-card__desc">Working on rural livelihoods, education, health, or women's empowerment? Connect with volunteers in community outreach, teaching, skill-building, and documentation roles.</p>
-              <div class="who-card__tags">
-                <span class="who-tag">Rural education</span>
-                <span class="who-tag">Women's empowerment</span>
-                <span class="who-tag">Livelihood programs</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="who-card">
-          <div class="who-card__top">
-            <div class="who-card__emoji-wrap">🔬</div>
-            <div class="who-card__body">
-              <p class="who-card__title">Research Institutions & Universities</p>
-              <p class="who-card__desc">Need citizen science contributors, field data collectors, or research assistants? List structured research volunteer programs and reach students and professionals with domain knowledge.</p>
-              <div class="who-card__tags">
-                <span class="who-tag">Biodiversity surveys</span>
-                <span class="who-tag">Citizen science</span>
-                <span class="who-tag">Climate data collection</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="who-card">
-          <div class="who-card__top">
-            <div class="who-card__emoji-wrap">♻️</div>
-            <div class="who-card__body">
-              <p class="who-card__title">Social Enterprises & Impact Startups</p>
-              <p class="who-card__desc">Running impactful programs in sustainability, clean energy, waste management, or social innovation? Register as a vendor and find motivated volunteers who align with your mission.</p>
-              <div class="who-card__tags">
-                <span class="who-tag">Sustainability programs</span>
-                <span class="who-tag">Clean energy outreach</span>
-                <span class="who-tag">Impact documentation</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── PARTNER GUIDE CARD ─────────────────────────── -->
-  <section class="host-guide">
-    <div class="h-container">
-      <div class="guide-card">
-        <!-- PDF visual -->
-        <div class="guide-card__pdf">
-          <div class="guide-card__badge">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v6M3 4l3 3 3-3M1 10h10" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="guide-card__pdf-lines">
-            <div class="guide-card__pdf-line" style="width:100%"></div>
-            <div class="guide-card__pdf-line" style="width:80%"></div>
-            <div class="guide-card__pdf-line" style="width:90%"></div>
-            <div class="guide-card__pdf-line" style="width:70%"></div>
-          </div>
-          <p class="guide-card__pdf-label">PDF</p>
-        </div>
-        <!-- Content -->
-        <div class="guide-card__content">
-          <p class="guide-card__title">The Complete NGO Partner Guide</p>
-          <p class="guide-card__desc">Download our comprehensive guide covering registration requirements, volunteer management tools, verification checklist, impact reporting features, and stories from our NGO partners. Everything you need to decide if GDT is right for your organisation.</p>
-          <div class="guide-card__actions">
-            <a href="assets/Partnership_Guide.pdf" download class="btn-guide-primary">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M2 13h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Download NGO Partner Guide
-            </a>
-            <a href="#apply" class="btn-guide-outline">
-              Register Now Instead
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── FAQ ────────────────────────────────────────── -->
-  <section class="host-faq">
-    <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">FAQ</span>
-        <h2>Common Questions From NGOs</h2>
-        <p>Everything you need to know before registering your organisation.</p>
-      </div>
-      <div class="faq-list" id="faqList">
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">Is it free to list our volunteering program?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            Yes — listing your program on Great D'Tour is completely free. We charge a small platform fee only when a volunteer confirms their participation. There are no listing fees, no monthly subscriptions, and no upfront costs.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">What documents do we need to register?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            You'll need: (1) NGO registration certificate or equivalent legal document, (2) a brief description of your organisation's mission and active programs, (3) contact details for your program coordinator, and (4) optional: photos or reports from past volunteer batches. Our team will guide you through the full checklist during onboarding.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">What types of volunteering programs can we list?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            We accept wildlife and conservation programs, community development projects, rural education initiatives, research and citizen science programs, environmental restoration drives, women's empowerment projects, and more. If you run a structured, meaningful volunteering program with defined roles and duration, it's likely a good fit.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">How does the volunteer application process work for us?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            Volunteers browse your program listing, select a batch and role, and submit an application with their profile and motivation. You receive all applications in your vendor dashboard, where you can review profiles, accept or reject candidates, and send batch confirmation emails — all from one place.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">Can we set our own eligibility criteria and screening questions?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            Yes. You can define minimum age, educational background, physical fitness level, required skills, and up to 5 custom screening questions that applicants must answer during the application process. This ensures you receive candidates who are genuinely suitable for your program.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">How do we handle stipends or program fees for volunteers?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            You set the terms. Programs can be fully funded (₹0 fee, stipend offered), partially funded, or cost-recovery (volunteer pays a contribution). The platform supports all models. For funded programs, stipend details are shown prominently on your listing to attract more applicants.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">What does the Vendor Dashboard include?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            Your dashboard gives you a real-time view of all applications, confirmed batches, volunteer profiles, batch occupancy, and communication history. You can manage multiple programs and batches simultaneously, export volunteer lists, send bulk updates, and generate impact reports for your stakeholders.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">How long does verification take?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            We complete document verification within 3–5 business days. Once verified, you receive the GDT Verified NGO badge and can publish your first program immediately. Most organisations go live within 2 weeks of initial registration.
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── FINAL CTA ──────────────────────────────────── -->
-  <section class="host-cta" id="apply">
-    <div class="host-cta__inner">
-      <div class="host-cta__badge">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4" fill="none"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
-        Open For Registrations
-      </div>
-      <h2 class="host-cta__title">Ready to Find Your<br />Next Volunteer Cohort?</h2>
-      <p class="host-cta__sub">Join conservation and community organisations already using Great D'Tour to recruit motivated, verified volunteers. Registration is free and takes under 15 minutes.</p>
-      <div class="host-cta__actions">
-        <a href="mailto:volunteer@greatdtour.com?subject=NGO Vendor Registration" class="btn-cta-primary">
-          Register Your Organisation
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10.5 5l4.5 5-4.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="assets/Partnership_Guide.pdf" download class="btn-cta-outline">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v10M5.5 8.5L10 13l4.5-4.5M3 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download NGO Guide
-        </a>
-      </div>
-      <p class="host-cta__note">Free to list · No upfront cost · GDT Verified NGO badge included</p>
-    </div>
-  </section>
-
-  <!-- ─── FOOTER ────────────────────────────────────── -->
+  <!-- ── FOOTER ────────────────────────────────────────── -->
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div class="site-footer__grid">
@@ -1137,9 +1083,6 @@
             </a>
             <a href="#" class="footer-social" aria-label="LinkedIn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            <a href="#" class="footer-social" aria-label="Facebook">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
           </div>
         </div>
@@ -1155,7 +1098,6 @@
           <a href="#" class="footer-col__link">Privacy Policy</a>
           <a href="#" class="footer-col__link">Terms &amp; Conditions</a>
           <a href="#" class="footer-col__link">Cancellation &amp; Refund</a>
-          <a href="#" class="footer-col__link">Cookie Policy</a>
         </div>
         <div>
           <h4 class="footer-col__title">Contact</h4>
@@ -1172,16 +1114,27 @@
 
   <script src="assets/main.js"></script>
   <script>
-    // FAQ accordion
-    document.querySelectorAll('.faq-item__btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        const isOpen = item.classList.contains('faq-item--open');
-        // Close all
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('faq-item--open'));
-        // Toggle this one
-        if (!isOpen) item.classList.add('faq-item--open');
-      });
+    // Tab switcher
+    function switchFlow(flow) {
+      document.querySelectorAll('.flow').forEach(f => f.classList.remove('active'));
+      document.querySelectorAll('.host-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('flow-' + flow).classList.add('active');
+      document.querySelector('.host-tab[data-flow="' + flow + '"]').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Check URL hash on load
+    if (window.location.hash === '#volunteer') switchFlow('volunteer');
+
+    // FAQ accordion (works for both flows)
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.faq-item__btn');
+      if (!btn) return;
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('faq-item--open');
+      // Close all in this flow
+      item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i => i.classList.remove('faq-item--open'));
+      if (!isOpen) item.classList.add('faq-item--open');
     });
   </script>
 </body>
