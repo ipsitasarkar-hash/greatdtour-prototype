@@ -210,43 +210,125 @@
 
     /* ── HOW IT WORKS ─────────────────────────────────── */
     .host-process { background: var(--white); padding: 80px 0; }
-    .process-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .process-col__label {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 13px; font-weight: 600; margin-bottom: 24px; padding-bottom: 16px;
-      border-bottom: 2px solid;
+    .process-unified { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-bottom: 52px; }
+    .process-unified::before {
+      content: ''; position: absolute; top: 20px; left: calc(12.5% + 0px); right: calc(12.5% + 0px);
+      height: 2px; background: var(--border2); z-index: 0;
     }
-    .process-col--travel .process-col__label { color: var(--orange); border-color: rgba(245,73,0,0.2); }
-    .process-col--vol .process-col__label { color: var(--green); border-color: rgba(46,125,50,0.2); }
-    .process-col__label-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .process-col--travel .process-col__label-dot { background: var(--orange); }
-    .process-col--vol .process-col__label-dot { background: var(--green); }
-    .process-steps { display: flex; flex-direction: column; gap: 0; }
-    .process-step {
-      display: grid; grid-template-columns: 48px 1fr;
-      gap: 0 16px; padding-bottom: 24px; position: relative;
+    .process-step-uni {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 0 12px; position: relative; z-index: 1;
     }
-    .process-step:not(:last-child)::before {
-      content: ''; position: absolute;
-      left: 23px; top: 36px; bottom: 0;
-      width: 2px;
-    }
-    .process-col--travel .process-step:not(:last-child)::before { background: rgba(245,73,0,0.15); }
-    .process-col--vol .process-step:not(:last-child)::before { background: rgba(46,125,50,0.15); }
-    .process-step__num {
-      width: 40px; height: 40px; border-radius: 50%;
+    .process-step-uni__num {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--white);
+      border: 2px solid var(--border2);
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 700; flex-shrink: 0; z-index: 1;
+      font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 14px; flex-shrink: 0;
     }
-    .process-col--travel .process-step__num { background: rgba(245,73,0,0.1); color: var(--orange); }
-    .process-col--vol .process-step__num { background: rgba(46,125,50,0.1); color: var(--green); }
-    .process-step__content { padding-top: 8px; }
-    .process-step__title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
-    .process-step__desc { font-size: 13px; color: var(--text); line-height: 1.5; }
-    .process-step__time {
+    .process-step-uni__title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+    .process-step-uni__desc { font-size: 12px; color: var(--text); line-height: 1.5; }
+    .process-step-uni__time {
       display: inline-block; background: var(--light-bg); border: 1px solid var(--border2);
-      border-radius: 999px; font-size: 10px; color: var(--muted); padding: 2px 8px; margin-bottom: 4px;
+      border-radius: 999px; font-size: 10px; color: var(--muted); padding: 2px 8px; margin-bottom: 8px;
     }
+    .process-ctas {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-proc-travel {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      font-size: 15px; font-weight: 600; padding: 15px 28px;
+      border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-proc-travel:hover { opacity: 0.88; }
+    .btn-proc-vol {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff;
+      font-size: 15px; font-weight: 600; padding: 15px 28px;
+      border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-proc-vol:hover { opacity: 0.88; }
+
+    /* ── APPLICATION MODALS ───────────────────────────── */
+    .app-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+      z-index: 1000; display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .app-modal-overlay.active { opacity: 1; pointer-events: all; }
+    .app-modal {
+      background: var(--white); border-radius: 20px; width: 100%; max-width: 560px;
+      max-height: 90vh; overflow-y: auto; position: relative;
+      transform: translateY(16px); transition: transform 0.25s;
+    }
+    .app-modal-overlay.active .app-modal { transform: translateY(0); }
+    .app-modal__header {
+      padding: 28px 32px 24px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; position: sticky; top: 0; background: var(--white); z-index: 2; border-radius: 20px 20px 0 0;
+    }
+    .app-modal__title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); line-height: 1.2; }
+    .app-modal__sub { font-size: 13px; color: var(--text); margin-top: 4px; }
+    .app-modal__close {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--light-bg);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--muted);
+    }
+    .app-modal__close:hover { background: var(--border2); }
+    .app-modal__body { padding: 28px 32px; }
+    .app-step-indicator {
+      display: flex; gap: 6px; margin-bottom: 28px;
+    }
+    .app-step-dot {
+      height: 4px; border-radius: 999px; flex: 1; background: var(--border2); transition: background 0.2s;
+    }
+    .app-step-dot.active { background: var(--orange); }
+    .app-modal--vol .app-step-dot.active { background: var(--green); }
+    .app-form-section { display: none; }
+    .app-form-section.active { display: block; }
+    .app-form-section h3 { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 18px; }
+    .app-field { margin-bottom: 18px; }
+    .app-field label { display: block; font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+    .app-field input, .app-field select, .app-field textarea {
+      width: 100%; border: 1px solid var(--border2); border-radius: 8px;
+      padding: 10px 14px; font-size: 14px; font-family: 'Inter', sans-serif;
+      color: var(--dark); background: var(--white); outline: none; transition: border-color 0.15s;
+    }
+    .app-field input:focus, .app-field select:focus, .app-field textarea:focus { border-color: var(--orange); }
+    .app-modal--vol .app-field input:focus, .app-modal--vol .app-field select:focus, .app-modal--vol .app-field textarea:focus { border-color: var(--green); }
+    .app-field textarea { resize: vertical; min-height: 80px; }
+    .app-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .app-checkboxes { display: flex; flex-direction: column; gap: 10px; }
+    .app-checkbox-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--text); cursor: pointer; }
+    .app-checkbox-item input { width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0; cursor: pointer; accent-color: var(--orange); }
+    .app-modal--vol .app-checkbox-item input { accent-color: var(--green); }
+    .app-modal__footer {
+      padding: 20px 32px 28px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .app-btn-back {
+      background: none; border: 1px solid var(--border2); color: var(--text);
+      font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 8px; cursor: pointer; transition: border-color 0.15s;
+    }
+    .app-btn-back:hover { border-color: var(--muted); }
+    .app-btn-next-travel {
+      background: var(--orange); color: #fff; border: none;
+      font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: opacity 0.2s; margin-left: auto;
+    }
+    .app-btn-next-travel:hover { opacity: 0.88; }
+    .app-btn-next-vol {
+      background: var(--green); color: #fff; border: none;
+      font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: opacity 0.2s; margin-left: auto;
+    }
+    .app-btn-next-vol:hover { opacity: 0.88; }
+    .app-success {
+      text-align: center; padding: 40px 32px 48px; display: none;
+    }
+    .app-success.active { display: block; }
+    .app-success__icon { font-size: 52px; margin-bottom: 16px; }
+    .app-success__title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+    .app-success__sub { font-size: 14px; color: var(--text); line-height: 1.6; max-width: 340px; margin: 0 auto 24px; }
+    .app-success__ref { font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 999px; display: inline-block; margin-bottom: 24px; }
+    .app-success__ref--travel { background: rgba(245,73,0,0.1); color: var(--orange); }
+    .app-success__ref--vol { background: rgba(46,125,50,0.1); color: var(--green); }
+    .app-success__dismiss { font-size: 13px; color: var(--muted); text-decoration: underline; cursor: pointer; background: none; border: none; }
 
     /* ── FAQ ──────────────────────────────────────────── */
     .host-faq { background: var(--light-bg); padding: 80px 0; }
@@ -292,7 +374,8 @@
       .host-hero__inner { grid-template-columns: 1fr; gap: 40px; }
       .host-hero__mosaic { display: none; }
       .prog-grid { grid-template-columns: 1fr; }
-      .process-split { grid-template-columns: 1fr; }
+      .process-unified { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .process-unified::before { display: none; }
     }
     @media (max-width: 760px) {
       .why-grid { grid-template-columns: repeat(2, 1fr); }
@@ -523,92 +606,258 @@
       <div class="section-header">
         <span class="overline-tag">The Process</span>
         <h2>How It Works</h2>
-        <p>A simple path to going live on GDT — for both partner types.</p>
+        <p>Four simple steps to go live on GDT — apply, verify, build your listing, and launch.</p>
       </div>
-      <div class="process-split">
-        <div class="process-col process-col--travel">
-          <div class="process-col__label">
-            <span class="process-col__label-dot"></span>
-            Travel Experience Host
-          </div>
-          <div class="process-steps">
-            <div class="process-step">
-              <div class="process-step__num">1</div>
-              <div class="process-step__content">
-                <span class="process-step__time">~10 min</span>
-                <p class="process-step__title">Apply</p>
-                <p class="process-step__desc">Tell us your expertise, location, and what you want to offer.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="process-step__num">2</div>
-              <div class="process-step__content">
-                <span class="process-step__time">3–5 days</span>
-                <p class="process-step__title">Get Verified</p>
-                <p class="process-step__desc">Profile review, onboarding call, and credential check.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="process-step__num">3</div>
-              <div class="process-step__content">
-                <span class="process-step__time">1–2 weeks</span>
-                <p class="process-step__title">Build Your Listing</p>
-                <p class="process-step__desc">Guided setup — itinerary, photos, pricing, and availability.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="process-step__num">4</div>
-              <div class="process-step__content">
-                <span class="process-step__time">Ongoing</span>
-                <p class="process-step__title">Go Live & Earn</p>
-                <p class="process-step__desc">Accept bookings, receive payouts, grow with analytics.</p>
-              </div>
-            </div>
-          </div>
+      <div class="process-unified">
+        <div class="process-step-uni">
+          <div class="process-step-uni__num">1</div>
+          <span class="process-step-uni__time">~10–15 min</span>
+          <p class="process-step-uni__title">Apply</p>
+          <p class="process-step-uni__desc">Tell us about yourself or your organisation and what you want to offer.</p>
         </div>
-        <div class="process-col process-col--vol">
-          <div class="process-col__label">
-            <span class="process-col__label-dot"></span>
-            Volunteer Programme Partner
-          </div>
-          <div class="process-steps">
-            <div class="process-step">
-              <div class="process-step__num">1</div>
-              <div class="process-step__content">
-                <span class="process-step__time">~15 min</span>
-                <p class="process-step__title">Register Your NGO</p>
-                <p class="process-step__desc">Submit org details, cause area, and program type.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="process-step__num">2</div>
-              <div class="process-step__content">
-                <span class="process-step__time">3–5 days</span>
-                <p class="process-step__title">Get Verified & Badged</p>
-                <p class="process-step__desc">Document check. Approved orgs receive the GDT NGO badge.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="process-step__num">3</div>
-              <div class="process-step__content">
-                <span class="process-step__time">1–2 weeks</span>
-                <p class="process-step__title">Build Program Listings</p>
-                <p class="process-step__desc">Set roles, batches, eligibility, and stipend details.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="process-step__num">4</div>
-              <div class="process-step__content">
-                <span class="process-step__time">Ongoing</span>
-                <p class="process-step__title">Go Live & Recruit</p>
-                <p class="process-step__desc">Review applications, confirm batches, track cohorts.</p>
-              </div>
-            </div>
-          </div>
+        <div class="process-step-uni">
+          <div class="process-step-uni__num">2</div>
+          <span class="process-step-uni__time">3–5 days</span>
+          <p class="process-step-uni__title">Get Verified</p>
+          <p class="process-step-uni__desc">Profile review, onboarding call, and credential or document check.</p>
         </div>
+        <div class="process-step-uni">
+          <div class="process-step-uni__num">3</div>
+          <span class="process-step-uni__time">1–2 weeks</span>
+          <p class="process-step-uni__title">Build Your Listing</p>
+          <p class="process-step-uni__desc">Guided setup for your experience itinerary or volunteer program details.</p>
+        </div>
+        <div class="process-step-uni">
+          <div class="process-step-uni__num">4</div>
+          <span class="process-step-uni__time">Ongoing</span>
+          <p class="process-step-uni__title">Go Live</p>
+          <p class="process-step-uni__desc">Accept bookings or applications, track performance, grow year on year.</p>
+        </div>
+      </div>
+      <div class="process-ctas">
+        <button class="btn-proc-travel" onclick="openModal('travel')">
+          Apply as a Travel Host
+          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn-proc-vol" onclick="openModal('vol')">
+          Register as a Volunteer Partner
+          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- ── TRAVEL HOST APPLICATION MODAL ─────────────────── -->
+  <div class="app-modal-overlay" id="modal-travel">
+    <div class="app-modal">
+      <div class="app-modal__header">
+        <div>
+          <p class="app-modal__title">Travel Host Application</p>
+          <p class="app-modal__sub">Step <span id="travel-step-label">1</span> of 3</p>
+        </div>
+        <button class="app-modal__close" onclick="closeModal('travel')" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="app-modal__body">
+        <div class="app-step-indicator" id="travel-dots">
+          <div class="app-step-dot active"></div>
+          <div class="app-step-dot"></div>
+          <div class="app-step-dot"></div>
+        </div>
+
+        <!-- Step 1: About You -->
+        <div class="app-form-section active" id="travel-s1">
+          <h3>About You</h3>
+          <div class="app-field-row">
+            <div class="app-field"><label>First Name</label><input type="text" placeholder="Arjun" /></div>
+            <div class="app-field"><label>Last Name</label><input type="text" placeholder="Sharma" /></div>
+          </div>
+          <div class="app-field"><label>Email</label><input type="email" placeholder="you@example.com" /></div>
+          <div class="app-field"><label>Phone</label><input type="tel" placeholder="+91 98765 43210" /></div>
+          <div class="app-field"><label>City / Region</label><input type="text" placeholder="Manali, Himachal Pradesh" /></div>
+        </div>
+
+        <!-- Step 2: Your Experience -->
+        <div class="app-form-section" id="travel-s2">
+          <h3>Your Experience Offering</h3>
+          <div class="app-field">
+            <label>Type of Experience</label>
+            <select>
+              <option value="">Select a category</option>
+              <option>Trek / Adventure</option>
+              <option>Cultural Immersion</option>
+              <option>Wildlife Safari</option>
+              <option>Culinary Trail</option>
+              <option>Wellness &amp; Retreat</option>
+              <option>Heritage Walk</option>
+              <option>Craft Workshop</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="app-field"><label>Experience Name (working title)</label><input type="text" placeholder="e.g. Himalayan Sunrise Trek" /></div>
+          <div class="app-field"><label>Brief Description</label><textarea placeholder="What makes your experience unique? (2–3 lines)"></textarea></div>
+          <div class="app-field">
+            <label>Years of Experience as a Host / Guide</label>
+            <select>
+              <option value="">Select</option>
+              <option>Less than 1 year</option>
+              <option>1–3 years</option>
+              <option>3–5 years</option>
+              <option>5+ years</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Step 3: Confirm -->
+        <div class="app-form-section" id="travel-s3">
+          <h3>Almost Done</h3>
+          <div class="app-field"><label>How did you hear about GDT?</label>
+            <select>
+              <option value="">Select</option>
+              <option>Instagram / Social Media</option>
+              <option>Google Search</option>
+              <option>Friend / Colleague</option>
+              <option>Event or Conference</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="app-field"><label>Anything else you'd like us to know?</label><textarea placeholder="Optional — e.g. certifications, languages spoken, group size capacity"></textarea></div>
+          <div class="app-checkboxes">
+            <label class="app-checkbox-item"><input type="checkbox" id="travel-terms" /><span>I agree to GDT's <a href="#" style="color:var(--orange)">Partner Terms</a> and understand the commission model.</span></label>
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div class="app-success" id="travel-success">
+          <div class="app-success__icon">✈️</div>
+          <p class="app-success__title">Application Received!</p>
+          <p class="app-success__sub">Our team will review your application and reach out within 3–5 business days.</p>
+          <span class="app-success__ref app-success__ref--travel" id="travel-ref"></span>
+          <br/>
+          <button class="app-success__dismiss" onclick="closeModal('travel')">Close</button>
+        </div>
+      </div>
+      <div class="app-modal__footer" id="travel-footer">
+        <button class="app-btn-back" id="travel-back" onclick="modalStep('travel', -1)" style="visibility:hidden;">Back</button>
+        <button class="app-btn-next-travel" id="travel-next" onclick="modalStep('travel', 1)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VOLUNTEER PARTNER APPLICATION MODAL ────────────── -->
+  <div class="app-modal-overlay" id="modal-vol">
+    <div class="app-modal app-modal--vol">
+      <div class="app-modal__header">
+        <div>
+          <p class="app-modal__title">Volunteer Partner Registration</p>
+          <p class="app-modal__sub">Step <span id="vol-step-label">1</span> of 3</p>
+        </div>
+        <button class="app-modal__close" onclick="closeModal('vol')" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="app-modal__body">
+        <div class="app-step-indicator" id="vol-dots">
+          <div class="app-step-dot active"></div>
+          <div class="app-step-dot"></div>
+          <div class="app-step-dot"></div>
+        </div>
+
+        <!-- Step 1: Organisation -->
+        <div class="app-form-section active" id="vol-s1">
+          <h3>Your Organisation</h3>
+          <div class="app-field"><label>Organisation Name</label><input type="text" placeholder="Wildlife Conservation India" /></div>
+          <div class="app-field"><label>Organisation Type</label>
+            <select>
+              <option value="">Select</option>
+              <option>Registered NGO / Trust</option>
+              <option>Section 8 Company</option>
+              <option>Social Enterprise</option>
+              <option>Government Body</option>
+              <option>Academic / Research Institution</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="app-field"><label>Website</label><input type="url" placeholder="https://yourorg.org" /></div>
+          <div class="app-field-row">
+            <div class="app-field"><label>Contact Name</label><input type="text" placeholder="Priya Nair" /></div>
+            <div class="app-field"><label>Contact Email</label><input type="email" placeholder="priya@org.org" /></div>
+          </div>
+        </div>
+
+        <!-- Step 2: Program Details -->
+        <div class="app-form-section" id="vol-s2">
+          <h3>Your Volunteer Program</h3>
+          <div class="app-field"><label>Cause Area</label>
+            <select>
+              <option value="">Select</option>
+              <option>Wildlife Conservation</option>
+              <option>Environmental Restoration</option>
+              <option>Rural Education</option>
+              <option>Community Development</option>
+              <option>Women's Empowerment</option>
+              <option>Research &amp; Citizen Science</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="app-field"><label>Program Name</label><input type="text" placeholder="e.g. Tiger Conservation Program — Ranthambore" /></div>
+          <div class="app-field"><label>Program Duration</label>
+            <select>
+              <option value="">Select</option>
+              <option>1–2 Weeks</option>
+              <option>3–4 Weeks</option>
+              <option>1–3 Months</option>
+              <option>3–6 Months</option>
+              <option>6+ Months</option>
+            </select>
+          </div>
+          <div class="app-field"><label>Funding Model</label>
+            <select>
+              <option value="">Select</option>
+              <option>Fully Funded (₹0 + stipend)</option>
+              <option>Partially Funded</option>
+              <option>Cost-Recovery (volunteer pays)</option>
+            </select>
+          </div>
+          <div class="app-field"><label>Brief Program Description</label><textarea placeholder="What will volunteers do? What impact does the program create?"></textarea></div>
+        </div>
+
+        <!-- Step 3: Confirm -->
+        <div class="app-form-section" id="vol-s3">
+          <h3>Almost Done</h3>
+          <div class="app-field"><label>FCRA / 12A / 80G Registration Number (if applicable)</label><input type="text" placeholder="Optional" /></div>
+          <div class="app-field"><label>How did you hear about GDT?</label>
+            <select>
+              <option value="">Select</option>
+              <option>Instagram / Social Media</option>
+              <option>Google Search</option>
+              <option>Partner Referral</option>
+              <option>Event or Conference</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="app-checkboxes">
+            <label class="app-checkbox-item"><input type="checkbox" id="vol-terms" /><span>I confirm this organisation is a legitimate non-profit or social enterprise and agree to GDT's <a href="#" style="color:var(--green)">Partner Terms</a>.</span></label>
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div class="app-success" id="vol-success">
+          <div class="app-success__icon">🌿</div>
+          <p class="app-success__title">Registration Received!</p>
+          <p class="app-success__sub">Our partnerships team will verify your organisation and reach out within 3–5 business days.</p>
+          <span class="app-success__ref app-success__ref--vol" id="vol-ref"></span>
+          <br/>
+          <button class="app-success__dismiss" onclick="closeModal('vol')">Close</button>
+        </div>
+      </div>
+      <div class="app-modal__footer" id="vol-footer">
+        <button class="app-btn-back" id="vol-back" onclick="modalStep('vol', -1)" style="visibility:hidden;">Back</button>
+        <button class="app-btn-next-vol" id="vol-next" onclick="modalStep('vol', 1)">Continue →</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ── FAQ ────────────────────────────────────────────── -->
   <section class="host-faq">
@@ -722,6 +971,7 @@
 
   <script src="assets/main.js"></script>
   <script>
+    // FAQ accordion
     document.addEventListener('click', function(e) {
       const btn = e.target.closest('.faq-item__btn');
       if (!btn) return;
@@ -729,6 +979,82 @@
       const isOpen = item.classList.contains('faq-item--open');
       document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('faq-item--open'));
       if (!isOpen) item.classList.add('faq-item--open');
+    });
+
+    // Modal state
+    const modalState = { travel: 1, vol: 1 };
+    const modalMax = { travel: 3, vol: 3 };
+
+    function openModal(type) {
+      modalState[type] = 1;
+      renderModal(type);
+      document.getElementById('modal-' + type).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(type) {
+      document.getElementById('modal-' + type).classList.remove('active');
+      document.body.style.overflow = '';
+      // reset after transition
+      setTimeout(() => { modalState[type] = 1; renderModal(type); }, 300);
+    }
+
+    function modalStep(type, dir) {
+      const step = modalState[type];
+      const max = modalMax[type];
+      if (dir === 1 && step === max) {
+        submitModal(type); return;
+      }
+      modalState[type] = Math.max(1, Math.min(max, step + dir));
+      renderModal(type);
+    }
+
+    function renderModal(type) {
+      const step = modalState[type];
+      const max = modalMax[type];
+      // sections
+      for (let i = 1; i <= max; i++) {
+        const el = document.getElementById(type + '-s' + i);
+        if (el) el.classList.toggle('active', i === step);
+      }
+      // dots
+      document.querySelectorAll('#' + type + '-dots .app-step-dot').forEach((d, i) => {
+        d.classList.toggle('active', i < step);
+      });
+      // step label
+      document.getElementById(type + '-step-label').textContent = step;
+      // back button
+      document.getElementById(type + '-back').style.visibility = step > 1 ? 'visible' : 'hidden';
+      // next button label
+      const nextBtn = document.getElementById(type + '-next');
+      nextBtn.textContent = step === max ? 'Submit Application →' : 'Continue →';
+      // hide success
+      document.getElementById(type + '-success').classList.remove('active');
+      document.getElementById(type + '-footer').style.display = 'flex';
+    }
+
+    function submitModal(type) {
+      const prefix = type === 'travel' ? 'TH' : 'VP';
+      const ref = prefix + '-2025-' + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById(type + '-ref').textContent = 'Reference: ' + ref;
+      // hide all steps
+      const max = modalMax[type];
+      for (let i = 1; i <= max; i++) {
+        const el = document.getElementById(type + '-s' + i);
+        if (el) el.classList.remove('active');
+      }
+      document.getElementById(type + '-success').classList.add('active');
+      document.getElementById(type + '-footer').style.display = 'none';
+    }
+
+    // Close on overlay click
+    document.querySelectorAll('.app-modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          const type = overlay.id.replace('modal-', '');
+          closeModal(type);
+        }
+      });
     });
   </script>
 </body>
