@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GDT Care Host Application — Great D'Tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f9fafb; color: #101828; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── TOP NAV ── */
+    .tha-nav {
+      background: #101828; padding: 0 40px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .tha-nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .tha-nav__logo {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #2E7D32; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 12px; color: #fff; flex-shrink: 0;
+    }
+    .tha-nav__title-wrap { display: flex; flex-direction: column; }
+    .tha-nav__title { font-size: 14px; font-weight: 600; color: #ffffff; line-height: 1.2; }
+    .tha-nav__subtitle { font-size: 11px; color: #8a9ab0; font-weight: 400; }
+    .tha-nav__step-counter { font-size: 13px; color: #8a9ab0; font-weight: 500; }
+    .tha-nav__step-counter span { color: #ffffff; font-weight: 600; }
+
+    /* ── PROGRESS BAR ── */
+    .tha-progress { background: #1e2d40; height: 6px; width: 100%; }
+    .tha-progress__fill { background: #2E7D32; height: 100%; transition: width 0.4s ease; }
+
+    /* ── TAB BAR ── */
+    .tha-tabs { background: #101828; border-bottom: 1px solid #1e2d40; padding: 0 40px; overflow-x: auto; white-space: nowrap; }
+    .tha-tabs::-webkit-scrollbar { display: none; }
+    .tha-tabs__inner { display: inline-flex; gap: 0; min-width: 100%; }
+    .tha-tab {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 13px 24px; font-size: 13px; font-weight: 500;
+      color: #4b6173; cursor: pointer; border-bottom: 2px solid transparent;
+      transition: all 0.2s; white-space: nowrap; user-select: none;
+    }
+    .tha-tab.is-done { color: #6b7e8f; }
+    .tha-tab.is-done .tha-tab__num { background: #2E7D32; color: #fff; border-color: #2E7D32; font-size: 10px; }
+    .tha-tab.is-active { color: #f9fafb; background: rgba(255,255,255,0.05); border-bottom-color: #2E7D32; }
+    .tha-tab.is-active .tha-tab__num { background: #2E7D32; color: #fff; border-color: #2E7D32; }
+    .tha-tab__num {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 1.5px solid #4b6173; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0; transition: all 0.2s;
+    }
+
+    /* ── MAIN ── */
+    .tha-main { flex: 1; padding: 40px 20px 120px; }
+    .tha-card {
+      max-width: 768px; margin: 0 auto;
+      background: #ffffff; border-radius: 14px; border: 1px solid #e5e7eb;
+      padding: 40px 48px;
+    }
+
+    /* ── SECTION LABELS ── */
+    .sec-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.8px; color: #2E7D32; margin-bottom: 14px; margin-top: 28px;
+    }
+    .sec-label:first-child { margin-top: 0; }
+    .sec-divider { border: none; border-top: 1px solid #e5e7eb; margin: 24px 0; }
+
+    /* ── STEP INTRO ── */
+    .step-title { font-size: 20px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .step-desc { font-size: 14px; color: #6b7280; margin-bottom: 28px; line-height: 1.55; }
+
+    /* ── STEP 1 INTRO CARD ── */
+    .intro-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 999px;
+      padding: 4px 12px; font-size: 12px; font-weight: 600; color: #166534;
+      margin-bottom: 20px;
+    }
+    .intro-card { background: #f9fafb; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; }
+    .intro-card h2 { font-size: 20px; font-weight: 700; color: #101828; margin-bottom: 6px; }
+    .intro-card p { font-size: 14px; color: #4b5563; line-height: 1.6; }
+    .intro-badges-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .intro-info-badge {
+      flex: 1; min-width: 150px; background: #f9fafb; border: 1px solid #e5e7eb;
+      border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 3px;
+    }
+    .intro-info-badge__icon { font-size: 18px; margin-bottom: 4px; }
+    .intro-info-badge__label { font-size: 13px; font-weight: 600; color: #101828; }
+    .intro-info-badge__desc { font-size: 12px; color: #6b7280; }
+
+    /* ── FORM ELEMENTS ── */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-group label { font-size: 13px; font-weight: 500; color: #374151; }
+    .form-group label .req { color: #dc2626; margin-left: 2px; }
+    .form-group label .opt { color: #9ca3af; font-weight: 400; margin-left: 4px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px;
+      font-size: 14px; font-family: 'Inter', sans-serif; color: #101828;
+      outline: none; transition: border-color 0.2s; background: #fff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: #2E7D32; box-shadow: 0 0 0 3px rgba(46,125,50,0.10); }
+    .form-group textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
+    .form-hint { font-size: 12px; color: #9ca3af; margin-top: 4px; line-height: 1.4; }
+
+    /* ── RADIO & CHECKBOX ── */
+    .radio-group, .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .radio-group.inline, .check-group.inline { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+    .radio-item, .check-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border: 1px solid #e5e7eb; border-radius: 8px;
+      cursor: pointer; transition: all 0.15s; font-size: 14px; color: #374151;
+    }
+    .radio-item:hover, .check-item:hover { border-color: #2E7D32; background: #f0fdf4; }
+    .radio-item.is-selected, .check-item.is-selected { border-color: #2E7D32; background: #f0fdf4; }
+    .radio-item input, .check-item input { margin-top: 2px; accent-color: #2E7D32; flex-shrink: 0; }
+    .check-item.is-max { opacity: 0.5; pointer-events: none; }
+
+    /* ── FILE UPLOAD ── */
+    .file-upload-area {
+      border: 2px dashed #d1d5db; border-radius: 10px;
+      padding: 28px; text-align: center; cursor: pointer;
+      transition: all 0.2s; background: #fafafa;
+    }
+    .file-upload-area:hover { border-color: #2E7D32; background: #f0fdf4; }
+    .file-upload-area input[type="file"] { display: none; }
+    .file-upload-area__icon { font-size: 28px; margin-bottom: 8px; }
+    .file-upload-area__label { font-size: 14px; font-weight: 500; color: #374151; margin-bottom: 4px; }
+    .file-upload-area__hint { font-size: 12px; color: #9ca3af; }
+    .file-upload-area__btn {
+      display: inline-block; margin-top: 10px;
+      background: #fff; border: 1px solid #d1d5db; border-radius: 6px;
+      padding: 7px 16px; font-size: 13px; font-weight: 500; color: #374151;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .file-upload-area__btn:hover { border-color: #2E7D32; color: #2E7D32; }
+    .file-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .file-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 6px; font-size: 13px; color: #166534;
+    }
+    .file-item__remove { cursor: pointer; color: #9ca3af; font-size: 16px; background: none; border: none; padding: 0; }
+    .file-item__remove:hover { color: #dc2626; }
+
+    /* ── CONDITIONAL FIELD ── */
+    .conditional-field { display: none; margin-top: 12px; padding: 16px; background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb; }
+    .conditional-field.is-visible { display: block; }
+
+    /* ── INFO BANNER ── */
+    .info-banner {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+      padding: 14px 16px; margin-bottom: 20px; font-size: 13px; color: #1e40af; line-height: 1.55;
+    }
+    .info-banner.green { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+    .info-banner__icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── PLEDGE / TERMS ── */
+    .pledge-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+    .pledge-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; border: 1px solid #e5e7eb; border-radius: 10px;
+      cursor: pointer; transition: all 0.2s; background: #fff;
+    }
+    .pledge-item:hover { border-color: #2E7D32; background: #f0fdf4; }
+    .pledge-item.is-checked { border-color: #2E7D32; background: #f0fdf4; }
+    .pledge-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #2E7D32; flex-shrink: 0; margin-top: 2px; }
+    .pledge-item__text { font-size: 14px; color: #374151; line-height: 1.5; }
+    .pledge-item.is-checked .pledge-item__text { color: #166534; }
+    .pledge-item__link { color: #2E7D32; text-decoration: underline; }
+
+    /* ── STEP PANELS ── */
+    .step-panel { display: none; }
+    .step-panel.is-active { display: block; }
+
+    /* ── STICKY FOOTER ── */
+    .tha-footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 1px solid #e5e7eb;
+      padding: 16px 40px; display: flex; align-items: center;
+      justify-content: space-between; z-index: 99;
+    }
+    .tha-footer__back {
+      background: none; border: none; font-size: 14px; font-weight: 500;
+      color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 6px;
+      padding: 10px 16px; border-radius: 8px; transition: all 0.15s;
+    }
+    .tha-footer__back:hover { background: #f3f4f6; color: #374151; }
+    .tha-footer__right { display: flex; align-items: center; gap: 14px; }
+    .tha-footer__hint { font-size: 12px; color: #9ca3af; }
+    .tha-footer__continue {
+      background: #101828; color: #ffffff; border: none;
+      padding: 0 28px; height: 48px; border-radius: 8px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; transition: background 0.2s;
+    }
+    .tha-footer__continue:hover { background: #1e2d40; }
+    .tha-footer__continue:disabled { opacity: 0.45; cursor: not-allowed; }
+    .tha-footer__continue.is-green { background: #2E7D32; }
+    .tha-footer__continue.is-green:hover { background: #1b5e20; }
+    .tha-footer__continue.is-green:disabled { background: #2E7D32; }
+
+    /* ── SUCCESS ── */
+    .success-screen { display: none; max-width: 520px; margin: 60px auto 0; text-align: center; padding: 0 20px; }
+    .success-screen.is-active { display: block; }
+    .success-icon { font-size: 56px; margin-bottom: 18px; }
+    .success-screen h2 { font-size: 26px; font-weight: 700; color: #101828; margin-bottom: 10px; }
+    .success-screen p { font-size: 15px; color: #4b5563; line-height: 1.65; margin-bottom: 22px; }
+    .success-ref {
+      display: inline-block; background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 8px; padding: 10px 22px; font-size: 14px; font-weight: 700;
+      color: #166534; margin-bottom: 30px; letter-spacing: 1px;
+    }
+    .success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .success-btn {
+      padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none; border: 1px solid #e5e7eb;
+      background: #fff; color: #374151; transition: all 0.15s;
+    }
+    .success-btn:hover { background: #f9fafb; }
+    .success-btn.primary { background: #2E7D32; color: #fff; border-color: #2E7D32; }
+    .success-btn.primary:hover { background: #1b5e20; }
+
+    @media (max-width: 640px) {
+      .tha-card { padding: 24px 20px; }
+      .tha-nav { padding: 0 20px; }
+      .tha-tabs { padding: 0 16px; }
+      .tha-footer { padding: 12px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .intro-badges-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP NAV ── -->
+  <nav class="tha-nav">
+    <a href="host.html" class="tha-nav__brand">
+      <div class="tha-nav__logo">GDT<br>Care</div>
+      <div class="tha-nav__title-wrap">
+        <span class="tha-nav__title">GDT Care Host — Intake Form</span>
+        <span class="tha-nav__subtitle">Volunteer Programme Application</span>
+      </div>
+    </a>
+    <span class="tha-nav__step-counter">Step <span id="navStepCurrent">1</span> of 4</span>
+  </nav>
+
+  <!-- ── PROGRESS BAR ── -->
+  <div class="tha-progress">
+    <div class="tha-progress__fill" id="progressFill" style="width: 25%"></div>
+  </div>
+
+  <!-- ── TAB BAR ── -->
+  <div class="tha-tabs">
+    <div class="tha-tabs__inner" id="tabsInner"></div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main class="tha-main" id="thaMain">
+
+    <!-- SUCCESS SCREEN -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">🌿</div>
+      <h2>Application Submitted!</h2>
+      <p>Thank you for applying to become a GDT Care host. Our team will review your application and reach out within 3–5 business days to schedule a qualification call.</p>
+      <div class="success-ref" id="successRef">VP-2025-XXXX</div>
+      <div class="success-actions">
+        <a href="volunteer-detail.html" class="success-btn">Explore Programmes</a>
+        <a href="index.html" class="success-btn primary">Back to Home</a>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: ABOUT YOU ── -->
+    <div class="tha-card step-panel is-active" id="step-1">
+      <div class="intro-badge">🌿 GDT Care — Volunteer Host</div>
+      <div class="intro-card">
+        <h2>List Your Volunteer Programme on GDT Care</h2>
+        <p>GDT Care connects responsible travellers with authentic volunteering opportunities across India. Tell us about yourself and your programme to get started.</p>
+      </div>
+      <div class="intro-badges-row" style="margin-bottom: 32px;">
+        <div class="intro-info-badge">
+          <div class="intro-info-badge__icon">⏱️</div>
+          <div class="intro-info-badge__label">15–20 Minutes</div>
+          <div class="intro-info-badge__desc">32 fields in 4 steps</div>
+        </div>
+        <div class="intro-info-badge">
+          <div class="intro-info-badge__icon">✅</div>
+          <div class="intro-info-badge__label">Manually Reviewed</div>
+          <div class="intro-info-badge__desc">Every application is vetted by GDT</div>
+        </div>
+        <div class="intro-info-badge">
+          <div class="intro-info-badge__icon">🔒</div>
+          <div class="intro-info-badge__label">Confidential</div>
+          <div class="intro-info-badge__desc">Your data is secure with us</div>
+        </div>
+      </div>
+
+      <div class="sec-label">Who You Are</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your name <span class="req">*</span></label>
+          <input type="text" placeholder="e.g. Meera Nair" />
+        </div>
+        <div class="form-group">
+          <label>Organisation or business name <span class="opt">(optional)</span></label>
+          <input type="text" placeholder="Leave blank if applying as individual" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>You are applying as <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="applicant_type" value="individual" onchange="handleApplicantType(this)" /> Individual</label>
+          <label class="radio-item"><input type="radio" name="applicant_type" value="ngo" onchange="handleApplicantType(this)" /> NGO or Trust</label>
+          <label class="radio-item"><input type="radio" name="applicant_type" value="business" onchange="handleApplicantType(this)" /> Registered Business</label>
+          <label class="radio-item"><input type="radio" name="applicant_type" value="farm" onchange="handleApplicantType(this)" /> Farm Stay or Eco Property</label>
+          <label class="radio-item"><input type="radio" name="applicant_type" value="other" onchange="handleApplicantType(this)" /> Other</label>
+        </div>
+        <div class="conditional-field" id="cond-applicant-other">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Please describe <span class="req">*</span></label>
+            <input type="text" placeholder="Describe your organisation type" />
+          </div>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Contact Details</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email address <span class="req">*</span></label>
+          <input type="email" placeholder="e.g. hello@yourecocamp.in" />
+        </div>
+        <div class="form-group">
+          <label>Phone number <span class="req">*</span></label>
+          <input type="tel" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>WhatsApp number <span class="opt">(optional)</span></label>
+          <input type="tel" placeholder="Leave blank if same as phone" />
+          <div class="form-hint">Leave blank if same as phone number above</div>
+        </div>
+        <div class="form-group">
+          <label>Website or social media link <span class="opt">(optional)</span></label>
+          <input type="url" placeholder="e.g. instagram.com/yourecocamp" />
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Programme Location</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>State <span class="req">*</span></label>
+          <select>
+            <option value="">Select state</option>
+            <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+            <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
+            <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+            <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+            <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+            <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
+            <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+            <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+            <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+            <option>West Bengal</option>
+            <option disabled>── Union Territories ──</option>
+            <option>Andaman and Nicobar Islands</option><option>Chandigarh</option>
+            <option>Dadra and Nagar Haveli and Daman and Diu</option><option>Delhi</option>
+            <option>Jammu and Kashmir</option><option>Ladakh</option>
+            <option>Lakshadweep</option><option>Puducherry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>District and nearest town <span class="req">*</span></label>
+          <input type="text" placeholder="e.g. Wayanad, Kalpetta" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: YOUR CREDENTIALS ── -->
+    <div class="tha-card step-panel" id="step-2">
+      <h3 class="step-title">Your Credentials</h3>
+      <p class="step-desc">Establishes legitimacy. Upload one document that best represents your organisation. All credentials are reviewed by the GDT team before approval.</p>
+
+      <div class="info-banner">
+        <span class="info-banner__icon">ℹ️</span>
+        <span>Documents are treated as declarations and stored securely. Verified originals may be requested during the qualification call. Misrepresentation will disqualify your application.</span>
+      </div>
+
+      <div class="sec-label">Tax Identification</div>
+      <div class="form-group">
+        <label>PAN number <span class="req">*</span></label>
+        <input type="text" placeholder="e.g. ABCDE1234F" maxlength="10" style="text-transform: uppercase;" />
+        <div class="form-hint">Required for all applicants — individual or organisation</div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Registrations &amp; Recognitions</div>
+      <div class="form-group">
+        <label>Do you have any of the following registrations? <span class="req">*</span></label>
+        <div class="check-group" id="credCheckGroup">
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> Darpan ID (NGO)</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> Section 8 Certificate</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> Trust Registration</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> Society Registration</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> FCRA (Foreign Contribution Regulation Act)</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> GST Registration</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> 12A or 80G Tax Exemption</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" /> State Tourism Board Recognition</label>
+          <label class="check-item"><input type="checkbox" name="cred_reg" value="none" id="credNone" onchange="handleCredNone(this)" /> None of the above</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Enter the relevant registration number(s) <span class="opt">(optional)</span></label>
+        <textarea placeholder="Add the numbers corresponding to what you selected above. E.g., Darpan ID: XXXXXX, GST: XXXXXX"></textarea>
+        <div class="form-hint">You may add multiple numbers — one per line is easiest</div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Identity or Registration Proof</div>
+      <div class="form-group">
+        <label>Upload document <span class="req">*</span></label>
+        <div class="file-upload-area" onclick="document.getElementById('fileUpload').click()">
+          <input type="file" id="fileUpload" accept=".pdf,.jpg,.jpeg,.png" multiple onchange="handleFileUpload(this)" />
+          <div class="file-upload-area__icon">📎</div>
+          <div class="file-upload-area__label">Drag & drop or browse to upload</div>
+          <div class="file-upload-area__hint">PDF, JPG, or PNG · Max 2 files · 5 MB each</div>
+          <div class="file-upload-area__btn">Choose File</div>
+        </div>
+        <div class="file-list" id="fileList"></div>
+        <div class="form-hint" style="margin-top: 8px;">Any one government-issued document — PAN card, registration certificate, trust deed, or Darpan certificate</div>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: YOUR PROGRAMME ── -->
+    <div class="tha-card step-panel" id="step-3">
+      <h3 class="step-title">Your Programme</h3>
+      <p class="step-desc">Tell us what kind of volunteering you offer and whether it fits GDT Care's mission of authentic, responsible experiences.</p>
+
+      <div class="sec-label">Programme Category <span style="font-weight:400;color:#9ca3af;letter-spacing:0;text-transform:none;font-size:12px;">(select up to 2)</span></div>
+      <div class="form-group">
+        <div class="check-group" id="catCheckGroup" data-max="2">
+          <label class="check-item"><input type="checkbox" name="prog_cat" onchange="handleMaxCheck('catCheckGroup',2,this)" /> Conservation and Wildlife</label>
+          <label class="check-item"><input type="checkbox" name="prog_cat" onchange="handleMaxCheck('catCheckGroup',2,this)" /> Organic Farming and Agriculture</label>
+          <label class="check-item"><input type="checkbox" name="prog_cat" onchange="handleMaxCheck('catCheckGroup',2,this)" /> Skills Exchange and Work Exchange</label>
+          <label class="check-item"><input type="checkbox" name="prog_cat" onchange="handleMaxCheck('catCheckGroup',2,this)" /> Apprenticeship and Craft</label>
+          <label class="check-item"><input type="checkbox" name="prog_cat" onchange="handleMaxCheck('catCheckGroup',2,this)" /> Cultural Immersion</label>
+          <label class="check-item"><input type="checkbox" name="prog_cat" onchange="handleMaxCheck('catCheckGroup',2,this)" /> Community Development</label>
+          <label class="check-item"><input type="checkbox" name="prog_cat" onchange="handleMaxCheck('catCheckGroup',2,this)" /> Eco-Tourism and Environment</label>
+          <label class="check-item"><input type="checkbox" name="prog_cat" value="other" onchange="handleMaxCheck('catCheckGroup',2,this); handleProgCatOther(this)" /> Other</label>
+        </div>
+        <div class="conditional-field" id="cond-prog-other">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Please describe your category <span class="req">*</span></label>
+            <input type="text" placeholder="e.g. Marine Conservation, Disaster Relief…" />
+          </div>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Programme Description</div>
+      <div class="form-group">
+        <label>Briefly describe what a volunteer does with you and what they receive in return <span class="req">*</span></label>
+        <textarea id="progDesc" rows="4" placeholder="Two to three sentences. e.g., 'Volunteers assist with organic farming 4 hours a day and receive accommodation and meals in return.'" oninput="updateCharCount(this,'progDescCount')"></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+          <div class="form-hint">Programme details (roles, hours, accommodation) are captured separately after activation</div>
+          <div style="font-size:12px;color:#9ca3af;"><span id="progDescCount">0</span> chars</div>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Exchange Model</div>
+      <div class="form-group">
+        <label>What is your exchange model? <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="exchange_model" /> Work exchange — no money between host and volunteer</label>
+          <label class="radio-item"><input type="radio" name="exchange_model" /> Host provides a stipend to volunteers</label>
+          <label class="radio-item"><input type="radio" name="exchange_model" /> Host charges a programme fee to volunteers</label>
+          <label class="radio-item"><input type="radio" name="exchange_model" /> Mixed — varies by programme</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Safety &amp; Safeguarding</div>
+
+      <div class="form-group">
+        <label>Does your programme involve working with children under 18? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="children" value="yes" onchange="handleConditional('children','yes','cond-children')" /> Yes</label>
+          <label class="radio-item"><input type="radio" name="children" value="no" onchange="handleConditional('children','yes','cond-children')" /> No</label>
+        </div>
+        <div class="conditional-field" id="cond-children">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Do you have a child safeguarding policy? <span class="req">*</span></label>
+            <div class="radio-group inline">
+              <label class="radio-item"><input type="radio" name="child_policy" /> Yes</label>
+              <label class="radio-item"><input type="radio" name="child_policy" /> No</label>
+              <label class="radio-item"><input type="radio" name="child_policy" /> In progress</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Does your programme involve animals? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="animals" value="yes" onchange="handleConditional('animals','yes','cond-animals')" /> Yes</label>
+          <label class="radio-item"><input type="radio" name="animals" value="no" onchange="handleConditional('animals','yes','cond-animals')" /> No</label>
+        </div>
+        <div class="conditional-field" id="cond-animals">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Do you follow a recognised animal welfare standard? <span class="req">*</span></label>
+            <div class="radio-group inline">
+              <label class="radio-item"><input type="radio" name="animal_welfare" /> Yes</label>
+              <label class="radio-item"><input type="radio" name="animal_welfare" /> No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Is there a 24/7 emergency contact available at or near your programme site? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="emergency_contact" /> Yes</label>
+          <label class="radio-item"><input type="radio" name="emergency_contact" /> No</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Do you carry any insurance covering your volunteers? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="insurance" /> Yes</label>
+          <label class="radio-item"><input type="radio" name="insurance" /> No</label>
+          <label class="radio-item"><input type="radio" name="insurance" /> Not sure</label>
+        </div>
+      </div>
+
+      <hr class="sec-divider" />
+      <div class="sec-label">Previous Experience</div>
+
+      <div class="form-group">
+        <label>Have you hosted volunteers before? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item"><input type="radio" name="hosted_before" value="yes" onchange="handleConditional('hosted_before','yes','cond-vol-count')" /> Yes</label>
+          <label class="radio-item"><input type="radio" name="hosted_before" value="no" onchange="handleConditional('hosted_before','yes','cond-vol-count')" /> No</label>
+        </div>
+        <div class="conditional-field" id="cond-vol-count">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Approximately how many volunteers to date? <span class="req">*</span></label>
+            <select>
+              <option value="">Select range</option>
+              <option>1–5</option>
+              <option>6–15</option>
+              <option>16–30</option>
+              <option>More than 30</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: TERMS AND SUBMISSION ── -->
+    <div class="tha-card step-panel" id="step-4">
+      <h3 class="step-title">Terms and Submission</h3>
+      <p class="step-desc">Please read and confirm each commitment below. All 6 confirmations are required to submit your application.</p>
+
+      <div class="info-banner green">
+        <span class="info-banner__icon">🌿</span>
+        <span>These are specific commitments tied to GDT Care's values — not generic boilerplate. Please read each one carefully before confirming.</span>
+      </div>
+
+      <div class="sec-label">Your Commitments</div>
+      <div class="pledge-list" id="pledgeList">
+        <label class="pledge-item" onclick="togglePledge(this)">
+          <input type="checkbox" onchange="updateSubmitGate()" />
+          <span class="pledge-item__text">All information I have provided is accurate and complete.</span>
+        </label>
+        <label class="pledge-item" onclick="togglePledge(this)">
+          <input type="checkbox" onchange="updateSubmitGate()" />
+          <span class="pledge-item__text">I understand that submitting this form does not guarantee listing on GDT. Applications are reviewed and subject to a qualification call.</span>
+        </label>
+        <label class="pledge-item" onclick="togglePledge(this)">
+          <input type="checkbox" onchange="updateSubmitGate()" />
+          <span class="pledge-item__text">My programme does not permit unsupervised access to any person under 18.</span>
+        </label>
+        <label class="pledge-item" onclick="togglePledge(this)">
+          <input type="checkbox" onchange="updateSubmitGate()" />
+          <span class="pledge-item__text">The exchange I offer volunteers is proportionate to their contribution and does not replace paid employment.</span>
+        </label>
+        <label class="pledge-item" onclick="togglePledge(this)">
+          <input type="checkbox" onchange="updateSubmitGate()" />
+          <span class="pledge-item__text">If approved and listed on GDT, I will respond to volunteer applications within 72 hours.</span>
+        </label>
+        <label class="pledge-item" onclick="togglePledge(this)">
+          <input type="checkbox" onchange="updateSubmitGate()" />
+          <span class="pledge-item__text">I have read and agree to GDT's <a class="pledge-item__link" href="#" onclick="return false;">Care Programme Terms and Conditions</a> and <a class="pledge-item__link" href="#" onclick="return false;">Privacy Policy</a>.</span>
+        </label>
+      </div>
+
+      <div id="pledgeHint" style="font-size:13px;color:#9ca3af;margin-top:14px;text-align:center;">
+        Check all 6 commitments to enable submission
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── STICKY FOOTER ── -->
+  <footer class="tha-footer" id="thaFooter">
+    <button class="tha-footer__back" id="footerBack" onclick="goStep(-1)">← Back</button>
+    <div class="tha-footer__right">
+      <span class="tha-footer__hint" id="footerHint"></span>
+      <button class="tha-footer__continue is-green" id="footerContinue" onclick="goStep(1)">
+        Begin Application →
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    const STEPS = [
+      { num: 1, label: 'About You' },
+      { num: 2, label: 'Credentials' },
+      { num: 3, label: 'Your Programme' },
+      { num: 4, label: 'Terms' },
+    ];
+    let currentStep = 1;
+
+    function renderTabs() {
+      document.getElementById('tabsInner').innerHTML = STEPS.map(s => {
+        let cls = 'tha-tab';
+        if (s.num < currentStep) cls += ' is-done';
+        else if (s.num === currentStep) cls += ' is-active';
+        const icon = s.num < currentStep ? '✓' : s.num;
+        return `<div class="${cls}" onclick="jumpToStep(${s.num})"><span class="tha-tab__num">${icon}</span>${s.label}</div>`;
+      }).join('');
+    }
+
+    function renderProgress() {
+      document.getElementById('progressFill').style.width = (currentStep / 4 * 100) + '%';
+      document.getElementById('navStepCurrent').textContent = currentStep;
+    }
+
+    function renderFooter() {
+      const back = document.getElementById('footerBack');
+      const cont = document.getElementById('footerContinue');
+      const hint = document.getElementById('footerHint');
+
+      back.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+      hint.textContent = `Step ${currentStep} of 4`;
+
+      if (currentStep === 1) {
+        cont.textContent = 'Begin Application →';
+      } else if (currentStep === 4) {
+        cont.textContent = 'Submit Application →';
+        updateSubmitGate();
+      } else {
+        cont.textContent = 'Continue →';
+        cont.disabled = false;
+      }
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('is-active'));
+      const panel = document.getElementById('step-' + n);
+      if (panel) panel.classList.add('is-active');
+      document.getElementById('successScreen').classList.remove('is-active');
+    }
+
+    function goStep(dir) {
+      if (dir === 1 && currentStep === 4) {
+        submitApplication();
+        return;
+      }
+      const next = currentStep + dir;
+      if (next < 1) return;
+      currentStep = next;
+      showStep(currentStep);
+      renderTabs();
+      renderProgress();
+      renderFooter();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function jumpToStep(n) {
+      if (n > currentStep) return;
+      currentStep = n;
+      showStep(currentStep);
+      renderTabs();
+      renderProgress();
+      renderFooter();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function submitApplication() {
+      if (document.getElementById('footerContinue').disabled) return;
+      const ref = 'VP-2025-' + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('successRef').textContent = ref;
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('is-active'));
+      document.getElementById('successScreen').classList.add('is-active');
+      document.getElementById('thaFooter').style.display = 'none';
+      document.getElementById('progressFill').style.width = '100%';
+      currentStep = 5;
+      renderTabs();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Pledge gate
+    function togglePledge(label) {
+      const cb = label.querySelector('input[type="checkbox"]');
+      label.classList.toggle('is-checked', cb.checked);
+    }
+
+    function updateSubmitGate() {
+      if (currentStep !== 4) return;
+      const boxes = document.querySelectorAll('#pledgeList input[type="checkbox"]');
+      const allChecked = Array.from(boxes).every(b => b.checked);
+      document.getElementById('footerContinue').disabled = !allChecked;
+      const hint = document.getElementById('pledgeHint');
+      const remaining = Array.from(boxes).filter(b => !b.checked).length;
+      hint.textContent = allChecked
+        ? '✓ All commitments confirmed — ready to submit'
+        : `Check all 6 commitments to enable submission (${remaining} remaining)`;
+      hint.style.color = allChecked ? '#2E7D32' : '#9ca3af';
+    }
+
+    // Conditional field display
+    function handleConditional(name, triggerVal, condId) {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      const cond = document.getElementById(condId);
+      if (selected && selected.value === triggerVal) {
+        cond.classList.add('is-visible');
+      } else {
+        cond.classList.remove('is-visible');
+      }
+    }
+
+    function handleApplicantType(radio) {
+      const cond = document.getElementById('cond-applicant-other');
+      cond.classList.toggle('is-visible', radio.value === 'other');
+    }
+
+    function handleProgCatOther(cb) {
+      const cond = document.getElementById('cond-prog-other');
+      cond.classList.toggle('is-visible', cb.checked);
+    }
+
+    // Max-select checkboxes
+    function handleMaxCheck(groupId, max, changed) {
+      const group = document.getElementById(groupId);
+      const checked = group.querySelectorAll('input[type="checkbox"]:checked');
+      const all = group.querySelectorAll('.check-item');
+      if (checked.length >= max) {
+        all.forEach(item => {
+          const cb = item.querySelector('input');
+          if (!cb.checked) item.classList.add('is-max');
+        });
+      } else {
+        all.forEach(item => item.classList.remove('is-max'));
+      }
+    }
+
+    // "None of the above" exclusivity for credentials
+    function handleCredNone(cb) {
+      const others = document.querySelectorAll('#credCheckGroup input[type="checkbox"]:not(#credNone)');
+      if (cb.checked) others.forEach(o => { o.checked = false; o.closest('.check-item').classList.remove('is-selected'); });
+    }
+
+    // File upload display
+    function handleFileUpload(input) {
+      const list = document.getElementById('fileList');
+      Array.from(input.files).slice(0, 2).forEach(file => {
+        const item = document.createElement('div');
+        item.className = 'file-item';
+        item.innerHTML = `<span>📄 ${file.name}</span><button class="file-item__remove" onclick="this.parentElement.remove()">×</button>`;
+        list.appendChild(item);
+      });
+    }
+
+    // Radio interactive highlight
+    document.addEventListener('change', function(e) {
+      const t = e.target;
+      if (t.type === 'radio') {
+        document.querySelectorAll(`input[type="radio"][name="${t.name}"]`).forEach(r => {
+          r.closest('.radio-item').classList.toggle('is-selected', r.checked);
+        });
+      }
+      if (t.type === 'checkbox' && t.closest('.check-item') && !t.closest('.check-item').classList.contains('is-max')) {
+        t.closest('.check-item').classList.toggle('is-selected', t.checked);
+      }
+    });
+
+    function updateCharCount(el, countId) {
+      if (countId) document.getElementById(countId).textContent = el.value.length;
+    }
+
+    // Init
+    renderTabs();
+    renderProgress();
+    renderFooter();
+  </script>
+</body>
+</html>
