@@ -184,14 +184,14 @@
       display: flex; align-items: center; justify-content: center; gap: 8px;
       width: 100%; background: var(--orange); color: #fff;
       font-size: 15px; font-weight: 700; padding: 16px 24px;
-      border-radius: 10px; text-decoration: none; transition: opacity 0.2s;
+      border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s;
     }
     .btn-cta-travel:hover { opacity: 0.88; }
     .btn-cta-vol {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       width: 100%; background: var(--green); color: #fff;
       font-size: 15px; font-weight: 700; padding: 16px 24px;
-      border-radius: 10px; text-decoration: none; transition: opacity 0.2s;
+      border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s;
     }
     .btn-cta-vol:hover { opacity: 0.88; }
     .prog-card__cta-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 8px; }
@@ -413,19 +413,19 @@
       <div class="host-hero__text">
         <div class="host-hero__badge">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.4l-3 2.9.7 4.1L8 10.4l-3.7 2 .7-4.1-3-2.9 4.2-.8z" fill="#ff7043"/></svg>
-          Partner Programme
+          Partner With GDT
         </div>
-        <h1 class="host-hero__title">Host Travel Experiences.<br /><em>Or Run Volunteer Programs.</em></h1>
-        <p class="host-hero__sub">Two ways to partner with Great D'Tour — as a travel experience host or as an NGO listing volunteer programs. Pick your path below.</p>
+        <h1 class="host-hero__title">Your Expertise.<br /><em>Our Platform. Real Impact.</em></h1>
+        <p class="host-hero__sub">Whether you lead unforgettable journeys or drive meaningful change on the ground — GDT gives you the audience, tools, and backing to scale what you do best.</p>
         <div class="host-hero__ctas">
-          <a href="#apply-travel" class="btn-hero-travel">
-            List a Travel Experience
+          <button class="btn-hero-travel" onclick="openModal('travel')">
+            Apply as a Travel Host
             <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="#apply-vol" class="btn-hero-vol">
-            List a Volunteer Program
+          </button>
+          <button class="btn-hero-vol" onclick="openModal('vol')">
+            Register as a Volunteer Partner
             <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          </button>
         </div>
       </div>
       <div class="hero-mosaic-wrap">
@@ -502,104 +502,6 @@
     </div>
   </section>
 
-  <!-- ── TWO PROGRAMME CARDS ────────────────────────────── -->
-  <section class="host-programmes" id="apply">
-    <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">Choose Your Path</span>
-        <h2>Two Ways to Partner With Us</h2>
-        <p>Pick the programme that matches what you offer.</p>
-      </div>
-      <div class="prog-grid">
-
-        <!-- TRAVEL HOST CARD -->
-        <div class="prog-card prog-card--travel" id="apply-travel">
-          <div class="prog-card__header">
-            <div class="prog-card__pill">
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.4l-3 2.9.7 4.1L8 10.4l-3.7 2 .7-4.1-3-2.9 4.2-.8z" fill="#ff7043"/></svg>
-              Travel Experience Host
-            </div>
-            <h2 class="prog-card__title">Share Your World.<br /><em>Earn Doing It.</em></h2>
-            <p class="prog-card__sub">Turn your local expertise into bookable experiences — treks, cultural tours, culinary trails, wellness retreats, and more.</p>
-          </div>
-          <div class="prog-card__body">
-            <div class="prog-card__stats">
-              <div class="prog-stat prog-stat--travel">
-                <p class="prog-stat__num">₹4.2L</p>
-                <p class="prog-stat__label">avg. annual earnings</p>
-              </div>
-              <div class="prog-stat prog-stat--travel">
-                <p class="prog-stat__num">50K+</p>
-                <p class="prog-stat__label">active travelers</p>
-              </div>
-              <div class="prog-stat prog-stat--travel">
-                <p class="prog-stat__num">850+</p>
-                <p class="prog-stat__label">hosts on platform</p>
-              </div>
-            </div>
-            <ul class="prog-card__perks">
-              <li>Commission-only model — no upfront fees</li>
-              <li>Pricing tools, demand forecasting, and analytics</li>
-              <li>Bookings and payments fully managed by GDT</li>
-              <li>Payouts within 5–7 business days of completion</li>
-              <li>Guided listing setup with our experience team</li>
-            </ul>
-            <div class="prog-card__cta">
-              <a href="mailto:hello@greatdtour.com?subject=Travel Host Application" class="btn-cta-travel">
-                Apply as a Travel Host
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <p class="prog-card__cta-note">Free to apply · Live within 3 weeks · ~10 min form</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- VOLUNTEER PARTNER CARD -->
-        <div class="prog-card prog-card--vol" id="apply-vol">
-          <div class="prog-card__header">
-            <div class="prog-card__pill">
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
-              Volunteer Programme Partner
-            </div>
-            <h2 class="prog-card__title">Recruit Better Volunteers.<br /><em>Amplify Your Impact.</em></h2>
-            <p class="prog-card__sub">List your NGO or social enterprise's programs and connect with motivated, verified volunteers ready to contribute.</p>
-          </div>
-          <div class="prog-card__body">
-            <div class="prog-card__stats">
-              <div class="prog-stat prog-stat--vol">
-                <p class="prog-stat__num">12K+</p>
-                <p class="prog-stat__label">registered volunteers</p>
-              </div>
-              <div class="prog-stat prog-stat--vol">
-                <p class="prog-stat__num">3×</p>
-                <p class="prog-stat__label">more applicants vs. social</p>
-              </div>
-              <div class="prog-stat prog-stat--vol">
-                <p class="prog-stat__num">2,400+</p>
-                <p class="prog-stat__label">placed this year</p>
-              </div>
-            </div>
-            <ul class="prog-card__perks">
-              <li>Free to list — small fee only on confirmed placements</li>
-              <li>Custom eligibility criteria and screening questions</li>
-              <li>Application management and batch confirmation tools</li>
-              <li>Supports funded, stipend, and cost-recovery models</li>
-              <li>GDT Verified NGO badge after document review</li>
-            </ul>
-            <div class="prog-card__cta">
-              <a href="mailto:volunteer@greatdtour.com?subject=NGO Volunteer Partner Registration" class="btn-cta-vol">
-                Register as a Volunteer Partner
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <p class="prog-card__cta-note">Free to list · Verified in 3–5 days · ~15 min form</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- ── HOW IT WORKS ───────────────────────────────────── -->
   <section class="host-process">
     <div class="h-container">
@@ -634,15 +536,103 @@
           <p class="process-step-uni__desc">Accept bookings or applications, track performance, grow year on year.</p>
         </div>
       </div>
-      <div class="process-ctas">
-        <button class="btn-proc-travel" onclick="openModal('travel')">
-          Apply as a Travel Host
-          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="btn-proc-vol" onclick="openModal('vol')">
-          Register as a Volunteer Partner
-          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+    </div>
+  </section>
+
+  <!-- ── TWO PROGRAMME CARDS ────────────────────────────── -->
+  <section class="host-programmes" id="apply">
+    <div class="h-container">
+      <div class="section-header">
+        <span class="overline-tag">Choose Your Path</span>
+        <h2>Two Ways to Partner With Us</h2>
+        <p>Pick the programme that matches what you offer.</p>
+      </div>
+      <div class="prog-grid">
+
+        <!-- TRAVEL HOST CARD -->
+        <div class="prog-card prog-card--travel">
+          <div class="prog-card__header">
+            <div class="prog-card__pill">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.4l-3 2.9.7 4.1L8 10.4l-3.7 2 .7-4.1-3-2.9 4.2-.8z" fill="#ff7043"/></svg>
+              Travel Experience Host
+            </div>
+            <h2 class="prog-card__title">Share Your World.<br /><em>Earn Doing It.</em></h2>
+            <p class="prog-card__sub">Turn your local expertise into bookable experiences — treks, cultural tours, culinary trails, wellness retreats, and more.</p>
+          </div>
+          <div class="prog-card__body">
+            <div class="prog-card__stats">
+              <div class="prog-stat prog-stat--travel">
+                <p class="prog-stat__num">₹4.2L</p>
+                <p class="prog-stat__label">avg. annual earnings</p>
+              </div>
+              <div class="prog-stat prog-stat--travel">
+                <p class="prog-stat__num">50K+</p>
+                <p class="prog-stat__label">active travelers</p>
+              </div>
+              <div class="prog-stat prog-stat--travel">
+                <p class="prog-stat__num">850+</p>
+                <p class="prog-stat__label">hosts on platform</p>
+              </div>
+            </div>
+            <ul class="prog-card__perks">
+              <li>Commission-only model — no upfront fees</li>
+              <li>Pricing tools, demand forecasting, and analytics</li>
+              <li>Bookings and payments fully managed by GDT</li>
+              <li>Payouts within 5–7 business days of completion</li>
+              <li>Guided listing setup with our experience team</li>
+            </ul>
+            <div class="prog-card__cta">
+              <button class="btn-cta-travel" onclick="openModal('travel')">
+                Apply as a Travel Host
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p class="prog-card__cta-note">Free to apply · Live within 3 weeks · ~10 min form</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- VOLUNTEER PARTNER CARD -->
+        <div class="prog-card prog-card--vol">
+          <div class="prog-card__header">
+            <div class="prog-card__pill">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
+              Volunteer Programme Partner
+            </div>
+            <h2 class="prog-card__title">Recruit Better Volunteers.<br /><em>Amplify Your Impact.</em></h2>
+            <p class="prog-card__sub">List your NGO or social enterprise's programs and connect with motivated, verified volunteers ready to contribute.</p>
+          </div>
+          <div class="prog-card__body">
+            <div class="prog-card__stats">
+              <div class="prog-stat prog-stat--vol">
+                <p class="prog-stat__num">12K+</p>
+                <p class="prog-stat__label">registered volunteers</p>
+              </div>
+              <div class="prog-stat prog-stat--vol">
+                <p class="prog-stat__num">3×</p>
+                <p class="prog-stat__label">more applicants vs. social</p>
+              </div>
+              <div class="prog-stat prog-stat--vol">
+                <p class="prog-stat__num">2,400+</p>
+                <p class="prog-stat__label">placed this year</p>
+              </div>
+            </div>
+            <ul class="prog-card__perks">
+              <li>Free to list — small fee only on confirmed placements</li>
+              <li>Custom eligibility criteria and screening questions</li>
+              <li>Application management and batch confirmation tools</li>
+              <li>Supports funded, stipend, and cost-recovery models</li>
+              <li>GDT Verified NGO badge after document review</li>
+            </ul>
+            <div class="prog-card__cta">
+              <button class="btn-cta-vol" onclick="openModal('vol')">
+                Register as a Volunteer Partner
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p class="prog-card__cta-note">Free to list · Verified in 3–5 days · ~15 min form</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
