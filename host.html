@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Become a Host — Great D'Tour</title>
+  <title>List a Volunteering Program — Great D'Tour</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -66,8 +66,15 @@
     }
 
     /* ─── HERO ─────────────────────────────────────── */
+    :root {
+      --vol-green: #2E7D32;
+      --vol-green-mid: #388E3C;
+      --vol-green-light: rgba(46,125,50,0.10);
+      --vol-green-border: rgba(46,125,50,0.30);
+    }
+
     .host-hero {
-      background: linear-gradient(163deg, var(--dark) 0%, var(--dark2) 100%);
+      background: linear-gradient(163deg, #1a2f1a 0%, #0d1f0d 100%);
       padding: 122px 0 80px;
       position: relative;
       overflow: hidden;
@@ -77,7 +84,7 @@
       position: absolute;
       top: -300px; right: -100px;
       width: 600px; height: 600px;
-      background: rgba(245,73,0,0.1);
+      background: rgba(46,125,50,0.15);
       border-radius: 50%;
       filter: blur(120px);
       pointer-events: none;
@@ -95,13 +102,13 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(245,73,0,0.15);
-      border: 1px solid rgba(245,73,0,0.3);
+      background: rgba(46,125,50,0.18);
+      border: 1px solid rgba(46,125,50,0.35);
       border-radius: 999px;
       padding: 6px 14px;
       font-size: 12px;
       font-weight: 600;
-      color: var(--orange);
+      color: #66bb6a;
       letter-spacing: 0.6px;
       text-transform: uppercase;
       margin-bottom: 28px;
@@ -115,7 +122,7 @@
       line-height: 1.14;
       margin-bottom: 24px;
     }
-    .host-hero__title em { font-style: normal; color: var(--orange); }
+    .host-hero__title em { font-style: normal; color: #66bb6a; }
     .host-hero__sub {
       font-size: 18px;
       color: rgba(255,255,255,0.8);
@@ -132,7 +139,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--orange);
+      background: var(--vol-green);
       color: #fff;
       font-size: 16px;
       font-weight: 600;
@@ -231,7 +238,7 @@
     }
     .why-card__icon-wrap {
       width: 52px; height: 52px;
-      background: rgba(245,73,0,0.08);
+      background: rgba(46,125,50,0.10);
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 24px;
@@ -280,7 +287,7 @@
       left: 13%;
       right: 13%;
       height: 2px;
-      background: linear-gradient(90deg, rgba(245,73,0,0.2) 0%, rgba(245,73,0,0.6) 50%, rgba(245,73,0,0.2) 100%);
+      background: linear-gradient(90deg, rgba(46,125,50,0.2) 0%, rgba(46,125,50,0.6) 50%, rgba(46,125,50,0.2) 100%);
     }
     .process-step {
       display: flex;
@@ -292,7 +299,7 @@
     .process-step__circle {
       width: 104px; height: 104px;
       border-radius: 50%;
-      border: 2px solid rgba(245,73,0,0.2);
+      border: 2px solid rgba(46,125,50,0.25);
       background: var(--white);
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 24px;
@@ -303,7 +310,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 28px;
       font-weight: 700;
-      color: var(--orange);
+      color: var(--vol-green);
     }
     .process-step__time {
       display: inline-block;
@@ -360,7 +367,7 @@
     }
     .who-card__emoji-wrap {
       width: 56px; height: 56px;
-      background: rgba(245,73,0,0.08);
+      background: rgba(46,125,50,0.10);
       border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
       font-size: 28px;
@@ -386,8 +393,8 @@
       gap: 8px;
     }
     .who-tag {
-      background: rgba(245,73,0,0.08);
-      color: var(--orange);
+      background: rgba(46,125,50,0.10);
+      color: var(--vol-green);
       font-size: 12px;
       font-weight: 500;
       padding: 4px 12px;
@@ -402,7 +409,7 @@
       padding: 72px 0;
     }
     .guide-card {
-      background: linear-gradient(163deg, var(--dark) 0%, var(--dark2) 100%);
+      background: linear-gradient(163deg, #1a2f1a 0%, #0d1f0d 100%);
       border-radius: 20px;
       padding: 48px;
       display: grid;
@@ -417,15 +424,15 @@
       position: absolute;
       top: -100px; right: -100px;
       width: 300px; height: 300px;
-      background: rgba(245,73,0,0.2);
+      background: rgba(46,125,50,0.25);
       border-radius: 50%;
       filter: blur(80px);
       pointer-events: none;
     }
     .guide-card__pdf {
       width: 80px;
-      background: rgba(245,73,0,0.2);
-      border: 1px solid rgba(245,73,0,0.3);
+      background: rgba(46,125,50,0.25);
+      border: 1px solid rgba(46,125,50,0.4);
       border-radius: 8px;
       padding: 10px;
       position: relative;
@@ -445,7 +452,7 @@
     .guide-card__pdf-label {
       font-size: 8px;
       font-weight: 700;
-      color: var(--orange);
+      color: #66bb6a;
       letter-spacing: 0.4px;
       text-transform: uppercase;
       text-align: center;
@@ -454,7 +461,7 @@
       position: absolute;
       top: -6px; right: -6px;
       width: 24px; height: 24px;
-      background: var(--orange);
+      background: var(--vol-green);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
     }
@@ -482,7 +489,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--orange);
+      background: var(--vol-green);
       color: #fff;
       font-size: 15px;
       font-weight: 600;
@@ -549,7 +556,7 @@
       color: var(--muted);
       transition: transform 0.2s;
     }
-    .faq-item--open .faq-item__icon { transform: rotate(45deg); color: var(--orange); }
+    .faq-item--open .faq-item__icon { transform: rotate(45deg); color: var(--vol-green); }
     .faq-item__answer {
       max-height: 0;
       overflow: hidden;
@@ -566,7 +573,7 @@
 
     /* ─── FINAL CTA ──────────────────────────────────── */
     .host-cta {
-      background: linear-gradient(163deg, var(--dark) 0%, var(--dark2) 100%);
+      background: linear-gradient(163deg, #1a2f1a 0%, #0d1f0d 100%);
       padding: 96px 0;
       text-align: center;
       position: relative;
@@ -578,7 +585,7 @@
       top: -100px; left: 50%;
       transform: translateX(-50%);
       width: 600px; height: 400px;
-      background: rgba(245,73,0,0.12);
+      background: rgba(46,125,50,0.18);
       border-radius: 50%;
       filter: blur(100px);
       pointer-events: none;
@@ -588,13 +595,13 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(245,73,0,0.15);
-      border: 1px solid rgba(245,73,0,0.3);
+      background: rgba(46,125,50,0.18);
+      border: 1px solid rgba(46,125,50,0.35);
       border-radius: 999px;
       padding: 6px 14px;
       font-size: 12px;
       font-weight: 600;
-      color: var(--orange);
+      color: #66bb6a;
       letter-spacing: 0.6px;
       text-transform: uppercase;
       margin-bottom: 28px;
@@ -624,7 +631,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--orange);
+      background: var(--vol-green);
       color: #fff;
       font-size: 18px;
       font-weight: 700;
@@ -719,19 +726,19 @@
     <div class="host-hero__inner">
       <div class="host-hero__text">
         <div class="host-hero__badge">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.4l-3 2.9.7 4.1L8 10.4l-3.7 2 .7-4.1-3-2.9 4.2-.8z" fill="#f54900"/></svg>
-          Partner Programme
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4" fill="none"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
+          Volunteer Partner Programme
         </div>
-        <h1 class="host-hero__title">Share Your World.<br /><em>Earn Doing It.</em></h1>
-        <p class="host-hero__sub">Join 850+ hosts on Great D'Tour and turn your knowledge of place, culture, and craft into a thriving travel experience business.</p>
+        <h1 class="host-hero__title">Reach More Volunteers.<br /><em>Amplify Your Impact.</em></h1>
+        <p class="host-hero__sub">List your NGO's volunteering program on Great D'Tour and connect with motivated, verified volunteers from across India who are ready to contribute to your cause.</p>
         <div class="host-hero__actions">
           <a href="#apply" class="btn-primary">
-            Start Your Application
+            List Your Program
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="assets/Partnership_Guide.pdf" download class="btn-outline-dark">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v9M5.25 7.5L9 11.25l3.75-3.75M3 14.5h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Download Partner Guide
+            Download NGO Guide
           </a>
         </div>
       </div>
@@ -756,10 +763,10 @@
             </div>
           </div>
         </div>
-        <!-- Earnings badge -->
+        <!-- Volunteers badge -->
         <div class="hero-earnings">
-          <p class="hero-earnings__label">Last month's top earner</p>
-          <p class="hero-earnings__num">₹68,400 <span>↑ 24%</span></p>
+          <p class="hero-earnings__label">Volunteers placed this year</p>
+          <p class="hero-earnings__num">2,400+ <span>↑ 38%</span></p>
         </div>
       </div>
     </div>
@@ -769,64 +776,64 @@
   <section class="host-why">
     <div class="h-container">
       <div class="section-header">
-        <span class="overline-tag">The Advantages</span>
-        <h2>Why Choose Us</h2>
-        <p>We built Great D'Tour around our hosts. Every feature, every tool, every policy is designed to help you succeed.</p>
+        <span class="overline-tag">Why List With Us</span>
+        <h2>What We Offer NGOs & Conservation Orgs</h2>
+        <p>We built Great D'Tour's volunteer platform for impact-first organisations. Every feature helps you attract the right volunteers and run better programs.</p>
       </div>
       <div class="why-grid">
 
         <div class="why-card">
           <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="#f54900" stroke-width="1.8"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="8" r="3" stroke="#f54900" stroke-width="1.5"/><path d="M24 20c1.5.5 3 1.5 3 3" stroke="#f54900" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="#2E7D32" stroke-width="1.8"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="8" r="3" stroke="#2E7D32" stroke-width="1.5"/><path d="M24 20c1.5.5 3 1.5 3 3" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
-          <p class="why-card__stat">50,000+<span class="why-card__stat-sub"> active travelers</span></p>
-          <p class="why-card__title">Global Reach</p>
-          <p class="why-card__desc">Tap into our curated community of culturally curious, high-intent travelers from 42 countries who actively seek authentic experiences.</p>
+          <p class="why-card__stat">12,000+<span class="why-card__stat-sub"> registered volunteers</span></p>
+          <p class="why-card__title">Verified Volunteer Pool</p>
+          <p class="why-card__desc">Access our growing community of screened, passionate volunteers — from students and working professionals to retirees — all with verified profiles and declared skills.</p>
         </div>
 
         <div class="why-card">
           <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="2" stroke="#f54900" stroke-width="1.8"/><path d="M4 11h20" stroke="#f54900" stroke-width="1.8"/><path d="M9 16h4M9 19h6" stroke="#f54900" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4v8l4 4" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/><circle cx="14" cy="14" r="10" stroke="#2E7D32" stroke-width="1.8"/></svg>
           </div>
-          <p class="why-card__stat">₹4.2L<span class="why-card__stat-sub"> avg. annual partner earnings</span></p>
-          <p class="why-card__title">Real Revenue</p>
-          <p class="why-card__desc">Our top hosts earn ₹4.2 lakhs annually. With our pricing tools and demand forecasting, you maximize yield year-round.</p>
+          <p class="why-card__stat">Zero<span class="why-card__stat-sub"> listing or subscription fee</span></p>
+          <p class="why-card__title">Free to List</p>
+          <p class="why-card__desc">Listing your program on Great D'Tour is completely free. We only charge a small platform fee when a volunteer confirms — no upfront costs, no monthly charges.</p>
         </div>
 
         <div class="why-card">
           <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4v8l4 4" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/><circle cx="14" cy="14" r="10" stroke="#f54900" stroke-width="1.8"/></svg>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="2" stroke="#2E7D32" stroke-width="1.8"/><path d="M4 11h20" stroke="#2E7D32" stroke-width="1.8"/><path d="M9 16h4M9 19h6" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
-          <p class="why-card__stat">100%<span class="why-card__stat-sub"> booking management handled</span></p>
-          <p class="why-card__title">Zero Admin</p>
-          <p class="why-card__desc">We handle bookings, payments, customer queries, and reminders. You focus on crafting extraordinary experiences.</p>
+          <p class="why-card__stat">100%<span class="why-card__stat-sub"> application management</span></p>
+          <p class="why-card__title">Zero Admin Load</p>
+          <p class="why-card__desc">We handle inbound applications, candidate screening questions, batch confirmations, and communications. You focus on running your program.</p>
         </div>
 
         <div class="why-card">
           <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14h4l3 6 4-12 3 6h6" stroke="#f54900" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14h4l3 6 4-12 3 6h6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <p class="why-card__stat">24/7<span class="why-card__stat-sub"> partner success team</span></p>
+          <p class="why-card__stat">3x<span class="why-card__stat-sub"> more applicants per program</span></p>
+          <p class="why-card__title">Wider Reach</p>
+          <p class="why-card__desc">Programs listed on Great D'Tour receive 3× more applicants on average than social-media-only outreach, with better candidate quality and completion rates.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card__icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M12 14l3 3 6-6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="14" r="10" stroke="#2E7D32" stroke-width="1.8"/></svg>
+          </div>
+          <p class="why-card__stat">GDT<span class="why-card__stat-sub"> Verified NGO badge</span></p>
+          <p class="why-card__title">Trust & Credibility</p>
+          <p class="why-card__desc">Earn the GDT Verified NGO badge after a one-time credential check. Volunteers can apply with confidence knowing your program meets our quality standards.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-card__icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6L9 19.2l.9-5.5-4-3.9 5.5-.8z" stroke="#2E7D32" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="why-card__stat">24/7<span class="why-card__stat-sub"> partner support team</span></p>
           <p class="why-card__title">Dedicated Support</p>
-          <p class="why-card__desc">Your dedicated account manager helps with listings, pricing strategy, and scaling your hosting business — at every stage.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6L9 19.2l.9-5.5-4-3.9 5.5-.8z" stroke="#f54900" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="why-card__stat">5–7<span class="why-card__stat-sub"> days to your account</span></p>
-          <p class="why-card__title">Secure Payouts</p>
-          <p class="why-card__desc">Payments are processed securely and transferred within 5–7 business days of experience completion — no chasing invoices.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-card__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M12 14l3 3 6-6" stroke="#f54900" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="14" r="10" stroke="#f54900" stroke-width="1.8"/></svg>
-          </div>
-          <p class="why-card__stat">4.8★<span class="why-card__stat-sub"> platform trust rating</span></p>
-          <p class="why-card__title">Trusted Brand</p>
-          <p class="why-card__desc">Associate with a platform known for curation and quality. Our verification badge signals credibility to discerning travelers.</p>
+          <p class="why-card__desc">Your assigned partner success manager helps with listing quality, batch planning, volunteer screening criteria, and growing your program year on year.</p>
         </div>
 
       </div>
@@ -838,8 +845,8 @@
     <div class="h-container">
       <div class="section-header">
         <span class="overline-tag">The Process</span>
-        <h2>From Application to First Booking</h2>
-        <p>A clear, supported journey from your first click to your first 5-star review.</p>
+        <h2>From Registration to First Batch</h2>
+        <p>A clear, supported path from your first click to receiving your first confirmed volunteer cohort.</p>
       </div>
       <div class="process-track">
 
@@ -847,9 +854,9 @@
           <div class="process-step__circle">
             <span class="process-step__num">01</span>
           </div>
-          <span class="process-step__time">~10 min</span>
-          <p class="process-step__title">Register Your Interest</p>
-          <p class="process-step__desc">Complete our partner application in under 10 minutes. Tell us about your expertise, location, and the experiences you envision.</p>
+          <span class="process-step__time">~15 min</span>
+          <p class="process-step__title">Register Your NGO</p>
+          <p class="process-step__desc">Complete our vendor registration form with your organization details, program categories, and cause areas. It takes under 15 minutes.</p>
         </div>
 
         <div class="process-step">
@@ -857,8 +864,8 @@
             <span class="process-step__num">02</span>
           </div>
           <span class="process-step__time">3–5 days</span>
-          <p class="process-step__title">Verification & Onboarding</p>
-          <p class="process-step__desc">Our team reviews your profile and schedules a discovery call within 3–5 business days. We verify credentials and align on quality standards.</p>
+          <p class="process-step__title">Verification & NGO Badge</p>
+          <p class="process-step__desc">Our team reviews your registration documents, NGO certificate, and past program evidence. Verified orgs receive the GDT NGO badge.</p>
         </div>
 
         <div class="process-step">
@@ -866,8 +873,8 @@
             <span class="process-step__num">03</span>
           </div>
           <span class="process-step__time">1–2 weeks</span>
-          <p class="process-step__title">Craft Your Listing</p>
-          <p class="process-step__desc">Work with our experience consultants to build compelling listings — itineraries, photography, pricing, and availability — all guided.</p>
+          <p class="process-step__title">Build Your Program Listings</p>
+          <p class="process-step__desc">Work with our partner team to craft compelling program pages — roles, batches, eligibility, stipend details, and requirements — all guided.</p>
         </div>
 
         <div class="process-step">
@@ -875,17 +882,17 @@
             <span class="process-step__num">04</span>
           </div>
           <span class="process-step__time">Ongoing</span>
-          <p class="process-step__title">Go Live & Host</p>
-          <p class="process-step__desc">Your experiences publish to our global platform. Accept bookings, receive payouts, and grow your hosting business with analytics tools.</p>
+          <p class="process-step__title">Go Live & Receive Applications</p>
+          <p class="process-step__desc">Your programs publish to our volunteer marketplace. Review applications in your dashboard, confirm batches, and track volunteer cohorts end-to-end.</p>
         </div>
 
       </div>
       <div class="process-cta">
-        <a href="#apply" class="btn-primary">
-          Start Your Application
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <p class="process-cta__note">No upfront cost · 10-minute application · Response within 5 days</p>
+          <a href="#apply" class="btn-primary">
+            Register Your NGO
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="process-cta__note">Free to list · 15-minute registration · Verification within 5 days</p>
       </div>
     </div>
   </section>
@@ -894,22 +901,22 @@
   <section class="host-who">
     <div class="h-container">
       <div class="section-header">
-        <span class="overline-tag">Partner Types</span>
-        <h2>Who Thrives on Great D'Tour?</h2>
-        <p>Whether you're an individual host or an established operator, there's a place for you here.</p>
+        <span class="overline-tag">Who Can Register</span>
+        <h2>Which Organisations Are We Looking For?</h2>
+        <p>We partner with registered NGOs, conservation bodies, social enterprises, and research institutions that run structured volunteer programs.</p>
       </div>
       <div class="who-grid">
 
         <div class="who-card">
           <div class="who-card__top">
-            <div class="who-card__emoji-wrap">🏡</div>
+            <div class="who-card__emoji-wrap">🌿</div>
             <div class="who-card__body">
-              <p class="who-card__title">Local Hosts</p>
-              <p class="who-card__desc">Live in a unique destination and want to share authentic cultural experiences — from home-cooking immersions to village treks — with curious travelers.</p>
+              <p class="who-card__title">Wildlife & Conservation NGOs</p>
+              <p class="who-card__desc">Run field programs in national parks, wildlife sanctuaries, or coastal ecosystems? List your volunteer roles and attract skilled field researchers, educators, and conservation enthusiasts.</p>
               <div class="who-card__tags">
-                <span class="who-tag">Homestay experiences</span>
-                <span class="who-tag">Cultural tours</span>
-                <span class="who-tag">Craft workshops</span>
+                <span class="who-tag">Tiger / Elephant corridors</span>
+                <span class="who-tag">Marine conservation</span>
+                <span class="who-tag">Forest restoration</span>
               </div>
             </div>
           </div>
@@ -917,14 +924,14 @@
 
         <div class="who-card">
           <div class="who-card__top">
-            <div class="who-card__emoji-wrap">✈️</div>
+            <div class="who-card__emoji-wrap">🏘️</div>
             <div class="who-card__body">
-              <p class="who-card__title">Travel Agents</p>
-              <p class="who-card__desc">Specialize in curated travel itineraries and want to reach a global audience of discerning travelers who seek meaningful, curated journeys.</p>
+              <p class="who-card__title">Community Development Orgs</p>
+              <p class="who-card__desc">Working on rural livelihoods, education, health, or women's empowerment? Connect with volunteers in community outreach, teaching, skill-building, and documentation roles.</p>
               <div class="who-card__tags">
-                <span class="who-tag">Multi-day packages</span>
-                <span class="who-tag">Custom itineraries</span>
-                <span class="who-tag">Group bookings</span>
+                <span class="who-tag">Rural education</span>
+                <span class="who-tag">Women's empowerment</span>
+                <span class="who-tag">Livelihood programs</span>
               </div>
             </div>
           </div>
@@ -932,14 +939,14 @@
 
         <div class="who-card">
           <div class="who-card__top">
-            <div class="who-card__emoji-wrap">🎥</div>
+            <div class="who-card__emoji-wrap">🔬</div>
             <div class="who-card__body">
-              <p class="who-card__title">Creators & Influencers</p>
-              <p class="who-card__desc">Have an engaged following and want to monetize your passion for travel by creating and hosting exclusive experiences for your community.</p>
+              <p class="who-card__title">Research Institutions & Universities</p>
+              <p class="who-card__desc">Need citizen science contributors, field data collectors, or research assistants? List structured research volunteer programs and reach students and professionals with domain knowledge.</p>
               <div class="who-card__tags">
-                <span class="who-tag">Photo walks</span>
-                <span class="who-tag">Creator retreats</span>
-                <span class="who-tag">Fan experiences</span>
+                <span class="who-tag">Biodiversity surveys</span>
+                <span class="who-tag">Citizen science</span>
+                <span class="who-tag">Climate data collection</span>
               </div>
             </div>
           </div>
@@ -947,14 +954,14 @@
 
         <div class="who-card">
           <div class="who-card__top">
-            <div class="who-card__emoji-wrap">🧭</div>
+            <div class="who-card__emoji-wrap">♻️</div>
             <div class="who-card__body">
-              <p class="who-card__title">Tour Operators</p>
-              <p class="who-card__desc">Offer specialized tours focused on cultural immersion, adventure, or wellness. Expand your distribution and access our network of ready-to-book travelers.</p>
+              <p class="who-card__title">Social Enterprises & Impact Startups</p>
+              <p class="who-card__desc">Running impactful programs in sustainability, clean energy, waste management, or social innovation? Register as a vendor and find motivated volunteers who align with your mission.</p>
               <div class="who-card__tags">
-                <span class="who-tag">Trekking tours</span>
-                <span class="who-tag">Wellness retreats</span>
-                <span class="who-tag">Heritage walks</span>
+                <span class="who-tag">Sustainability programs</span>
+                <span class="who-tag">Clean energy outreach</span>
+                <span class="who-tag">Impact documentation</span>
               </div>
             </div>
           </div>
@@ -983,15 +990,15 @@
         </div>
         <!-- Content -->
         <div class="guide-card__content">
-          <p class="guide-card__title">The Complete Partner Guide</p>
-          <p class="guide-card__desc">Download our comprehensive PDF covering commission structures, platform features, success strategies, and real host stories from our top partners. Everything you need to decide if GDT is right for you.</p>
+          <p class="guide-card__title">The Complete NGO Partner Guide</p>
+          <p class="guide-card__desc">Download our comprehensive guide covering registration requirements, volunteer management tools, verification checklist, impact reporting features, and stories from our NGO partners. Everything you need to decide if GDT is right for your organisation.</p>
           <div class="guide-card__actions">
             <a href="assets/Partnership_Guide.pdf" download class="btn-guide-primary">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M2 13h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Download Partnership Guide
+              Download NGO Partner Guide
             </a>
             <a href="#apply" class="btn-guide-outline">
-              Apply Now Instead
+              Register Now Instead
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
@@ -1005,78 +1012,68 @@
     <div class="h-container">
       <div class="section-header">
         <span class="overline-tag">FAQ</span>
-        <h2>Common Questions</h2>
-        <p>Everything you need to know before applying.</p>
+        <h2>Common Questions From NGOs</h2>
+        <p>Everything you need to know before registering your organisation.</p>
       </div>
       <div class="faq-list" id="faqList">
 
         <div class="faq-item">
           <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">How much does it cost to become a host?</span>
+            <span class="faq-item__q">Is it free to list our volunteering program?</span>
             <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="faq-item__answer">
-            It's completely free to apply and join. We operate on a commission-only model — you pay nothing upfront. A percentage of each completed booking goes to GDT, which covers platform infrastructure, payment processing, pre-sales support, marketing, and more. No listing fee, no monthly subscriptions.
+            Yes — listing your program on Great D'Tour is completely free. We charge a small platform fee only when a volunteer confirms their participation. There are no listing fees, no monthly subscriptions, and no upfront costs.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">What types of experiences can I offer?</span>
+            <span class="faq-item__q">What documents do we need to register?</span>
             <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="faq-item__answer">
-            We welcome adventure treks and expeditions, wellness and yoga retreats, cultural immersion programs, wildlife safaris, culinary trails, craft workshops, heritage walks, and more. If it's an authentic, bookable experience with a genuine host, it likely fits. If you're unsure, apply and we'll let you know.
+            You'll need: (1) NGO registration certificate or equivalent legal document, (2) a brief description of your organisation's mission and active programs, (3) contact details for your program coordinator, and (4) optional: photos or reports from past volunteer batches. Our team will guide you through the full checklist during onboarding.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">How long does the verification process take?</span>
+            <span class="faq-item__q">What types of volunteering programs can we list?</span>
             <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="faq-item__answer">
-            We review all applications within 5 business days. If you're a good fit, we schedule a 30-minute onboarding call within a week. Most partners complete verification and go live within 3 weeks of their initial application.
+            We accept wildlife and conservation programs, community development projects, rural education initiatives, research and citizen science programs, environmental restoration drives, women's empowerment projects, and more. If you run a structured, meaningful volunteering program with defined roles and duration, it's likely a good fit.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">Do I need insurance to host?</span>
+            <span class="faq-item__q">How does the volunteer application process work for us?</span>
             <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="faq-item__answer">
-            For adventure and outdoor experiences, appropriate liability insurance or certifications are required. For cultural, wellness, and culinary experiences, it depends on the nature of the activity. Our onboarding team will walk you through the specific requirements for your category during the verification call.
+            Volunteers browse your program listing, select a batch and role, and submit an application with their profile and motivation. You receive all applications in your vendor dashboard, where you can review profiles, accept or reject candidates, and send batch confirmation emails — all from one place.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">How do I set pricing?</span>
+            <span class="faq-item__q">Can we set our own eligibility criteria and screening questions?</span>
             <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="faq-item__answer">
-            You set your own prices. Our team provides category benchmarks and demand data to help you price competitively. You can set per-person pricing, group pricing, early-bird discounts, and seasonal rates. Your pricing is always visible to travelers before they book.
+            Yes. You can define minimum age, educational background, physical fitness level, required skills, and up to 5 custom screening questions that applicants must answer during the application process. This ensures you receive candidates who are genuinely suitable for your program.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">When and how do I get paid?</span>
+            <span class="faq-item__q">How do we handle stipends or program fees for volunteers?</span>
             <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="faq-item__answer">
-            Payments are settled within 5–7 business days after the experience is completed. We support bank transfers to any Indian bank account. For GST-registered operators, we can also process full platform settlements. You receive a detailed breakdown for every transaction.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__btn" aria-expanded="false">
-            <span class="faq-item__q">Can I offer private or custom experiences?</span>
-            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            Yes. You can offer both open group experiences (where travelers book individual spots) and private experiences (where a single group books the whole experience). You can also enable custom quote requests for travelers who want bespoke itineraries.
+            You set the terms. Programs can be fully funded (₹0 fee, stipend offered), partially funded, or cost-recovery (volunteer pays a contribution). The platform supports all models. For funded programs, stipend details are shown prominently on your listing to attract more applicants.
           </div>
         </div>
 
@@ -1086,7 +1083,17 @@
             <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="faq-item__answer">
-            Your dashboard gives you a real-time view of bookings, earnings, upcoming experiences, traveler details, and reviews. You can manage availability, update pricing, respond to queries, and download transaction reports — all in one place.
+            Your dashboard gives you a real-time view of all applications, confirmed batches, volunteer profiles, batch occupancy, and communication history. You can manage multiple programs and batches simultaneously, export volunteer lists, send bulk updates, and generate impact reports for your stakeholders.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__btn" aria-expanded="false">
+            <span class="faq-item__q">How long does verification take?</span>
+            <svg class="faq-item__icon" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-item__answer">
+            We complete document verification within 3–5 business days. Once verified, you receive the GDT Verified NGO badge and can publish your first program immediately. Most organisations go live within 2 weeks of initial registration.
           </div>
         </div>
 
@@ -1098,22 +1105,22 @@
   <section class="host-cta" id="apply">
     <div class="host-cta__inner">
       <div class="host-cta__badge">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#f54900" stroke-width="1.4"/><path d="M8 5v3l2 1.5" stroke="#f54900" stroke-width="1.4" stroke-linecap="round"/></svg>
-        Limited Spots Available
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 2 1.1 3.7 2.7 4.6L8 14l2.3-2.4C11.9 10.7 13 9 13 7c0-2.8-2.2-5-5-5z" stroke="#66bb6a" stroke-width="1.4" fill="none"/><circle cx="8" cy="7" r="1.5" fill="#66bb6a"/></svg>
+        Open For Registrations
       </div>
-      <h2 class="host-cta__title">Ready to Start Hosting?</h2>
-      <p class="host-cta__sub">We accept a limited number of new partners each quarter to maintain our quality standards. Apply today — the next cohort onboards in June 2026.</p>
+      <h2 class="host-cta__title">Ready to Find Your<br />Next Volunteer Cohort?</h2>
+      <p class="host-cta__sub">Join conservation and community organisations already using Great D'Tour to recruit motivated, verified volunteers. Registration is free and takes under 15 minutes.</p>
       <div class="host-cta__actions">
-        <a href="mailto:hello@greatdtour.com?subject=Host Application" class="btn-cta-primary">
-          Apply to Become a Host
+        <a href="mailto:volunteer@greatdtour.com?subject=NGO Vendor Registration" class="btn-cta-primary">
+          Register Your Organisation
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10.5 5l4.5 5-4.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="assets/Partnership_Guide.pdf" download class="btn-cta-outline">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v10M5.5 8.5L10 13l4.5-4.5M3 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download Guide
+          Download NGO Guide
         </a>
       </div>
-      <p class="host-cta__note">No upfront cost · Free to apply · Join 850+ partners</p>
+      <p class="host-cta__note">Free to list · No upfront cost · GDT Verified NGO badge included</p>
     </div>
   </section>
 
