@@ -348,8 +348,148 @@
     .reply-modal textarea:focus { border-color: #2E7D32; }
     .reply-modal__footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 14px; }
 
+    /* ── APPLICANTS TABLE ── */
+    .app-filters {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      margin-bottom: 20px;
+    }
+    .app-filter-group {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .app-filter-group label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.8px; color: #9ca3af;
+    }
+    .app-filter-select {
+      padding: 8px 30px 8px 12px; border: 1px solid #e5e7eb; border-radius: 8px;
+      font-size: 13px; color: #374151; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239ca3af' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+      appearance: none; cursor: pointer; min-width: 140px;
+    }
+    .app-filter-select:focus { outline: none; border-color: #2E7D32; box-shadow: 0 0 0 3px rgba(46,125,50,0.10); }
+    .app-search-wrap { flex: 1; min-width: 200px; position: relative; align-self: flex-end; }
+    .app-search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+    .app-search {
+      width: 100%; padding: 8px 12px 8px 34px; border: 1px solid #e5e7eb; border-radius: 8px;
+      font-size: 13px; color: #374151; background: #fff;
+    }
+    .app-search:focus { outline: none; border-color: #2E7D32; box-shadow: 0 0 0 3px rgba(46,125,50,0.10); }
+    .app-filter-tags {
+      display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 16px;
+      min-height: 0;
+    }
+    .app-filter-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 999px;
+      padding: 3px 10px; font-size: 12px; font-weight: 500; color: #166534; cursor: pointer;
+    }
+    .app-filter-tag svg { opacity: 0.5; }
+    .app-filter-tag:hover { background: #dcfce7; }
+    .app-filter-tag--clear { background: #f3f4f6; border-color: #e5e7eb; color: #6b7280; }
+    .app-results-meta {
+      font-size: 12px; color: #9ca3af; margin-bottom: 14px; margin-top: 4px;
+    }
+    .app-results-meta strong { color: #374151; }
+
+    /* Table */
+    .app-table-wrap {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+      overflow: hidden; margin-bottom: 16px;
+    }
+    .app-table { width: 100%; border-collapse: collapse; }
+    .app-table thead { background: #f9fafb; }
+    .app-table th {
+      padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af;
+      border-bottom: 1px solid #f3f4f6; white-space: nowrap; cursor: pointer; user-select: none;
+    }
+    .app-table th:hover { color: #374151; }
+    .app-table th .sort-icon { margin-left: 4px; opacity: 0.4; }
+    .app-table th.sorted { color: #2E7D32; }
+    .app-table th.sorted .sort-icon { opacity: 1; }
+    .app-table td {
+      padding: 14px 16px; font-size: 13px; color: #374151;
+      border-bottom: 1px solid #f9fafb; vertical-align: middle;
+    }
+    .app-table tr:last-child td { border-bottom: none; }
+    .app-table tr:hover td { background: #f9fafb; }
+    .app-row-avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff; vertical-align: middle; margin-right: 8px;
+    }
+    .app-name { font-weight: 600; color: #101828; }
+    .app-email { font-size: 12px; color: #9ca3af; }
+
+    /* Status badges */
+    .app-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+    }
+    .app-badge--new      { background: #eff6ff; color: #1d4ed8; }
+    .app-badge--review   { background: #fffbeb; color: #92400e; }
+    .app-badge--shortlist{ background: #f0fdf4; color: #166534; }
+    .app-badge--call     { background: #fdf4ff; color: #7e22ce; }
+    .app-badge--accepted { background: #dcfce7; color: #14532d; }
+    .app-badge--waitlist { background: #fff7ed; color: #c2410c; }
+    .app-badge--declined { background: #fef2f2; color: #dc2626; }
+
+    /* Row actions */
+    .app-row-actions { display: flex; gap: 6px; flex-wrap: nowrap; }
+    .app-action-btn {
+      padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+      border: 1px solid #e5e7eb; background: #fff; color: #374151;
+      cursor: pointer; white-space: nowrap; transition: all 0.15s;
+    }
+    .app-action-btn:hover { background: #f3f4f6; }
+    .app-action-btn--green { background: #2E7D32; color: #fff; border-color: #2E7D32; }
+    .app-action-btn--green:hover { background: #1b5e20; }
+    .app-action-btn--red { color: #dc2626; border-color: #fecaca; }
+    .app-action-btn--red:hover { background: #fef2f2; }
+
+    /* Pagination */
+    .app-pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px; background: #fff; border: 1px solid #e5e7eb;
+      border-radius: 0 0 14px 14px; border-top: 1px solid #f3f4f6;
+      font-size: 13px; color: #6b7280;
+      margin-top: -16px; margin-bottom: 16px;
+    }
+    .app-pagination { margin-top: 0; border-radius: 0 0 14px 14px; }
+    .app-page-btns { display: flex; gap: 4px; }
+    .app-page-btn {
+      width: 30px; height: 30px; border-radius: 6px; border: 1px solid #e5e7eb;
+      background: #fff; font-size: 13px; font-weight: 500; color: #374151;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .app-page-btn.active { background: #2E7D32; color: #fff; border-color: #2E7D32; }
+    .app-page-btn:hover:not(.active) { background: #f3f4f6; }
+
+    /* Summary stat strip above table */
+    .app-stat-strip {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .app-stat-chip {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+      padding: 10px 16px; display: flex; flex-direction: column; gap: 2px;
+      min-width: 90px;
+    }
+    .app-stat-chip__val { font-size: 20px; font-weight: 700; color: #101828; line-height: 1; }
+    .app-stat-chip__lbl { font-size: 11px; color: #9ca3af; }
+    .app-stat-chip--blue .app-stat-chip__val { color: #1d4ed8; }
+    .app-stat-chip--yellow .app-stat-chip__val { color: #92400e; }
+    .app-stat-chip--green .app-stat-chip__val { color: #2E7D32; }
+    .app-stat-chip--purple .app-stat-chip__val { color: #7e22ce; }
+
+    /* No results */
+    .app-no-results {
+      text-align: center; padding: 48px 20px;
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+    }
+    .app-no-results__icon { font-size: 30px; margin-bottom: 10px; }
+    .app-no-results p { font-size: 14px; color: #9ca3af; }
+
     @media (max-width: 960px) { .hd-main { grid-template-columns: 1fr; } .hd-sidebar { order: -1; } }
-    @media (max-width: 640px) { :root { --pad-x: 20px; } .listing-card { flex-direction: column; } .listing-card__img, .listing-card__img-placeholder { width: 100%; height: 160px; } .listing-card__body { flex-direction: column; } }
+    @media (max-width: 640px) { :root { --pad-x: 20px; } .listing-card { flex-direction: column; } .listing-card__img, .listing-card__img-placeholder { width: 100%; height: 160px; } .listing-card__body { flex-direction: column; } .app-table th:nth-child(4), .app-table td:nth-child(4), .app-table th:nth-child(5), .app-table td:nth-child(5) { display: none; } }
   </style>
 </head>
 <body>
@@ -421,6 +561,9 @@
         <button class="hd-tab" onclick="switchTab('listings', this)">Listings</button>
         <button class="hd-tab" onclick="switchTab('enquiries', this)">
           Enquiries &amp; Bookings<span class="hd-tab__badge">3</span>
+        </button>
+        <button class="hd-tab" onclick="switchTab('applicants', this)">
+          Applicants<span class="hd-tab__badge" id="appBadge" style="background:#2E7D32;">8</span>
         </button>
         <button class="hd-tab" onclick="switchTab('reviews', this)">Reviews</button>
         <button class="hd-tab" onclick="switchTab('payouts', this)">Payouts</button>
@@ -790,6 +933,110 @@
         </div>
       </div>
 
+      <!-- ══ APPLICANTS TAB ══ -->
+      <div class="hd-panel" id="panel-applicants">
+
+        <div class="hd-sec-head">
+          <h2>Volunteer Programme Applicants</h2>
+          <div class="hd-sec-head__actions">
+            <button class="hd-btn" onclick="exportApplicants()">⬇ Export CSV</button>
+          </div>
+        </div>
+
+        <!-- Summary stat strip -->
+        <div class="app-stat-strip" id="appStatStrip">
+          <div class="app-stat-chip app-stat-chip--blue"><div class="app-stat-chip__val" id="countNew">8</div><div class="app-stat-chip__lbl">New</div></div>
+          <div class="app-stat-chip app-stat-chip--yellow"><div class="app-stat-chip__val" id="countReview">5</div><div class="app-stat-chip__lbl">Under Review</div></div>
+          <div class="app-stat-chip app-stat-chip--purple"><div class="app-stat-chip__val" id="countCall">4</div><div class="app-stat-chip__lbl">Call Scheduled</div></div>
+          <div class="app-stat-chip app-stat-chip--green"><div class="app-stat-chip__val" id="countAccepted">11</div><div class="app-stat-chip__lbl">Accepted</div></div>
+          <div class="app-stat-chip"><div class="app-stat-chip__val" id="countTotal">31</div><div class="app-stat-chip__lbl">Total</div></div>
+        </div>
+
+        <!-- Filters row -->
+        <div class="app-filters">
+          <div class="app-filter-group">
+            <label>Status</label>
+            <select class="app-filter-select" id="fStatus" onchange="applyFilters()">
+              <option value="">All statuses</option>
+              <option value="New">New</option>
+              <option value="Under Review">Under Review</option>
+              <option value="Shortlisted">Shortlisted</option>
+              <option value="Call Scheduled">Call Scheduled</option>
+              <option value="Accepted">Accepted</option>
+              <option value="Waitlisted">Waitlisted</option>
+              <option value="Declined">Declined</option>
+            </select>
+          </div>
+          <div class="app-filter-group">
+            <label>Programme</label>
+            <select class="app-filter-select" id="fProgramme" onchange="applyFilters()">
+              <option value="">All programmes</option>
+              <option value="Wildlife Conservation">Wildlife Conservation</option>
+              <option value="Community Teaching">Community Teaching</option>
+              <option value="Organic Farming">Organic Farming</option>
+              <option value="Women's Craft Co-op">Women's Craft Co-op</option>
+            </select>
+          </div>
+          <div class="app-filter-group">
+            <label>Applicant Type</label>
+            <select class="app-filter-select" id="fType" onchange="applyFilters()">
+              <option value="">All types</option>
+              <option value="Individual">Individual</option>
+              <option value="Couple">Couple</option>
+              <option value="Group">Group</option>
+              <option value="Family">Family</option>
+            </select>
+          </div>
+          <div class="app-filter-group">
+            <label>Duration Preference</label>
+            <select class="app-filter-select" id="fDuration" onchange="applyFilters()">
+              <option value="">Any duration</option>
+              <option value="1 week">1 week</option>
+              <option value="2 weeks">2 weeks</option>
+              <option value="1 month">1 month</option>
+              <option value="3+ months">3+ months</option>
+            </select>
+          </div>
+          <div class="app-search-wrap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#9ca3af" stroke-width="1.8"/><path d="M16.5 16.5L21 21" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" class="app-search" id="appSearch" placeholder="Search by name, email or location…" oninput="applyFilters()" />
+          </div>
+        </div>
+
+        <!-- Active filter chips -->
+        <div class="app-filter-tags" id="filterTags"></div>
+
+        <!-- Results meta -->
+        <div class="app-results-meta" id="appResultsMeta">Showing <strong>12</strong> of 31 applicants</div>
+
+        <!-- Table -->
+        <div class="app-table-wrap">
+          <table class="app-table" id="appTable">
+            <thead>
+              <tr>
+                <th onclick="sortTable('name')" id="th-name">Applicant <span class="sort-icon">↕</span></th>
+                <th onclick="sortTable('programme')" id="th-programme">Programme <span class="sort-icon">↕</span></th>
+                <th onclick="sortTable('type')" id="th-type">Type <span class="sort-icon">↕</span></th>
+                <th onclick="sortTable('duration')" id="th-duration">Duration <span class="sort-icon">↕</span></th>
+                <th onclick="sortTable('applied')" id="th-applied">Applied <span class="sort-icon">↓</span></th>
+                <th onclick="sortTable('status')" id="th-status">Status <span class="sort-icon">↕</span></th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="appTableBody">
+              <!-- rows injected by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="app-pagination" id="appPagination">
+          <span id="appPageInfo">Page 1 of 3</span>
+          <div class="app-page-btns" id="appPageBtns"></div>
+        </div>
+
+      </div><!-- /panel-applicants -->
+
       <!-- ══ REVIEWS TAB ══ -->
       <div class="hd-panel" id="panel-reviews">
         <div class="hd-sec-head"><h2>Traveller Reviews</h2></div>
@@ -1137,6 +1384,260 @@
       t.classList.add('is-visible');
       setTimeout(() => t.classList.remove('is-visible'), 2800);
     }
+
+    // ── APPLICANTS TABLE ──
+    const APPLICANTS = [
+      { id:1,  name:'Meera Iyer',        email:'meera.iyer@gmail.com',       location:'Bangalore, KA', type:'Individual', programme:'Wildlife Conservation',  duration:'2 weeks',  applied:'2026-06-25', status:'New',          avatar:'#6366f1' },
+      { id:2,  name:'Lucas Ferreira',     email:'lucas.f@protonmail.com',      location:'São Paulo, Brazil', type:'Individual', programme:'Community Teaching',    duration:'1 month',  applied:'2026-06-24', status:'New',          avatar:'#f59e0b' },
+      { id:3,  name:'Ritika & Ansh Shah', email:'ritika.shah@outlook.com',     location:'Mumbai, MH',    type:'Couple',     programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-23', status:'New',          avatar:'#0891b2' },
+      { id:4,  name:'Sarah O\'Brien',     email:'sarah.obrien@hey.com',        location:'Dublin, Ireland', type:'Individual', programme:'Wildlife Conservation',  duration:'3+ months',applied:'2026-06-22', status:'New',          avatar:'#7c3aed' },
+      { id:5,  name:'Karan Bajwa',        email:'karan.bajwa@gmail.com',       location:'Chandigarh, PB', type:'Individual', programme:'Wildlife Conservation',  duration:'1 week',   applied:'2026-06-21', status:'New',          avatar:'#16a34a' },
+      { id:6,  name:'Aarti Desai',        email:'aarti.d@gmail.com',           location:'Ahmedabad, GJ', type:'Family',     programme:'Community Teaching',    duration:'1 week',   applied:'2026-06-20', status:'New',          avatar:'#dc2626' },
+      { id:7,  name:'Thomas Müller',      email:'t.mueller@gmail.com',         location:'Berlin, Germany', type:'Individual', programme:'Organic Farming',       duration:'1 month',  applied:'2026-06-19', status:'New',          avatar:'#ea580c' },
+      { id:8,  name:'Nadia Kaur',         email:'nadia.kaur@gmail.com',        location:'Amritsar, PB',  type:'Individual', programme:'Women\'s Craft Co-op',   duration:'2 weeks',  applied:'2026-06-19', status:'New',          avatar:'#c026d3' },
+      { id:9,  name:'Raj & Priya Nair',   email:'raj.nair@gmail.com',          location:'Kochi, KL',     type:'Couple',     programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-15', status:'Under Review', avatar:'#0284c7' },
+      { id:10, name:'Simone Rossi',       email:'simone.rossi@gmail.com',      location:'Rome, Italy',   type:'Individual', programme:'Community Teaching',    duration:'1 month',  applied:'2026-06-14', status:'Under Review', avatar:'#65a30d' },
+      { id:11, name:'Pooja Sharma',       email:'pooja.s@yahoo.co.in',         location:'Jaipur, RJ',    type:'Individual', programme:'Women\'s Craft Co-op',   duration:'3+ months',applied:'2026-06-13', status:'Under Review', avatar:'#9333ea' },
+      { id:12, name:'Ali Hassan',         email:'ali.hassan@gmail.com',        location:'Cairo, Egypt',  type:'Individual', programme:'Wildlife Conservation',  duration:'1 month',  applied:'2026-06-12', status:'Under Review', avatar:'#16a34a' },
+      { id:13, name:'Divya Menon',        email:'divya.menon@gmail.com',       location:'Trivandrum, KL', type:'Individual', programme:'Community Teaching',    duration:'2 weeks',  applied:'2026-06-11', status:'Under Review', avatar:'#b45309' },
+      { id:14, name:'James O\'Connor',    email:'james.o@gmail.com',           location:'Sydney, Australia', type:'Group',   programme:'Wildlife Conservation',  duration:'1 week',   applied:'2026-06-09', status:'Shortlisted',  avatar:'#0369a1' },
+      { id:15, name:'Ankita Patel',       email:'ankita.p@gmail.com',          location:'Surat, GJ',     type:'Individual', programme:'Women\'s Craft Co-op',   duration:'1 month',  applied:'2026-06-08', status:'Shortlisted',  avatar:'#be185d' },
+      { id:16, name:'Rena Tanaka',        email:'rena.tanaka@gmail.com',       location:'Tokyo, Japan',  type:'Individual', programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-07', status:'Call Scheduled',avatar:'#0891b2' },
+      { id:17, name:'Harshit Agarwal',    email:'harshit.ag@gmail.com',        location:'Lucknow, UP',   type:'Individual', programme:'Community Teaching',    duration:'1 month',  applied:'2026-06-06', status:'Call Scheduled',avatar:'#7c3aed' },
+      { id:18, name:'Valeria Gomez',      email:'v.gomez@outlook.com',         location:'Bogotá, Colombia', type:'Individual', programme:'Wildlife Conservation', duration:'3+ months',applied:'2026-06-05', status:'Call Scheduled',avatar:'#f59e0b' },
+      { id:19, name:'Nilufar Rashidova',  email:'nilufar.r@gmail.com',         location:'Tashkent, UZ',  type:'Couple',     programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-04', status:'Call Scheduled',avatar:'#16a34a' },
+      { id:20, name:'Surya Pratap Singh', email:'surya.ps@gmail.com',          location:'Varanasi, UP',  type:'Individual', programme:'Community Teaching',    duration:'1 week',   applied:'2026-06-02', status:'Accepted',     avatar:'#2E7D32' },
+      { id:21, name:'Kavita & Raj Mehta', email:'kavita.mehta@gmail.com',      location:'Pune, MH',      type:'Couple',     programme:'Organic Farming',       duration:'1 month',  applied:'2026-05-29', status:'Accepted',     avatar:'#6366f1' },
+      { id:22, name:'Emma Larsson',       email:'emma.larsson@gmail.com',      location:'Stockholm, Sweden', type:'Individual', programme:'Wildlife Conservation', duration:'2 weeks', applied:'2026-05-26', status:'Accepted',   avatar:'#0284c7' },
+      { id:23, name:'Nikhil Bose',        email:'nikhil.bose@gmail.com',       location:'Kolkata, WB',   type:'Individual', programme:'Community Teaching',    duration:'3+ months',applied:'2026-05-22', status:'Accepted',     avatar:'#dc2626' },
+      { id:24, name:'Fatima Al-Saeed',    email:'fatima.s@gmail.com',          location:'Riyadh, KSA',   type:'Individual', programme:'Women\'s Craft Co-op',   duration:'1 month',  applied:'2026-05-18', status:'Accepted',     avatar:'#c026d3' },
+      { id:25, name:'André Dubois',       email:'andre.dubois@gmail.com',      location:'Paris, France', type:'Individual', programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-05-14', status:'Accepted',     avatar:'#b45309' },
+      { id:26, name:'Sana Mirza',         email:'sana.mirza@gmail.com',        location:'Hyderabad, TS', type:'Individual', programme:'Women\'s Craft Co-op',   duration:'2 weeks',  applied:'2026-05-10', status:'Accepted',     avatar:'#0891b2' },
+      { id:27, name:'Yusuf Adeyemi',      email:'yusuf.a@gmail.com',           location:'Lagos, Nigeria',type:'Group',      programme:'Community Teaching',    duration:'1 month',  applied:'2026-05-06', status:'Accepted',     avatar:'#7c3aed' },
+      { id:28, name:'Rekha Nambiar',      email:'rekha.n@gmail.com',           location:'Calicut, KL',   type:'Individual', programme:'Wildlife Conservation',  duration:'1 week',   applied:'2026-05-02', status:'Accepted',     avatar:'#16a34a' },
+      { id:29, name:'Marco Bianchi',      email:'marco.b@gmail.com',           location:'Milan, Italy',  type:'Individual', programme:'Organic Farming',       duration:'1 month',  applied:'2026-05-28', status:'Accepted',     avatar:'#65a30d' },
+      { id:30, name:'Geeta Chauhan',      email:'geeta.chauhan@gmail.com',     location:'Shimla, HP',    type:'Family',     programme:'Community Teaching',    duration:'1 week',   applied:'2026-04-20', status:'Waitlisted',   avatar:'#ea580c' },
+      { id:31, name:'Viktor Novak',       email:'viktor.n@gmail.com',          location:'Prague, Czech R.', type:'Individual', programme:'Wildlife Conservation', duration:'3+ months',applied:'2026-04-10', status:'Declined',  avatar:'#9ca3af' },
+    ];
+
+    const STATUS_CLASS = {
+      'New':            'app-badge--new',
+      'Under Review':   'app-badge--review',
+      'Shortlisted':    'app-badge--shortlist',
+      'Call Scheduled': 'app-badge--call',
+      'Accepted':       'app-badge--accepted',
+      'Waitlisted':     'app-badge--waitlist',
+      'Declined':       'app-badge--declined',
+    };
+
+    let appCurrentPage = 1;
+    const APP_PER_PAGE = 10;
+    let appSortKey = 'applied';
+    let appSortAsc = false;
+    let appFiltered = [...APPLICANTS];
+
+    function applyFilters() {
+      const fStatus    = document.getElementById('fStatus').value;
+      const fProgramme = document.getElementById('fProgramme').value;
+      const fType      = document.getElementById('fType').value;
+      const fDuration  = document.getElementById('fDuration').value;
+      const fSearch    = document.getElementById('appSearch').value.toLowerCase().trim();
+
+      appFiltered = APPLICANTS.filter(a => {
+        if (fStatus    && a.status    !== fStatus)    return false;
+        if (fProgramme && a.programme !== fProgramme) return false;
+        if (fType      && a.type      !== fType)      return false;
+        if (fDuration  && a.duration  !== fDuration)  return false;
+        if (fSearch && !a.name.toLowerCase().includes(fSearch) &&
+                       !a.email.toLowerCase().includes(fSearch) &&
+                       !a.location.toLowerCase().includes(fSearch)) return false;
+        return true;
+      });
+
+      appCurrentPage = 1;
+      renderFilterTags();
+      renderTable();
+    }
+
+    function renderFilterTags() {
+      const wrap = document.getElementById('filterTags');
+      const chips = [];
+      const fStatus    = document.getElementById('fStatus').value;
+      const fProgramme = document.getElementById('fProgramme').value;
+      const fType      = document.getElementById('fType').value;
+      const fDuration  = document.getElementById('fDuration').value;
+      const fSearch    = document.getElementById('appSearch').value.trim();
+
+      if (fStatus)    chips.push({ label: fStatus,    clear: () => { document.getElementById('fStatus').value='';    applyFilters(); } });
+      if (fProgramme) chips.push({ label: fProgramme, clear: () => { document.getElementById('fProgramme').value=''; applyFilters(); } });
+      if (fType)      chips.push({ label: fType,      clear: () => { document.getElementById('fType').value='';      applyFilters(); } });
+      if (fDuration)  chips.push({ label: fDuration,  clear: () => { document.getElementById('fDuration').value='';  applyFilters(); } });
+      if (fSearch)    chips.push({ label: `"${fSearch}"`, clear: () => { document.getElementById('appSearch').value=''; applyFilters(); } });
+
+      if (chips.length === 0) { wrap.innerHTML=''; return; }
+
+      wrap.innerHTML = chips.map((c, i) =>
+        `<span class="app-filter-tag" onclick="appClearChip(${i})">
+          ${c.label}
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>`
+      ).join('') +
+      `<span class="app-filter-tag app-filter-tag--clear" onclick="clearAllFilters()">Clear all</span>`;
+
+      // Store callbacks for onclick
+      window._appChipClears = chips.map(c => c.clear);
+    }
+
+    function appClearChip(i) {
+      if (window._appChipClears && window._appChipClears[i]) window._appChipClears[i]();
+    }
+
+    function clearAllFilters() {
+      document.getElementById('fStatus').value    = '';
+      document.getElementById('fProgramme').value = '';
+      document.getElementById('fType').value      = '';
+      document.getElementById('fDuration').value  = '';
+      document.getElementById('appSearch').value  = '';
+      applyFilters();
+    }
+
+    function sortTable(key) {
+      if (appSortKey === key) { appSortAsc = !appSortAsc; }
+      else { appSortKey = key; appSortAsc = key !== 'applied'; }
+      document.querySelectorAll('.app-table th').forEach(th => th.classList.remove('sorted'));
+      const el = document.getElementById('th-' + key);
+      if (el) { el.classList.add('sorted'); el.querySelector('.sort-icon').textContent = appSortAsc ? '↑' : '↓'; }
+      renderTable();
+    }
+
+    function renderTable() {
+      const sorted = [...appFiltered].sort((a, b) => {
+        let va = a[appSortKey] || '', vb = b[appSortKey] || '';
+        if (appSortKey === 'applied') { va = new Date(va); vb = new Date(vb); }
+        if (va < vb) return appSortAsc ? -1 : 1;
+        if (va > vb) return appSortAsc ? 1 : -1;
+        return 0;
+      });
+
+      const totalPages = Math.max(1, Math.ceil(sorted.length / APP_PER_PAGE));
+      appCurrentPage = Math.min(appCurrentPage, totalPages);
+      const slice = sorted.slice((appCurrentPage - 1) * APP_PER_PAGE, appCurrentPage * APP_PER_PAGE);
+
+      const meta = document.getElementById('appResultsMeta');
+      meta.innerHTML = `Showing <strong>${sorted.length === 0 ? 0 : (appCurrentPage - 1) * APP_PER_PAGE + 1}–${Math.min(appCurrentPage * APP_PER_PAGE, sorted.length)}</strong> of <strong>${sorted.length}</strong> applicant${sorted.length !== 1 ? 's' : ''}`;
+
+      const tbody = document.getElementById('appTableBody');
+      if (sorted.length === 0) {
+        tbody.innerHTML = '';
+        document.getElementById('appPagination').style.display = 'none';
+        let noRes = document.getElementById('appNoResults');
+        if (!noRes) {
+          noRes = document.createElement('div');
+          noRes.id = 'appNoResults';
+          noRes.className = 'app-no-results';
+          noRes.innerHTML = '<div class="app-no-results__icon">🔍</div><p>No applicants match your current filters.</p>';
+          document.querySelector('.app-table-wrap').after(noRes);
+        }
+        return;
+      }
+      document.getElementById('appPagination').style.display = '';
+      const nr = document.getElementById('appNoResults');
+      if (nr) nr.remove();
+
+      const fmtDate = d => {
+        const dt = new Date(d);
+        return dt.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+      };
+
+      tbody.innerHTML = slice.map(a => `
+        <tr id="app-row-${a.id}">
+          <td>
+            <div style="display:flex;align-items:center;gap:0;">
+              <span class="app-row-avatar" style="background:${a.avatar};">${a.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</span>
+              <div>
+                <div class="app-name">${a.name}</div>
+                <div class="app-email">${a.email}</div>
+                <div style="font-size:11px;color:#9ca3af;margin-top:1px;">📍 ${a.location}</div>
+              </div>
+            </div>
+          </td>
+          <td>${a.programme}</td>
+          <td>${a.type}</td>
+          <td>${a.duration}</td>
+          <td style="white-space:nowrap;">${fmtDate(a.applied)}</td>
+          <td><span class="app-badge ${STATUS_CLASS[a.status] || ''}">${a.status}</span></td>
+          <td>
+            <div class="app-row-actions">
+              ${a.status === 'New' || a.status === 'Under Review' || a.status === 'Shortlisted' ? `
+                <button class="app-action-btn app-action-btn--green" onclick="updateAppStatus(${a.id}, 'Accepted')">Accept</button>
+                <button class="app-action-btn" onclick="updateAppStatus(${a.id}, 'Shortlisted')">Shortlist</button>
+                <button class="app-action-btn app-action-btn--red" onclick="updateAppStatus(${a.id}, 'Declined')">Decline</button>
+              ` : a.status === 'Call Scheduled' ? `
+                <button class="app-action-btn app-action-btn--green" onclick="updateAppStatus(${a.id}, 'Accepted')">Accept</button>
+                <button class="app-action-btn" onclick="showToast('Call notes coming soon')">Notes</button>
+                <button class="app-action-btn app-action-btn--red" onclick="updateAppStatus(${a.id}, 'Declined')">Decline</button>
+              ` : a.status === 'Accepted' ? `
+                <button class="app-action-btn" onclick="showToast('Welcome message sent to ${a.name.split(' ')[0]}')">Send Welcome</button>
+                <button class="app-action-btn" onclick="showToast('Onboarding checklist coming soon')">Onboarding</button>
+              ` : a.status === 'Waitlisted' ? `
+                <button class="app-action-btn app-action-btn--green" onclick="updateAppStatus(${a.id}, 'Accepted')">Move to Accepted</button>
+                <button class="app-action-btn app-action-btn--red" onclick="updateAppStatus(${a.id}, 'Declined')">Decline</button>
+              ` : `
+                <button class="app-action-btn" onclick="updateAppStatus(${a.id}, 'Under Review')">Reopen</button>
+              `}
+              <button class="app-action-btn" onclick="showToast('Viewing full application…')">View</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      // Pagination
+      const pInfo = document.getElementById('appPageInfo');
+      pInfo.textContent = `Page ${appCurrentPage} of ${totalPages}`;
+      const pBtns = document.getElementById('appPageBtns');
+      let btnsHtml = `<button class="app-page-btn" onclick="goAppPage(${appCurrentPage - 1})" ${appCurrentPage === 1 ? 'disabled style="opacity:0.3"' : ''}>‹</button>`;
+      for (let p = 1; p <= totalPages; p++) {
+        btnsHtml += `<button class="app-page-btn ${p === appCurrentPage ? 'active' : ''}" onclick="goAppPage(${p})">${p}</button>`;
+      }
+      btnsHtml += `<button class="app-page-btn" onclick="goAppPage(${appCurrentPage + 1})" ${appCurrentPage === totalPages ? 'disabled style="opacity:0.3"' : ''}>›</button>`;
+      pBtns.innerHTML = btnsHtml;
+    }
+
+    function goAppPage(p) {
+      const totalPages = Math.max(1, Math.ceil(appFiltered.length / APP_PER_PAGE));
+      if (p < 1 || p > totalPages) return;
+      appCurrentPage = p;
+      renderTable();
+      document.getElementById('panel-applicants').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateAppStatus(id, newStatus) {
+      const app = APPLICANTS.find(a => a.id === id);
+      if (!app) return;
+      const oldStatus = app.status;
+      app.status = newStatus;
+      applyFilters();
+      showToast(`${app.name.split(' ')[0]} → ${newStatus}`);
+    }
+
+    function exportApplicants() {
+      showToast('CSV export coming soon');
+    }
+
+    // Init applicants table when panel becomes active — lazy render
+    const _origSwitchTab = window.switchTab;
+    window.switchTabOrig = _origSwitchTab;
+    // Override done below after definition
+
   </script>
-</body>
+  <script>
+    // Re-wrap switchTab to init table on first visit
+    const __origSwitch = switchTab;
+    switchTab = function(tab, btnEl) {
+      __origSwitch(tab, btnEl);
+      if (tab === 'applicants') {
+        renderTable();
+      }
+    };
+  </script>
 </html>
