@@ -141,6 +141,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .nav__avatar:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.55); }
 .nav__avatar svg { display: block; }
+.nav__avatar--loggedin {
+  background: linear-gradient(135deg, #f54900, #fe9a00);
+  border-color: rgba(255,255,255,0.30);
+  font-size: 12px; font-weight: 700; color: #fff;
+  letter-spacing: 0.5px;
+}
+.nav__avatar--loggedin:hover { background: linear-gradient(135deg, #d94000, #f54900); }
 .nav.nav--scrolled .nav__avatar,
 .nav--page .nav__avatar {
   background: #f3f4f6;

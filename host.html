@@ -402,18 +402,13 @@
         <a href="host.html" class="nav__cta" style="opacity:0.7;pointer-events:none;">Become a Host</a>
       </div>
       <div class="nav__user">
-        <button class="nav__avatar" id="navAvatarBtn" aria-label="Account" onclick="toggleUserMenu()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
+        <button class="nav__avatar nav__avatar--loggedin" id="navAvatarBtn" aria-label="Account" onclick="toggleUserMenu()">AR</button>
         <div class="nav__user-dropdown" id="userDropdown">
           <div class="nav__dd-header">
-            <div class="nav__dd-name">Traveller</div>
-            <div class="nav__dd-email">Sign in to access your account</div>
+            <div class="nav__dd-name">Arjun Rao</div>
+            <div class="nav__dd-email">arjun.rao@gmail.com</div>
           </div>
-          <a href="#" class="nav__dd-item">
+          <a href="profile.html" class="nav__dd-item">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" stroke="currentColor" stroke-width="1.5"/><path d="M3 20c0-3.9 4-7 9-7s9 3.1 9 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             My Profile
           </a>
@@ -426,9 +421,9 @@
             Become a Host
           </a>
           <hr class="nav__dd-divider" />
-          <button class="nav__dd-item nav__dd-item--danger" onclick="return false;">
+          <button class="nav__dd-item nav__dd-item--danger" onclick="window.location='index.html'">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            Sign In
+            Sign Out
           </button>
         </div>
       </div>
