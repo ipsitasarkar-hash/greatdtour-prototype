@@ -17,6 +17,19 @@ if (hamburger && navLinks) {
   });
 }
 
+// ---- User avatar dropdown ----
+function toggleUserMenu() {
+  const dropdown = document.getElementById('userDropdown');
+  if (dropdown) dropdown.classList.toggle('is-open');
+}
+document.addEventListener('click', (e) => {
+  const btn = document.getElementById('navAvatarBtn');
+  const dropdown = document.getElementById('userDropdown');
+  if (dropdown && btn && !btn.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.classList.remove('is-open');
+  }
+});
+
 // ---- Experience carousel ----
 const carousel = document.getElementById('expCarousel');
 const prevBtn = document.getElementById('expPrev');
