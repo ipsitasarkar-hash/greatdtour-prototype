@@ -757,6 +757,10 @@
     /* Additional registration checkboxes */
     .acc-check-opt { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; color: #374151; cursor: pointer; background: #fff; transition: border-color 0.15s, background 0.15s; }
     .acc-check-opt--checked { border-color: #f54900; background: #fff7ed; color: #ea580c; }
+    /* Declaration rows */
+    .acc-decl-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; color: #374151; cursor: pointer; background: #fff; transition: border-color 0.15s, background 0.15s; }
+    .acc-decl-row:has(input:checked) { border-color: #f54900; background: #fff7ed; color: #374151; }
+    .acc-decl-row input { width: 16px; height: 16px; }
     .acc-check-opt input { flex-shrink: 0; width: 15px; height: 15px; }
     /* Cert row */
     .acc-cert-row {
@@ -1943,35 +1947,49 @@
 
           <!-- ── CARE HOST ACKNOWLEDGEMENT TAB ── -->
           <div class="acc-tab-panel" id="acc-panel-carehost">
+
             <div class="acc-card">
-              <div class="acc-section-title">Care Host Commitment</div>
-              <p style="font-size:14px;color:#374151;line-height:1.7;margin-bottom:16px;">As a Care Host on Great D'Tour, you agree to uphold the safety, wellbeing, and dignity of every traveller and volunteer in your care. Please read and acknowledge the following commitments.</p>
-              <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
-                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
-                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
-                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will ensure a safe, hygienic, and respectful environment for all travellers and volunteers hosted through Great D'Tour.</span>
+              <div class="acc-section-title">Declarations &amp; Agreement</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <label class="acc-decl-row">
+                  <input type="checkbox" style="accent-color:#f54900;flex-shrink:0;" />
+                  <span>All information is accurate and complete</span>
                 </label>
-                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
-                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
-                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will provide accurate descriptions of all programs, tours, and accommodations listed on my profile and not misrepresent any services.</span>
+                <label class="acc-decl-row">
+                  <input type="checkbox" style="accent-color:#f54900;flex-shrink:0;" />
+                  <span>No unsupervised access to anyone under 18</span>
                 </label>
-                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
-                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
-                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will maintain appropriate insurance coverage and comply with all local regulations, permits, and licensing requirements applicable to my services.</span>
+                <label class="acc-decl-row">
+                  <input type="checkbox" style="accent-color:#f54900;flex-shrink:0;" />
+                  <span>Exchange is proportionate; not a substitute for paid employment</span>
                 </label>
-                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
-                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
-                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will communicate promptly with travellers, honour confirmed bookings, and provide advance notice in the event of any cancellations or changes.</span>
+                <label class="acc-decl-row">
+                  <input type="checkbox" style="accent-color:#f54900;flex-shrink:0;" />
+                  <span>I will respond to applications within 72 hours</span>
                 </label>
-                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
-                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
-                  <span style="font-size:13px;color:#374151;line-height:1.6;">I understand that Great D'Tour may suspend or remove my listing if I fail to meet these standards, and I agree to the platform's <a href="#" style="color:#f54900;text-decoration:underline;">Terms &amp; Conditions</a> and <a href="#" style="color:#f54900;text-decoration:underline;">Host Code of Conduct</a>.</span>
+                <label class="acc-decl-row">
+                  <input type="checkbox" style="accent-color:#f54900;flex-shrink:0;" />
+                  <span>I understand listing suspension may follow SLA breaches</span>
+                </label>
+                <label class="acc-decl-row">
+                  <input type="checkbox" style="accent-color:#f54900;flex-shrink:0;" />
+                  <span>I have read Care Host Terms and Privacy Policy</span>
+                </label>
+                <label class="acc-decl-row">
+                  <input type="checkbox" style="accent-color:#f54900;flex-shrink:0;" />
+                  <span>I accept the Care Host Agreement</span>
                 </label>
               </div>
             </div>
-            <div class="acc-footer-bar">
-              <button class="acc-save-btn" onclick="showToast('Acknowledgement saved')">Save &amp; Acknowledge</button>
+
+            <div class="acc-card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+              <p style="font-size:14px;color:#374151;line-height:1.6;margin:0;">Submit your completed profile and selected membership plan for admin approval.</p>
+              <div style="display:flex;gap:10px;flex-shrink:0;">
+                <button class="acc-outline-btn" onclick="switchAccTab('membership', document.getElementById('acc-tab-membership'))">Change Plan</button>
+                <button class="acc-save-btn" onclick="showToast('Submitted for approval')">Submit for Approval</button>
+              </div>
             </div>
+
           </div><!-- /carehost tab -->
 
         </div><!-- /acc-page -->
