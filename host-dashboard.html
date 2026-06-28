@@ -1948,6 +1948,38 @@
           <!-- ── CARE HOST ACKNOWLEDGEMENT TAB ── -->
           <div class="acc-tab-panel" id="acc-panel-carehost">
 
+            <!-- Programme Scope -->
+            <div class="acc-card">
+              <div class="acc-section-title">Programme Scope</div>
+              <div class="acc-gst-row" style="margin-bottom:20px;">
+                <span class="acc-gst-q">Hosted volunteers before?</span>
+                <label class="acc-radio-opt"><div class="acc-radio is-selected" id="hostedYes" onclick="document.getElementById('hostedYes').classList.add('is-selected');document.getElementById('hostedNo').classList.remove('is-selected')"></div><span class="acc-radio-label">Yes</span></label>
+                <label class="acc-radio-opt"><div class="acc-radio" id="hostedNo" onclick="document.getElementById('hostedNo').classList.add('is-selected');document.getElementById('hostedYes').classList.remove('is-selected')"></div><span class="acc-radio-label">No</span></label>
+              </div>
+              <div class="acc-form-row" style="margin-bottom:16px;">
+                <div class="acc-field">
+                  <label>Approx how many</label>
+                  <select class="acc-input" style="height:38px;">
+                    <option value="">Select</option>
+                    <option>1–5</option>
+                    <option>6–20</option>
+                    <option>21–50</option>
+                    <option>50+</option>
+                  </select>
+                </div>
+                <div class="acc-field">
+                  <label>Other Platform Name</label>
+                  <input type="text" class="acc-input" placeholder="" />
+                </div>
+              </div>
+              <div class="acc-form-row" style="grid-template-columns:1fr 1fr;margin-bottom:0;">
+                <div class="acc-field">
+                  <label>Link</label>
+                  <input type="url" class="acc-input" placeholder="" />
+                </div>
+              </div>
+            </div>
+
             <div class="acc-card">
               <div class="acc-section-title">Declarations &amp; Agreement</div>
               <div style="display:flex;flex-direction:column;gap:10px;">
