@@ -9,134 +9,187 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
-    body { background: #f9fafb; padding-top: var(--nav-h); }
+    body { background: #f4f5f7; padding-top: var(--nav-h); }
 
-    /* ── PROFILE HERO ── */
-    .pf-hero {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 60%, #2d1a0a 100%);
-      padding: 48px 0 0;
-      position: relative;
-      overflow: hidden;
+    /* ══ PAGE SHELL ══ */
+    .profile-shell {
+      max-width: 1200px; margin: 0 auto;
+      padding: 36px var(--pad-x) 80px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+      align-items: start;
     }
-    .pf-hero::before {
+
+    /* ══ LEFT SIDEBAR ══ */
+    .ps-sidebar { position: sticky; top: calc(var(--nav-h) + 24px); }
+
+    /* Identity card */
+    .ps-identity {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .ps-identity__cover {
+      height: 72px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 55%, #2d1a0a 100%);
+      position: relative;
+    }
+    .ps-identity__cover::after {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(245,73,0,0.12) 0%, transparent 65%);
-      pointer-events: none;
+      background: radial-gradient(ellipse at 70% 50%, rgba(245,73,0,0.18) 0%, transparent 65%);
     }
-    .pf-hero__inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--pad-x);
-      position: relative;
-    }
-    .pf-hero__top {
-      display: flex;
-      align-items: flex-end;
-      gap: 28px;
-      padding-bottom: 0;
-    }
-    .pf-avatar-wrap { position: relative; flex-shrink: 0; }
-    .pf-avatar {
-      width: 88px; height: 88px; border-radius: 50%;
+    .ps-identity__body { padding: 0 20px 20px; }
+    .ps-avatar-wrap { position: relative; margin-top: -28px; margin-bottom: 12px; display: inline-block; }
+    .ps-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
       background: linear-gradient(135deg, #f54900, #fe9a00);
       display: flex; align-items: center; justify-content: center;
-      font-size: 32px; font-weight: 700; color: #fff;
-      border: 3px solid rgba(255,255,255,0.15);
-      position: relative; bottom: -20px;
+      font-size: 20px; font-weight: 700; color: #fff;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
-    .pf-avatar__edit {
-      position: absolute; bottom: 16px; right: -2px;
-      width: 24px; height: 24px; border-radius: 50%;
-      background: #fff; border: 2px solid #e5e7eb;
+    .ps-avatar__edit {
+      position: absolute; bottom: 0; right: -2px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #fff; border: 1.5px solid #e5e7eb;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.15s;
+      cursor: pointer; font-size: 9px;
     }
-    .pf-avatar__edit:hover { background: #f3f4f6; }
-    .pf-hero__info { padding-bottom: 22px; flex: 1; }
-    .pf-hero__name {
-      font-family: var(--font-serif);
-      font-size: 26px; font-weight: 700; color: #fff;
-      margin-bottom: 4px; line-height: 1.2;
+    .ps-avatar__edit:hover { background: #f3f4f6; }
+    .ps-name { font-size: 16px; font-weight: 700; color: #101828; margin-bottom: 2px; }
+    .ps-handle { font-size: 12px; color: #9ca3af; margin-bottom: 10px; }
+    .ps-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #fff7ed; border: 1px solid #fed7aa;
+      border-radius: 999px; padding: 3px 9px;
+      font-size: 11px; font-weight: 600; color: #9a3412;
+      margin-bottom: 14px;
     }
-    .pf-hero__meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .pf-hero__tag {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.60);
+    .ps-stats-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; margin-bottom: 14px;
     }
-    .pf-hero__tag strong { color: rgba(255,255,255,0.85); font-weight: 600; }
-    .pf-hero__badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: rgba(254,154,0,0.15); border: 1px solid rgba(254,154,0,0.30);
-      border-radius: 999px; padding: 3px 10px;
-      font-size: 11px; font-weight: 600; color: #fe9a00;
+    .ps-mini-stat {
+      background: #f9fafb; border-radius: 10px;
+      padding: 10px 12px; text-align: center;
     }
-    .pf-hero__tabs {
-      display: flex; gap: 0;
-      margin-top: 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    .ps-mini-stat__val { font-size: 18px; font-weight: 700; color: #101828; line-height: 1; }
+    .ps-mini-stat__lbl { font-size: 10px; color: #9ca3af; margin-top: 2px; }
+    .ps-edit-btn {
+      width: 100%; padding: 9px; border-radius: 8px;
+      border: 1px solid #e5e7eb; background: #fff;
+      font-size: 13px; font-weight: 600; color: #374151;
+      cursor: pointer; transition: all 0.15s;
     }
-    .pf-tab {
-      padding: 12px 20px; font-size: 14px; font-weight: 500;
-      color: rgba(255,255,255,0.45); cursor: pointer;
-      border-bottom: 2px solid transparent; margin-bottom: -1px;
-      transition: all 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none;
-    }
-    .pf-tab:hover { color: rgba(255,255,255,0.75); }
-    .pf-tab.is-active { color: #fff; border-bottom-color: #f54900; }
+    .ps-edit-btn:hover { background: #f9fafb; border-color: #d1d5db; }
 
-    /* ── STATS BAR ── */
-    .pf-stats {
-      background: #fff;
-      border-bottom: 1px solid var(--border);
+    /* Nav menu */
+    .ps-nav {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+      overflow: hidden; margin-bottom: 12px;
     }
-    .pf-stats__inner {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: flex; gap: 0;
+    .ps-nav__label {
+      padding: 12px 16px 6px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #9ca3af;
     }
-    .pf-stat {
-      padding: 18px 40px 18px 0;
-      display: flex; flex-direction: column; gap: 2px;
-      border-right: 1px solid var(--border);
-      margin-right: 40px;
+    .ps-nav__item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 16px; font-size: 13px; font-weight: 500;
+      color: #6b7280; cursor: pointer; transition: all 0.15s;
+      border: none; background: none; width: 100%; text-align: left;
+      position: relative;
     }
-    .pf-stat:last-child { border-right: none; }
-    .pf-stat__num { font-size: 22px; font-weight: 700; color: #101828; line-height: 1; }
-    .pf-stat__label { font-size: 12px; color: #9ca3af; font-weight: 500; }
+    .ps-nav__item:hover { background: #f9fafb; color: #101828; }
+    .ps-nav__item.is-active {
+      background: #fff7ed; color: #f54900; font-weight: 600;
+    }
+    .ps-nav__item.is-active::before {
+      content: '';
+      position: absolute; left: 0; top: 6px; bottom: 6px;
+      width: 3px; border-radius: 0 3px 3px 0;
+      background: #f54900;
+    }
+    .ps-nav__item svg { flex-shrink: 0; opacity: 0.7; }
+    .ps-nav__item.is-active svg { opacity: 1; }
+    .ps-nav__badge {
+      margin-left: auto;
+      background: #f54900; color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 1px 6px; border-radius: 999px;
+    }
+    .ps-nav__divider { height: 1px; background: #f3f4f6; margin: 4px 0; }
 
-    /* ── MAIN LAYOUT ── */
-    .pf-main {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 40px var(--pad-x) 80px;
-      display: grid; grid-template-columns: 1fr 320px;
-      gap: 40px; align-items: start;
+    /* Passport card in sidebar */
+    .ps-passport {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+      overflow: hidden;
     }
+    .ps-passport__head {
+      padding: 12px 16px; border-bottom: 1px solid #f3f4f6;
+      font-size: 12px; font-weight: 600; color: #374151;
+    }
+    .ps-passport__body { padding: 12px 16px; }
+    .pp-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+    .pp-item__flag { font-size: 18px; flex-shrink: 0; }
+    .pp-item__loc { font-size: 12px; font-weight: 600; color: #101828; }
+    .pp-item__date { font-size: 11px; color: #9ca3af; }
+    .pp-item__badge {
+      margin-left: auto; font-size: 10px; font-weight: 700;
+      padding: 2px 6px; border-radius: 999px; white-space: nowrap;
+    }
+    .pp-item__badge--done     { background: #f0fdf4; color: #166534; }
+    .pp-item__badge--upcoming { background: #fffbeb; color: #92400e; }
 
-    /* ── TAB PANELS ── */
-    .pf-panel { display: none; }
-    .pf-panel.is-active { display: block; }
+    /* ══ MAIN CONTENT ══ */
+    .ps-main { min-width: 0; }
 
-    /* ── SECTION HEADER ── */
-    .pf-section-head {
+    /* Panel visibility */
+    .ps-panel { display: none; }
+    .ps-panel.is-active { display: block; }
+
+    /* Panel header */
+    .ps-panel-head {
       display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
-    .pf-section-head h2 { font-size: 17px; font-weight: 700; color: #101828; }
-    .pf-section-link { font-size: 13px; font-weight: 500; color: var(--orange); }
-    .pf-section-link:hover { text-decoration: underline; }
+    .ps-panel-head h1 {
+      font-size: 20px; font-weight: 700; color: #101828;
+    }
+    .ps-panel-head__sub { font-size: 13px; color: #9ca3af; margin-top: 2px; }
+
+    /* ── SECTION HEAD ── */
+    .sec-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px; margin-top: 32px;
+    }
+    .sec-head:first-child { margin-top: 0; }
+    .sec-head h2 { font-size: 15px; font-weight: 700; color: #374151; }
+    .sec-head__link { font-size: 13px; font-weight: 500; color: var(--orange); }
+    .sec-head__link:hover { text-decoration: underline; }
+
+    /* ── CARD BASE ── */
+    .p-card {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+      overflow: hidden;
+    }
+    .p-card + .p-card { margin-top: 14px; }
 
     /* ── BOOKING CARD ── */
-    .bk-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+    .bk-list { display: flex; flex-direction: column; gap: 14px; }
     .bk-card {
       background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
-      padding: 20px; display: flex; gap: 20px; align-items: flex-start;
+      padding: 18px; display: flex; gap: 18px; align-items: flex-start;
       transition: box-shadow 0.2s;
     }
     .bk-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
     .bk-card__img {
-      width: 96px; height: 80px; border-radius: 10px;
-      object-fit: cover; flex-shrink: 0;
+      width: 88px; height: 74px; border-radius: 10px;
+      object-fit: cover; flex-shrink: 0; background: #f3f4f6;
     }
     .bk-card__body { flex: 1; min-width: 0; }
     .bk-card__status {
@@ -148,117 +201,99 @@
     .bk-card__status--upcoming  { background: #fffbeb; color: #92400e; }
     .bk-card__status--completed { background: #f3f4f6; color: #6b7280; }
     .bk-card__title { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .bk-card__meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; color: #6b7280; }
-    .bk-card__meta span { display: flex; align-items: center; gap: 4px; }
-    .bk-card__actions { display: flex; gap: 8px; margin-top: 12px; }
-    .bk-card__btn {
-      padding: 7px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+    .bk-card__meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: #6b7280; margin-bottom: 4px; }
+    .bk-card__ref { font-size: 11px; color: #9ca3af; font-family: monospace; margin-bottom: 10px; }
+    .bk-card__actions { display: flex; gap: 7px; flex-wrap: wrap; }
+    .bk-btn {
+      padding: 6px 13px; border-radius: 6px; font-size: 12px; font-weight: 600;
       cursor: pointer; transition: all 0.15s; border: 1px solid #e5e7eb;
       background: #fff; color: #374151;
     }
-    .bk-card__btn:hover { background: #f9fafb; }
-    .bk-card__btn--primary { background: #101828; color: #fff; border-color: #101828; }
-    .bk-card__btn--primary:hover { background: #1e2d40; }
-    .bk-card__ref { font-size: 12px; color: #9ca3af; font-family: monospace; margin-top: 4px; }
+    .bk-btn:hover { background: #f9fafb; }
+    .bk-btn--primary { background: #101828; color: #fff; border-color: #101828; }
+    .bk-btn--primary:hover { background: #1e2d40; }
+    .bk-btn--orange { background: #f54900; color: #fff; border-color: #f54900; }
+    .bk-btn--orange:hover { background: #d43e00; }
 
-    /* ── SAVED / WISHLIST CARDS ── */
-    .saved-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    /* ── SAVED GRID ── */
+    .saved-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .saved-card {
       background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
       overflow: hidden; transition: box-shadow 0.2s;
     }
     .saved-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .saved-card__img { height: 140px; overflow: hidden; position: relative; }
-    .saved-card__img img { width: 100%; height: 100%; object-fit: cover; }
-    .saved-card__tag {
-      position: absolute; top: 10px; left: 10px;
+    .saved-card__img { height: 130px; overflow: hidden; position: relative; }
+    .saved-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .saved-card:hover .saved-card__img img { transform: scale(1.04); }
+    .saved-card__cat {
+      position: absolute; top: 8px; left: 8px;
       background: rgba(0,0,0,0.55); color: #fff;
-      font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 999px;
+      font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 999px;
     }
     .saved-card__unsave {
-      position: absolute; top: 8px; right: 8px;
-      width: 28px; height: 28px; border-radius: 50%;
-      background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+      position: absolute; top: 6px; right: 6px;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(255,255,255,0.92); border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; transition: background 0.15s;
+      font-size: 13px; transition: background 0.15s; color: #f54900;
     }
     .saved-card__unsave:hover { background: #fff; }
-    .saved-card__body { padding: 14px; }
-    .saved-card__title { font-size: 14px; font-weight: 700; color: #101828; margin-bottom: 6px; }
-    .saved-card__meta { font-size: 12px; color: #9ca3af; margin-bottom: 8px; }
+    .saved-card__body { padding: 12px 14px; }
+    .saved-card__title { font-size: 13px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .saved-card__meta { font-size: 11px; color: #9ca3af; margin-bottom: 6px; }
     .saved-card__price { font-size: 14px; font-weight: 700; color: #101828; }
-    .saved-card__price--old { font-size: 12px; color: #9ca3af; text-decoration: line-through; margin-left: 4px; font-weight: 400; }
-    .saved-card__cta { display: block; margin-top: 10px; padding: 8px; border-radius: 6px; background: #f9fafb; border: 1px solid #e5e7eb; text-align: center; font-size: 13px; font-weight: 600; color: #374151; transition: all 0.15s; }
+    .saved-card__price--old { font-size: 11px; color: #9ca3af; text-decoration: line-through; margin-left: 4px; font-weight: 400; }
+    .saved-card__cta {
+      display: block; margin-top: 8px; padding: 7px;
+      border-radius: 6px; background: #f9fafb; border: 1px solid #e5e7eb;
+      text-align: center; font-size: 12px; font-weight: 600; color: #374151;
+      transition: all 0.15s;
+    }
     .saved-card__cta:hover { background: #f54900; color: #fff; border-color: #f54900; }
 
     /* ── REVIEW CARD ── */
-    .review-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
     .review-card {
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px;
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px;
     }
+    .review-card + .review-card { margin-top: 12px; }
     .review-card__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
     .review-card__exp { font-size: 14px; font-weight: 700; color: #101828; }
     .review-card__stars { color: #f59e0b; font-size: 14px; letter-spacing: 1px; }
     .review-card__date { font-size: 12px; color: #9ca3af; margin-top: 2px; }
-    .review-card__text { font-size: 14px; color: #374151; line-height: 1.6; }
-    .review-card__img { width: 72px; height: 60px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+    .review-card__text { font-size: 13px; color: #374151; line-height: 1.6; }
+    .review-card__img { width: 64px; height: 54px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
 
-    /* ── EMPTY STATE ── */
-    .empty-state {
-      text-align: center; padding: 48px 20px;
-      background: #fff; border: 1px dashed #e5e7eb; border-radius: 14px;
-    }
-    .empty-state__icon { font-size: 36px; margin-bottom: 12px; }
-    .empty-state h3 { font-size: 15px; font-weight: 600; color: #374151; margin-bottom: 6px; }
-    .empty-state p { font-size: 14px; color: #9ca3af; margin-bottom: 16px; }
-    .empty-state a { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; background: #101828; color: #fff; border-radius: 8px; font-size: 13px; font-weight: 600; transition: background 0.2s; }
-    .empty-state a:hover { background: #1e2d40; }
-
-    /* ── SIDEBAR ── */
-    .pf-sidebar { display: flex; flex-direction: column; gap: 16px; }
-
-    /* ── PROFILE CARD (sidebar) ── */
-    .pf-card {
+    /* ── SETTINGS FIELDS ── */
+    .settings-section {
       background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
-      overflow: hidden;
+      overflow: hidden; margin-bottom: 14px;
     }
-    .pf-card__head {
-      padding: 16px 20px; border-bottom: 1px solid #f3f4f6;
+    .settings-section__head {
+      padding: 14px 20px; border-bottom: 1px solid #f3f4f6;
       font-size: 13px; font-weight: 600; color: #374151;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .pf-card__edit { font-size: 12px; font-weight: 500; color: var(--orange); cursor: pointer; }
-    .pf-card__edit:hover { text-decoration: underline; }
-    .pf-card__body { padding: 16px 20px; }
-    .pf-field { margin-bottom: 14px; }
-    .pf-field:last-child { margin-bottom: 0; }
-    .pf-field__label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #9ca3af; margin-bottom: 3px; }
-    .pf-field__val { font-size: 14px; color: #101828; font-weight: 500; }
-    .pf-field__val--muted { color: #9ca3af; font-style: italic; font-weight: 400; }
+    .settings-section__edit { font-size: 12px; font-weight: 500; color: var(--orange); cursor: pointer; }
+    .settings-section__edit:hover { text-decoration: underline; }
+    .settings-section__body { padding: 18px 20px; }
+    .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .sf-field__label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; margin-bottom: 3px; }
+    .sf-field__val { font-size: 13px; color: #101828; font-weight: 500; }
 
-    /* ── PREFERENCES ── */
-    .pref-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    /* ── ABOUT SECTION (inside settings) ── */
+    .pref-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
     .pref-tag {
       display: inline-flex; align-items: center; gap: 4px;
-      background: #fff7ed; border: 1px solid #fed7aa; border-radius: 999px;
-      padding: 4px 10px; font-size: 12px; font-weight: 500; color: #9a3412;
+      background: #fff7ed; border: 1px solid #fed7aa;
+      border-radius: 999px; padding: 4px 10px;
+      font-size: 12px; font-weight: 500; color: #9a3412;
     }
 
-    /* ── TRAVEL PASSPORT (sidebar) ── */
-    .passport-list { display: flex; flex-direction: column; gap: 10px; }
-    .passport-item { display: flex; align-items: center; gap: 12px; }
-    .passport-item__flag { font-size: 22px; flex-shrink: 0; }
-    .passport-item__loc { font-size: 13px; font-weight: 600; color: #101828; }
-    .passport-item__date { font-size: 12px; color: #9ca3af; }
-    .passport-item__badge {
-      margin-left: auto; font-size: 10px; font-weight: 700;
-      padding: 2px 7px; border-radius: 999px;
+    /* ── NOTIFICATION TOGGLES ── */
+    .notif-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 0; border-bottom: 1px solid #f9fafb;
     }
-    .passport-item__badge--done { background: #f0fdf4; color: #166534; }
-    .passport-item__badge--upcoming { background: #fffbeb; color: #92400e; }
-
-    /* ── NOTIFICATION PREF ── */
-    .notif-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f3f4f6; }
     .notif-row:last-child { border-bottom: none; }
     .notif-row__label { font-size: 13px; color: #374151; }
     .notif-toggle {
@@ -272,8 +307,23 @@
       width: 14px; height: 14px; border-radius: 50%; background: #fff;
       top: 3px; transition: left 0.2s;
     }
-    .notif-toggle.on::after { left: 19px; }
+    .notif-toggle.on::after  { left: 19px; }
     .notif-toggle.off::after { left: 3px; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center; padding: 48px 20px;
+      background: #fff; border: 1px dashed #e5e7eb; border-radius: 14px;
+    }
+    .empty-state__icon { font-size: 32px; margin-bottom: 10px; }
+    .empty-state h3 { font-size: 15px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+    .empty-state p { font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
+    .empty-state a {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 20px; background: #101828; color: #fff;
+      border-radius: 8px; font-size: 13px; font-weight: 600;
+    }
+    .empty-state a:hover { background: #1e2d40; }
 
     /* ── EDIT MODAL ── */
     .edit-overlay {
@@ -287,48 +337,44 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.18);
     }
     .edit-modal h2 { font-size: 18px; font-weight: 700; color: #101828; margin-bottom: 20px; }
-    .edit-form-group { margin-bottom: 16px; }
-    .edit-form-group label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 6px; }
-    .edit-form-group input,
-    .edit-form-group select,
-    .edit-form-group textarea {
+    .em-group { margin-bottom: 16px; }
+    .em-group label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 6px; }
+    .em-group input, .em-group select, .em-group textarea {
       width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px;
-      font-size: 14px; font-family: 'Inter', sans-serif; color: #101828;
-      outline: none; transition: border-color 0.2s;
+      font-size: 14px; font-family: 'Inter', sans-serif; color: #101828; outline: none; transition: border-color 0.2s;
     }
-    .edit-form-group input:focus,
-    .edit-form-group select:focus { border-color: #f54900; box-shadow: 0 0 0 3px rgba(245,73,0,0.10); }
-    .edit-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .em-group input:focus, .em-group select:focus, .em-group textarea:focus {
+      border-color: #f54900; box-shadow: 0 0 0 3px rgba(245,73,0,0.10);
+    }
+    .em-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .edit-modal__footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
-    .edit-modal__cancel { padding: 10px 20px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; background: #fff; transition: all 0.15s; }
-    .edit-modal__cancel:hover { background: #f9fafb; }
-    .edit-modal__save { padding: 10px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; color: #fff; background: #101828; cursor: pointer; transition: background 0.2s; }
-    .edit-modal__save:hover { background: #1e2d40; }
+    .em-cancel { padding: 10px 20px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; background: #fff; }
+    .em-save { padding: 10px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; color: #fff; background: #101828; cursor: pointer; }
+    .em-save:hover { background: #1e2d40; }
 
     /* ── TOAST ── */
     .toast {
       position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px);
       background: #101828; color: #fff; padding: 12px 24px; border-radius: 8px;
-      font-size: 14px; font-weight: 500; opacity: 0;
-      transition: all 0.3s; z-index: 9999; pointer-events: none; white-space: nowrap;
+      font-size: 14px; font-weight: 500; opacity: 0; transition: all 0.3s;
+      z-index: 9999; pointer-events: none; white-space: nowrap;
     }
     .toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    @media (max-width: 960px) {
-      .pf-main { grid-template-columns: 1fr; }
-      .pf-sidebar { order: -1; }
+    @media (max-width: 900px) {
+      .profile-shell { grid-template-columns: 1fr; }
+      .ps-sidebar { position: static; }
+      .ps-nav { display: flex; flex-wrap: wrap; }
+      .ps-nav__label { display: none; }
+      .ps-nav__item { flex: 1; justify-content: center; min-width: 100px; }
+      .ps-nav__item.is-active::before { top: auto; bottom: 0; left: 8px; right: 8px; width: auto; height: 3px; border-radius: 3px 3px 0 0; }
       .saved-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
-      :root { --pad-x: 20px; }
-      .pf-hero__top { gap: 16px; }
-      .pf-avatar { width: 72px; height: 72px; font-size: 26px; }
-      .pf-hero__name { font-size: 20px; }
-      .pf-stats__inner { gap: 0; overflow-x: auto; }
-      .pf-stat { padding: 14px 24px 14px 0; margin-right: 24px; }
-      .pf-stat__num { font-size: 18px; }
+      :root { --pad-x: 16px; }
+      .profile-shell { padding: 20px var(--pad-x) 60px; gap: 16px; }
       .bk-card { flex-direction: column; }
-      .bk-card__img { width: 100%; height: 120px; }
+      .bk-card__img { width: 100%; height: 110px; border-radius: 10px 10px 0 0; margin: -18px -18px 14px; width: calc(100% + 36px); }
     }
   </style>
 </head>
@@ -348,12 +394,10 @@
         <a href="host.html" class="nav__cta">Become a Host</a>
       </div>
       <div class="nav__user">
-        <button class="nav__avatar nav__avatar--loggedin" id="navAvatarBtn" aria-label="Account" onclick="toggleUserMenu()">
-          AR
-        </button>
+        <button class="nav__avatar nav__avatar--loggedin" id="navAvatarBtn" aria-label="Account" onclick="toggleUserMenu()">AR</button>
         <div class="nav__user-dropdown" id="userDropdown">
           <div class="nav__dd-header">
-            <div class="nav__dd-name">Arjun Rao</div>
+            <div class="nav__dd-name" id="navDdName">Arjun Rao</div>
             <div class="nav__dd-email">arjun.rao@gmail.com</div>
           </div>
           <a href="profile.html" class="nav__dd-item nav__dd-item--active">
@@ -364,10 +408,6 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             Browse Experiences
           </a>
-          <a href="#" class="nav__dd-item" onclick="switchTab('wishlist'); return false;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.5"/></svg>
-            Saved Experiences
-          </a>
           <hr class="nav__dd-divider" />
           <button class="nav__dd-item nav__dd-item--danger" onclick="handleSignOut()">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -375,76 +415,111 @@
           </button>
         </div>
       </div>
-      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <!-- ── PROFILE HERO ── -->
-  <section class="pf-hero">
-    <div class="pf-hero__inner">
-      <div class="pf-hero__top">
-        <div class="pf-avatar-wrap">
-          <div class="pf-avatar" id="heroAvatar">AR</div>
-          <button class="pf-avatar__edit" title="Change photo" onclick="showEditModal()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#374151" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#374151" stroke-width="2" stroke-linecap="round"/></svg>
-          </button>
+  <!-- ── PAGE SHELL ── -->
+  <div class="profile-shell">
+
+    <!-- ════ LEFT SIDEBAR ════ -->
+    <aside class="ps-sidebar">
+
+      <!-- Identity card -->
+      <div class="ps-identity">
+        <div class="ps-identity__cover"></div>
+        <div class="ps-identity__body">
+          <div class="ps-avatar-wrap">
+            <div class="ps-avatar" id="psAvatar">AR</div>
+            <button class="ps-avatar__edit" onclick="showEditModal()" title="Edit photo">✎</button>
+          </div>
+          <div class="ps-name" id="psName">Arjun Rao</div>
+          <div class="ps-handle" id="psHandle">Bengaluru, India · Member since Jan 2024</div>
+          <span class="ps-badge">✦ Explorer</span>
+          <div class="ps-stats-row">
+            <div class="ps-mini-stat"><div class="ps-mini-stat__val">4</div><div class="ps-mini-stat__lbl">Experiences</div></div>
+            <div class="ps-mini-stat"><div class="ps-mini-stat__val">6</div><div class="ps-mini-stat__lbl">Saved</div></div>
+            <div class="ps-mini-stat"><div class="ps-mini-stat__val">3</div><div class="ps-mini-stat__lbl">Reviews</div></div>
+            <div class="ps-mini-stat"><div class="ps-mini-stat__val">1</div><div class="ps-mini-stat__lbl">Upcoming</div></div>
+          </div>
+          <button class="ps-edit-btn" onclick="showEditModal()">Edit Profile</button>
         </div>
-        <div class="pf-hero__info">
-          <h1 class="pf-hero__name" id="heroName">Arjun Rao</h1>
-          <div class="pf-hero__meta">
-            <span class="pf-hero__tag">📍 <strong id="heroCity">Bengaluru, India</strong></span>
-            <span class="pf-hero__tag">🗺️ <strong>4</strong> experiences completed</span>
-            <span class="pf-hero__tag">Member since <strong>Jan 2024</strong></span>
-            <span class="pf-hero__badge">✦ Explorer</span>
+      </div>
+
+      <!-- Navigation menu -->
+      <nav class="ps-nav">
+        <div class="ps-nav__label">My Account</div>
+        <button class="ps-nav__item is-active" id="nav-bookings" onclick="switchTab('bookings', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          My Bookings
+        </button>
+        <button class="ps-nav__item" id="nav-saved" onclick="switchTab('saved', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Saved
+          <span class="ps-nav__badge">6</span>
+        </button>
+        <button class="ps-nav__item" id="nav-reviews" onclick="switchTab('reviews', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Reviews
+        </button>
+        <div class="ps-nav__divider"></div>
+        <div class="ps-nav__label">More</div>
+        <button class="ps-nav__item" id="nav-settings" onclick="switchTab('settings', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Settings
+        </button>
+        <button class="ps-nav__item" onclick="handleSignOut()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Sign Out
+        </button>
+      </nav>
+
+      <!-- Travel Passport -->
+      <div class="ps-passport">
+        <div class="ps-passport__head">Travel Passport</div>
+        <div class="ps-passport__body">
+          <div class="pp-item">
+            <span class="pp-item__flag">🏔️</span>
+            <div><div class="pp-item__loc">Himachal Pradesh</div><div class="pp-item__date">Sep 2026</div></div>
+            <span class="pp-item__badge pp-item__badge--upcoming">Upcoming</span>
+          </div>
+          <div class="pp-item">
+            <span class="pp-item__flag">🏜️</span>
+            <div><div class="pp-item__loc">Rajasthan</div><div class="pp-item__date">Mar 2026</div></div>
+            <span class="pp-item__badge pp-item__badge--done">Done</span>
+          </div>
+          <div class="pp-item">
+            <span class="pp-item__flag">🌴</span>
+            <div><div class="pp-item__loc">Kerala</div><div class="pp-item__date">Nov 2025</div></div>
+            <span class="pp-item__badge pp-item__badge--done">Done</span>
+          </div>
+          <div class="pp-item">
+            <span class="pp-item__flag">🐯</span>
+            <div><div class="pp-item__loc">Madhya Pradesh</div><div class="pp-item__date">Jul 2025</div></div>
+            <span class="pp-item__badge pp-item__badge--done">Done</span>
           </div>
         </div>
       </div>
-      <div class="pf-hero__tabs">
-        <button class="pf-tab is-active" onclick="switchTab('bookings', this)">My Bookings</button>
-        <button class="pf-tab" onclick="switchTab('wishlist', this)">Saved</button>
-        <button class="pf-tab" onclick="switchTab('reviews', this)">Reviews</button>
-        <button class="pf-tab" onclick="switchTab('settings', this)">Settings</button>
-      </div>
-    </div>
-  </section>
 
-  <!-- ── STATS BAR ── -->
-  <div class="pf-stats">
-    <div class="pf-stats__inner">
-      <div class="pf-stat">
-        <span class="pf-stat__num">4</span>
-        <span class="pf-stat__label">Experiences</span>
-      </div>
-      <div class="pf-stat">
-        <span class="pf-stat__num">1</span>
-        <span class="pf-stat__label">Upcoming</span>
-      </div>
-      <div class="pf-stat">
-        <span class="pf-stat__num">3</span>
-        <span class="pf-stat__label">Reviews given</span>
-      </div>
-      <div class="pf-stat">
-        <span class="pf-stat__num">6</span>
-        <span class="pf-stat__label">Saved</span>
-      </div>
-    </div>
-  </div>
+    </aside>
 
-  <!-- ── MAIN ── -->
-  <div class="pf-main">
-    <div class="pf-content">
+    <!-- ════ MAIN CONTENT ════ -->
+    <main class="ps-main">
 
-      <!-- BOOKINGS TAB -->
-      <div class="pf-panel is-active" id="panel-bookings">
-
-        <div class="pf-section-head">
-          <h2>Upcoming</h2>
+      <!-- ══ MY BOOKINGS ══ -->
+      <div class="ps-panel is-active" id="panel-bookings">
+        <div class="ps-panel-head">
+          <div>
+            <h1>My Bookings</h1>
+            <div class="ps-panel-head__sub">Your upcoming and past experiences</div>
+          </div>
+          <a href="experiences.html" class="bk-btn bk-btn--primary" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">+ Book an Experience</a>
         </div>
+
+        <div class="sec-head" style="margin-top:0;"><h2>Upcoming</h2></div>
         <div class="bk-list">
           <div class="bk-card">
-            <img class="bk-card__img" src="assets/images/yoga-retreat.jpg" alt="Himalayan Trek" />
+            <img class="bk-card__img" src="assets/images/yoga-retreat.jpg" alt="Trek" onerror="this.style.background='#e8f5e9'" />
             <div class="bk-card__body">
               <span class="bk-card__status bk-card__status--upcoming">⏳ Confirmed · Upcoming</span>
               <div class="bk-card__title">Himalayan Trek &amp; Yoga Immersion</div>
@@ -456,87 +531,81 @@
               </div>
               <div class="bk-card__ref">Ref: GDT-2026-4821</div>
               <div class="bk-card__actions">
-                <button class="bk-card__btn bk-card__btn--primary">View Details</button>
-                <button class="bk-card__btn">Download Voucher</button>
-                <button class="bk-card__btn">Contact Host</button>
+                <button class="bk-btn bk-btn--primary">View Details</button>
+                <button class="bk-btn">Download Voucher</button>
+                <button class="bk-btn">Contact Host</button>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="pf-section-head">
-          <h2>Past Experiences</h2>
-          <a href="experiences.html" class="pf-section-link">Book again →</a>
-        </div>
+        <div class="sec-head"><h2>Past Experiences</h2><a href="experiences.html" class="sec-head__link">Book again →</a></div>
         <div class="bk-list">
           <div class="bk-card">
-            <img class="bk-card__img" src="assets/images/desert.jpg" alt="Desert Safari" onerror="this.style.background='#f3f4f6';this.src=''" />
+            <img class="bk-card__img" src="assets/images/desert.jpg" alt="Desert" onerror="this.style.background='#fef3c7'" />
             <div class="bk-card__body">
               <span class="bk-card__status bk-card__status--completed">✓ Completed</span>
               <div class="bk-card__title">Desert Safari &amp; Folk Culture</div>
               <div class="bk-card__meta">
-                <span>📍 Rajasthan</span>
-                <span>📅 Mar 2026</span>
-                <span>👥 2 travellers</span>
-                <span>💰 ₹56,000</span>
+                <span>📍 Rajasthan</span><span>📅 Mar 2026</span>
+                <span>👥 2 travellers</span><span>💰 ₹56,000</span>
               </div>
               <div class="bk-card__ref">Ref: GDT-2026-3107</div>
               <div class="bk-card__actions">
-                <button class="bk-card__btn bk-card__btn--primary" onclick="switchTab('reviews')">Write a Review</button>
-                <button class="bk-card__btn">Book Again</button>
+                <button class="bk-btn bk-btn--orange" onclick="switchTab('reviews', document.getElementById('nav-reviews'))">Write a Review</button>
+                <button class="bk-btn">Book Again</button>
               </div>
             </div>
           </div>
           <div class="bk-card">
-            <img class="bk-card__img" src="assets/images/kerala.jpg" alt="Kerala" onerror="this.style.background='#f3f4f6';this.src=''" />
+            <img class="bk-card__img" src="assets/images/kerala.jpg" alt="Kerala" onerror="this.style.background='#d1fae5'" />
             <div class="bk-card__body">
               <span class="bk-card__status bk-card__status--completed">✓ Completed</span>
               <div class="bk-card__title">Kerala Backwaters &amp; Ayurveda</div>
               <div class="bk-card__meta">
-                <span>📍 Kerala</span>
-                <span>📅 Nov 2025</span>
-                <span>👥 1 traveller</span>
-                <span>💰 ₹18,000</span>
+                <span>📍 Kerala</span><span>📅 Nov 2025</span>
+                <span>👥 1 traveller</span><span>💰 ₹18,000</span>
               </div>
               <div class="bk-card__ref">Ref: GDT-2025-1892</div>
               <div class="bk-card__actions">
-                <button class="bk-card__btn">View Review</button>
-                <button class="bk-card__btn">Book Again</button>
+                <button class="bk-btn">View Review</button>
+                <button class="bk-btn">Book Again</button>
               </div>
             </div>
           </div>
           <div class="bk-card">
-            <img class="bk-card__img" src="assets/images/tiger.jpg" alt="Tiger Conservation" onerror="this.style.background='#f3f4f6';this.src=''" />
+            <img class="bk-card__img" src="assets/images/tiger.jpg" alt="Conservation" onerror="this.style.background='#f0fdf4'" />
             <div class="bk-card__body">
               <span class="bk-card__status bk-card__status--completed">✓ Completed · GDT Care</span>
               <div class="bk-card__title">Tiger Conservation Volunteer Programme</div>
               <div class="bk-card__meta">
-                <span>📍 Madhya Pradesh</span>
-                <span>📅 Jul 2025</span>
-                <span>👥 1 traveller</span>
-                <span>🌿 14-day programme</span>
+                <span>📍 Madhya Pradesh</span><span>📅 Jul 2025</span>
+                <span>👥 1 traveller</span><span>🌿 14-day programme</span>
               </div>
               <div class="bk-card__ref">Ref: VP-2025-0034</div>
               <div class="bk-card__actions">
-                <button class="bk-card__btn">View Certificate</button>
-                <button class="bk-card__btn">View Review</button>
+                <button class="bk-btn">View Certificate</button>
+                <button class="bk-btn">View Review</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- WISHLIST TAB -->
-      <div class="pf-panel" id="panel-wishlist">
-        <div class="pf-section-head">
-          <h2>Saved Experiences</h2>
-          <a href="experiences.html" class="pf-section-link">Browse all →</a>
+      <!-- ══ SAVED ══ -->
+      <div class="ps-panel" id="panel-saved">
+        <div class="ps-panel-head">
+          <div>
+            <h1>Saved</h1>
+            <div class="ps-panel-head__sub">Experiences you're considering</div>
+          </div>
+          <a href="experiences.html" class="bk-btn" style="text-decoration:none;">Browse all →</a>
         </div>
         <div class="saved-grid">
           <div class="saved-card">
             <div class="saved-card__img">
               <img src="assets/images/spiti.jpg" alt="Spiti" onerror="this.style.background='linear-gradient(135deg,#667eea,#764ba2)'" />
-              <span class="saved-card__tag">Adventure</span>
+              <span class="saved-card__cat">Adventure</span>
               <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
             </div>
             <div class="saved-card__body">
@@ -549,7 +618,7 @@
           <div class="saved-card">
             <div class="saved-card__img">
               <img src="assets/images/coorg.jpg" alt="Coorg" onerror="this.style.background='linear-gradient(135deg,#2E7D32,#66bb6a)'" />
-              <span class="saved-card__tag">Retreat</span>
+              <span class="saved-card__cat">Retreat</span>
               <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
             </div>
             <div class="saved-card__body">
@@ -562,7 +631,7 @@
           <div class="saved-card">
             <div class="saved-card__img">
               <img src="assets/images/yoga-retreat.jpg" alt="Rishikesh" onerror="this.style.background='linear-gradient(135deg,#f54900,#fe9a00)'" />
-              <span class="saved-card__tag">Wellness</span>
+              <span class="saved-card__cat">Wellness</span>
               <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
             </div>
             <div class="saved-card__body">
@@ -575,7 +644,7 @@
           <div class="saved-card">
             <div class="saved-card__img">
               <img src="assets/images/desert.jpg" alt="Kutch" onerror="this.style.background='linear-gradient(135deg,#f59e0b,#fde68a)'" />
-              <span class="saved-card__tag">Cultural</span>
+              <span class="saved-card__cat">Cultural</span>
               <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
             </div>
             <div class="saved-card__body">
@@ -588,7 +657,7 @@
           <div class="saved-card">
             <div class="saved-card__img">
               <img src="assets/images/andaman.jpg" alt="Andaman" onerror="this.style.background='linear-gradient(135deg,#0891b2,#67e8f9)'" />
-              <span class="saved-card__tag">Adventure</span>
+              <span class="saved-card__cat">Adventure</span>
               <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
             </div>
             <div class="saved-card__body">
@@ -601,7 +670,7 @@
           <div class="saved-card">
             <div class="saved-card__img">
               <img src="assets/images/northeast.jpg" alt="Meghalaya" onerror="this.style.background='linear-gradient(135deg,#16a34a,#4ade80)'" />
-              <span class="saved-card__tag">Cultural</span>
+              <span class="saved-card__cat">Cultural</span>
               <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
             </div>
             <div class="saved-card__body">
@@ -614,85 +683,96 @@
         </div>
       </div>
 
-      <!-- REVIEWS TAB -->
-      <div class="pf-panel" id="panel-reviews">
-        <div class="pf-section-head">
-          <h2>Your Reviews</h2>
+      <!-- ══ REVIEWS ══ -->
+      <div class="ps-panel" id="panel-reviews">
+        <div class="ps-panel-head">
+          <div><h1>Reviews</h1><div class="ps-panel-head__sub">What you've shared with the community</div></div>
         </div>
-        <div class="review-list">
-          <div class="review-card">
-            <div class="review-card__head">
-              <div>
-                <div class="review-card__exp">Kerala Backwaters &amp; Ayurveda</div>
-                <div class="review-card__stars">★★★★★</div>
-                <div class="review-card__date">November 2025</div>
-              </div>
-              <img class="review-card__img" src="assets/images/yoga-retreat.jpg" alt="" onerror="this.style.display='none'" />
+
+        <div class="sec-head" style="margin-top:0;"><h2>Written by you</h2></div>
+        <div class="review-card">
+          <div class="review-card__head">
+            <div>
+              <div class="review-card__exp">Kerala Backwaters &amp; Ayurveda</div>
+              <div class="review-card__stars">★★★★★</div>
+              <div class="review-card__date">November 2025</div>
             </div>
-            <p class="review-card__text">One of the most restorative weeks of my life. The Ayurveda consultations were genuinely tailored, and the houseboat journey through the backwaters was everything I hoped for. The host was knowledgeable and accommodating throughout.</p>
+            <img class="review-card__img" src="assets/images/yoga-retreat.jpg" alt="" onerror="this.style.display='none'" />
           </div>
-          <div class="review-card">
-            <div class="review-card__head">
-              <div>
-                <div class="review-card__exp">Tiger Conservation Volunteer Programme</div>
-                <div class="review-card__stars">★★★★★</div>
-                <div class="review-card__date">July 2025</div>
-              </div>
-            </div>
-            <p class="review-card__text">Two weeks that genuinely changed how I think about conservation. The fieldwork was demanding and real — not tourist-facing. The team treated volunteers as contributors, not spectators. Would return without hesitation.</p>
-          </div>
-          <div class="review-card">
-            <div class="review-card__head">
-              <div>
-                <div class="review-card__exp">Himalayan Trek &amp; Yoga Immersion</div>
-                <div class="review-card__stars">★★★★☆</div>
-                <div class="review-card__date">April 2025</div>
-              </div>
-            </div>
-            <p class="review-card__text">The trek itself was spectacular — Day 4 through the Beas Kund meadows was the highlight. The yoga sessions were thoughtfully integrated. Would have appreciated slightly more flexibility on pace for the group.</p>
-          </div>
+          <p class="review-card__text">One of the most restorative weeks of my life. The Ayurveda consultations were genuinely tailored, and the houseboat journey through the backwaters was everything I hoped for. The host was knowledgeable and accommodating throughout.</p>
         </div>
-        <div class="pf-section-head" style="margin-top: 12px;">
-          <h2>Pending Reviews</h2>
+        <div class="review-card">
+          <div class="review-card__head">
+            <div>
+              <div class="review-card__exp">Tiger Conservation Volunteer Programme</div>
+              <div class="review-card__stars">★★★★★</div>
+              <div class="review-card__date">July 2025</div>
+            </div>
+          </div>
+          <p class="review-card__text">Two weeks that genuinely changed how I think about conservation. The fieldwork was demanding and real — not tourist-facing. The team treated volunteers as contributors, not spectators. Would return without hesitation.</p>
         </div>
-        <div class="bk-list">
-          <div class="bk-card">
-            <img class="bk-card__img" src="assets/images/desert.jpg" alt="" onerror="this.style.background='#f3f4f6';this.src=''" />
-            <div class="bk-card__body">
-              <span class="bk-card__status bk-card__status--upcoming">✏️ Awaiting your review</span>
-              <div class="bk-card__title">Desert Safari &amp; Folk Culture</div>
-              <div class="bk-card__meta"><span>📍 Rajasthan</span><span>📅 Completed Mar 2026</span></div>
-              <div class="bk-card__actions">
-                <button class="bk-card__btn bk-card__btn--primary" onclick="showToast('Review form coming soon')">Write Review</button>
-              </div>
+        <div class="review-card">
+          <div class="review-card__head">
+            <div>
+              <div class="review-card__exp">Himalayan Trek &amp; Yoga Immersion</div>
+              <div class="review-card__stars">★★★★☆</div>
+              <div class="review-card__date">April 2025</div>
+            </div>
+          </div>
+          <p class="review-card__text">The trek itself was spectacular — Day 4 through the Beas Kund meadows was the highlight. The yoga sessions were thoughtfully integrated. Would have appreciated slightly more flexibility on pace for the group.</p>
+        </div>
+
+        <div class="sec-head"><h2>Pending</h2></div>
+        <div class="bk-card">
+          <img class="bk-card__img" src="assets/images/desert.jpg" alt="" onerror="this.style.background='#fef3c7'" />
+          <div class="bk-card__body">
+            <span class="bk-card__status bk-card__status--upcoming">✏️ Awaiting your review</span>
+            <div class="bk-card__title">Desert Safari &amp; Folk Culture</div>
+            <div class="bk-card__meta"><span>📍 Rajasthan</span><span>📅 Completed Mar 2026</span></div>
+            <div class="bk-card__actions">
+              <button class="bk-btn bk-btn--primary" onclick="showToast('Review form coming soon')">Write Review</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- SETTINGS TAB -->
-      <div class="pf-panel" id="panel-settings">
-        <div class="pf-section-head"><h2>Account Settings</h2></div>
-        <div class="pf-card" style="margin-bottom: 16px;">
-          <div class="pf-card__head">
+      <!-- ══ SETTINGS ══ -->
+      <div class="ps-panel" id="panel-settings">
+        <div class="ps-panel-head">
+          <div><h1>Settings</h1><div class="ps-panel-head__sub">Manage your account and preferences</div></div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-section__head">
             Personal Information
-            <span class="pf-card__edit" onclick="showEditModal()">Edit</span>
+            <span class="settings-section__edit" onclick="showEditModal()">Edit</span>
           </div>
-          <div class="pf-card__body">
-            <div class="edit-form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-              <div class="pf-field"><div class="pf-field__label">Full Name</div><div class="pf-field__val" id="settingsName">Arjun Rao</div></div>
-              <div class="pf-field"><div class="pf-field__label">Email</div><div class="pf-field__val">arjun.rao@gmail.com</div></div>
+          <div class="settings-section__body">
+            <div class="settings-grid" style="margin-bottom:14px;">
+              <div><div class="sf-field__label">Full Name</div><div class="sf-field__val" id="settingsName">Arjun Rao</div></div>
+              <div><div class="sf-field__label">Email</div><div class="sf-field__val">arjun.rao@gmail.com</div></div>
+              <div><div class="sf-field__label">Phone</div><div class="sf-field__val">+91 98765 43210</div></div>
+              <div><div class="sf-field__label">City</div><div class="sf-field__val" id="settingsCity">Bengaluru, India</div></div>
             </div>
-            <div class="edit-form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-              <div class="pf-field"><div class="pf-field__label">Phone</div><div class="pf-field__val">+91 98765 43210</div></div>
-              <div class="pf-field"><div class="pf-field__label">City</div><div class="pf-field__val" id="settingsCity">Bengaluru, India</div></div>
-            </div>
-            <div class="pf-field"><div class="pf-field__label">Bio</div><div class="pf-field__val">Chasing altitude and stillness. Software engineer by day, deliberate traveller always.</div></div>
+            <div><div class="sf-field__label">Bio</div><div class="sf-field__val" id="settingsBio" style="margin-top:4px;">Chasing altitude and stillness. Software engineer by day, deliberate traveller always.</div></div>
           </div>
         </div>
-        <div class="pf-card" style="margin-bottom: 16px;">
-          <div class="pf-card__head">Notification Preferences</div>
-          <div class="pf-card__body">
+
+        <div class="settings-section">
+          <div class="settings-section__head">Travel Interests</div>
+          <div class="settings-section__body">
+            <div class="pref-tags">
+              <span class="pref-tag">🏔️ Adventure</span>
+              <span class="pref-tag">🌿 Conservation</span>
+              <span class="pref-tag">🧘 Wellness</span>
+              <span class="pref-tag">🎨 Craft &amp; Culture</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-section__head">Notification Preferences</div>
+          <div class="settings-section__body" style="padding-bottom:4px;">
             <div class="notif-row"><span class="notif-row__label">Booking confirmations</span><button class="notif-toggle on" onclick="toggleNotif(this)"></button></div>
             <div class="notif-row"><span class="notif-row__label">New experiences matching your interests</span><button class="notif-toggle on" onclick="toggleNotif(this)"></button></div>
             <div class="notif-row"><span class="notif-row__label">GDT Care programme openings</span><button class="notif-toggle on" onclick="toggleNotif(this)"></button></div>
@@ -700,9 +780,10 @@
             <div class="notif-row"><span class="notif-row__label">Promotional offers</span><button class="notif-toggle off" onclick="toggleNotif(this)"></button></div>
           </div>
         </div>
-        <div class="pf-card">
-          <div class="pf-card__head" style="color: #dc2626;">Danger Zone</div>
-          <div class="pf-card__body">
+
+        <div class="settings-section" style="margin-bottom:0;">
+          <div class="settings-section__head" style="color:#dc2626;">Danger Zone</div>
+          <div class="settings-section__body">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
               <div>
                 <div style="font-size:14px;font-weight:600;color:#374151;">Delete Account</div>
@@ -714,134 +795,23 @@
         </div>
       </div>
 
-    </div><!-- /pf-content -->
-
-    <!-- ── SIDEBAR ── -->
-    <aside class="pf-sidebar">
-
-      <!-- Profile details -->
-      <div class="pf-card">
-        <div class="pf-card__head">
-          About
-          <span class="pf-card__edit" onclick="showEditModal()">Edit</span>
-        </div>
-        <div class="pf-card__body">
-          <div class="pf-field">
-            <div class="pf-field__label">Bio</div>
-            <div class="pf-field__val" id="sidebarBio">Chasing altitude and stillness. Software engineer by day, deliberate traveller always.</div>
-          </div>
-          <div class="pf-field">
-            <div class="pf-field__label">Based in</div>
-            <div class="pf-field__val" id="sidebarCity">Bengaluru, India</div>
-          </div>
-          <div class="pf-field">
-            <div class="pf-field__label">Languages</div>
-            <div class="pf-field__val">English, Kannada, Hindi</div>
-          </div>
-          <div class="pf-field">
-            <div class="pf-field__label">Travel interests</div>
-            <div class="pref-tags">
-              <span class="pref-tag">🏔️ Adventure</span>
-              <span class="pref-tag">🌿 Conservation</span>
-              <span class="pref-tag">🧘 Wellness</span>
-              <span class="pref-tag">🎨 Craft</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Travel passport -->
-      <div class="pf-card">
-        <div class="pf-card__head">Travel Passport</div>
-        <div class="pf-card__body">
-          <div class="passport-list">
-            <div class="passport-item">
-              <span class="passport-item__flag">🏔️</span>
-              <div>
-                <div class="passport-item__loc">Himachal Pradesh</div>
-                <div class="passport-item__date">Sep 2026</div>
-              </div>
-              <span class="passport-item__badge passport-item__badge--upcoming">Upcoming</span>
-            </div>
-            <div class="passport-item">
-              <span class="passport-item__flag">🏜️</span>
-              <div>
-                <div class="passport-item__loc">Rajasthan</div>
-                <div class="passport-item__date">Mar 2026</div>
-              </div>
-              <span class="passport-item__badge passport-item__badge--done">Done</span>
-            </div>
-            <div class="passport-item">
-              <span class="passport-item__flag">🌴</span>
-              <div>
-                <div class="passport-item__loc">Kerala</div>
-                <div class="passport-item__date">Nov 2025</div>
-              </div>
-              <span class="passport-item__badge passport-item__badge--done">Done</span>
-            </div>
-            <div class="passport-item">
-              <span class="passport-item__flag">🐯</span>
-              <div>
-                <div class="passport-item__loc">Madhya Pradesh</div>
-                <div class="passport-item__date">Jul 2025</div>
-              </div>
-              <span class="passport-item__badge passport-item__badge--done">Done</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick links -->
-      <div class="pf-card">
-        <div class="pf-card__head">Quick Actions</div>
-        <div class="pf-card__body" style="padding: 8px 0;">
-          <a href="experiences.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;font-weight:500;color:#374151;transition:background 0.15s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            Browse Experiences
-          </a>
-          <a href="volunteer-detail.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;font-weight:500;color:#374151;transition:background 0.15s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.518 3.8 1 7 1c1.88 0 3.52.881 4.5 2.25C12.48 1.881 14.12 1 16 1c3.2 0 6 2.518 6 5.191 0 4.105-5.37 8.863-11 14.402z" stroke="currentColor" stroke-width="1.5"/></svg>
-            GDT Care Programmes
-          </a>
-          <a href="field-notes.html" style="display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;font-weight:500;color:#374151;transition:background 0.15s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.5"/></svg>
-            Field Notes
-          </a>
-        </div>
-      </div>
-
-    </aside>
+    </main>
   </div>
 
   <!-- ── EDIT PROFILE MODAL ── -->
-  <div class="edit-overlay" id="editOverlay" onclick="handleOverlayClick(event)">
+  <div class="edit-overlay" id="editOverlay" onclick="if(event.target===this)closeEditModal()">
     <div class="edit-modal">
       <h2>Edit Profile</h2>
-      <div class="edit-form-row">
-        <div class="edit-form-group">
-          <label>First Name</label>
-          <input type="text" id="editFirstName" value="Arjun" />
-        </div>
-        <div class="edit-form-group">
-          <label>Last Name</label>
-          <input type="text" id="editLastName" value="Rao" />
-        </div>
+      <div class="em-row">
+        <div class="em-group"><label>First Name</label><input type="text" id="editFirstName" value="Arjun" /></div>
+        <div class="em-group"><label>Last Name</label><input type="text" id="editLastName" value="Rao" /></div>
       </div>
-      <div class="edit-form-group">
-        <label>City / Location</label>
-        <input type="text" id="editCity" value="Bengaluru, India" />
-      </div>
-      <div class="edit-form-group">
-        <label>Bio</label>
-        <textarea id="editBio" rows="3">Chasing altitude and stillness. Software engineer by day, deliberate traveller always.</textarea>
-      </div>
-      <div class="edit-form-group">
-        <label>Phone</label>
-        <input type="tel" value="+91 98765 43210" />
-      </div>
+      <div class="em-group"><label>City / Location</label><input type="text" id="editCity" value="Bengaluru, India" /></div>
+      <div class="em-group"><label>Bio</label><textarea id="editBio" rows="3">Chasing altitude and stillness. Software engineer by day, deliberate traveller always.</textarea></div>
+      <div class="em-group"><label>Phone</label><input type="tel" value="+91 98765 43210" /></div>
       <div class="edit-modal__footer">
-        <button class="edit-modal__cancel" onclick="closeEditModal()">Cancel</button>
-        <button class="edit-modal__save" onclick="saveProfile()">Save Changes</button>
+        <button class="em-cancel" onclick="closeEditModal()">Cancel</button>
+        <button class="em-save" onclick="saveProfile()">Save Changes</button>
       </div>
     </div>
   </div>
@@ -851,24 +821,20 @@
 
   <script src="assets/main.js"></script>
   <script>
-    // Tab switching
     function switchTab(tab, btnEl) {
-      document.querySelectorAll('.pf-panel').forEach(p => p.classList.remove('is-active'));
-      document.querySelectorAll('.pf-tab').forEach(t => t.classList.remove('is-active'));
-      document.getElementById('panel-' + tab).classList.add('is-active');
+      document.querySelectorAll('.ps-panel').forEach(p => p.classList.remove('is-active'));
+      document.querySelectorAll('.ps-nav__item').forEach(b => b.classList.remove('is-active'));
+      const panel = document.getElementById('panel-' + tab);
+      if (panel) panel.classList.add('is-active');
       if (btnEl) {
         btnEl.classList.add('is-active');
       } else {
-        // called programmatically — find the matching tab button
-        document.querySelectorAll('.pf-tab').forEach(t => {
-          if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + tab + "'")) {
-            t.classList.add('is-active');
-          }
-        });
+        const nb = document.getElementById('nav-' + tab);
+        if (nb) nb.classList.add('is-active');
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Edit modal
     function showEditModal() {
       document.getElementById('editOverlay').classList.add('is-open');
       document.body.style.overflow = 'hidden';
@@ -877,52 +843,42 @@
       document.getElementById('editOverlay').classList.remove('is-open');
       document.body.style.overflow = '';
     }
-    function handleOverlayClick(e) {
-      if (e.target === document.getElementById('editOverlay')) closeEditModal();
-    }
+
     function saveProfile() {
       const first = document.getElementById('editFirstName').value.trim();
       const last  = document.getElementById('editLastName').value.trim();
       const city  = document.getElementById('editCity').value.trim();
       const bio   = document.getElementById('editBio').value.trim();
       const name  = first + (last ? ' ' + last : '');
-      const initials = (first[0] || '') + (last[0] || '');
+      const initials = ((first[0] || '') + (last[0] || '')).toUpperCase();
 
-      // Update hero
-      document.getElementById('heroName').textContent = name;
-      document.getElementById('heroAvatar').textContent = initials.toUpperCase();
-      document.getElementById('heroCity').textContent = city;
-      // Update sidebar
-      if (document.getElementById('sidebarBio')) document.getElementById('sidebarBio').textContent = bio;
-      if (document.getElementById('sidebarCity')) document.getElementById('sidebarCity').textContent = city;
-      // Update settings tab
-      if (document.getElementById('settingsName')) document.getElementById('settingsName').textContent = name;
-      if (document.getElementById('settingsCity')) document.getElementById('settingsCity').textContent = city;
-      // Update nav avatar
-      document.querySelector('.nav__avatar--loggedin').textContent = initials.toUpperCase();
-      document.querySelector('.nav__dd-name').textContent = name;
+      document.getElementById('psAvatar').textContent = initials;
+      document.getElementById('psName').textContent = name;
+      document.getElementById('psHandle').textContent = city + ' · Member since Jan 2024';
+      document.getElementById('settingsName').textContent = name;
+      document.getElementById('settingsCity').textContent = city;
+      document.getElementById('settingsBio').textContent = bio;
+      document.querySelector('.nav__avatar--loggedin').textContent = initials;
+      document.getElementById('navDdName').textContent = name;
 
       closeEditModal();
       showToast('Profile updated');
     }
 
-    // Unsave card
     function unsave(btn) {
       const card = btn.closest('.saved-card');
+      card.style.transition = 'all 0.2s';
       card.style.opacity = '0';
       card.style.transform = 'scale(0.95)';
-      card.style.transition = 'all 0.2s';
       setTimeout(() => card.remove(), 200);
       showToast('Removed from saved');
     }
 
-    // Toggle notification
     function toggleNotif(btn) {
       btn.classList.toggle('on');
       btn.classList.toggle('off');
     }
 
-    // Toast
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -930,7 +886,6 @@
       setTimeout(() => t.classList.remove('is-visible'), 2800);
     }
 
-    // Sign out
     function handleSignOut() {
       showToast('Signed out — redirecting…');
       setTimeout(() => window.location = 'index.html', 1400);

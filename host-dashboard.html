@@ -9,105 +9,129 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
-    body { background: #f9fafb; padding-top: var(--nav-h); }
+    body { background: #f4f5f7; padding-top: var(--nav-h); }
 
-    /* ── HOST HERO ── */
-    .hd-hero {
-      background: linear-gradient(135deg, #0a0a0a 0%, #101828 55%, #0a1f0a 100%);
-      padding: 44px 0 0;
-      position: relative; overflow: hidden;
-    }
-    .hd-hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(46,125,50,0.15) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .hd-hero__inner {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x); position: relative;
-    }
-    .hd-hero__top { display: flex; align-items: flex-end; gap: 28px; }
-    .hd-avatar-wrap { position: relative; flex-shrink: 0; }
-    .hd-avatar {
-      width: 88px; height: 88px; border-radius: 16px;
-      background: linear-gradient(135deg, #2E7D32, #66bb6a);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 30px; font-weight: 700; color: #fff;
-      border: 3px solid rgba(255,255,255,0.12);
-      position: relative; bottom: -20px;
-    }
-    .hd-avatar__badge {
-      position: absolute; bottom: 14px; right: -6px;
-      background: #fe9a00; border-radius: 999px;
-      font-size: 9px; font-weight: 700; color: #101828;
-      padding: 2px 7px; white-space: nowrap;
-    }
-    .hd-hero__info { padding-bottom: 22px; flex: 1; }
-    .hd-hero__name {
-      font-family: var(--font-serif);
-      font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 6px;
-    }
-    .hd-hero__meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .hd-hero__tag { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); }
-    .hd-hero__tag strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+    /* ── STATUS PILL (reused in identity card) ── */
     .hd-status-pill {
       display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(46,125,50,0.20); border: 1px solid rgba(46,125,50,0.40);
-      border-radius: 999px; padding: 4px 12px;
-      font-size: 11px; font-weight: 600; color: #86efac;
+      background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 999px; padding: 3px 10px;
+      font-size: 11px; font-weight: 600; color: #166534;
     }
-    .hd-status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; }
-    .hd-hero__tabs {
-      display: flex; gap: 0; margin-top: 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .hd-tab {
-      padding: 12px 20px; font-size: 14px; font-weight: 500;
-      color: rgba(255,255,255,0.40); cursor: pointer;
-      border-bottom: 2px solid transparent; margin-bottom: -1px;
-      transition: all 0.2s; white-space: nowrap;
-      background: none; border-top: none; border-left: none; border-right: none;
-    }
-    .hd-tab:hover { color: rgba(255,255,255,0.70); }
-    .hd-tab.is-active { color: #fff; border-bottom-color: #2E7D32; }
-    .hd-tab__badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 18px; height: 18px; border-radius: 999px;
-      background: #f54900; color: #fff;
-      font-size: 10px; font-weight: 700; margin-left: 6px;
-    }
+    .hd-status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-    /* ── STATS BAR ── */
-    .hd-stats { background: #fff; border-bottom: 1px solid var(--border); }
-    .hd-stats__inner {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 0 var(--pad-x);
-      display: flex; gap: 0; overflow-x: auto;
-    }
-    .hd-stat {
-      padding: 18px 40px 18px 0; margin-right: 40px;
-      display: flex; flex-direction: column; gap: 3px;
-      border-right: 1px solid var(--border); flex-shrink: 0;
-    }
-    .hd-stat:last-child { border-right: none; }
-    .hd-stat__num { font-size: 22px; font-weight: 700; color: #101828; line-height: 1; }
-    .hd-stat__num--green { color: #2E7D32; }
-    .hd-stat__label { font-size: 12px; color: #9ca3af; font-weight: 500; }
-    .hd-stat__trend { font-size: 11px; color: #2E7D32; font-weight: 600; margin-top: 1px; }
-    .hd-stat__trend--down { color: #dc2626; }
-
-    /* ── MAIN LAYOUT ── */
-    .hd-main {
-      max-width: var(--max-w); margin: 0 auto;
-      padding: 40px var(--pad-x) 80px;
-      display: grid; grid-template-columns: 1fr 300px; gap: 36px;
+    /* ── PAGE SHELL ── */
+    .hd-shell {
+      max-width: 1200px; margin: 0 auto;
+      padding: 36px var(--pad-x) 80px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
       align-items: start;
     }
 
-    /* ── TAB PANELS ── */
-    .hd-panel { display: none; }
-    .hd-panel.is-active { display: block; }
+    /* ── LEFT SIDEBAR ── */
+    .hd-left { position: sticky; top: calc(var(--nav-h) + 24px); }
+
+    /* Identity card */
+    .hd-identity {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+      overflow: hidden; margin-bottom: 12px;
+    }
+    .hd-identity__cover {
+      height: 72px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #101828 55%, #0a1f0a 100%);
+      position: relative;
+    }
+    .hd-identity__cover::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(46,125,50,0.25) 0%, transparent 65%);
+    }
+    .hd-identity__body { padding: 0 20px 20px; }
+    .hd-avatar-wrap { position: relative; margin-top: -28px; margin-bottom: 12px; display: inline-block; }
+    .hd-avatar {
+      width: 56px; height: 56px; border-radius: 12px;
+      background: linear-gradient(135deg, #2E7D32, #66bb6a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: #fff;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .hd-avatar__badge {
+      position: absolute; bottom: -4px; right: -6px;
+      background: #fe9a00; border-radius: 999px;
+      font-size: 9px; font-weight: 700; color: #101828;
+      padding: 2px 6px; white-space: nowrap; border: 2px solid #fff;
+    }
+    .hd-host-name {
+      font-family: var(--font-serif);
+      font-size: 16px; font-weight: 700; color: #101828; margin-bottom: 2px;
+    }
+    .hd-host-meta { font-size: 12px; color: #9ca3af; margin-bottom: 10px; }
+    .hd-stats-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;
+    }
+    .hd-mini-stat {
+      background: #f9fafb; border-radius: 10px; padding: 10px 12px; text-align: center;
+    }
+    .hd-mini-stat__val { font-size: 16px; font-weight: 700; color: #101828; line-height: 1; }
+    .hd-mini-stat__val--green { color: #2E7D32; }
+    .hd-mini-stat__lbl { font-size: 10px; color: #9ca3af; margin-top: 2px; }
+
+    /* Nav menu */
+    .hd-nav {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+      overflow: hidden; margin-bottom: 12px;
+    }
+    .hd-nav__label {
+      padding: 12px 16px 6px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #9ca3af;
+    }
+    .hd-nav__item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 16px; font-size: 13px; font-weight: 500;
+      color: #6b7280; cursor: pointer; transition: all 0.15s;
+      border: none; background: none; width: 100%; text-align: left;
+      position: relative;
+    }
+    .hd-nav__item:hover { background: #f9fafb; color: #101828; }
+    .hd-nav__item.is-active {
+      background: #f0fdf4; color: #2E7D32; font-weight: 600;
+    }
+    .hd-nav__item.is-active::before {
+      content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+      width: 3px; border-radius: 0 3px 3px 0; background: #2E7D32;
+    }
+    .hd-nav__item svg { flex-shrink: 0; opacity: 0.7; }
+    .hd-nav__item.is-active svg { opacity: 1; }
+    .hd-nav__badge {
+      margin-left: auto; background: #f54900; color: #fff;
+      font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 999px;
+    }
+    .hd-nav__badge--green { background: #2E7D32; }
+    .hd-nav__divider { height: 1px; background: #f3f4f6; margin: 4px 0; }
+
+    /* Sidebar utility cards */
+    .hd-side-card {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+      overflow: hidden; margin-bottom: 12px;
+    }
+    .hd-side-card:last-child { margin-bottom: 0; }
+    .hd-side-card__head {
+      padding: 12px 16px; border-bottom: 1px solid #f3f4f6;
+      font-size: 12px; font-weight: 600; color: #374151;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .hd-side-card__head-link { font-size: 11px; font-weight: 500; color: var(--orange); }
+    .hd-side-card__head-link:hover { text-decoration: underline; }
+    .hd-side-card__body { padding: 12px 16px; }
+
+    /* ── MAIN LAYOUT ── */
+    .hd-main {
+      min-width: 0;
+    }
 
     /* ── SECTION HEAD ── */
     .hd-sec-head {
@@ -273,13 +297,17 @@
     .payout-row__status--paid { background: #f0fdf4; color: #166534; }
     .payout-row__status--pending { background: #fffbeb; color: #92400e; }
 
-    /* ── SIDEBAR ── */
-    .hd-sidebar { display: flex; flex-direction: column; gap: 16px; }
-    .hd-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; overflow: hidden; }
-    .hd-card__head { padding: 14px 18px; border-bottom: 1px solid #f3f4f6; font-size: 13px; font-weight: 600; color: #374151; display: flex; align-items: center; justify-content: space-between; }
-    .hd-card__head-link { font-size: 12px; font-weight: 500; color: var(--orange); }
-    .hd-card__head-link:hover { text-decoration: underline; }
-    .hd-card__body { padding: 14px 18px; }
+    /* ── TAB PANELS ── */
+    .hd-panel { display: none; }
+    .hd-panel.is-active { display: block; }
+
+    /* ── PANEL HEADER ── */
+    .hd-panel-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .hd-panel-head h1 { font-size: 20px; font-weight: 700; color: #101828; }
+    .hd-panel-head__sub { font-size: 13px; color: #9ca3af; margin-top: 2px; }
     .hd-field { margin-bottom: 12px; }
     .hd-field:last-child { margin-bottom: 0; }
     .hd-field__label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #9ca3af; margin-bottom: 3px; }
@@ -488,8 +516,22 @@
     .app-no-results__icon { font-size: 30px; margin-bottom: 10px; }
     .app-no-results p { font-size: 14px; color: #9ca3af; }
 
-    @media (max-width: 960px) { .hd-main { grid-template-columns: 1fr; } .hd-sidebar { order: -1; } }
-    @media (max-width: 640px) { :root { --pad-x: 20px; } .listing-card { flex-direction: column; } .listing-card__img, .listing-card__img-placeholder { width: 100%; height: 160px; } .listing-card__body { flex-direction: column; } .app-table th:nth-child(4), .app-table td:nth-child(4), .app-table th:nth-child(5), .app-table td:nth-child(5) { display: none; } }
+    @media (max-width: 960px) {
+      .hd-shell { grid-template-columns: 1fr; }
+      .hd-left { position: static; }
+      .hd-nav { display: flex; flex-wrap: wrap; }
+      .hd-nav__label { display: none; }
+      .hd-nav__item { flex: 1; justify-content: center; min-width: 90px; }
+      .hd-nav__item.is-active::before { top: auto; bottom: 0; left: 8px; right: 8px; width: auto; height: 3px; border-radius: 3px 3px 0 0; }
+    }
+    @media (max-width: 640px) {
+      :root { --pad-x: 16px; }
+      .hd-shell { padding: 20px var(--pad-x) 60px; gap: 16px; }
+      .listing-card { flex-direction: column; }
+      .listing-card__img, .listing-card__img-placeholder { width: 100%; height: 160px; }
+      .listing-card__body { flex-direction: column; }
+      .app-table th:nth-child(4), .app-table td:nth-child(4), .app-table th:nth-child(5), .app-table td:nth-child(5) { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -538,74 +580,142 @@
     </div>
   </nav>
 
-  <!-- ── HOST HERO ── -->
-  <section class="hd-hero">
-    <div class="hd-hero__inner">
-      <div class="hd-hero__top">
-        <div class="hd-avatar-wrap">
-          <div class="hd-avatar">WT</div>
-          <span class="hd-avatar__badge">Founding Host</span>
-        </div>
-        <div class="hd-hero__info">
-          <h1 class="hd-hero__name">Wild Trails India</h1>
-          <div class="hd-hero__meta">
-            <span class="hd-hero__tag">📍 <strong>Himachal Pradesh</strong></span>
-            <span class="hd-hero__tag">🗓️ Member since <strong>Jan 2026</strong></span>
-            <span class="hd-hero__tag">⭐ <strong>4.9</strong> avg rating</span>
-            <span class="hd-status-pill">Live on GDT</span>
+  <!-- ── PAGE SHELL ── -->
+  <div class="hd-shell">
+
+    <!-- ════ LEFT SIDEBAR ════ -->
+    <aside class="hd-left">
+
+      <!-- Identity card -->
+      <div class="hd-identity">
+        <div class="hd-identity__cover"></div>
+        <div class="hd-identity__body">
+          <div class="hd-avatar-wrap">
+            <div class="hd-avatar">WT</div>
+            <span class="hd-avatar__badge">Founding Host</span>
+          </div>
+          <div class="hd-host-name">Wild Trails India</div>
+          <div class="hd-host-meta">📍 Himachal Pradesh &nbsp;·&nbsp; Host since Jan 2026</div>
+          <div style="margin-bottom:14px;"><span class="hd-status-pill">Live on GDT</span></div>
+          <div class="hd-stats-row">
+            <div class="hd-mini-stat"><div class="hd-mini-stat__val hd-mini-stat__val--green">₹2.4L</div><div class="hd-mini-stat__lbl">Revenue</div></div>
+            <div class="hd-mini-stat"><div class="hd-mini-stat__val">14</div><div class="hd-mini-stat__lbl">Bookings</div></div>
+            <div class="hd-mini-stat"><div class="hd-mini-stat__val">4.9★</div><div class="hd-mini-stat__lbl">Avg Rating</div></div>
+            <div class="hd-mini-stat"><div class="hd-mini-stat__val">87%</div><div class="hd-mini-stat__lbl">Response</div></div>
           </div>
         </div>
       </div>
-      <div class="hd-hero__tabs">
-        <button class="hd-tab is-active" onclick="switchTab('overview', this)">Overview</button>
-        <button class="hd-tab" onclick="switchTab('listings', this)">Listings</button>
-        <button class="hd-tab" onclick="switchTab('enquiries', this)">
-          Enquiries &amp; Bookings<span class="hd-tab__badge">3</span>
-        </button>
-        <button class="hd-tab" onclick="switchTab('applicants', this)">
-          Applicants<span class="hd-tab__badge" id="appBadge" style="background:#2E7D32;">8</span>
-        </button>
-        <button class="hd-tab" onclick="switchTab('reviews', this)">Reviews</button>
-        <button class="hd-tab" onclick="switchTab('payouts', this)">Payouts</button>
-        <button class="hd-tab" onclick="switchTab('settings', this)">Settings</button>
-      </div>
-    </div>
-  </section>
 
-  <!-- ── STATS BAR ── -->
-  <div class="hd-stats">
-    <div class="hd-stats__inner">
-      <div class="hd-stat">
-        <span class="hd-stat__num">₹2.4L</span>
-        <span class="hd-stat__label">Revenue this month</span>
-        <span class="hd-stat__trend">↑ 18% vs last month</span>
-      </div>
-      <div class="hd-stat">
-        <span class="hd-stat__num">14</span>
-        <span class="hd-stat__label">Bookings this month</span>
-        <span class="hd-stat__trend">↑ 3 new this week</span>
-      </div>
-      <div class="hd-stat">
-        <span class="hd-stat__num hd-stat__num--green">3</span>
-        <span class="hd-stat__label">New enquiries</span>
-        <span class="hd-stat__trend">Respond within 72 hrs</span>
-      </div>
-      <div class="hd-stat">
-        <span class="hd-stat__num">4.9</span>
-        <span class="hd-stat__label">Avg rating</span>
-        <span class="hd-stat__trend">↑ from 4.7 last quarter</span>
-      </div>
-      <div class="hd-stat">
-        <span class="hd-stat__num">87%</span>
-        <span class="hd-stat__label">Response rate</span>
-        <span class="hd-stat__trend hd-stat__trend--down">↓ Target: 95%</span>
-      </div>
-    </div>
-  </div>
+      <!-- Navigation -->
+      <nav class="hd-nav">
+        <div class="hd-nav__label">Dashboard</div>
+        <button class="hd-nav__item is-active" id="hn-overview" onclick="switchTab('overview', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+          Overview
+        </button>
+        <button class="hd-nav__item" id="hn-listings" onclick="switchTab('listings', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Listings
+        </button>
+        <button class="hd-nav__item" id="hn-enquiries" onclick="switchTab('enquiries', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Enquiries &amp; Bookings
+          <span class="hd-nav__badge" id="enqNavBadge">3</span>
+        </button>
+        <button class="hd-nav__item" id="hn-applicants" onclick="switchTab('applicants', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Applicants
+          <span class="hd-nav__badge hd-nav__badge--green" id="appNavBadge">8</span>
+        </button>
+        <div class="hd-nav__divider"></div>
+        <div class="hd-nav__label">Manage</div>
+        <button class="hd-nav__item" id="hn-reviews" onclick="switchTab('reviews', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Reviews
+        </button>
+        <button class="hd-nav__item" id="hn-payouts" onclick="switchTab('payouts', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.5"/></svg>
+          Payouts
+        </button>
+        <button class="hd-nav__item" id="hn-settings" onclick="switchTab('settings', this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Settings
+        </button>
+        <div class="hd-nav__divider"></div>
+        <button class="hd-nav__item" onclick="window.location='index.html'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Sign Out
+        </button>
+      </nav>
 
-  <!-- ── MAIN ── -->
-  <div class="hd-main">
-    <div class="hd-content">
+      <!-- Availability calendar -->
+      <div class="hd-side-card">
+        <div class="hd-side-card__head">
+          Availability — July 2026
+          <a href="#" class="hd-side-card__head-link" onclick="showToast('Full calendar coming soon');return false;">Manage →</a>
+        </div>
+        <div class="hd-side-card__body">
+          <div class="cal-strip">
+            <div class="cal-day"><div class="cal-day__lbl">Mo</div><div class="cal-day__num">1</div></div>
+            <div class="cal-day"><div class="cal-day__lbl">Tu</div><div class="cal-day__num">2</div></div>
+            <div class="cal-day"><div class="cal-day__lbl">We</div><div class="cal-day__num">3</div></div>
+            <div class="cal-day"><div class="cal-day__lbl">Th</div><div class="cal-day__num">4</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Fr</div><div class="cal-day__num">5</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Sa</div><div class="cal-day__num">6</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Su</div><div class="cal-day__num">7</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Mo</div><div class="cal-day__num">8</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Tu</div><div class="cal-day__num">9</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">We</div><div class="cal-day__num">10</div></div>
+            <div class="cal-day today"><div class="cal-day__lbl">Th</div><div class="cal-day__num">11</div></div>
+            <div class="cal-day"><div class="cal-day__lbl">Fr</div><div class="cal-day__num">12</div></div>
+            <div class="cal-day"><div class="cal-day__lbl">Sa</div><div class="cal-day__num">13</div></div>
+            <div class="cal-day"><div class="cal-day__lbl">Su</div><div class="cal-day__num">14</div></div>
+            <div class="cal-day blocked"><div class="cal-day__lbl">Mo</div><div class="cal-day__num">15</div></div>
+            <div class="cal-day blocked"><div class="cal-day__lbl">Tu</div><div class="cal-day__num">16</div></div>
+            <div class="cal-day blocked"><div class="cal-day__lbl">We</div><div class="cal-day__num">17</div></div>
+            <div class="cal-day"><div class="cal-day__lbl">Th</div><div class="cal-day__num">18</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Fr</div><div class="cal-day__num">19</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Sa</div><div class="cal-day__num">20</div></div>
+            <div class="cal-day booked"><div class="cal-day__lbl">Su</div><div class="cal-day__num">21</div></div>
+          </div>
+          <div class="cal-legend">
+            <span><span class="cal-legend-dot" style="background:#fef3c7;"></span>Booked</span>
+            <span><span class="cal-legend-dot" style="background:#f3f4f6;"></span>Blocked</span>
+            <span><span class="cal-legend-dot" style="background:#101828;"></span>Today</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile checklist -->
+      <div class="hd-side-card">
+        <div class="hd-side-card__head">Profile Checklist</div>
+        <div class="hd-side-card__body">
+          <div class="checklist">
+            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">Business profile complete</span></div>
+            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">Bank details verified</span></div>
+            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">2 live listings published</span></div>
+            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">Field Notes story published</span></div>
+            <div class="checklist-item warn"><span class="checklist-item__icon">⚠️</span><span class="checklist-item__label">Response rate below target</span></div>
+            <div class="checklist-item todo"><span class="checklist-item__icon">○</span><span class="checklist-item__label">Add photos to draft listing</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GDT Host Support -->
+      <div class="hd-side-card">
+        <div class="hd-side-card__head">GDT Host Support</div>
+        <div class="hd-side-card__body">
+          <div class="hd-field"><div class="hd-field__label">Manager</div><div class="hd-field__val">Kavya S.</div></div>
+          <div class="hd-field"><div class="hd-field__label">Email</div><div class="hd-field__val" style="color:var(--orange);">kavya@greatdtour.com</div></div>
+          <div class="hd-field" style="margin-bottom:12px;"><div class="hd-field__label">Next check-in</div><div class="hd-field__val">30 Jul 2026</div></div>
+          <button class="hd-btn" style="width:100%;" onclick="showToast('Message sent to Kavya')">Message GDT Team</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ════ MAIN CONTENT ════ -->
+    <div class="hd-main">
 
       <!-- ══ OVERVIEW TAB ══ -->
       <div class="hd-panel is-active" id="panel-overview">
@@ -1160,90 +1270,9 @@
         </div>
       </div>
 
-    </div><!-- /hd-content -->
+    </div><!-- /hd-main -->
 
-    <!-- ── SIDEBAR ── -->
-    <aside class="hd-sidebar">
-
-      <!-- Availability calendar -->
-      <div class="hd-card">
-        <div class="hd-card__head">
-          Availability — July 2026
-          <a href="#" class="hd-card__head-link" onclick="showToast('Full calendar coming soon');return false;">Manage →</a>
-        </div>
-        <div class="hd-card__body">
-          <div class="cal-strip">
-            <div class="cal-day"><div class="cal-day__lbl">Mo</div><div class="cal-day__num">1</div></div>
-            <div class="cal-day"><div class="cal-day__lbl">Tu</div><div class="cal-day__num">2</div></div>
-            <div class="cal-day"><div class="cal-day__lbl">We</div><div class="cal-day__num">3</div></div>
-            <div class="cal-day"><div class="cal-day__lbl">Th</div><div class="cal-day__num">4</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Fr</div><div class="cal-day__num">5</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Sa</div><div class="cal-day__num">6</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Su</div><div class="cal-day__num">7</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Mo</div><div class="cal-day__num">8</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Tu</div><div class="cal-day__num">9</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">We</div><div class="cal-day__num">10</div></div>
-            <div class="cal-day today"><div class="cal-day__lbl">Th</div><div class="cal-day__num">11</div></div>
-            <div class="cal-day"><div class="cal-day__lbl">Fr</div><div class="cal-day__num">12</div></div>
-            <div class="cal-day"><div class="cal-day__lbl">Sa</div><div class="cal-day__num">13</div></div>
-            <div class="cal-day"><div class="cal-day__lbl">Su</div><div class="cal-day__num">14</div></div>
-            <div class="cal-day blocked"><div class="cal-day__lbl">Mo</div><div class="cal-day__num">15</div></div>
-            <div class="cal-day blocked"><div class="cal-day__lbl">Tu</div><div class="cal-day__num">16</div></div>
-            <div class="cal-day blocked"><div class="cal-day__lbl">We</div><div class="cal-day__num">17</div></div>
-            <div class="cal-day"><div class="cal-day__lbl">Th</div><div class="cal-day__num">18</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Fr</div><div class="cal-day__num">19</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Sa</div><div class="cal-day__num">20</div></div>
-            <div class="cal-day booked"><div class="cal-day__lbl">Su</div><div class="cal-day__num">21</div></div>
-          </div>
-          <div class="cal-legend">
-            <span><span class="cal-legend-dot" style="background:#fef3c7;"></span>Booked</span>
-            <span><span class="cal-legend-dot" style="background:#f3f4f6;"></span>Blocked</span>
-            <span><span class="cal-legend-dot" style="background:#101828;"></span>Today</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Performance snapshot -->
-      <div class="hd-card">
-        <div class="hd-card__head">This Month</div>
-        <div class="hd-card__body">
-          <div class="quick-stat-grid">
-            <div class="quick-stat"><div class="quick-stat__val">₹2.4L</div><div class="quick-stat__lbl">Revenue</div></div>
-            <div class="quick-stat"><div class="quick-stat__val">14</div><div class="quick-stat__lbl">Bookings</div></div>
-            <div class="quick-stat"><div class="quick-stat__val">58</div><div class="quick-stat__lbl">Guests</div></div>
-            <div class="quick-stat"><div class="quick-stat__val">4.9★</div><div class="quick-stat__lbl">Avg Rating</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Profile completion checklist -->
-      <div class="hd-card">
-        <div class="hd-card__head">Profile Checklist</div>
-        <div class="hd-card__body">
-          <div class="checklist">
-            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">Business profile complete</span></div>
-            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">Bank details verified</span></div>
-            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">2 live listings published</span></div>
-            <div class="checklist-item done"><span class="checklist-item__icon">✅</span><span class="checklist-item__label">Field Notes story published</span></div>
-            <div class="checklist-item warn"><span class="checklist-item__icon">⚠️</span><span class="checklist-item__label">Response rate below target (87% vs 95%)</span></div>
-            <div class="checklist-item todo"><span class="checklist-item__icon">○</span><span class="checklist-item__label">Add photography to draft listing</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- GDT support -->
-      <div class="hd-card">
-        <div class="hd-card__head">GDT Host Support</div>
-        <div class="hd-card__body">
-          <div class="hd-field"><div class="hd-field__label">Dedicated Manager</div><div class="hd-field__val">Kavya S.</div></div>
-          <div class="hd-field"><div class="hd-field__label">Email</div><div class="hd-field__val" style="color:var(--orange);">kavya@greatdtour.com</div></div>
-          <div class="hd-field"><div class="hd-field__label">Next check-in</div><div class="hd-field__val">30 Jul 2026</div></div>
-          <button class="hd-btn" style="width:100%;margin-top:4px;justify-content:center;" onclick="showToast('Message sent to Kavya')">Message GDT Team</button>
-        </div>
-      </div>
-
-    </aside>
-  </div>
+  </div><!-- /hd-shell -->
 
   <!-- ── EDIT PROFILE MODAL ── -->
   <div class="edit-overlay" id="editOverlay" onclick="if(event.target===this)closeEditModal()">
@@ -1306,18 +1335,17 @@
   <script>
     function switchTab(tab, btnEl) {
       document.querySelectorAll('.hd-panel').forEach(p => p.classList.remove('is-active'));
-      document.querySelectorAll('.hd-tab').forEach(t => t.classList.remove('is-active'));
-      document.getElementById('panel-' + tab).classList.add('is-active');
+      document.querySelectorAll('.hd-nav__item').forEach(t => t.classList.remove('is-active'));
+      const panel = document.getElementById('panel-' + tab);
+      if (panel) panel.classList.add('is-active');
       if (btnEl) {
         btnEl.classList.add('is-active');
       } else {
-        document.querySelectorAll('.hd-tab').forEach(t => {
-          if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + tab + "'")) {
-            t.classList.add('is-active');
-          }
-        });
+        const nb = document.getElementById('hn-' + tab);
+        if (nb) nb.classList.add('is-active');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (tab === 'applicants') renderTable();
     }
 
     function toggleSwitch(btn) {
@@ -1346,11 +1374,12 @@
     }
 
     function updateBadge(delta) {
-      document.querySelectorAll('.hd-tab__badge').forEach(b => {
+      const b = document.getElementById('enqNavBadge');
+      if (b) {
         const v = parseInt(b.textContent) + delta;
         b.textContent = Math.max(0, v);
         if (v <= 0) b.style.display = 'none';
-      });
+      }
     }
 
     // Modals
@@ -1624,20 +1653,5 @@
       showToast('CSV export coming soon');
     }
 
-    // Init applicants table when panel becomes active — lazy render
-    const _origSwitchTab = window.switchTab;
-    window.switchTabOrig = _origSwitchTab;
-    // Override done below after definition
-
-  </script>
-  <script>
-    // Re-wrap switchTab to init table on first visit
-    const __origSwitch = switchTab;
-    switchTab = function(tab, btnEl) {
-      __origSwitch(tab, btnEl);
-      if (tab === 'applicants') {
-        renderTable();
-      }
-    };
   </script>
 </html>
