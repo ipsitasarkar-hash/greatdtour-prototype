@@ -361,6 +361,29 @@
     .payout-row__status--paid { background: #f0fdf4; color: #166534; }
     .payout-row__status--pending { background: #fffbeb; color: #92400e; }
 
+    /* ── SHARED TABLE ── */
+    .hd-table-wrap { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+    .hd-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .hd-table thead tr { background: #f9fafb; }
+    .hd-table th { padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e5e7eb; white-space: nowrap; }
+    .hd-table td { padding: 13px 16px; border-bottom: 1px solid #f3f4f6; color: #374151; vertical-align: middle; }
+    .hd-table tbody tr:last-child td { border-bottom: none; }
+    .hd-table tbody tr:hover td { background: #fafafa; }
+    .hd-table__primary { font-weight: 600; color: #101828; }
+    .hd-table__sub { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+    .hd-table__actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .hd-table__btn { height: 28px; padding: 0 10px; font-size: 12px; font-weight: 500; border-radius: 6px; cursor: pointer; border: 1px solid #e5e7eb; background: #fff; color: #374151; transition: background 0.12s; white-space: nowrap; }
+    .hd-table__btn:hover { background: #f3f4f6; }
+    .hd-table__btn--primary { background: #f54900; color: #fff; border-color: #f54900; }
+    .hd-table__btn--primary:hover { background: #d44000; }
+    .hd-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+    .hd-badge--green { background: #f0fdf4; color: #16a34a; }
+    .hd-badge--red { background: #fef2f2; color: #dc2626; }
+    .hd-badge--yellow { background: #fffbeb; color: #92400e; }
+    .hd-badge--blue { background: #eff6ff; color: #1d4ed8; }
+    .hd-badge--gray { background: #f3f4f6; color: #6b7280; }
+    .hd-badge--orange { background: #fff7ed; color: #ea580c; }
+
     /* ── TAB PANELS ── */
     .hd-panel { display: none; }
     .hd-panel.is-active { display: block; }
@@ -879,7 +902,7 @@
         <div class="hd-nav__sub">
           <button class="hd-nav__sub-item" id="hn-listings" onclick="switchTab('listings', this)">My Tours</button>
           <button class="hd-nav__sub-item" id="hn-enquiries" onclick="switchTab('enquiries', this)">
-            Tour Bookings
+            Booking Requests
             <span class="hd-nav__badge" id="enqNavBadge" style="margin-left:auto">3</span>
           </button>
         </div>
@@ -1052,269 +1075,145 @@
             Add New Listing
           </button>
         </div>
-        <div class="listing-grid">
-
-          <!-- Card 1 -->
-          <div class="listing-card">
-            <div class="listing-card__image-area">
-              <div class="listing-card__image-placeholder">
-                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
-              </div>
-              <span class="listing-card__badge listing-card__badge--active">Active</span>
-              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
-            </div>
-            <div class="listing-card__body">
-              <div class="listing-card__title">Himalayan Trek &amp; Yoga Immersion</div>
-              <div class="listing-card__location">📍 Himachal Pradesh, India</div>
-              <div class="listing-card__rating-row">
-                <div class="listing-card__rating-left">
-                  <span class="listing-card__star">★</span>
-                  <span class="listing-card__rating-num">4.9</span>
-                  <span class="listing-card__review-count">(127 reviews)</span>
-                </div>
-                <span class="listing-card__price">₹35,000/person</span>
-              </div>
-              <div class="listing-card__divider"></div>
-              <div class="listing-card__bookings">Total Bookings: <strong>45</strong></div>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="listing-card">
-            <div class="listing-card__image-area">
-              <div class="listing-card__image-placeholder">
-                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
-              </div>
-              <span class="listing-card__badge listing-card__badge--active">Active</span>
-              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
-            </div>
-            <div class="listing-card__body">
-              <div class="listing-card__title">Spiti Valley Winter Expedition</div>
-              <div class="listing-card__location">📍 Himachal Pradesh, India</div>
-              <div class="listing-card__rating-row">
-                <div class="listing-card__rating-left">
-                  <span class="listing-card__star">★</span>
-                  <span class="listing-card__rating-num">4.8</span>
-                  <span class="listing-card__review-count">(93 reviews)</span>
-                </div>
-                <span class="listing-card__price">₹45,000/person</span>
-              </div>
-              <div class="listing-card__divider"></div>
-              <div class="listing-card__bookings">Total Bookings: <strong>38</strong></div>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="listing-card">
-            <div class="listing-card__image-area">
-              <div class="listing-card__image-placeholder">
-                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
-              </div>
-              <span class="listing-card__badge listing-card__badge--active">Active</span>
-              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
-            </div>
-            <div class="listing-card__body">
-              <div class="listing-card__title">Desert Camp &amp; Folk Music Retreat</div>
-              <div class="listing-card__location">📍 Rajasthan, India</div>
-              <div class="listing-card__rating-row">
-                <div class="listing-card__rating-left">
-                  <span class="listing-card__star">★</span>
-                  <span class="listing-card__rating-num">4.7</span>
-                  <span class="listing-card__review-count">(156 reviews)</span>
-                </div>
-                <span class="listing-card__price">₹18,000/person</span>
-              </div>
-              <div class="listing-card__divider"></div>
-              <div class="listing-card__bookings">Total Bookings: <strong>62</strong></div>
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="listing-card">
-            <div class="listing-card__image-area">
-              <div class="listing-card__image-placeholder">
-                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
-              </div>
-              <span class="listing-card__badge listing-card__badge--inactive">Inactive</span>
-              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
-            </div>
-            <div class="listing-card__body">
-              <div class="listing-card__title">Forest Bathing &amp; Mindfulness Walk</div>
-              <div class="listing-card__location">📍 Uttarakhand, India</div>
-              <div class="listing-card__rating-row">
-                <div class="listing-card__rating-left">
-                  <span class="listing-card__star">★</span>
-                  <span class="listing-card__rating-num">4.9</span>
-                  <span class="listing-card__review-count">(84 reviews)</span>
-                </div>
-                <span class="listing-card__price">₹12,000/person</span>
-              </div>
-              <div class="listing-card__divider"></div>
-              <div class="listing-card__bookings">Total Bookings: <strong>31</strong></div>
-            </div>
-          </div>
-
-          <!-- Card 5 -->
-          <div class="listing-card">
-            <div class="listing-card__image-area">
-              <div class="listing-card__image-placeholder">
-                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
-              </div>
-              <span class="listing-card__badge listing-card__badge--active">Active</span>
-              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
-            </div>
-            <div class="listing-card__body">
-              <div class="listing-card__title">Kerala Houseboat &amp; Ayurveda Retreat</div>
-              <div class="listing-card__location">📍 Kerala, India</div>
-              <div class="listing-card__rating-row">
-                <div class="listing-card__rating-left">
-                  <span class="listing-card__star">★</span>
-                  <span class="listing-card__rating-num">4.8</span>
-                  <span class="listing-card__review-count">(109 reviews)</span>
-                </div>
-                <span class="listing-card__price">₹28,000/person</span>
-              </div>
-              <div class="listing-card__divider"></div>
-              <div class="listing-card__bookings">Total Bookings: <strong>52</strong></div>
-            </div>
-          </div>
-
-          <!-- Card 6 -->
-          <div class="listing-card">
-            <div class="listing-card__image-area">
-              <div class="listing-card__image-placeholder">
-                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
-              </div>
-              <span class="listing-card__badge listing-card__badge--active">Active</span>
-              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
-            </div>
-            <div class="listing-card__body">
-              <div class="listing-card__title">Goa Coastal Walk &amp; Heritage Trail</div>
-              <div class="listing-card__location">📍 Goa, India</div>
-              <div class="listing-card__rating-row">
-                <div class="listing-card__rating-left">
-                  <span class="listing-card__star">★</span>
-                  <span class="listing-card__rating-num">4.6</span>
-                  <span class="listing-card__review-count">(78 reviews)</span>
-                </div>
-                <span class="listing-card__price">₹9,500/person</span>
-              </div>
-              <div class="listing-card__divider"></div>
-              <div class="listing-card__bookings">Total Bookings: <strong>41</strong></div>
-            </div>
-          </div>
-
+        <div class="hd-table-wrap">
+          <table class="hd-table">
+            <thead>
+              <tr>
+                <th>Tour Name</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Bookings</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="hd-table__primary">Himalayan Trek &amp; Yoga Immersion</div></td>
+                <td>Himachal Pradesh, India</td>
+                <td>₹35,000/person</td>
+                <td><span style="color:#f59e0b;">★</span> 4.9 <span style="color:#9ca3af;">(127)</span></td>
+                <td>45</td>
+                <td><span class="hd-badge hd-badge--green">Active</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Spiti Valley Winter Expedition</div></td>
+                <td>Himachal Pradesh, India</td>
+                <td>₹45,000/person</td>
+                <td><span style="color:#f59e0b;">★</span> 4.8 <span style="color:#9ca3af;">(93)</span></td>
+                <td>38</td>
+                <td><span class="hd-badge hd-badge--green">Active</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Desert Camp &amp; Folk Music Retreat</div></td>
+                <td>Rajasthan, India</td>
+                <td>₹18,000/person</td>
+                <td><span style="color:#f59e0b;">★</span> 4.7 <span style="color:#9ca3af;">(156)</span></td>
+                <td>62</td>
+                <td><span class="hd-badge hd-badge--green">Active</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Forest Bathing &amp; Mindfulness Walk</div></td>
+                <td>Uttarakhand, India</td>
+                <td>₹12,000/person</td>
+                <td><span style="color:#f59e0b;">★</span> 4.9 <span style="color:#9ca3af;">(84)</span></td>
+                <td>31</td>
+                <td><span class="hd-badge hd-badge--gray">Inactive</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Activate coming soon')">Activate</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Kerala Houseboat &amp; Ayurveda Retreat</div></td>
+                <td>Kerala, India</td>
+                <td>₹28,000/person</td>
+                <td><span style="color:#f59e0b;">★</span> 4.8 <span style="color:#9ca3af;">(109)</span></td>
+                <td>52</td>
+                <td><span class="hd-badge hd-badge--green">Active</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Goa Coastal Walk &amp; Heritage Trail</div></td>
+                <td>Goa, India</td>
+                <td>₹9,500/person</td>
+                <td><span style="color:#f59e0b;">★</span> 4.6 <span style="color:#9ca3af;">(78)</span></td>
+                <td>41</td>
+                <td><span class="hd-badge hd-badge--green">Active</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <!-- ══ ENQUIRIES TAB ══ -->
       <div class="hd-panel" id="panel-enquiries">
-        <h2 class="hd-page-title">Tour Bookings</h2>
-        <div class="hd-page-subtitle" style="margin-bottom:16px;">Review and manage booking requests from travellers.</div>
-        <div class="hd-sec-head" style="margin-bottom:18px;">
-          <div></div>
-          <div class="hd-sec-head__actions">
-            <select style="padding:8px 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;color:#374151;background:#fff;cursor:pointer;">
-              <option>All listings</option>
-              <option>Himalayan Trek</option>
-              <option>Spiti Valley</option>
-            </select>
-          </div>
-        </div>
+        <h2 class="hd-page-title">Booking Requests</h2>
+        <div class="hd-page-subtitle" style="margin-bottom:20px;">Review and manage booking requests from travellers.</div>
 
-        <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin-bottom:12px;">New · 3</div>
-        <div class="enq-list">
-          <div class="enq-card is-unread">
-            <div class="enq-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">SR</div>
-            <div class="enq-card__body">
-              <div class="enq-card__head"><span class="enq-card__name">Sneha Reddy</span><span class="enq-card__time">2 hrs ago</span></div>
-              <div class="enq-card__exp">Himalayan Trek &amp; Yoga Immersion</div>
-              <div class="enq-card__meta">
-                <span class="enq-card__tag enq-card__tag--new">New</span>
-                <span class="enq-card__tag enq-card__tag--dates">📅 14–22 Sep 2026</span>
-                <span class="enq-card__tag enq-card__tag--guests">👥 2 guests</span>
-              </div>
-              <div class="enq-card__msg">"We're two friends, both intermediate-level trekkers. Is the Sep batch still open? Do we need to bring our own gear?"</div>
-              <div class="enq-card__actions">
-                <button class="enq-btn enq-btn--accept" onclick="acceptEnquiry(this)">Accept &amp; Reply</button>
-                <button class="enq-btn" onclick="showReplyModal(this)">Reply</button>
-                <button class="enq-btn enq-btn--decline" onclick="declineEnquiry(this)">Decline</button>
-              </div>
-            </div>
-          </div>
-          <div class="enq-card is-unread">
-            <div class="enq-avatar" style="background:linear-gradient(135deg,#f59e0b,#f54900);">AM</div>
-            <div class="enq-card__body">
-              <div class="enq-card__head"><span class="enq-card__name">Aditya Menon</span><span class="enq-card__time">Yesterday</span></div>
-              <div class="enq-card__exp">Spiti Valley Winter Expedition</div>
-              <div class="enq-card__meta">
-                <span class="enq-card__tag enq-card__tag--new">New</span>
-                <span class="enq-card__tag enq-card__tag--dates">📅 Dec 2026</span>
-                <span class="enq-card__tag enq-card__tag--guests">👥 Solo</span>
-              </div>
-              <div class="enq-card__msg">"Solo traveller, experienced at altitude. Is there a minimum group size for the winter departure?"</div>
-              <div class="enq-card__actions">
-                <button class="enq-btn enq-btn--accept" onclick="acceptEnquiry(this)">Accept &amp; Reply</button>
-                <button class="enq-btn" onclick="showReplyModal(this)">Reply</button>
-                <button class="enq-btn enq-btn--decline" onclick="declineEnquiry(this)">Decline</button>
-              </div>
-            </div>
-          </div>
-          <div class="enq-card is-unread">
-            <div class="enq-avatar" style="background:linear-gradient(135deg,#0891b2,#06b6d4);">RG</div>
-            <div class="enq-card__body">
-              <div class="enq-card__head"><span class="enq-card__name">Rohan Gupta</span><span class="enq-card__time">2 days ago</span></div>
-              <div class="enq-card__exp">Himalayan Trek &amp; Yoga Immersion</div>
-              <div class="enq-card__meta">
-                <span class="enq-card__tag enq-card__tag--new">New</span>
-                <span class="enq-card__tag enq-card__tag--dates">📅 Oct 2026</span>
-                <span class="enq-card__tag enq-card__tag--guests">👥 6 guests</span>
-              </div>
-              <div class="enq-card__msg">"Corporate group of 6. Looking for a fully customised 5-day version with a private batch. What's the pricing?"</div>
-              <div class="enq-card__actions">
-                <button class="enq-btn enq-btn--accept" onclick="acceptEnquiry(this)">Accept &amp; Reply</button>
-                <button class="enq-btn" onclick="showReplyModal(this)">Reply</button>
-                <button class="enq-btn enq-btn--decline" onclick="declineEnquiry(this)">Decline</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin:24px 0 12px;">Confirmed Bookings · 2</div>
-        <div class="enq-list">
-          <div class="enq-card">
-            <div class="enq-avatar" style="background:linear-gradient(135deg,#16a34a,#4ade80);">PK</div>
-            <div class="enq-card__body">
-              <div class="enq-card__head"><span class="enq-card__name">Priya Krishnamurthy + 3</span><span class="enq-card__time">GDT-2026-5012</span></div>
-              <div class="enq-card__exp">Himalayan Trek &amp; Yoga Immersion</div>
-              <div class="enq-card__meta">
-                <span class="enq-card__tag" style="background:#f0fdf4;color:#166534;">✓ Confirmed</span>
-                <span class="enq-card__tag enq-card__tag--dates">📅 14–22 Sep 2026</span>
-                <span class="enq-card__tag enq-card__tag--guests">👥 4 guests · ₹1,40,000</span>
-              </div>
-              <div class="enq-card__actions">
-                <button class="enq-btn">View Details</button>
-                <button class="enq-btn">Send Pre-Trip Info</button>
-                <button class="enq-btn" onclick="showToast('Voucher downloaded')">Download Voucher</button>
-              </div>
-            </div>
-          </div>
-          <div class="enq-card">
-            <div class="enq-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">VN</div>
-            <div class="enq-card__body">
-              <div class="enq-card__head"><span class="enq-card__name">Vikram Nair</span><span class="enq-card__time">GDT-2026-4821</span></div>
-              <div class="enq-card__exp">Spiti Valley Winter Expedition</div>
-              <div class="enq-card__meta">
-                <span class="enq-card__tag" style="background:#f0fdf4;color:#166534;">✓ Confirmed</span>
-                <span class="enq-card__tag enq-card__tag--dates">📅 10–19 Dec 2026</span>
-                <span class="enq-card__tag enq-card__tag--guests">👥 1 guest · ₹45,000</span>
-              </div>
-              <div class="enq-card__actions">
-                <button class="enq-btn">View Details</button>
-                <button class="enq-btn">Send Pre-Trip Info</button>
-              </div>
-            </div>
-          </div>
+        <div class="hd-table-wrap">
+          <table class="hd-table">
+            <thead>
+              <tr>
+                <th>Traveller</th>
+                <th>Tour</th>
+                <th>Dates</th>
+                <th>Guests</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="hd-table__primary">Sneha Reddy</div><div class="hd-table__sub">2 hrs ago</div></td>
+                <td>Himalayan Trek &amp; Yoga Immersion</td>
+                <td>14–22 Sep 2026</td>
+                <td>2</td>
+                <td>₹70,000</td>
+                <td><span class="hd-badge hd-badge--blue">New</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary" onclick="showToast('Accepted')">Accept</button><button class="hd-table__btn" onclick="showToast('Declined')">Decline</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Aditya Menon</div><div class="hd-table__sub">Yesterday</div></td>
+                <td>Spiti Valley Winter Expedition</td>
+                <td>Dec 2026</td>
+                <td>1</td>
+                <td>₹45,000</td>
+                <td><span class="hd-badge hd-badge--blue">New</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary" onclick="showToast('Accepted')">Accept</button><button class="hd-table__btn" onclick="showToast('Declined')">Decline</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Rohan Gupta</div><div class="hd-table__sub">2 days ago</div></td>
+                <td>Himalayan Trek &amp; Yoga Immersion</td>
+                <td>Oct 2026</td>
+                <td>6</td>
+                <td>₹2,10,000</td>
+                <td><span class="hd-badge hd-badge--blue">New</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary" onclick="showToast('Accepted')">Accept</button><button class="hd-table__btn" onclick="showToast('Declined')">Decline</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Priya Krishnamurthy +3</div><div class="hd-table__sub">GDT-2026-5012</div></td>
+                <td>Himalayan Trek &amp; Yoga Immersion</td>
+                <td>14–22 Sep 2026</td>
+                <td>4</td>
+                <td>₹1,40,000</td>
+                <td><span class="hd-badge hd-badge--green">Confirmed</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Details coming soon')">View</button><button class="hd-table__btn" onclick="showToast('Voucher downloaded')">Voucher</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Vikram Nair</div><div class="hd-table__sub">GDT-2026-4821</div></td>
+                <td>Spiti Valley Winter Expedition</td>
+                <td>10–19 Dec 2026</td>
+                <td>1</td>
+                <td>₹45,000</td>
+                <td><span class="hd-badge hd-badge--green">Confirmed</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Details coming soon')">View</button><button class="hd-table__btn" onclick="showToast('Pre-trip info sent')">Pre-trip Info</button></div></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -1442,29 +1341,45 @@
             </div>
           </div>
         </div>
-        <div class="host-review-card">
-          <div class="host-review-card__head">
-            <div><div class="host-review-card__traveller">Arjun Rao</div><div class="host-review-card__exp">Himalayan Trek · Apr 2025</div></div>
-            <div class="host-review-card__stars">★★★★☆</div>
-          </div>
-          <p class="host-review-card__text">The trek itself was spectacular — Day 4 through the Beas Kund meadows was the highlight. The yoga sessions were thoughtfully integrated. Would have appreciated slightly more flexibility on pace for the group.</p>
-          <div class="host-review-card__reply"><strong>Your reply:</strong> Thank you Arjun! We've since introduced pace-check points on Day 3 based on feedback like yours. Hope to have you back for the winter batch!</div>
-        </div>
-        <div class="host-review-card">
-          <div class="host-review-card__head">
-            <div><div class="host-review-card__traveller">Priya Krishnamurthy</div><div class="host-review-card__exp">Himalayan Trek · Feb 2025</div></div>
-            <div class="host-review-card__stars">★★★★★</div>
-          </div>
-          <p class="host-review-card__text">Absolutely transformative. Our guide Karan was exceptional — knowledgeable, patient, and genuinely passionate about the mountains. The food at basecamp exceeded expectations. Already planning to return.</p>
-          <button class="host-review-card__reply-btn" onclick="showReplyModal(this)">Reply to this review →</button>
-        </div>
-        <div class="host-review-card">
-          <div class="host-review-card__head">
-            <div><div class="host-review-card__traveller">Vikram Nair</div><div class="host-review-card__exp">Spiti Valley Expedition · Jan 2025</div></div>
-            <div class="host-review-card__stars">★★★★★</div>
-          </div>
-          <p class="host-review-card__text">Nothing prepares you for Spiti in winter. Wild Trails handled the logistics with absolute precision. The photography guidance was a bonus I didn't expect. Best trip of my life.</p>
-          <button class="host-review-card__reply-btn" onclick="showReplyModal(this)">Reply to this review →</button>
+        <div class="hd-table-wrap">
+          <table class="hd-table">
+            <thead>
+              <tr>
+                <th>Traveller</th>
+                <th>Tour</th>
+                <th>Date</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="hd-table__primary">Arjun Rao</div></td>
+                <td>Himalayan Trek</td>
+                <td>Apr 2025</td>
+                <td><span style="color:#f59e0b;">★★★★</span><span style="color:#d1d5db;">★</span></td>
+                <td style="max-width:320px;"><div style="color:#374151;font-size:13px;line-height:1.5;">The trek was spectacular. Day 4 through Beas Kund was the highlight. Would have appreciated more flexibility on pace.</div><div style="background:#f9fafb;border-left:3px solid #e5e7eb;padding:8px 10px;margin-top:6px;font-size:12px;color:#6b7280;border-radius:4px;"><strong style="color:#374151;">Your reply:</strong> Thank you Arjun! We've since introduced pace-check points on Day 3.</div></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Reply sent')">Edit Reply</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Priya Krishnamurthy</div></td>
+                <td>Himalayan Trek</td>
+                <td>Feb 2025</td>
+                <td><span style="color:#f59e0b;">★★★★★</span></td>
+                <td style="max-width:320px;"><div style="color:#374151;font-size:13px;line-height:1.5;">Absolutely transformative. Guide Karan was exceptional. Food at basecamp exceeded expectations. Already planning to return.</div></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary" onclick="showReplyModal(this)">Reply</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Vikram Nair</div></td>
+                <td>Spiti Valley Expedition</td>
+                <td>Jan 2025</td>
+                <td><span style="color:#f59e0b;">★★★★★</span></td>
+                <td style="max-width:320px;"><div style="color:#374151;font-size:13px;line-height:1.5;">Nothing prepares you for Spiti in winter. Wild Trails handled logistics with absolute precision. Best trip of my life.</div></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary" onclick="showReplyModal(this)">Reply</button></div></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -1486,26 +1401,49 @@
             </div>
           </div>
         </div>
-        <div class="payout-card">
-          <div class="payout-card__head">Transaction History</div>
-          <div class="payout-card__body" style="padding: 0 20px;">
-            <div class="payout-row">
-              <div><div style="font-size:13px;font-weight:600;color:#101828;">Himalayan Trek — 4 guests</div><div class="payout-row__ref">GDT-2026-5012 · 28 Jun</div></div>
-              <div style="text-align:right;"><div class="payout-row__amount">+₹1,23,200</div><span class="payout-row__status payout-row__status--pending">Pending</span></div>
-            </div>
-            <div class="payout-row">
-              <div><div style="font-size:13px;font-weight:600;color:#101828;">Himalayan Trek — 2 guests</div><div class="payout-row__ref">GDT-2026-4103 · 15 Jun</div></div>
-              <div style="text-align:right;"><div class="payout-row__amount">+₹61,600</div><span class="payout-row__status payout-row__status--paid">Paid</span></div>
-            </div>
-            <div class="payout-row">
-              <div><div style="font-size:13px;font-weight:600;color:#101828;">Spiti Valley — 3 guests</div><div class="payout-row__ref">GDT-2026-3844 · 2 Jun</div></div>
-              <div style="text-align:right;"><div class="payout-row__amount">+₹1,18,800</div><span class="payout-row__status payout-row__status--paid">Paid</span></div>
-            </div>
-            <div class="payout-row">
-              <div><div style="font-size:13px;font-weight:600;color:#101828;">Himalayan Trek — 6 guests</div><div class="payout-row__ref">GDT-2026-3201 · 18 May</div></div>
-              <div style="text-align:right;"><div class="payout-row__amount">+₹1,84,800</div><span class="payout-row__status payout-row__status--paid">Paid</span></div>
-            </div>
-          </div>
+        <div class="hd-table-wrap">
+          <div style="padding:16px 20px;border-bottom:1px solid #e5e7eb;font-size:13px;font-weight:600;color:#101828;">Transaction History</div>
+          <table class="hd-table">
+            <thead>
+              <tr>
+                <th>Booking</th>
+                <th>Reference</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="hd-table__primary">Himalayan Trek — 4 guests</div></td>
+                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-5012</span></td>
+                <td>28 Jun 2026</td>
+                <td><span style="font-weight:600;color:#101828;">+₹1,23,200</span></td>
+                <td><span class="hd-badge hd-badge--yellow">Pending</span></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Himalayan Trek — 2 guests</div></td>
+                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-4103</span></td>
+                <td>15 Jun 2026</td>
+                <td><span style="font-weight:600;color:#101828;">+₹61,600</span></td>
+                <td><span class="hd-badge hd-badge--green">Paid</span></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Spiti Valley — 3 guests</div></td>
+                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-3844</span></td>
+                <td>2 Jun 2026</td>
+                <td><span style="font-weight:600;color:#101828;">+₹1,18,800</span></td>
+                <td><span class="hd-badge hd-badge--green">Paid</span></td>
+              </tr>
+              <tr>
+                <td><div class="hd-table__primary">Himalayan Trek — 6 guests</div></td>
+                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-3201</span></td>
+                <td>18 May 2026</td>
+                <td><span style="font-weight:600;color:#101828;">+₹1,84,800</span></td>
+                <td><span class="hd-badge hd-badge--green">Paid</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
