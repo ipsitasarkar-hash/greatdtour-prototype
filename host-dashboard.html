@@ -1488,16 +1488,7 @@
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
                 <div class="acc-header__name">Wild Trails India</div>
                 <span class="acc-chip acc-chip--green"><span class="acc-chip__dot"></span>Active</span>
-                <!-- Profile completion ring -->
-                <div title="Profile 100% complete" style="display:flex;align-items:center;gap:6px;">
-                  <svg width="28" height="28" viewBox="0 0 28 28" style="flex-shrink:0;">
-                    <circle cx="14" cy="14" r="11" fill="none" stroke="#e5e7eb" stroke-width="2.5"/>
-                    <circle cx="14" cy="14" r="11" fill="none" stroke="#16a34a" stroke-width="2.5"
-                      stroke-dasharray="69.1" stroke-dashoffset="0"
-                      stroke-linecap="round" transform="rotate(-90 14 14)"/>
-                    <text x="14" y="18" text-anchor="middle" font-size="7" font-weight="700" fill="#101828">100%</text>
-                  </svg>
-                </div>
+                <div id="profileCompletionRing" style="display:none;align-items:center;gap:6px;"></div>
               </div>
               <div class="acc-header__email">hello@wildtrailsindia.in</div>
             </div>
@@ -2110,6 +2101,23 @@
 
   <script src="assets/main.js"></script>
   <script>
+    // Profile completion ring — only shown when < 100%
+    (function() {
+      const completion = 100; // change this value to test
+      if (completion < 100) {
+        const circumference = 2 * Math.PI * 11; // r=11
+        const offset = circumference * (1 - completion / 100);
+        const ring = document.getElementById('profileCompletionRing');
+        ring.style.display = 'flex';
+        ring.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" title="Profile ${completion}% complete" style="flex-shrink:0;">
+          <circle cx="14" cy="14" r="11" fill="none" stroke="#e5e7eb" stroke-width="2.5"/>
+          <circle cx="14" cy="14" r="11" fill="none" stroke="#f59e0b" stroke-width="2.5"
+            stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
+            stroke-linecap="round" transform="rotate(-90 14 14)"/>
+          <text x="14" y="18" text-anchor="middle" font-size="7" font-weight="700" fill="#101828">${completion}%</text>
+        </svg>`;
+      }
+    })();
     function switchAccTab(tab, btnEl) {
       document.querySelectorAll('.acc-tab-panel').forEach(p => p.classList.remove('is-active'));
       document.querySelectorAll('.acc-tab').forEach(b => b.classList.remove('is-active'));
