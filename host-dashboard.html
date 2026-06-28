@@ -608,19 +608,24 @@
 
     /* Identity header strip */
     .acc-header {
-      display: flex; align-items: center; gap: 16px;
+      display: flex; align-items: center; gap: 20px;
       background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-      padding: 18px 24px; margin-bottom: 20px;
+      padding: 20px 28px; margin-bottom: 20px;
     }
     .acc-header__avatar {
-      width: 48px; height: 48px; border-radius: 50%; background: #f3f4f6;
+      width: 64px; height: 64px; border-radius: 50%; background: #f3f4f6;
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 700; color: #f54900; flex-shrink: 0;
+      font-size: 18px; font-weight: 700; color: #f54900; flex-shrink: 0;
       border: 2px solid #e5e7eb;
     }
-    .acc-header__identity { margin-right: 8px; }
-    .acc-header__name { font-size: 16px; font-weight: 600; color: #101828; }
-    .acc-header__email { font-size: 13px; color: #6b7280; margin-top: 1px; }
+    .acc-header__identity { min-width: 160px; }
+    .acc-header__name { font-size: 16px; font-weight: 700; color: #101828; }
+    .acc-header__email { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .acc-header__divider { width: 1px; background: #e5e7eb; align-self: stretch; flex-shrink: 0; margin: 0 4px; }
+    .acc-header__stats { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    .acc-header__stat { display: flex; flex-direction: column; gap: 4px; }
+    .acc-header__stat-label { font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.4px; }
+    .acc-header__stat-val { font-size: 14px; font-weight: 600; color: #101828; }
     .acc-header__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; align-items: center; }
     .acc-chip {
       display: inline-flex; align-items: center; gap: 5px;
@@ -1483,20 +1488,46 @@
 
           <!-- Page header — identity strip -->
           <div class="acc-header">
+            <!-- Avatar -->
             <div class="acc-header__avatar">WT</div>
+
+            <!-- Name / email / status -->
             <div class="acc-header__identity">
-              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                <div class="acc-header__name">Wild Trails India</div>
-                <span class="acc-chip acc-chip--green"><span class="acc-chip__dot"></span>Active</span>
-                <div id="profileCompletionRing" style="display:none;align-items:center;gap:6px;"></div>
-              </div>
+              <div class="acc-header__name">Wild Trails India</div>
               <div class="acc-header__email">hello@wildtrailsindia.in</div>
+              <div style="margin-top:8px;">
+                <span class="acc-chip acc-chip--green"><span class="acc-chip__dot"></span>Active</span>
+              </div>
             </div>
-            <div class="acc-header__chips">
-              <span class="acc-chip">Starter Plan</span>
-              <span class="acc-chip">Expires Jun 23, 2027</span>
-              <span class="acc-chip">Tour</span>
-              <span class="acc-chip">Volunteer</span>
+
+            <div class="acc-header__divider"></div>
+
+            <!-- Profile completion donut -->
+            <div id="profileCompletionRing" style="display:none;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;"></div>
+
+            <div class="acc-header__divider" id="profileCompletionDivider" style="display:none;"></div>
+
+            <!-- Stat fields -->
+            <div class="acc-header__stats">
+              <div class="acc-header__stat">
+                <div class="acc-header__stat-label">Plan</div>
+                <div class="acc-header__stat-val">Starter</div>
+              </div>
+              <div class="acc-header__stat">
+                <div class="acc-header__stat-label">Expires</div>
+                <div class="acc-header__stat-val">Jun 23, 2027</div>
+              </div>
+              <div class="acc-header__stat">
+                <div class="acc-header__stat-label">Rating</div>
+                <div class="acc-header__stat-val" style="display:flex;align-items:center;gap:4px;"><span style="color:#f59e0b;">★</span> 4.9 <span style="font-size:11px;color:#9ca3af;">(170)</span></div>
+              </div>
+              <div class="acc-header__stat">
+                <div class="acc-header__stat-label">Services</div>
+                <div class="acc-header__stat-val" style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <span class="acc-chip" style="padding:2px 8px;font-size:11px;">Tour</span>
+                  <span class="acc-chip" style="padding:2px 8px;font-size:11px;">Volunteer</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -2101,21 +2132,26 @@
 
   <script src="assets/main.js"></script>
   <script>
-    // Profile completion ring — only shown when < 100%
+    // Profile completion donut — only shown when < 100%
     (function() {
       const completion = 100; // change this value to test
       if (completion < 100) {
-        const circumference = 2 * Math.PI * 11; // r=11
+        const r = 30, stroke = 4;
+        const circumference = 2 * Math.PI * r;
         const offset = circumference * (1 - completion / 100);
         const ring = document.getElementById('profileCompletionRing');
+        const divider = document.getElementById('profileCompletionDivider');
         ring.style.display = 'flex';
-        ring.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" title="Profile ${completion}% complete" style="flex-shrink:0;">
-          <circle cx="14" cy="14" r="11" fill="none" stroke="#e5e7eb" stroke-width="2.5"/>
-          <circle cx="14" cy="14" r="11" fill="none" stroke="#f59e0b" stroke-width="2.5"
-            stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
-            stroke-linecap="round" transform="rotate(-90 14 14)"/>
-          <text x="14" y="18" text-anchor="middle" font-size="7" font-weight="700" fill="#101828">${completion}%</text>
-        </svg>`;
+        if (divider) divider.style.display = 'block';
+        ring.innerHTML = `
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="${r}" fill="none" stroke="#e5e7eb" stroke-width="${stroke}"/>
+            <circle cx="40" cy="40" r="${r}" fill="none" stroke="#f59e0b" stroke-width="${stroke}"
+              stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
+              stroke-linecap="round" transform="rotate(-90 40 40)"/>
+            <text x="40" y="37" text-anchor="middle" font-size="13" font-weight="700" fill="#101828">${completion}%</text>
+            <text x="40" y="51" text-anchor="middle" font-size="8" fill="#9ca3af">Complete</text>
+          </svg>`;
       }
     })();
     function switchAccTab(tab, btnEl) {
