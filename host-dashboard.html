@@ -610,12 +610,12 @@
     .acc-header {
       display: flex; align-items: center; gap: 20px;
       background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-      padding: 20px 28px; margin-bottom: 20px;
+      padding: 14px 24px; margin-bottom: 20px;
     }
     .acc-header__avatar {
-      width: 64px; height: 64px; border-radius: 50%; background: #f3f4f6;
+      width: 52px; height: 52px; border-radius: 50%; background: #f3f4f6;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 700; color: #f54900; flex-shrink: 0;
+      font-size: 16px; font-weight: 700; color: #f54900; flex-shrink: 0;
       border: 2px solid #e5e7eb;
     }
     .acc-header__identity { min-width: 160px; }
@@ -1491,13 +1491,10 @@
             <!-- Avatar -->
             <div class="acc-header__avatar">WT</div>
 
-            <!-- Name / email / status -->
+            <!-- Name / email -->
             <div class="acc-header__identity">
               <div class="acc-header__name">Wild Trails India</div>
               <div class="acc-header__email">hello@wildtrailsindia.in</div>
-              <div style="margin-top:8px;">
-                <span class="acc-chip acc-chip--green"><span class="acc-chip__dot"></span>Active</span>
-              </div>
             </div>
 
             <div class="acc-header__divider"></div>
@@ -1509,6 +1506,10 @@
 
             <!-- Stat fields -->
             <div class="acc-header__stats">
+              <div class="acc-header__stat">
+                <div class="acc-header__stat-label">Status</div>
+                <div class="acc-header__stat-val"><span class="acc-chip acc-chip--green" style="padding:2px 8px;font-size:11px;"><span class="acc-chip__dot"></span>Active</span></div>
+              </div>
               <div class="acc-header__stat">
                 <div class="acc-header__stat-label">Plan</div>
                 <div class="acc-header__stat-val">Starter</div>
@@ -2134,9 +2135,9 @@
   <script>
     // Profile completion donut — only shown when < 100%
     (function() {
-      const completion = 100; // change this value to test
+      const completion = 72;
       if (completion < 100) {
-        const r = 30, stroke = 4;
+        const r = 22, stroke = 4;
         const circumference = 2 * Math.PI * r;
         const offset = circumference * (1 - completion / 100);
         const ring = document.getElementById('profileCompletionRing');
@@ -2144,13 +2145,13 @@
         ring.style.display = 'flex';
         if (divider) divider.style.display = 'block';
         ring.innerHTML = `
-          <svg width="80" height="80" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="${r}" fill="none" stroke="#e5e7eb" stroke-width="${stroke}"/>
-            <circle cx="40" cy="40" r="${r}" fill="none" stroke="#f59e0b" stroke-width="${stroke}"
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="${r}" fill="none" stroke="#e5e7eb" stroke-width="${stroke}"/>
+            <circle cx="30" cy="30" r="${r}" fill="none" stroke="#f59e0b" stroke-width="${stroke}"
               stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
-              stroke-linecap="round" transform="rotate(-90 40 40)"/>
-            <text x="40" y="37" text-anchor="middle" font-size="13" font-weight="700" fill="#101828">${completion}%</text>
-            <text x="40" y="51" text-anchor="middle" font-size="8" fill="#9ca3af">Complete</text>
+              stroke-linecap="round" transform="rotate(-90 30 30)"/>
+            <text x="30" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#101828">${completion}%</text>
+            <text x="30" y="38" text-anchor="middle" font-size="7" fill="#9ca3af">Profile</text>
           </svg>`;
       }
     })();
