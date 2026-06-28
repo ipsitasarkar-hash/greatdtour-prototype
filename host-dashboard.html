@@ -580,59 +580,32 @@
 
     /* ── ACCOUNT SETTINGS PAGE ── */
     .acc-page { background: #f3f4f6; }
-    .acc-page__title { font-size: 26px; font-weight: 700; color: #101828; margin-bottom: 4px; }
-    .acc-page__subtitle { font-size: 14px; color: #6b7280; margin-bottom: 24px; }
 
-    /* Top stat cards row */
-    .acc-stat-row {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;
-    }
-    .acc-stat-card {
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 20px;
-    }
-    .acc-stat-card__label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
-      color: #9ca3af; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
-    }
-    .acc-stat-card__label::before {
-      content: ''; width: 7px; height: 7px; border-radius: 50%; background: #f54900; flex-shrink: 0;
-    }
-    .acc-stat-card__value { font-size: 24px; font-weight: 700; color: #101828; margin-bottom: 2px; }
-    .acc-stat-card__value--green { color: #16a34a; font-size: 18px; font-weight: 700; }
-    .acc-stat-card__sub { font-size: 13px; color: #6b7280; }
-    .acc-stat-card__progress { height: 6px; background: #e5e7eb; border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
-    .acc-stat-card__progress-fill { height: 100%; background: #f54900; border-radius: 999px; }
-    .acc-stat-card__progress-label { font-size: 11px; color: #9ca3af; display: flex; justify-content: space-between; }
-
-    /* Membership details card */
-    .acc-membership-card {
+    /* Identity header strip */
+    .acc-header {
+      display: flex; align-items: center; gap: 16px;
       background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-      padding: 20px 24px; margin-bottom: 24px;
+      padding: 18px 24px; margin-bottom: 20px;
     }
-    .acc-membership-card__head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
-    .acc-membership-card__icon {
-      width: 36px; height: 36px; border-radius: 8px; background: #eef2ff;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .acc-membership-card__title { font-size: 16px; font-weight: 600; color: #101828; margin-bottom: 2px; }
-    .acc-membership-card__desc { font-size: 13px; color: #6b7280; }
-    .acc-mem-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-    }
-    .acc-mem-cell {
-      border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .acc-mem-cell__icon {
-      width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+    .acc-header__avatar {
+      width: 48px; height: 48px; border-radius: 50%; background: #f3f4f6;
       display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700; color: #f54900; flex-shrink: 0;
+      border: 2px solid #e5e7eb;
     }
-    .acc-mem-cell__icon--blue { background: #eff6ff; }
-    .acc-mem-cell__icon--green { background: #f0fdf4; }
-    .acc-mem-cell__icon--orange { background: #fff7ed; }
-    .acc-mem-cell__icon--purple { background: #f5f3ff; }
-    .acc-mem-cell__label { font-size: 12px; color: #9ca3af; margin-bottom: 2px; }
-    .acc-mem-cell__val { font-size: 15px; font-weight: 600; color: #101828; }
+    .acc-header__identity { margin-right: 8px; }
+    .acc-header__name { font-size: 16px; font-weight: 600; color: #101828; }
+    .acc-header__email { font-size: 13px; color: #6b7280; margin-top: 1px; }
+    .acc-header__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; align-items: center; }
+    .acc-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 6px;
+      font-size: 12px; font-weight: 500; color: #6b7280;
+      background: #f9fafb; border: 1px solid #e5e7eb;
+    }
+    .acc-chip--green { background: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
+    .acc-chip--orange { background: #fff7ed; border-color: #fed7aa; color: #ea580c; }
+    .acc-chip__dot { width: 6px; height: 6px; border-radius: 50%; background: #16a34a; flex-shrink: 0; }
 
     /* Tabs */
     .acc-tabs {
@@ -1524,72 +1497,24 @@
       <div class="hd-panel" id="panel-settings">
         <div class="acc-page">
 
-          <!-- Page title -->
-          <div class="acc-page__title">Account Settings</div>
-          <div class="acc-page__subtitle">Manage your account, membership, and preferences.</div>
-
-          <!-- Top 3 stat cards -->
-          <div class="acc-stat-row">
-            <div class="acc-stat-card">
-              <div class="acc-stat-card__label">Profile Completion</div>
-              <div class="acc-stat-card__value">100%</div>
-              <div class="acc-stat-card__progress"><div class="acc-stat-card__progress-fill" style="width:100%"></div></div>
-              <div class="acc-stat-card__progress-label">
-                <span>3/3 sections completed</span><span style="color:#f54900;font-weight:600;">100%</span>
-              </div>
+          <!-- Page header — identity strip -->
+          <div class="acc-header">
+            <div class="acc-header__avatar">WT</div>
+            <div class="acc-header__identity">
+              <div class="acc-header__name">Wild Trails India</div>
+              <div class="acc-header__email">hello@wildtrailsindia.in</div>
             </div>
-            <div class="acc-stat-card">
-              <div class="acc-stat-card__label">Membership</div>
-              <div class="acc-stat-card__value--green">Starter</div>
-              <div class="acc-stat-card__sub" style="margin-top:4px;">Active plan</div>
-            </div>
-            <div class="acc-stat-card">
-              <div class="acc-stat-card__label">Account Status</div>
-              <div class="acc-stat-card__value--green">Active</div>
-              <div class="acc-stat-card__sub" style="margin-top:4px;">Your membership package is active.</div>
+            <div class="acc-header__chips">
+              <span class="acc-chip acc-chip--green">
+                <span class="acc-chip__dot"></span>Active
+              </span>
+              <span class="acc-chip acc-chip--orange">Starter Plan</span>
+              <span class="acc-chip">Expires Jun 23, 2027</span>
+              <span class="acc-chip">Tour · Volunteer</span>
             </div>
           </div>
 
-          <!-- Membership Details section -->
-          <div class="acc-membership-card">
-            <div class="acc-membership-card__head">
-              <div class="acc-membership-card__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#4f46e5" stroke-width="1.8"/><path d="M3 9h18" stroke="#4f46e5" stroke-width="1.8"/><path d="M8 2v4M16 2v4" stroke="#4f46e5" stroke-width="1.8" stroke-linecap="round"/></svg>
-              </div>
-              <div>
-                <div class="acc-membership-card__title">Membership Details</div>
-                <div class="acc-membership-card__desc">View your membership status and key details</div>
-              </div>
-            </div>
-            <div class="acc-mem-grid">
-              <div class="acc-mem-cell">
-                <div class="acc-mem-cell__icon acc-mem-cell__icon--blue">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#3b82f6" stroke-width="1.8"/><path d="M3 9h18" stroke="#3b82f6" stroke-width="1.8"/><path d="M8 2v4M16 2v4" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"/></svg>
-                </div>
-                <div><div class="acc-mem-cell__label">Activation date</div><div class="acc-mem-cell__val">2026-06-23</div></div>
-              </div>
-              <div class="acc-mem-cell">
-                <div class="acc-mem-cell__icon acc-mem-cell__icon--green">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#16a34a" stroke-width="1.8"/><path d="M3 9h18" stroke="#16a34a" stroke-width="1.8"/><path d="M8 2v4M16 2v4" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/></svg>
-                </div>
-                <div><div class="acc-mem-cell__label">Expiration date</div><div class="acc-mem-cell__val">2027-06-23</div></div>
-              </div>
-              <div class="acc-mem-cell">
-                <div class="acc-mem-cell__icon acc-mem-cell__icon--orange">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f59e0b" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"/></svg>
-                </div>
-                <div><div class="acc-mem-cell__label">Time Remaining</div><div class="acc-mem-cell__val" style="color:#f59e0b;">360 Days Left</div></div>
-              </div>
-              <div class="acc-mem-cell">
-                <div class="acc-mem-cell__icon acc-mem-cell__icon--purple">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.09 6.26H21l-5.47 3.97 2.08 6.26L12 14.5l-5.61 4 2.08-6.26L3 8.26h6.91z" stroke="#7c3aed" stroke-width="1.8" stroke-linejoin="round"/></svg>
-                </div>
-                <div><div class="acc-mem-cell__label">Services</div><div class="acc-mem-cell__val">Tour, Volunteer</div></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sub-tabs: 4 tabs matching images -->
+          <!-- Sub-tabs -->
           <div class="acc-tabs">
             <button class="acc-tab is-active" id="acc-tab-profile" onclick="switchAccTab('profile', this)">Profile</button>
             <button class="acc-tab" id="acc-tab-business" onclick="switchAccTab('business', this)">Business Info</button>
