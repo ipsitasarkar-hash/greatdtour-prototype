@@ -150,6 +150,7 @@
       margin-bottom: 18px;
     }
     .hd-sec-head h2 { font-size: 17px; font-weight: 700; color: #101828; }
+    .hd-page-title { font-size: 22px; font-weight: 700; color: #101828; margin-bottom: 20px; }
     .hd-sec-head__actions { display: flex; gap: 8px; align-items: center; }
     .hd-btn {
       padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
@@ -913,6 +914,7 @@
 
       <!-- ══ OVERVIEW TAB ══ -->
       <div class="hd-panel is-active" id="panel-overview">
+        <div class="hd-page-title">Dashboard</div>
 
         <!-- Revenue chart -->
         <div class="hd-sec-head"><h2>Revenue — Last 6 Months</h2></div>
@@ -1040,7 +1042,7 @@
       <div class="hd-panel" id="panel-listings">
         <div class="listings-panel-head">
           <div>
-            <h1>My Listings</h1>
+            <h1 class="hd-page-title" style="margin-bottom:4px;">My Tours</h1>
             <p>Manage your travel properties and experiences.</p>
           </div>
           <button class="listings-add-btn" onclick="showToast('Listing builder coming soon')">
@@ -1206,7 +1208,7 @@
       <!-- ══ ENQUIRIES TAB ══ -->
       <div class="hd-panel" id="panel-enquiries">
         <div class="hd-sec-head">
-          <h2>Enquiries &amp; Bookings</h2>
+          <h2 class="hd-page-title" style="margin-bottom:0;">Tour Bookings</h2>
           <div class="hd-sec-head__actions">
             <select style="padding:8px 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;color:#374151;background:#fff;cursor:pointer;">
               <option>All listings</option>
@@ -1316,7 +1318,7 @@
       <div class="hd-panel" id="panel-applicants">
 
         <div class="hd-sec-head">
-          <h2>Volunteer Programme Applicants</h2>
+          <h2 class="hd-page-title" style="margin-bottom:0;">Volunteer Applications</h2>
           <div class="hd-sec-head__actions">
             <button class="hd-btn" onclick="exportApplicants()">⬇ Export CSV</button>
           </div>
@@ -1418,7 +1420,7 @@
 
       <!-- ══ REVIEWS TAB ══ -->
       <div class="hd-panel" id="panel-reviews">
-        <div class="hd-sec-head"><h2>Traveller Reviews</h2></div>
+        <div class="hd-sec-head"><h2 class="hd-page-title" style="margin-bottom:0;">Traveller Reviews</h2></div>
         <div style="display:flex;gap:24px;align-items:center;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;margin-bottom:24px;">
           <div style="text-align:center;flex-shrink:0;">
             <div style="font-size:48px;font-weight:800;color:#101828;line-height:1;">4.9</div>
@@ -1461,7 +1463,7 @@
 
       <!-- ══ PAYOUTS TAB ══ -->
       <div class="hd-panel" id="panel-payouts">
-        <div class="hd-sec-head"><h2>Payouts</h2></div>
+        <div class="hd-sec-head"><h2 class="hd-page-title" style="margin-bottom:0;">Payouts</h2></div>
         <div class="payout-card">
           <div class="payout-card__head">
             Available Balance
@@ -1502,13 +1504,13 @@
       <!-- ══ SETTINGS TAB ══ -->
       <!-- Programs placeholder -->
       <div class="hd-panel" id="panel-programs">
-        <div class="hd-sec-head"><h2>My Programs</h2></div>
+        <div class="hd-sec-head"><h2 class="hd-page-title" style="margin-bottom:0;">My Programs</h2></div>
         <p style="color:#6b7280;font-size:15px;">Your volunteering programs will appear here.</p>
       </div>
 
       <!-- Program Bookings placeholder -->
       <div class="hd-panel" id="panel-prog-bookings">
-        <div class="hd-sec-head"><h2>Program Bookings</h2></div>
+        <div class="hd-sec-head"><h2 class="hd-page-title" style="margin-bottom:0;">Program Bookings</h2></div>
         <p style="color:#6b7280;font-size:15px;">Program booking requests will appear here.</p>
       </div>
 
@@ -1517,7 +1519,7 @@
         <div class="acc-page">
 
           <!-- Page title -->
-          <div style="font-size:22px;font-weight:700;color:#101828;margin-bottom:16px;">Account Settings</div>
+          <div class="hd-page-title">Account Settings</div>
 
           <!-- Page header — identity strip -->
           <div class="acc-header">
