@@ -1499,11 +1499,6 @@
 
             <div class="acc-header__divider"></div>
 
-            <!-- Profile completion donut -->
-            <div id="profileCompletionRing" style="display:none;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;"></div>
-
-            <div class="acc-header__divider" id="profileCompletionDivider" style="display:none;"></div>
-
             <!-- Stat fields -->
             <div class="acc-header__stats">
               <div class="acc-header__stat">
@@ -1527,6 +1522,15 @@
                 <div class="acc-header__stat-val" style="display:flex;gap:6px;flex-wrap:wrap;">
                   <span class="acc-chip" style="padding:2px 8px;font-size:11px;">Tour</span>
                   <span class="acc-chip" style="padding:2px 8px;font-size:11px;">Volunteer</span>
+                </div>
+              </div>
+              <div class="acc-header__stat" id="profileCompletionStat" style="display:none;min-width:110px;">
+                <div class="acc-header__stat-label">Profile</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:2px;">
+                  <div style="flex:1;height:4px;background:#e5e7eb;border-radius:999px;overflow:hidden;min-width:72px;">
+                    <div id="profileCompletionBar" style="height:100%;border-radius:999px;background:#f59e0b;width:0%;transition:width 0.6s ease;"></div>
+                  </div>
+                  <span id="profileCompletionPct" style="font-size:12px;font-weight:700;color:#101828;white-space:nowrap;"></span>
                 </div>
               </div>
             </div>
@@ -2133,26 +2137,19 @@
 
   <script src="assets/main.js"></script>
   <script>
-    // Profile completion donut — only shown when < 100%
+    // Profile completion bar — only shown when < 100%
     (function() {
       const completion = 72;
       if (completion < 100) {
-        const r = 22, stroke = 4;
-        const circumference = 2 * Math.PI * r;
-        const offset = circumference * (1 - completion / 100);
-        const ring = document.getElementById('profileCompletionRing');
-        const divider = document.getElementById('profileCompletionDivider');
-        ring.style.display = 'flex';
-        if (divider) divider.style.display = 'block';
-        ring.innerHTML = `
-          <svg width="60" height="60" viewBox="0 0 60 60">
-            <circle cx="30" cy="30" r="${r}" fill="none" stroke="#e5e7eb" stroke-width="${stroke}"/>
-            <circle cx="30" cy="30" r="${r}" fill="none" stroke="#f59e0b" stroke-width="${stroke}"
-              stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
-              stroke-linecap="round" transform="rotate(-90 30 30)"/>
-            <text x="30" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#101828">${completion}%</text>
-            <text x="30" y="38" text-anchor="middle" font-size="7" fill="#9ca3af">Profile</text>
-          </svg>`;
+        const stat = document.getElementById('profileCompletionStat');
+        const bar = document.getElementById('profileCompletionBar');
+        const pct = document.getElementById('profileCompletionPct');
+        if (stat) stat.style.display = 'flex';
+        if (pct) pct.textContent = completion + '%';
+        // Animate bar after paint
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (bar) bar.style.width = completion + '%';
+        }));
       }
     })();
     function switchAccTab(tab, btnEl) {
