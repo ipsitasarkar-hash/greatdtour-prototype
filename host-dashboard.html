@@ -519,19 +519,49 @@
 
     /* ── ACCOUNT SETTINGS PAGE (Figma) ── */
     .acc-page { background: #f9fafb; padding: 32px; }
-    .acc-page__title { font-size: 28px; font-weight: 600; color: #101828; margin-bottom: 4px; }
-    .acc-page__sub { font-size: 16px; color: #6b7280; margin-bottom: 24px; }
+    .acc-page__title { font-size: 28px; font-weight: 700; color: #101828; margin-bottom: 10px; }
+    .acc-page__meta {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      font-size: 14px; color: #6b7280; margin-bottom: 28px;
+    }
+    .acc-page__meta-dot { color: #d1d5db; }
+    .acc-page__meta-status {
+      display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: #16a34a;
+    }
+    .acc-page__meta-status::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%; background: #16a34a; flex-shrink: 0;
+    }
+    .acc-page__meta-plan { font-weight: 600; color: #101828; }
+    /* Progress bar */
+    .acc-progress-row {
+      display: flex; align-items: center; gap: 24px; margin-bottom: 28px;
+    }
+    .acc-progress-bar-wrap {
+      flex: 1; height: 12px; background: #e5e7eb; border-radius: 999px; overflow: hidden;
+    }
+    .acc-progress-bar {
+      height: 100%; background: #f54900; border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+    .acc-progress-label {
+      font-family: 'Courier New', monospace; white-space: nowrap; text-align: right; flex-shrink: 0;
+    }
+    .acc-progress-label strong { font-size: 15px; font-weight: 700; color: #101828; display: block; }
+    .acc-progress-label span { font-size: 13px; color: #6b7280; }
     .acc-tabs {
-      display: flex; gap: 4px; border-bottom: 1px solid #e5ddd5; margin-bottom: 24px;
+      display: flex; gap: 0; border-bottom: 2px solid #e5e7eb; margin-bottom: 24px;
     }
     .acc-tab {
       display: flex; align-items: center; gap: 8px;
-      padding: 12px 20px; font-size: 15px; font-weight: 400; color: #6b7280;
-      border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;
-      margin-bottom: -1px; transition: all 0.15s;
+      padding: 12px 20px; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.6px; text-transform: uppercase;
+      color: #9ca3af;
+      border: none; background: none; cursor: pointer;
+      border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: all 0.15s;
     }
-    .acc-tab:hover { color: #101828; }
-    .acc-tab.is-active { color: #f54900; font-weight: 500; border-bottom-color: #f54900; }
+    .acc-tab:hover { color: #374151; }
+    .acc-tab.is-active { color: #f54900; border-bottom-color: #f54900; }
     .acc-tab svg { opacity: 0.6; }
     .acc-tab.is-active svg { opacity: 1; }
     .acc-section-title {
@@ -1326,22 +1356,36 @@
       <div class="hd-panel" id="panel-settings">
         <div class="acc-page">
           <div class="acc-page__title">Account Settings</div>
-          <div class="acc-page__sub">Manage your account, membership, and preferences.</div>
+
+          <!-- Account meta info -->
+          <div class="acc-page__meta">
+            <span class="acc-page__meta-status">Active status</span>
+            <span class="acc-page__meta-dot">·</span>
+            <span class="acc-page__meta-plan">Starter Plan</span>
+            <span class="acc-page__meta-dot">·</span>
+            <span>Expires Jun 7, 2027</span>
+            <span class="acc-page__meta-dot">·</span>
+            <span>Service: Care Host</span>
+          </div>
+
+          <!-- Profile progress -->
+          <div class="acc-progress-row">
+            <div class="acc-progress-bar-wrap">
+              <div class="acc-progress-bar" style="width: 71%;"></div>
+            </div>
+            <div class="acc-progress-label">
+              <strong>71% Profile Progress</strong>
+              <span>5 / 7 Sections Completed</span>
+            </div>
+          </div>
 
           <!-- Sub-tabs -->
           <div class="acc-tabs">
-            <button class="acc-tab is-active" id="acc-tab-profile" onclick="switchAccTab('profile', this)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
-              Profile
-            </button>
-            <button class="acc-tab" id="acc-tab-security" onclick="switchAccTab('security', this)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Security
-            </button>
-            <button class="acc-tab" id="acc-tab-receivables" onclick="switchAccTab('receivables', this)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.8"/></svg>
-              Account Receivables
-            </button>
+            <button class="acc-tab is-active" id="acc-tab-profile" onclick="switchAccTab('profile', this)">Profile</button>
+            <button class="acc-tab" id="acc-tab-business" onclick="switchAccTab('business', this)">Business Info</button>
+            <button class="acc-tab" id="acc-tab-legal" onclick="switchAccTab('legal', this)">Legal &amp; Compliance</button>
+            <button class="acc-tab" id="acc-tab-membership" onclick="switchAccTab('membership', this)">Membership</button>
+            <button class="acc-tab" id="acc-tab-pay" onclick="switchAccTab('pay', this)">Pay</button>
           </div>
 
           <!-- Profile tab -->
@@ -1505,55 +1549,99 @@
 
           </div><!-- /acc-panel-profile -->
 
-          <!-- Security tab placeholder -->
-          <div class="acc-tab-panel" id="acc-panel-security">
+          <!-- Business Info tab -->
+          <div class="acc-tab-panel" id="acc-panel-business">
             <div class="acc-card">
-              <h3 style="font-size:16px;font-weight:600;color:#101828;margin-bottom:16px;">Password</h3>
-              <div class="acc-form-row" style="grid-template-columns:1fr;margin-bottom:16px;">
-                <div class="acc-field" style="max-width:50%;">
-                  <label>Current Password</label>
-                  <input type="password" class="acc-input" placeholder="Enter current password" />
+              <div class="acc-form-row" style="grid-template-columns: 1fr; margin-bottom: 24px;">
+                <div class="acc-field">
+                  <label>Business / Company Name <span class="req">*</span></label>
+                  <input type="text" class="acc-input" value="Wild Trails India" />
                 </div>
               </div>
-              <div class="acc-form-row" style="margin-bottom:0;">
-                <div class="acc-field">
-                  <label>New Password</label>
-                  <input type="password" class="acc-input" placeholder="Min. 8 characters" />
+              <div class="acc-field" style="margin-bottom: 24px;">
+                <label>Business Type <span class="req">*</span> <span class="hint">(select all that apply)</span></label>
+                <div class="acc-biz-grid" style="margin-top: 4px;">
+                  <div class="acc-biz-opt is-checked" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Tour Operator</span></div>
+                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Property Host</span></div>
+                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Travel Guide</span></div>
+                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Agent</span></div>
+                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Influencer</span></div>
+                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Others</span></div>
                 </div>
+              </div>
+              <div class="acc-field" style="margin-bottom: 24px;">
+                <label>About Your Business</label>
+                <textarea class="acc-textarea">Adventure trek specialists operating across Himachal Pradesh since 2019. Led by certified mountaineers.</textarea>
+              </div>
+              <div class="acc-form-row" style="margin-bottom: 24px;">
+                <div class="acc-field"><label>Registered Office Address</label><input type="text" class="acc-input" value="Village Jagatsukh, Near Manali" /></div>
+                <div class="acc-field"><label>City</label><input type="text" class="acc-input" value="Manali" /></div>
+              </div>
+              <div class="acc-form-row" style="margin-bottom: 0;">
+                <div class="acc-field"><label>State</label><input type="text" class="acc-input" value="Himachal Pradesh" /></div>
+                <div class="acc-field"><label>PIN Code</label><input type="text" class="acc-input" value="175131" /></div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+              <button class="acc-save-btn" onclick="showToast('Business info saved')">Save Changes</button>
+            </div>
+          </div>
+
+          <!-- Legal & Compliance tab -->
+          <div class="acc-tab-panel" id="acc-panel-legal">
+            <div class="acc-card">
+              <div class="acc-form-row" style="margin-bottom: 24px;">
                 <div class="acc-field">
-                  <label>Confirm Password</label>
-                  <input type="password" class="acc-input" placeholder="Repeat new password" />
+                  <div class="acc-gst-row">
+                    <span class="acc-gst-q">Are you GST registered? <span>*</span></span>
+                    <label class="acc-radio-opt"><div class="acc-radio is-selected" id="gstYes2" onclick="document.getElementById('gstYes2').classList.add('is-selected');document.getElementById('gstNo2').classList.remove('is-selected')"></div><span class="acc-radio-label">Yes</span></label>
+                    <label class="acc-radio-opt"><div class="acc-radio" id="gstNo2" onclick="document.getElementById('gstNo2').classList.add('is-selected');document.getElementById('gstYes2').classList.remove('is-selected')"></div><span class="acc-radio-label">No</span></label>
+                  </div>
+                </div>
+                <div class="acc-field"><label>GST Number <span class="req">*</span></label><input type="text" class="acc-input" value="27AAACW2038F1ZM" /></div>
+              </div>
+              <div class="acc-form-row" style="grid-template-columns:1fr; margin-bottom: 24px;">
+                <div class="acc-field" style="max-width:50%;"><label>PAN Number <span class="req">*</span></label><input type="text" class="acc-input" value="AABFW1234F" /></div>
+              </div>
+              <div class="acc-section-title" style="margin-top:0;">Certification &amp; Accreditations</div>
+              <div class="acc-cert-row">
+                <div><div class="acc-cert-name">W-9 Form</div><div class="acc-cert-date">Submitted on May 15, 2024</div></div>
+                <div style="display:flex;align-items:center;gap:24px;">
+                  <span class="acc-cert-verified">Verified</span>
+                  <button class="acc-cert-update-btn" onclick="showToast('Certificate upload coming soon')">Update Certificates</button>
                 </div>
               </div>
             </div>
             <div style="display:flex;justify-content:flex-end;margin-top:8px;">
-              <button class="acc-save-btn" onclick="showToast('Password updated')">Update Password</button>
+              <button class="acc-save-btn" onclick="showToast('Legal details saved')">Save Changes</button>
             </div>
           </div>
 
-          <!-- Receivables placeholder -->
-          <div class="acc-tab-panel" id="acc-panel-receivables">
+          <!-- Membership tab -->
+          <div class="acc-tab-panel" id="acc-panel-membership">
+            <div class="acc-card">
+              <h3 style="font-size:16px;font-weight:600;color:#101828;margin-bottom:4px;">Starter Plan</h3>
+              <p style="font-size:14px;color:#6b7280;margin-bottom:20px;">Expires Jun 7, 2027 &nbsp;·&nbsp; Service: Care Host</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+                <div style="background:#f9fafb;border-radius:10px;padding:14px;"><div style="font-size:20px;font-weight:700;color:#101828;">6</div><div style="font-size:11px;color:#9ca3af;margin-top:2px;">Active Listings</div></div>
+                <div style="background:#f9fafb;border-radius:10px;padding:14px;"><div style="font-size:20px;font-weight:700;color:#f54900;">2</div><div style="font-size:11px;color:#9ca3af;margin-top:2px;">Programmes</div></div>
+                <div style="background:#f9fafb;border-radius:10px;padding:14px;"><div style="font-size:20px;font-weight:700;color:#2E7D32;">14</div><div style="font-size:11px;color:#9ca3af;margin-top:2px;">Bookings This Month</div></div>
+              </div>
+              <button class="acc-save-btn" onclick="showToast('Upgrade coming soon')">Upgrade Plan</button>
+            </div>
+          </div>
+
+          <!-- Pay tab -->
+          <div class="acc-tab-panel" id="acc-panel-pay">
             <div class="acc-card">
               <h3 style="font-size:16px;font-weight:600;color:#101828;margin-bottom:16px;">Bank Account (Payouts)</h3>
               <div class="acc-form-row" style="margin-bottom:16px;">
-                <div class="acc-field">
-                  <label>Account Holder Name</label>
-                  <input type="text" class="acc-input" value="Wild Trails India Pvt Ltd" />
-                </div>
-                <div class="acc-field">
-                  <label>Bank Name</label>
-                  <input type="text" class="acc-input" value="HDFC Bank" />
-                </div>
+                <div class="acc-field"><label>Account Holder Name</label><input type="text" class="acc-input" value="Wild Trails India Pvt Ltd" /></div>
+                <div class="acc-field"><label>Bank Name</label><input type="text" class="acc-input" value="HDFC Bank" /></div>
               </div>
               <div class="acc-form-row" style="margin-bottom:0;">
-                <div class="acc-field">
-                  <label>Account Number</label>
-                  <input type="text" class="acc-input" value="•••• •••• 4421" />
-                </div>
-                <div class="acc-field">
-                  <label>IFSC Code</label>
-                  <input type="text" class="acc-input" value="HDFC0001234" />
-                </div>
+                <div class="acc-field"><label>Account Number</label><input type="text" class="acc-input" value="•••• •••• 4421" /></div>
+                <div class="acc-field"><label>IFSC Code</label><input type="text" class="acc-input" value="HDFC0001234" /></div>
               </div>
             </div>
             <div style="display:flex;justify-content:flex-end;margin-top:8px;">
