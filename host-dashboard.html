@@ -151,54 +151,105 @@
     .hd-btn--green { background: #2E7D32; color: #fff; border-color: #2E7D32; }
     .hd-btn--green:hover { background: #1b5e20; }
 
-    /* ── LISTING CARD ── */
-    .listing-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+    /* ── LISTING CARD (Figma grid design) ── */
+    .listing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 36px;
+    }
     .listing-card {
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
-      overflow: hidden; transition: box-shadow 0.2s;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
       display: flex;
+      flex-direction: column;
     }
-    .listing-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-    .listing-card__img {
-      width: 160px; height: 140px; object-fit: cover; flex-shrink: 0;
-    }
-    .listing-card__img-placeholder {
-      width: 160px; height: 140px; flex-shrink: 0;
+    .listing-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.10); transform: translateY(-2px); }
+    .listing-card__image-area {
+      position: relative;
+      height: 192px;
+      background: #f3f4f6;
+      flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 36px;
     }
-    .listing-card__body { flex: 1; padding: 20px; min-width: 0; display: flex; gap: 16px; align-items: flex-start; }
-    .listing-card__info { flex: 1; min-width: 0; }
-    .listing-card__status {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px;
-      margin-bottom: 8px;
+    .listing-card__image-area img {
+      width: 100%; height: 100%; object-fit: cover;
     }
-    .listing-card__status--live { background: #f0fdf4; color: #166534; }
-    .listing-card__status--review { background: #fffbeb; color: #92400e; }
-    .listing-card__status--draft { background: #f3f4f6; color: #6b7280; }
-    .listing-card__title { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 6px; }
-    .listing-card__meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; color: #6b7280; margin-bottom: 10px; }
-    .listing-card__meta span { display: flex; align-items: center; gap: 4px; }
-    .listing-card__kpis { display: flex; gap: 20px; }
-    .listing-card__kpi { display: flex; flex-direction: column; gap: 2px; }
-    .listing-card__kpi-val { font-size: 16px; font-weight: 700; color: #101828; }
-    .listing-card__kpi-label { font-size: 11px; color: #9ca3af; }
-    .listing-card__actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; justify-content: space-between; }
-    .listing-card__toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #6b7280; white-space: nowrap; }
-    .toggle-switch {
-      width: 36px; height: 20px; border-radius: 999px; border: none;
-      cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0;
+    .listing-card__image-placeholder {
+      width: 88px; height: 88px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px; color: #9ca3af;
     }
-    .toggle-switch.on { background: #2E7D32; }
-    .toggle-switch.off { background: #d1d5db; }
-    .toggle-switch::after {
-      content: ''; position: absolute;
-      width: 14px; height: 14px; border-radius: 50%; background: #fff;
-      top: 3px; transition: left 0.2s;
+    .listing-card__badge {
+      position: absolute; top: 12px; left: 12px;
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 32px; padding: 0 12px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600;
     }
-    .toggle-switch.on::after { left: 19px; }
-    .toggle-switch.off::after { left: 3px; }
+    .listing-card__badge--active { background: #dcfce7; color: #008236; }
+    .listing-card__badge--inactive { background: #f3f4f6; color: #364153; }
+    .listing-card__menu {
+      position: absolute; top: 12px; right: 12px;
+      width: 32px; height: 32px; border-radius: 8px;
+      background: #fff; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: #6b7280;
+      transition: background 0.15s; line-height: 1;
+    }
+    .listing-card__menu:hover { background: #f3f4f6; }
+    .listing-card__body {
+      padding: 20px;
+      display: flex; flex-direction: column; flex: 1;
+    }
+    .listing-card__title {
+      font-size: 18px; font-weight: 500; color: #101828;
+      margin-bottom: 4px; line-height: 1.3;
+    }
+    .listing-card__location {
+      font-size: 16px; color: #4a5565; margin-bottom: 12px;
+    }
+    .listing-card__rating-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .listing-card__rating-left { display: flex; align-items: center; gap: 5px; }
+    .listing-card__star { color: #f59e0b; font-size: 14px; }
+    .listing-card__rating-num { font-size: 14px; font-weight: 600; color: #101828; }
+    .listing-card__review-count { font-size: 14px; color: #6a7282; }
+    .listing-card__price { font-size: 15px; font-weight: 600; color: #009689; }
+    .listing-card__divider {
+      height: 1px; background: #e5e7eb; margin-bottom: 12px;
+    }
+    .listing-card__bookings {
+      font-size: 13px; color: #4a5565; margin-top: auto;
+    }
+    .listing-card__bookings strong { color: #101828; font-weight: 600; }
+
+    /* ── LISTING PANEL HEADER ── */
+    .listings-panel-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .listings-panel-head h1 { font-size: 24px; font-weight: 500; color: #101828; margin-bottom: 4px; }
+    .listings-panel-head p { font-size: 16px; color: #4a5565; }
+    .listings-add-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 36px; padding: 0 16px; background: #f54900; color: #fff;
+      border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s; white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .listings-add-btn:hover { background: #d44000; }
+
+    @media (max-width: 1100px) {
+      .listing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .listing-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── ENQUIRY / BOOKING LIST ── */
     .enq-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
@@ -527,9 +578,6 @@
     @media (max-width: 640px) {
       :root { --pad-x: 16px; }
       .hd-shell { padding: 20px var(--pad-x) 60px; gap: 16px; }
-      .listing-card { flex-direction: column; }
-      .listing-card__img, .listing-card__img-placeholder { width: 100%; height: 160px; }
-      .listing-card__body { flex-direction: column; }
       .app-table th:nth-child(4), .app-table td:nth-child(4), .app-table th:nth-child(5), .app-table td:nth-child(5) { display: none; }
     }
   </style>
@@ -844,93 +892,168 @@
 
       <!-- ══ LISTINGS TAB ══ -->
       <div class="hd-panel" id="panel-listings">
-        <div class="hd-sec-head">
-          <h2>Your Listings</h2>
-          <div class="hd-sec-head__actions">
-            <button class="hd-btn hd-btn--green" onclick="showToast('Listing builder coming soon')">+ Add Listing</button>
+        <div class="listings-panel-head">
+          <div>
+            <h1>My Listings</h1>
+            <p>Manage your travel properties and experiences.</p>
           </div>
+          <button class="listings-add-btn" onclick="showToast('Listing builder coming soon')">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add New Listing
+          </button>
         </div>
         <div class="listing-grid">
+
+          <!-- Card 1 -->
           <div class="listing-card">
-            <img class="listing-card__img" src="assets/images/yoga-retreat.jpg" alt="Trek" onerror="this.style.background='#d1fae5';this.src=''" />
+            <div class="listing-card__image-area">
+              <div class="listing-card__image-placeholder">
+                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
+              </div>
+              <span class="listing-card__badge listing-card__badge--active">Active</span>
+              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
+            </div>
             <div class="listing-card__body">
-              <div class="listing-card__info">
-                <span class="listing-card__status listing-card__status--live">● Live</span>
-                <div class="listing-card__title">Himalayan Trek &amp; Yoga Immersion</div>
-                <div class="listing-card__meta">
-                  <span>📍 Himachal Pradesh</span>
-                  <span>🕐 8 Days</span>
-                  <span>💰 ₹35,000 / person</span>
+              <div class="listing-card__title">Himalayan Trek &amp; Yoga Immersion</div>
+              <div class="listing-card__location">📍 Himachal Pradesh, India</div>
+              <div class="listing-card__rating-row">
+                <div class="listing-card__rating-left">
+                  <span class="listing-card__star">★</span>
+                  <span class="listing-card__rating-num">4.9</span>
+                  <span class="listing-card__review-count">(127 reviews)</span>
                 </div>
-                <div class="listing-card__kpis">
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">127</div><div class="listing-card__kpi-label">Reviews</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">⭐ 4.9</div><div class="listing-card__kpi-label">Rating</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">₹1.8L</div><div class="listing-card__kpi-label">This month</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">68%</div><div class="listing-card__kpi-label">Occupancy</div></div>
-                </div>
+                <span class="listing-card__price">₹35,000/person</span>
               </div>
-              <div class="listing-card__actions">
-                <div class="listing-card__toggle">
-                  Live <button class="toggle-switch on" onclick="toggleSwitch(this)"></button>
-                </div>
-                <button class="hd-btn" onclick="showEditListingModal()">Edit</button>
-                <button class="hd-btn" onclick="showToast('Listing preview opened')">Preview</button>
-              </div>
+              <div class="listing-card__divider"></div>
+              <div class="listing-card__bookings">Total Bookings: <strong>45</strong></div>
             </div>
           </div>
+
+          <!-- Card 2 -->
           <div class="listing-card">
-            <div class="listing-card__img-placeholder" style="background:#f0f9ff;">🏔️</div>
+            <div class="listing-card__image-area">
+              <div class="listing-card__image-placeholder">
+                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
+              </div>
+              <span class="listing-card__badge listing-card__badge--active">Active</span>
+              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
+            </div>
             <div class="listing-card__body">
-              <div class="listing-card__info">
-                <span class="listing-card__status listing-card__status--live">● Live</span>
-                <div class="listing-card__title">Spiti Valley Winter Expedition</div>
-                <div class="listing-card__meta">
-                  <span>📍 Himachal Pradesh</span>
-                  <span>🕐 10 Days</span>
-                  <span>💰 ₹45,000 / person</span>
+              <div class="listing-card__title">Spiti Valley Winter Expedition</div>
+              <div class="listing-card__location">📍 Himachal Pradesh, India</div>
+              <div class="listing-card__rating-row">
+                <div class="listing-card__rating-left">
+                  <span class="listing-card__star">★</span>
+                  <span class="listing-card__rating-num">4.8</span>
+                  <span class="listing-card__review-count">(93 reviews)</span>
                 </div>
-                <div class="listing-card__kpis">
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">43</div><div class="listing-card__kpi-label">Reviews</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">⭐ 4.8</div><div class="listing-card__kpi-label">Rating</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">₹60,000</div><div class="listing-card__kpi-label">This month</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">40%</div><div class="listing-card__kpi-label">Occupancy</div></div>
-                </div>
+                <span class="listing-card__price">₹45,000/person</span>
               </div>
-              <div class="listing-card__actions">
-                <div class="listing-card__toggle">
-                  Live <button class="toggle-switch on" onclick="toggleSwitch(this)"></button>
-                </div>
-                <button class="hd-btn" onclick="showEditListingModal()">Edit</button>
-                <button class="hd-btn" onclick="showToast('Listing preview opened')">Preview</button>
-              </div>
+              <div class="listing-card__divider"></div>
+              <div class="listing-card__bookings">Total Bookings: <strong>38</strong></div>
             </div>
           </div>
+
+          <!-- Card 3 -->
           <div class="listing-card">
-            <div class="listing-card__img-placeholder" style="background:#fef3c7;">🌿</div>
+            <div class="listing-card__image-area">
+              <div class="listing-card__image-placeholder">
+                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
+              </div>
+              <span class="listing-card__badge listing-card__badge--active">Active</span>
+              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
+            </div>
             <div class="listing-card__body">
-              <div class="listing-card__info">
-                <span class="listing-card__status listing-card__status--draft">● Draft</span>
-                <div class="listing-card__title">Forest Bathing &amp; Mindfulness Walk</div>
-                <div class="listing-card__meta">
-                  <span>📍 Uttarakhand</span>
-                  <span>🕐 3 Days</span>
-                  <span>💰 ₹12,000 / person</span>
+              <div class="listing-card__title">Desert Camp &amp; Folk Music Retreat</div>
+              <div class="listing-card__location">📍 Rajasthan, India</div>
+              <div class="listing-card__rating-row">
+                <div class="listing-card__rating-left">
+                  <span class="listing-card__star">★</span>
+                  <span class="listing-card__rating-num">4.7</span>
+                  <span class="listing-card__review-count">(156 reviews)</span>
                 </div>
-                <div class="listing-card__kpis">
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">—</div><div class="listing-card__kpi-label">Reviews</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">—</div><div class="listing-card__kpi-label">Rating</div></div>
-                  <div class="listing-card__kpi"><div class="listing-card__kpi-val">—</div><div class="listing-card__kpi-label">Revenue</div></div>
-                </div>
+                <span class="listing-card__price">₹18,000/person</span>
               </div>
-              <div class="listing-card__actions">
-                <div class="listing-card__toggle" style="color:#9ca3af;">
-                  Draft <button class="toggle-switch off" onclick="toggleSwitch(this)"></button>
-                </div>
-                <button class="hd-btn hd-btn--primary" onclick="showToast('Submit for review coming soon')">Submit for Review</button>
-                <button class="hd-btn" onclick="showEditListingModal()">Edit</button>
-              </div>
+              <div class="listing-card__divider"></div>
+              <div class="listing-card__bookings">Total Bookings: <strong>62</strong></div>
             </div>
           </div>
+
+          <!-- Card 4 -->
+          <div class="listing-card">
+            <div class="listing-card__image-area">
+              <div class="listing-card__image-placeholder">
+                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
+              </div>
+              <span class="listing-card__badge listing-card__badge--inactive">Inactive</span>
+              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
+            </div>
+            <div class="listing-card__body">
+              <div class="listing-card__title">Forest Bathing &amp; Mindfulness Walk</div>
+              <div class="listing-card__location">📍 Uttarakhand, India</div>
+              <div class="listing-card__rating-row">
+                <div class="listing-card__rating-left">
+                  <span class="listing-card__star">★</span>
+                  <span class="listing-card__rating-num">4.9</span>
+                  <span class="listing-card__review-count">(84 reviews)</span>
+                </div>
+                <span class="listing-card__price">₹12,000/person</span>
+              </div>
+              <div class="listing-card__divider"></div>
+              <div class="listing-card__bookings">Total Bookings: <strong>31</strong></div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="listing-card">
+            <div class="listing-card__image-area">
+              <div class="listing-card__image-placeholder">
+                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
+              </div>
+              <span class="listing-card__badge listing-card__badge--active">Active</span>
+              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
+            </div>
+            <div class="listing-card__body">
+              <div class="listing-card__title">Kerala Houseboat &amp; Ayurveda Retreat</div>
+              <div class="listing-card__location">📍 Kerala, India</div>
+              <div class="listing-card__rating-row">
+                <div class="listing-card__rating-left">
+                  <span class="listing-card__star">★</span>
+                  <span class="listing-card__rating-num">4.8</span>
+                  <span class="listing-card__review-count">(109 reviews)</span>
+                </div>
+                <span class="listing-card__price">₹28,000/person</span>
+              </div>
+              <div class="listing-card__divider"></div>
+              <div class="listing-card__bookings">Total Bookings: <strong>52</strong></div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="listing-card">
+            <div class="listing-card__image-area">
+              <div class="listing-card__image-placeholder">
+                <svg width="88" height="88" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="8" fill="#f3f4f6"/><path d="M28 60l12-16 10 13 7-9 11 12H28z" fill="#d1d5db"/><circle cx="56" cy="34" r="6" fill="#d1d5db"/></svg>
+              </div>
+              <span class="listing-card__badge listing-card__badge--active">Active</span>
+              <button class="listing-card__menu" onclick="showToast('Options coming soon')" title="Options">···</button>
+            </div>
+            <div class="listing-card__body">
+              <div class="listing-card__title">Goa Coastal Walk &amp; Heritage Trail</div>
+              <div class="listing-card__location">📍 Goa, India</div>
+              <div class="listing-card__rating-row">
+                <div class="listing-card__rating-left">
+                  <span class="listing-card__star">★</span>
+                  <span class="listing-card__rating-num">4.6</span>
+                  <span class="listing-card__review-count">(78 reviews)</span>
+                </div>
+                <span class="listing-card__price">₹9,500/person</span>
+              </div>
+              <div class="listing-card__divider"></div>
+              <div class="listing-card__bookings">Total Bookings: <strong>41</strong></div>
+            </div>
+          </div>
+
         </div>
       </div>
 
