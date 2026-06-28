@@ -97,42 +97,36 @@
     .hd-nav__sub-item.is-active::before { opacity: 1; background: #f54900; }
 
     .hd-sidebar__footer {
-      padding: 14px 16px; border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.1);
     }
-    .hd-sidebar__account-card {
-      background: rgba(255,255,255,0.06); border-radius: 12px;
-      padding: 14px 16px; margin-bottom: 12px;
-    }
-    .hd-sidebar__account-top {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
-    }
-    .hd-sidebar__account-avatar {
-      width: 38px; height: 38px; border-radius: 50%; background: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: #f54900; flex-shrink: 0;
-    }
-    .hd-sidebar__account-name { font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3; }
-    .hd-sidebar__account-email { font-size: 11px; color: #99a1af; margin-top: 1px; }
-    .hd-sidebar__plan-badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      background: rgba(245,73,0,0.18); color: #f98a5e;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.4px;
-      padding: 2px 8px; border-radius: 999px; margin-bottom: 8px;
-    }
-    .hd-sidebar__days {
-      font-size: 20px; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 4px;
-    }
-    .hd-sidebar__days span { font-size: 13px; font-weight: 400; color: #99a1af; }
-    .hd-sidebar__plan-bar { height: 4px; background: rgba(255,255,255,0.15); border-radius: 999px; overflow: hidden; margin-bottom: 8px; }
-    .hd-sidebar__plan-bar-fill { height: 100%; background: #f54900; border-radius: 999px; }
-    .hd-sidebar__plan-hint { font-size: 11px; color: #99a1af; text-align: center; margin-bottom: 8px; line-height: 1.4; }
-    .hd-sidebar__upgrade-btn {
-      width: 100%; height: 34px; background: none; border: none;
-      color: #f54900; font-size: 13px; font-weight: 600; cursor: pointer;
-      text-align: center; transition: color 0.15s;
-    }
-    .hd-sidebar__upgrade-btn:hover { color: #ff6b35; }
     .hd-sidebar__copyright { font-size: 11px; color: #4b5563; text-align: center; }
+    /* Sidebar account info block */
+    .hd-sidebar__info {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .hd-sidebar__info-identity {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+    }
+    .hd-sidebar__info-avatar {
+      width: 42px; height: 42px; border-radius: 50%; background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #f54900; flex-shrink: 0;
+    }
+    .hd-sidebar__info-name { font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3; }
+    .hd-sidebar__info-email { font-size: 11px; color: #6b7280; margin-top: 2px; }
+    .hd-sidebar__info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0;
+    }
+    .hd-sidebar__info-label {
+      font-size: 11px; color: #6b7280;
+    }
+    .hd-sidebar__info-val {
+      font-size: 11px; font-weight: 500; color: #d1d5dc;
+    }
+    .hd-sidebar__info-val--green { color: #4ade80; }
+    .hd-sidebar__info-val--orange { color: #f98a5e; }
 
     /* ── MAIN AREA ── */
     .hd-main-wrap {
@@ -840,7 +834,32 @@
       <span class="hd-sidebar__logo-text" style="display:none;">great D'tour</span>
     </div>
 
-    <!-- User profile -->
+    <!-- Account info highlights -->
+    <div class="hd-sidebar__info">
+      <div class="hd-sidebar__info-identity">
+        <div class="hd-sidebar__info-avatar">WT</div>
+        <div>
+          <div class="hd-sidebar__info-name">Wild Trails India</div>
+          <div class="hd-sidebar__info-email">hello@wildtrailsindia.in</div>
+        </div>
+      </div>
+      <div class="hd-sidebar__info-row">
+        <span class="hd-sidebar__info-label">Status</span>
+        <span class="hd-sidebar__info-val hd-sidebar__info-val--green">Active</span>
+      </div>
+      <div class="hd-sidebar__info-row">
+        <span class="hd-sidebar__info-label">Plan</span>
+        <span class="hd-sidebar__info-val hd-sidebar__info-val--orange">Starter</span>
+      </div>
+      <div class="hd-sidebar__info-row">
+        <span class="hd-sidebar__info-label">Expires</span>
+        <span class="hd-sidebar__info-val">Jun 23, 2027</span>
+      </div>
+      <div class="hd-sidebar__info-row">
+        <span class="hd-sidebar__info-label">Service</span>
+        <span class="hd-sidebar__info-val">Tour, Volunteer</span>
+      </div>
+    </div>
 
     <!-- Nav -->
     <nav class="hd-sidebar__nav">
@@ -892,22 +911,6 @@
 
     <!-- Footer -->
     <div class="hd-sidebar__footer">
-      <div class="hd-sidebar__account-card">
-        <div class="hd-sidebar__account-top">
-          <div class="hd-sidebar__account-avatar">WT</div>
-          <div>
-            <div class="hd-sidebar__account-name">Wild Trails India</div>
-            <div class="hd-sidebar__account-email">hello@wildtrailsindia.in</div>
-          </div>
-        </div>
-        <div class="hd-sidebar__plan-badge">Starter Plan</div>
-        <div class="hd-sidebar__days">360 <span>/ 365 days</span></div>
-        <div class="hd-sidebar__plan-bar">
-          <div class="hd-sidebar__plan-bar-fill" style="width: 98%;"></div>
-        </div>
-        <div class="hd-sidebar__plan-hint">See deeper insights &amp; boost your sales!</div>
-        <button class="hd-sidebar__upgrade-btn" onclick="switchAccTab('membership', document.getElementById('acc-tab-membership')); switchTab('settings', document.getElementById('hn-settings2'))">Upgrade to Pro</button>
-      </div>
       <div class="hd-sidebar__copyright">© 2025 Great D'Tour</div>
     </div>
   </aside>
