@@ -635,11 +635,13 @@
     /* Tabs */
     .acc-tabs {
       display: flex; gap: 0; border-bottom: 2px solid #e5e7eb; margin-bottom: 24px;
+      overflow-x: auto; scrollbar-width: none;
     }
+    .acc-tabs::-webkit-scrollbar { display: none; }
     .acc-tab {
       display: flex; align-items: center; gap: 8px;
-      padding: 12px 20px; font-size: 14px; font-weight: 500;
-      color: #6b7280;
+      padding: 12px 16px; font-size: 13px; font-weight: 500;
+      color: #6b7280; white-space: nowrap;
       border: none; background: none; cursor: pointer;
       border-bottom: 2px solid transparent; margin-bottom: -2px;
       transition: all 0.15s;
@@ -1499,8 +1501,10 @@
           <div class="acc-tabs">
             <button class="acc-tab is-active" id="acc-tab-profile" onclick="switchAccTab('profile', this)">Profile</button>
             <button class="acc-tab" id="acc-tab-business" onclick="switchAccTab('business', this)">Business Info</button>
-            <button class="acc-tab" id="acc-tab-payment" onclick="switchAccTab('payment', this)">Payment Methods</button>
+            <button class="acc-tab" id="acc-tab-legal" onclick="switchAccTab('legal', this)">Legal &amp; Compliance</button>
             <button class="acc-tab" id="acc-tab-membership" onclick="switchAccTab('membership', this)">Membership Plan</button>
+            <button class="acc-tab" id="acc-tab-payment" onclick="switchAccTab('payment', this)">Payment Methods</button>
+            <button class="acc-tab" id="acc-tab-carehost" onclick="switchAccTab('carehost', this)">Care Host Acknowledgement</button>
           </div>
 
           <!-- ── PROFILE TAB ── -->
@@ -1689,6 +1693,14 @@
               </div>
             </div>
 
+            <div class="acc-footer-bar">
+              <button class="acc-save-btn" onclick="showToast('Changes saved')">Save Changes</button>
+            </div>
+          </div><!-- /business tab -->
+
+          <!-- ── LEGAL & COMPLIANCE TAB ── -->
+          <div class="acc-tab-panel" id="acc-panel-legal">
+
             <!-- Tax & Legal Details -->
             <div class="acc-card">
               <div class="acc-section-title">Tax &amp; Legal Details</div>
@@ -1721,8 +1733,8 @@
                 <div class="acc-field">
                   <div class="acc-gst-row" style="margin-bottom:10px;">
                     <span class="acc-gst-q">Are you GST registered? <span class="req">*</span></span>
-                    <label class="acc-radio-opt"><div class="acc-radio is-selected" id="bizGstYes" onclick="document.getElementById('bizGstYes').classList.add('is-selected');document.getElementById('bizGstNo').classList.remove('is-selected')"></div><span class="acc-radio-label">Yes</span></label>
-                    <label class="acc-radio-opt"><div class="acc-radio" id="bizGstNo" onclick="document.getElementById('bizGstNo').classList.add('is-selected');document.getElementById('bizGstYes').classList.remove('is-selected')"></div><span class="acc-radio-label">No</span></label>
+                    <label class="acc-radio-opt"><div class="acc-radio is-selected" id="legalGstYes" onclick="document.getElementById('legalGstYes').classList.add('is-selected');document.getElementById('legalGstNo').classList.remove('is-selected')"></div><span class="acc-radio-label">Yes</span></label>
+                    <label class="acc-radio-opt"><div class="acc-radio" id="legalGstNo" onclick="document.getElementById('legalGstNo').classList.add('is-selected');document.getElementById('legalGstYes').classList.remove('is-selected')"></div><span class="acc-radio-label">No</span></label>
                   </div>
                 </div>
                 <div class="acc-field">
@@ -1803,7 +1815,7 @@
             <div class="acc-footer-bar">
               <button class="acc-save-btn" onclick="showToast('Changes saved')">Save Changes</button>
             </div>
-          </div><!-- /business tab -->
+          </div><!-- /legal tab -->
 
           <!-- ── PAYMENT METHODS TAB ── -->
           <div class="acc-tab-panel" id="acc-panel-payment">
@@ -1928,6 +1940,39 @@
               <button class="acc-save-btn" onclick="showToast('Changes saved')">Save Changes</button>
             </div>
           </div><!-- /membership plan tab -->
+
+          <!-- ── CARE HOST ACKNOWLEDGEMENT TAB ── -->
+          <div class="acc-tab-panel" id="acc-panel-carehost">
+            <div class="acc-card">
+              <div class="acc-section-title">Care Host Commitment</div>
+              <p style="font-size:14px;color:#374151;line-height:1.7;margin-bottom:16px;">As a Care Host on Great D'Tour, you agree to uphold the safety, wellbeing, and dignity of every traveller and volunteer in your care. Please read and acknowledge the following commitments.</p>
+              <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
+                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
+                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will ensure a safe, hygienic, and respectful environment for all travellers and volunteers hosted through Great D'Tour.</span>
+                </label>
+                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
+                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
+                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will provide accurate descriptions of all programs, tours, and accommodations listed on my profile and not misrepresent any services.</span>
+                </label>
+                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
+                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
+                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will maintain appropriate insurance coverage and comply with all local regulations, permits, and licensing requirements applicable to my services.</span>
+                </label>
+                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
+                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
+                  <span style="font-size:13px;color:#374151;line-height:1.6;">I will communicate promptly with travellers, honour confirmed bookings, and provide advance notice in the event of any cancellations or changes.</span>
+                </label>
+                <label class="acc-check-opt" style="align-items:flex-start;gap:12px;padding:14px 16px;">
+                  <input type="checkbox" style="accent-color:#f54900;margin-top:2px;flex-shrink:0;" />
+                  <span style="font-size:13px;color:#374151;line-height:1.6;">I understand that Great D'Tour may suspend or remove my listing if I fail to meet these standards, and I agree to the platform's <a href="#" style="color:#f54900;text-decoration:underline;">Terms &amp; Conditions</a> and <a href="#" style="color:#f54900;text-decoration:underline;">Host Code of Conduct</a>.</span>
+                </label>
+              </div>
+            </div>
+            <div class="acc-footer-bar">
+              <button class="acc-save-btn" onclick="showToast('Acknowledgement saved')">Save &amp; Acknowledge</button>
+            </div>
+          </div><!-- /carehost tab -->
 
         </div><!-- /acc-page -->
       </div>
