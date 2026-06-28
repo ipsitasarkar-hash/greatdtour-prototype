@@ -752,6 +752,10 @@
     .acc-radio.is-selected { background: #f54900; border-color: #f54900; }
     .acc-radio.is-selected::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
     .acc-radio-label { font-size: 14px; color: #1e293b; }
+    /* Additional registration checkboxes */
+    .acc-check-opt { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; color: #374151; cursor: pointer; background: #fff; transition: border-color 0.15s, background 0.15s; }
+    .acc-check-opt--checked { border-color: #f54900; background: #fff7ed; color: #ea580c; }
+    .acc-check-opt input { flex-shrink: 0; width: 15px; height: 15px; }
     /* Cert row */
     .acc-cert-row {
       background: #fdf8f3; border-radius: 10px; padding: 16px;
@@ -1596,63 +1600,164 @@
           <!-- ── BUSINESS INFO TAB ── -->
           <div class="acc-tab-panel" id="acc-panel-business">
 
+            <!-- Business Information -->
             <div class="acc-card">
               <div class="acc-section-title">Business Information</div>
-              <div class="acc-form-row" style="grid-template-columns:1fr;margin-bottom:16px;">
+              <div class="acc-form-row" style="margin-bottom:16px;">
                 <div class="acc-field">
-                  <label>Business / Company Name <span class="req">*</span></label>
+                  <label>Registering As <span class="req">*</span></label>
+                  <select class="acc-input" style="height:38px;" required>
+                    <option>Organisation</option>
+                    <option>Individual</option>
+                    <option>Partnership Firm</option>
+                    <option>LLP</option>
+                    <option>Trust / NGO</option>
+                  </select>
+                </div>
+                <div class="acc-field">
+                  <label>Brand / Display Name <span class="req">*</span></label>
                   <input type="text" class="acc-input" value="Wild Trails India" required />
                 </div>
               </div>
-              <div class="acc-field" style="margin-bottom:16px;">
-                <label>Business Type <span class="req">*</span> <span class="hint">(select all that apply)</span></label>
-                <div class="acc-biz-grid" style="margin-top:6px;">
-                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Tour Operator</span></div>
-                  <div class="acc-biz-opt is-checked" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Property Host</span></div>
-                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Travel Guide</span></div>
-                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Agent</span></div>
-                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Influencer</span></div>
-                  <div class="acc-biz-opt" onclick="this.classList.toggle('is-checked')"><div class="acc-biz-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="acc-biz-label">Others</span></div>
-                </div>
-              </div>
-              <div class="acc-field" style="margin-bottom:16px;">
-                <label>About Your Business</label>
-                <textarea class="acc-textarea" style="min-height:80px;">i am program host host host 3</textarea>
-              </div>
               <div class="acc-form-row" style="margin-bottom:16px;">
-                <div class="acc-field"><label>Registered Office Address <span class="req">*</span></label><input type="text" class="acc-input" value="Bangalore, 560066" required /></div>
-                <div class="acc-field"><label>City <span class="req">*</span></label><input type="text" class="acc-input" value="Bangalore" required /></div>
-              </div>
-              <div class="acc-form-row" style="margin-bottom:0;">
                 <div class="acc-field">
-                  <label>State <span class="req">*</span></label>
-                  <select class="acc-input" style="height:38px;">
-                    <option>Karnataka</option><option>Maharashtra</option><option>Himachal Pradesh</option><option>Kerala</option><option>Rajasthan</option>
+                  <label>Organization Type <span class="req">*</span></label>
+                  <select class="acc-input" style="height:38px;" required>
+                    <option>Partnership</option>
+                    <option>Sole Proprietorship</option>
+                    <option>Private Limited</option>
+                    <option>Public Limited</option>
+                    <option>LLP</option>
+                    <option>Trust</option>
+                    <option>Society</option>
                   </select>
                 </div>
-                <div class="acc-field"><label>PIN Code <span class="req">*</span></label><input type="text" class="acc-input" value="560048" required /></div>
+                <div class="acc-field">
+                  <label>Year of Establishment <span class="req">*</span></label>
+                  <input type="text" class="acc-input" value="2019" required />
+                </div>
+              </div>
+              <div class="acc-form-row" style="grid-template-columns:1fr 1fr;margin-bottom:16px;">
+                <div class="acc-field">
+                  <label>Team Size <span class="req">*</span></label>
+                  <select class="acc-input" style="height:38px;" required>
+                    <option>Just me</option>
+                    <option>2–5</option>
+                    <option>6–15</option>
+                    <option>16–50</option>
+                    <option>50+</option>
+                  </select>
+                </div>
+              </div>
+              <div class="acc-form-row" style="margin-bottom:16px;">
+                <div class="acc-field">
+                  <label>Registered Office Address <span class="req">*</span></label>
+                  <input type="text" class="acc-input" value="Manali, Kullu District" required />
+                </div>
+                <div class="acc-field">
+                  <label>City / Town / Village <span class="req">*</span></label>
+                  <input type="text" class="acc-input" value="Manali" required />
+                </div>
+              </div>
+              <div class="acc-form-row" style="margin-bottom:16px;">
+                <div class="acc-field">
+                  <label>Country <span class="req">*</span></label>
+                  <select class="acc-input" style="height:38px;" required>
+                    <option>India</option>
+                    <option>Nepal</option>
+                    <option>Bhutan</option>
+                    <option>Sri Lanka</option>
+                  </select>
+                </div>
+                <div class="acc-field">
+                  <label>State <span class="req">*</span></label>
+                  <select class="acc-input" style="height:38px;" required>
+                    <option>Himachal Pradesh</option>
+                    <option>Karnataka</option>
+                    <option>Maharashtra</option>
+                    <option>Kerala</option>
+                    <option>Rajasthan</option>
+                    <option>Uttarakhand</option>
+                  </select>
+                </div>
+              </div>
+              <div class="acc-form-row" style="grid-template-columns:1fr 1fr;margin-bottom:0;">
+                <div class="acc-field">
+                  <label>PIN Code <span class="req">*</span></label>
+                  <input type="text" class="acc-input" value="175131" required />
+                </div>
               </div>
             </div>
 
-            <!-- Tax & Legal -->
+            <!-- Tax & Legal Details -->
             <div class="acc-card">
               <div class="acc-section-title">Tax &amp; Legal Details</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:16px;">
+              <div class="acc-form-row" style="margin-bottom:16px;">
                 <div class="acc-field">
-                  <div class="acc-gst-row">
-                    <span class="acc-gst-q">Are you GST registered? <span>*</span></span>
-                    <label class="acc-radio-opt"><div class="acc-radio" id="bizGstYes" onclick="document.getElementById('bizGstYes').classList.add('is-selected');document.getElementById('bizGstNo').classList.remove('is-selected')"></div><span class="acc-radio-label">Yes</span></label>
-                    <label class="acc-radio-opt"><div class="acc-radio is-selected" id="bizGstNo" onclick="document.getElementById('bizGstNo').classList.add('is-selected');document.getElementById('bizGstYes').classList.remove('is-selected')"></div><span class="acc-radio-label">No</span></label>
+                  <label>Legal Name <span class="req">*</span></label>
+                  <input type="text" class="acc-input" value="Wild Trails India Pvt. Ltd." required />
+                </div>
+                <div class="acc-field">
+                  <label>PAN Number <span class="req">*</span></label>
+                  <input type="text" class="acc-input" value="QWERT1234P" required />
+                </div>
+              </div>
+              <div class="acc-form-row" style="margin-bottom:16px;">
+                <div class="acc-field">
+                  <label>Registration Type</label>
+                  <select class="acc-input" style="height:38px;">
+                    <option>MCA CIN</option>
+                    <option>MSME</option>
+                    <option>Shop Act</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="acc-field">
+                  <label>Registration Number</label>
+                  <input type="text" class="acc-input" placeholder="Enter registration number" />
+                </div>
+              </div>
+              <div class="acc-form-row" style="margin-bottom:16px;">
+                <div class="acc-field">
+                  <div class="acc-gst-row" style="margin-bottom:10px;">
+                    <span class="acc-gst-q">Are you GST registered? <span class="req">*</span></span>
+                    <label class="acc-radio-opt"><div class="acc-radio is-selected" id="bizGstYes" onclick="document.getElementById('bizGstYes').classList.add('is-selected');document.getElementById('bizGstNo').classList.remove('is-selected')"></div><span class="acc-radio-label">Yes</span></label>
+                    <label class="acc-radio-opt"><div class="acc-radio" id="bizGstNo" onclick="document.getElementById('bizGstNo').classList.add('is-selected');document.getElementById('bizGstYes').classList.remove('is-selected')"></div><span class="acc-radio-label">No</span></label>
                   </div>
                 </div>
                 <div class="acc-field">
                   <label>GST Number <span class="req">*</span></label>
-                  <input type="text" class="acc-input" placeholder="Enter Your - 15 digit GST No." />
+                  <input type="text" class="acc-input" placeholder="15-digit GST number" />
                 </div>
               </div>
-              <div class="acc-field" style="max-width:50%;">
-                <label>PAN Number <span class="req">*</span></label>
-                <input type="text" class="acc-input" value="QWERT1234P" required />
+              <div class="acc-field" style="margin-bottom:0;">
+                <label style="margin-bottom:10px;display:block;">Additional Registrations</label>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+                  <label class="acc-check-opt acc-check-opt--checked">
+                    <input type="checkbox" checked style="accent-color:#f54900;" />
+                    <span>80G</span>
+                  </label>
+                  <label class="acc-check-opt">
+                    <input type="checkbox" style="accent-color:#f54900;" />
+                    <span>12A</span>
+                  </label>
+                  <label class="acc-check-opt">
+                    <input type="checkbox" style="accent-color:#f54900;" />
+                    <span>FCRA</span>
+                  </label>
+                  <label class="acc-check-opt">
+                    <input type="checkbox" style="accent-color:#f54900;" />
+                    <span>State Tourism</span>
+                  </label>
+                  <label class="acc-check-opt">
+                    <input type="checkbox" style="accent-color:#f54900;" />
+                    <span>AYUSH</span>
+                  </label>
+                  <label class="acc-check-opt">
+                    <input type="checkbox" style="accent-color:#f54900;" />
+                    <span>Other</span>
+                  </label>
+                </div>
               </div>
             </div>
 
