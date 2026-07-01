@@ -108,8 +108,11 @@
       font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0;
     }
     .vp-header__identity { min-width: 140px; }
-    .vp-header__name { font-size: 15px; font-weight: 700; color: #101828; }
-    .vp-header__email { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .vp-header__name { font-size: 15px; font-weight: 700; color: #101828; display: flex; align-items: center; gap: 5px; }
+    .vp-header__email { font-size: 12px; color: #6b7280; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+    .vp-verified { display: inline-flex; align-items: center; flex-shrink: 0; }
+    .vp-verified--lg svg { width: 16px; height: 16px; }
+    .vp-verified--sm svg { width: 13px; height: 13px; }
     .vp-header__divider { width: 1px; background: #e5e7eb; align-self: stretch; flex-shrink: 0; margin: 0 4px; }
     .vp-header__stats { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
     .vp-header__stat { display: flex; flex-direction: column; gap: 3px; }
@@ -422,8 +425,8 @@
     <div class="vp-header">
       <div class="vp-header__avatar" id="hdrAvatar">AR</div>
       <div class="vp-header__identity">
-        <div class="vp-header__name" id="hdrName">Arjun Rao</div>
-        <div class="vp-header__email">arjun.rao@gmail.com</div>
+        <div class="vp-header__name" id="hdrName">Arjun Rao <span class="vp-verified vp-verified--lg" title="Verified volunteer"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#1DA1F2"/><path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="vp-header__email">arjun.rao@gmail.com <span class="vp-verified vp-verified--sm" title="Verified volunteer"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#1DA1F2"/><path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
       </div>
       <div class="vp-header__divider"></div>
       <div class="vp-header__stats">
@@ -790,7 +793,7 @@
                 <td>📍 Madhya Pradesh</td>
                 <td>14 days</td>
                 <td>Jun 2025</td>
-                <td><span class="vp-badge vp-badge--green">Completed</span></td>
+                <td><span class="vp-badge vp-badge--green">✔ Completed</span></td>
                 <td><button class="bk-btn" style="font-size:11px;padding:4px 10px;">Certificate</button></td>
               </tr>
             </tbody>
