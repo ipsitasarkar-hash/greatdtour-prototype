@@ -324,6 +324,114 @@
     .bk-field-error { font-size: 12px; color: #ef4444; margin-top: 3px; display: none; }
     .bk-field-error.visible { display: block; }
 
+    /* ======================================
+       MOBILE RESPONSIVE — volunteer-application
+       ====================================== */
+    @media (max-width: 768px) {
+
+      /* Top bar */
+      .bk-topbar { padding: 0 16px; }
+      .bk-topbar__inner { height: 60px; gap: 10px; }
+      .bk-topbar__thumb { width: 36px; height: 36px; }
+      .bk-topbar__title { font-size: 13px; }
+      .bk-topbar__meta { display: none; }
+      .bk-topbar__back { font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+
+      /* Page layout — single column, no sidebar */
+      .bk-page {
+        grid-template-columns: 1fr;
+        padding: 16px 16px 100px;
+        gap: 0;
+      }
+
+      /* Hide desktop sidebar (summary shown inline via steps) */
+      .bk-sidebar { display: none; }
+
+      /* Progress bar — compress labels on small screens */
+      .bk-steps { margin-bottom: 20px; gap: 0; }
+      .bk-step__label { font-size: 11px; }
+      .bk-step__num { width: 26px; height: 26px; font-size: 11px; }
+      .bk-step__inner { gap: 6px; }
+      .bk-step__sep { min-width: 8px; margin: 0 4px; }
+
+      /* Step cards */
+      .bk-step-card__header { padding: 16px 16px; }
+      .bk-step-body { padding: 0 16px 20px; }
+      .bk-step-card__summary { padding: 0 16px 12px; }
+
+      /* Step 1 — group size stepper */
+      .bk-travellers-row { flex-direction: column; gap: 16px; margin-bottom: 20px; }
+      .bk-stepper__val { font-size: 20px; }
+
+      /* Batch grid — 2 columns on mobile */
+      .bk-months { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .bk-month-btn { padding: 12px 10px; }
+      .bk-month-btn__name { font-size: 13px; }
+
+      /* Batch detail card */
+      .vol-batch-selected-card { padding: 14px 16px; }
+
+      /* Next button */
+      .bk-next-btn { font-size: 15px; padding: 14px; }
+
+      /* Role cards (step 2) */
+      .bk-pkg-card { padding: 14px; }
+      .bk-pkg-card__name { font-size: 14px; }
+      .bk-pkg-card__desc { font-size: 12px; }
+
+      /* Profile form (step 3) — stack all rows */
+      .bk-form-row { grid-template-columns: 1fr; gap: 12px; }
+      .bk-form-group.full { grid-column: 1; }
+      .bk-input, .bk-select, .bk-textarea { font-size: 16px; /* prevent iOS zoom */ padding: 10px 12px; }
+
+      /* Skills pills — slightly smaller */
+      .vol-skill-pill { font-size: 12px; padding: 6px 12px; }
+
+      /* Pledge items (step 4) */
+      .vol-pledge-item { padding: 12px 14px; }
+      .vol-pledge-item__text { font-size: 13px; }
+
+      /* Success screen */
+      .bk-success { padding: 40px 20px; }
+      .bk-success__title { font-size: 24px; }
+      .bk-success__sub { font-size: 14px; }
+      .bk-success__btns { flex-direction: column; align-items: center; gap: 10px; }
+      .bk-success__btn-primary, .bk-success__btn-secondary { width: 100%; max-width: 280px; }
+
+      /* Mobile summary strip — sticky bottom bar showing current selections */
+      .mob-summary-bar {
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+        background: white;
+        border-top: 1px solid var(--border);
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+        display: flex; align-items: center;
+        padding: 10px 16px; gap: 12px;
+      }
+      .mob-summary-bar__info { flex: 1; min-width: 0; }
+      .mob-summary-bar__prog {
+        font-size: 11px; font-weight: 600; color: var(--vol-green); letter-spacing: 0.3px; text-transform: uppercase;
+      }
+      .mob-summary-bar__detail {
+        font-size: 12px; color: var(--warm-gray); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .mob-summary-bar__free {
+        background: var(--vol-green-light);
+        color: var(--vol-green);
+        border: 1px solid rgba(46,125,50,0.25);
+        border-radius: 100px;
+        font-size: 12px; font-weight: 700;
+        padding: 5px 12px; white-space: nowrap; flex-shrink: 0;
+      }
+    }
+
+    /* Hide mob-summary-bar on desktop */
+    .mob-summary-bar { display: none; }
+
+    @media (max-width: 480px) {
+      .bk-step__label { display: none; } /* show only numbers on very small phones */
+      .bk-months { grid-template-columns: repeat(2, 1fr); }
+    }
+
   </style>
 </head>
 <body>
@@ -733,6 +841,15 @@
 
   </div><!-- /bk-page -->
 
+  <!-- ====== MOBILE SUMMARY BAR ====== -->
+  <div class="mob-summary-bar" id="mobSummaryBar">
+    <div class="mob-summary-bar__info">
+      <div class="mob-summary-bar__prog" id="mobBarStep">Step 1 of 4</div>
+      <div class="mob-summary-bar__detail" id="mobBarDetail">Choose batch &amp; group size</div>
+    </div>
+    <div class="mob-summary-bar__free">₹0 — Funded</div>
+  </div>
+
   <script src="assets/main.js"></script>
   <script>
 
@@ -936,6 +1053,8 @@
       document.querySelectorAll('.bk-step-card').forEach(c => c.style.display = 'none');
       document.getElementById('bkSidebar').style.display = 'none';
       document.getElementById('successScreen').classList.add('visible');
+      const mobBar = document.getElementById('mobSummaryBar');
+      if (mobBar) mobBar.style.display = 'none';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -961,6 +1080,40 @@
         if (err) err.classList.remove('visible');
       });
     });
+
+    // ---- Mobile summary bar update ----
+    const MOB_STEP_LABELS = [
+      'Choose batch & group size',
+      'Pick your volunteer role',
+      'Tell us about yourself',
+      'Confirm your commitment'
+    ];
+
+    function updateMobBar() {
+      const stepEl = document.getElementById('mobBarStep');
+      const detailEl = document.getElementById('mobBarDetail');
+      if (!stepEl) return;
+      stepEl.textContent = 'Step ' + currentStep + ' of 4';
+      let detail = MOB_STEP_LABELS[currentStep - 1];
+      if (currentStep >= 2 && selectedBatch) {
+        const b = BATCH_INFO[selectedBatch];
+        detail = b.name + ' · ' + volunteers + ' vol' + (volunteers > 1 ? 's' : '');
+      }
+      if (currentStep >= 3 && selectedRole) {
+        detail += ' · ' + ROLE_NAMES[selectedRole];
+      }
+      detailEl.textContent = detail;
+    }
+
+    // patch goToStep & editStep to also update mob bar
+    const _origGoToStep = goToStep;
+    goToStep = function(step) { _origGoToStep(step); updateMobBar(); };
+    const _origEditStep = editStep;
+    editStep = function(step) { _origEditStep(step); updateMobBar(); };
+    const _origSubmitProfile = submitProfile;
+    submitProfile = function() { _origSubmitProfile(); updateMobBar(); };
+
+    updateMobBar();
 
   </script>
 </body>
