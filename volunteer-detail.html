@@ -278,6 +278,175 @@
     .footer-detail__legal span { color: rgba(255,255,255,0.2); }
 
   </style>
+
+  <!-- ======= MOBILE RESPONSIVE ======= -->
+  <style>
+    /* ── MOBILE STICKY CTA BAR ── */
+    .mob-cta-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: #fff; border-top: 1px solid #e5e7eb;
+      padding: 12px 16px; gap: 10px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.10);
+    }
+    .mob-cta-bar__info { flex: 1; }
+    .mob-cta-bar__label { font-size: 11px; color: #6b7280; }
+    .mob-cta-bar__value { font-size: 14px; font-weight: 700; color: #2E7D32; }
+    .mob-cta-bar__btn {
+      background: #2E7D32; color: #fff; border: none; border-radius: 8px;
+      padding: 12px 22px; font-size: 15px; font-weight: 700; cursor: pointer;
+      font-family: var(--font-sans); white-space: nowrap; flex-shrink: 0;
+    }
+    .mob-cta-bar__share {
+      width: 44px; height: 44px; border-radius: 8px; border: 1px solid #e5e7eb;
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+
+      /* ── Nav/hero ── */
+      .exp-hero { height: 240px; margin-top: 60px !important; }
+
+      /* ── Title section ── */
+      .exp-title-section .container { padding: 0 16px; }
+      .exp-title-h1 { font-size: 24px; line-height: 1.25; }
+      .exp-title-row { flex-direction: column; gap: 12px; }
+      .exp-share-btn { display: none; }
+      .exp-meta-row { gap: 12px; }
+      .exp-meta-item { font-size: 13px; }
+      .exp-back { margin-bottom: 16px; font-size: 13px; }
+      .vol-tags { gap: 6px; margin-top: 10px; }
+      .vol-tag { font-size: 11px; padding: 4px 10px; }
+
+      /* ── Sticky tabs: horizontally scrollable ── */
+      .exp-tabs .container { padding: 0; }
+      .exp-tabs__list {
+        gap: 0; overflow-x: auto; scrollbar-width: none;
+        padding: 0 16px; -webkit-overflow-scrolling: touch;
+      }
+      .exp-tabs__list::-webkit-scrollbar { display: none; }
+      .exp-tabs__item { font-size: 13px; padding: 12px 14px; white-space: nowrap; }
+
+      /* ── Body layout ── */
+      .exp-body { padding: 20px 0 100px; }
+      .exp-body .container { padding: 0 16px; }
+      .exp-layout { grid-template-columns: 1fr; gap: 0; }
+
+      /* ── Sidebar: move above content on mobile as a compact strip ── */
+      .exp-sidebar {
+        order: -1; position: static;
+        margin-bottom: 20px;
+      }
+      .exp-booking-card {
+        padding: 16px; border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      }
+      /* Collapse the glance rows to a 2-col grid */
+      .vol-glance { padding: 14px; margin-bottom: 14px; }
+      .vol-glance__title { font-size: 10px; margin-bottom: 10px; }
+      .vol-glance__row { padding: 7px 0; }
+      .vol-glance__label { font-size: 12px; }
+      .vol-glance__value { font-size: 13px; }
+      /* Hide sidebar buttons & why-box — they're in mobile CTA bar */
+      .exp-book-btn { display: none; }
+      .exp-sidebar-btn { display: none; }
+      .exp-why-box { display: none; }
+      /* Sidebar org card — compact */
+      .vol-sidebar-org { padding: 14px; margin-top: 12px; }
+      .vol-sidebar-org__logo { width: 44px; height: 44px; }
+      .vol-sidebar-org__name { font-size: 14px; }
+
+      /* ── Content sections ── */
+      .exp-section { margin-bottom: 32px; }
+      .exp-section__title { font-size: 18px; margin-bottom: 14px; }
+      .exp-about__text { font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+      .exp-divider { margin: 24px 0; }
+
+      /* Trust grid: 1 col on small, 2 col on 480+ */
+      .exp-trust-grid { grid-template-columns: 1fr; gap: 12px; }
+
+      /* Impact bar: wrap to 1 col */
+      .vol-impact-bar { flex-direction: row; flex-wrap: wrap; }
+      .vol-impact-item { flex: 1; min-width: 30%; padding: 14px 10px; }
+      .vol-impact-num { font-size: 22px; }
+      .vol-impact-label { font-size: 10px; }
+
+      /* Org card */
+      .vol-org-card { flex-direction: column; gap: 12px; padding: 16px; }
+      .vol-org-logo { width: 48px; height: 48px; }
+      .vol-org-stat-row { gap: 12px; flex-wrap: wrap; }
+
+      /* Highlights: 1 col */
+      .exp-highlights-grid { grid-template-columns: 1fr; gap: 12px; }
+
+      /* Review cards */
+      .exp-review-card { padding: 16px; }
+      .exp-reviewer-name { font-size: 14px; }
+      .exp-review-text { font-size: 13px; }
+
+      /* Week accordion */
+      .itin-accordion__header { padding: 14px 16px; }
+      .itin-accordion__title { font-size: 14px; }
+      .vol-week { flex-direction: column; gap: 10px; padding: 14px 16px; }
+      .vol-week__badge { width: 44px; height: 44px; }
+      .vol-week__theme { font-size: 15px; }
+      .vol-week__activities li { font-size: 13px; }
+
+      /* Included/excluded: stack */
+      .exp-section > div[style*="grid-template-columns:1fr 1fr"] {
+        display: flex !important; flex-direction: column; gap: 20px;
+      }
+
+      /* Batch grid: 1 col */
+      .vol-batch-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .vol-batch-card { padding: 12px; }
+      .vol-batch-card__dates { font-size: 13px; }
+
+      /* Covered cards */
+      .vol-covered-card { padding: 16px; }
+      .vol-covered-card__title { font-size: 16px; }
+      .vol-covered-card__price { font-size: 24px; }
+
+      /* Policy table */
+      .policy-table td { font-size: 13px; padding: 8px 0; }
+      .policy-table td:first-child { width: 44%; }
+      .vol-skills-grid { gap: 6px; }
+      .vol-skill-pill { font-size: 12px; padding: 5px 10px; }
+
+      /* FAQ */
+      .faq-question__text { font-size: 14px; }
+      .faq-answer p { font-size: 13px; }
+
+      /* Similar programs: 2-col scroll */
+      .exp-similar { padding: 32px 0; }
+      .exp-similar .container { padding: 0 16px; }
+      .exp-similar__grid {
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+        gap: 14px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+      }
+      .exp-similar__grid::-webkit-scrollbar { display: none; }
+      .sim-card__img { height: 140px; }
+      .sim-card__title { font-size: 13px; }
+
+      /* Show mobile CTA bar */
+      .mob-cta-bar { display: flex; }
+    }
+
+    @media (min-width: 480px) and (max-width: 768px) {
+      .exp-trust-grid { grid-template-columns: 1fr 1fr; }
+      .exp-highlights-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 360px) {
+      .vol-batch-grid { grid-template-columns: 1fr; }
+      .exp-similar__grid { grid-template-columns: repeat(2, 200px); }
+    }
+  </style>
 </head>
 <body>
 
@@ -1087,6 +1256,18 @@
     </div>
   </footer>
 
+
+  <!-- ====== MOBILE STICKY CTA BAR ====== -->
+  <div class="mob-cta-bar">
+    <div class="mob-cta-bar__info">
+      <div class="mob-cta-bar__label">Fully Funded · 4 Weeks</div>
+      <div class="mob-cta-bar__value">₹0 Program Fee · 8 spots left</div>
+    </div>
+    <button class="mob-cta-bar__share" aria-label="Share">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    </button>
+    <button class="mob-cta-bar__btn" onclick="window.location.href='volunteer-application.html'">Apply Now →</button>
+  </div>
 
   <script src="assets/main.js"></script>
   <script>
