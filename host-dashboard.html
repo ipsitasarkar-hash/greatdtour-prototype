@@ -957,6 +957,12 @@
           <button class="hd-nav__sub-item" id="hn-prog-bookings" onclick="switchTab('prog-bookings', this)">Program Bookings</button>
         </div>
       </div>
+      <!-- Earnings -->
+      <button class="hd-nav__item" id="hn-earnings" onclick="switchTab('earnings', this)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" stroke-width="1.8"/><path d="M12 6v2m0 8v2M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-1 2-2.5 2.5S9.5 13 9.5 14.5a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Earnings
+      </button>
+
     </nav>
 
     <!-- Footer -->
@@ -1628,68 +1634,449 @@
       </div>
 
       <!-- ══ PAYOUTS TAB ══ -->
-      <div class="hd-panel" id="panel-payouts">
-        <div class="hd-sec-head"><h2 class="hd-page-title">Payouts</h2></div>
-        <div class="hd-page-subtitle">Track your earnings and manage payout settings.</div>
-        <div class="payout-card">
-          <div class="payout-card__head">
-            Available Balance
-            <span style="font-size:12px;font-weight:500;color:#9ca3af;">Updated daily</span>
+      <!-- ══ EARNINGS TAB ══ -->
+      <div class="hd-panel" id="panel-earnings">
+        <style>
+          /* ── EARNINGS PANEL ── */
+          .earn-kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+          .earn-kpi {
+            background:#fff; border:1px solid #e5e7eb; border-radius:14px;
+            padding:18px 20px;
+          }
+          .earn-kpi__label { font-size:11px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+          .earn-kpi__val { font-size:26px; font-weight:800; color:#101828; line-height:1.1; margin-bottom:4px; }
+          .earn-kpi__delta { font-size:12px; font-weight:600; }
+          .earn-kpi__delta--up { color:#16a34a; }
+          .earn-kpi__delta--down { color:#dc2626; }
+          .earn-kpi__sub { font-size:12px; color:#9ca3af; margin-top:4px; }
+          @media (max-width:960px) { .earn-kpi-grid { grid-template-columns:repeat(2,1fr); } }
+          @media (max-width:600px) { .earn-kpi-grid { grid-template-columns:1fr; } }
+
+          /* Holdings bar */
+          .earn-hold-card {
+            background: linear-gradient(135deg,#101828 0%,#1e2d40 100%);
+            border-radius:14px; padding:24px 28px; margin-bottom:24px;
+            display:flex; align-items:center; justify-content:space-between; gap:24px;
+            flex-wrap:wrap;
+          }
+          .earn-hold__left {}
+          .earn-hold__label { font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:0.6px; margin-bottom:6px; }
+          .earn-hold__amount { font-size:34px; font-weight:800; color:#fff; line-height:1; margin-bottom:6px; }
+          .earn-hold__note { font-size:12px; color:rgba(255,255,255,0.5); }
+          .earn-hold__note strong { color:rgba(255,255,255,0.8); }
+          .earn-hold__right { display:flex; gap:32px; flex-wrap:wrap; }
+          .earn-hold__stat {}
+          .earn-hold__stat-label { font-size:11px; color:rgba(255,255,255,0.4); margin-bottom:4px; }
+          .earn-hold__stat-val { font-size:16px; font-weight:700; color:#fff; }
+          .earn-hold__stat-val--green { color:#4ade80; }
+          .earn-hold__stat-val--amber { color:#fbbf24; }
+          .earn-hold__btn {
+            padding:10px 22px; background:#f54900; color:#fff; border:none;
+            border-radius:8px; font-size:14px; font-weight:700; cursor:pointer;
+            white-space:nowrap; transition:background 0.15s; flex-shrink:0;
+          }
+          .earn-hold__btn:hover { background:#d44000; }
+          /* Progress track inside holdings */
+          .earn-hold__track { width:100%; flex-basis:100%; margin-top:16px; }
+          .earn-hold__track-label { display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,0.45); margin-bottom:6px; }
+          .earn-hold__bar { height:6px; background:rgba(255,255,255,0.12); border-radius:999px; overflow:hidden; }
+          .earn-hold__bar-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#4ade80,#22c55e); }
+
+          /* Two-col row */
+          .earn-row2 { display:grid; grid-template-columns:1.4fr 1fr; gap:16px; margin-bottom:24px; }
+          @media (max-width:960px) { .earn-row2 { grid-template-columns:1fr; } }
+
+          /* Card */
+          .earn-card { background:#fff; border:1px solid #e5e7eb; border-radius:14px; overflow:hidden; }
+          .earn-card__head { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #f3f4f6; }
+          .earn-card__title { font-size:14px; font-weight:700; color:#101828; }
+          .earn-card__sub { font-size:12px; color:#9ca3af; margin-top:1px; }
+
+          /* Monthly mini-bars */
+          .earn-month-chart { padding:20px; }
+          .earn-month-bars { display:flex; align-items:flex-end; gap:6px; height:80px; border-bottom:1px solid #f3f4f6; padding-bottom:4px; margin-bottom:8px; }
+          .earn-month-bar { flex:1; border-radius:4px 4px 0 0; position:relative; cursor:pointer; transition:opacity 0.15s; min-width:0; }
+          .earn-month-bar:hover { opacity:0.8; }
+          .earn-month-bar--active { background:#f54900 !important; }
+          .earn-month-labels { display:flex; gap:6px; }
+          .earn-month-lbl { flex:1; text-align:center; font-size:10px; color:#9ca3af; min-width:0; }
+          .earn-month-lbl--active { color:#f54900; font-weight:700; }
+
+          /* Tour earnings table */
+          .earn-tour-table { width:100%; border-collapse:collapse; }
+          .earn-tour-table th { background:#f9fafb; padding:10px 16px; text-align:left; font-size:11px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e5e7eb; }
+          .earn-tour-table td { padding:13px 16px; border-bottom:1px solid #f3f4f6; font-size:13px; color:#374151; vertical-align:middle; }
+          .earn-tour-table tr:last-child td { border-bottom:none; }
+          .earn-tour-table tr:hover td { background:#fafafa; }
+          .earn-tour__bar-track { height:5px; background:#f3f4f6; border-radius:999px; overflow:hidden; margin-top:5px; min-width:80px; }
+          .earn-tour__bar-fill { height:100%; border-radius:999px; background:#f54900; }
+
+          /* Payout history */
+          .earn-txn-table { width:100%; border-collapse:collapse; }
+          .earn-txn-table th { background:#f9fafb; padding:10px 16px; text-align:left; font-size:11px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e5e7eb; }
+          .earn-txn-table td { padding:13px 16px; border-bottom:1px solid #f3f4f6; font-size:13px; color:#374151; vertical-align:middle; }
+          .earn-txn-table tr:last-child td { border-bottom:none; }
+          .earn-txn-table tr:hover td { background:#fafafa; }
+        </style>
+
+        <!-- Page header -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="hd-page-title">Earnings</div>
+            <div class="hd-page-subtitle" style="margin-bottom:0;">All figures after GDT platform commission (12%) · Updated daily</div>
           </div>
-          <div class="payout-card__body">
-            <div class="payout-balance">
-              <div class="payout-balance__label">Ready to withdraw</div>
-              <div class="payout-balance__amount">₹1,85,000</div>
-              <div class="payout-balance__note">After GDT commission (12%) · Next auto-payout: 1 Jul 2026</div>
-              <button class="payout-balance__btn" onclick="showToast('Payout initiated — 2–3 business days')">Request Payout</button>
-            </div>
+          <div style="display:flex;gap:8px;">
+            <select style="padding:7px 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;color:#374151;background:#fff;cursor:pointer;outline:none;">
+              <option>2026</option>
+              <option>2025</option>
+            </select>
+            <button class="hd-btn" onclick="showToast('Report downloaded')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Export
+            </button>
           </div>
         </div>
-        <div class="hd-table-wrap">
-          <div style="padding:16px 20px;border-bottom:1px solid #e5e7eb;font-size:13px;font-weight:600;color:#101828;">Transaction History</div>
-          <table class="hd-table">
+
+        <!-- KPI CARDS -->
+        <div class="earn-kpi-grid">
+          <div class="earn-kpi">
+            <div class="earn-kpi__label">Total Earnings (All Time)</div>
+            <div class="earn-kpi__val">₹18.6L</div>
+            <div class="earn-kpi__sub">Since joining · Jan 2024</div>
+          </div>
+          <div class="earn-kpi">
+            <div class="earn-kpi__label">This Year (2026)</div>
+            <div class="earn-kpi__val">₹7.64L</div>
+            <div class="earn-kpi__delta earn-kpi__delta--up">↑ 34% vs 2025</div>
+          </div>
+          <div class="earn-kpi" style="border-color:#fde68a;background:#fffbeb;">
+            <div class="earn-kpi__label">June 2026 (Latest)</div>
+            <div class="earn-kpi__val" style="color:#92400e;">₹2,11,200</div>
+            <div class="earn-kpi__delta earn-kpi__delta--up">↑ 43% vs May</div>
+            <div class="earn-kpi__sub">Gross: ₹2,40,000 · GDT fee: ₹28,800</div>
+          </div>
+          <div class="earn-kpi">
+            <div class="earn-kpi__label">Avg. per Booking</div>
+            <div class="earn-kpi__val">₹6,920</div>
+            <div class="earn-kpi__delta earn-kpi__delta--up">↑ ₹380 vs last month</div>
+          </div>
+        </div>
+
+        <!-- HOLDINGS BAR -->
+        <div class="earn-hold-card">
+          <div class="earn-hold__left">
+            <div class="earn-hold__label">Holdings — Liable for End-of-Month Payout</div>
+            <div class="earn-hold__amount">₹1,85,000</div>
+            <div class="earn-hold__note">Confirmed bookings awaiting settlement · <strong>Auto-payout: 1 Aug 2026</strong></div>
+          </div>
+          <div class="earn-hold__right">
+            <div class="earn-hold__stat">
+              <div class="earn-hold__stat-label">Cleared (Jun)</div>
+              <div class="earn-hold__stat-val earn-hold__stat-val--green">₹1,80,400</div>
+            </div>
+            <div class="earn-hold__stat">
+              <div class="earn-hold__stat-label">Pending (Jul so far)</div>
+              <div class="earn-hold__stat-val earn-hold__stat-val--amber">₹1,85,000</div>
+            </div>
+            <div class="earn-hold__stat">
+              <div class="earn-hold__stat-label">GDT Commission</div>
+              <div class="earn-hold__stat-val" style="color:rgba(255,255,255,0.6);">12%</div>
+            </div>
+          </div>
+          <button class="earn-hold__btn" onclick="showToast('Early payout requested — review in 1–2 days')">Request Early Payout</button>
+          <div class="earn-hold__track">
+            <div class="earn-hold__track-label">
+              <span>₹0</span>
+              <span>Jul progress · ₹1,85,000 of ₹3,00,000 target</span>
+              <span>₹3,00,000</span>
+            </div>
+            <div class="earn-hold__bar"><div class="earn-hold__bar-fill" style="width:62%;"></div></div>
+          </div>
+        </div>
+
+        <!-- MONTHLY TREND + BREAKDOWN BY TOUR -->
+        <div class="earn-row2">
+
+          <!-- Monthly trend bars -->
+          <div class="earn-card">
+            <div class="earn-card__head">
+              <div>
+                <div class="earn-card__title">Monthly Earnings — 2026</div>
+                <div class="earn-card__sub">Net after 12% platform fee</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:11px;color:#9ca3af;">Jan–Jun total</div>
+                <div style="font-size:15px;font-weight:800;color:#101828;">₹7,64,720</div>
+              </div>
+            </div>
+            <div class="earn-month-chart">
+              <div class="earn-month-bars">
+                <div class="earn-month-bar" style="height:34%;background:#fcd34d;" title="Jan: ₹74,800"></div>
+                <div class="earn-month-bar" style="height:45%;background:#fcd34d;" title="Feb: ₹96,800"></div>
+                <div class="earn-month-bar" style="height:49%;background:#fdba74;" title="Mar: ₹1,03,840"></div>
+                <div class="earn-month-bar" style="height:63%;background:#fdba74;" title="Apr: ₹1,30,240"></div>
+                <div class="earn-month-bar" style="height:68%;background:#fb923c;" title="May: ₹1,47,840"></div>
+                <div class="earn-month-bar earn-month-bar--active" style="height:100%;" title="Jun: ₹2,11,200"></div>
+              </div>
+              <div class="earn-month-labels">
+                <div class="earn-month-lbl">Jan<br/><span style="font-size:9px;">74.8k</span></div>
+                <div class="earn-month-lbl">Feb<br/><span style="font-size:9px;">96.8k</span></div>
+                <div class="earn-month-lbl">Mar<br/><span style="font-size:9px;">1.04L</span></div>
+                <div class="earn-month-lbl">Apr<br/><span style="font-size:9px;">1.3L</span></div>
+                <div class="earn-month-lbl">May<br/><span style="font-size:9px;">1.48L</span></div>
+                <div class="earn-month-lbl earn-month-lbl--active">Jun<br/><span style="font-size:9px;">2.11L</span></div>
+              </div>
+              <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;">
+                <div style="font-size:12px;color:#6b7280;">Highest month: <strong style="color:#f54900;">Jun 2026 — ₹2,11,200</strong></div>
+                <div style="font-size:12px;color:#6b7280;">Monthly avg: <strong style="color:#101828;">₹1,27,453</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Earnings by tour (pie-style legend + bars) -->
+          <div class="earn-card">
+            <div class="earn-card__head">
+              <div>
+                <div class="earn-card__title">Earnings by Tour</div>
+                <div class="earn-card__sub">Jun 2026 · Net payout</div>
+              </div>
+              <span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:#f3f4f6;color:#6b7280;">This Month</span>
+            </div>
+            <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+                  <span style="font-weight:600;color:#374151;">Desert Camp &amp; Folk Music</span>
+                  <span style="font-weight:700;color:#101828;">₹97,680</span>
+                </div>
+                <div style="font-size:11px;color:#9ca3af;margin-bottom:5px;">62 bookings · 46% of Jun earnings</div>
+                <div class="earn-tour__bar-track"><div class="earn-tour__bar-fill" style="width:100%;background:#f54900;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+                  <span style="font-weight:600;color:#374151;">Kerala Houseboat</span>
+                  <span style="font-weight:700;color:#101828;">₹57,024</span>
+                </div>
+                <div style="font-size:11px;color:#9ca3af;margin-bottom:5px;">52 bookings · 27% of Jun earnings</div>
+                <div class="earn-tour__bar-track"><div class="earn-tour__bar-fill" style="width:58%;background:#fb923c;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+                  <span style="font-weight:600;color:#374151;">Himalayan Trek &amp; Yoga</span>
+                  <span style="font-weight:700;color:#101828;">₹38,808</span>
+                </div>
+                <div style="font-size:11px;color:#9ca3af;margin-bottom:5px;">45 bookings · 18% of Jun earnings</div>
+                <div class="earn-tour__bar-track"><div class="earn-tour__bar-fill" style="width:40%;background:#fbbf24;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+                  <span style="font-weight:600;color:#374151;">Goa Coastal Walk</span>
+                  <span style="font-weight:700;color:#101828;">₹10,120</span>
+                </div>
+                <div style="font-size:11px;color:#9ca3af;margin-bottom:5px;">41 bookings · 5% of Jun earnings</div>
+                <div class="earn-tour__bar-track"><div class="earn-tour__bar-fill" style="width:10%;background:#d1d5db;"></div></div>
+              </div>
+              <div style="padding-top:10px;border-top:1px solid #f3f4f6;display:flex;justify-content:space-between;font-size:13px;">
+                <span style="color:#6b7280;">Jun Net Total</span>
+                <span style="font-weight:800;color:#101828;">₹2,11,200</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TOUR EARNINGS TABLE (full year) -->
+        <div class="earn-card" style="margin-bottom:24px;">
+          <div class="earn-card__head">
+            <div>
+              <div class="earn-card__title">Earnings by Tour — 2026 YTD</div>
+              <div class="earn-card__sub">Jan–Jun · Net after commission</div>
+            </div>
+          </div>
+          <table class="earn-tour-table">
             <thead>
               <tr>
-                <th>Booking</th>
+                <th>Tour</th>
+                <th>Bookings</th>
+                <th>Gross</th>
+                <th>Commission (12%)</th>
+                <th>Net Earned</th>
+                <th>% of Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Desert Camp &amp; Folk Music Retreat</div><div style="font-size:11px;color:#9ca3af;">Rajasthan</div></td>
+                <td>62</td>
+                <td>₹11,16,000</td>
+                <td style="color:#dc2626;">−₹1,33,920</td>
+                <td><strong>₹9,82,080</strong></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-weight:600;color:#374151;">31%</span>
+                    <div class="earn-tour__bar-track" style="flex:1;"><div class="earn-tour__bar-fill" style="width:100%;"></div></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Kerala Houseboat &amp; Ayurveda</div><div style="font-size:11px;color:#9ca3af;">Kerala</div></td>
+                <td>52</td>
+                <td>₹14,56,000</td>
+                <td style="color:#dc2626;">−₹1,74,720</td>
+                <td><strong>₹12,81,280</strong></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-weight:600;color:#374151;">26%</span>
+                    <div class="earn-tour__bar-track" style="flex:1;"><div class="earn-tour__bar-fill" style="width:84%;"></div></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Himalayan Trek &amp; Yoga Immersion</div><div style="font-size:11px;color:#9ca3af;">Himachal Pradesh</div></td>
+                <td>45</td>
+                <td>₹15,75,000</td>
+                <td style="color:#dc2626;">−₹1,89,000</td>
+                <td><strong>₹13,86,000</strong></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-weight:600;color:#374151;">22%</span>
+                    <div class="earn-tour__bar-track" style="flex:1;"><div class="earn-tour__bar-fill" style="width:71%;"></div></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Spiti Valley Winter Expedition</div><div style="font-size:11px;color:#9ca3af;">Himachal Pradesh</div></td>
+                <td>38</td>
+                <td>₹17,10,000</td>
+                <td style="color:#dc2626;">−₹2,05,200</td>
+                <td><strong>₹15,04,800</strong></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-weight:600;color:#374151;">14%</span>
+                    <div class="earn-tour__bar-track" style="flex:1;"><div class="earn-tour__bar-fill" style="width:45%;background:#fdba74;"></div></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Goa Coastal Walk &amp; Heritage</div><div style="font-size:11px;color:#9ca3af;">Goa</div></td>
+                <td>41</td>
+                <td>₹3,89,500</td>
+                <td style="color:#dc2626;">−₹46,740</td>
+                <td><strong>₹3,42,760</strong></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-weight:600;color:#374151;">5%</span>
+                    <div class="earn-tour__bar-track" style="flex:1;"><div class="earn-tour__bar-fill" style="width:16%;background:#d1d5db;"></div></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#9ca3af;">Forest Bathing &amp; Mindfulness <em style="font-size:11px;">(inactive)</em></div><div style="font-size:11px;color:#d1d5db;">Uttarakhand</div></td>
+                <td style="color:#9ca3af;">31</td>
+                <td style="color:#9ca3af;">₹3,72,000</td>
+                <td style="color:#d1d5db;">−₹44,640</td>
+                <td style="color:#9ca3af;"><strong>₹3,27,360</strong></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-weight:600;color:#9ca3af;">2%</span>
+                    <div class="earn-tour__bar-track" style="flex:1;"><div class="earn-tour__bar-fill" style="width:6%;background:#e5e7eb;"></div></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="background:#f9fafb;">
+                <td style="font-weight:700;color:#101828;padding:14px 16px;">Total YTD</td>
+                <td style="font-weight:700;color:#101828;padding:14px 16px;">269</td>
+                <td style="font-weight:700;color:#101828;padding:14px 16px;">₹66,18,500</td>
+                <td style="font-weight:700;color:#dc2626;padding:14px 16px;">−₹7,94,220</td>
+                <td style="font-weight:800;color:#16a34a;font-size:15px;padding:14px 16px;">₹58,24,280</td>
+                <td style="padding:14px 16px;"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- PAYOUT HISTORY -->
+        <div class="earn-card">
+          <div class="earn-card__head">
+            <div>
+              <div class="earn-card__title">Payout History</div>
+              <div class="earn-card__sub">Settlements transferred to your bank account</div>
+            </div>
+            <button class="hd-btn" style="font-size:12px;padding:6px 14px;" onclick="showToast('Full statement downloaded')">Download Statement</button>
+          </div>
+          <table class="earn-txn-table">
+            <thead>
+              <tr>
+                <th>Tour / Booking</th>
                 <th>Reference</th>
-                <th>Date</th>
-                <th>Amount</th>
+                <th>Booking Date</th>
+                <th>Gross</th>
+                <th>Net (after 12%)</th>
+                <th>Payout Date</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><div class="hd-table__primary">Himalayan Trek — 4 guests</div></td>
-                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-5012</span></td>
+                <td><div style="font-weight:600;color:#101828;">Himalayan Trek — 4 guests</div><div style="font-size:11px;color:#9ca3af;">Priya Krishnamurthy</div></td>
+                <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-5012</span></td>
                 <td>28 Jun 2026</td>
-                <td><span style="font-weight:600;color:#101828;">+₹1,23,200</span></td>
+                <td>₹1,40,000</td>
+                <td style="font-weight:600;color:#92400e;">₹1,23,200</td>
+                <td style="color:#9ca3af;">1 Aug 2026</td>
                 <td><span class="hd-badge hd-badge--yellow">Pending</span></td>
               </tr>
               <tr>
-                <td><div class="hd-table__primary">Himalayan Trek — 2 guests</div></td>
-                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-4103</span></td>
+                <td><div style="font-weight:600;color:#101828;">Himalayan Trek — 2 guests</div></td>
+                <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-4103</span></td>
                 <td>15 Jun 2026</td>
-                <td><span style="font-weight:600;color:#101828;">+₹61,600</span></td>
+                <td>₹70,000</td>
+                <td style="font-weight:600;color:#16a34a;">₹61,600</td>
+                <td>1 Jul 2026</td>
                 <td><span class="hd-badge hd-badge--green">Paid</span></td>
               </tr>
               <tr>
-                <td><div class="hd-table__primary">Spiti Valley — 3 guests</div></td>
-                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-3844</span></td>
+                <td><div style="font-weight:600;color:#101828;">Spiti Valley — 3 guests</div></td>
+                <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-3844</span></td>
                 <td>2 Jun 2026</td>
-                <td><span style="font-weight:600;color:#101828;">+₹1,18,800</span></td>
+                <td>₹1,35,000</td>
+                <td style="font-weight:600;color:#16a34a;">₹1,18,800</td>
+                <td>1 Jul 2026</td>
                 <td><span class="hd-badge hd-badge--green">Paid</span></td>
               </tr>
               <tr>
-                <td><div class="hd-table__primary">Himalayan Trek — 6 guests</div></td>
-                <td><span style="font-family:monospace;font-size:12px;color:#9ca3af;">GDT-2026-3201</span></td>
+                <td><div style="font-weight:600;color:#101828;">Himalayan Trek — 6 guests</div></td>
+                <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-3201</span></td>
                 <td>18 May 2026</td>
-                <td><span style="font-weight:600;color:#101828;">+₹1,84,800</span></td>
+                <td>₹2,10,000</td>
+                <td style="font-weight:600;color:#16a34a;">₹1,84,800</td>
+                <td>1 Jun 2026</td>
+                <td><span class="hd-badge hd-badge--green">Paid</span></td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Desert Camp — 8 guests</div></td>
+                <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-2887</span></td>
+                <td>5 May 2026</td>
+                <td>₹1,44,000</td>
+                <td style="font-weight:600;color:#16a34a;">₹1,26,720</td>
+                <td>1 Jun 2026</td>
+                <td><span class="hd-badge hd-badge--green">Paid</span></td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Kerala Houseboat — 4 guests</div></td>
+                <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-2104</span></td>
+                <td>11 Apr 2026</td>
+                <td>₹1,12,000</td>
+                <td style="font-weight:600;color:#16a34a;">₹98,560</td>
+                <td>1 May 2026</td>
                 <td><span class="hd-badge hd-badge--green">Paid</span></td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
+
+      </div><!-- /panel-earnings -->
 
       <!-- ══ SETTINGS TAB ══ -->
       <!-- Programs placeholder -->
