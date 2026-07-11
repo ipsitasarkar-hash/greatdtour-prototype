@@ -181,8 +181,8 @@
 
     /* ── SCHEDULE ── */
     .ap-responsibility-row { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; position: relative; }
-    .ap-responsibility-row .ap-remove-btn { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border-radius: 6px; border: 1px solid #e5e7eb; background: none; color: #9ca3af; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .ap-responsibility-row .ap-remove-btn:hover { border-color: #fecaca; color: #dc2626; }
+    .ap-responsibility-row .ap-remove-btn { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border-radius: 6px; border: 1px solid #fecaca; background: none; color: #dc2626; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .ap-responsibility-row .ap-remove-btn:hover { background: #fef2f2; }
     .ap-row-label { font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.4px; }
 
     /* ── AVAILABILITY TABLE ── */
@@ -828,9 +828,7 @@ function stepSchedule() {
 function renderResponsibilityRow(placeholder, listId) {
   return `<div class="ap-responsibility-row">
     <div class="ap-row-label">Add new item</div>
-    <button class="ap-remove-btn" onclick="this.closest('.ap-responsibility-row').remove()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="1.5"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
+    <button class="ap-remove-btn" onclick="this.closest('.ap-responsibility-row').remove()">×</button>
     <label class="ap-label">${placeholder}</label>
     <input class="ap-input" type="text">
   </div>`;
