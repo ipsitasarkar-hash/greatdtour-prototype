@@ -228,8 +228,8 @@
     .ap-footer-nav { position: fixed; bottom: 0; left: 256px; right: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; z-index: 50; }
     .ap-btn-back { padding: 10px 24px; border: 1.5px solid #d1d5db; border-radius: 8px; background: #fff; font-size: 14px; font-weight: 600; color: #374151; cursor: pointer; transition: all 0.15s; }
     .ap-btn-back:hover { border-color: #9ca3af; }
-    .ap-btn-continue { padding: 10px 28px; border-radius: 8px; background: #101828; border: none; font-size: 14px; font-weight: 700; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.15s; }
-    .ap-btn-continue:hover { background: #1f2937; }
+    .ap-btn-continue { padding: 10px 28px; border-radius: 8px; background: #f54900; border: none; font-size: 14px; font-weight: 700; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.15s; }
+    .ap-btn-continue:hover { background: #d93f00; }
     .ap-btn-complete { padding: 10px 28px; border-radius: 8px; background: #16a34a; border: none; font-size: 14px; font-weight: 700; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 8px; }
     .ap-btn-complete:hover { background: #15803d; }
     .ap-step1-continue { position: sticky; bottom: 0; display: flex; justify-content: flex-end; background: linear-gradient(to bottom, transparent, #f3f4f6 70%); padding: 20px 0 4px; }
@@ -248,8 +248,8 @@
 <!-- ── SIDEBAR ── -->
 <aside class="hd-sidebar">
   <div class="hd-sidebar__logo">
-    <img src="assets/GDT_logo_white.svg" alt="GDT" style="height:28px;" onerror="this.style.display='none'">
-    <span class="hd-sidebar__logo-text">great D'tour</span>
+    <img src="assets/GDT_logo_white.svg" alt="GDT" style="height:28px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="hd-sidebar__logo-text" style="display:none">great D'tour</span>
   </div>
   <div class="hd-sidebar__info">
     <div class="hd-sidebar__info-identity">
@@ -482,16 +482,62 @@ function stepDetails() {
       </div>
     </div>
     <div style="border-top:1px solid #f3f4f6;padding-top:16px;margin-top:4px;">
-      <label class="ap-check-label" style="margin-bottom:12px;"><input type="checkbox"> Open to - Solo Women</label>
+      <label class="ap-check-label" style="margin-bottom:0;font-weight:600;" onclick="toggleConditional('solo-women-fields', this.querySelector('input'))">
+        <input type="checkbox" onchange="toggleConditional('solo-women-fields', this)"> Open to - Solo Women
+      </label>
+      <div id="solo-women-fields" style="display:none;margin-top:16px;">
+        <div class="ap-field-group ap-field-group--2" style="margin-bottom:0;">
+          <div class="ap-field">
+            <label class="ap-label">Female staff</label>
+            <select class="ap-select"><option>Yes</option><option>No</option></select>
+          </div>
+          <div class="ap-field">
+            <label class="ap-label">Separate accommodation</label>
+            <select class="ap-select"><option>Yes</option><option>No</option></select>
+          </div>
+        </div>
+        <div class="ap-field-group ap-field-group--2" style="margin-top:12px;margin-bottom:0;">
+          <div class="ap-field">
+            <label class="ap-label">Female coordinator</label>
+            <select class="ap-select"><option>Yes</option><option>No</option></select>
+          </div>
+          <div class="ap-field">
+            <label class="ap-label">Safe pickup</label>
+            <select class="ap-select"><option>Yes</option><option>No</option></select>
+          </div>
+        </div>
+      </div>
     </div>
-    <div style="border-top:1px solid #f3f4f6;padding-top:16px;">
-      <label class="ap-check-label" style="margin-bottom:12px;"><input type="checkbox"> Allow Guests?</label>
+    <div style="border-top:1px solid #f3f4f6;padding-top:16px;margin-top:16px;">
+      <label class="ap-check-label" style="margin-bottom:0;font-weight:600;">
+        <input type="checkbox" onchange="toggleConditional('allow-guests-fields', this)"> Allow Guests?
+      </label>
+      <div id="allow-guests-fields" style="display:none;margin-top:16px;">
+        <div class="ap-field-group ap-field-group--2" style="margin-bottom:0;">
+          <div class="ap-field">
+            <label class="ap-label">Shared accommodation</label>
+            <select class="ap-select"><option>Yes</option><option>No</option></select>
+          </div>
+        </div>
+      </div>
     </div>
-    <div style="border-top:1px solid #f3f4f6;padding-top:16px;">
-      <div class="ap-field-group ap-field-group--2" style="margin-bottom:0;">
-        <div class="ap-field">
-          <label class="ap-label">Stipend</label>
-          <select class="ap-select" style="width:160px;"><option>No</option><option>Yes</option></select>
+    <div style="border-top:1px solid #f3f4f6;padding-top:16px;margin-top:16px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <label class="ap-label" style="margin:0;font-weight:600;">Stipend</label>
+        <select class="ap-select" style="width:140px;" onchange="toggleConditional('stipend-fields', null, this.value === 'Yes')">
+          <option>No</option><option>Yes</option>
+        </select>
+      </div>
+      <div id="stipend-fields" style="display:none;margin-top:16px;">
+        <div class="ap-field-group ap-field-group--2" style="margin-bottom:0;">
+          <div class="ap-field">
+            <label class="ap-label">Stipend Frequency</label>
+            <select class="ap-select"><option>Monthly</option><option>Weekly</option><option>One-time</option></select>
+          </div>
+          <div class="ap-field">
+            <label class="ap-label">Stipend Amount</label>
+            <input class="ap-input" type="number" placeholder="e.g. 5000">
+          </div>
         </div>
       </div>
     </div>
@@ -1049,6 +1095,12 @@ const STEP_RENDERERS = [
 ];
 
 // ── HELPERS ──
+function toggleConditional(id, checkbox, forceShow) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const show = forceShow !== undefined ? forceShow : (checkbox ? checkbox.checked : false);
+  el.style.display = show ? 'block' : 'none';
+}
 function toggleCat(id) {
   document.getElementById(id).classList.toggle('is-open');
 }
