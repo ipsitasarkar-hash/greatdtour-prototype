@@ -987,11 +987,11 @@ function stepPreScreening() {
   return `
   <!-- SKILL-BASED QUESTIONS -->
   <div class="ap-card" style="margin-bottom:16px;">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
       <span class="ap-skill-badge-num ap-skill-badge-num--orange">2</span>
-      <div style="font-size:18px;font-weight:700;color:#101828;">Skill-Based Questions</div>
+      <div class="ap-section-title" style="margin:0;">SKILL-BASED QUESTIONS</div>
     </div>
-    <div style="font-size:13px;color:#6b7280;margin-bottom:20px;padding-left:40px;">Questions are generated automatically from the proof type of each selected primary and secondary skill. Mark Required only when a No answer should fail the applicant.</div>
+    <div style="font-size:13px;color:#6b7280;margin-bottom:20px;padding-left:40px;">Questions are generated automatically from the proof type of each selected primary and secondary skill. These are required — applicants must answer Yes and attach the relevant proof.</div>
 
     <div class="ap-sbq-row">
       <span class="ap-sbq-num">1</span>
@@ -1002,13 +1002,10 @@ function stepPreScreening() {
       <div class="ap-sbq-right">
         <div class="ap-sbq-ans-wrap">
           <div class="ap-sbq-ans-label">Accepted answer</div>
-          <select class="ap-select" style="min-width:160px;" onchange="handleSBQChange(this,'sbq-proof-1')">
-            <option>I will Decide</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <div id="sbq-proof-1" style="display:none;margin-top:6px;">
-            <select class="ap-select" style="min-width:160px;border-color:#2563eb;color:#2563eb;">
+          <div style="padding:8px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;min-width:160px;text-align:center;">Yes — Required</div>
+          <div style="margin-top:8px;">
+            <div class="ap-sbq-ans-label" style="margin-bottom:4px;">Proof type to attach</div>
+            <select class="ap-select" style="min-width:160px;">
               <option value="" disabled selected>Select proof type</option>
               <option>Certificate</option>
               <option>Portfolio / Work samples</option>
@@ -1018,9 +1015,6 @@ function stepPreScreening() {
             </select>
           </div>
         </div>
-        <label class="ap-sbq-required is-checked" style="padding-top:22px;">
-          <input type="checkbox" checked onchange="this.closest('.ap-sbq-required').classList.toggle('is-checked',this.checked)"> Required
-        </label>
       </div>
     </div>
 
@@ -1033,13 +1027,10 @@ function stepPreScreening() {
       <div class="ap-sbq-right">
         <div class="ap-sbq-ans-wrap">
           <div class="ap-sbq-ans-label">Accepted answer</div>
-          <select class="ap-select" style="min-width:160px;" onchange="handleSBQChange(this,'sbq-proof-2')">
-            <option>I will Decide</option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <div id="sbq-proof-2" style="display:none;margin-top:6px;">
-            <select class="ap-select" style="min-width:160px;border-color:#2563eb;color:#2563eb;">
+          <div style="padding:8px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;min-width:160px;text-align:center;">Yes — Required</div>
+          <div style="margin-top:8px;">
+            <div class="ap-sbq-ans-label" style="margin-bottom:4px;">Proof type to attach</div>
+            <select class="ap-select" style="min-width:160px;">
               <option value="" disabled selected>Select proof type</option>
               <option>Certificate</option>
               <option>Portfolio / Work samples</option>
@@ -1049,13 +1040,8 @@ function stepPreScreening() {
             </select>
           </div>
         </div>
-        <label class="ap-sbq-required" style="padding-top:22px;">
-          <input type="checkbox" onchange="this.closest('.ap-sbq-required').classList.toggle('is-checked',this.checked)"> Required
-        </label>
       </div>
     </div>
-
-    <div style="padding:14px 20px 0;font-size:13px;color:#6b7280;">Add up to 10 questions and choose the accepted answer for each.</div>
   </div>
 
   <!-- CULTURAL FIT -->
@@ -1127,48 +1113,38 @@ function stepPreScreening() {
     </div>
   </div>
 
-  <!-- AUTO ASKED -->
+  <!-- REQUIRED QUESTIONS -->
   <div style="margin-top:28px;">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
       <span class="ap-skill-badge-num ap-skill-badge-num--dark">7</span>
-      <div>
-        <div style="font-size:18px;font-weight:700;color:#101828;">Auto Asked</div>
-        <div style="font-size:13px;color:#6b7280;margin-top:2px;">These platform questions are always asked to volunteers. They are read-only here and do not affect pass or fail.</div>
-      </div>
+      <div class="ap-section-title" style="margin:0;">REQUIRED QUESTIONS</div>
     </div>
+    <div style="font-size:13px;color:#6b7280;margin-bottom:16px;padding-left:40px;">These questions are fixed and mandatory — always shown to every applicant. They cannot be edited or removed.</div>
     <div class="ap-auto-asked-card">
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">1</span>
         <span class="ap-auto-q__text">What is your intended start date?</span>
-        <div class="ap-auto-q__ans"><input class="ap-input" type="text" placeholder="dd/mm/yyyy" style="width:160px;"></div>
+        <div class="ap-auto-q__ans"><span class="ap-auto-q__confirm">Date input</span></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">2</span>
         <span class="ap-auto-q__text">How many days do you intend to stay?</span>
-        <div class="ap-auto-q__ans"><input class="ap-input" type="number" style="width:160px;"></div>
+        <div class="ap-auto-q__ans"><span class="ap-auto-q__confirm">Number input</span></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">3</span>
-        <span class="ap-auto-q__text">Are you accompanied by a guest?</span>
-        <div class="ap-auto-q__ans">
-          <select class="ap-select" style="width:160px;"><option>No</option><option>Yes</option></select>
-        </div>
-      </div>
-      <div class="ap-guest-grid">
-        <div class="ap-guest-field"><label>No. of Guests</label><input class="ap-input" type="number" min="1" value="1"></div>
-        <div class="ap-guest-field"><label>Name Of the Guest</label><input class="ap-input" type="text"></div>
-        <div class="ap-guest-field"><label>Age of the Guest</label><input class="ap-input" type="number" min="0"></div>
-        <div class="ap-guest-field"><label>Relationship with Guest</label><input class="ap-input" type="text"></div>
+        <span class="ap-auto-q__text">Are you accompanied by a guest? <span style="font-size:12px;color:#9ca3af;">(If yes: no. of guests, name, age, relationship)</span></span>
+        <div class="ap-auto-q__ans"><span class="ap-auto-q__confirm">Yes / No</span></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">4</span>
         <span class="ap-auto-q__text">What languages do you speak?</span>
-        <div class="ap-auto-q__ans"><input class="ap-input" type="text" style="width:160px;"></div>
+        <div class="ap-auto-q__ans"><span class="ap-auto-q__confirm">Text input</span></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">5</span>
         <span class="ap-auto-q__text">Are you comfortable being photographed or filmed for the host&#39;s or GDT&#39;s content during the programme?</span>
-        <div class="ap-auto-q__ans"><select class="ap-select" style="width:160px;"><option>Yes</option><option>No</option></select></div>
+        <div class="ap-auto-q__ans"><span class="ap-auto-q__confirm">Yes / No</span></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">6</span>
