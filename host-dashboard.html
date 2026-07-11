@@ -1541,12 +1541,12 @@
           .batch-table { width:100%; border-collapse:collapse; }
           .batch-table th { font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.4px;padding:6px 12px;text-align:left;border-bottom:1px solid #e5e7eb;background:#f3f4f6; }
           .batch-table td { font-size:12px;color:#374151;padding:9px 12px;border-bottom:1px solid #f3f4f6; }
-          .batch-table td:last-child { display:flex;align-items:center;gap:6px;flex-wrap:wrap; }
+          .batch-table td.batch-td-waste { } .batch-table td.batch-td-arrow { text-align:center;width:32px; }
           .batch-table tr:last-child td { border-bottom:none; }
           .batch-table tbody tr.batch-clickable { cursor:pointer;transition:background 0.15s; }
           .batch-table tbody tr.batch-clickable:hover { background:#fffbf7; }
           .batch-table tbody tr.batch-clickable:hover td:first-child { color:#f54900;font-weight:600; }
-          .batch-view-link { display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#f54900;font-weight:600;white-space:nowrap; }
+          .batch-name-link { font-weight:600;color:#101828;cursor:pointer; } .batch-clickable:hover .batch-name-link { color:#f54900;text-decoration:underline; } .batch-td-arrow { color:#9ca3af;font-size:14px; } .batch-clickable:hover .batch-td-arrow { color:#f54900; }
 
           /* ── ROSTER DRAWER ── */
           .roster-overlay { position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.4);opacity:0;pointer-events:none;transition:opacity 0.25s; }
@@ -1596,11 +1596,22 @@
           }
           .expand-chevron { width:18px;height:18px;transition:transform 0.2s;flex-shrink:0;color:#9ca3af; }
           .expand-chevron.is-open { transform:rotate(180deg); }
-          .row-actions { display:flex;gap:6px;align-items:center;flex-wrap:wrap; }
+          .row-actions { display:flex;gap:6px;align-items:center;flex-wrap:nowrap; }
           .hd-table__btn--danger { color:#dc2626;border-color:#fecaca; }
           .hd-table__btn--danger:hover { background:#fef2f2;border-color:#dc2626; }
           .hd-table__btn--view { background:#101828;color:#fff;border-color:#101828;display:inline-flex;align-items:center;gap:5px; }
           .hd-table__btn--view:hover { background:#1e2d40;border-color:#1e2d40; }
+          /* Overflow menu */
+          .row-overflow { position:relative; display:inline-block; }
+          .row-overflow__btn { width:28px;height:28px;border-radius:6px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;font-size:16px;font-weight:700;color:#6b7280;display:flex;align-items:center;justify-content:center;letter-spacing:1px;line-height:1;transition:background 0.12s; }
+          .row-overflow__btn:hover { background:#f3f4f6; }
+          .row-overflow__menu { display:none;position:absolute;right:0;top:32px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.10);min-width:140px;z-index:200;padding:4px 0; }
+          .row-overflow.is-open .row-overflow__menu { display:block; }
+          .row-overflow__item { display:block;width:100%;padding:9px 14px;font-size:13px;font-weight:500;color:#374151;background:none;border:none;text-align:left;cursor:pointer;white-space:nowrap; }
+          .row-overflow__item:hover { background:#f9fafb; }
+          .row-overflow__item--danger { color:#dc2626; }
+          .row-overflow__item--danger:hover { background:#fef2f2; }
+          .row-overflow__divider { height:1px;background:#f3f4f6;margin:4px 0; }
           .batch-waste { display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:4px;padding:1px 6px;margin-left:6px;white-space:nowrap; }
         </style>
 
@@ -1643,10 +1654,9 @@
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-1')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1655,14 +1665,14 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('tour-1',6);event.stopPropagation()"><td>Batch 6 <span class="batch-view-link">↗ View</span></td><td>12–26 Sep 2026</td><td>12</td><td>4</td><td>8 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-1',5);event.stopPropagation()"><td>Batch 5 <span class="batch-view-link">↗ View</span></td><td>14–28 Jun 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 2 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-1',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>3–17 May 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 2 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-1',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>5–19 Apr 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-1',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>7–21 Feb 2026</td><td>12</td><td>11</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-1',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>10–24 Jan 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-1',6);event.stopPropagation()"><td><span class="batch-name-link">Batch 6</span></td><td>12–26 Sep 2026</td><td>12</td><td>4</td><td>8 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-1',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>14–28 Jun 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 2 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-1',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>3–17 May 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 2 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-1',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>5–19 Apr 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-1',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>7–21 Feb 2026</td><td>12</td><td>11</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-1',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>10–24 Jan 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -1682,10 +1692,9 @@
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-2')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1694,12 +1703,12 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('tour-2',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>15–29 Nov 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-2',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>18 Jun–2 Jul 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-2',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>12–26 Mar 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-2',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>15–29 Jan 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-2',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>15–29 Nov 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-2',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>18 Jun–2 Jul 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-2',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>12–26 Mar 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-2',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>15–29 Jan 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -1719,10 +1728,9 @@
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-3')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1731,17 +1739,17 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',7);event.stopPropagation()"><td>Batch 7 <span class="batch-view-link">↗ View</span></td><td>2–6 Oct 2026</td><td>8</td><td>7</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',8);event.stopPropagation()"><td>Batch 8 <span class="batch-view-link">↗ View</span></td><td>6–10 Nov 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',9);event.stopPropagation()"><td>Batch 9 <span class="batch-view-link">↗ View</span></td><td>4–8 Dec 2026</td><td>8</td><td>0</td><td>8 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',6);event.stopPropagation()"><td>Batch 6 <span class="batch-view-link">↗ View</span></td><td>3–7 Jul 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',5);event.stopPropagation()"><td>Batch 5 <span class="batch-view-link">↗ View</span></td><td>1–5 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>11–15 Mar 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>4–8 Feb 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>14–18 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-3',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>3–7 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',7);event.stopPropagation()"><td><span class="batch-name-link">Batch 7</span></td><td>2–6 Oct 2026</td><td>8</td><td>7</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',8);event.stopPropagation()"><td><span class="batch-name-link">Batch 8</span></td><td>6–10 Nov 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',9);event.stopPropagation()"><td><span class="batch-name-link">Batch 9</span></td><td>4–8 Dec 2026</td><td>8</td><td>0</td><td>8 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',6);event.stopPropagation()"><td><span class="batch-name-link">Batch 6</span></td><td>3–7 Jul 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>1–5 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>11–15 Mar 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>4–8 Feb 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>14–18 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-3',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>3–7 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -1763,8 +1771,8 @@
                   <div class="row-actions">
                     <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 12px;" onclick="showToast('Tour activated')">Activate</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour deleted')">Delete</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-4')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour deleted')">Delete Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1773,11 +1781,11 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('tour-4',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>TBD</td><td>10</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Paused</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-4',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>22–26 Feb 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-4',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>8–12 Jan 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-4',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>TBD</td><td>10</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Paused</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-4',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>22–26 Feb 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-4',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>8–12 Jan 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -1797,10 +1805,9 @@
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-5')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1809,15 +1816,15 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('tour-5',6);event.stopPropagation()"><td>Batch 6 <span class="batch-view-link">↗ View</span></td><td>18–22 Jul 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-5',7);event.stopPropagation()"><td>Batch 7 <span class="batch-view-link">↗ View</span></td><td>22–26 Aug 2026</td><td>8</td><td>1</td><td>7 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-5',5);event.stopPropagation()"><td>Batch 5 <span class="batch-view-link">↗ View</span></td><td>20–24 Jun 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-5',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>16–20 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-5',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>11–15 Apr 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-5',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>2–6 Mar 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-5',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>5–9 Feb 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-5',6);event.stopPropagation()"><td><span class="batch-name-link">Batch 6</span></td><td>18–22 Jul 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-5',7);event.stopPropagation()"><td><span class="batch-name-link">Batch 7</span></td><td>22–26 Aug 2026</td><td>8</td><td>1</td><td>7 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-5',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>20–24 Jun 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-5',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>16–20 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-5',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>11–15 Apr 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-5',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>2–6 Mar 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-5',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>5–9 Feb 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -1837,10 +1844,9 @@
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-6')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1849,16 +1855,16 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',7);event.stopPropagation()"><td>Batch 7 <span class="batch-view-link">↗ View</span></td><td>11–13 Jul 2026</td><td>15</td><td>9</td><td>6 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',8);event.stopPropagation()"><td>Batch 8 <span class="batch-view-link">↗ View</span></td><td>15–17 Aug 2026</td><td>15</td><td>3</td><td>12 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',6);event.stopPropagation()"><td>Batch 6 <span class="batch-view-link">↗ View</span></td><td>20–22 Jun 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',5);event.stopPropagation()"><td>Batch 5 <span class="batch-view-link">↗ View</span></td><td>9–11 May 2026</td><td>15</td><td>14</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>18–20 Apr 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>14–16 Mar 2026</td><td>15</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 3 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>7–9 Feb 2026</td><td>15</td><td>14</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('tour-6',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>10–12 Jan 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',7);event.stopPropagation()"><td><span class="batch-name-link">Batch 7</span></td><td>11–13 Jul 2026</td><td>15</td><td>9</td><td>6 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',8);event.stopPropagation()"><td><span class="batch-name-link">Batch 8</span></td><td>15–17 Aug 2026</td><td>15</td><td>3</td><td>12 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',6);event.stopPropagation()"><td><span class="batch-name-link">Batch 6</span></td><td>20–22 Jun 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>9–11 May 2026</td><td>15</td><td>14</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>18–20 Apr 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>14–16 Mar 2026</td><td>15</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 3 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>7–9 Feb 2026</td><td>15</td><td>14</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('tour-6',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>10–12 Jan 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -2660,10 +2666,9 @@
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-1')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2672,11 +2677,11 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('prog-1',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>6 Jul–2 Aug 2026</td><td>12</td><td>11</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-1',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>1–28 Mar 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 2 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-1',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>5–31 Jan 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-1',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>6 Jul–2 Aug 2026</td><td>12</td><td>11</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-1',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>1–28 Mar 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 2 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-1',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>5–31 Jan 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -2702,10 +2707,9 @@
                 <td><span class="prog-status-badge prog-status--open">Applications Open</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-2')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2714,10 +2718,10 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('prog-2',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>1–21 Sep 2026</td><td>10</td><td>7</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-2',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>Feb–Mar 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-2',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>1–21 Sep 2026</td><td>10</td><td>7</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-2',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>Feb–Mar 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -2743,10 +2747,9 @@
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-3')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2755,13 +2758,13 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('prog-3',5);event.stopPropagation()"><td>Batch 5 <span class="batch-view-link">↗ View</span></td><td>10–23 Aug 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-3',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>20 Jun–3 Jul 2026</td><td>8</td><td>5</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 3 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-3',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>15–28 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-3',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>1–14 Mar 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-3',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>5–18 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-3',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>10–23 Aug 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-3',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>20 Jun–3 Jul 2026</td><td>8</td><td>5</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 3 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-3',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>15–28 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-3',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>1–14 Mar 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-3',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>5–18 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -2787,10 +2790,9 @@
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-4')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2799,12 +2801,12 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('prog-4',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>4–17 Aug 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-4',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>2–15 Jun 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-4',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>7–20 Apr 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-4',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>10–23 Feb 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-4',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>4–17 Aug 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-4',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>2–15 Jun 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-4',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>7–20 Apr 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-4',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>10–23 Feb 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -2830,10 +2832,9 @@
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-5')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2842,14 +2843,14 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('prog-5',4);event.stopPropagation()"><td>Batch 4 <span class="batch-view-link">↗ View</span></td><td>1–30 Sep 2026</td><td>6</td><td>3</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-5',5);event.stopPropagation()"><td>Batch 5 <span class="batch-view-link">↗ View</span></td><td>2 Nov–1 Dec 2026</td><td>6</td><td>0</td><td>6 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-5',6);event.stopPropagation()"><td>Batch 6 <span class="batch-view-link">↗ View</span></td><td>TBD 2027</td><td>6</td><td>0</td><td>—</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Planned</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-5',3);event.stopPropagation()"><td>Batch 3 <span class="batch-view-link">↗ View</span></td><td>7 Jul–5 Aug 2026</td><td>6</td><td>3</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 3 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-5',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>4 May–3 Jun 2026</td><td>6</td><td>5</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span><span class="batch-waste">⚠ 1 empty</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-5',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>3 Feb–2 Mar 2026</td><td>6</td><td>6</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-5',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>1–30 Sep 2026</td><td>6</td><td>3</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-5',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>2 Nov–1 Dec 2026</td><td>6</td><td>0</td><td>6 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-5',6);event.stopPropagation()"><td><span class="batch-name-link">Batch 6</span></td><td>TBD 2027</td><td>6</td><td>0</td><td>—</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Planned</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-5',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>7 Jul–5 Aug 2026</td><td>6</td><td>3</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 3 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-5',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>4 May–3 Jun 2026</td><td>6</td><td>5</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-5',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>3 Feb–2 Mar 2026</td><td>6</td><td>6</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -2875,10 +2876,9 @@
                 <td><span class="prog-status-badge prog-status--draft">Draft</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
-                    <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 12px;" onclick="showToast('Program published')">Publish</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
-                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program deleted')">Delete</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-6')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Program published')">Publish</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program deleted')">Delete Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2887,10 +2887,10 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th><th>Empty</th><th style="width:32px;"></th></tr></thead>
                       <tbody>
-                        <tr class="batch-clickable" onclick="openRoster('prog-6',1);event.stopPropagation()"><td>Batch 1 <span class="batch-view-link">↗ View</span></td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td></tr>
-                        <tr class="batch-clickable" onclick="openRoster('prog-6',2);event.stopPropagation()"><td>Batch 2 <span class="batch-view-link">↗ View</span></td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-6',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
+                        <tr class="batch-clickable" onclick="openRoster('prog-6',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -3779,6 +3779,19 @@
       if (!row) return;
       const isOpen = row.classList.toggle('is-open');
       if (chev) chev.classList.toggle('is-open', isOpen);
+    }
+
+    function toggleOverflow(btn, event) {
+      event.stopPropagation();
+      const wrap = btn.closest('.row-overflow');
+      const isOpen = wrap.classList.toggle('is-open');
+      if (isOpen) {
+        // close all others
+        document.querySelectorAll('.row-overflow.is-open').forEach(el => { if (el !== wrap) el.classList.remove('is-open'); });
+        // close on outside click
+        const close = (e) => { if (!wrap.contains(e.target)) { wrap.classList.remove('is-open'); document.removeEventListener('click', close); } };
+        document.addEventListener('click', close);
+      }
     }
 
     function toggleNavGroup(group) {
