@@ -471,6 +471,20 @@
     /* ── TOAST ── */
     .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: #101828; color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; opacity: 0; transition: all 0.3s; z-index: 9999; pointer-events: none; white-space: nowrap; }
     .toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .cancel-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:10000; align-items:center; justify-content:center; }
+    .cancel-overlay.is-open { display:flex; }
+    .cancel-dialog { background:#fff; border-radius:12px; padding:28px 28px 24px; width:100%; max-width:420px; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+    .cancel-dialog__icon { width:44px; height:44px; border-radius:50%; background:#fef2f2; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+    .cancel-dialog__icon svg { width:22px; height:22px; color:#dc2626; }
+    .cancel-dialog__title { font-size:16px; font-weight:700; color:#101828; margin-bottom:8px; }
+    .cancel-dialog__body { font-size:14px; color:#6b7280; line-height:1.6; margin-bottom:20px; }
+    .cancel-dialog__reason { width:100%; padding:10px 12px; border:1px solid #d1d5db; border-radius:8px; font-size:14px; color:#101828; resize:none; min-height:80px; margin-bottom:20px; font-family:inherit; }
+    .cancel-dialog__reason:focus { outline:none; border-color:#f54900; }
+    .cancel-dialog__actions { display:flex; gap:10px; justify-content:flex-end; }
+    .cancel-dialog__btn-back { padding:9px 18px; border:1px solid #d1d5db; border-radius:8px; background:#fff; font-size:14px; font-weight:500; color:#374151; cursor:pointer; }
+    .cancel-dialog__btn-back:hover { background:#f9fafb; }
+    .cancel-dialog__btn-confirm { padding:9px 18px; border:none; border-radius:8px; background:#dc2626; font-size:14px; font-weight:600; color:#fff; cursor:pointer; }
+    .cancel-dialog__btn-confirm:hover { background:#b91c1c; }
 
     /* ── REPLY MODAL ── */
     .reply-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.45); align-items: center; justify-content: center; }
@@ -1673,7 +1687,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-1')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('tour','Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1711,7 +1725,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-2')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('tour','Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1747,7 +1761,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-3')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('tour','Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1824,7 +1838,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-5')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('tour','Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -1863,7 +1877,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('tour-6')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Tour cancelled')">Cancel Tour</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Sold out applied')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('tour','Tour cancelled')">Cancel Tour</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2685,7 +2699,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-1')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('program','Programme cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2726,7 +2740,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-2')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('program','Programme cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2766,7 +2780,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-3')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('program','Programme cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2809,7 +2823,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-4')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('program','Programme cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -2851,7 +2865,7 @@
                   <div class="row-actions">
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--view" onclick="showPreview('prog-5')"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>View</button>
-                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="showToast('Program cancelled')">Cancel Program</button></div></div>
+                    <div class="row-overflow"><button class="row-overflow__btn" onclick="toggleOverflow(this,event)">&#xB7;&#xB7;&#xB7;</button><div class="row-overflow__menu"><button class="row-overflow__item" onclick="showToast('Marked sold out')">Sold Out</button><div class="row-overflow__divider"></div><button class="row-overflow__item row-overflow__item--danger" onclick="confirmCancel('program','Programme cancelled')">Cancel Program</button></div></div>
                   </div>
                 </td>
               </tr>
@@ -3648,7 +3662,21 @@
   <!-- ── TOAST ── -->
   <div class="toast" id="toast"></div>
 
-  <!-- ── ROSTER DRAWER ── -->
+  <!-- ── CANCEL CONFIRMATION DIALOG ── -->
+  <div class="cancel-overlay" id="cancelOverlay" onclick="closeCancelDialog(event)">
+    <div class="cancel-dialog">
+      <div class="cancel-dialog__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="cancel-dialog__title" id="cancelDialogTitle">Cancel Programme?</div>
+      <div class="cancel-dialog__body" id="cancelDialogBody">This action cannot be undone. All confirmed participants will be notified and their bookings will be cancelled.</div>
+      <textarea class="cancel-dialog__reason" id="cancelDialogReason" placeholder="Reason for cancellation (optional — shared with participants)"></textarea>
+      <div class="cancel-dialog__actions">
+        <button class="cancel-dialog__btn-back" onclick="closeCancelDialog()">Go Back</button>
+        <button class="cancel-dialog__btn-confirm" id="cancelDialogConfirmBtn">Yes, Cancel</button>
+      </div>
+    </div>
+  </div>
   <div class="roster-overlay" id="rosterOverlay" onclick="if(event.target===this)closeRoster()">
     <div class="roster-drawer" id="rosterDrawer">
       <div class="roster-drawer__head">
@@ -3821,7 +3849,7 @@
         // Fill rate cell (index 4, previously "Availability")
         cells[4].innerHTML = '<div class="batch-fill-bar"><span class="batch-fill-num">' + pct + '%</span><div class="batch-fill-track"><div class="batch-fill-inner ' + fillClass + '" style="width:' + pct + '%"></div></div></div>';
         // Action cell (index 6, previously "waste")
-        cells[6].innerHTML = '<div class="batch-action-menu"><button class="batch-action-btn" onclick="toggleBatchMenu(this,event)">Actions ▾</button><div class="batch-action-menu__dropdown"><button class="batch-action-menu__item" onclick="showToast(\'Edit batch\');event.stopPropagation()">Edit Dates / Capacity</button><button class="batch-action-menu__item" onclick="showToast(\'Marked as Sold Out\');event.stopPropagation()">Mark Sold Out</button><button class="batch-action-menu__item batch-action-menu__item--danger" onclick="showToast(\'Batch cancelled\');event.stopPropagation()">Cancel Batch</button></div></div>';
+        cells[6].innerHTML = '<div class="batch-action-menu"><button class="batch-action-btn" onclick="toggleBatchMenu(this,event)">Actions ▾</button><div class="batch-action-menu__dropdown"><button class="batch-action-menu__item" onclick="showToast(\'Edit batch\');event.stopPropagation()">Edit Dates / Capacity</button><button class="batch-action-menu__item" onclick="showToast(\'Marked as Sold Out\');event.stopPropagation()">Mark Sold Out</button><button class="batch-action-menu__item batch-action-menu__item--danger" onclick="confirmCancel(\'batch\',\'Batch cancelled\');event.stopPropagation()">Cancel Batch</button></div></div>';
       });
     });
 
@@ -4095,6 +4123,32 @@
       t.textContent = msg;
       t.classList.add('is-visible');
       setTimeout(() => t.classList.remove('is-visible'), 2800);
+    }
+
+    function confirmCancel(type, confirmMsg) {
+      const overlay = document.getElementById('cancelOverlay');
+      const title = document.getElementById('cancelDialogTitle');
+      const body = document.getElementById('cancelDialogBody');
+      const btn = document.getElementById('cancelDialogConfirmBtn');
+      const reason = document.getElementById('cancelDialogReason');
+      reason.value = '';
+      if (type === 'batch') {
+        title.textContent = 'Cancel Batch?';
+        body.textContent = 'This batch will be cancelled. Confirmed participants will be notified automatically.';
+      } else if (type === 'tour') {
+        title.textContent = 'Cancel Tour?';
+        body.textContent = 'This will cancel the entire tour. All batches and confirmed participants will be affected and notified.';
+      } else {
+        title.textContent = 'Cancel Programme?';
+        body.textContent = 'This action cannot be undone. All confirmed participants will be notified and their bookings will be cancelled.';
+      }
+      btn.onclick = () => { closeCancelDialog(); showToast(confirmMsg || 'Cancelled'); };
+      overlay.classList.add('is-open');
+    }
+
+    function closeCancelDialog(e) {
+      if (e && e.target !== document.getElementById('cancelOverlay')) return;
+      document.getElementById('cancelOverlay').classList.remove('is-open');
     }
 
     const PLAN_DATA = {
