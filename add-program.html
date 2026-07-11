@@ -49,26 +49,73 @@
     .hd-sidebar__footer-link:hover { color: #fff; }
 
     /* ── MAIN ── */
-    .ap-main { margin-left: 256px; min-height: 100vh; padding: 0 0 80px; background: #f3f4f6; }
-    .ap-header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 20px 40px 16px; }
-    .ap-header h1 { font-size: 22px; font-weight: 700; color: #101828; margin: 0; }
+    .ap-main { margin-left: 256px; min-height: 100vh; padding: 0 0 72px; background: #f3f4f6; display: flex; flex-direction: column; }
+    .ap-header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 18px 32px 14px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; }
+    .ap-header h1 { font-size: 20px; font-weight: 700; color: #101828; margin: 0; }
+    .ap-header__sub { font-size: 13px; color: #9ca3af; margin-top: 2px; }
 
-    /* ── STEPPER ── */
-    .ap-stepper { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 40px; overflow-x: auto; }
-    .ap-stepper__inner { display: flex; align-items: center; min-width: max-content; }
-    .ap-step { display: flex; flex-direction: column; align-items: center; padding: 14px 0; min-width: 80px; cursor: pointer; position: relative; }
-    .ap-step + .ap-step::before { content: ''; position: absolute; left: 0; top: 28px; width: 1px; height: 1px; }
-    .ap-step__num { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #d1d5db; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #9ca3af; margin-bottom: 5px; transition: all 0.2s; flex-shrink: 0; }
-    .ap-step__label { font-size: 11px; color: #9ca3af; font-weight: 500; text-align: center; white-space: nowrap; transition: color 0.2s; }
-    .ap-step.is-active .ap-step__num { background: #f54900; border-color: #f54900; color: #fff; }
-    .ap-step.is-active .ap-step__label { color: #f54900; font-weight: 700; }
-    .ap-step.is-done .ap-step__num { background: #101828; border-color: #101828; color: #fff; }
-    .ap-step.is-done .ap-step__label { color: #374151; }
-    .ap-step-connector { flex: 1; height: 1px; background: #e5e7eb; min-width: 20px; margin-top: -18px; }
-    .ap-step-connector.is-done { background: #101828; }
+    /* ── 3-COLUMN BODY ── */
+    .ap-body { display: flex; flex: 1; align-items: flex-start; gap: 0; }
+
+    /* LEFT: Vertical Step Navigator */
+    .ap-stepnav {
+      width: 220px; flex-shrink: 0; background: #fff; border-right: 1px solid #e5e7eb;
+      padding: 24px 0; position: sticky; top: 0; min-height: calc(100vh - 113px);
+      overflow-y: auto;
+    }
+    .ap-stepnav__title { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #9ca3af; padding: 0 20px 12px; }
+    .ap-stepnav__item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 20px; cursor: pointer; position: relative;
+      transition: background 0.15s;
+    }
+    .ap-stepnav__item:hover { background: #f9fafb; }
+    .ap-stepnav__item.is-active { background: #fff7ed; }
+    .ap-stepnav__connector {
+      position: absolute; left: 30px; bottom: -1px; width: 2px; height: 8px;
+      background: #e5e7eb; z-index: 1;
+    }
+    .ap-stepnav__connector.is-done { background: #101828; }
+    .ap-stepnav__num {
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid #d1d5db; background: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;
+      color: #9ca3af; flex-shrink: 0; transition: all 0.2s; z-index: 2; position: relative;
+    }
+    .ap-stepnav__item.is-active .ap-stepnav__num { background: #f54900; border-color: #f54900; color: #fff; }
+    .ap-stepnav__item.is-done .ap-stepnav__num { background: #101828; border-color: #101828; color: #fff; font-size: 10px; }
+    .ap-stepnav__label { font-size: 13px; font-weight: 500; color: #9ca3af; line-height: 1.3; }
+    .ap-stepnav__item.is-active .ap-stepnav__label { color: #f54900; font-weight: 600; }
+    .ap-stepnav__item.is-done .ap-stepnav__label { color: #374151; }
+    .ap-stepnav__progress { padding: 16px 20px 0; border-top: 1px solid #f3f4f6; margin-top: 8px; }
+    .ap-stepnav__prog-label { font-size: 11px; color: #9ca3af; margin-bottom: 6px; }
+    .ap-stepnav__prog-bar { height: 4px; background: #f3f4f6; border-radius: 2px; overflow: hidden; }
+    .ap-stepnav__prog-fill { height: 100%; background: #f54900; border-radius: 2px; transition: width 0.4s; }
+
+    /* CENTER: Form content */
+    .ap-center { flex: 1; min-width: 0; padding: 28px 28px 0; }
+
+    /* RIGHT: Context panel */
+    .ap-context {
+      width: 260px; flex-shrink: 0; padding: 24px 20px; position: sticky; top: 0;
+      min-height: calc(100vh - 113px); border-left: 1px solid #e5e7eb; background: #fff;
+      overflow-y: auto;
+    }
+    .ap-ctx__heading { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; margin-bottom: 14px; }
+    .ap-ctx__card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+    .ap-ctx__card-title { font-size: 12px; font-weight: 700; color: #374151; margin-bottom: 6px; }
+    .ap-ctx__card p { font-size: 12px; color: #6b7280; line-height: 1.6; margin: 0; }
+    .ap-ctx__tip { display: flex; gap: 8px; padding: 10px 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; margin-bottom: 10px; font-size: 12px; color: #92400e; line-height: 1.5; }
+    .ap-ctx__tip-icon { flex-shrink: 0; font-size: 14px; }
+    .ap-ctx__checklist { display: flex; flex-direction: column; gap: 6px; }
+    .ap-ctx__check-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #6b7280; line-height: 1.4; }
+    .ap-ctx__check-item::before { content: '○'; font-size: 10px; color: #d1d5db; margin-top: 1px; flex-shrink: 0; }
+    .ap-ctx__divider { height: 1px; background: #f3f4f6; margin: 14px 0; }
+
+    /* ── STEPPER (horizontal, hidden — replaced by stepnav) ── */
+    .ap-stepper { display: none; }
 
     /* ── CONTENT AREA ── */
-    .ap-content { padding: 32px 40px; max-width: 1040px; }
+    .ap-content { padding: 0; max-width: none; }
 
     /* ── CARDS / SECTIONS ── */
     .ap-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 28px; margin-bottom: 20px; }
@@ -295,16 +342,37 @@
 <!-- ── MAIN ── -->
 <main class="ap-main">
   <div class="ap-header">
-    <h1>Add New Program</h1>
+    <div>
+      <h1>Add New Program</h1>
+      <div class="ap-header__sub" id="apHeaderSub">Step 1 of 10 — Details</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button style="padding:7px 16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;font-size:13px;font-weight:500;color:#374151;cursor:pointer;" onclick="window.location='host-dashboard.html'">Save Draft</button>
+      <button style="padding:7px 16px;border:none;border-radius:8px;background:#f54900;font-size:13px;font-weight:600;color:#fff;cursor:pointer;" onclick="toast('Complete all steps to publish')">Publish</button>
+    </div>
   </div>
 
-  <!-- STEPPER -->
-  <div class="ap-stepper">
-    <div class="ap-stepper__inner" id="stepperInner"></div>
+  <!-- 3-COLUMN BODY -->
+  <div class="ap-body">
+    <!-- LEFT: Step Navigator -->
+    <nav class="ap-stepnav" id="apStepNav">
+      <div class="ap-stepnav__title">Steps</div>
+      <!-- populated by renderStepper() -->
+    </nav>
+
+    <!-- CENTER: Form -->
+    <div class="ap-center">
+      <div class="ap-content" id="apContent"></div>
+    </div>
+
+    <!-- RIGHT: Context / Tips -->
+    <aside class="ap-context" id="apContext">
+      <!-- populated by renderContext() -->
+    </aside>
   </div>
 
-  <!-- STEP PANELS -->
-  <div class="ap-content" id="apContent"></div>
+  <!-- Hidden stepper (keeps old renderStepper() target for compatibility) -->
+  <div class="ap-stepper" style="display:none"><div id="stepperInner"></div></div>
 </main>
 
 <!-- FOOTER NAV -->
@@ -347,25 +415,128 @@ let currentStep = 0;
 let selectedQualities = [];
 let availRows = [{ batch: 'Batch 1', start: '', end: '', cap: 1 }, { batch: 'Batch 2', start: '', end: '', cap: 1 }];
 
-// ── RENDER STEPPER ──
+// ── RENDER STEPPER (left nav) ──
 function renderStepper() {
+  // Update hidden horizontal stepper (legacy)
   const el = document.getElementById('stepperInner');
-  let html = '';
-  STEPS.forEach((s, i) => {
-    const cls = i < currentStep ? 'is-done' : i === currentStep ? 'is-active' : '';
-    html += `<div class="ap-step ${cls}" onclick="goToStep(${i})">
-      <div class="ap-step__num">${i < currentStep ? '✓' : i + 1}</div>
-      <div class="ap-step__label">${s.label}</div>
-    </div>`;
-    if (i < STEPS.length - 1) {
-      html += `<div class="ap-step-connector ${i < currentStep ? 'is-done' : ''}"></div>`;
-    }
+  if (el) {
+    let html = '';
+    STEPS.forEach((s, i) => {
+      const cls = i < currentStep ? 'is-done' : i === currentStep ? 'is-active' : '';
+      html += `<div class="ap-step ${cls}"><div class="ap-step__num">${i < currentStep ? '✓' : i + 1}</div><div class="ap-step__label">${s.label}</div></div>`;
+      if (i < STEPS.length - 1) html += `<div class="ap-step-connector ${i < currentStep ? 'is-done' : ''}"></div>`;
+    });
+    el.innerHTML = html;
+  }
+
+  // Build left vertical step navigator
+  const nav = document.getElementById('apStepNav');
+  if (nav) {
+    const pct = Math.round((currentStep / (STEPS.length - 1)) * 100);
+    let navHtml = `<div class="ap-stepnav__title">Steps</div>`;
+    STEPS.forEach((s, i) => {
+      const cls = i < currentStep ? 'is-done' : i === currentStep ? 'is-active' : '';
+      const isDone = i < currentStep;
+      const connCls = i < currentStep ? 'is-done' : '';
+      navHtml += `
+        <div class="ap-stepnav__item ${cls}" onclick="goToStep(${i})" style="position:relative;">
+          <div class="ap-stepnav__num">${isDone ? '✓' : i + 1}</div>
+          <span class="ap-stepnav__label">${s.label}</span>
+          ${i < STEPS.length - 1 ? `<span style="position:absolute;left:32px;bottom:-9px;width:2px;height:10px;background:${isDone ? '#101828' : '#e5e7eb'};z-index:1;"></span>` : ''}
+        </div>`;
+    });
+    navHtml += `
+      <div class="ap-stepnav__progress">
+        <div class="ap-stepnav__prog-label">${currentStep + 1} of ${STEPS.length} complete</div>
+        <div class="ap-stepnav__prog-bar"><div class="ap-stepnav__prog-fill" style="width:${pct}%"></div></div>
+      </div>`;
+    nav.innerHTML = navHtml;
+  }
+
+  // Update header subtitle
+  const sub = document.getElementById('apHeaderSub');
+  if (sub) sub.textContent = `Step ${currentStep + 1} of ${STEPS.length} — ${STEPS[currentStep].label}`;
+
+  // Update context panel
+  renderContext();
+}
+
+// ── CONTEXT PANEL ──
+const STEP_CONTEXT = [
+  // 0: Details
+  { heading: 'Setting up Details', tips: [
+    { icon: '💡', text: 'Choose the category that best matches your program — it helps volunteers find you.' },
+    { icon: '⚠️', text: 'Duration and slot count are required to create batch schedules later.' },
+  ], checklist: ['Category selected','Work setting chosen','Duration filled in','Total slots set'] },
+  // 1: Identity
+  { heading: 'Program Identity', tips: [
+    { icon: '✍️', text: 'Write a clear, inspiring description. Volunteers read this first.' },
+    { icon: '💡', text: 'Outcomes help volunteers understand what they will gain.' },
+  ], checklist: ['Program name (50 chars)','Description written','At least 1 outcome ticked','1+ highlight added'] },
+  // 2: Requirements
+  { heading: 'Setting Requirements', tips: [
+    { icon: '💡', text: 'Be honest about physical fitness levels — it avoids mismatched applications.' },
+    { icon: '⚠️', text: 'Top Qualities help screen for culture fit, not just skills.' },
+  ], checklist: ['Minimum age set','Language specified','Primary skill selected','Qualities added (optional)'] },
+  // 3: Photos
+  { heading: 'Adding Visuals', tips: [
+    { icon: '📸', text: 'Listings with photos get 3× more applications.' },
+    { icon: '💡', text: 'Upload at least 3 gallery images for best results.' },
+  ], checklist: ['Featured image uploaded','3+ gallery images','Video URL (optional)'] },
+  // 4: Locations
+  { heading: 'Location Details', tips: [
+    { icon: '📍', text: 'Pin the exact work site, not just the city — it sets expectations.' },
+    { icon: '💡', text: 'Nearest transport hub helps volunteers plan arrival.' },
+  ], checklist: ['Country & state set','City entered','Full address added'] },
+  // 5: Schedule
+  { heading: 'Daily Schedule', tips: [
+    { icon: '💡', text: 'List 3–5 key responsibilities so volunteers know what to expect day-to-day.' },
+    { icon: '⚠️', text: 'Mention offline hours and signal availability — this matters for remote volunteers.' },
+  ], checklist: ['Exchange details filled','Key responsibilities added','Typical day described'] },
+  // 6: Inclusions
+  { heading: 'What's Included', tips: [
+    { icon: '💡', text: 'Transparent inclusions reduce last-minute drop-outs.' },
+    { icon: '⚠️', text: 'Always clarify what volunteers must arrange themselves.' },
+  ], checklist: ['Accommodation type set','Meals specified','Transport option set','Volunteer arrangements noted'] },
+  // 7: Health & Safety
+  { heading: 'Health & Safety', tips: [
+    { icon: '🏥', text: 'Distance to nearest medical facility is critical for remote programs.' },
+    { icon: '⚠️', text: 'List recommended vaccinations even if not mandatory.' },
+  ], checklist: ['Emergency contact added','Medical facility noted','Safety gear listed','Insurance status set'] },
+  // 8: Pre-Screening
+  { heading: 'Pre-Screening', tips: [
+    { icon: '💡', text: 'Custom questions surface the right volunteers faster.' },
+    { icon: '⚠️', text: 'Keep it to 3–5 questions max — longer forms reduce completion rates.' },
+  ], checklist: ['Cultural fit questions added','Non-skill questions reviewed','Auto-asked questions noted'] },
+  // 9: Availability
+  { heading: 'Batch Availability', tips: [
+    { icon: '📅', text: 'Add at least 2 batch windows to give volunteers flexibility.' },
+    { icon: '💡', text: 'Set realistic capacity per batch — overbooking creates bad experiences.' },
+  ], checklist: ['Default status set','At least 1 batch added','Start & end dates entered','Capacity set per batch'] },
+];
+
+function renderContext() {
+  const ctx = document.getElementById('apContext');
+  if (!ctx) return;
+  const data = STEP_CONTEXT[currentStep];
+  if (!data) return;
+  let html = `<div class="ap-ctx__heading">${data.heading}</div>`;
+  data.tips.forEach(t => {
+    html += `<div class="ap-ctx__tip"><span class="ap-ctx__tip-icon">${t.icon}</span><span>${t.text}</span></div>`;
   });
-  el.innerHTML = html;
+  html += `<div class="ap-ctx__divider"></div>
+    <div class="ap-ctx__card">
+      <div class="ap-ctx__card-title">Step checklist</div>
+      <div class="ap-ctx__checklist">`;
+  data.checklist.forEach(c => {
+    html += `<div class="ap-ctx__check-item">${c}</div>`;
+  });
+  html += `</div></div>`;
+  ctx.innerHTML = html;
 }
 
 function goToStep(n) {
-  if (n > currentStep) return; // only go back to completed
+  if (n > currentStep) return; // only go back to completed steps
   currentStep = n;
   renderStepper();
   renderStep();
