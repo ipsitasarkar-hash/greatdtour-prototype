@@ -2307,9 +2307,250 @@
       <!-- ══ SETTINGS TAB ══ -->
       <!-- Programs placeholder -->
       <div class="hd-panel" id="panel-programs">
-        <div class="hd-sec-head"><h2 class="hd-page-title">My Programs</h2></div>
-        <div class="hd-page-subtitle">Create and manage your volunteering programs.</div>
-        <p style="color:#6b7280;font-size:15px;">Your volunteering programs will appear here.</p>
+
+        <style>
+          .prog-table-wrap { background:#fff; border:1px solid #e5e7eb; border-radius:14px; overflow:hidden; }
+          .prog-table { width:100%; border-collapse:collapse; }
+          .prog-table th {
+            background:#f9fafb; padding:11px 16px; text-align:left;
+            font-size:11px; font-weight:700; color:#6b7280;
+            text-transform:uppercase; letter-spacing:0.5px;
+            border-bottom:1px solid #e5e7eb;
+          }
+          .prog-table td { padding:14px 16px; border-bottom:1px solid #f3f4f6; font-size:13px; color:#374151; vertical-align:middle; }
+          .prog-table tr:last-child td { border-bottom:none; }
+          .prog-table tr:hover td { background:#fafafa; }
+          .prog-name { font-weight:700; color:#101828; font-size:13px; }
+          .prog-location { font-size:11px; color:#9ca3af; margin-top:2px; }
+          .prog-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+          .prog-status-badge {
+            display:inline-block; font-size:11px; font-weight:600;
+            padding:3px 10px; border-radius:999px; white-space:nowrap;
+          }
+          .prog-status--active  { background:#f0fdf4; color:#15803d; }
+          .prog-status--open    { background:#eff6ff; color:#1d4ed8; }
+          .prog-status--paused  { background:#f9fafb; color:#6b7280; border:1px solid #e5e7eb; }
+          .prog-status--draft   { background:#fefce8; color:#92400e; }
+        </style>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="hd-page-title">My Programs</div>
+            <div class="hd-page-subtitle" style="margin-bottom:0;">Volunteer &amp; conservation programs listed on GDT Care</div>
+          </div>
+          <button class="hd-btn hd-btn--primary" style="font-size:13px;padding:9px 18px;" onclick="showToast('New program form coming soon')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:5px;"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add Program
+          </button>
+        </div>
+
+        <!-- Summary KPIs -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Total Programs</div>
+            <div style="font-size:26px;font-weight:800;color:#101828;">6</div>
+            <div style="font-size:12px;color:#9ca3af;margin-top:3px;">5 active · 1 draft</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Total Volunteers</div>
+            <div style="font-size:26px;font-weight:800;color:#101828;">31</div>
+            <div style="font-size:12px;color:#9ca3af;margin-top:3px;">Accepted across all programs</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Open Applications</div>
+            <div style="font-size:26px;font-weight:800;color:#101828;">31</div>
+            <div style="font-size:12px;color:#9ca3af;margin-top:3px;">Across 4 programs</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Upcoming Batch</div>
+            <div style="font-size:26px;font-weight:800;color:#101828;">Jul</div>
+            <div style="font-size:12px;color:#9ca3af;margin-top:3px;">Tiger Conservation · 2026</div>
+          </div>
+        </div>
+
+        <!-- Programs table -->
+        <div class="prog-table-wrap">
+          <table class="prog-table">
+            <thead>
+              <tr>
+                <th>Program</th>
+                <th>Category</th>
+                <th>Duration</th>
+                <th>Batch</th>
+                <th>Applications</th>
+                <th>Volunteers</th>
+                <th>Next Run</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="prog-icon" style="background:#fef9c3;">🐯</div>
+                    <div>
+                      <div class="prog-name">Tiger Conservation Program</div>
+                      <div class="prog-location">Ranthambore NP, Rajasthan</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Wildlife</td>
+                <td>4 Weeks</td>
+                <td>Batch 3</td>
+                <td>
+                  <div style="font-size:13px;">19 total</div>
+                  <div style="font-size:11px;color:#9ca3af;">11 new · 8 review</div>
+                </td>
+                <td style="font-weight:700;color:#101828;">11</td>
+                <td style="font-weight:600;">Jul 2026</td>
+                <td><span class="prog-status-badge prog-status--active">Active</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="prog-icon" style="background:#e0f2fe;">🐢</div>
+                    <div>
+                      <div class="prog-name">Marine Turtle Monitoring</div>
+                      <div class="prog-location">Odisha Coast, Odisha</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Marine</td>
+                <td>3 Weeks</td>
+                <td>Batch 2</td>
+                <td>
+                  <div style="font-size:13px;">7 total</div>
+                  <div style="font-size:11px;color:#9ca3af;">7 new</div>
+                </td>
+                <td style="font-weight:700;color:#101828;">7</td>
+                <td style="font-weight:600;">Sep 2026</td>
+                <td><span class="prog-status-badge prog-status--open">Applications Open</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Marine Turtle applications opening soon')">Applications</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="prog-icon" style="background:#f0fdf4;">🌿</div>
+                    <div>
+                      <div class="prog-name">Wildlife Conservation</div>
+                      <div class="prog-location">Jim Corbett, Uttarakhand</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Wildlife</td>
+                <td>2 Weeks</td>
+                <td>Batch 5</td>
+                <td>
+                  <div style="font-size:13px;">14 total</div>
+                  <div style="font-size:11px;color:#9ca3af;">8 new · 6 review</div>
+                </td>
+                <td style="font-weight:700;color:#101828;">5</td>
+                <td style="font-weight:600;">Aug 2026</td>
+                <td><span class="prog-status-badge prog-status--active">Active</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="prog-icon" style="background:#fef3c7;">🌾</div>
+                    <div>
+                      <div class="prog-name">Organic Farming &amp; Permaculture</div>
+                      <div class="prog-location">Auroville, Tamil Nadu</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Agriculture</td>
+                <td>2 Weeks</td>
+                <td>Batch 4</td>
+                <td>
+                  <div style="font-size:13px;">6 total</div>
+                  <div style="font-size:11px;color:#9ca3af;">6 new</div>
+                </td>
+                <td style="font-weight:700;color:#101828;">4</td>
+                <td style="font-weight:600;">Aug 2026</td>
+                <td><span class="prog-status-badge prog-status--active">Active</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="prog-icon" style="background:#eff6ff;">📚</div>
+                    <div>
+                      <div class="prog-name">Community Teaching</div>
+                      <div class="prog-location">Dharavi, Mumbai</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Education</td>
+                <td>1 Month</td>
+                <td>Batch 6</td>
+                <td>
+                  <div style="font-size:13px;">5 total</div>
+                  <div style="font-size:11px;color:#9ca3af;">5 new</div>
+                </td>
+                <td style="font-weight:700;color:#101828;">3</td>
+                <td style="font-weight:600;">Sep 2026</td>
+                <td><span class="prog-status-badge prog-status--active">Active</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="prog-icon" style="background:#fdf4ff;">🧵</div>
+                    <div>
+                      <div class="prog-name">Women's Craft Co-op</div>
+                      <div class="prog-location">Kutch, Gujarat</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Livelihood</td>
+                <td>2 Weeks</td>
+                <td>Batch 2</td>
+                <td>
+                  <div style="font-size:13px;">—</div>
+                  <div style="font-size:11px;color:#9ca3af;">Not yet published</div>
+                </td>
+                <td style="color:#9ca3af;">—</td>
+                <td style="color:#9ca3af;">TBD</td>
+                <td><span class="prog-status-badge prog-status--draft">Draft</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 10px;" onclick="showToast('Publish program coming soon')">Publish</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
       <!-- Program Bookings placeholder -->
