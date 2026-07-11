@@ -1094,22 +1094,58 @@
         }
         .db-header-row h2 { margin:0; font-size:22px; font-weight:700; color:#101828; }
         .db-header-row .db-header-sub { font-size:13px; color:#6b7280; margin-top:3px; }
+
         .db-mode-toggle {
-          display:flex; align-items:center; gap:6px;
-          background:#f3f4f6; border-radius:12px; padding:4px;
+          display:flex; align-items:stretch; gap:8px;
         }
         .db-mode-btn {
-          display:flex; align-items:center; gap:7px;
-          padding:8px 16px; border-radius:9px; border:none; cursor:pointer;
-          font-size:13px; font-weight:500; color:#6b7280; background:transparent;
-          transition:all 0.18s;
+          display:flex; align-items:center; gap:10px;
+          padding:10px 18px; border-radius:12px; border:2px solid #e5e7eb;
+          cursor:pointer; font-size:13px; font-weight:500; color:#6b7280;
+          background:#fff; transition:all 0.2s; position:relative; overflow:hidden;
+          min-width:160px;
         }
-        .db-mode-btn svg { width:16px; height:16px; flex-shrink:0; }
-        .db-mode-btn:hover { color:#101828; }
-        .db-mode-btn--active {
-          background:#fff; color:#101828; font-weight:600;
-          box-shadow:0 1px 4px rgba(0,0,0,0.12);
+        .db-mode-btn::before {
+          content:''; position:absolute; inset:0; opacity:0; transition:opacity 0.2s;
         }
+        .db-mode-btn:hover { border-color:#d1d5db; color:#374151; background:#fafafa; }
+        .db-mode-btn__icon {
+          width:34px; height:34px; border-radius:9px;
+          display:flex; align-items:center; justify-content:center; flex-shrink:0;
+          background:#f3f4f6; transition:background 0.2s;
+        }
+        .db-mode-btn__icon svg { width:17px; height:17px; }
+        .db-mode-btn__text { display:flex; flex-direction:column; gap:1px; text-align:left; }
+        .db-mode-btn__label { font-size:13px; font-weight:600; line-height:1.2; }
+        .db-mode-btn__sub { font-size:11px; font-weight:400; opacity:0.65; line-height:1.2; }
+        .db-mode-btn__dot {
+          width:8px; height:8px; border-radius:50%; background:#d1d5db;
+          flex-shrink:0; margin-left:auto; transition:background 0.2s;
+        }
+
+        /* Marketplace active */
+        .db-mode-btn--marketplace.db-mode-btn--active {
+          border-color:#f54900; background:#fff7ed; color:#101828;
+          box-shadow:0 2px 12px rgba(245,73,0,0.12);
+        }
+        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__icon {
+          background:#f54900;
+        }
+        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__icon svg { stroke:#fff; }
+        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__dot { background:#f54900; }
+        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__label { color:#c2390a; }
+
+        /* Care active */
+        .db-mode-btn--care.db-mode-btn--active {
+          border-color:#16a34a; background:#f0fdf4; color:#101828;
+          box-shadow:0 2px 12px rgba(22,163,74,0.12);
+        }
+        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__icon {
+          background:#16a34a;
+        }
+        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__icon svg { stroke:#fff; }
+        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__dot { background:#16a34a; }
+        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__label { color:#15803d; }
       </style>
 
         <div class="db-layout">
@@ -1132,13 +1168,25 @@
             <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
               <!-- Mode toggle -->
               <div class="db-mode-toggle" id="dbModeToggle">
-                <button class="db-mode-btn db-mode-btn--active" id="btnMarketplace" onclick="setDashMode('marketplace')">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M3 3h18l-2 9H5L3 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/></svg>
-                  GDT Marketplace
+                <button class="db-mode-btn db-mode-btn--marketplace db-mode-btn--active" id="btnMarketplace" onclick="setDashMode('marketplace')">
+                  <div class="db-mode-btn__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                  </div>
+                  <div class="db-mode-btn__text">
+                    <div class="db-mode-btn__label">GDT Marketplace</div>
+                    <div class="db-mode-btn__sub">Tours &amp; bookings</div>
+                  </div>
+                  <div class="db-mode-btn__dot"></div>
                 </button>
-                <button class="db-mode-btn" id="btnCare" onclick="setDashMode('care')">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-                  GDT Care
+                <button class="db-mode-btn db-mode-btn--care" id="btnCare" onclick="setDashMode('care')">
+                  <div class="db-mode-btn__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z"/></svg>
+                  </div>
+                  <div class="db-mode-btn__text">
+                    <div class="db-mode-btn__label">GDT Care</div>
+                    <div class="db-mode-btn__sub">Volunteering &amp; conservation</div>
+                  </div>
+                  <div class="db-mode-btn__dot"></div>
                 </button>
               </div>
               <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:7px 14px;" onclick="switchTab('enquiries',document.getElementById('hn-enquiries'))">3 Pending Requests</button>
@@ -2986,16 +3034,23 @@
       const care = document.getElementById('db-view-care');
       const btnM = document.getElementById('btnMarketplace');
       const btnC = document.getElementById('btnCare');
+      // Update icon stroke colors
+      const mIcon = btnM && btnM.querySelector('.db-mode-btn__icon svg');
+      const cIcon = btnC && btnC.querySelector('.db-mode-btn__icon svg');
       if (mode === 'marketplace') {
         if (marketplace) marketplace.style.display = '';
         if (care) care.style.display = 'none';
-        if (btnM) { btnM.classList.add('db-mode-btn--active'); btnM.classList.add('db-mode-btn'); }
+        if (btnM) btnM.classList.add('db-mode-btn--active');
         if (btnC) btnC.classList.remove('db-mode-btn--active');
+        if (mIcon) mIcon.setAttribute('stroke', '#f54900');
+        if (cIcon) cIcon.setAttribute('stroke', '#6b7280');
       } else {
         if (marketplace) marketplace.style.display = 'none';
         if (care) care.style.display = '';
-        if (btnC) { btnC.classList.add('db-mode-btn--active'); }
+        if (btnC) btnC.classList.add('db-mode-btn--active');
         if (btnM) btnM.classList.remove('db-mode-btn--active');
+        if (cIcon) cIcon.setAttribute('stroke', '#16a34a');
+        if (mIcon) mIcon.setAttribute('stroke', '#6b7280');
       }
     }
 
