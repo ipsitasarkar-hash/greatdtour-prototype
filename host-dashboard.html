@@ -1591,6 +1591,7 @@
                     <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('tour-1')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -1629,6 +1630,7 @@
                     <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('tour-2')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -1665,6 +1667,7 @@
                     <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('tour-3')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -1706,6 +1709,7 @@
                     <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 12px;" onclick="showToast('Tour activated')">Activate</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour deleted')">Delete</button>
+                    <button class="hd-table__btn" onclick="showPreview('tour-4')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -1741,6 +1745,7 @@
                     <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('tour-5')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -1780,6 +1785,7 @@
                     <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('tour-6')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -2602,6 +2608,7 @@
                     <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('prog-1')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -2643,6 +2650,7 @@
                     <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('prog-2')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -2683,6 +2691,7 @@
                     <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('prog-3')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -2726,6 +2735,7 @@
                     <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('prog-4')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -2768,6 +2778,7 @@
                     <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
+                    <button class="hd-table__btn" onclick="showPreview('prog-5')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -2812,6 +2823,7 @@
                     <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 12px;" onclick="showToast('Program published')">Publish</button>
                     <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
                     <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program deleted')">Delete</button>
+                    <button class="hd-table__btn" onclick="showPreview('prog-6')">Preview</button>
                   </div>
                 </td>
               </tr>
@@ -3496,6 +3508,71 @@
     </div>
   </div>
 
+  <!-- ── PREVIEW MODAL ── -->
+  <div id="previewOverlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.55);overflow-y:auto;" onclick="if(event.target===this)closePreview()">
+    <div id="previewModal" style="background:#fff;max-width:860px;margin:32px auto;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.22);">
+
+      <!-- Draft banner -->
+      <div id="previewDraftBanner" style="display:none;background:#fef3c7;border-bottom:1px solid #fde68a;padding:10px 24px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#92400e;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Draft Preview — not visible to travellers until published
+      </div>
+
+      <!-- Close -->
+      <button onclick="closePreview()" style="position:absolute;top:16px;right:16px;z-index:10;background:#fff;border:1px solid #e5e7eb;border-radius:999px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="#374151" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <!-- Hero -->
+      <div id="previewHero" style="height:280px;overflow:hidden;position:relative;">
+        <div id="previewHeroImg" style="width:100%;height:100%;background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.55));"></div>
+        <div style="position:absolute;bottom:20px;left:24px;">
+          <div id="previewType" style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.8);margin-bottom:6px;"></div>
+          <div id="previewHeroTitle" style="font-size:26px;font-weight:800;color:#fff;line-height:1.2;max-width:600px;"></div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:24px 28px 32px;">
+
+        <!-- Meta row -->
+        <div id="previewMeta" style="display:flex;flex-wrap:wrap;gap:20px;padding-bottom:20px;border-bottom:1px solid #f3f4f6;margin-bottom:20px;"></div>
+
+        <!-- Description -->
+        <div style="margin-bottom:24px;">
+          <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:8px;">About this <span id="previewKind"></span></div>
+          <div id="previewDesc" style="font-size:14px;color:#374151;line-height:1.7;"></div>
+        </div>
+
+        <!-- Highlights -->
+        <div style="margin-bottom:24px;">
+          <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:12px;">Highlights</div>
+          <div id="previewHighlights" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div>
+        </div>
+
+        <!-- What's included / requirements -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:10px;" id="previewIncLabel">What's Included</div>
+            <div id="previewInc" style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#374151;"></div>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:10px;">Requirements</div>
+            <div id="previewReqs" style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#374151;"></div>
+          </div>
+        </div>
+
+        <!-- Batches -->
+        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:16px 20px;">
+          <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:14px;" id="previewBatchLabel">Available Batches</div>
+          <div id="previewBatches" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- ── TOAST ── -->
   <div class="toast" id="toast"></div>
 
@@ -3662,6 +3739,259 @@
       }
       closeReplyModal();
       showToast('Reply sent');
+    }
+
+    // ── PREVIEW MODAL ──
+    const PREVIEW_DATA = {
+      // TOURS
+      'tour-1': {
+        kind: 'tour', status: 'active',
+        type: 'Trek & Wellness', title: 'Himalayan Trek & Yoga Immersion',
+        hero: 'linear-gradient(135deg,#0f2027,#203a43,#2c5364)',
+        location: 'Himachal Pradesh, India', duration: '14 Days / 13 Nights',
+        price: '₹35,000/person', groupSize: 'Max 12 per batch',
+        desc: 'Journey through the dramatic landscapes of the Himalayas — from forested valleys to high-altitude meadows — combined with daily yoga and meditation sessions at a riverside camp. Led by certified mountain guides and yoga instructors, this immersion balances physical challenge with inner stillness.',
+        highlights: ['Kedarkantha & Har Ki Dun trail', 'Daily sunrise yoga at 3,500m', 'Local village homestay night', 'Snow leopard spotting zone', 'Bonfire & folk music evening', 'Personalised wellness journal'],
+        inc: ['Accommodation (tents + homestay)', 'All meals (veg & non-veg)', 'Experienced trek leader', 'Yoga instructor', 'Permits & insurance', 'Transport from Dehradun'],
+        reqs: ['Moderate fitness level', 'Age 18–55', 'No prior trek experience needed', 'Medical form required'],
+        batches: [
+          { label: 'Batch 5', dates: '14–28 Jun 2026', spots: '2 left', status: 'open' },
+          { label: 'Batch 6', dates: '12–26 Sep 2026', spots: '8 left', status: 'open' },
+        ]
+      },
+      'tour-2': {
+        kind: 'tour', status: 'active',
+        type: 'Expedition', title: 'Spiti Valley Winter Expedition',
+        hero: 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
+        location: 'Himachal Pradesh, India', duration: '14 Days / 13 Nights',
+        price: '₹45,000/person', groupSize: 'Max 10 per batch',
+        desc: 'An elite cold-weather expedition into the high-altitude Spiti Valley — one of India\'s most remote and stunning landscapes. Snow-covered monasteries, frozen rivers, and a night sky unmarred by light pollution await the adventurous traveller.',
+        highlights: ['Key Monastery in winter', 'Frozen Spiti River walk', 'Stargazing at Langza village', 'Snow leopard territory', 'Ancient Tabo cave paintings', 'Local nomad family visit'],
+        inc: ['Heated guesthouse accommodation', 'All meals', 'Expert expedition guide', 'Cold-weather gear briefing', 'Permits & inner-line passes', 'Transport from Shimla'],
+        reqs: ['Good physical fitness', 'Cold-weather gear mandatory', 'Age 20–50', 'No cardiac conditions'],
+        batches: [
+          { label: 'Batch 4', dates: '15–29 Nov 2026', spots: 'Full', status: 'full' },
+        ]
+      },
+      'tour-3': {
+        kind: 'tour', status: 'active',
+        type: 'Culture & Music', title: 'Desert Camp & Folk Music Retreat',
+        hero: 'linear-gradient(135deg,#f7971e,#f54900,#b34700)',
+        location: 'Rajasthan, India', duration: '4 Nights / 5 Days',
+        price: '₹18,000/person', groupSize: 'Max 8 per batch',
+        desc: 'Sleep under a canopy of stars in a luxury desert camp deep in the Thar. Days are filled with camel safaris, visits to ancient forts, and evenings with live performances by award-winning Rajasthani folk musicians around a blazing bonfire.',
+        highlights: ['Luxury tented camp in the Thar', 'Camel safari at golden hour', 'Live Manganiyar folk performance', 'Jaisalmer Fort guided walk', 'Dune photography at sunrise', 'Traditional Rajasthani thali'],
+        inc: ['Luxury tent accommodation', 'All meals & beverages', 'Camel safari', 'Folk music performance', 'AC vehicle transfers', 'Fort entry passes'],
+        reqs: ['Suitable for all ages', 'Comfortable walking shoes', 'Sunscreen & hat recommended'],
+        batches: [
+          { label: 'Batch 7', dates: '2–6 Oct 2026', spots: '1 left', status: 'open' },
+          { label: 'Batch 8', dates: '6–10 Nov 2026', spots: '4 left', status: 'open' },
+          { label: 'Batch 9', dates: '4–8 Dec 2026', spots: '8 left', status: 'open' },
+        ]
+      },
+      'tour-4': {
+        kind: 'tour', status: 'inactive',
+        type: 'Wellness', title: 'Forest Bathing & Mindfulness Walk',
+        hero: 'linear-gradient(135deg,#134e5e,#71b280,#2e7d32)',
+        location: 'Uttarakhand, India', duration: '4 Days / 3 Nights',
+        price: '₹12,000/person', groupSize: 'Max 10 per batch',
+        desc: 'A restorative retreat into the ancient oak and rhododendron forests of Uttarakhand. Guided by a certified forest therapy facilitator, this slow, intentional journey reconnects you with nature through mindful walking, breathwork, and sensory immersion.',
+        highlights: ['Certified forest therapy guide', 'Morning breathwork sessions', 'Silent trail at dawn', 'Nature journaling', 'Herbal tea ceremony', 'Sound healing session'],
+        inc: ['Eco lodge accommodation', 'Organic vegetarian meals', 'Forest therapy facilitator', 'Mindfulness journal', 'All trail fees'],
+        reqs: ['Open to all fitness levels', 'Silence appreciated on trail days', 'Comfortable walking shoes'],
+        batches: [
+          { label: 'Batch 3', dates: 'TBD (paused)', spots: '—', status: 'paused' },
+        ]
+      },
+      'tour-5': {
+        kind: 'tour', status: 'active',
+        type: 'Wellness & Culture', title: 'Kerala Houseboat & Ayurveda Retreat',
+        hero: 'linear-gradient(135deg,#005c97,#006630,#2e7d32)',
+        location: 'Kerala, India', duration: '5 Days / 4 Nights',
+        price: '₹28,000/person', groupSize: 'Max 8 per batch',
+        desc: 'Drift through the serene backwaters of Alleppey on a traditional kettuvallam houseboat, with certified Ayurvedic treatments each morning, fresh Kerala cuisine, and guided canoe rides through narrow village canals.',
+        highlights: ['Overnight on a traditional houseboat', 'Daily Ayurvedic consultation & treatment', 'Alleppey backwater village tour', 'Spice garden walk', 'Kathakali performance', 'Coir weaving workshop'],
+        inc: ['Houseboat accommodation', 'All Kerala meals', 'Ayurvedic treatments (2)', 'Experienced boat crew', 'Village canoe tour', 'Spice garden entry'],
+        reqs: ['Suitable for all ages', 'Non-swimmers must inform in advance', 'Light packing recommended'],
+        batches: [
+          { label: 'Batch 6', dates: '18–22 Jul 2026', spots: '3 left', status: 'open' },
+          { label: 'Batch 7', dates: '22–26 Aug 2026', spots: '7 left', status: 'open' },
+        ]
+      },
+      'tour-6': {
+        kind: 'tour', status: 'active',
+        type: 'Heritage Walk', title: 'Goa Coastal Walk & Heritage Trail',
+        hero: 'linear-gradient(135deg,#00b4db,#0083b0,#006494)',
+        location: 'Goa, India', duration: '2 Nights / 3 Days',
+        price: '₹9,500/person', groupSize: 'Max 15 per batch',
+        desc: 'Skip the beaches and discover Goa\'s less-told story — Portuguese-era chapels, spice estates, traditional fishing villages, and a coastline dotted with laterite caves. A curated walking itinerary for curious travellers who want to see beyond the tourist trail.',
+        highlights: ['Hidden laterite cave formations', 'Spice estate walk & tasting', 'Old Goa basilica heritage tour', 'Sunset from Cabo de Rama fort', 'Traditional Goan lunch', 'Fishing village morning walk'],
+        inc: ['Boutique guesthouse', 'Breakfasts & 2 lunches', 'Certified heritage guide', 'Entry passes', 'Local transport'],
+        reqs: ['Comfortable walking shoes', 'Suitable for all fitness levels', 'Hat & water bottle recommended'],
+        batches: [
+          { label: 'Batch 7', dates: '11–13 Jul 2026', spots: '6 left', status: 'open' },
+          { label: 'Batch 8', dates: '15–17 Aug 2026', spots: '12 left', status: 'open' },
+        ]
+      },
+      // PROGRAMS
+      'prog-1': {
+        kind: 'program', status: 'active',
+        type: 'Wildlife Conservation', title: 'Tiger Conservation Program',
+        hero: 'linear-gradient(135deg,#1a0a00,#5c2e00,#c86000)',
+        location: 'Ranthambore NP, Rajasthan', duration: '4 Weeks',
+        price: 'Fully Funded · ₹0 fee', groupSize: 'Max 12 volunteers',
+        desc: 'Join wildlife biologists and forest rangers in one of India\'s most iconic tiger reserves. Volunteers assist with camera trap monitoring, prey-base surveys, and data collection — contributing directly to tiger population research and habitat conservation.',
+        highlights: ['Camera trap deployment & analysis', 'Prey-base population surveys', 'Wildlife corridor mapping', 'Daily briefings with forest rangers', 'Field data entry & reporting', 'Community outreach sessions'],
+        inc: ['Shared dormitory accommodation', 'All meals', 'Field equipment & uniform', 'Training workshop on arrival', 'Conservation impact certificate', 'Airport transfer (Jaipur)'],
+        reqs: ['Age 18+', 'Physical fitness for 6–8 km daily walks', 'English fluency', 'Commitment for full 4 weeks', 'Background check required'],
+        batches: [
+          { label: 'Batch 3', dates: '6 Jul–2 Aug 2026', spots: '1 left', status: 'open' },
+        ]
+      },
+      'prog-2': {
+        kind: 'program', status: 'open',
+        type: 'Marine Conservation', title: 'Marine Turtle Monitoring',
+        hero: 'linear-gradient(135deg,#0052d4,#4364f7,#1a6b8a)',
+        location: 'Odisha Coast, Odisha', duration: '3 Weeks',
+        price: 'Fully Funded · ₹0 fee', groupSize: 'Max 10 volunteers',
+        desc: 'Work alongside marine biologists monitoring Olive Ridley sea turtle nesting and hatchling emergence on the Odisha coastline — one of the world\'s largest mass-nesting sites. Volunteers conduct nightly beach patrols, tag turtles, and protect nests from poaching.',
+        highlights: ['Nightly nesting beach patrols', 'Turtle tagging & measurement', 'Nest protection & incubation monitoring', 'Hatchling release events', 'Marine biodiversity surveys', 'Interaction with local fishing communities'],
+        inc: ['Beach cottage accommodation', 'All meals', 'Field gear & torches', 'Marine conservation training', 'Certificate of participation', 'Local transport'],
+        reqs: ['Age 20+', 'Ability to work night shifts', 'Comfort in coastal terrain', 'Minimum 3 weeks commitment'],
+        batches: [
+          { label: 'Batch 2', dates: '1–21 Sep 2026', spots: '3 left', status: 'open' },
+        ]
+      },
+      'prog-3': {
+        kind: 'program', status: 'active',
+        type: 'Wildlife Conservation', title: 'Wildlife Conservation',
+        hero: 'linear-gradient(135deg,#134e5e,#1e8449,#2e7d32)',
+        location: 'Jim Corbett, Uttarakhand', duration: '2 Weeks',
+        price: 'Fully Funded · ₹0 fee', groupSize: 'Max 8 volunteers',
+        desc: 'Support the Jim Corbett landscape team in monitoring wildlife corridors, setting up remote sensing equipment, and engaging with forest-edge villages on human-wildlife conflict mitigation. Short-term, high-impact fieldwork in one of India\'s oldest national parks.',
+        highlights: ['Wildlife corridor monitoring', 'Remote camera deployment', 'Human-wildlife conflict workshops', 'Forest guard ride-alongs', 'Biodiversity assessment grids', 'Data submission to national database'],
+        inc: ['Forest rest house accommodation', 'All meals', 'Field equipment', 'Daily briefings', 'Conservation certificate'],
+        reqs: ['Age 18+', 'Fitness for daily forest walks', 'Willingness to follow strict park rules', '2-week minimum'],
+        batches: [
+          { label: 'Batch 5', dates: '10–23 Aug 2026', spots: '3 left', status: 'open' },
+        ]
+      },
+      'prog-4': {
+        kind: 'program', status: 'active',
+        type: 'Sustainable Agriculture', title: 'Organic Farming & Permaculture',
+        hero: 'linear-gradient(135deg,#654ea3,#eaafc8,#d4a017)',
+        location: 'Auroville, Tamil Nadu', duration: '2 Weeks',
+        price: 'Fully Funded · ₹0 fee', groupSize: 'Max 8 volunteers',
+        desc: 'Immerse yourself in the living laboratory of Auroville\'s regenerative farms. Learn permaculture design, seed saving, natural building, and food forest management while contributing to food sovereignty projects that feed the community of 3,000+ residents.',
+        highlights: ['Permaculture design principles', 'Seed saving & heritage crops', 'Natural building workshop', 'Composting & biochar making', 'Food forest maintenance', 'Community meal preparation'],
+        inc: ['Auroville guesthouse stay', 'Community meals', 'Farming tools & materials', 'Permaculture workshop', 'Certificate of participation'],
+        reqs: ['Open to all ages (18+)', 'Willingness to work outdoors in heat', 'No prior farming experience needed'],
+        batches: [
+          { label: 'Batch 4', dates: '4–17 Aug 2026', spots: '4 left', status: 'open' },
+        ]
+      },
+      'prog-5': {
+        kind: 'program', status: 'active',
+        type: 'Education & Community', title: 'Community Teaching',
+        hero: 'linear-gradient(135deg,#4776e6,#8e54e9,#c82a6b)',
+        location: 'Dharavi, Mumbai', duration: '1 Month',
+        price: 'Fully Funded · ₹0 fee', groupSize: 'Max 6 volunteers',
+        desc: 'Teach English, maths, art, and digital literacy to children and young adults in Dharavi\'s grassroots learning centres. Work alongside local teachers and social workers, and participate in curriculum design workshops to build lasting educational resources.',
+        highlights: ['English & numeracy classes (ages 8–18)', 'Digital literacy sessions', 'Art & expression workshops', 'Curriculum design collaboration', 'Weekly community events', 'Home visits with social workers'],
+        inc: ['Shared apartment accommodation', 'Monthly food stipend', 'Teaching materials', 'Orientation & training', 'NGO placement certificate'],
+        reqs: ['Age 21+', 'English proficiency', 'Teaching or tutoring experience preferred', 'Full month commitment'],
+        batches: [
+          { label: 'Batch 4', dates: '1–30 Sep 2026', spots: '3 left', status: 'open' },
+          { label: 'Batch 5', dates: '2 Nov–1 Dec 2026', spots: '6 left', status: 'open' },
+        ]
+      },
+      'prog-6': {
+        kind: 'program', status: 'draft',
+        type: 'Livelihood & Craft', title: "Women's Craft Co-op",
+        hero: 'linear-gradient(135deg,#6a3093,#a044ff,#ec77ab)',
+        location: 'Kutch, Gujarat', duration: '2 Weeks',
+        price: 'Fully Funded · ₹0 fee', groupSize: 'Max 8 volunteers',
+        desc: 'Partner with the artisan women of Kutch in preserving and reviving traditional embroidery, block printing, and hand-weaving crafts. Volunteers assist in documentation, help set up e-commerce profiles for the cooperative, and facilitate design workshops.',
+        highlights: ['Hands-on embroidery & weaving sessions', 'Craft documentation project', 'E-commerce & social media training', 'Market visit & artisan stories', 'Design collaboration workshops', 'Cultural immersion in Rann of Kutch'],
+        inc: ['Homestay with artisan families', 'All meals', 'Craft materials', 'Translation support', 'Impact report participation'],
+        reqs: ['Age 20+', 'Interest in craft, design, or social enterprise', 'Camera or documentation skills a plus'],
+        batches: [
+          { label: 'Batch 1', dates: 'TBD', spots: '—', status: 'paused' },
+          { label: 'Batch 2', dates: 'TBD', spots: '—', status: 'paused' },
+        ]
+      },
+    };
+
+    function showPreview(id) {
+      const d = PREVIEW_DATA[id];
+      if (!d) return;
+      const overlay = document.getElementById('previewOverlay');
+      const isDraft = d.status === 'draft' || d.status === 'inactive';
+
+      // Draft banner
+      const banner = document.getElementById('previewDraftBanner');
+      banner.style.display = isDraft ? 'flex' : 'none';
+
+      // Hero
+      document.getElementById('previewHeroImg').style.background = d.hero;
+      document.getElementById('previewType').textContent = d.type;
+      document.getElementById('previewHeroTitle').textContent = d.title;
+
+      // Kind
+      document.getElementById('previewKind').textContent = d.kind;
+      document.getElementById('previewBatchLabel').textContent = d.kind === 'program' ? 'Available Batches' : 'Upcoming Batches';
+      document.getElementById('previewIncLabel').textContent = d.kind === 'program' ? "What's Provided" : "What's Included";
+
+      // Meta
+      const metaIcons = {
+        location: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg>',
+        duration: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+        price: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+        group: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      };
+      document.getElementById('previewMeta').innerHTML = [
+        [metaIcons.location, d.location],
+        [metaIcons.duration, d.duration],
+        [metaIcons.price, d.price],
+        [metaIcons.group, d.groupSize],
+      ].map(([icon, text]) => `<div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#374151;">${icon}<span>${text}</span></div>`).join('');
+
+      // Description
+      document.getElementById('previewDesc').textContent = d.desc;
+
+      // Highlights
+      document.getElementById('previewHighlights').innerHTML = d.highlights.map(h =>
+        `<div style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#374151;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12" stroke="#f54900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${h}</span></div>`
+      ).join('');
+
+      // Included
+      document.getElementById('previewInc').innerHTML = d.inc.map(i =>
+        `<div style="display:flex;align-items:flex-start;gap:7px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${i}</span></div>`
+      ).join('');
+
+      // Requirements
+      document.getElementById('previewReqs').innerHTML = d.reqs.map(r =>
+        `<div style="display:flex;align-items:flex-start;gap:7px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="9" stroke="#6b7280" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/></svg><span>${r}</span></div>`
+      ).join('');
+
+      // Batches
+      document.getElementById('previewBatches').innerHTML = d.batches.map(b => {
+        const spotColor = b.status === 'full' ? '#dc2626' : b.status === 'paused' ? '#9ca3af' : '#16a34a';
+        const spotBg = b.status === 'full' ? '#fef2f2' : b.status === 'paused' ? '#f3f4f6' : '#f0fdf4';
+        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;flex-wrap:wrap;gap:8px;">
+          <div style="font-size:13px;font-weight:700;color:#101828;">${b.label}</div>
+          <div style="font-size:13px;color:#374151;">${b.dates}</div>
+          <span style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:${spotBg};color:${spotColor};">${b.spots}</span>
+        </div>`;
+      }).join('');
+
+      overlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreview() {
+      document.getElementById('previewOverlay').style.display = 'none';
+      document.body.style.overflow = '';
     }
 
     function showToast(msg) {
