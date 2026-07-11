@@ -392,10 +392,10 @@ function renderFooter() {
   const isFirst = currentStep === 0;
   const isLast = currentStep === STEPS.length - 1;
   el.innerHTML = `
-    ${!isFirst ? `<button class="ap-btn-back" onclick="prevStep()">BACK</button>` : `<div></div>`}
+    ${!isFirst ? `<button class="ap-btn-back" onclick="prevStep()">Back</button>` : `<div></div>`}
     ${isLast
-      ? `<button class="ap-btn-complete" onclick="completeForm()">COMPLETE →</button>`
-      : `<button class="ap-btn-continue" onclick="nextStep()">CONTINUE →</button>`
+      ? `<button class="ap-btn-complete" onclick="completeForm()">Complete →</button>`
+      : `<button class="ap-btn-continue" onclick="nextStep()">Continue →</button>`
     }`;
 }
 
