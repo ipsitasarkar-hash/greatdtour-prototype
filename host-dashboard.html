@@ -1072,185 +1072,354 @@
         .db-trip-tag { font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; display:inline-block; margin-bottom:3px; }
         .db-trip-name { font-size:13px; font-weight:700; color:#101828; }
         .db-trip-meta { font-size:11px; color:#9ca3af; margin-top:2px; }
+
+        /* ── LAST VISITED BANNER ── */
+        .db-last-visited {
+          display:flex; align-items:center; gap:8px;
+          background:#fff7ed; border:1px solid #fed7aa; border-radius:10px;
+          padding:10px 14px; margin-bottom:16px; font-size:13px; color:#92400e;
+        }
+        .db-last-visited svg { flex-shrink:0; width:16px; height:16px; color:#f54900; }
+        .db-last-visited span { flex:1; }
+        .db-last-visited button {
+          background:none; border:none; cursor:pointer; font-size:16px; color:#92400e;
+          padding:0; line-height:1; opacity:0.6;
+        }
+        .db-last-visited button:hover { opacity:1; }
+
+        /* ── MODE TOGGLE ── */
+        .db-header-row {
+          display:flex; align-items:flex-start; justify-content:space-between;
+          flex-wrap:wrap; gap:12px; margin-bottom:20px;
+        }
+        .db-header-row h2 { margin:0; font-size:22px; font-weight:700; color:#101828; }
+        .db-header-row .db-header-sub { font-size:13px; color:#6b7280; margin-top:3px; }
+        .db-mode-toggle {
+          display:flex; align-items:center; gap:6px;
+          background:#f3f4f6; border-radius:12px; padding:4px;
+        }
+        .db-mode-btn {
+          display:flex; align-items:center; gap:7px;
+          padding:8px 16px; border-radius:9px; border:none; cursor:pointer;
+          font-size:13px; font-weight:500; color:#6b7280; background:transparent;
+          transition:all 0.18s;
+        }
+        .db-mode-btn svg { width:16px; height:16px; flex-shrink:0; }
+        .db-mode-btn:hover { color:#101828; }
+        .db-mode-btn--active {
+          background:#fff; color:#101828; font-weight:600;
+          box-shadow:0 1px 4px rgba(0,0,0,0.12);
+        }
       </style>
 
         <div class="db-layout">
         <!-- ════ MAIN CONTENT ════ -->
         <div class="db-main">
 
+          <!-- ── LAST VISITED BANNER ── -->
+          <div class="db-last-visited" id="dbLastVisited" style="display:none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span id="dbLastVisitedText">Last visited: —</span>
+            <button onclick="document.getElementById('dbLastVisited').style.display='none'" style="margin-left:auto;background:none;border:none;cursor:pointer;color:inherit;opacity:0.5;font-size:14px;line-height:1;">✕</button>
+          </div>
+
           <!-- Page header -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+          <div class="db-header-row">
             <div>
               <div class="hd-page-title">Dashboard</div>
               <div style="font-size:13px;color:#6b7280;">Welcome back, Wild Trails India — Tuesday, 1 July 2026</div>
             </div>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span class="hd-status-pill">Live</span>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <!-- Mode toggle -->
+              <div class="db-mode-toggle" id="dbModeToggle">
+                <button class="db-mode-btn db-mode-btn--active" id="btnMarketplace" onclick="setDashMode('marketplace')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M3 3h18l-2 9H5L3 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/></svg>
+                  GDT Marketplace
+                </button>
+                <button class="db-mode-btn" id="btnCare" onclick="setDashMode('care')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                  GDT Care
+                </button>
+              </div>
               <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:7px 14px;" onclick="switchTab('enquiries',document.getElementById('hn-enquiries'))">3 Pending Requests</button>
             </div>
           </div>
 
-          <!-- KPI CARDS -->
-          <div class="db-kpi-grid">
-            <div class="db-kpi">
-              <div class="db-kpi__icon" style="background:#fff7ed;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="#f54900" stroke-width="1.8"/><path d="M3 9h18M8 2v4M16 2v4" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/></svg>
-              </div>
-              <div><div class="db-kpi__label">Total Bookings</div><div class="db-kpi__val">269</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 2.98% vs last month</div></div>
-            </div>
-            <div class="db-kpi">
-              <div class="db-kpi__icon" style="background:#f0fdf4;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#16a34a" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/></svg>
-              </div>
-              <div><div class="db-kpi__label">Volunteer Applicants</div><div class="db-kpi__val">31</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 8 new this week</div></div>
-            </div>
-            <div class="db-kpi">
-              <div class="db-kpi__icon" style="background:#eff6ff;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2563eb" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/></svg>
-              </div>
-              <div><div class="db-kpi__label">Revenue Jun 2026</div><div class="db-kpi__val">&#8377;2.4L</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 43% vs May</div></div>
-            </div>
-          </div>
+          <!-- ── MARKETPLACE VIEW ── -->
+          <div id="db-view-marketplace">
 
-          <!-- TRIP STATUS BAR -->
-          <div class="db-trip-bar">
-            <div class="db-trip-bar__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#2563eb" stroke-width="1.8"/></svg>
-            </div>
-            <div><div class="db-trip-bar__total-label">Total Trips</div><div class="db-trip-bar__total-val">269</div></div>
-            <div class="db-trip-bar__divider"></div>
-            <div class="db-trip-bar__track">
-              <div class="db-trip-bar__segments">
-                <div class="db-trip-bar__seg" style="width:62%;background:#2563eb;"></div>
-                <div class="db-trip-bar__seg" style="width:25%;background:#93c5fd;"></div>
-                <div class="db-trip-bar__seg" style="width:13%;background:#fca5a5;"></div>
+            <!-- KPI CARDS -->
+            <div class="db-kpi-grid">
+              <div class="db-kpi">
+                <div class="db-kpi__icon" style="background:#fff7ed;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="#f54900" stroke-width="1.8"/><path d="M3 9h18M8 2v4M16 2v4" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div><div class="db-kpi__label">Total Bookings</div><div class="db-kpi__val">269</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 2.98% vs last month</div></div>
               </div>
-              <div class="db-trip-bar__legend">
-                <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#2563eb;"></div>Completed <strong>167</strong></div>
-                <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#93c5fd;"></div>Upcoming <strong>67</strong></div>
-                <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#fca5a5;"></div>Pending <strong>35</strong></div>
+              <div class="db-kpi">
+                <div class="db-kpi__icon" style="background:#eff6ff;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2563eb" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div><div class="db-kpi__label">Revenue Jun 2026</div><div class="db-kpi__val">&#8377;2.4L</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 43% vs May</div></div>
+              </div>
+              <div class="db-kpi">
+                <div class="db-kpi__icon" style="background:#f0fdf4;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="#16a34a" stroke-width="1.8"/><path d="M12 6v2m0 8v2M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.5-1 2-2.5 2.5S9.5 13 9.5 14.5a2.5 2.5 0 0 0 5 0" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div><div class="db-kpi__label">Holdings (Pending Payout)</div><div class="db-kpi__val">&#8377;1.85L</div><div class="db-kpi__delta" style="color:#92400e;">&#8594; Auto-payout 1 Aug</div></div>
               </div>
             </div>
-          </div>
 
-          <!-- REVENUE CHART + DONUT -->
-          <div class="db-row2">
-            <div class="db-chart-card">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                <div><div style="font-size:14px;font-weight:700;color:#101828;">Revenue Overview</div><div style="font-size:12px;color:#9ca3af;">Jan &ndash; Jun 2026 &middot; All listings</div></div>
-                <div style="text-align:right;"><div style="font-size:11px;color:#9ca3af;">6-month total</div><div style="font-size:15px;font-weight:800;color:#101828;">&#8377;8,69,000</div></div>
+            <!-- TRIP STATUS BAR -->
+            <div class="db-trip-bar">
+              <div class="db-trip-bar__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#2563eb" stroke-width="1.8"/></svg>
               </div>
-              <div class="chart-bars" style="height:120px;">
-                <div class="chart-bar" style="height:35%;background:#bfdbfe;" title="Jan: &#8377;85,000"></div>
-                <div class="chart-bar" style="height:46%;background:#bfdbfe;" title="Feb: &#8377;1,10,000"></div>
-                <div class="chart-bar" style="height:49%;background:#93c5fd;" title="Mar: &#8377;1,18,000"></div>
-                <div class="chart-bar" style="height:62%;background:#93c5fd;" title="Apr: &#8377;1,48,000"></div>
-                <div class="chart-bar" style="height:70%;background:#93c5fd;" title="May: &#8377;1,68,000"></div>
-                <div class="chart-bar" style="height:100%;background:#2563eb;" title="Jun: &#8377;2,40,000"></div>
-              </div>
-              <div class="chart-labels">
-                <div class="chart-label">Jan<br/><span style="font-size:9px;color:#9ca3af;">85k</span></div>
-                <div class="chart-label">Feb<br/><span style="font-size:9px;color:#9ca3af;">1.1L</span></div>
-                <div class="chart-label">Mar<br/><span style="font-size:9px;color:#9ca3af;">1.18L</span></div>
-                <div class="chart-label">Apr<br/><span style="font-size:9px;color:#9ca3af;">1.48L</span></div>
-                <div class="chart-label">May<br/><span style="font-size:9px;color:#9ca3af;">1.68L</span></div>
-                <div class="chart-label">Jun<br/><span style="font-size:9px;color:#9ca3af;">2.4L</span></div>
-              </div>
-            </div>
-            <div class="db-chart-card">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                <div style="font-size:14px;font-weight:700;color:#101828;">Top Destinations</div>
-                <span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:#f3f4f6;color:#6b7280;">This Month</span>
-              </div>
-              <div class="db-donut-wrap">
-                <svg width="110" height="110" viewBox="0 0 110 110" style="flex-shrink:0;">
-                  <circle cx="55" cy="55" r="40" fill="none" stroke="#f3f4f6" stroke-width="18"/>
-                  <circle cx="55" cy="55" r="40" fill="none" stroke="#2563eb" stroke-width="18" stroke-dasharray="106 245" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
-                  <circle cx="55" cy="55" r="40" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="61 290" stroke-dashoffset="-109" transform="rotate(-90 55 55)"/>
-                  <circle cx="55" cy="55" r="40" fill="none" stroke="#93c5fd" stroke-width="18" stroke-dasharray="58 293" stroke-dashoffset="-170" transform="rotate(-90 55 55)"/>
-                  <circle cx="55" cy="55" r="40" fill="none" stroke="#dbeafe" stroke-width="18" stroke-dasharray="28 323" stroke-dashoffset="-228" transform="rotate(-90 55 55)"/>
-                  <text x="55" y="51" text-anchor="middle" font-size="13" font-weight="800" fill="#101828">269</text>
-                  <text x="55" y="63" text-anchor="middle" font-size="9" fill="#9ca3af">bookings</text>
-                </svg>
-                <div class="db-donut-legend">
-                  <div class="db-donut-leg"><div class="db-donut-dot" style="background:#2563eb;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Himachal Pradesh</div><div style="color:#9ca3af;font-size:11px;">45 bookings &middot; 17%</div></div></div>
-                  <div class="db-donut-leg"><div class="db-donut-dot" style="background:#60a5fa;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Kerala</div><div style="color:#9ca3af;font-size:11px;">52 bookings &middot; 19%</div></div></div>
-                  <div class="db-donut-leg"><div class="db-donut-dot" style="background:#93c5fd;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Rajasthan</div><div style="color:#9ca3af;font-size:11px;">62 bookings &middot; 23%</div></div></div>
-                  <div class="db-donut-leg"><div class="db-donut-dot" style="background:#dbeafe;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Others</div><div style="color:#9ca3af;font-size:11px;">110 bookings &middot; 41%</div></div></div>
+              <div><div class="db-trip-bar__total-label">Total Trips</div><div class="db-trip-bar__total-val">269</div></div>
+              <div class="db-trip-bar__divider"></div>
+              <div class="db-trip-bar__track">
+                <div class="db-trip-bar__segments">
+                  <div class="db-trip-bar__seg" style="width:62%;background:#2563eb;"></div>
+                  <div class="db-trip-bar__seg" style="width:25%;background:#93c5fd;"></div>
+                  <div class="db-trip-bar__seg" style="width:13%;background:#fca5a5;"></div>
+                </div>
+                <div class="db-trip-bar__legend">
+                  <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#2563eb;"></div>Completed <strong>167</strong></div>
+                  <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#93c5fd;"></div>Upcoming <strong>67</strong></div>
+                  <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#fca5a5;"></div>Pending <strong>35</strong></div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- MESSAGES + TOUR PERFORMANCE -->
-          <div class="db-row2" style="margin-bottom:24px;">
-            <div class="db-chart-card" style="padding:0;overflow:hidden;">
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;border-bottom:1px solid #f3f4f6;">
-                <div style="font-size:14px;font-weight:700;color:#101828;">Messages</div>
-                <button style="background:none;border:none;color:#9ca3af;cursor:pointer;font-size:18px;line-height:1;">&#xB7;&#xB7;&#xB7;</button>
-              </div>
-              <div class="db-msg-list" style="padding:0 12px;">
-                <div class="db-msg-row">
-                  <div class="db-msg-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">SR</div>
-                  <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Sneha Reddy</span><span class="db-msg-time">2 hrs ago</span></div><div class="db-msg-preview">Re: Himalayan Trek &middot; Is Sep batch still open?</div></div>
-                  <div class="db-msg-badge">!</div>
+            <!-- REVENUE CHART + DONUT -->
+            <div class="db-row2">
+              <div class="db-chart-card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                  <div><div style="font-size:14px;font-weight:700;color:#101828;">Revenue Overview</div><div style="font-size:12px;color:#9ca3af;">Jan &ndash; Jun 2026 &middot; All listings</div></div>
+                  <div style="text-align:right;"><div style="font-size:11px;color:#9ca3af;">6-month total</div><div style="font-size:15px;font-weight:800;color:#101828;">&#8377;8,69,000</div></div>
                 </div>
-                <div class="db-msg-row">
-                  <div class="db-msg-avatar" style="background:linear-gradient(135deg,#f59e0b,#f54900);">AM</div>
-                  <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Aditya Menon</span><span class="db-msg-time">Yesterday</span></div><div class="db-msg-preview">Re: Spiti Valley &middot; Minimum group size?</div></div>
-                  <div class="db-msg-badge">!</div>
+                <div class="chart-bars" style="height:120px;">
+                  <div class="chart-bar" style="height:35%;background:#bfdbfe;" title="Jan: &#8377;85,000"></div>
+                  <div class="chart-bar" style="height:46%;background:#bfdbfe;" title="Feb: &#8377;1,10,000"></div>
+                  <div class="chart-bar" style="height:49%;background:#93c5fd;" title="Mar: &#8377;1,18,000"></div>
+                  <div class="chart-bar" style="height:62%;background:#93c5fd;" title="Apr: &#8377;1,48,000"></div>
+                  <div class="chart-bar" style="height:70%;background:#93c5fd;" title="May: &#8377;1,68,000"></div>
+                  <div class="chart-bar" style="height:100%;background:#2563eb;" title="Jun: &#8377;2,40,000"></div>
                 </div>
-                <div class="db-msg-row">
-                  <div class="db-msg-avatar" style="background:linear-gradient(135deg,#0891b2,#06b6d4);">RG</div>
-                  <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Rohan Gupta</span><span class="db-msg-time">2 days ago</span></div><div class="db-msg-preview">Re: Himalayan Trek &middot; Group of 6, Oct batch</div></div>
-                  <div class="db-msg-badge">!</div>
-                </div>
-                <div class="db-msg-row">
-                  <div class="db-msg-avatar" style="background:linear-gradient(135deg,#16a34a,#4ade80);">AR</div>
-                  <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Arjun Rao</span><span class="db-msg-time">Apr 2025</span></div><div class="db-msg-preview">&ldquo;The trek was spectacular. Day 4 through Beas Kund&hellip;&rdquo;</div></div>
-                  <span style="font-size:11px;color:#f59e0b;flex-shrink:0;">4&#9733;</span>
-                </div>
-                <div class="db-msg-row">
-                  <div class="db-msg-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">PK</div>
-                  <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Priya Krishnamurthy</span><span class="db-msg-time">Feb 2025</span></div><div class="db-msg-preview">&ldquo;Best experience of my life. Guides were incredible.&rdquo;</div></div>
-                  <span style="font-size:11px;color:#f59e0b;flex-shrink:0;">5&#9733;</span>
+                <div class="chart-labels">
+                  <div class="chart-label">Jan<br/><span style="font-size:9px;color:#9ca3af;">85k</span></div>
+                  <div class="chart-label">Feb<br/><span style="font-size:9px;color:#9ca3af;">1.1L</span></div>
+                  <div class="chart-label">Mar<br/><span style="font-size:9px;color:#9ca3af;">1.18L</span></div>
+                  <div class="chart-label">Apr<br/><span style="font-size:9px;color:#9ca3af;">1.48L</span></div>
+                  <div class="chart-label">May<br/><span style="font-size:9px;color:#9ca3af;">1.68L</span></div>
+                  <div class="chart-label">Jun<br/><span style="font-size:9px;color:#9ca3af;">2.4L</span></div>
                 </div>
               </div>
-              <div style="padding:12px 20px;border-top:1px solid #f3f4f6;text-align:center;">
-                <button style="font-size:12px;font-weight:600;color:#6b7280;background:none;border:none;cursor:pointer;" onclick="switchTab('enquiries',document.getElementById('hn-enquiries'))">See all enquiries &#8594;</button>
-              </div>
-            </div>
-            <div class="db-chart-card">
-              <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:4px;">Tour Performance</div>
-              <div style="font-size:12px;color:#9ca3af;margin-bottom:16px;">Bookings by listing</div>
-              <div style="display:flex;flex-direction:column;gap:13px;">
-                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Desert Camp &amp; Folk Music</span><span style="font-weight:700;color:#101828;">62</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:100%;background:#2563eb;border-radius:999px;"></div></div></div>
-                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Kerala Houseboat</span><span style="font-weight:700;color:#101828;">52</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:84%;background:#2563eb;border-radius:999px;opacity:0.75;"></div></div></div>
-                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Himalayan Trek &amp; Yoga</span><span style="font-weight:700;color:#101828;">45</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:72%;background:#2563eb;border-radius:999px;opacity:0.6;"></div></div></div>
-                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Goa Coastal Walk</span><span style="font-weight:700;color:#101828;">41</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:66%;background:#2563eb;border-radius:999px;opacity:0.45;"></div></div></div>
-                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Spiti Valley Winter</span><span style="font-weight:700;color:#101828;">38</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:61%;background:#2563eb;border-radius:999px;opacity:0.3;"></div></div></div>
-                <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#9ca3af;">Forest Bathing <em style="font-size:10px;">(inactive)</em></span><span style="font-weight:700;color:#9ca3af;">31</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:50%;background:#d1d5db;border-radius:999px;"></div></div></div>
+              <div class="db-chart-card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                  <div style="font-size:14px;font-weight:700;color:#101828;">Top Destinations</div>
+                  <span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:#f3f4f6;color:#6b7280;">This Month</span>
+                </div>
+                <div class="db-donut-wrap">
+                  <svg width="110" height="110" viewBox="0 0 110 110" style="flex-shrink:0;">
+                    <circle cx="55" cy="55" r="40" fill="none" stroke="#f3f4f6" stroke-width="18"/>
+                    <circle cx="55" cy="55" r="40" fill="none" stroke="#2563eb" stroke-width="18" stroke-dasharray="106 245" stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+                    <circle cx="55" cy="55" r="40" fill="none" stroke="#60a5fa" stroke-width="18" stroke-dasharray="61 290" stroke-dashoffset="-109" transform="rotate(-90 55 55)"/>
+                    <circle cx="55" cy="55" r="40" fill="none" stroke="#93c5fd" stroke-width="18" stroke-dasharray="58 293" stroke-dashoffset="-170" transform="rotate(-90 55 55)"/>
+                    <circle cx="55" cy="55" r="40" fill="none" stroke="#dbeafe" stroke-width="18" stroke-dasharray="28 323" stroke-dashoffset="-228" transform="rotate(-90 55 55)"/>
+                    <text x="55" y="51" text-anchor="middle" font-size="13" font-weight="800" fill="#101828">269</text>
+                    <text x="55" y="63" text-anchor="middle" font-size="9" fill="#9ca3af">bookings</text>
+                  </svg>
+                  <div class="db-donut-legend">
+                    <div class="db-donut-leg"><div class="db-donut-dot" style="background:#2563eb;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Himachal Pradesh</div><div style="color:#9ca3af;font-size:11px;">45 bookings &middot; 17%</div></div></div>
+                    <div class="db-donut-leg"><div class="db-donut-dot" style="background:#60a5fa;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Kerala</div><div style="color:#9ca3af;font-size:11px;">52 bookings &middot; 19%</div></div></div>
+                    <div class="db-donut-leg"><div class="db-donut-dot" style="background:#93c5fd;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Rajasthan</div><div style="color:#9ca3af;font-size:11px;">62 bookings &middot; 23%</div></div></div>
+                    <div class="db-donut-leg"><div class="db-donut-dot" style="background:#dbeafe;"></div><div><div style="font-weight:600;color:#374151;font-size:12px;">Others</div><div style="color:#9ca3af;font-size:11px;">110 bookings &middot; 41%</div></div></div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- RECENT BOOKINGS TABLE -->
-          <div class="db-chart-card" style="padding:0;overflow:hidden;margin-bottom:0;">
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e5e7eb;">
-              <div style="font-size:14px;font-weight:700;color:#101828;">Recent Bookings</div>
-              <button class="hd-btn" style="font-size:12px;padding:6px 14px;" onclick="switchTab('enquiries',document.getElementById('hn-enquiries'))">View All</button>
+            <!-- MESSAGES + TOUR PERFORMANCE -->
+            <div class="db-row2" style="margin-bottom:24px;">
+              <div class="db-chart-card" style="padding:0;overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;border-bottom:1px solid #f3f4f6;">
+                  <div style="font-size:14px;font-weight:700;color:#101828;">Messages</div>
+                  <button style="background:none;border:none;color:#9ca3af;cursor:pointer;font-size:18px;line-height:1;">&#xB7;&#xB7;&#xB7;</button>
+                </div>
+                <div class="db-msg-list" style="padding:0 12px;">
+                  <div class="db-msg-row">
+                    <div class="db-msg-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">SR</div>
+                    <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Sneha Reddy</span><span class="db-msg-time">2 hrs ago</span></div><div class="db-msg-preview">Re: Himalayan Trek &middot; Is Sep batch still open?</div></div>
+                    <div class="db-msg-badge">!</div>
+                  </div>
+                  <div class="db-msg-row">
+                    <div class="db-msg-avatar" style="background:linear-gradient(135deg,#f59e0b,#f54900);">AM</div>
+                    <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Aditya Menon</span><span class="db-msg-time">Yesterday</span></div><div class="db-msg-preview">Re: Spiti Valley &middot; Minimum group size?</div></div>
+                    <div class="db-msg-badge">!</div>
+                  </div>
+                  <div class="db-msg-row">
+                    <div class="db-msg-avatar" style="background:linear-gradient(135deg,#0891b2,#06b6d4);">RG</div>
+                    <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Rohan Gupta</span><span class="db-msg-time">2 days ago</span></div><div class="db-msg-preview">Re: Himalayan Trek &middot; Group of 6, Oct batch</div></div>
+                    <div class="db-msg-badge">!</div>
+                  </div>
+                  <div class="db-msg-row">
+                    <div class="db-msg-avatar" style="background:linear-gradient(135deg,#16a34a,#4ade80);">AR</div>
+                    <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Arjun Rao</span><span class="db-msg-time">Apr 2025</span></div><div class="db-msg-preview">&ldquo;The trek was spectacular. Day 4 through Beas Kund&hellip;&rdquo;</div></div>
+                    <span style="font-size:11px;color:#f59e0b;flex-shrink:0;">4&#9733;</span>
+                  </div>
+                  <div class="db-msg-row">
+                    <div class="db-msg-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">PK</div>
+                    <div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;"><span class="db-msg-name">Priya Krishnamurthy</span><span class="db-msg-time">Feb 2025</span></div><div class="db-msg-preview">&ldquo;Best experience of my life. Guides were incredible.&rdquo;</div></div>
+                    <span style="font-size:11px;color:#f59e0b;flex-shrink:0;">5&#9733;</span>
+                  </div>
+                </div>
+                <div style="padding:12px 20px;border-top:1px solid #f3f4f6;text-align:center;">
+                  <button style="font-size:12px;font-weight:600;color:#6b7280;background:none;border:none;cursor:pointer;" onclick="switchTab('enquiries',document.getElementById('hn-enquiries'))">See all enquiries &#8594;</button>
+                </div>
+              </div>
+              <div class="db-chart-card">
+                <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:4px;">Tour Performance</div>
+                <div style="font-size:12px;color:#9ca3af;margin-bottom:16px;">Bookings by listing</div>
+                <div style="display:flex;flex-direction:column;gap:13px;">
+                  <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Desert Camp &amp; Folk Music</span><span style="font-weight:700;color:#101828;">62</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:100%;background:#2563eb;border-radius:999px;"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Kerala Houseboat</span><span style="font-weight:700;color:#101828;">52</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:84%;background:#2563eb;border-radius:999px;opacity:0.75;"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Himalayan Trek &amp; Yoga</span><span style="font-weight:700;color:#101828;">45</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:72%;background:#2563eb;border-radius:999px;opacity:0.6;"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Goa Coastal Walk</span><span style="font-weight:700;color:#101828;">41</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:66%;background:#2563eb;border-radius:999px;opacity:0.45;"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#374151;">Spiti Valley Winter</span><span style="font-weight:700;color:#101828;">38</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:61%;background:#2563eb;border-radius:999px;opacity:0.3;"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="font-weight:500;color:#9ca3af;">Forest Bathing <em style="font-size:10px;">(inactive)</em></span><span style="font-weight:700;color:#9ca3af;">31</span></div><div style="height:5px;background:#f3f4f6;border-radius:999px;overflow:hidden;"><div style="height:100%;width:50%;background:#d1d5db;border-radius:999px;"></div></div></div>
+                </div>
+              </div>
             </div>
-            <table class="db-bk-table">
-              <thead><tr><th>Traveller</th><th>Tour</th><th>Duration</th><th>Dates</th><th>Value</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr><td><div style="font-weight:600;color:#101828;">Priya Krishnamurthy +3</div><div style="font-size:11px;color:#9ca3af;">GDT-2026-5012</div></td><td>Himalayan Trek &amp; Yoga</td><td>8 days</td><td>14&ndash;22 Sep 2026</td><td style="font-weight:600;">&#8377;1,40,000</td><td><span class="db-bk-status db-bk-status--green">Confirmed</span></td></tr>
-                <tr><td><div style="font-weight:600;color:#101828;">Vikram Nair</div><div style="font-size:11px;color:#9ca3af;">GDT-2026-4821</div></td><td>Spiti Valley Winter</td><td>9 days</td><td>10&ndash;19 Dec 2026</td><td style="font-weight:600;">&#8377;45,000</td><td><span class="db-bk-status db-bk-status--green">Confirmed</span></td></tr>
-                <tr><td><div style="font-weight:600;color:#101828;">Sneha Reddy</div><div style="font-size:11px;color:#9ca3af;">2 hrs ago</div></td><td>Himalayan Trek &amp; Yoga</td><td>8 days</td><td>14&ndash;22 Sep 2026</td><td style="font-weight:600;">&#8377;70,000</td><td><span class="db-bk-status db-bk-status--amber">Under Review</span></td></tr>
-                <tr><td><div style="font-weight:600;color:#101828;">Rohan Gupta</div><div style="font-size:11px;color:#9ca3af;">2 days ago</div></td><td>Himalayan Trek &amp; Yoga</td><td>8 days</td><td>Oct 2026</td><td style="font-weight:600;">&#8377;2,10,000</td><td><span class="db-bk-status db-bk-status--blue">New</span></td></tr>
-                <tr><td><div style="font-weight:600;color:#101828;">Aditya Menon</div><div style="font-size:11px;color:#9ca3af;">Yesterday</div></td><td>Spiti Valley Winter</td><td>9 days</td><td>Dec 2026</td><td style="font-weight:600;">&#8377;45,000</td><td><span class="db-bk-status db-bk-status--blue">New</span></td></tr>
-              </tbody>
-            </table>
-          </div>
+
+            <!-- RECENT BOOKINGS TABLE -->
+            <div class="db-chart-card" style="padding:0;overflow:hidden;margin-bottom:0;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e5e7eb;">
+                <div style="font-size:14px;font-weight:700;color:#101828;">Recent Bookings</div>
+                <button class="hd-btn" style="font-size:12px;padding:6px 14px;" onclick="switchTab('enquiries',document.getElementById('hn-enquiries'))">View All</button>
+              </div>
+              <table class="db-bk-table">
+                <thead><tr><th>Traveller</th><th>Tour</th><th>Duration</th><th>Dates</th><th>Value</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td><div style="font-weight:600;color:#101828;">Priya Krishnamurthy +3</div><div style="font-size:11px;color:#9ca3af;">GDT-2026-5012</div></td><td>Himalayan Trek &amp; Yoga</td><td>8 days</td><td>14&ndash;22 Sep 2026</td><td style="font-weight:600;">&#8377;1,40,000</td><td><span class="db-bk-status db-bk-status--green">Confirmed</span></td></tr>
+                  <tr><td><div style="font-weight:600;color:#101828;">Vikram Nair</div><div style="font-size:11px;color:#9ca3af;">GDT-2026-4821</div></td><td>Spiti Valley Winter</td><td>9 days</td><td>10&ndash;19 Dec 2026</td><td style="font-weight:600;">&#8377;45,000</td><td><span class="db-bk-status db-bk-status--green">Confirmed</span></td></tr>
+                  <tr><td><div style="font-weight:600;color:#101828;">Sneha Reddy</div><div style="font-size:11px;color:#9ca3af;">2 hrs ago</div></td><td>Himalayan Trek &amp; Yoga</td><td>8 days</td><td>14&ndash;22 Sep 2026</td><td style="font-weight:600;">&#8377;70,000</td><td><span class="db-bk-status db-bk-status--amber">Under Review</span></td></tr>
+                  <tr><td><div style="font-weight:600;color:#101828;">Rohan Gupta</div><div style="font-size:11px;color:#9ca3af;">2 days ago</div></td><td>Himalayan Trek &amp; Yoga</td><td>8 days</td><td>Oct 2026</td><td style="font-weight:600;">&#8377;2,10,000</td><td><span class="db-bk-status db-bk-status--blue">New</span></td></tr>
+                  <tr><td><div style="font-weight:600;color:#101828;">Aditya Menon</div><div style="font-size:11px;color:#9ca3af;">Yesterday</div></td><td>Spiti Valley Winter</td><td>9 days</td><td>Dec 2026</td><td style="font-weight:600;">&#8377;45,000</td><td><span class="db-bk-status db-bk-status--blue">New</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div><!-- /db-view-marketplace -->
+
+          <!-- ── GDT CARE VIEW ── -->
+          <div id="db-view-care" style="display:none;">
+
+            <!-- Care KPI cards — no earnings -->
+            <div class="db-kpi-grid">
+              <div class="db-kpi" style="border-color:#d1fae5;">
+                <div class="db-kpi__icon" style="background:#f0fdf4;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#16a34a" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div><div class="db-kpi__label">Total Applicants</div><div class="db-kpi__val">31</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 8 new this week</div></div>
+              </div>
+              <div class="db-kpi" style="border-color:#d1fae5;">
+                <div class="db-kpi__icon" style="background:#dcfce7;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div><div class="db-kpi__label">Accepted Volunteers</div><div class="db-kpi__val">11</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 3 this month</div></div>
+              </div>
+              <div class="db-kpi" style="border-color:#d1fae5;">
+                <div class="db-kpi__icon" style="background:#fef9c3;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="#ca8a04" stroke-width="1.8"/><path d="M3 9h18M8 2v4M16 2v4" stroke="#ca8a04" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div><div class="db-kpi__label">Active Programs</div><div class="db-kpi__val">2</div><div class="db-kpi__delta" style="color:#9ca3af;">Tiger Conservation &middot; Marine Turtle</div></div>
+              </div>
+            </div>
+
+            <!-- Care notice — no earnings -->
+            <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:14px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;background:#16a34a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:#14532d;margin-bottom:4px;">GDT Care — Volunteer &amp; Conservation Programs</div>
+                <div style="font-size:13px;color:#166534;line-height:1.6;">This mode shows your <strong>volunteer &amp; social impact programs</strong>. These programs are <strong>fully funded</strong> — volunteers pay no fee and you receive no commercial earnings from this stream. Impact is measured through participation, community outcomes, and conservation data.</div>
+              </div>
+            </div>
+
+            <!-- Care program status bar -->
+            <div class="db-trip-bar" style="border-color:#bbf7d0;background:#f0fdf4;">
+              <div class="db-trip-bar__icon" style="background:#dcfce7;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#16a34a" stroke-width="1.8"/></svg>
+              </div>
+              <div><div class="db-trip-bar__total-label">Total Volunteers</div><div class="db-trip-bar__total-val" style="color:#14532d;">31</div></div>
+              <div class="db-trip-bar__divider"></div>
+              <div class="db-trip-bar__track">
+                <div class="db-trip-bar__segments">
+                  <div class="db-trip-bar__seg" style="width:35%;background:#16a34a;"></div>
+                  <div class="db-trip-bar__seg" style="width:26%;background:#4ade80;"></div>
+                  <div class="db-trip-bar__seg" style="width:39%;background:#d1fae5;"></div>
+                </div>
+                <div class="db-trip-bar__legend">
+                  <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#16a34a;"></div>Accepted <strong>11</strong></div>
+                  <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#4ade80;"></div>Under Review <strong>8</strong></div>
+                  <div class="db-trip-bar__leg"><div class="db-trip-bar__dot" style="background:#d1fae5;border:1px solid #86efac;"></div>New Applications <strong>12</strong></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Care programs list -->
+            <div class="db-row2" style="margin-bottom:24px;">
+              <div class="db-chart-card" style="padding:0;overflow:hidden;">
+                <div style="padding:16px 20px;border-bottom:1px solid #f3f4f6;font-size:14px;font-weight:700;color:#101828;">Active Programs</div>
+                <div style="padding:16px 20px;display:flex;flex-direction:column;gap:16px;">
+                  <div style="display:flex;gap:14px;align-items:flex-start;">
+                    <div style="width:48px;height:48px;border-radius:10px;background:#fef9c3;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🐯</div>
+                    <div style="flex:1;">
+                      <div style="font-size:14px;font-weight:700;color:#101828;">Tiger Conservation Program</div>
+                      <div style="font-size:12px;color:#9ca3af;margin-top:2px;">Ranthambore NP, Rajasthan &middot; 4 Weeks</div>
+                      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+                        <span style="font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;padding:2px 8px;border-radius:999px;">11 Accepted</span>
+                        <span style="font-size:11px;font-weight:600;background:#fffbeb;color:#92400e;padding:2px 8px;border-radius:999px;">8 Pending</span>
+                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:999px;">Jul 2026</span>
+                      </div>
+                    </div>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">View Apps</button>
+                  </div>
+                  <div style="height:1px;background:#f3f4f6;"></div>
+                  <div style="display:flex;gap:14px;align-items:flex-start;">
+                    <div style="width:48px;height:48px;border-radius:10px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🐢</div>
+                    <div style="flex:1;">
+                      <div style="font-size:14px;font-weight:700;color:#101828;">Marine Turtle Monitoring</div>
+                      <div style="font-size:12px;color:#9ca3af;margin-top:2px;">Odisha Coast &middot; 3 Weeks</div>
+                      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+                        <span style="font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;padding:2px 8px;border-radius:999px;">7 Accepted</span>
+                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:999px;">Sep 2026</span>
+                        <span style="font-size:11px;font-weight:600;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:999px;">Applications Open</span>
+                      </div>
+                    </div>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="showToast('Marine Turtle program opening soon')">View Apps</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent volunteer activity -->
+              <div class="db-chart-card">
+                <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:16px;">Recent Volunteer Activity</div>
+                <div style="display:flex;flex-direction:column;gap:14px;">
+                  <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#4ade80);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;">AR</div><div><div style="font-size:13px;color:#374151;"><strong>Arjun Rao</strong> <span style="color:#16a34a;font-weight:600;">accepted</span></div><div style="font-size:11px;color:#9ca3af;">Tiger Conservation &middot; 2 hrs ago</div></div></div>
+                  <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;">SR</div><div><div style="font-size:13px;color:#374151;"><strong>Sneha Reddy</strong> applied</div><div style="font-size:11px;color:#9ca3af;">Tiger Conservation &middot; 5 hrs ago</div></div></div>
+                  <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#f54900);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;">PK</div><div><div style="font-size:13px;color:#374151;"><strong>Priya K.</strong> submitted field report</div><div style="font-size:11px;color:#9ca3af;">Tiger Conservation &middot; Yesterday</div></div></div>
+                  <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:#f3e8ff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#9333ea;flex-shrink:0;">+8</div><div><div style="font-size:13px;color:#374151;"><strong>8 new applications</strong> received</div><div style="font-size:11px;color:#9ca3af;">Wildlife Conservation &middot; Yesterday</div></div></div>
+                </div>
+                <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f3f4f6;text-align:center;">
+                  <button style="font-size:12px;font-weight:600;color:#16a34a;background:none;border:none;cursor:pointer;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">View all applications &#8594;</button>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /db-view-care -->
 
         </div><!-- /db-main -->
 
@@ -1766,8 +1935,8 @@
         <div class="earn-hold-card">
           <div class="earn-hold__left">
             <div class="earn-hold__label">Holdings — Liable for End-of-Month Payout</div>
-            <div class="earn-hold__amount">₹1,85,000</div>
-            <div class="earn-hold__note">Confirmed bookings awaiting settlement · <strong>Auto-payout: 1 Aug 2026</strong></div>
+            <div class="earn-hold__amount">₹61,800</div>
+            <div class="earn-hold__note">From completed trips only · <strong>Auto-payout: 1 Aug 2026</strong> · Future trip bookings released after trip completion</div>
           </div>
           <div class="earn-hold__right">
             <div class="earn-hold__stat">
@@ -1775,8 +1944,8 @@
               <div class="earn-hold__stat-val earn-hold__stat-val--green">₹1,80,400</div>
             </div>
             <div class="earn-hold__stat">
-              <div class="earn-hold__stat-label">Pending (Jul so far)</div>
-              <div class="earn-hold__stat-val earn-hold__stat-val--amber">₹1,85,000</div>
+              <div class="earn-hold__stat-label">Pending (Jul · completed)</div>
+              <div class="earn-hold__stat-val earn-hold__stat-val--amber">₹61,800</div>
             </div>
             <div class="earn-hold__stat">
               <div class="earn-hold__stat-label">GDT Commission</div>
@@ -1787,10 +1956,10 @@
           <div class="earn-hold__track">
             <div class="earn-hold__track-label">
               <span>₹0</span>
-              <span>Jul progress · ₹1,85,000 of ₹3,00,000 target</span>
+              <span>Jul progress · ₹61,800 of ₹3,00,000 target</span>
               <span>₹3,00,000</span>
             </div>
-            <div class="earn-hold__bar"><div class="earn-hold__bar-fill" style="width:62%;"></div></div>
+            <div class="earn-hold__bar"><div class="earn-hold__bar-fill" style="width:21%;"></div></div>
           </div>
         </div>
 
@@ -2001,7 +2170,7 @@
           <div class="earn-card__head">
             <div>
               <div class="earn-card__title">Payout History</div>
-              <div class="earn-card__sub">Settlements transferred to your bank account</div>
+              <div class="earn-card__sub">Payouts released after trip completion · Pending = completed trip awaiting month-end settlement</div>
             </div>
             <button class="hd-btn" style="font-size:12px;padding:6px 14px;" onclick="showToast('Full statement downloaded')">Download Statement</button>
           </div>
@@ -2011,6 +2180,7 @@
                 <th>Tour / Booking</th>
                 <th>Reference</th>
                 <th>Booking Date</th>
+                <th>Trip Date</th>
                 <th>Gross</th>
                 <th>Net (after 12%)</th>
                 <th>Payout Date</th>
@@ -2018,12 +2188,23 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr style="background:#fffbeb;">
                 <td><div style="font-weight:600;color:#101828;">Himalayan Trek — 4 guests</div><div style="font-size:11px;color:#9ca3af;">Priya Krishnamurthy</div></td>
                 <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-5012</span></td>
                 <td>28 Jun 2026</td>
+                <td style="font-size:12px;color:#92400e;font-weight:500;">Sep 2026</td>
                 <td>₹1,40,000</td>
-                <td style="font-weight:600;color:#92400e;">₹1,23,200</td>
+                <td style="font-weight:600;color:#9ca3af;">₹1,23,200</td>
+                <td style="color:#9ca3af;font-size:12px;">After trip completes</td>
+                <td><span style="display:inline-block;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:#fef3c7;color:#92400e;white-space:nowrap;">Awaiting Trip</span></td>
+              </tr>
+              <tr>
+                <td><div style="font-weight:600;color:#101828;">Desert Camp — 5 guests</div><div style="font-size:11px;color:#9ca3af;">Ananya Sharma</div></td>
+                <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-5108</span></td>
+                <td>3 Jul 2026</td>
+                <td style="font-size:12px;color:#16a34a;font-weight:500;">Jul 2026 ✓</td>
+                <td>₹70,000</td>
+                <td style="font-weight:600;color:#92400e;">₹61,800</td>
                 <td style="color:#9ca3af;">1 Aug 2026</td>
                 <td><span class="hd-badge hd-badge--yellow">Pending</span></td>
               </tr>
@@ -2031,6 +2212,7 @@
                 <td><div style="font-weight:600;color:#101828;">Himalayan Trek — 2 guests</div></td>
                 <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-4103</span></td>
                 <td>15 Jun 2026</td>
+                <td style="font-size:12px;color:#16a34a;font-weight:500;">Jun 2026 ✓</td>
                 <td>₹70,000</td>
                 <td style="font-weight:600;color:#16a34a;">₹61,600</td>
                 <td>1 Jul 2026</td>
@@ -2040,6 +2222,7 @@
                 <td><div style="font-weight:600;color:#101828;">Spiti Valley — 3 guests</div></td>
                 <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-3844</span></td>
                 <td>2 Jun 2026</td>
+                <td style="font-size:12px;color:#16a34a;font-weight:500;">Jun 2026 ✓</td>
                 <td>₹1,35,000</td>
                 <td style="font-weight:600;color:#16a34a;">₹1,18,800</td>
                 <td>1 Jul 2026</td>
@@ -2049,6 +2232,7 @@
                 <td><div style="font-weight:600;color:#101828;">Himalayan Trek — 6 guests</div></td>
                 <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-3201</span></td>
                 <td>18 May 2026</td>
+                <td style="font-size:12px;color:#16a34a;font-weight:500;">May 2026 ✓</td>
                 <td>₹2,10,000</td>
                 <td style="font-weight:600;color:#16a34a;">₹1,84,800</td>
                 <td>1 Jun 2026</td>
@@ -2058,6 +2242,7 @@
                 <td><div style="font-weight:600;color:#101828;">Desert Camp — 8 guests</div></td>
                 <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-2887</span></td>
                 <td>5 May 2026</td>
+                <td style="font-size:12px;color:#16a34a;font-weight:500;">May 2026 ✓</td>
                 <td>₹1,44,000</td>
                 <td style="font-weight:600;color:#16a34a;">₹1,26,720</td>
                 <td>1 Jun 2026</td>
@@ -2067,6 +2252,7 @@
                 <td><div style="font-weight:600;color:#101828;">Kerala Houseboat — 4 guests</div></td>
                 <td><span style="font-family:monospace;color:#9ca3af;font-size:12px;">GDT-2026-2104</span></td>
                 <td>11 Apr 2026</td>
+                <td style="font-size:12px;color:#16a34a;font-weight:500;">Apr 2026 ✓</td>
                 <td>₹1,12,000</td>
                 <td style="font-weight:600;color:#16a34a;">₹98,560</td>
                 <td>1 May 2026</td>
@@ -2793,6 +2979,47 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (tab === 'applicants') renderTable();
     }
+
+    // ── DASHBOARD MODE TOGGLE (Marketplace ↔ Care) ──
+    function setDashMode(mode) {
+      const marketplace = document.getElementById('db-view-marketplace');
+      const care = document.getElementById('db-view-care');
+      const btnM = document.getElementById('btnMarketplace');
+      const btnC = document.getElementById('btnCare');
+      if (mode === 'marketplace') {
+        if (marketplace) marketplace.style.display = '';
+        if (care) care.style.display = 'none';
+        if (btnM) { btnM.classList.add('db-mode-btn--active'); btnM.classList.add('db-mode-btn'); }
+        if (btnC) btnC.classList.remove('db-mode-btn--active');
+      } else {
+        if (marketplace) marketplace.style.display = 'none';
+        if (care) care.style.display = '';
+        if (btnC) { btnC.classList.add('db-mode-btn--active'); }
+        if (btnM) btnM.classList.remove('db-mode-btn--active');
+      }
+    }
+
+    // ── LAST VISITED TRACKING ──
+    (function initLastVisited() {
+      const KEY = 'gdt_dash_last_visit';
+      const banner = document.getElementById('dbLastVisited');
+      const textEl = document.getElementById('dbLastVisitedText');
+      const prev = localStorage.getItem(KEY);
+      if (prev && banner && textEl) {
+        const diff = Date.now() - parseInt(prev, 10);
+        let label;
+        const mins = Math.floor(diff / 60000);
+        const hours = Math.floor(diff / 3600000);
+        const days = Math.floor(diff / 86400000);
+        if (mins < 2) label = 'just now';
+        else if (mins < 60) label = mins + ' minutes ago';
+        else if (hours < 24) label = hours + ' hour' + (hours > 1 ? 's' : '') + ' ago';
+        else label = days + ' day' + (days > 1 ? 's' : '') + ' ago';
+        textEl.textContent = 'Last visited: ' + label;
+        banner.style.display = 'flex';
+      }
+      localStorage.setItem(KEY, Date.now().toString());
+    })();
 
     function toggleNavGroup(group) {
       const el = document.getElementById('navgroup-' + group);
