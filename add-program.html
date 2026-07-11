@@ -186,16 +186,13 @@
     .ap-row-label { font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.4px; }
 
     /* ── AVAILABILITY TABLE ── */
-    .ap-avail-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
-    .ap-avail-table th { font-size: 12px; font-weight: 700; color: #374151; padding: 10px 12px; text-align: left; border-bottom: 2px solid #e5e7eb; }
-    .ap-avail-table td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; font-size: 13px; color: #374151; }
-    .ap-avail-table th:first-child, .ap-avail-table td:first-child { color: #f54900; font-weight: 600; }
-    .ap-avail-actions { display: flex; align-items: center; gap: 10px; }
-    .ap-avail-edit { font-size: 13px; color: #2563eb; cursor: pointer; font-weight: 500; }
-    .ap-avail-del { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #fecaca; background: none; color: #dc2626; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+    .ap-avail-input-row { display: flex; align-items: flex-end; gap: 12px; padding: 16px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 4px; }
+    .ap-avail-added-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 8px; }
+    .ap-avail-batch-name { font-size: 14px; font-weight: 600; color: #101828; flex: 1; }
+    .ap-avail-batch-date { font-size: 13px; color: #374151; min-width: 100px; }
+    .ap-avail-batch-cap { font-size: 13px; color: #6b7280; min-width: 70px; }
+    .ap-avail-del { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #fecaca; background: none; color: #dc2626; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .ap-avail-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #1d4ed8; }
-    .ap-avail-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 12px; align-items: end; padding: 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 12px; }
-    .ap-avail-row .ap-avail-del-row { width: 32px; height: 32px; border-radius: 999px; border: 1.5px solid #fecaca; background: none; color: #dc2626; cursor: pointer; font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 20px; }
 
     /* ── PRE-SCREENING ── */
     .ap-ps-section { border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin-bottom: 12px; background: #fff; }
@@ -402,7 +399,7 @@ const STEPS = [
 
 let currentStep = 0;
 let selectedQualities = [];
-let availRows = [{ batch: 'Batch 1', start: '', end: '', cap: 1 }, { batch: 'Batch 2', start: '', end: '', cap: 1 }];
+let availRows = [];
 
 // ── RENDER STEPPER (horizontal top) ──
 function renderStepper() {
@@ -1196,16 +1193,18 @@ function formatDate(dateStr) {
 
 // ── STEP 10: AVAILABILITY ──
 function stepAvailability() {
-  const tableRows = availRows.map((r, i) => {
-    const label = r.start ? `Batch ${i+1} · ${formatDate(r.start)}` : `Batch ${i+1}`;
-    return `<tr>
-      <td style="font-weight:600;color:#101828;">${label}</td>
-      <td><input class="ap-input" type="date" value="${r.start}" style="min-width:140px;" onchange="availRows[${i}].start=this.value;renderStep()"></td>
-      <td><input class="ap-input" type="date" value="${r.end}" style="min-width:140px;" onchange="availRows[${i}].end=this.value;renderStep()"></td>
-      <td><input class="ap-input" type="number" min="1" value="${r.cap}" style="width:80px;" onchange="availRows[${i}].cap=this.value"></td>
-      <td><button class="ap-avail-del" onclick="removeAvailRow(${i})">×</button></td>
-    </tr>`;
-  }).join('');
+  const addedRows = availRows.length > 0
+    ? availRows.map((r, i) => {
+        const label = r.start ? `Batch ${i+1} · ${formatDate(r.start)}` : `Batch ${i+1}`;
+        return `<div class="ap-avail-added-row">
+          <span class="ap-avail-batch-name">${label}</span>
+          <span class="ap-avail-batch-date">${r.start || '—'}</span>
+          <span class="ap-avail-batch-date">${r.end || '—'}</span>
+          <span class="ap-avail-batch-cap">${r.cap} seat${r.cap != 1 ? 's' : ''}</span>
+          <button class="ap-avail-del" onclick="removeAvailRow(${i})">×</button>
+        </div>`;
+      }).join('')
+    : '';
 
   return `
   <div class="ap-card" style="margin-bottom:20px;">
@@ -1218,12 +1217,30 @@ function stepAvailability() {
   <div class="ap-card">
     <div style="font-size:16px;font-weight:700;color:#101828;margin-bottom:4px;">Program Availability Dates</div>
     <div style="font-size:13px;color:#6b7280;margin-bottom:20px;">Add one or more availability periods for this program.</div>
-    <table class="ap-avail-table">
-      <thead><tr><th>Batch</th><th>Start Date</th><th>End Date</th><th>Capacity</th><th></th></tr></thead>
-      <tbody>${tableRows}</tbody>
-    </table>
-    <button class="ap-add-btn" style="margin-top:8px;" onclick="addAvailRow()">+ Add Batch</button>
-    <div class="ap-avail-note" style="margin-top:16px;">Batch name is auto-generated. Start date will be shown as suffix once set.</div>
+
+    <!-- Input row -->
+    <div class="ap-avail-input-row">
+      <div class="ap-field" style="flex:1;min-width:130px;">
+        <label class="ap-label">Start Date</label>
+        <input class="ap-input" type="date" id="avail-start">
+      </div>
+      <div class="ap-field" style="flex:1;min-width:130px;">
+        <label class="ap-label">End Date</label>
+        <input class="ap-input" type="date" id="avail-end">
+      </div>
+      <div class="ap-field" style="width:100px;">
+        <label class="ap-label">Capacity</label>
+        <input class="ap-input" type="number" min="1" value="1" id="avail-cap">
+      </div>
+      <button class="ap-btn-continue" style="align-self:flex-end;margin-bottom:0;" onclick="addAvailRow()">+ Add Batch</button>
+    </div>
+
+    <!-- Added batches -->
+    <div id="avail-list" style="margin-top:${availRows.length ? '12px' : '0'};">
+      ${addedRows}
+    </div>
+
+    <div class="ap-avail-note" style="margin-top:${availRows.length ? '16px' : '12px'};">Batch name is auto-generated. Start date will be shown as suffix once set.</div>
   </div>`;
 }
 
@@ -1368,8 +1385,49 @@ function closeModal() {
 
 // Availability
 function addAvailRow() {
-  availRows.push({ batch: 'Batch ' + (availRows.length + 1), start: '', end: '', cap: 1 });
-  renderStep();
+  const start = document.getElementById('avail-start').value;
+  const end = document.getElementById('avail-end').value;
+  const cap = parseInt(document.getElementById('avail-cap').value) || 1;
+  availRows.push({ start, end, cap });
+  const i = availRows.length - 1;
+  const r = availRows[i];
+  const label = r.start ? `Batch ${i+1} · ${formatDate(r.start)}` : `Batch ${i+1}`;
+  const list = document.getElementById('avail-list');
+  if (list) {
+    list.style.marginTop = '12px';
+    const div = document.createElement('div');
+    div.className = 'ap-avail-added-row';
+    div.dataset.idx = i;
+    div.innerHTML = `<span class="ap-avail-batch-name">${label}</span>
+      <span class="ap-avail-batch-date">${r.start || '—'}</span>
+      <span class="ap-avail-batch-date">${r.end || '—'}</span>
+      <span class="ap-avail-batch-cap">${cap} seat${cap !== 1 ? 's' : ''}</span>
+      <button class="ap-avail-del" onclick="removeAvailRowEl(this)">×</button>`;
+    list.appendChild(div);
+    // reset inputs
+    document.getElementById('avail-start').value = '';
+    document.getElementById('avail-end').value = '';
+    document.getElementById('avail-cap').value = '1';
+    // renumber
+    renumberAvailRows();
+  }
+}
+function removeAvailRowEl(btn) {
+  const row = btn.closest('.ap-avail-added-row');
+  const idx = parseInt(row.dataset.idx);
+  availRows.splice(idx, 1);
+  row.remove();
+  renumberAvailRows();
+}
+function renumberAvailRows() {
+  const list = document.getElementById('avail-list');
+  if (!list) return;
+  list.querySelectorAll('.ap-avail-added-row').forEach((el, i) => {
+    el.dataset.idx = i;
+    const r = availRows[i];
+    const label = r.start ? `Batch ${i+1} · ${formatDate(r.start)}` : `Batch ${i+1}`;
+    el.querySelector('.ap-avail-batch-name').textContent = label;
+  });
 }
 function removeAvailRow(i) {
   if (availRows.length <= 1) return;
