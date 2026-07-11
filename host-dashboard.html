@@ -3925,73 +3925,8 @@
     function showPreview(id) {
       const d = PREVIEW_DATA[id];
       if (!d) return;
-      const overlay = document.getElementById('previewOverlay');
-      const isDraft = d.status === 'draft' || d.status === 'inactive';
-
-      // Draft banner
-      const banner = document.getElementById('previewDraftBanner');
-      banner.style.display = isDraft ? 'flex' : 'none';
-
-      // Hero
-      document.getElementById('previewHeroImg').style.background = d.hero;
-      document.getElementById('previewType').textContent = d.type;
-      document.getElementById('previewHeroTitle').textContent = d.title;
-
-      // Kind
-      document.getElementById('previewKind').textContent = d.kind;
-      document.getElementById('previewBatchLabel').textContent = d.kind === 'program' ? 'Available Batches' : 'Upcoming Batches';
-      document.getElementById('previewIncLabel').textContent = d.kind === 'program' ? "What's Provided" : "What's Included";
-
-      // Meta
-      const metaIcons = {
-        location: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg>',
-        duration: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-        price: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-        group: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-      };
-      document.getElementById('previewMeta').innerHTML = [
-        [metaIcons.location, d.location],
-        [metaIcons.duration, d.duration],
-        [metaIcons.price, d.price],
-        [metaIcons.group, d.groupSize],
-      ].map(([icon, text]) => `<div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#374151;">${icon}<span>${text}</span></div>`).join('');
-
-      // Description
-      document.getElementById('previewDesc').textContent = d.desc;
-
-      // Highlights
-      document.getElementById('previewHighlights').innerHTML = d.highlights.map(h =>
-        `<div style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#374151;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12" stroke="#f54900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${h}</span></div>`
-      ).join('');
-
-      // Included
-      document.getElementById('previewInc').innerHTML = d.inc.map(i =>
-        `<div style="display:flex;align-items:flex-start;gap:7px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${i}</span></div>`
-      ).join('');
-
-      // Requirements
-      document.getElementById('previewReqs').innerHTML = d.reqs.map(r =>
-        `<div style="display:flex;align-items:flex-start;gap:7px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="9" stroke="#6b7280" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/></svg><span>${r}</span></div>`
-      ).join('');
-
-      // Batches
-      document.getElementById('previewBatches').innerHTML = d.batches.map(b => {
-        const spotColor = b.status === 'full' ? '#dc2626' : b.status === 'paused' ? '#9ca3af' : '#16a34a';
-        const spotBg = b.status === 'full' ? '#fef2f2' : b.status === 'paused' ? '#f3f4f6' : '#f0fdf4';
-        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;flex-wrap:wrap;gap:8px;">
-          <div style="font-size:13px;font-weight:700;color:#101828;">${b.label}</div>
-          <div style="font-size:13px;color:#374151;">${b.dates}</div>
-          <span style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:${spotBg};color:${spotColor};">${b.spots}</span>
-        </div>`;
-      }).join('');
-
-      overlay.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePreview() {
-      document.getElementById('previewOverlay').style.display = 'none';
-      document.body.style.overflow = '';
+      localStorage.setItem('gdt_preview', JSON.stringify({ id, ...d }));
+      window.open('volunteer-detail.html?preview=' + encodeURIComponent(id), '_blank');
     }
 
     function showToast(msg) {

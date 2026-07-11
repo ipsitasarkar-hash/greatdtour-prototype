@@ -1324,6 +1324,102 @@
       document.getElementById('batchDeadline').textContent = d.deadline;
       document.getElementById('batchDetail').classList.add('visible');
     }
+
+    // ---- Host Dashboard Preview Injection ----
+    (function applyDashPreview() {
+      const params = new URLSearchParams(window.location.search);
+      if (!params.has('preview')) return;
+      const raw = localStorage.getItem('gdt_preview');
+      if (!raw) return;
+      let d;
+      try { d = JSON.parse(raw); } catch(e) { return; }
+
+      // Draft banner
+      if (d.status === 'draft' || d.status === 'inactive') {
+        const banner = document.createElement('div');
+        banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#f54900;color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:600;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;gap:10px;';
+        banner.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Draft Preview — This listing is not yet published and is only visible to you';
+        document.body.insertBefore(banner, document.body.firstChild);
+        // Push nav down so it's not hidden under banner
+        const nav = document.getElementById('nav');
+        if (nav) nav.style.top = banner.offsetHeight + 'px';
+      }
+
+      // Page title
+      document.title = d.title + ' — Great D\'Tour Preview';
+
+      // Hero
+      const heroImg = document.querySelector('.exp-hero img');
+      if (heroImg && d.hero) {
+        heroImg.style.display = 'none';
+        const heroDiv = document.createElement('div');
+        heroDiv.style.cssText = 'width:100%;height:100%;' + d.hero;
+        heroImg.parentNode.insertBefore(heroDiv, heroImg);
+      }
+
+      // Category + title
+      const catEl = document.querySelector('.exp-category');
+      if (catEl) catEl.textContent = d.type || d.kind;
+      const h1 = document.querySelector('.exp-title-h1');
+      if (h1) h1.textContent = d.title;
+
+      // Meta items
+      const metaItems = document.querySelectorAll('.exp-meta-item');
+      const metas = [d.location, d.duration, d.price, d.groupSize];
+      metaItems.forEach((el, i) => {
+        if (metas[i] !== undefined) {
+          // Replace text node while keeping the SVG icon
+          const icon = el.querySelector('svg');
+          el.textContent = '';
+          if (icon) el.appendChild(icon);
+          el.appendChild(document.createTextNode(' ' + metas[i]));
+        }
+      });
+
+      // Vol tags
+      const tagsEl = document.querySelector('.vol-tags');
+      if (tagsEl && d.highlights && d.highlights.length) {
+        tagsEl.innerHTML = d.highlights.slice(0, 4).map(h =>
+          `<span class="vol-tag">${h.split(' ').slice(0, 3).join(' ')}</span>`
+        ).join('');
+      }
+
+      // About / description
+      const aboutEl = document.querySelector('.exp-about__text');
+      if (aboutEl && d.desc) aboutEl.textContent = d.desc;
+
+      // Highlights grid
+      const hlGrid = document.querySelector('.exp-highlights-grid');
+      if (hlGrid && d.highlights) {
+        hlGrid.innerHTML = d.highlights.map(h =>
+          `<div class="exp-highlight-item"><div class="exp-highlight-dot">✓</div><p class="exp-highlight-text">${h}</p></div>`
+        ).join('');
+      }
+
+      // Included section — replace first include list found
+      const incSections = document.querySelectorAll('.vol-covered-card');
+      if (incSections.length && d.inc) {
+        const incCard = incSections[0];
+        const listEl = incCard.querySelector('ul');
+        if (listEl) {
+          listEl.innerHTML = d.inc.map(i => `<li>${i}</li>`).join('');
+        }
+      }
+
+      // Batch grid — replace with preview batches
+      const batchGrid = document.querySelector('.vol-batch-grid');
+      if (batchGrid && d.batches) {
+        batchGrid.innerHTML = d.batches.map((b, i) => {
+          const isFull = b.status === 'full';
+          const isPaused = b.status === 'paused';
+          return `<div class="vol-batch-card${isFull ? ' full' : ''}" data-batch="b${i}" onclick="selectBatch(this)" style="${isFull ? 'opacity:0.6;' : ''}">
+            <div class="vol-batch-card__dates">${b.dates}</div>
+            <div class="vol-batch-card__label">${b.label}</div>
+            <div class="vol-batch-card__spots" style="color:${isFull ? '#dc2626' : isPaused ? '#9ca3af' : '#16a34a'}">${b.spots}</div>
+          </div>`;
+        }).join('');
+      }
+    })();
   </script>
 </body>
 </html>
