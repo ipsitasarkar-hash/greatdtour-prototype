@@ -1532,13 +1532,30 @@
 
       <!-- ══ LISTINGS TAB ══ -->
       <div class="hd-panel" id="panel-listings">
+        <style>
+          .expand-row { display:none; }
+          .expand-row.is-open { display:table-row; }
+          .expand-cell { padding:0 !important; border-bottom:2px solid #e5e7eb !important; background:#f9fafb; }
+          .expand-inner { padding:16px 20px 20px 56px; }
+          .expand-title { font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px; }
+          .batch-table { width:100%; border-collapse:collapse; }
+          .batch-table th { font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.4px;padding:6px 12px;text-align:left;border-bottom:1px solid #e5e7eb;background:#f3f4f6; }
+          .batch-table td { font-size:12px;color:#374151;padding:9px 12px;border-bottom:1px solid #f3f4f6; }
+          .batch-table tr:last-child td { border-bottom:none; }
+          .expand-chevron { width:18px;height:18px;transition:transform 0.2s;flex-shrink:0;color:#9ca3af; }
+          .expand-chevron.is-open { transform:rotate(180deg); }
+          .row-actions { display:flex;gap:6px;align-items:center;flex-wrap:wrap; }
+          .hd-table__btn--danger { color:#dc2626;border-color:#fecaca; }
+          .hd-table__btn--danger:hover { background:#fef2f2;border-color:#dc2626; }
+        </style>
+
         <div class="listings-panel-head">
           <div>
             <h1 class="hd-page-title">My Tours</h1>
             <p class="hd-page-subtitle">Manage and publish your tour listings.</p>
           </div>
-          <button class="listings-add-btn" onclick="showToast('Listing builder coming soon')">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <button class="hd-btn hd-btn--primary" onclick="showToast('Listing builder coming soon')">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="vertical-align:-1px;margin-right:5px;"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             Add New Listing
           </button>
         </div>
@@ -1546,6 +1563,7 @@
           <table class="hd-table">
             <thead>
               <tr>
+                <th style="width:28px;"></th>
                 <th>Tour Name</th>
                 <th>Location</th>
                 <th>Price</th>
@@ -1556,60 +1574,236 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+
+              <!-- Himalayan Trek — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('tour-1')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-tour-1" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td><div class="hd-table__primary">Himalayan Trek &amp; Yoga Immersion</div></td>
-                <td>Himachal Pradesh, India</td>
+                <td>Himachal Pradesh</td>
                 <td>₹35,000/person</td>
                 <td><span style="color:#f59e0b;">★</span> 4.9 <span style="color:#9ca3af;">(127)</span></td>
                 <td>45</td>
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                  </div>
+                </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="tour-1">
+                <td class="expand-cell" colspan="8">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>10–24 Jan 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>7–21 Feb 2026</td><td>12</td><td>11</td><td>1 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>5–19 Apr 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>3–17 May 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 5</td><td>14–28 Jun 2026</td><td>12</td><td>10</td><td>2 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 6</td><td>12–26 Sep 2026</td><td>12</td><td>4</td><td>8 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Spiti Valley — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('tour-2')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-tour-2" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td><div class="hd-table__primary">Spiti Valley Winter Expedition</div></td>
-                <td>Himachal Pradesh, India</td>
+                <td>Himachal Pradesh</td>
                 <td>₹45,000/person</td>
                 <td><span style="color:#f59e0b;">★</span> 4.8 <span style="color:#9ca3af;">(93)</span></td>
                 <td>38</td>
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                  </div>
+                </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="tour-2">
+                <td class="expand-cell" colspan="8">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>15–29 Jan 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>12–26 Mar 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>18 Jun–2 Jul 2026</td><td>10</td><td>9</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>15–29 Nov 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Desert Camp — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('tour-3')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-tour-3" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td><div class="hd-table__primary">Desert Camp &amp; Folk Music Retreat</div></td>
-                <td>Rajasthan, India</td>
+                <td>Rajasthan</td>
                 <td>₹18,000/person</td>
                 <td><span style="color:#f59e0b;">★</span> 4.7 <span style="color:#9ca3af;">(156)</span></td>
                 <td>62</td>
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                  </div>
+                </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="tour-3">
+                <td class="expand-cell" colspan="8">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>3–7 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>14–18 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>4–8 Feb 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>11–15 Mar 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 5</td><td>1–5 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 6</td><td>3–7 Jul 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 7</td><td>2–6 Oct 2026</td><td>8</td><td>7</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                        <tr><td>Batch 8</td><td>6–10 Nov 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                        <tr><td>Batch 9</td><td>4–8 Dec 2026</td><td>8</td><td>0</td><td>8 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Forest Bathing — Inactive (Draft-like: no Sold Out/Cancel, has Activate) -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('tour-4')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-tour-4" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td><div class="hd-table__primary">Forest Bathing &amp; Mindfulness Walk</div></td>
-                <td>Uttarakhand, India</td>
+                <td>Uttarakhand</td>
                 <td>₹12,000/person</td>
                 <td><span style="color:#f59e0b;">★</span> 4.9 <span style="color:#9ca3af;">(84)</span></td>
                 <td>31</td>
                 <td><span class="hd-badge hd-badge--gray">Inactive</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Activate coming soon')">Activate</button></div></td>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 12px;" onclick="showToast('Tour activated')">Activate</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour deleted')">Delete</button>
+                  </div>
+                </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="tour-4">
+                <td class="expand-cell" colspan="8">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>8–12 Jan 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>22–26 Feb 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>TBD</td><td>10</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Paused</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Kerala Houseboat — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('tour-5')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-tour-5" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td><div class="hd-table__primary">Kerala Houseboat &amp; Ayurveda Retreat</div></td>
-                <td>Kerala, India</td>
+                <td>Kerala</td>
                 <td>₹28,000/person</td>
                 <td><span style="color:#f59e0b;">★</span> 4.8 <span style="color:#9ca3af;">(109)</span></td>
                 <td>52</td>
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                  </div>
+                </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="tour-5">
+                <td class="expand-cell" colspan="8">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>5–9 Feb 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>2–6 Mar 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>11–15 Apr 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>16–20 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 5</td><td>20–24 Jun 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 6</td><td>18–22 Jul 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                        <tr><td>Batch 7</td><td>22–26 Aug 2026</td><td>8</td><td>1</td><td>7 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Goa Coastal Walk — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('tour-6')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-tour-6" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td><div class="hd-table__primary">Goa Coastal Walk &amp; Heritage Trail</div></td>
-                <td>Goa, India</td>
+                <td>Goa</td>
                 <td>₹9,500/person</td>
                 <td><span style="color:#f59e0b;">★</span> 4.6 <span style="color:#9ca3af;">(78)</span></td>
                 <td>41</td>
                 <td><span class="hd-badge hd-badge--green">Active</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button><button class="hd-table__btn" onclick="showToast('Preview coming soon')">Preview</button></div></td>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Sold out applied')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Tour cancelled')">Cancel</button>
+                  </div>
+                </td>
               </tr>
+              <tr class="expand-row" id="tour-6">
+                <td class="expand-cell" colspan="8">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>10–12 Jan 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>7–9 Feb 2026</td><td>15</td><td>14</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>14–16 Mar 2026</td><td>15</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>18–20 Apr 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 5</td><td>9–11 May 2026</td><td>15</td><td>14</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 6</td><td>20–22 Jun 2026</td><td>15</td><td>15</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 7</td><td>11–13 Jul 2026</td><td>15</td><td>9</td><td>6 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                        <tr><td>Batch 8</td><td>15–17 Aug 2026</td><td>15</td><td>3</td><td>12 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -2373,180 +2567,269 @@
           <table class="prog-table">
             <thead>
               <tr>
+                <th style="width:28px;"></th>
                 <th>Program</th>
                 <th>Category</th>
                 <th>Duration</th>
-                <th>Batch</th>
                 <th>Applications</th>
                 <th>Volunteers</th>
                 <th>Next Run</th>
                 <th>Status</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+
+              <!-- Tiger Conservation — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('prog-1')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-prog-1" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#fef9c3;">🐯</div>
-                    <div>
-                      <div class="prog-name">Tiger Conservation Program</div>
-                      <div class="prog-location">Ranthambore NP, Rajasthan</div>
-                    </div>
+                    <div><div class="prog-name">Tiger Conservation Program</div><div class="prog-location">Ranthambore NP, Rajasthan</div></div>
                   </div>
                 </td>
                 <td>Wildlife</td>
                 <td>4 Weeks</td>
-                <td>Batch 3</td>
-                <td>
-                  <div style="font-size:13px;">19 total</div>
-                  <div style="font-size:11px;color:#9ca3af;">11 new · 8 review</div>
-                </td>
+                <td><div style="font-size:13px;">19 total</div><div style="font-size:11px;color:#9ca3af;">11 new · 8 review</div></td>
                 <td style="font-weight:700;color:#101828;">11</td>
                 <td style="font-weight:600;">Jul 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="prog-1">
+                <td class="expand-cell" colspan="9">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>5–31 Jan 2026</td><td>12</td><td>12</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>1–28 Mar 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>6 Jul–2 Aug 2026</td><td>12</td><td>11</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Marine Turtle — Applications Open -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('prog-2')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-prog-2" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#e0f2fe;">🐢</div>
-                    <div>
-                      <div class="prog-name">Marine Turtle Monitoring</div>
-                      <div class="prog-location">Odisha Coast, Odisha</div>
-                    </div>
+                    <div><div class="prog-name">Marine Turtle Monitoring</div><div class="prog-location">Odisha Coast, Odisha</div></div>
                   </div>
                 </td>
                 <td>Marine</td>
                 <td>3 Weeks</td>
-                <td>Batch 2</td>
-                <td>
-                  <div style="font-size:13px;">7 total</div>
-                  <div style="font-size:11px;color:#9ca3af;">7 new</div>
-                </td>
+                <td><div style="font-size:13px;">7 total</div><div style="font-size:11px;color:#9ca3af;">7 new</div></td>
                 <td style="font-weight:700;color:#101828;">7</td>
                 <td style="font-weight:600;">Sep 2026</td>
                 <td><span class="prog-status-badge prog-status--open">Applications Open</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Marine Turtle applications opening soon')">Applications</button>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="prog-2">
+                <td class="expand-cell" colspan="9">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>Feb–Mar 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>1–21 Sep 2026</td><td>10</td><td>7</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Wildlife Conservation — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('prog-3')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-prog-3" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#f0fdf4;">🌿</div>
-                    <div>
-                      <div class="prog-name">Wildlife Conservation</div>
-                      <div class="prog-location">Jim Corbett, Uttarakhand</div>
-                    </div>
+                    <div><div class="prog-name">Wildlife Conservation</div><div class="prog-location">Jim Corbett, Uttarakhand</div></div>
                   </div>
                 </td>
                 <td>Wildlife</td>
                 <td>2 Weeks</td>
-                <td>Batch 5</td>
-                <td>
-                  <div style="font-size:13px;">14 total</div>
-                  <div style="font-size:11px;color:#9ca3af;">8 new · 6 review</div>
-                </td>
+                <td><div style="font-size:13px;">14 total</div><div style="font-size:11px;color:#9ca3af;">8 new · 6 review</div></td>
                 <td style="font-weight:700;color:#101828;">5</td>
                 <td style="font-weight:600;">Aug 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="prog-3">
+                <td class="expand-cell" colspan="9">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>5–18 Jan 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>1–14 Mar 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>15–28 May 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>20 Jun–3 Jul 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 5</td><td>10–23 Aug 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Organic Farming — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('prog-4')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-prog-4" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#fef3c7;">🌾</div>
-                    <div>
-                      <div class="prog-name">Organic Farming &amp; Permaculture</div>
-                      <div class="prog-location">Auroville, Tamil Nadu</div>
-                    </div>
+                    <div><div class="prog-name">Organic Farming &amp; Permaculture</div><div class="prog-location">Auroville, Tamil Nadu</div></div>
                   </div>
                 </td>
                 <td>Agriculture</td>
                 <td>2 Weeks</td>
-                <td>Batch 4</td>
-                <td>
-                  <div style="font-size:13px;">6 total</div>
-                  <div style="font-size:11px;color:#9ca3af;">6 new</div>
-                </td>
+                <td><div style="font-size:13px;">6 total</div><div style="font-size:11px;color:#9ca3af;">6 new</div></td>
                 <td style="font-weight:700;color:#101828;">4</td>
                 <td style="font-weight:600;">Aug 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="prog-4">
+                <td class="expand-cell" colspan="9">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>10–23 Feb 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>7–20 Apr 2026</td><td>8</td><td>7</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>2–15 Jun 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>4–17 Aug 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Community Teaching — Active -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('prog-5')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-prog-5" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#eff6ff;">📚</div>
-                    <div>
-                      <div class="prog-name">Community Teaching</div>
-                      <div class="prog-location">Dharavi, Mumbai</div>
-                    </div>
+                    <div><div class="prog-name">Community Teaching</div><div class="prog-location">Dharavi, Mumbai</div></div>
                   </div>
                 </td>
                 <td>Education</td>
                 <td>1 Month</td>
-                <td>Batch 6</td>
-                <td>
-                  <div style="font-size:13px;">5 total</div>
-                  <div style="font-size:11px;color:#9ca3af;">5 new</div>
-                </td>
+                <td><div style="font-size:13px;">5 total</div><div style="font-size:11px;color:#9ca3af;">5 new</div></td>
                 <td style="font-weight:700;color:#101828;">3</td>
                 <td style="font-weight:600;">Sep 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">Applications</button>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-table__btn" onclick="showToast('Marked sold out')">Sold Out</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program cancelled')">Cancel</button>
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr class="expand-row" id="prog-5">
+                <td class="expand-cell" colspan="9">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>3 Feb–2 Mar 2026</td><td>6</td><td>6</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 2</td><td>4 May–3 Jun 2026</td><td>6</td><td>5</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 3</td><td>7 Jul–5 Aug 2026</td><td>6</td><td>3</td><td>3 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td></tr>
+                        <tr><td>Batch 4</td><td>1–30 Sep 2026</td><td>6</td><td>3</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td></tr>
+                        <tr><td>Batch 5</td><td>2 Nov–1 Dec 2026</td><td>6</td><td>0</td><td>6 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td></tr>
+                        <tr><td>Batch 6</td><td>TBD 2027</td><td>6</td><td>0</td><td>—</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Planned</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Women's Craft Co-op — Draft -->
+              <tr style="cursor:pointer;" onclick="toggleExpand('prog-6')">
+                <td style="padding:14px 0 14px 14px;">
+                  <svg class="expand-chevron" id="chev-prog-6" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </td>
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#fdf4ff;">🧵</div>
-                    <div>
-                      <div class="prog-name">Women's Craft Co-op</div>
-                      <div class="prog-location">Kutch, Gujarat</div>
-                    </div>
+                    <div><div class="prog-name">Women's Craft Co-op</div><div class="prog-location">Kutch, Gujarat</div></div>
                   </div>
                 </td>
                 <td>Livelihood</td>
                 <td>2 Weeks</td>
-                <td>Batch 2</td>
-                <td>
-                  <div style="font-size:13px;">—</div>
-                  <div style="font-size:11px;color:#9ca3af;">Not yet published</div>
-                </td>
+                <td><div style="font-size:13px;color:#9ca3af;">—</div><div style="font-size:11px;color:#9ca3af;">Not yet published</div></td>
                 <td style="color:#9ca3af;">—</td>
                 <td style="color:#9ca3af;">TBD</td>
                 <td><span class="prog-status-badge prog-status--draft">Draft</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 10px;" onclick="showToast('Publish program coming soon')">Publish</button>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 10px;" onclick="showToast('Edit program opening soon')">Edit</button>
+                <td onclick="event.stopPropagation()">
+                  <div class="row-actions">
+                    <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:5px 12px;" onclick="showToast('Program published')">Publish</button>
+                    <button class="hd-table__btn" onclick="showToast('Edit coming soon')">Edit</button>
+                    <button class="hd-table__btn hd-table__btn--danger" onclick="showToast('Program deleted')">Delete</button>
                   </div>
                 </td>
               </tr>
+              <tr class="expand-row" id="prog-6">
+                <td class="expand-cell" colspan="9">
+                  <div class="expand-inner">
+                    <div class="expand-title">Batch Breakdown</div>
+                    <table class="batch-table">
+                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Availability</th><th>Status</th></tr></thead>
+                      <tbody>
+                        <tr><td>Batch 1</td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td></tr>
+                        <tr><td>Batch 2</td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -3308,6 +3591,14 @@
       }
       localStorage.setItem(KEY, Date.now().toString());
     })();
+
+    function toggleExpand(id) {
+      const row = document.getElementById(id);
+      const chev = document.getElementById('chev-' + id);
+      if (!row) return;
+      const isOpen = row.classList.toggle('is-open');
+      if (chev) chev.classList.toggle('is-open', isOpen);
+    }
 
     function toggleNavGroup(group) {
       const el = document.getElementById('navgroup-' + group);
