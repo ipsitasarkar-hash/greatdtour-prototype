@@ -198,24 +198,57 @@
     .ap-avail-row .ap-avail-del-row { width: 32px; height: 32px; border-radius: 999px; border: 1.5px solid #fecaca; background: none; color: #dc2626; cursor: pointer; font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 20px; }
 
     /* ── PRE-SCREENING ── */
-    .ap-ps-section { border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
-    .ap-ps-header { display: flex; align-items: center; padding: 14px 18px; cursor: pointer; background: #fff; user-select: none; }
-    .ap-ps-chevron { width: 16px; height: 16px; color: #9ca3af; transition: transform 0.2s; margin-right: 10px; }
+    .ap-ps-section { border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin-bottom: 12px; background: #fff; }
+    .ap-ps-header { display: flex; align-items: center; padding: 14px 18px; cursor: pointer; background: #fff; user-select: none; gap: 10px; }
+    .ap-ps-chevron { width: 16px; height: 16px; color: #9ca3af; transition: transform 0.2s; flex-shrink: 0; }
     .ap-ps-section.is-open .ap-ps-chevron { transform: rotate(90deg); }
     .ap-ps-title { font-size: 14px; font-weight: 600; color: #101828; flex: 1; }
-    .ap-ps-count { font-size: 12px; color: #9ca3af; margin-right: 12px; }
-    .ap-ps-add-btn { padding: 6px 14px; background: #2563eb; color: #fff; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
-    .ap-ps-add-btn:hover { background: #1d4ed8; }
-    .ap-ps-body { display: none; padding: 4px 18px 18px; background: #fafafa; border-top: 1px solid #e5e7eb; }
+    .ap-ps-count { font-size: 12px; color: #9ca3af; white-space: nowrap; }
+    .ap-ps-add-btn { padding: 7px 14px; background: #f54900; color: #fff; border: none; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .ap-ps-add-btn:hover { background: #d93f00; }
+    .ap-ps-body { display: none; border-top: 1px solid #e5e7eb; }
     .ap-ps-section.is-open .ap-ps-body { display: block; }
-    .ap-skill-badge-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #f3f4f6; font-size: 13px; font-weight: 700; color: #374151; margin-right: 10px; flex-shrink: 0; }
-    .ap-skill-badge-num--orange { background: #fff7ed; color: #f54900; }
-    .ap-auto-asked-card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; background: #fff; }
-    .ap-auto-q { display: flex; align-items: flex-start; gap: 12px; padding: 13px 0; border-bottom: 1px solid #f3f4f6; }
-    .ap-auto-q:last-child { border-bottom: none; padding-bottom: 0; }
-    .ap-auto-q__num { font-size: 13px; font-weight: 600; color: #9ca3af; flex-shrink: 0; min-width: 18px; }
+
+    /* Skill-based question rows */
+    .ap-sbq-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; }
+    .ap-sbq-row:last-child { border-bottom: none; }
+    .ap-sbq-num { font-size: 14px; font-weight: 700; color: #374151; flex-shrink: 0; min-width: 18px; padding-top: 2px; }
+    .ap-sbq-body { flex: 1; }
+    .ap-sbq-text { font-size: 14px; font-weight: 500; color: #101828; line-height: 1.5; margin-bottom: 4px; }
+    .ap-sbq-source { font-size: 11px; font-weight: 600; color: #9ca3af; letter-spacing: 0.04em; text-transform: uppercase; }
+    .ap-sbq-right { display: flex; align-items: flex-start; gap: 16px; flex-shrink: 0; }
+    .ap-sbq-required { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #374151; padding-top: 2px; white-space: nowrap; }
+    .ap-sbq-required input[type=checkbox] { accent-color: #f54900; width: 15px; height: 15px; cursor: pointer; }
+    .ap-sbq-required.is-checked { color: #f54900; font-weight: 600; }
+    .ap-sbq-ans-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 170px; }
+    .ap-sbq-ans-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; }
+    .ap-sbq-proof { font-size: 12px; color: #2563eb; margin-top: 2px; }
+
+    /* Cultural fit / non-skill question rows */
+    .ap-psq-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; }
+    .ap-psq-row:last-child { border-bottom: none; }
+    .ap-psq-num { font-size: 14px; font-weight: 700; color: #374151; flex-shrink: 0; min-width: 18px; padding-top: 2px; }
+    .ap-psq-text { font-size: 14px; color: #374151; flex: 1; line-height: 1.5; }
+    .ap-psq-right { display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0; min-width: 220px; }
+    .ap-psq-ans-wrap { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .ap-psq-ans-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    /* Badge counter */
+    .ap-skill-badge-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #f3f4f6; font-size: 13px; font-weight: 700; color: #374151; flex-shrink: 0; }
+    .ap-skill-badge-num--orange { background: #fff7ed; color: #f54900; border: 1.5px solid #fed7aa; }
+    .ap-skill-badge-num--dark { background: #101828; color: #fff; }
+
+    /* Auto Asked */
+    .ap-auto-asked-card { border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; overflow: hidden; }
+    .ap-auto-q { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; }
+    .ap-auto-q:last-child { border-bottom: none; }
+    .ap-auto-q__num { font-size: 14px; font-weight: 600; color: #9ca3af; flex-shrink: 0; min-width: 20px; padding-top: 2px; }
     .ap-auto-q__text { font-size: 14px; color: #374151; flex: 1; line-height: 1.5; }
-    .ap-auto-q__ans { flex-shrink: 0; }
+    .ap-auto-q__ans { flex-shrink: 0; min-width: 180px; display: flex; justify-content: flex-end; }
+    .ap-auto-q__confirm { display: inline-flex; align-items: center; padding: 5px 12px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 12px; font-weight: 600; color: #6b7280; white-space: nowrap; }
+    .ap-guest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px 20px 16px 52px; background: #f9fafb; border-top: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6; }
+    .ap-guest-field { display: flex; flex-direction: column; gap: 4px; }
+    .ap-guest-field label { font-size: 12px; font-weight: 500; color: #374151; }
 
     /* ── MODAL ── */
     .ap-modal-overlay { position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; padding: 24px; }
@@ -955,91 +988,200 @@ function stepHealthSafety() {
 // ── STEP 9: PRE-SCREENING ──
 function stepPreScreening() {
   return `
+  <!-- SKILL-BASED QUESTIONS -->
   <div class="ap-card" style="margin-bottom:16px;">
-    <div style="display:flex;align-items:flex-start;gap:12px;">
-      <span class="ap-skill-badge-num ap-skill-badge-num--orange">0</span>
-      <div>
-        <div style="font-size:18px;font-weight:700;color:#101828;margin-bottom:4px;">Skill-Based Questions</div>
-        <div style="font-size:13px;color:#6b7280;margin-bottom:10px;">Questions are generated automatically from the proof type of each selected primary and secondary skill. Mark Required only when a No answer should fail the applicant.</div>
-        <p style="font-size:13px;color:#374151;margin:0 0 6px;">Select a primary or secondary skill with a Certification, Portfolio, or Experience proof type to generate its question.</p>
-        <p style="font-size:13px;color:#374151;margin:0;">Add up to 10 questions and choose the accepted answer for each.</p>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+      <span class="ap-skill-badge-num ap-skill-badge-num--orange">2</span>
+      <div style="font-size:18px;font-weight:700;color:#101828;">Skill-Based Questions</div>
+    </div>
+    <div style="font-size:13px;color:#6b7280;margin-bottom:20px;padding-left:40px;">Questions are generated automatically from the proof type of each selected primary and secondary skill. Mark Required only when a No answer should fail the applicant.</div>
+
+    <div class="ap-sbq-row">
+      <span class="ap-sbq-num">1</span>
+      <div class="ap-sbq-body">
+        <div class="ap-sbq-text">Do you have prior experience or practice in <u>Animal behaviour observation</u>?</div>
+        <div class="ap-sbq-source">Primary Skill — EXPERIENCE</div>
+      </div>
+      <div class="ap-sbq-right">
+        <div class="ap-sbq-ans-wrap">
+          <div class="ap-sbq-ans-label">Accepted answer</div>
+          <select class="ap-select" style="min-width:160px;" onchange="handleSBQChange(this,'sbq-proof-1')">
+            <option>I will Decide</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+          <div id="sbq-proof-1" style="display:none;margin-top:6px;">
+            <select class="ap-select" style="min-width:160px;border-color:#2563eb;color:#2563eb;">
+              <option value="" disabled selected>Select proof type</option>
+              <option>Certificate</option>
+              <option>Portfolio / Work samples</option>
+              <option>Reference letter</option>
+              <option>LinkedIn profile</option>
+              <option>Self-declaration</option>
+            </select>
+          </div>
+        </div>
+        <label class="ap-sbq-required is-checked" style="padding-top:22px;">
+          <input type="checkbox" checked onchange="this.closest('.ap-sbq-required').classList.toggle('is-checked',this.checked)"> Required
+        </label>
+      </div>
+    </div>
+
+    <div class="ap-sbq-row">
+      <span class="ap-sbq-num">2</span>
+      <div class="ap-sbq-body">
+        <div class="ap-sbq-text">Do you have a portfolio or work samples demonstrating your <u>Birdwatching / ornithology</u>?</div>
+        <div class="ap-sbq-source">Secondary Skill — PORTFOLIO</div>
+      </div>
+      <div class="ap-sbq-right">
+        <div class="ap-sbq-ans-wrap">
+          <div class="ap-sbq-ans-label">Accepted answer</div>
+          <select class="ap-select" style="min-width:160px;" onchange="handleSBQChange(this,'sbq-proof-2')">
+            <option>I will Decide</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+          <div id="sbq-proof-2" style="display:none;margin-top:6px;">
+            <select class="ap-select" style="min-width:160px;border-color:#2563eb;color:#2563eb;">
+              <option value="" disabled selected>Select proof type</option>
+              <option>Certificate</option>
+              <option>Portfolio / Work samples</option>
+              <option>Reference letter</option>
+              <option>LinkedIn profile</option>
+              <option>Self-declaration</option>
+            </select>
+          </div>
+        </div>
+        <label class="ap-sbq-required" style="padding-top:22px;">
+          <input type="checkbox" onchange="this.closest('.ap-sbq-required').classList.toggle('is-checked',this.checked)"> Required
+        </label>
+      </div>
+    </div>
+
+    <div style="padding:14px 20px 0;font-size:13px;color:#6b7280;">Add up to 10 questions and choose the accepted answer for each.</div>
+  </div>
+
+  <!-- CULTURAL FIT -->
+  <div class="ap-ps-section is-open" id="ps-cultural">
+    <div class="ap-ps-header" onclick="togglePS('ps-cultural')">
+      <svg class="ap-ps-chevron" viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6" stroke="currentColor" stroke-width="1.8"/></svg>
+      <span class="ap-ps-title">Cultural Fit</span>
+      <span class="ap-ps-count" id="ps-cultural-count">1 Question</span>
+      <button class="ap-ps-add-btn" onclick="openQModal('Cultural Fit','cultural');event.stopPropagation()">+ Add Question</button>
+    </div>
+    <div class="ap-ps-body" id="ps-cultural-body">
+      <div class="ap-psq-row">
+        <span class="ap-psq-num">1</span>
+        <span class="ap-psq-text">Are you physically comfortable with sustained physical or outdoor work for the daily hours stated in this listing?</span>
+        <div class="ap-psq-right">
+          <div class="ap-psq-ans-wrap">
+            <div class="ap-psq-ans-label">Accepted answer</div>
+            <select class="ap-select" style="min-width:150px;">
+              <option>I will Decide</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <button class="ap-quality-card__remove" style="margin-top:18px;">×</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="ap-ps-section" id="ps-cultural">
-    <div class="ap-ps-header" onclick="togglePS('ps-cultural')">
-      <svg class="ap-ps-chevron" viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6" stroke="currentColor" stroke-width="1.8"/></svg>
-      <span class="ap-ps-title">Cultural Fit</span>
-      <span class="ap-ps-count">0 Questions</span>
-      <button class="ap-ps-add-btn" onclick="openQModal('Cultural Fit', 'cultural');event.stopPropagation()">+ Add Question</button>
-    </div>
-    <div class="ap-ps-body"></div>
-  </div>
-
-  <div class="ap-ps-section" id="ps-nonskill">
+  <!-- NON SKILL -->
+  <div class="ap-ps-section is-open" id="ps-nonskill">
     <div class="ap-ps-header" onclick="togglePS('ps-nonskill')">
       <svg class="ap-ps-chevron" viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6" stroke="currentColor" stroke-width="1.8"/></svg>
       <span class="ap-ps-title">Non Skill</span>
-      <span class="ap-ps-count">0 Questions</span>
-      <button class="ap-ps-add-btn" onclick="openQModal('Non Skill', 'nonskill');event.stopPropagation()">+ Add Question</button>
+      <span class="ap-ps-count" id="ps-nonskill-count">2 Questions</span>
+      <button class="ap-ps-add-btn" onclick="openQModal('Non Skill','nonskill');event.stopPropagation()">+ Add Question</button>
     </div>
-    <div class="ap-ps-body"></div>
+    <div class="ap-ps-body" id="ps-nonskill-body">
+      <div class="ap-psq-row">
+        <span class="ap-psq-num">1</span>
+        <span class="ap-psq-text">Are you comfortable performing repetitive or routine tasks where results build slowly over days or weeks?</span>
+        <div class="ap-psq-right">
+          <div class="ap-psq-ans-wrap">
+            <div class="ap-psq-ans-label">Accepted answer</div>
+            <select class="ap-select" style="min-width:150px;">
+              <option>I will Decide</option>
+              <option selected>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <button class="ap-quality-card__remove" style="margin-top:18px;">×</button>
+        </div>
+      </div>
+      <div class="ap-psq-row">
+        <span class="ap-psq-num">2</span>
+        <span class="ap-psq-text">Are you comfortable working in a cold / high-altitude climate for the duration?</span>
+        <div class="ap-psq-right">
+          <div class="ap-psq-ans-wrap">
+            <div class="ap-psq-ans-label">Accepted answer</div>
+            <select class="ap-select" style="min-width:150px;">
+              <option>I will Decide</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <button class="ap-quality-card__remove" style="margin-top:18px;">×</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- AUTO ASKED -->
-  <div style="margin-top:24px;">
-    <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;">
-      <span class="ap-skill-badge-num" style="background:#101828;color:#fff;">7</span>
+  <div style="margin-top:28px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <span class="ap-skill-badge-num ap-skill-badge-num--dark">7</span>
       <div>
-        <div style="font-size:18px;font-weight:700;color:#101828;margin-bottom:4px;">Auto Asked</div>
-        <div style="font-size:13px;color:#6b7280;">These platform questions are always asked to volunteers. They are read-only here and do not affect pass or fail.</div>
+        <div style="font-size:18px;font-weight:700;color:#101828;">Auto Asked</div>
+        <div style="font-size:13px;color:#6b7280;margin-top:2px;">These platform questions are always asked to volunteers. They are read-only here and do not affect pass or fail.</div>
       </div>
     </div>
     <div class="ap-auto-asked-card">
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">1</span>
         <span class="ap-auto-q__text">What is your intended start date?</span>
-        <div class="ap-auto-q__ans"><input class="ap-input" type="text" placeholder="dd/mm/yyyy" style="width:140px;"></div>
+        <div class="ap-auto-q__ans"><input class="ap-input" type="text" placeholder="dd/mm/yyyy" style="width:160px;"></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">2</span>
         <span class="ap-auto-q__text">How many days do you intend to stay?</span>
-        <div class="ap-auto-q__ans"><input class="ap-input" type="number" style="width:120px;"></div>
+        <div class="ap-auto-q__ans"><input class="ap-input" type="number" style="width:160px;"></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">3</span>
         <span class="ap-auto-q__text">Are you accompanied by a guest?</span>
         <div class="ap-auto-q__ans">
-          <select class="ap-select" style="width:120px;"><option>No</option><option>Yes</option></select>
+          <select class="ap-select" style="width:160px;"><option>No</option><option>Yes</option></select>
         </div>
       </div>
-      <div class="ap-auto-q" style="flex-wrap:wrap;gap:8px;">
-        <span class="ap-auto-q__num">—</span>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;">
-          <div><label class="ap-label" style="font-size:12px;">No. of Guests</label><input class="ap-input" type="number" min="0"></div>
-          <div><label class="ap-label" style="font-size:12px;">Name Of the Guest</label><input class="ap-input" type="text"></div>
-        </div>
+      <div class="ap-guest-grid">
+        <div class="ap-guest-field"><label>No. of Guests</label><input class="ap-input" type="number" min="1" value="1"></div>
+        <div class="ap-guest-field"><label>Name Of the Guest</label><input class="ap-input" type="text"></div>
+        <div class="ap-guest-field"><label>Age of the Guest</label><input class="ap-input" type="number" min="0"></div>
+        <div class="ap-guest-field"><label>Relationship with Guest</label><input class="ap-input" type="text"></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">4</span>
         <span class="ap-auto-q__text">What languages do you speak?</span>
-        <div class="ap-auto-q__ans"><input class="ap-input" type="text" style="width:200px;"></div>
+        <div class="ap-auto-q__ans"><input class="ap-input" type="text" style="width:160px;"></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">5</span>
-        <span class="ap-auto-q__text">Are you comfortable being photographed or filmed for the host's or GDT's content during the programme?</span>
-        <div class="ap-auto-q__ans"><select class="ap-select" style="width:120px;"><option>Yes</option><option>No</option></select></div>
+        <span class="ap-auto-q__text">Are you comfortable being photographed or filmed for the host&#39;s or GDT&#39;s content during the programme?</span>
+        <div class="ap-auto-q__ans"><select class="ap-select" style="width:160px;"><option>Yes</option><option>No</option></select></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">6</span>
-        <span class="ap-auto-q__text">Have you read the full listing - exchange terms, daily schedule, and all costs to you?</span>
-        <div class="ap-auto-q__ans"><span style="font-size:12px;color:#6b7280;font-weight:500;padding:5px 10px;border:1px solid #e5e7eb;border-radius:6px;">Required confirmation</span></div>
+        <span class="ap-auto-q__text">Have you read the full listing — exchange terms, daily schedule, and all costs to you?</span>
+        <div class="ap-auto-q__ans"><span class="ap-auto-q__confirm">Required confirmation</span></div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">7</span>
-        <span class="ap-auto-q__text">Do you understand that GDT does not provide insurance and that your safety on-site is governed by the host's arrangements and your own cover?</span>
-        <div class="ap-auto-q__ans"><span style="font-size:12px;color:#6b7280;font-weight:500;padding:5px 10px;border:1px solid #e5e7eb;border-radius:6px;">Required confirmation</span></div>
+        <span class="ap-auto-q__text">Do you understand that GDT does not provide insurance and that your safety on-site is governed by the host&#39;s arrangements and your own cover?</span>
+        <div class="ap-auto-q__ans"><span class="ap-auto-q__confirm">Required confirmation</span></div>
       </div>
     </div>
   </div>`;
@@ -1126,6 +1268,10 @@ function addRow(listId, placeholder) {
 }
 function togglePS(id) {
   document.getElementById(id).classList.toggle('is-open');
+}
+function handleSBQChange(sel, proofId) {
+  const el = document.getElementById(proofId);
+  if (el) el.style.display = sel.value === 'Yes' ? 'block' : 'none';
 }
 
 // Qualities modal
