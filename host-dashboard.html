@@ -1416,19 +1416,19 @@
               </div>
             </div>
 
-            <!-- Care notice — no earnings -->
-            <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:14px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:flex-start;gap:16px;">
-              <div style="width:40px;height:40px;background:#16a34a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+            <!-- Care notice -->
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;background:#f0fdf4;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#16a34a" stroke-width="2" stroke-linejoin="round"/></svg>
               </div>
               <div>
-                <div style="font-size:14px;font-weight:700;color:#14532d;margin-bottom:4px;">GDT Care — Volunteer &amp; Conservation Programs</div>
-                <div style="font-size:13px;color:#166534;line-height:1.6;">This mode shows your <strong>volunteer &amp; social impact programs</strong>. These programs are <strong>fully funded</strong> — volunteers pay no fee and you receive no commercial earnings from this stream. Impact is measured through participation, community outcomes, and conservation data.</div>
+                <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:4px;">GDT Care — Volunteer &amp; Conservation Programs</div>
+                <div style="font-size:13px;color:#6b7280;line-height:1.6;">This mode shows your <strong>volunteer &amp; social impact programs</strong>. These programs are <strong>fully funded</strong> — volunteers pay no fee and you receive no commercial earnings from this stream. Impact is measured through participation, community outcomes, and conservation data.</div>
               </div>
             </div>
 
             <!-- Care program status bar -->
-            <div class="db-trip-bar" style="border-color:#bbf7d0;background:#f0fdf4;">
+            <div class="db-trip-bar" style="margin-bottom:24px;">
               <div class="db-trip-bar__icon" style="background:#dcfce7;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#16a34a" stroke-width="1.8"/></svg>
               </div>
@@ -1464,7 +1464,7 @@
                         <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:999px;">Jul 2026</span>
                       </div>
                     </div>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">View Apps</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
                   </div>
                   <div style="height:1px;background:#f3f4f6;"></div>
                   <div style="display:flex;gap:14px;align-items:flex-start;">
@@ -1478,10 +1478,14 @@
                         <span style="font-size:11px;font-weight:600;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:999px;">Applications Open</span>
                       </div>
                     </div>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="showToast('Marine Turtle program opening soon')">View Apps</button>
+                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
                   </div>
                 </div>
-              </div>
+                <div style="padding:12px 20px;border-top:1px solid #f3f4f6;text-align:center;">
+                  <button style="font-size:13px;font-weight:600;color:#f54900;background:none;border:none;cursor:pointer;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View all Programs &#8594;</button>
+                </div>
+
+              </div><!-- /Active Programs card -->
 
               <!-- Recent volunteer activity -->
               <div class="db-chart-card">
