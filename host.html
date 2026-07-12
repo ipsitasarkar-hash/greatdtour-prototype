@@ -646,8 +646,8 @@
 
   <!-- ── SIGNUP MODAL ──────────────────────────────────── -->
   <div class="app-modal-overlay" id="modal-signup">
-    <div class="app-modal" style="max-width:480px;">
-      <div class="app-modal__header" style="padding:28px 32px 20px;">
+    <div class="app-modal" style="max-width:600px;">
+      <div class="app-modal__header" style="padding:28px 36px 20px;">
         <div>
           <p style="font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#171717;margin-bottom:4px;">Create your host account</p>
           <p style="font-family:'Inter',sans-serif;font-size:13px;color:#737373;">Join GDT as a host — it only takes a minute</p>
@@ -656,8 +656,9 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
       </div>
-      <div class="app-modal__body" style="padding:4px 32px 32px;">
-        <!-- Form -->
+      <div class="app-modal__body" style="padding:4px 36px 36px;">
+
+        <!-- ── SIGNUP FORM ── -->
         <div id="signup-form">
           <div class="app-field-row" style="gap:16px;margin-bottom:20px;">
             <div class="app-field" style="margin-bottom:0;">
@@ -710,13 +711,38 @@
           <button onclick="submitSignup()" style="width:100%;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:15px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.88" onmouseout="this.style.opacity=1">Sign Up</button>
           <p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px;font-family:'Inter',sans-serif;">Or continue with social login</p>
         </div>
-        <!-- Confirmation -->
-        <div class="app-success" id="signup-success" style="padding:32px 0 24px;">
-          <div class="app-success__icon">✉️</div>
-          <p class="app-success__title" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:600;">Check Your Inbox</p>
-          <p class="app-success__sub">We've sent a verification email to <strong id="signup-confirmed-email"></strong>. Please verify your email address to complete your registration. We'll be in touch within 3–5 business days.</p>
-          <button class="app-success__dismiss" onclick="closeSignupModal()">Close</button>
+
+        <!-- ── OTP VERIFICATION SCREEN ── -->
+        <div id="signup-otp" style="display:none;text-align:center;padding:16px 0 8px;">
+          <!-- Envelope + check icon -->
+          <div style="position:relative;display:inline-block;margin-bottom:28px;">
+            <svg width="72" height="56" viewBox="0 0 72 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="70" height="54" rx="6" fill="#f54900" stroke="#1a1a1a" stroke-width="2"/>
+              <path d="M1 8l35 24L71 8" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div style="position:absolute;bottom:-10px;right:-10px;width:28px;height:28px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;border:2.5px solid #fff;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <h2 style="font-family:'Inter',sans-serif;font-size:26px;font-weight:700;color:#101828;margin-bottom:12px;">Verify Your Email</h2>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;color:#525252;line-height:1.6;margin-bottom:6px;">We've sent a 4-digit verification code to your email address</p>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:#101828;margin-bottom:20px;" id="otp-email-display"></p>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;color:#525252;margin-bottom:28px;">Please check your inbox and enter the code below.</p>
+
+          <!-- 4-digit OTP inputs -->
+          <div style="display:flex;justify-content:center;gap:14px;margin-bottom:20px;">
+            <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:64px;height:64px;border:1.5px solid #d1d5db;border-radius:10px;font-size:24px;font-weight:600;font-family:'Inter',sans-serif;text-align:center;outline:none;transition:border-color 0.15s;color:#101828;" />
+            <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:64px;height:64px;border:1.5px solid #d1d5db;border-radius:10px;font-size:24px;font-weight:600;font-family:'Inter',sans-serif;text-align:center;outline:none;transition:border-color 0.15s;color:#101828;" />
+            <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:64px;height:64px;border:1.5px solid #d1d5db;border-radius:10px;font-size:24px;font-weight:600;font-family:'Inter',sans-serif;text-align:center;outline:none;transition:border-color 0.15s;color:#101828;" />
+            <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:64px;height:64px;border:1.5px solid #d1d5db;border-radius:10px;font-size:24px;font-weight:600;font-family:'Inter',sans-serif;text-align:center;outline:none;transition:border-color 0.15s;color:#101828;" />
+          </div>
+
+          <p style="font-family:'Inter',sans-serif;font-size:14px;color:#525252;margin-bottom:28px;">Didn't receive the code? <a href="#" onclick="return false;" style="color:var(--orange);font-weight:600;text-decoration:none;">Resend Code</a></p>
+
+          <button onclick="verifyOtp()" style="width:100%;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:16px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;margin-bottom:14px;" onmouseover="this.style.opacity=0.88" onmouseout="this.style.opacity=1">Verify &amp; Create Account</button>
+          <p style="font-family:'Inter',sans-serif;font-size:12px;color:#9ca3af;">Or continue with social login</p>
         </div>
+
       </div>
     </div>
   </div>
@@ -1112,7 +1138,7 @@
     // Signup modal
     function openSignupModal() {
       document.getElementById('signup-form').style.display = '';
-      document.getElementById('signup-success').classList.remove('active');
+      document.getElementById('signup-otp').style.display = 'none';
       document.getElementById('modal-signup').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -1122,11 +1148,24 @@
     }
     function submitSignup() {
       const email = document.getElementById('signup-email').value.trim();
-      const emailVal = email || 'your email address';
-      document.getElementById('signup-confirmed-email').textContent = emailVal;
+      document.getElementById('otp-email-display').textContent = email || 'your email address';
       document.getElementById('signup-form').style.display = 'none';
-      document.getElementById('signup-success').classList.add('active');
+      document.getElementById('signup-otp').style.display = 'block';
     }
+    function verifyOtp() {
+      closeSignupModal();
+    }
+
+    // OTP input auto-advance
+    document.querySelectorAll('.otp-box').forEach(function(input, idx, inputs) {
+      input.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '').slice(0, 1);
+        if (this.value && idx < inputs.length - 1) inputs[idx + 1].focus();
+      });
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && !this.value && idx > 0) inputs[idx - 1].focus();
+      });
+    });
     document.getElementById('modal-signup').addEventListener('click', function(e) {
       if (e.target === this) closeSignupModal();
     });
