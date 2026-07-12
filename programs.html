@@ -11,21 +11,18 @@
   <style>
     body { background: #fff; }
 
-    /* ── Hero strip ── */
-    .pgm-hero { background: #0d1a10; padding: 20px 0; }
-    .pgm-hero__inner {
-      max-width: 1280px; margin: 0 auto; padding: 0 80px;
-      display: flex; align-items: center; gap: 20px;
-    }
+    /* ── Hero ── */
+    .pgm-hero { background: #0d1a10; padding: 36px 0 30px; }
+    .pgm-hero__inner { max-width: 1280px; margin: 0 auto; padding: 0 80px; }
     .pgm-hero__overline {
       font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-      color: #4ade80; flex-shrink: 0;
+      color: #4ade80; margin-bottom: 10px; display: block;
     }
     .pgm-hero__title {
-      font-family: 'Inter', sans-serif; font-size: 18px;
-      font-weight: 700; color: #fff; line-height: 1.2; margin: 0;
+      font-family: 'Inter', sans-serif; font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 10px;
     }
-    .pgm-hero__sub { font-size: 14px; color: #9ca3af; line-height: 1.5; margin: 0; }
+    .pgm-hero__sub { font-size: 15px; color: #9ca3af; line-height: 1.6; max-width: 500px; }
 
     /* ── Filter bar (Field Notes style) ── */
     .pgm-filter-bar {
@@ -245,12 +242,12 @@
     </div>
   </nav>
 
-  <!-- Hero strip -->
+  <!-- Hero -->
   <section class="pgm-hero" style="margin-top:76px;">
     <div class="pgm-hero__inner">
-      <p class="pgm-hero__overline">🌿 Volunteering</p>
-      <h1 class="pgm-hero__title">Programs</h1>
-      <p class="pgm-hero__sub">Fully-funded conservation &amp; community programs across India — real fieldwork, real impact.</p>
+      <p class="pgm-hero__overline">🌿 Volunteering Programs</p>
+      <h1 class="pgm-hero__title">Make your journey<br />mean something.</h1>
+      <p class="pgm-hero__sub">Join fully-funded conservation and community programs across India. Real fieldwork, real impact — alongside verified NGOs and expert biologists.</p>
     </div>
   </section>
 
