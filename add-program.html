@@ -207,28 +207,29 @@
     .ap-ps-section.is-open .ap-ps-body { display: block; }
 
     /* Skill-based question rows */
-    .ap-sbq-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; }
+    .ap-sbq-row { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; }
     .ap-sbq-row:last-child { border-bottom: none; }
     .ap-sbq-num { font-size: 14px; font-weight: 700; color: #374151; flex-shrink: 0; min-width: 18px; padding-top: 2px; }
     .ap-sbq-body { flex: 1; }
     .ap-sbq-text { font-size: 14px; font-weight: 500; color: #101828; line-height: 1.5; margin-bottom: 4px; }
     .ap-sbq-source { font-size: 11px; font-weight: 600; color: #9ca3af; letter-spacing: 0.04em; text-transform: uppercase; }
-    .ap-sbq-right { display: flex; align-items: flex-start; gap: 16px; flex-shrink: 0; }
+    .ap-sbq-right { display: flex; align-items: center; flex-shrink: 0; }
     .ap-sbq-required { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #374151; padding-top: 2px; white-space: nowrap; }
     .ap-sbq-required input[type=checkbox] { accent-color: #f54900; width: 15px; height: 15px; cursor: pointer; }
     .ap-sbq-required.is-checked { color: #f54900; font-weight: 600; }
-    .ap-sbq-ans-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 170px; }
-    .ap-sbq-ans-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; }
+    .ap-sbq-ans-wrap { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+    .ap-sbq-pair { display: flex; align-items: center; gap: 10px; }
+    .ap-sbq-pair-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
     .ap-sbq-proof { font-size: 12px; color: #2563eb; margin-top: 2px; }
 
     /* Cultural fit / non-skill question rows */
-    .ap-psq-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; }
+    .ap-psq-row { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; }
     .ap-psq-row:last-child { border-bottom: none; }
-    .ap-psq-num { font-size: 14px; font-weight: 700; color: #374151; flex-shrink: 0; min-width: 18px; padding-top: 2px; }
+    .ap-psq-num { font-size: 14px; font-weight: 700; color: #374151; flex-shrink: 0; min-width: 18px; }
     .ap-psq-text { font-size: 14px; color: #374151; flex: 1; line-height: 1.5; }
-    .ap-psq-right { display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0; min-width: 220px; }
-    .ap-psq-ans-wrap { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-    .ap-psq-ans-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; }
+    .ap-psq-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .ap-psq-ans-wrap { display: flex; align-items: center; gap: 10px; }
+    .ap-psq-ans-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
 
     /* Badge counter */
     .ap-skill-badge-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #f3f4f6; font-size: 13px; font-weight: 700; color: #374151; flex-shrink: 0; }
@@ -1002,10 +1003,12 @@ function stepPreScreening() {
       </div>
       <div class="ap-sbq-right">
         <div class="ap-sbq-ans-wrap">
-          <div class="ap-sbq-ans-label">Accepted answer</div>
-          <div style="padding:8px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;min-width:160px;text-align:center;">Yes — Required</div>
-          <div style="margin-top:8px;">
-            <div class="ap-sbq-ans-label" style="margin-bottom:4px;">Proof type to attach</div>
+          <div class="ap-sbq-pair">
+            <span class="ap-sbq-pair-label">Accepted Answer</span>
+            <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes — Required</div>
+          </div>
+          <div class="ap-sbq-pair">
+            <span class="ap-sbq-pair-label">Proof type to attach</span>
             <select class="ap-select" style="min-width:160px;">
               <option value="" disabled selected>Select proof type</option>
               <option>Certificate</option>
@@ -1027,10 +1030,12 @@ function stepPreScreening() {
       </div>
       <div class="ap-sbq-right">
         <div class="ap-sbq-ans-wrap">
-          <div class="ap-sbq-ans-label">Accepted answer</div>
-          <div style="padding:8px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;min-width:160px;text-align:center;">Yes — Required</div>
-          <div style="margin-top:8px;">
-            <div class="ap-sbq-ans-label" style="margin-bottom:4px;">Proof type to attach</div>
+          <div class="ap-sbq-pair">
+            <span class="ap-sbq-pair-label">Accepted Answer</span>
+            <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes — Required</div>
+          </div>
+          <div class="ap-sbq-pair">
+            <span class="ap-sbq-pair-label">Proof type to attach</span>
             <select class="ap-select" style="min-width:160px;">
               <option value="" disabled selected>Select proof type</option>
               <option>Certificate</option>
@@ -1066,7 +1071,7 @@ function stepPreScreening() {
               <option>No</option>
             </select>
           </div>
-          <button class="ap-quality-card__remove" style="margin-top:18px;">×</button>
+          <button class="ap-quality-card__remove">×</button>
         </div>
       </div>
     </div>
@@ -1093,7 +1098,7 @@ function stepPreScreening() {
               <option>No</option>
             </select>
           </div>
-          <button class="ap-quality-card__remove" style="margin-top:18px;">×</button>
+          <button class="ap-quality-card__remove">×</button>
         </div>
       </div>
       <div class="ap-psq-row">
@@ -1108,7 +1113,7 @@ function stepPreScreening() {
               <option>No</option>
             </select>
           </div>
-          <button class="ap-quality-card__remove" style="margin-top:18px;">×</button>
+          <button class="ap-quality-card__remove">×</button>
         </div>
       </div>
     </div>
