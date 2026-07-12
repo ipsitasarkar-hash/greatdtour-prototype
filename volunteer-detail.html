@@ -187,6 +187,31 @@
     .vol-aid-note { background: #fffbf5; border: 1px solid rgba(246,154,57,0.3); border-radius: 8px; padding: 16px 20px; margin-top: 16px; font-size: 14px; color: var(--warm-gray); line-height: 1.6; }
     .vol-aid-note strong { color: #101828; }
 
+    /* ---- Inclusions / Exclusions cards ---- */
+    .incl-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; background: #fff; }
+    .incl-card__header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; user-select: none; }
+    .incl-card__header:hover { background: #fafafa; }
+    .incl-card__title { font-size: 18px; font-weight: 700; color: #101828; }
+    .incl-card__chevron { width: 22px; height: 22px; color: #6b7280; flex-shrink: 0; transition: transform 0.25s; }
+    .incl-card.closed .incl-card__chevron { transform: rotate(-90deg); }
+    .incl-card__body { padding: 0 24px 24px; }
+    .incl-card__desc { font-size: 14px; color: var(--warm-gray); line-height: 1.65; margin-bottom: 18px; }
+    .incl-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .incl-list__item { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #4a5565; line-height: 1.55; }
+    .incl-list__item::before { content: ''; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; background-size: contain; }
+    .incl-list__item--yes::before {
+      background-color: var(--vol-green);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 13 13' fill='none'%3E%3Cpath d='M2.5 6.5l3 3 5-5' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .incl-list__item--no::before {
+      background-color: #e05d3a;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Crect x='2' y='5.5' width='8' height='1.5' rx='0.75' fill='white'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
     /* ---- Requirements Tab ---- */
     .policy-section { margin-bottom: 36px; }
     .policy-section__title { font-size: 18px; font-weight: 600; color: #101828; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
@@ -861,49 +886,42 @@
           <div class="tab-panel" id="panel-inclusions">
 
             <div class="exp-section">
-              <h2 class="exp-section__title">Financial Commitment</h2>
-              <p style="font-size:14px;color:var(--warm-gray);margin-bottom:24px;line-height:1.7;">We believe cost should not be a barrier to meaningful contribution. Here is exactly what this program costs and provides.</p>
 
-              <div class="vol-covered-card highlight">
-                <div class="vol-covered-card__tag">Fully Covered by WCI</div>
-                <div class="vol-covered-card__title">What You Get — At No Cost</div>
-                <div class="vol-covered-card__sub">Wildlife Conservation India covers all program operational costs.</div>
-                <ul class="vol-covered-card__items">
-                  <li>Shared accommodation in the Ranthambore base camp (6-person dorms)</li>
-                  <li>Three meals per day — simple, nutritious field camp food</li>
-                  <li>All field equipment: binoculars, GPS, camera traps, data notebooks</li>
-                  <li>National Park entry permits and vehicle costs for all field days</li>
-                  <li>Professional training and mentorship from senior biologists</li>
-                  <li>Emergency medical support and first aid on-site</li>
-                </ul>
-                <div class="vol-covered-card__price">₹0 <span>program fee</span></div>
+              <!-- Inclusions accordion -->
+              <div class="incl-card">
+                <div class="incl-card__header" onclick="toggleInclCard(this)">
+                  <span class="incl-card__title">Inclusions</span>
+                  <svg class="incl-card__chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="incl-card__body">
+                  <p class="incl-card__desc">Here's what your stay covers - from where you sleep to what's on your plate. The host provides these at no cost to you.</p>
+                  <ul class="incl-list">
+                    <li class="incl-list__item incl-list__item--yes">Accommodation - Shared - 2 persons</li>
+                    <li class="incl-list__item incl-list__item--yes">Bathroom - Outdoor</li>
+                    <li class="incl-list__item incl-list__item--yes">Local Transport - Provided for programme activities only</li>
+                    <li class="incl-list__item incl-list__item--yes">Equipment - Provided</li>
+                    <li class="incl-list__item incl-list__item--yes">Programme Outcome - Certificate, Skills Exchange, Cultural Immersion, Apprenticeship, Professional Experience, Personal Growth</li>
+                    <li class="incl-list__item incl-list__item--yes">Programme Fee - Rs.0 (Fully Funded)</li>
+                  </ul>
+                </div>
               </div>
 
-              <div class="vol-covered-card">
-                <div class="vol-covered-card__tag">Monthly Stipend</div>
-                <div class="vol-covered-card__title">You Receive ₹5,000 / month</div>
-                <div class="vol-covered-card__sub">A modest stipend to cover personal expenses and transport within Sawai Madhopur town.</div>
-                <ul class="vol-covered-card__items">
-                  <li>Paid at the end of each calendar month</li>
-                  <li>Directly to your bank account (NEFT)</li>
-                  <li>Applicable to volunteers completing at least 3 of 4 weeks</li>
-                </ul>
+              <!-- Exclusions accordion -->
+              <div class="incl-card">
+                <div class="incl-card__header" onclick="toggleInclCard(this)">
+                  <span class="incl-card__title">Exclusions</span>
+                  <svg class="incl-card__chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="incl-card__body">
+                  <ul class="incl-list">
+                    <li class="incl-list__item incl-list__item--no">Travel to the programme site</li>
+                    <li class="incl-list__item incl-list__item--no">Personal travel</li>
+                    <li class="incl-list__item incl-list__item--no">Personal expenses and leisure costs</li>
+                    <li class="incl-list__item incl-list__item--no">Appropriate Clothing for sunny and humid weather. Hat, sunscreen, umbrella, sunglasses</li>
+                  </ul>
+                </div>
               </div>
 
-              <div class="vol-covered-card">
-                <div class="vol-covered-card__tag">Your Responsibility</div>
-                <div class="vol-covered-card__title">What You Arrange</div>
-                <div class="vol-covered-card__sub">These are not large costs, but plan ahead.</div>
-                <ul class="vol-covered-card__items">
-                  <li>Travel to Sawai Madhopur Railway Station (WCI will arrange pickup from there)</li>
-                  <li>Personal travel insurance covering field activities (we can recommend providers)</li>
-                  <li>Personal clothing appropriate for outdoor work (list provided on acceptance)</li>
-                </ul>
-              </div>
-
-              <div class="vol-aid-note">
-                <strong>Financial Aid Available.</strong> For volunteers who cannot afford travel to Ranthambore, WCI offers limited travel grants. Mention this in your application — it does not affect your selection chances.
-              </div>
             </div>
 
           </div><!-- /panel-inclusions -->
@@ -1288,6 +1306,11 @@
         }
       });
     });
+
+    // ---- Inclusions card toggle ----
+    function toggleInclCard(headerEl) {
+      headerEl.closest('.incl-card').classList.toggle('closed');
+    }
 
     // ---- Accordion toggle ----
     function toggleAccordion(headerEl) {
