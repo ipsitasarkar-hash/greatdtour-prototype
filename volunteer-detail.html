@@ -91,6 +91,15 @@
     .vol-org-stat strong { font-size: 15px; font-weight: 700; color: #101828; display: block; }
     .vol-org-stat span { font-size: 11px; color: var(--warm-gray); }
 
+    /* Program Facts Grid */
+    .pgm-facts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 32px; }
+    .pgm-fact { padding: 20px 20px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .pgm-fact:nth-child(3n) { border-right: none; }
+    .pgm-fact:nth-child(4), .pgm-fact:nth-child(5), .pgm-fact:nth-child(6) { border-bottom: none; }
+    .pgm-fact__icon { margin-bottom: 10px; }
+    .pgm-fact__label { font-size: 12px; font-weight: 700; color: #101828; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+    .pgm-fact__value { font-size: 14px; color: #4a5565; line-height: 1.55; }
+
     /* Highlights */
     .exp-highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .exp-highlight-item { display: flex; align-items: flex-start; gap: 12px; }
@@ -557,8 +566,8 @@
       <ul class="exp-tabs__list">
         <li class="exp-tabs__item active" data-tab="overview">Overview</li>
         <li class="exp-tabs__item" data-tab="program">Program</li>
-        <li class="exp-tabs__item" data-tab="apply">Apply</li>
-        <li class="exp-tabs__item" data-tab="commitment">Commitment</li>
+        <li class="exp-tabs__item" data-tab="join">Join</li>
+        <li class="exp-tabs__item" data-tab="inclusions">Inclusions</li>
         <li class="exp-tabs__item" data-tab="requirements">Requirements</li>
         <li class="exp-tabs__item" data-tab="faqs">FAQs</li>
       </ul>
@@ -582,67 +591,51 @@
                 Join one of India's most impactful wildlife conservation programs in the heart of Ranthambore National Park. Over four weeks you'll work alongside field biologists and park rangers to monitor tiger populations, restore degraded habitats, and engage local communities in conservation. This is not tourism with a green veneer — it is real, unglamorous, meaningful fieldwork.
               </p>
 
-              <div class="exp-trust-grid">
-                <div class="exp-trust-item">
-                  <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6h6l-5 3.5 2 6L10 14l-5 3.5 2-6L2 8h6l2-6z" fill="none" stroke="#2E7D32" stroke-width="1.3" stroke-linejoin="round"/></svg>
-                  <div>
-                    <div class="exp-trust-item__label">Verified NGO</div>
-                    <div class="exp-trust-item__sub">Registered & audited</div>
-                  </div>
-                </div>
-                <div class="exp-trust-item">
-                  <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" stroke="#2E7D32" stroke-width="1.3"/></svg>
-                  <div>
-                    <div class="exp-trust-item__label">Experience Level</div>
-                    <div class="exp-trust-item__sub">Beginner to intermediate</div>
-                  </div>
-                </div>
-                <div class="exp-trust-item">
-                  <svg class="exp-trust-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="#2E7D32" stroke-width="1.3"/><path d="M3 8h14M7 2v4M13 2v4" stroke="#2E7D32" stroke-width="1.3" stroke-linecap="round"/></svg>
-                  <div>
-                    <div class="exp-trust-item__label">Next Intake</div>
-                    <div class="exp-trust-item__sub">Jun 2025 — 8 spots left</div>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            <!-- Impact bar -->
-            <div class="vol-impact-bar">
-              <div class="vol-impact-item">
-                <div class="vol-impact-icon">🐅</div>
-                <div>
-                  <div class="vol-impact-num">120</div>
-                  <div class="vol-impact-label">Tigers Protected</div>
+            <!-- Program Facts Grid -->
+            <div class="pgm-facts-grid">
+              <div class="pgm-fact">
+                <div class="pgm-fact__icon">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z" stroke="#2E7D32" stroke-width="1.4"/><circle cx="10" cy="9" r="2" stroke="#2E7D32" stroke-width="1.4"/></svg>
                 </div>
+                <div class="pgm-fact__label">Locale</div>
+                <div class="pgm-fact__value">Remote, Coastal</div>
               </div>
-              <div class="vol-impact-item">
-                <div class="vol-impact-icon">🌳</div>
-                <div>
-                  <div class="vol-impact-num">5,000</div>
-                  <div class="vol-impact-label">Trees Planted</div>
+              <div class="pgm-fact">
+                <div class="pgm-fact__icon">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 1 0 0 16A8 8 0 0 0 10 2z" stroke="#2E7D32" stroke-width="1.4"/><path d="M7 10l2 2 4-4" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
+                <div class="pgm-fact__label">Stipend</div>
+                <div class="pgm-fact__value">Yes — ₹5,000/month</div>
               </div>
-              <div class="vol-impact-item">
-                <div class="vol-impact-icon">👥</div>
-                <div>
-                  <div class="vol-impact-num">200+</div>
-                  <div class="vol-impact-label">Volunteers to Date</div>
+              <div class="pgm-fact">
+                <div class="pgm-fact__icon">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2a5 5 0 1 0 0 10A5 5 0 0 0 10 2z" stroke="#2E7D32" stroke-width="1.4"/><path d="M2 18c0-3.9 3.6-7 8-7s8 3.1 8 7" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round"/></svg>
                 </div>
+                <div class="pgm-fact__label">Open To</div>
+                <div class="pgm-fact__value">Everyone · Solo Women Travelers · Pairs</div>
               </div>
-            </div>
-
-            <!-- Org card -->
-            <div class="vol-org-card">
-              <img src="assets/images/trek1.jpg" alt="Wildlife Conservation India" class="vol-org-logo" />
-              <div>
-                <div class="vol-org-name">Wildlife Conservation India <span class="vol-org-verified">VERIFIED NGO</span></div>
-                <p class="vol-org-desc">A grassroots conservation organisation working in partnership with the Forest Department of Rajasthan since 2009. Awarded the National Wildlife Conservation Award in 2022.</p>
-                <div class="vol-org-stat-row">
-                  <div class="vol-org-stat"><strong>15+</strong><span>Years active</span></div>
-                  <div class="vol-org-stat"><strong>8</strong><span>Active programs</span></div>
-                  <div class="vol-org-stat"><strong>200+</strong><span>Alumni volunteers</span></div>
+              <div class="pgm-fact">
+                <div class="pgm-fact__icon">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="2" stroke="#2E7D32" stroke-width="1.4"/><path d="M6 5V3M14 5V3M2 9h16" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round"/></svg>
                 </div>
+                <div class="pgm-fact__label">Nationality</div>
+                <div class="pgm-fact__value">Open for All</div>
+              </div>
+              <div class="pgm-fact">
+                <div class="pgm-fact__icon">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#2E7D32" stroke-width="1.4"/><path d="M10 6v4l3 2" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </div>
+                <div class="pgm-fact__label">No. of Working Days</div>
+                <div class="pgm-fact__value">6 days/week</div>
+              </div>
+              <div class="pgm-fact">
+                <div class="pgm-fact__icon">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 4h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="#2E7D32" stroke-width="1.4"/><path d="M6 9h8M6 13h5" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </div>
+                <div class="pgm-fact__label">Program Outcome</div>
+                <div class="pgm-fact__value">Certificate · Skills exchange · Cultural immersion · Apprenticeship · Professional experience · Personal growth</div>
               </div>
             </div>
 
@@ -725,111 +718,87 @@
               <h2 class="exp-section__title">4-Week Program Schedule</h2>
               <p style="font-size:14px;color:var(--warm-gray);margin-bottom:24px;line-height:1.7;">Each week has a defined focus. Days run from 05:30 field start to evening debrief. Weekends include rest time and optional excursions.</p>
 
+              <!-- A Typical Volunteering Day -->
               <div class="itin-accordion open" onclick="toggleAccordion(this.querySelector('.itin-accordion__header'))">
                 <div class="itin-accordion__header">
-                  <span class="itin-accordion__title">Weeks 1–4: Full Program Breakdown</span>
+                  <span class="itin-accordion__title">A Typical Volunteering Day</span>
                   <svg class="itin-accordion__chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
                 <div class="itin-accordion__body">
-
-                  <div class="vol-week">
-                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">1</span></div>
-                    <div>
-                      <div class="vol-week__theme">Orientation & Field Fundamentals</div>
-                      <div class="vol-week__sub">Getting your bearings in the park and mastering the tools.</div>
-                      <ul class="vol-week__activities">
-                        <li>Park induction with head biologist Dr. Rajan Mehta</li>
-                        <li>Camera trap placement and maintenance training</li>
-                        <li>Introduction to wildlife tracking and scat identification</li>
-                        <li>Field safety protocols and zone geography</li>
-                        <li>First data collection exercise (transect walk)</li>
-                      </ul>
-                    </div>
+                  <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;">Morning: Team brief, beach restoration activity</p>
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;">Noon: Lunch</p>
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;">Afternoon: Public awareness on beach and natural habitat conservation</p>
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;">Evening: Cooking, Dinner</p>
                   </div>
-
-                  <div class="vol-week">
-                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">2</span></div>
-                    <div>
-                      <div class="vol-week__theme">Wildlife Census & Monitoring</div>
-                      <div class="vol-week__sub">Deep fieldwork on tiger population tracking and prey base analysis.</div>
-                      <ul class="vol-week__activities">
-                        <li>Morning camera trap rounds (4:30 am starts)</li>
-                        <li>Individual tiger ID from stripe pattern analysis</li>
-                        <li>Prey density count — sambar, chital, nilgai</li>
-                        <li>Waterhole activity logging and occupancy maps</li>
-                        <li>Evening data entry and pattern review sessions</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="vol-week">
-                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">3</span></div>
-                    <div>
-                      <div class="vol-week__theme">Habitat Restoration</div>
-                      <div class="vol-week__sub">Hands-on ecological work — replanting, waterhole maintenance, invasive species removal.</div>
-                      <ul class="vol-week__activities">
-                        <li>Native sapling planting in degraded zones (approx. 500 trees)</li>
-                        <li>Invasive Lantana removal from core tiger corridors</li>
-                        <li>Waterhole deepening and desilting with hand tools</li>
-                        <li>Soil moisture and vegetation cover mapping</li>
-                        <li>Before/after photographic documentation</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="vol-week">
-                    <div class="vol-week__badge"><span class="vol-week__badge-label">WK</span><span class="vol-week__badge-num">4</span></div>
-                    <div>
-                      <div class="vol-week__theme">Community Outreach & Reporting</div>
-                      <div class="vol-week__sub">Village engagement, education sessions, and presenting your field findings.</div>
-                      <ul class="vol-week__activities">
-                        <li>Wildlife education workshops in 3 buffer-zone villages</li>
-                        <li>Human–wildlife conflict mediation training</li>
-                        <li>Eco-tourism livelihood sessions for local families</li>
-                        <li>Individual field report writing (submitted to WCI)</li>
-                        <li>Closing ceremony and certificate presentation</li>
-                      </ul>
-                    </div>
-                  </div>
-
                 </div>
               </div>
-            </div>
 
-            <hr class="exp-divider" />
-
-            <div class="exp-section">
-              <h2 class="exp-section__title">Covered &amp; Not Covered</h2>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
-                <div>
-                  <div class="itin-inclexcl__title" style="color:var(--vol-green);">✓ Covered by the Program</div>
-                  <ul class="itin-inclexcl__list">
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Shared accommodation in base camp</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>All meals (breakfast, lunch, field dinner)</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Field equipment and safety gear</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Park entry permits and vehicle costs</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Professional training and mentorship</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Monthly stipend of ₹5,000</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--yes">✓</span>Certificate of participation</li>
-                  </ul>
+              <!-- Key Responsibilities -->
+              <div class="itin-accordion" onclick="toggleAccordion(this.querySelector('.itin-accordion__header'))">
+                <div class="itin-accordion__header">
+                  <span class="itin-accordion__title">Key Responsibilities</span>
+                  <svg class="itin-accordion__chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                <div>
-                  <div class="itin-inclexcl__title" style="color:#ef4444;">✗ Not Covered</div>
-                  <ul class="itin-inclexcl__list">
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Travel to/from Sawai Madhopur</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Personal travel insurance</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Personal toiletries and clothing</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Leisure activities on weekends</li>
-                    <li class="itin-inclexcl__item"><span class="itin-inclexcl__icon--no">✗</span>Personal camera equipment</li>
-                  </ul>
+                <div class="itin-accordion__body">
+                  <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;"><strong style="color:#101828;">Bycatch Reduction:</strong> Organizations like NOAA Fisheries and WWF work with commercial fisheries to mandate Turtle Excluder Devices (TEDs) in nets and promote the use of barbless circle hooks.</p>
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;"><strong style="color:#101828;">Nesting Beach Protection:</strong> Patrolling beaches ensures eggs are safe from poachers and natural predators.</p>
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;"><strong style="color:#101828;">Community Engagement:</strong> Empowering local fishing communities to become conservation stewards is vital.</p>
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.7;"><strong style="color:#101828;">Habitat & Debris Management:</strong> Preserving seagrass beds and coral reefs is essential, as these serve as critical foraging grounds.</p>
+                  </div>
                 </div>
               </div>
+
+              <!-- Contribution Hours -->
+              <div class="itin-accordion" onclick="toggleAccordion(this.querySelector('.itin-accordion__header'))">
+                <div class="itin-accordion__header">
+                  <span class="itin-accordion__title">Contribution Hours</span>
+                  <svg class="itin-accordion__chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="itin-accordion__body">
+                  <div style="padding:20px 24px;">
+                    <table style="width:100%;border-collapse:collapse;">
+                      <tr style="border-bottom:1px solid var(--border);">
+                        <td style="padding:10px 0;font-size:15px;font-weight:700;color:#101828;width:50%;">Hours per Day:</td>
+                        <td style="padding:10px 0;font-size:15px;color:var(--warm-gray);">6 Hours</td>
+                      </tr>
+                      <tr style="border-bottom:1px solid var(--border);">
+                        <td style="padding:10px 0;font-size:15px;font-weight:700;color:#101828;">Days per Week:</td>
+                        <td style="padding:10px 0;font-size:15px;color:var(--warm-gray);">6 Days</td>
+                      </tr>
+                      <tr style="border-bottom:1px solid var(--border);">
+                        <td style="padding:10px 0;font-size:15px;font-weight:700;color:#101828;">No. of Days Off:</td>
+                        <td style="padding:10px 0;font-size:15px;color:var(--warm-gray);">1 Day</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:10px 0;font-size:15px;font-weight:700;color:#101828;">Schedule Flexibility:</td>
+                        <td style="padding:10px 0;font-size:15px;color:var(--warm-gray);">Fixed</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Your Free Time -->
+              <div class="itin-accordion" onclick="toggleAccordion(this.querySelector('.itin-accordion__header'))">
+                <div class="itin-accordion__header">
+                  <span class="itin-accordion__title">Your Free Time</span>
+                  <svg class="itin-accordion__chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="itin-accordion__body">
+                  <div style="padding:20px 24px;">
+                    <p style="font-size:15px;color:var(--warm-gray);line-height:1.75;">1. Rushikulya Turtle Rookery; 2&gt; Pati Sonapur Beach (approx. 35 km south); 3&gt; Potagarh Fort (approx. 15 km away); 4&gt; Maa Gangadevi Temple; 5&gt; Chilika Lake (Rambha, approx. 30 km north); 6&gt; Gopalpur</p>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div><!-- /panel-program -->
 
-          <!-- ===== APPLY TAB ===== -->
-          <div class="tab-panel" id="panel-apply">
+          <!-- ===== JOIN TAB ===== -->
+          <div class="tab-panel" id="panel-join">
 
             <div class="exp-section">
               <h2 class="exp-section__title">Upcoming Batches</h2>
@@ -869,10 +838,10 @@
               </div>
             </div>
 
-          </div><!-- /panel-apply -->
+          </div><!-- /panel-join -->
 
-          <!-- ===== COMMITMENT TAB ===== -->
-          <div class="tab-panel" id="panel-commitment">
+          <!-- ===== INCLUSIONS TAB ===== -->
+          <div class="tab-panel" id="panel-inclusions">
 
             <div class="exp-section">
               <h2 class="exp-section__title">Financial Commitment</h2>
@@ -920,7 +889,7 @@
               </div>
             </div>
 
-          </div><!-- /panel-commitment -->
+          </div><!-- /panel-inclusions -->
 
           <!-- ===== REQUIREMENTS TAB ===== -->
           <div class="tab-panel" id="panel-requirements">
