@@ -1173,7 +1173,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .filter-btn {
   padding: 7px 16px;
   border: 1px solid var(--border);
-  border-radius: 99px;
+  border-radius: 8px;
   font-size: 13px; font-weight: 500;
   color: var(--warm-gray);
   cursor: pointer; background: var(--white);
