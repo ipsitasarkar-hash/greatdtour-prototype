@@ -60,698 +60,202 @@
     </div>
   </nav>
 
-  <section class="page-hero">
-    <div class="container">
-      <p class="overline">40+ curated journeys</p>
-      <h1>Experiences crafted<br />for the curious traveler</h1>
-      <p>Every experience on GDT is handpicked — vetted hosts, small groups, and stories that last long after you return.</p>
-    </div>
-  </section>
-
-  <!-- FILTER BAR -->
-  <div class="exp-filter-bar" id="expFilterBar">
-    <div class="exp-filter-bar__inner">
-
-      <!-- Search -->
-      <div class="exp-search">
-        <svg class="exp-search__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#6a7282" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="#6a7282" stroke-width="1.4" stroke-linecap="round"/></svg>
-        <input class="exp-search__input" id="expSearch" type="text" placeholder="Search experiences…" autocomplete="off" />
-        <button class="exp-search__clear" id="expSearchClear" aria-label="Clear search">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
-      </div>
-
-      <!-- Category pills -->
-      <div class="exp-pills" id="expPills">
-        <button class="exp-pill exp-pill--active" data-filter="category" data-value="all">All</button>
-        <button class="exp-pill" data-filter="category" data-value="adventure">Adventure</button>
-        <button class="exp-pill" data-filter="category" data-value="retreat">Retreat</button>
-        <button class="exp-pill" data-filter="category" data-value="cultural">Cultural</button>
-        <button class="exp-pill" data-filter="category" data-value="immersion">Immersion</button>
-        <button class="exp-pill" data-filter="category" data-value="wildlife">Wildlife</button>
-      </div>
-
-      <!-- Right actions -->
-      <div class="exp-filter-actions">
-        <!-- Duration dropdown -->
-        <div class="exp-dropdown" id="durationDropdown">
-          <button class="exp-dropdown__btn" id="durationBtn">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Duration
-            <svg class="exp-dropdown__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="exp-dropdown__menu" id="durationMenu">
-            <button class="exp-dropdown__item exp-dropdown__item--active" data-filter="duration" data-value="all">Any duration</button>
-            <button class="exp-dropdown__item" data-filter="duration" data-value="short">1–3 days</button>
-            <button class="exp-dropdown__item" data-filter="duration" data-value="medium">4–6 days</button>
-            <button class="exp-dropdown__item" data-filter="duration" data-value="long">7+ days</button>
-          </div>
-        </div>
-
-        <!-- Group size dropdown -->
-        <div class="exp-dropdown" id="groupDropdown">
-          <button class="exp-dropdown__btn" id="groupBtn">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 6.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM9 6.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM1 12c0-2.21 1.79-4 4-4h4c2.21 0 4 1.79 4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Group size
-            <svg class="exp-dropdown__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="exp-dropdown__menu" id="groupMenu">
-            <button class="exp-dropdown__item exp-dropdown__item--active" data-filter="group" data-value="all">Any size</button>
-            <button class="exp-dropdown__item" data-filter="group" data-value="small">Small (≤6)</button>
-            <button class="exp-dropdown__item" data-filter="group" data-value="medium">Medium (6–10)</button>
-            <button class="exp-dropdown__item" data-filter="group" data-value="large">Large (10+)</button>
-          </div>
-        </div>
-
-        <!-- Sort dropdown -->
-        <div class="exp-dropdown" id="sortDropdown">
-          <button class="exp-dropdown__btn" id="sortBtn">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M4 7h6M6 10h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Sort
-            <svg class="exp-dropdown__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="exp-dropdown__menu" id="sortMenu">
-            <button class="exp-dropdown__item exp-dropdown__item--active" data-sort="featured">Featured</button>
-            <button class="exp-dropdown__item" data-sort="price-asc">Price: Low to High</button>
-            <button class="exp-dropdown__item" data-sort="price-desc">Price: High to Low</button>
-            <button class="exp-dropdown__item" data-sort="rating">Top Rated</button>
-            <button class="exp-dropdown__item" data-sort="discount">Biggest Discount</button>
-          </div>
-        </div>
-      </div>
-      </div><!-- /nav__actions -->
-    </div>
-
-    <!-- Active filter chips -->
-    <div class="exp-active-filters" id="expActiveFilters"></div>
-  </div>
-
-  <section class="section section--white" style="padding-top: 32px;">
-    <div class="container">
-
-      <!-- Results count -->
-      <div class="exp-results-bar">
-        <p class="exp-results-count" id="expResultsCount">Showing 6 experiences</p>
-      </div>
-
-      <div class="exp-grid" id="expGrid">
-
-        <div class="exp-card"
-          id="himalayan-trek"
-          data-category="adventure"
-          data-duration="long"
-          data-group="medium"
-          data-price="35000"
-          data-rating="4.9"
-          data-discount="17">
-          <a href="#himalayan-trek" class="exp-card__link">
-            <div class="exp-card__img">
-              <img src="assets/images/yoga-retreat.jpg" alt="Himalayan Trek" />
-              <span class="exp-card__tag">Adventure</span>
-            </div>
-            <div class="exp-card__body">
-              <h3 class="exp-card__title">Himalayan Trek &amp; Yoga Immersion</h3>
-              <div class="exp-card__meta"><span class="exp-card__rating">★ 4.9 <span class="muted">(127 reviews)</span></span></div>
-              <div class="exp-card__details">
-                <span>📍 Himachal Pradesh</span>
-                <span>🕐 8 Days</span>
-                <span>👥 6–10 people</span>
-              </div>
-              <p class="exp-card__desc">Trek through pristine valleys and practice sunrise yoga with mountain views</p>
-              <div class="exp-card__footer">
-                <div class="exp-card__price"><span class="price">₹35,000</span><span class="price--old">₹42,000</span></div>
-                <span class="badge badge--green">17% OFF</span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="exp-card"
-          id="desert-safari"
-          data-category="cultural"
-          data-duration="medium"
-          data-group="small"
-          data-price="28000"
-          data-rating="4.7"
-          data-discount="13">
-          <a href="#desert-safari" class="exp-card__link">
-            <div class="exp-card__img">
-              <img src="assets/images/landscape.jpg" alt="Desert Safari" />
-              <span class="exp-card__tag">Cultural</span>
-            </div>
-            <div class="exp-card__body">
-              <h3 class="exp-card__title">Desert Safari &amp; Folk Culture</h3>
-              <div class="exp-card__meta"><span class="exp-card__rating">★ 4.7 <span class="muted">(89 reviews)</span></span></div>
-              <div class="exp-card__details">
-                <span>📍 Rajasthan</span>
-                <span>🕐 5 Days</span>
-                <span>👥 4–8 people</span>
-              </div>
-              <p class="exp-card__desc">Experience desert life, traditional music, and stay in heritage havelis</p>
-              <div class="exp-card__footer">
-                <div class="exp-card__price"><span class="price">₹28,000</span><span class="price--old">₹32,000</span></div>
-                <span class="badge badge--green">13% OFF</span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="exp-card"
-          id="kerala"
-          data-category="retreat"
-          data-duration="long"
-          data-group="small"
-          data-price="42000"
-          data-rating="4.8"
-          data-discount="13">
-          <a href="#kerala" class="exp-card__link">
-            <div class="exp-card__img">
-              <img src="assets/images/retreat1.jpg" alt="Kerala Backwaters" />
-              <span class="exp-card__tag">Retreat</span>
-            </div>
-            <div class="exp-card__body">
-              <h3 class="exp-card__title">Kerala Backwaters &amp; Ayurveda</h3>
-              <div class="exp-card__meta"><span class="exp-card__rating">★ 4.8 <span class="muted">(156 reviews)</span></span></div>
-              <div class="exp-card__details">
-                <span>📍 Kerala</span>
-                <span>🕐 7 Days</span>
-                <span>👥 4–6 people</span>
-              </div>
-              <p class="exp-card__desc">Rejuvenate with authentic Ayurvedic treatments and houseboat stays</p>
-              <div class="exp-card__footer">
-                <div class="exp-card__price"><span class="price">₹42,000</span><span class="price--old">₹48,000</span></div>
-                <span class="badge badge--green">13% OFF</span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="exp-card"
-          id="stargazing"
-          data-category="adventure"
-          data-duration="short"
-          data-group="large"
-          data-price="18000"
-          data-rating="4.6"
-          data-discount="18">
-          <a href="#stargazing" class="exp-card__link">
-            <div class="exp-card__img">
-              <img src="assets/images/trek2.jpg" alt="Stargazing" />
-              <span class="exp-card__tag">Adventure</span>
-            </div>
-            <div class="exp-card__body">
-              <h3 class="exp-card__title">Campfire &amp; Stargazing Expedition</h3>
-              <div class="exp-card__meta"><span class="exp-card__rating">★ 4.6 <span class="muted">(64 reviews)</span></span></div>
-              <div class="exp-card__details">
-                <span>📍 Uttarakhand</span>
-                <span>🕐 4 Days</span>
-                <span>👥 6–12 people</span>
-              </div>
-              <p class="exp-card__desc">Sleep under a blanket of stars in the wilderness of the Kumaon hills</p>
-              <div class="exp-card__footer">
-                <div class="exp-card__price"><span class="price">₹18,000</span><span class="price--old">₹22,000</span></div>
-                <span class="badge badge--green">18% OFF</span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="exp-card"
-          data-category="immersion"
-          data-duration="short"
-          data-group="small"
-          data-price="22000"
-          data-rating="4.9"
-          data-discount="15">
-          <a href="#" class="exp-card__link">
-            <div class="exp-card__img">
-              <img src="assets/images/cultural1.jpg" alt="Cultural Immersion" />
-              <span class="exp-card__tag">Immersion</span>
-            </div>
-            <div class="exp-card__body">
-              <h3 class="exp-card__title">Varanasi Cultural Immersion</h3>
-              <div class="exp-card__meta"><span class="exp-card__rating">★ 4.9 <span class="muted">(210 reviews)</span></span></div>
-              <div class="exp-card__details">
-                <span>📍 Uttar Pradesh</span>
-                <span>🕐 4 Days</span>
-                <span>👥 4–8 people</span>
-              </div>
-              <p class="exp-card__desc">Morning boat rides on the Ganga, evening aartis, and conversations with scholars</p>
-              <div class="exp-card__footer">
-                <div class="exp-card__price"><span class="price">₹22,000</span><span class="price--old">₹26,000</span></div>
-                <span class="badge badge--green">15% OFF</span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="exp-card"
-          data-category="cultural"
-          data-duration="medium"
-          data-group="medium"
-          data-price="31000"
-          data-rating="4.7"
-          data-discount="18">
-          <a href="#" class="exp-card__link">
-            <div class="exp-card__img">
-              <img src="assets/images/immersion1.jpg" alt="Tribal Culture" />
-              <span class="exp-card__tag">Cultural</span>
-            </div>
-            <div class="exp-card__body">
-              <h3 class="exp-card__title">Northeast Tribal Arts &amp; Festivals</h3>
-              <div class="exp-card__meta"><span class="exp-card__rating">★ 4.7 <span class="muted">(43 reviews)</span></span></div>
-              <div class="exp-card__details">
-                <span>📍 Nagaland</span>
-                <span>🕐 6 Days</span>
-                <span>👥 6–10 people</span>
-              </div>
-              <p class="exp-card__desc">Witness the Hornbill Festival and stay with tribal communities</p>
-              <div class="exp-card__footer">
-                <div class="exp-card__price"><span class="price">₹31,000</span><span class="price--old">₹38,000</span></div>
-                <span class="badge badge--green">18% OFF</span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Empty state -->
-      <div class="exp-empty" id="expEmpty" style="display:none;">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#e5e5e5" stroke-width="2"/><path d="M16 24h16M24 16v16" stroke="#d1d1d1" stroke-width="2" stroke-linecap="round"/></svg>
-        <p class="exp-empty__title">No experiences found</p>
-        <p class="exp-empty__sub">Try adjusting your filters or <button class="exp-empty__reset" id="expReset">clear all</button></p>
-      </div>
-
-    </div>
-  </section>
-
+  <!-- Coming Soon -->
   <style>
-  /* ===== EXPERIENCES FILTER BAR ===== */
-  .exp-card__tag--vol { background: #2E7D32 !important; }
-  .exp-filter-bar {
-    background: #fff;
-    border-bottom: 1px solid #e5e7eb;
-    position: sticky;
-    top: 64px;
-    z-index: 90;
-    padding: 16px 0 0;
-  }
-  .exp-filter-bar__inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 80px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-
-  /* Search */
-  .exp-search {
-    position: relative;
-    flex-shrink: 0;
-  }
-  .exp-search__icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-  .exp-search__input {
-    width: 200px;
-    height: 42px;
-    border: 1px solid #d1d5dc;
-    border-radius: 999px;
-    padding: 0 36px 0 40px;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    color: #101828;
-    background: #fff;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .exp-search__input::placeholder { color: #99a1af; }
-  .exp-search__input:focus { border-color: #f54900; }
-  .exp-search__clear {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 2px;
-    display: none;
-    color: #6a7282;
-  }
-  .exp-search__clear.visible { display: flex; }
-
-  /* Category pills */
-  .exp-pills {
-    display: flex;
-    gap: 8px;
-    flex: 1;
-  }
-  .exp-pill {
-    height: 42px;
-    padding: 0 18px;
-    border-radius: 999px;
-    border: none;
-    background: #f3f4f6;
-    color: #364153;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    white-space: nowrap;
-  }
-  .exp-pill:hover { background: #e5e7eb; }
-  .exp-pill--active { background: #101828; color: #fff; }
-
-  /* Dropdown buttons */
-  .exp-filter-actions {
-    display: flex;
-    gap: 8px;
-    flex-shrink: 0;
-    margin-left: auto;
-  }
-  .exp-dropdown {
-    position: relative;
-  }
-  .exp-dropdown__btn {
-    height: 42px;
-    padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid #e5e7eb;
-    background: #fff;
-    color: #364153;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    white-space: nowrap;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .exp-dropdown__btn:hover,
-  .exp-dropdown--open .exp-dropdown__btn {
-    border-color: #101828;
-    background: #f9f9f9;
-  }
-  .exp-dropdown__btn.has-value { border-color: #f54900; color: #f54900; }
-  .exp-dropdown__chevron { transition: transform 0.2s; flex-shrink: 0; }
-  .exp-dropdown--open .exp-dropdown__chevron { transform: rotate(180deg); }
-
-  .exp-dropdown__menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-    padding: 6px;
-    min-width: 180px;
-    opacity: 0;
-    transform: translateY(6px);
-    pointer-events: none;
-    transition: opacity 0.15s, transform 0.15s;
-    z-index: 100;
-  }
-  .exp-dropdown--open .exp-dropdown__menu {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .exp-dropdown__item {
-    display: block;
-    width: 100%;
-    padding: 9px 14px;
-    border: none;
-    background: none;
-    text-align: left;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    color: #364153;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.12s;
-  }
-  .exp-dropdown__item:hover { background: #f3f4f6; }
-  .exp-dropdown__item--active { background: #fff7ed; color: #f54900; font-weight: 500; }
-
-  /* Active filter chips row */
-  .exp-active-filters {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 80px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    padding-top: 10px;
-    padding-bottom: 14px;
-    min-height: 0;
-  }
-  .exp-active-filters:empty { padding-bottom: 2px; }
-  .exp-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    height: 28px;
-    padding: 0 10px 0 12px;
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #f54900;
-    cursor: default;
-  }
-  .exp-chip__remove {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #f54900;
-    padding: 0;
-    display: flex;
-    opacity: 0.6;
-    transition: opacity 0.15s;
-  }
-  .exp-chip__remove:hover { opacity: 1; }
-
-  /* Results bar */
-  .exp-results-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 28px;
-  }
-  .exp-results-count {
-    font-size: 13px;
-    color: #6a7282;
-  }
-
-  /* Empty state */
-  .exp-empty {
-    text-align: center;
-    padding: 80px 0;
-  }
-  .exp-empty svg { margin: 0 auto 20px; display: block; }
-  .exp-empty__title { font-size: 18px; font-weight: 600; color: #101828; margin-bottom: 8px; }
-  .exp-empty__sub { font-size: 14px; color: #6a7282; }
-  .exp-empty__reset {
-    background: none; border: none; color: #f54900;
-    font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: underline;
-  }
-
-  /* Grid on experiences page */
-  .exp-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
+    .exp-cs {
+      min-height: calc(100vh - 76px);
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .exp-cs__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #f54900;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 32px;
+    }
+    .exp-cs__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      color: #101828;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .exp-cs__title em {
+      font-style: italic;
+      color: #f54900;
+    }
+    .exp-cs__sub {
+      font-size: 17px;
+      color: #4a5565;
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
+    .exp-cs__notify {
+      display: flex;
+      gap: 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-bottom: 48px;
+      width: 100%;
+      max-width: 420px;
+    }
+    .exp-cs__notify input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: #101828;
+      background: transparent;
+    }
+    .exp-cs__notify input::placeholder { color: #9ca3af; }
+    .exp-cs__notify button {
+      background: #f54900;
+      color: #fff;
+      border: none;
+      padding: 14px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .exp-cs__notify button:hover { background: #d93f00; }
+    .exp-cs__preview-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+    .exp-cs__cards {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .exp-cs__card {
+      width: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      filter: blur(3px);
+      opacity: 0.55;
+      pointer-events: none;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .exp-cs__card-img {
+      height: 120px;
+      overflow: hidden;
+    }
+    .exp-cs__card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .exp-cs__card-body {
+      padding: 12px 14px;
+    }
+    .exp-cs__card-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #f54900;
+      margin-bottom: 5px;
+    }
+    .exp-cs__card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #101828;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .exp-cs__card-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: #101828;
+    }
   </style>
 
-  <script>
-  (function () {
-    const grid     = document.getElementById('expGrid');
-    const cards    = Array.from(grid.querySelectorAll('.exp-card'));
-    const countEl  = document.getElementById('expResultsCount');
-    const emptyEl  = document.getElementById('expEmpty');
-    const chipsEl  = document.getElementById('expActiveFilters');
-    const searchEl = document.getElementById('expSearch');
-    const clearBtn = document.getElementById('expSearchClear');
-    const resetBtn = document.getElementById('expReset');
+  <div class="exp-cs" style="margin-top:76px;">
 
-    const state = { category: 'all', duration: 'all', group: 'all', sort: 'featured', search: '' };
+    <span class="exp-cs__badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5v2.5l1.5 1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Coming Soon
+    </span>
 
-    // ── Pills ────────────────────────────────────────────
-    document.getElementById('expPills').addEventListener('click', e => {
-      const btn = e.target.closest('[data-filter="category"]');
-      if (!btn) return;
-      state.category = btn.dataset.value;
-      document.querySelectorAll('[data-filter="category"]').forEach(b => b.classList.toggle('exp-pill--active', b === btn));
-      apply();
-    });
+    <h1 class="exp-cs__title">Handpicked experiences,<br /><em>launching soon.</em></h1>
+    <p class="exp-cs__sub">We're curating India's most unique travel experiences — small groups, vetted hosts, stories worth living. Be the first to know when we go live.</p>
 
-    // ── Dropdowns ────────────────────────────────────────
-    document.querySelectorAll('.exp-dropdown').forEach(dd => {
-      const btn  = dd.querySelector('.exp-dropdown__btn');
-      const menu = dd.querySelector('.exp-dropdown__menu');
+    <div class="exp-cs__notify">
+      <input type="email" placeholder="Enter your email address" />
+      <button onclick="this.textContent='Noted!';this.style.background='#16a34a';">Notify Me</button>
+    </div>
 
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const open = dd.classList.contains('exp-dropdown--open');
-        document.querySelectorAll('.exp-dropdown--open').forEach(d => d.classList.remove('exp-dropdown--open'));
-        if (!open) dd.classList.add('exp-dropdown--open');
-      });
+    <p class="exp-cs__preview-label">A glimpse of what's coming</p>
 
-      menu.addEventListener('click', e => {
-        const item = e.target.closest('.exp-dropdown__item');
-        if (!item) return;
-        menu.querySelectorAll('.exp-dropdown__item').forEach(i => i.classList.remove('exp-dropdown__item--active'));
-        item.classList.add('exp-dropdown__item--active');
-        dd.classList.remove('exp-dropdown--open');
-
-        if (item.dataset.filter === 'duration') {
-          state.duration = item.dataset.value;
-          btn.classList.toggle('has-value', state.duration !== 'all');
-        } else if (item.dataset.filter === 'group') {
-          state.group = item.dataset.value;
-          btn.classList.toggle('has-value', state.group !== 'all');
-        } else if (item.dataset.sort) {
-          state.sort = item.dataset.sort;
-          btn.classList.toggle('has-value', state.sort !== 'featured');
-        }
-        apply();
-      });
-    });
-
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.exp-dropdown--open').forEach(d => d.classList.remove('exp-dropdown--open'));
-    });
-
-    // ── Search ───────────────────────────────────────────
-    searchEl.addEventListener('input', () => {
-      state.search = searchEl.value.trim().toLowerCase();
-      clearBtn.classList.toggle('visible', state.search.length > 0);
-      apply();
-    });
-    clearBtn.addEventListener('click', () => {
-      searchEl.value = '';
-      state.search = '';
-      clearBtn.classList.remove('visible');
-      apply();
-    });
-
-    // ── Reset ────────────────────────────────────────────
-    if (resetBtn) resetBtn.addEventListener('click', resetAll);
-
-    function resetAll() {
-      state.category = 'all'; state.duration = 'all'; state.group = 'all';
-      state.sort = 'featured'; state.search = '';
-      searchEl.value = '';
-      clearBtn.classList.remove('visible');
-      document.querySelectorAll('[data-filter="category"]').forEach(b => b.classList.toggle('exp-pill--active', b.dataset.value === 'all'));
-      document.querySelectorAll('.exp-dropdown__item').forEach(i => i.classList.toggle('exp-dropdown__item--active', i.dataset.value === 'all' || i.dataset.sort === 'featured'));
-      document.querySelectorAll('.exp-dropdown__btn').forEach(b => b.classList.remove('has-value'));
-      apply();
-    }
-
-    // ── Apply filters ────────────────────────────────────
-    function apply() {
-      let visible = cards.filter(card => {
-        if (state.category !== 'all' && card.dataset.category !== state.category) return false;
-        if (state.duration !== 'all' && card.dataset.duration !== state.duration) return false;
-        if (state.group !== 'all' && card.dataset.group !== state.group) return false;
-        if (state.search) {
-          const text = card.textContent.toLowerCase();
-          if (!text.includes(state.search)) return false;
-        }
-        return true;
-      });
-
-      // Sort
-      if (state.sort === 'price-asc')   visible.sort((a,b) => +a.dataset.price   - +b.dataset.price);
-      if (state.sort === 'price-desc')  visible.sort((a,b) => +b.dataset.price   - +a.dataset.price);
-      if (state.sort === 'rating')      visible.sort((a,b) => +b.dataset.rating  - +a.dataset.rating);
-      if (state.sort === 'discount')    visible.sort((a,b) => +b.dataset.discount - +a.dataset.discount);
-
-      const visibleSet = new Set(visible);
-      cards.forEach(c => { c.style.display = visibleSet.has(c) ? '' : 'none'; });
-
-      // Re-order visible cards in DOM
-      visible.forEach(c => grid.appendChild(c));
-
-      countEl.textContent = `Showing ${visible.length} experience${visible.length !== 1 ? 's' : ''}`;
-      emptyEl.style.display = visible.length === 0 ? 'block' : 'none';
-
-      renderChips();
-    }
-
-    // ── Active filter chips ──────────────────────────────
-    const labels = {
-      duration: { short: '1–3 days', medium: '4–6 days', long: '7+ days' },
-      group:    { small: 'Small group', medium: 'Medium group', large: 'Large group' },
-      sort:     { 'price-asc': 'Price ↑', 'price-desc': 'Price ↓', rating: 'Top Rated', discount: 'Best Discount' }
-    };
-
-    function renderChips() {
-      chipsEl.innerHTML = '';
-      const add = (key, label) => {
-        const chip = document.createElement('span');
-        chip.className = 'exp-chip';
-        chip.innerHTML = `${label}<button class="exp-chip__remove" aria-label="Remove filter"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>`;
-        chip.querySelector('.exp-chip__remove').addEventListener('click', () => {
-          if (key === 'category') {
-            state.category = 'all';
-            document.querySelectorAll('[data-filter="category"]').forEach(b => b.classList.toggle('exp-pill--active', b.dataset.value === 'all'));
-          } else if (key === 'duration') {
-            state.duration = 'all';
-            document.querySelector('[data-filter="duration"][data-value="all"]').classList.add('exp-dropdown__item--active');
-            document.getElementById('durationBtn').classList.remove('has-value');
-          } else if (key === 'group') {
-            state.group = 'all';
-            document.querySelector('[data-filter="group"][data-value="all"]').classList.add('exp-dropdown__item--active');
-            document.getElementById('groupBtn').classList.remove('has-value');
-          } else if (key === 'sort') {
-            state.sort = 'featured';
-            document.querySelector('[data-sort="featured"]').classList.add('exp-dropdown__item--active');
-            document.getElementById('sortBtn').classList.remove('has-value');
-          }
-          apply();
-        });
-        chipsEl.appendChild(chip);
-      };
-
-      if (state.category !== 'all') add('category', state.category.charAt(0).toUpperCase() + state.category.slice(1));
-      if (state.duration !== 'all') add('duration', labels.duration[state.duration]);
-      if (state.group    !== 'all') add('group',    labels.group[state.group]);
-      if (state.sort !== 'featured') add('sort', labels.sort[state.sort]);
-    }
-
-    apply();
-  })();
-  </script>
-
-  <!-- CTA -->
-  <section class="cta-banner">
-    <div class="cta-banner__overlay"></div>
-    <div class="cta-banner__bg" style="background-image:url('assets/images/trek1.jpg')"></div>
-    <div class="cta-banner__content">
-      <h2 class="cta-banner__heading">Are you a host?<br /><em class="cta-banner__accent">Share your expertise.</em></h2>
-      <p class="cta-banner__sub">GDT is looking for passionate experience creators. Apply to become a host and reach thousands of curious travelers.</p>
-      <div class="cta-banner__actions">
-        <a href="host.html" class="btn btn--primary btn--lg">Apply as Host</a>
+    <div class="exp-cs__cards">
+      <div class="exp-cs__card">
+        <div class="exp-cs__card-img"><img src="assets/images/yoga-retreat.jpg" alt="" /></div>
+        <div class="exp-cs__card-body">
+          <p class="exp-cs__card-tag">Adventure</p>
+          <p class="exp-cs__card-title">Himalayan Trek & Yoga Immersion</p>
+          <p class="exp-cs__card-price">₹35,000</p>
+        </div>
+      </div>
+      <div class="exp-cs__card">
+        <div class="exp-cs__card-img"><img src="assets/images/retreat1.jpg" alt="" /></div>
+        <div class="exp-cs__card-body">
+          <p class="exp-cs__card-tag">Retreat</p>
+          <p class="exp-cs__card-title">Kerala Backwaters & Ayurveda</p>
+          <p class="exp-cs__card-price">₹42,000</p>
+        </div>
+      </div>
+      <div class="exp-cs__card">
+        <div class="exp-cs__card-img"><img src="assets/images/cultural1.jpg" alt="" /></div>
+        <div class="exp-cs__card-body">
+          <p class="exp-cs__card-tag">Immersion</p>
+          <p class="exp-cs__card-title">Varanasi Cultural Immersion</p>
+          <p class="exp-cs__card-price">₹22,000</p>
+        </div>
+      </div>
+      <div class="exp-cs__card">
+        <div class="exp-cs__card-img"><img src="assets/images/immersion1.jpg" alt="" /></div>
+        <div class="exp-cs__card-body">
+          <p class="exp-cs__card-tag">Cultural</p>
+          <p class="exp-cs__card-title">Northeast Tribal Arts & Festivals</p>
+          <p class="exp-cs__card-price">₹31,000</p>
+        </div>
       </div>
     </div>
-  </section>
+
+  </div>
 
   <!-- ── FOOTER ──────────────────────────────────────────── -->
   <footer class="gdt-footer">
