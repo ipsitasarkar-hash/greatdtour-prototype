@@ -267,6 +267,17 @@
     .fn-article__sep { color: #99a1af; }
     .fn-article__date { color: #99a1af; }
 
+    .fn-page-btn {
+      min-width: 36px; height: 36px; padding: 0 10px; border-radius: 8px;
+      border: 1px solid #e5e7eb; background: #fff; color: #364153;
+      font-size: 13px; font-weight: 500; font-family: 'Inter', sans-serif;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .fn-page-btn:hover { border-color: #101828; color: #101828; }
+    .fn-page-btn--active { background: #101828; color: #fff; border-color: #101828; }
+    .fn-page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
     /* WRITE CTA */
     .fn-write-cta-wrap { padding: 48px 64px 80px; max-width: 1280px; margin: 0 auto; }
     .fn-write-cta {
@@ -728,10 +739,10 @@
         </a>
 
       </div>
+      <!-- PAGINATION -->
+      <div id="fnPagination" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:40px 0 48px;"></div>
     </div>
   </section>
-
-  <!-- WRITE CTA -->
   <div class="fn-write-cta-wrap">
     <div class="fn-write-cta">
       <div class="fn-write-cta__icon">
@@ -839,8 +850,45 @@
     const state = { cat: 'all', read: 'all', sort: 'newest', search: '' };
     const grid = document.getElementById('storiesGrid');
     const countEl = document.getElementById('storiesCount');
+    const paginationEl = document.getElementById('fnPagination');
+    const PER_PAGE = 8;
+    let currentPage = 1;
 
     function allArticles() { return [...grid.querySelectorAll('.fn-article')]; }
+
+    function renderPagination(totalPages) {
+      paginationEl.innerHTML = '';
+      if (totalPages <= 1) return;
+
+      // Prev
+      const prev = document.createElement('button');
+      prev.className = 'fn-page-btn';
+      prev.innerHTML = '&#8592;';
+      prev.disabled = currentPage === 1;
+      prev.onclick = () => { currentPage--; applyFilters(); scrollToGrid(); };
+      paginationEl.appendChild(prev);
+
+      // Page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'fn-page-btn' + (i === currentPage ? ' fn-page-btn--active' : '');
+        btn.textContent = i;
+        btn.onclick = (function(p) { return () => { currentPage = p; applyFilters(); scrollToGrid(); }; })(i);
+        paginationEl.appendChild(btn);
+      }
+
+      // Next
+      const next = document.createElement('button');
+      next.className = 'fn-page-btn';
+      next.innerHTML = '&#8594;';
+      next.disabled = currentPage === totalPages;
+      next.onclick = () => { currentPage++; applyFilters(); scrollToGrid(); };
+      paginationEl.appendChild(next);
+    }
+
+    function scrollToGrid() {
+      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     function applyFilters() {
       const articles = allArticles();
@@ -863,12 +911,20 @@
         return 0;
       });
 
-      // Show/hide and re-order
-      articles.forEach(a => { a.style.display = 'none'; });
-      visible.forEach(a => { a.style.display = ''; grid.appendChild(a); });
-
       const n = visible.length;
       countEl.textContent = `${n} ${n === 1 ? 'story' : 'stories'} found`;
+
+      // Pagination
+      const totalPages = Math.ceil(n / PER_PAGE);
+      if (currentPage > totalPages) currentPage = 1;
+      const start = (currentPage - 1) * PER_PAGE;
+      const pageItems = visible.slice(start, start + PER_PAGE);
+
+      // Show/hide and re-order
+      articles.forEach(a => { a.style.display = 'none'; });
+      pageItems.forEach(a => { a.style.display = ''; grid.appendChild(a); });
+
+      renderPagination(totalPages);
     }
 
     // ── CATEGORY PILLS ────────────────────────────────────────────
@@ -878,6 +934,7 @@
       document.querySelectorAll('.fn-pill').forEach(p => p.classList.remove('fn-pill--active'));
       pill.classList.add('fn-pill--active');
       state.cat = pill.dataset.cat;
+      currentPage = 1;
       applyFilters();
     });
 
@@ -887,12 +944,14 @@
     searchInput.addEventListener('input', function() {
       state.search = this.value.toLowerCase().trim();
       searchClear.classList.toggle('visible', this.value.length > 0);
+      currentPage = 1;
       applyFilters();
     });
     searchClear.addEventListener('click', () => {
       searchInput.value = '';
       state.search = '';
       searchClear.classList.remove('visible');
+      currentPage = 1;
       applyFilters();
     });
 
@@ -920,6 +979,7 @@
 
     setupDropdown('readDropdown', 'readMenu', 'readBtn', (item) => {
       state.read = item.dataset.read;
+      currentPage = 1;
       const label = { all: 'Read time', short: '< 8 min', long: '8+ min' }[state.read];
       document.getElementById('readLabel').textContent = label;
       document.getElementById('readBtn').classList.toggle('fn-dropdown__btn--active', state.read !== 'all');
@@ -927,6 +987,7 @@
 
     setupDropdown('sortDropdown', 'sortMenu', 'sortBtn', (item) => {
       state.sort = item.dataset.sort;
+      currentPage = 1;
       const labels = { newest: 'Newest', oldest: 'Oldest', shortest: 'Shortest', longest: 'Longest' };
       document.getElementById('sortLabel').textContent = labels[state.sort];
     });
