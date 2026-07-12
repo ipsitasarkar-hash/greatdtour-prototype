@@ -1983,22 +1983,12 @@
       <!-- ══ APPLICANTS TAB ══ -->
       <div class="hd-panel" id="panel-applicants">
 
-        <h2 class="hd-page-title">Volunteer Applications</h2>
-        <div class="hd-page-subtitle" style="margin-bottom:16px;">Track and respond to applications for your volunteering programs.</div>
-        <div class="hd-sec-head">
-          <div></div>
-          <div class="hd-sec-head__actions">
-            <button class="hd-btn" onclick="exportApplicants()">⬇ Export CSV</button>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;">
+          <div>
+            <h2 class="hd-page-title" style="margin-bottom:2px;">Volunteer Applications</h2>
+            <div class="hd-page-subtitle" style="margin-bottom:0;">Track and respond to applications for your volunteering programs.</div>
           </div>
-        </div>
-
-        <!-- Summary stat strip -->
-        <div class="app-stat-strip" id="appStatStrip">
-          <div class="app-stat-chip app-stat-chip--blue"><div class="app-stat-chip__val" id="countNew">8</div><div class="app-stat-chip__lbl">New</div></div>
-          <div class="app-stat-chip app-stat-chip--yellow"><div class="app-stat-chip__val" id="countReview">5</div><div class="app-stat-chip__lbl">Under Review</div></div>
-          <div class="app-stat-chip app-stat-chip--purple"><div class="app-stat-chip__val" id="countCall">4</div><div class="app-stat-chip__lbl">Call Scheduled</div></div>
-          <div class="app-stat-chip app-stat-chip--green"><div class="app-stat-chip__val" id="countAccepted">11</div><div class="app-stat-chip__lbl">Accepted</div></div>
-          <div class="app-stat-chip"><div class="app-stat-chip__val" id="countTotal">31</div><div class="app-stat-chip__lbl">Total</div></div>
+          <button class="hd-btn" onclick="exportApplicants()" style="flex-shrink:0;margin-top:4px;">⬇ Export CSV</button>
         </div>
 
         <!-- Filters row -->
