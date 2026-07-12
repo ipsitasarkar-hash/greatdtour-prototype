@@ -1634,8 +1634,8 @@
           .row-actions { display:flex;gap:6px;align-items:center;flex-wrap:nowrap; }
           .hd-table__btn--danger { color:#dc2626;border-color:#fecaca; }
           .hd-table__btn--danger:hover { background:#fef2f2;border-color:#dc2626; }
-          .hd-table__btn--view { background:#101828;color:#fff;border-color:#101828;display:inline-flex;align-items:center;gap:5px; }
-          .hd-table__btn--view:hover { background:#1e2d40;border-color:#1e2d40; }
+          .hd-table__btn--view { background:#fff;color:#374151;border-color:#d1d5db;display:inline-flex;align-items:center;gap:5px; }
+          .hd-table__btn--view:hover { background:#f9fafb;border-color:#9ca3af; }
           /* Overflow menu */
           .row-overflow { position:relative; display:inline-block; }
           .row-overflow__btn { width:28px;height:28px;border-radius:6px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;font-size:16px;font-weight:700;color:#6b7280;display:flex;align-items:center;justify-content:center;letter-spacing:1px;line-height:1;transition:background 0.12s; }
@@ -3823,8 +3823,11 @@
         const fillClass = pct >= 80 ? '' : pct >= 40 ? 'batch-fill-inner--warn' : 'batch-fill-inner--low';
         // Fill rate cell (index 4, previously "Availability")
         cells[4].innerHTML = '<div class="batch-fill-bar"><span class="batch-fill-num">' + pct + '%</span><div class="batch-fill-track"><div class="batch-fill-inner ' + fillClass + '" style="width:' + pct + '%"></div></div></div>';
-        // Action cell (index 6, previously "waste")
-        cells[6].innerHTML = '<div class="batch-action-menu"><button class="batch-action-btn" onclick="toggleBatchMenu(this,event)">Actions ▾</button><div class="batch-action-menu__dropdown"><button class="batch-action-menu__item" onclick="showToast(\'Edit batch\');event.stopPropagation()">Edit Dates / Capacity</button><button class="batch-action-menu__item" onclick="showToast(\'Marked as Sold Out\');event.stopPropagation()">Mark Sold Out</button><button class="batch-action-menu__item batch-action-menu__item--danger" onclick="confirmCancel(\'batch\',\'Batch cancelled\');event.stopPropagation()">Cancel Batch</button></div></div>';
+        // Action cell (index 6) — only for non-completed batches
+        const statusText = cells[5].textContent.trim();
+        if (statusText !== 'Completed') {
+          cells[6].innerHTML = '<div class="batch-action-menu"><button class="batch-action-btn" onclick="toggleBatchMenu(this,event)">Actions ▾</button><div class="batch-action-menu__dropdown"><button class="batch-action-menu__item" onclick="showToast(\'Edit batch\');event.stopPropagation()">Edit Dates / Capacity</button><button class="batch-action-menu__item" onclick="showToast(\'Marked as Sold Out\');event.stopPropagation()">Mark Sold Out</button><button class="batch-action-menu__item batch-action-menu__item--danger" onclick="confirmCancel(\'batch\',\'Batch cancelled\');event.stopPropagation()">Cancel Batch</button></div></div>';
+        }
       });
     });
 
