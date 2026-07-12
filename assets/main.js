@@ -8,6 +8,17 @@ if (nav) {
   }, { passive: true });
 }
 
+// ---- Active nav link ----
+(function() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav__link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && (href === page || (page === '' && href === 'index.html'))) {
+      link.classList.add('is-active');
+    }
+  });
+})();
+
 // ---- Mobile hamburger ----
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('.nav__links');
