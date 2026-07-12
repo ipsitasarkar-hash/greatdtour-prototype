@@ -237,6 +237,23 @@
     .exp-why-list li { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--warm-gray); }
     .exp-why-list li::before { content: '✓'; color: var(--vol-green); font-size: 15px; font-weight: 600; flex-shrink: 0; }
 
+    /* Select dropdowns */
+    .vol-select-group { margin-bottom: 14px; }
+    .vol-select-label { display: block; font-size: 14px; font-weight: 600; color: #101828; margin-bottom: 7px; }
+    .vol-select-wrap { position: relative; }
+    .vol-select {
+      width: 100%; appearance: none; -webkit-appearance: none;
+      border: 1.5px solid var(--vol-green); border-radius: 8px;
+      padding: 13px 40px 13px 14px; font-size: 15px; color: #4a5565;
+      background: #fff; cursor: pointer; font-family: var(--font-sans);
+      outline: none;
+    }
+    .vol-select:focus { border-color: var(--vol-green); box-shadow: 0 0 0 3px rgba(46,125,50,0.12); }
+    .vol-select-chevron { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #6b7280; }
+
+    /* Why list — gold checkmarks */
+    .exp-why-list li::before { content: '✓'; color: #c8922a; font-size: 15px; font-weight: 600; flex-shrink: 0; }
+
     /* Sidebar org card */
     .vol-sidebar-org { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-top: 20px; }
     .vol-sidebar-org__inner { display: flex; gap: 16px; align-items: flex-start; }
@@ -1037,62 +1054,68 @@
         <div class="exp-sidebar">
           <div class="exp-booking-card">
 
+            <!-- Program at a Glance box -->
             <div class="vol-glance">
               <div class="vol-glance__title">Program at a Glance</div>
               <div class="vol-glance__row">
-                <span class="vol-glance__label">📅 Duration</span>
-                <span class="vol-glance__value">4 Weeks</span>
+                <span class="vol-glance__label">Duration</span>
+                <span class="vol-glance__value">30 Days</span>
               </div>
               <div class="vol-glance__row">
-                <span class="vol-glance__label">💰 Monthly Stipend</span>
-                <span class="vol-glance__value">₹5,000/month</span>
+                <span class="vol-glance__label">Work Setting</span>
+                <span class="vol-glance__value">Outdoor</span>
               </div>
               <div class="vol-glance__row">
-                <span class="vol-glance__label">👥 Spots Left</span>
-                <span class="vol-glance__spots">8 / 12 (Jun batch)</span>
+                <span class="vol-glance__label">Experience</span>
+                <span class="vol-glance__value">Required</span>
               </div>
               <div class="vol-glance__row">
-                <span class="vol-glance__label">📋 Apply by</span>
-                <span class="vol-glance__value">15 May 2025</span>
-              </div>
-              <div class="vol-glance__row">
-                <span class="vol-glance__label">💵 Program Fee</span>
-                <span class="vol-glance__value" style="color:var(--vol-green);">₹0 — Fully Funded</span>
+                <span class="vol-glance__label">Total Fee</span>
+                <span class="vol-glance__value">Rs.499 total</span>
               </div>
             </div>
 
-            <button class="exp-book-btn" onclick="window.location.href='volunteer-application.html'">Apply Now →</button>
-            <button class="exp-sidebar-btn">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="14" cy="3.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="9" r="1.75" stroke="currentColor" stroke-width="1.3"/><circle cx="14" cy="14.5" r="1.75" stroke="currentColor" stroke-width="1.3"/><path d="M5.6 9.87L12.4 13.6M5.6 8.13L12.4 4.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-              Share Program
-            </button>
-            <button class="exp-sidebar-btn">Contact the NGO</button>
+            <!-- Month selector -->
+            <div class="vol-select-group">
+              <label class="vol-select-label">Month</label>
+              <div class="vol-select-wrap">
+                <select class="vol-select">
+                  <option value="">Select month</option>
+                  <option>June 2025</option>
+                  <option>August 2025</option>
+                  <option>October 2025</option>
+                </select>
+                <svg class="vol-select-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
 
+            <!-- Available Date selector -->
+            <div class="vol-select-group">
+              <label class="vol-select-label">Available Date</label>
+              <div class="vol-select-wrap">
+                <select class="vol-select">
+                  <option value="">Select date</option>
+                  <option>1 Jun 2025</option>
+                  <option>8 Jun 2025</option>
+                  <option>15 Jun 2025</option>
+                </select>
+                <svg class="vol-select-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <button class="exp-book-btn" onclick="window.location.href='volunteer-application.html'">Apply Now</button>
+
+            <!-- Why Volunteer -->
             <div class="exp-why-box">
               <h4 class="exp-why-title">Why Volunteer With Us?</h4>
               <ul class="exp-why-list">
-                <li>Fully funded — ₹0 program fee</li>
+                <li>Verified &amp; trusted hosts</li>
                 <li>Real fieldwork, not guided tourism</li>
-                <li>Mentorship from senior biologists</li>
-                <li>Verifiable certificate of participation</li>
+                <li>Direct conservation impact</li>
+                <li>Clear refund policy</li>
               </ul>
             </div>
-          </div>
 
-          <!-- Org card in sidebar -->
-          <div class="vol-sidebar-org">
-            <div class="vol-sidebar-org__inner">
-              <img src="assets/images/trek1.jpg" alt="Wildlife Conservation India" class="vol-sidebar-org__logo" />
-              <div>
-                <div class="vol-sidebar-org__name">Wildlife Conservation India</div>
-                <span class="vol-sidebar-org__badge">VERIFIED NGO</span>
-                <div class="vol-sidebar-org__meta">Est. 2009 · 8 active programs · 200+ volunteers</div>
-                <a href="#" class="vol-sidebar-org__link">
-                  View organisation profile
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
