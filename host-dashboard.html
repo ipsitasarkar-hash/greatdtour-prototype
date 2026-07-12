@@ -1999,6 +1999,20 @@
 
         <!-- Filters row -->
         <div class="app-filters">
+          <div class="app-search-wrap" style="flex:1;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#9ca3af" stroke-width="1.8"/><path d="M16.5 16.5L21 21" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" class="app-search" id="appSearch" placeholder="Search applicants or programs…" oninput="applyFilters()" />
+          </div>
+          <div class="app-filter-group">
+            <label>Batch</label>
+            <select class="app-filter-select" id="fBatch" onchange="applyFilters()">
+              <option value="">All batches</option>
+              <option value="August 2026">August 2026</option>
+              <option value="July 2026">July 2026</option>
+              <option value="June 2026">June 2026</option>
+              <option value="September 2026">September 2026</option>
+            </select>
+          </div>
           <div class="app-filter-group">
             <label>Status</label>
             <select class="app-filter-select" id="fStatus" onchange="applyFilters()">
@@ -2012,40 +2026,8 @@
               <option value="Declined">Declined</option>
             </select>
           </div>
-          <div class="app-filter-group">
-            <label>Programme</label>
-            <select class="app-filter-select" id="fProgramme" onchange="applyFilters()">
-              <option value="">All programmes</option>
-              <option value="Wildlife Conservation">Wildlife Conservation</option>
-              <option value="Community Teaching">Community Teaching</option>
-              <option value="Organic Farming">Organic Farming</option>
-              <option value="Women's Craft Co-op">Women's Craft Co-op</option>
-            </select>
-          </div>
-          <div class="app-filter-group">
-            <label>Applicant Type</label>
-            <select class="app-filter-select" id="fType" onchange="applyFilters()">
-              <option value="">All types</option>
-              <option value="Individual">Individual</option>
-              <option value="Couple">Couple</option>
-              <option value="Group">Group</option>
-              <option value="Family">Family</option>
-            </select>
-          </div>
-          <div class="app-filter-group">
-            <label>Duration Preference</label>
-            <select class="app-filter-select" id="fDuration" onchange="applyFilters()">
-              <option value="">Any duration</option>
-              <option value="1 week">1 week</option>
-              <option value="2 weeks">2 weeks</option>
-              <option value="1 month">1 month</option>
-              <option value="3+ months">3+ months</option>
-            </select>
-          </div>
-          <div class="app-search-wrap">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#9ca3af" stroke-width="1.8"/><path d="M16.5 16.5L21 21" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/></svg>
-            <input type="text" class="app-search" id="appSearch" placeholder="Search by name, email or location…" oninput="applyFilters()" />
-          </div>
+          <button class="hd-btn" onclick="applyFilters()">Filter</button>
+          <button class="hd-btn" onclick="resetFilters()">Reset</button>
         </div>
 
         <!-- Active filter chips -->
@@ -2060,12 +2042,11 @@
             <thead>
               <tr>
                 <th onclick="sortTable('name')" id="th-name">Applicant <span class="sort-icon">↕</span></th>
-                <th onclick="sortTable('programme')" id="th-programme">Programme <span class="sort-icon">↕</span></th>
-                <th onclick="sortTable('type')" id="th-type">Type <span class="sort-icon">↕</span></th>
-                <th onclick="sortTable('duration')" id="th-duration">Duration <span class="sort-icon">↕</span></th>
-                <th onclick="sortTable('applied')" id="th-applied">Applied <span class="sort-icon">↓</span></th>
+                <th onclick="sortTable('location')" id="th-location">Location <span class="sort-icon">↕</span></th>
+                <th onclick="sortTable('programme')" id="th-programme">Program <span class="sort-icon">↕</span></th>
+                <th onclick="sortTable('batch')" id="th-batch">Batch <span class="sort-icon">↕</span></th>
                 <th onclick="sortTable('status')" id="th-status">Status <span class="sort-icon">↕</span></th>
-                <th>Actions</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody id="appTableBody">
@@ -2667,11 +2648,11 @@
               <tr>
                 <th style="width:28px;"></th>
                 <th>Program</th>
+                <th>Location</th>
                 <th>Category</th>
                 <th>Duration</th>
                 <th>Applications</th>
                 <th>Volunteers</th>
-                <th>Next Run</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -2686,14 +2667,14 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#fef9c3;">🐯</div>
-                    <div><div class="prog-name">Tiger Conservation Program</div><div class="prog-location">Ranthambore NP, Rajasthan</div></div>
+                    <div class="prog-name">Tiger Conservation Program</div>
                   </div>
                 </td>
+                <td><div class="prog-location" style="font-size:13px;">Ranthambore NP, Rajasthan</div></td>
                 <td>Wildlife</td>
                 <td>4 Weeks</td>
-                <td><div style="font-size:13px;">19 total</div><div style="font-size:11px;color:#9ca3af;">11 new · 8 review</div></td>
+                <td onclick="event.stopPropagation()"><a href="#" onclick="switchTab('applicants',null);return false;" style="font-size:13px;font-weight:600;color:#2563eb;text-decoration:none;">19 Applications</a></td>
                 <td style="font-weight:700;color:#101828;">11</td>
-                <td style="font-weight:600;">Jul 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
@@ -2704,7 +2685,7 @@
                 </td>
               </tr>
               <tr class="expand-row" id="prog-1">
-                <td class="expand-cell" colspan="9">
+                <td class="expand-cell" colspan="8">
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
@@ -2727,14 +2708,14 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#e0f2fe;">🐢</div>
-                    <div><div class="prog-name">Marine Turtle Monitoring</div><div class="prog-location">Odisha Coast, Odisha</div></div>
+                    <div class="prog-name">Marine Turtle Monitoring</div>
                   </div>
                 </td>
+                <td><div class="prog-location" style="font-size:13px;">Odisha Coast, Odisha</div></td>
                 <td>Marine</td>
                 <td>3 Weeks</td>
-                <td><div style="font-size:13px;">7 total</div><div style="font-size:11px;color:#9ca3af;">7 new</div></td>
+                <td onclick="event.stopPropagation()"><a href="#" onclick="switchTab('applicants',null);return false;" style="font-size:13px;font-weight:600;color:#2563eb;text-decoration:none;">7 Applications</a></td>
                 <td style="font-weight:700;color:#101828;">7</td>
-                <td style="font-weight:600;">Sep 2026</td>
                 <td><span class="prog-status-badge prog-status--open">Applications Open</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
@@ -2745,7 +2726,7 @@
                 </td>
               </tr>
               <tr class="expand-row" id="prog-2">
-                <td class="expand-cell" colspan="9">
+                <td class="expand-cell" colspan="8">
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
@@ -2767,14 +2748,14 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#f0fdf4;">🌿</div>
-                    <div><div class="prog-name">Wildlife Conservation</div><div class="prog-location">Jim Corbett, Uttarakhand</div></div>
+                    <div class="prog-name">Wildlife Conservation</div>
                   </div>
                 </td>
+                <td><div class="prog-location" style="font-size:13px;">Jim Corbett, Uttarakhand</div></td>
                 <td>Wildlife</td>
                 <td>2 Weeks</td>
-                <td><div style="font-size:13px;">14 total</div><div style="font-size:11px;color:#9ca3af;">8 new · 6 review</div></td>
+                <td onclick="event.stopPropagation()"><a href="#" onclick="switchTab('applicants',null);return false;" style="font-size:13px;font-weight:600;color:#2563eb;text-decoration:none;">14 Applications</a></td>
                 <td style="font-weight:700;color:#101828;">5</td>
-                <td style="font-weight:600;">Aug 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
@@ -2785,7 +2766,7 @@
                 </td>
               </tr>
               <tr class="expand-row" id="prog-3">
-                <td class="expand-cell" colspan="9">
+                <td class="expand-cell" colspan="8">
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
@@ -2810,14 +2791,14 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#fef3c7;">🌾</div>
-                    <div><div class="prog-name">Organic Farming &amp; Permaculture</div><div class="prog-location">Auroville, Tamil Nadu</div></div>
+                    <div class="prog-name">Organic Farming &amp; Permaculture</div>
                   </div>
                 </td>
+                <td><div class="prog-location" style="font-size:13px;">Auroville, Tamil Nadu</div></td>
                 <td>Agriculture</td>
                 <td>2 Weeks</td>
-                <td><div style="font-size:13px;">6 total</div><div style="font-size:11px;color:#9ca3af;">6 new</div></td>
+                <td onclick="event.stopPropagation()"><a href="#" onclick="switchTab('applicants',null);return false;" style="font-size:13px;font-weight:600;color:#2563eb;text-decoration:none;">6 Applications</a></td>
                 <td style="font-weight:700;color:#101828;">4</td>
-                <td style="font-weight:600;">Aug 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
@@ -2828,7 +2809,7 @@
                 </td>
               </tr>
               <tr class="expand-row" id="prog-4">
-                <td class="expand-cell" colspan="9">
+                <td class="expand-cell" colspan="8">
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
@@ -2852,14 +2833,14 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#eff6ff;">📚</div>
-                    <div><div class="prog-name">Community Teaching</div><div class="prog-location">Dharavi, Mumbai</div></div>
+                    <div class="prog-name">Community Teaching</div>
                   </div>
                 </td>
+                <td><div class="prog-location" style="font-size:13px;">Dharavi, Mumbai</div></td>
                 <td>Education</td>
                 <td>1 Month</td>
-                <td><div style="font-size:13px;">5 total</div><div style="font-size:11px;color:#9ca3af;">5 new</div></td>
+                <td onclick="event.stopPropagation()"><a href="#" onclick="switchTab('applicants',null);return false;" style="font-size:13px;font-weight:600;color:#2563eb;text-decoration:none;">5 Applications</a></td>
                 <td style="font-weight:700;color:#101828;">3</td>
-                <td style="font-weight:600;">Sep 2026</td>
                 <td><span class="prog-status-badge prog-status--active">Active</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
@@ -2870,7 +2851,7 @@
                 </td>
               </tr>
               <tr class="expand-row" id="prog-5">
-                <td class="expand-cell" colspan="9">
+                <td class="expand-cell" colspan="8">
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
@@ -2896,14 +2877,14 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:12px;">
                     <div class="prog-icon" style="background:#fdf4ff;">🧵</div>
-                    <div><div class="prog-name">Women's Craft Co-op</div><div class="prog-location">Kutch, Gujarat</div></div>
+                    <div class="prog-name">Women's Craft Co-op</div>
                   </div>
                 </td>
+                <td><div class="prog-location" style="font-size:13px;">Kutch, Gujarat</div></td>
                 <td>Livelihood</td>
                 <td>2 Weeks</td>
-                <td><div style="font-size:13px;color:#9ca3af;">—</div><div style="font-size:11px;color:#9ca3af;">Not yet published</div></td>
+                <td><div style="font-size:13px;color:#9ca3af;">—</div></td>
                 <td style="color:#9ca3af;">—</td>
-                <td style="color:#9ca3af;">TBD</td>
                 <td><span class="prog-status-badge prog-status--draft">Draft</span></td>
                 <td onclick="event.stopPropagation()">
                   <div class="row-actions">
@@ -2914,7 +2895,7 @@
                 </td>
               </tr>
               <tr class="expand-row" id="prog-6">
-                <td class="expand-cell" colspan="9">
+                <td class="expand-cell" colspan="8">
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
@@ -4217,37 +4198,37 @@
 
     // ── APPLICANTS TABLE ──
     const APPLICANTS = [
-      { id:1,  name:'Meera Iyer',        email:'meera.iyer@gmail.com',       location:'Bangalore, KA', type:'Individual', programme:'Wildlife Conservation',  duration:'2 weeks',  applied:'2026-06-25', status:'New',          avatar:'#6366f1' },
-      { id:2,  name:'Lucas Ferreira',     email:'lucas.f@protonmail.com',      location:'São Paulo, Brazil', type:'Individual', programme:'Community Teaching',    duration:'1 month',  applied:'2026-06-24', status:'New',          avatar:'#f59e0b' },
-      { id:3,  name:'Ritika & Ansh Shah', email:'ritika.shah@outlook.com',     location:'Mumbai, MH',    type:'Couple',     programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-23', status:'New',          avatar:'#0891b2' },
-      { id:4,  name:'Sarah O\'Brien',     email:'sarah.obrien@hey.com',        location:'Dublin, Ireland', type:'Individual', programme:'Wildlife Conservation',  duration:'3+ months',applied:'2026-06-22', status:'New',          avatar:'#7c3aed' },
-      { id:5,  name:'Karan Bajwa',        email:'karan.bajwa@gmail.com',       location:'Chandigarh, PB', type:'Individual', programme:'Wildlife Conservation',  duration:'1 week',   applied:'2026-06-21', status:'New',          avatar:'#16a34a' },
-      { id:6,  name:'Aarti Desai',        email:'aarti.d@gmail.com',           location:'Ahmedabad, GJ', type:'Family',     programme:'Community Teaching',    duration:'1 week',   applied:'2026-06-20', status:'New',          avatar:'#dc2626' },
-      { id:7,  name:'Thomas Müller',      email:'t.mueller@gmail.com',         location:'Berlin, Germany', type:'Individual', programme:'Organic Farming',       duration:'1 month',  applied:'2026-06-19', status:'New',          avatar:'#ea580c' },
-      { id:8,  name:'Nadia Kaur',         email:'nadia.kaur@gmail.com',        location:'Amritsar, PB',  type:'Individual', programme:'Women\'s Craft Co-op',   duration:'2 weeks',  applied:'2026-06-19', status:'New',          avatar:'#c026d3' },
-      { id:9,  name:'Raj & Priya Nair',   email:'raj.nair@gmail.com',          location:'Kochi, KL',     type:'Couple',     programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-15', status:'Under Review', avatar:'#0284c7' },
-      { id:10, name:'Simone Rossi',       email:'simone.rossi@gmail.com',      location:'Rome, Italy',   type:'Individual', programme:'Community Teaching',    duration:'1 month',  applied:'2026-06-14', status:'Under Review', avatar:'#65a30d' },
-      { id:11, name:'Pooja Sharma',       email:'pooja.s@yahoo.co.in',         location:'Jaipur, RJ',    type:'Individual', programme:'Women\'s Craft Co-op',   duration:'3+ months',applied:'2026-06-13', status:'Under Review', avatar:'#9333ea' },
-      { id:12, name:'Ali Hassan',         email:'ali.hassan@gmail.com',        location:'Cairo, Egypt',  type:'Individual', programme:'Wildlife Conservation',  duration:'1 month',  applied:'2026-06-12', status:'Under Review', avatar:'#16a34a' },
-      { id:13, name:'Divya Menon',        email:'divya.menon@gmail.com',       location:'Trivandrum, KL', type:'Individual', programme:'Community Teaching',    duration:'2 weeks',  applied:'2026-06-11', status:'Under Review', avatar:'#b45309' },
-      { id:14, name:'James O\'Connor',    email:'james.o@gmail.com',           location:'Sydney, Australia', type:'Group',   programme:'Wildlife Conservation',  duration:'1 week',   applied:'2026-06-09', status:'Shortlisted',  avatar:'#0369a1' },
-      { id:15, name:'Ankita Patel',       email:'ankita.p@gmail.com',          location:'Surat, GJ',     type:'Individual', programme:'Women\'s Craft Co-op',   duration:'1 month',  applied:'2026-06-08', status:'Shortlisted',  avatar:'#be185d' },
-      { id:16, name:'Rena Tanaka',        email:'rena.tanaka@gmail.com',       location:'Tokyo, Japan',  type:'Individual', programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-07', status:'Call Scheduled',avatar:'#0891b2' },
-      { id:17, name:'Harshit Agarwal',    email:'harshit.ag@gmail.com',        location:'Lucknow, UP',   type:'Individual', programme:'Community Teaching',    duration:'1 month',  applied:'2026-06-06', status:'Call Scheduled',avatar:'#7c3aed' },
-      { id:18, name:'Valeria Gomez',      email:'v.gomez@outlook.com',         location:'Bogotá, Colombia', type:'Individual', programme:'Wildlife Conservation', duration:'3+ months',applied:'2026-06-05', status:'Call Scheduled',avatar:'#f59e0b' },
-      { id:19, name:'Nilufar Rashidova',  email:'nilufar.r@gmail.com',         location:'Tashkent, UZ',  type:'Couple',     programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-06-04', status:'Call Scheduled',avatar:'#16a34a' },
-      { id:20, name:'Surya Pratap Singh', email:'surya.ps@gmail.com',          location:'Varanasi, UP',  type:'Individual', programme:'Community Teaching',    duration:'1 week',   applied:'2026-06-02', status:'Accepted',     avatar:'#2E7D32' },
-      { id:21, name:'Kavita & Raj Mehta', email:'kavita.mehta@gmail.com',      location:'Pune, MH',      type:'Couple',     programme:'Organic Farming',       duration:'1 month',  applied:'2026-05-29', status:'Accepted',     avatar:'#6366f1' },
-      { id:22, name:'Emma Larsson',       email:'emma.larsson@gmail.com',      location:'Stockholm, Sweden', type:'Individual', programme:'Wildlife Conservation', duration:'2 weeks', applied:'2026-05-26', status:'Accepted',   avatar:'#0284c7' },
-      { id:23, name:'Nikhil Bose',        email:'nikhil.bose@gmail.com',       location:'Kolkata, WB',   type:'Individual', programme:'Community Teaching',    duration:'3+ months',applied:'2026-05-22', status:'Accepted',     avatar:'#dc2626' },
-      { id:24, name:'Fatima Al-Saeed',    email:'fatima.s@gmail.com',          location:'Riyadh, KSA',   type:'Individual', programme:'Women\'s Craft Co-op',   duration:'1 month',  applied:'2026-05-18', status:'Accepted',     avatar:'#c026d3' },
-      { id:25, name:'André Dubois',       email:'andre.dubois@gmail.com',      location:'Paris, France', type:'Individual', programme:'Organic Farming',       duration:'2 weeks',  applied:'2026-05-14', status:'Accepted',     avatar:'#b45309' },
-      { id:26, name:'Sana Mirza',         email:'sana.mirza@gmail.com',        location:'Hyderabad, TS', type:'Individual', programme:'Women\'s Craft Co-op',   duration:'2 weeks',  applied:'2026-05-10', status:'Accepted',     avatar:'#0891b2' },
-      { id:27, name:'Yusuf Adeyemi',      email:'yusuf.a@gmail.com',           location:'Lagos, Nigeria',type:'Group',      programme:'Community Teaching',    duration:'1 month',  applied:'2026-05-06', status:'Accepted',     avatar:'#7c3aed' },
-      { id:28, name:'Rekha Nambiar',      email:'rekha.n@gmail.com',           location:'Calicut, KL',   type:'Individual', programme:'Wildlife Conservation',  duration:'1 week',   applied:'2026-05-02', status:'Accepted',     avatar:'#16a34a' },
-      { id:29, name:'Marco Bianchi',      email:'marco.b@gmail.com',           location:'Milan, Italy',  type:'Individual', programme:'Organic Farming',       duration:'1 month',  applied:'2026-05-28', status:'Accepted',     avatar:'#65a30d' },
-      { id:30, name:'Geeta Chauhan',      email:'geeta.chauhan@gmail.com',     location:'Shimla, HP',    type:'Family',     programme:'Community Teaching',    duration:'1 week',   applied:'2026-04-20', status:'Waitlisted',   avatar:'#ea580c' },
-      { id:31, name:'Viktor Novak',       email:'viktor.n@gmail.com',          location:'Prague, Czech R.', type:'Individual', programme:'Wildlife Conservation', duration:'3+ months',applied:'2026-04-10', status:'Declined',  avatar:'#9ca3af' },
+      { id:1,  name:'Meera Iyer',        email:'meera.iyer@gmail.com',       location:'Bangalore, KA',       type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-06-25', status:'New',           avatar:'#6366f1' },
+      { id:2,  name:'Lucas Ferreira',     email:'lucas.f@protonmail.com',      location:'São Paulo, Brazil',   type:'Individual', programme:'Community Teaching',    batch:'September 2026', applied:'2026-06-24', status:'New',           avatar:'#f59e0b' },
+      { id:3,  name:'Ritika & Ansh Shah', email:'ritika.shah@outlook.com',     location:'Mumbai, MH',          type:'Couple',     programme:'Organic Farming',       batch:'August 2026',    applied:'2026-06-23', status:'New',           avatar:'#0891b2' },
+      { id:4,  name:'Sarah O\'Brien',     email:'sarah.obrien@hey.com',        location:'Dublin, Ireland',     type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-06-22', status:'New',           avatar:'#7c3aed' },
+      { id:5,  name:'Karan Bajwa',        email:'karan.bajwa@gmail.com',       location:'Chandigarh, PB',      type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-06-21', status:'New',           avatar:'#16a34a' },
+      { id:6,  name:'Aarti Desai',        email:'aarti.d@gmail.com',           location:'Ahmedabad, GJ',       type:'Family',     programme:'Community Teaching',    batch:'September 2026', applied:'2026-06-20', status:'New',           avatar:'#dc2626' },
+      { id:7,  name:'Thomas Müller',      email:'t.mueller@gmail.com',         location:'Berlin, Germany',     type:'Individual', programme:'Organic Farming',       batch:'August 2026',    applied:'2026-06-19', status:'New',           avatar:'#ea580c' },
+      { id:8,  name:'Nadia Kaur',         email:'nadia.kaur@gmail.com',        location:'Amritsar, PB',        type:'Individual', programme:"Women's Craft Co-op",   batch:'July 2026',      applied:'2026-06-19', status:'New',           avatar:'#c026d3' },
+      { id:9,  name:'Raj & Priya Nair',   email:'raj.nair@gmail.com',          location:'Kochi, KL',           type:'Couple',     programme:'Organic Farming',       batch:'August 2026',    applied:'2026-06-15', status:'Under Review',  avatar:'#0284c7' },
+      { id:10, name:'Simone Rossi',       email:'simone.rossi@gmail.com',      location:'Rome, Italy',         type:'Individual', programme:'Community Teaching',    batch:'September 2026', applied:'2026-06-14', status:'Under Review',  avatar:'#65a30d' },
+      { id:11, name:'Pooja Sharma',       email:'pooja.s@yahoo.co.in',         location:'Jaipur, RJ',          type:'Individual', programme:"Women's Craft Co-op",   batch:'July 2026',      applied:'2026-06-13', status:'Under Review',  avatar:'#9333ea' },
+      { id:12, name:'Ali Hassan',         email:'ali.hassan@gmail.com',        location:'Cairo, Egypt',        type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-06-12', status:'Under Review',  avatar:'#16a34a' },
+      { id:13, name:'Divya Menon',        email:'divya.menon@gmail.com',       location:'Trivandrum, KL',      type:'Individual', programme:'Community Teaching',    batch:'September 2026', applied:'2026-06-11', status:'Under Review',  avatar:'#b45309' },
+      { id:14, name:'James O\'Connor',    email:'james.o@gmail.com',           location:'Sydney, Australia',   type:'Group',      programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-06-09', status:'Shortlisted',   avatar:'#0369a1' },
+      { id:15, name:'Ankita Patel',       email:'ankita.p@gmail.com',          location:'Surat, GJ',           type:'Individual', programme:"Women's Craft Co-op",   batch:'July 2026',      applied:'2026-06-08', status:'Shortlisted',   avatar:'#be185d' },
+      { id:16, name:'Rena Tanaka',        email:'rena.tanaka@gmail.com',       location:'Tokyo, Japan',        type:'Individual', programme:'Organic Farming',       batch:'August 2026',    applied:'2026-06-07', status:'Call Scheduled',avatar:'#0891b2' },
+      { id:17, name:'Harshit Agarwal',    email:'harshit.ag@gmail.com',        location:'Lucknow, UP',         type:'Individual', programme:'Community Teaching',    batch:'September 2026', applied:'2026-06-06', status:'Call Scheduled',avatar:'#7c3aed' },
+      { id:18, name:'Valeria Gomez',      email:'v.gomez@outlook.com',         location:'Bogotá, Colombia',    type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-06-05', status:'Call Scheduled',avatar:'#f59e0b' },
+      { id:19, name:'Nilufar Rashidova',  email:'nilufar.r@gmail.com',         location:'Tashkent, UZ',        type:'Couple',     programme:'Organic Farming',       batch:'August 2026',    applied:'2026-06-04', status:'Call Scheduled',avatar:'#16a34a' },
+      { id:20, name:'Surya Pratap Singh', email:'surya.ps@gmail.com',          location:'Varanasi, UP',        type:'Individual', programme:'Community Teaching',    batch:'July 2026',      applied:'2026-06-02', status:'Accepted',      avatar:'#2E7D32' },
+      { id:21, name:'Kavita & Raj Mehta', email:'kavita.mehta@gmail.com',      location:'Pune, MH',            type:'Couple',     programme:'Organic Farming',       batch:'August 2026',    applied:'2026-05-29', status:'Accepted',      avatar:'#6366f1' },
+      { id:22, name:'Emma Larsson',       email:'emma.larsson@gmail.com',      location:'Stockholm, Sweden',   type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-05-26', status:'Accepted',      avatar:'#0284c7' },
+      { id:23, name:'Nikhil Bose',        email:'nikhil.bose@gmail.com',       location:'Kolkata, WB',         type:'Individual', programme:'Community Teaching',    batch:'September 2026', applied:'2026-05-22', status:'Accepted',      avatar:'#dc2626' },
+      { id:24, name:'Fatima Al-Saeed',    email:'fatima.s@gmail.com',          location:'Riyadh, KSA',         type:'Individual', programme:"Women's Craft Co-op",   batch:'July 2026',      applied:'2026-05-18', status:'Accepted',      avatar:'#c026d3' },
+      { id:25, name:'André Dubois',       email:'andre.dubois@gmail.com',      location:'Paris, France',       type:'Individual', programme:'Organic Farming',       batch:'August 2026',    applied:'2026-05-14', status:'Accepted',      avatar:'#b45309' },
+      { id:26, name:'Sana Mirza',         email:'sana.mirza@gmail.com',        location:'Hyderabad, TS',       type:'Individual', programme:"Women's Craft Co-op",   batch:'July 2026',      applied:'2026-05-10', status:'Accepted',      avatar:'#0891b2' },
+      { id:27, name:'Yusuf Adeyemi',      email:'yusuf.a@gmail.com',           location:'Lagos, Nigeria',      type:'Group',      programme:'Community Teaching',    batch:'September 2026', applied:'2026-05-06', status:'Accepted',      avatar:'#7c3aed' },
+      { id:28, name:'Rekha Nambiar',      email:'rekha.n@gmail.com',           location:'Calicut, KL',         type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-05-02', status:'Accepted',      avatar:'#16a34a' },
+      { id:29, name:'Marco Bianchi',      email:'marco.b@gmail.com',           location:'Milan, Italy',        type:'Individual', programme:'Organic Farming',       batch:'August 2026',    applied:'2026-05-28', status:'Accepted',      avatar:'#65a30d' },
+      { id:30, name:'Geeta Chauhan',      email:'geeta.chauhan@gmail.com',     location:'Shimla, HP',          type:'Family',     programme:'Community Teaching',    batch:'September 2026', applied:'2026-04-20', status:'Waitlisted',    avatar:'#ea580c' },
+      { id:31, name:'Viktor Novak',       email:'viktor.n@gmail.com',          location:'Prague, Czech R.',    type:'Individual', programme:'Wildlife Conservation',  batch:'August 2026',    applied:'2026-04-10', status:'Declined',      avatar:'#9ca3af' },
     ];
 
     const STATUS_CLASS = {
@@ -4267,20 +4248,17 @@
     let appFiltered = [...APPLICANTS];
 
     function applyFilters() {
-      const fStatus    = document.getElementById('fStatus').value;
-      const fProgramme = document.getElementById('fProgramme').value;
-      const fType      = document.getElementById('fType').value;
-      const fDuration  = document.getElementById('fDuration').value;
-      const fSearch    = document.getElementById('appSearch').value.toLowerCase().trim();
+      const fStatus  = document.getElementById('fStatus').value;
+      const fBatch   = document.getElementById('fBatch').value;
+      const fSearch  = document.getElementById('appSearch').value.toLowerCase().trim();
 
       appFiltered = APPLICANTS.filter(a => {
-        if (fStatus    && a.status    !== fStatus)    return false;
-        if (fProgramme && a.programme !== fProgramme) return false;
-        if (fType      && a.type      !== fType)      return false;
-        if (fDuration  && a.duration  !== fDuration)  return false;
+        if (fStatus && a.status !== fStatus) return false;
+        if (fBatch  && a.batch  !== fBatch)  return false;
         if (fSearch && !a.name.toLowerCase().includes(fSearch) &&
                        !a.email.toLowerCase().includes(fSearch) &&
-                       !a.location.toLowerCase().includes(fSearch)) return false;
+                       !a.location.toLowerCase().includes(fSearch) &&
+                       !a.programme.toLowerCase().includes(fSearch)) return false;
         return true;
       });
 
@@ -4289,20 +4267,23 @@
       renderTable();
     }
 
+    function resetFilters() {
+      document.getElementById('fStatus').value = '';
+      document.getElementById('fBatch').value = '';
+      document.getElementById('appSearch').value = '';
+      applyFilters();
+    }
+
     function renderFilterTags() {
       const wrap = document.getElementById('filterTags');
       const chips = [];
-      const fStatus    = document.getElementById('fStatus').value;
-      const fProgramme = document.getElementById('fProgramme').value;
-      const fType      = document.getElementById('fType').value;
-      const fDuration  = document.getElementById('fDuration').value;
-      const fSearch    = document.getElementById('appSearch').value.trim();
+      const fStatus = document.getElementById('fStatus').value;
+      const fBatch  = document.getElementById('fBatch').value;
+      const fSearch = document.getElementById('appSearch').value.trim();
 
-      if (fStatus)    chips.push({ label: fStatus,    clear: () => { document.getElementById('fStatus').value='';    applyFilters(); } });
-      if (fProgramme) chips.push({ label: fProgramme, clear: () => { document.getElementById('fProgramme').value=''; applyFilters(); } });
-      if (fType)      chips.push({ label: fType,      clear: () => { document.getElementById('fType').value='';      applyFilters(); } });
-      if (fDuration)  chips.push({ label: fDuration,  clear: () => { document.getElementById('fDuration').value='';  applyFilters(); } });
-      if (fSearch)    chips.push({ label: `"${fSearch}"`, clear: () => { document.getElementById('appSearch').value=''; applyFilters(); } });
+      if (fStatus) chips.push({ label: fStatus, clear: () => { document.getElementById('fStatus').value=''; applyFilters(); } });
+      if (fBatch)  chips.push({ label: fBatch,  clear: () => { document.getElementById('fBatch').value='';  applyFilters(); } });
+      if (fSearch) chips.push({ label: `"${fSearch}"`, clear: () => { document.getElementById('appSearch').value=''; applyFilters(); } });
 
       if (chips.length === 0) { wrap.innerHTML=''; return; }
 
@@ -4323,11 +4304,9 @@
     }
 
     function clearAllFilters() {
-      document.getElementById('fStatus').value    = '';
-      document.getElementById('fProgramme').value = '';
-      document.getElementById('fType').value      = '';
-      document.getElementById('fDuration').value  = '';
-      document.getElementById('appSearch').value  = '';
+      document.getElementById('fStatus').value = '';
+      document.getElementById('fBatch').value  = '';
+      document.getElementById('appSearch').value = '';
       applyFilters();
     }
 
@@ -4382,40 +4361,21 @@
       tbody.innerHTML = slice.map(a => `
         <tr id="app-row-${a.id}">
           <td>
-            <div style="display:flex;align-items:center;gap:0;">
+            <div style="display:flex;align-items:center;gap:10px;">
               <span class="app-row-avatar" style="background:${a.avatar};">${a.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</span>
               <div>
                 <div class="app-name">${a.name}</div>
                 <div class="app-email">${a.email}</div>
-                <div style="font-size:11px;color:#9ca3af;margin-top:1px;">📍 ${a.location}</div>
               </div>
             </div>
           </td>
-          <td>${a.programme}</td>
-          <td>${a.type}</td>
-          <td>${a.duration}</td>
-          <td style="white-space:nowrap;">${fmtDate(a.applied)}</td>
+          <td style="font-size:13px;color:#6b7280;">${a.location}</td>
+          <td style="font-size:13px;">${a.programme}</td>
+          <td style="font-size:13px;white-space:nowrap;">${a.batch}</td>
           <td><span class="app-badge ${STATUS_CLASS[a.status] || ''}">${a.status}</span></td>
           <td>
             <div class="app-row-actions">
-              ${a.status === 'New' || a.status === 'Under Review' || a.status === 'Shortlisted' ? `
-                <button class="app-action-btn app-action-btn--green" onclick="updateAppStatus(${a.id}, 'Accepted')">Accept</button>
-                <button class="app-action-btn" onclick="updateAppStatus(${a.id}, 'Shortlisted')">Shortlist</button>
-                <button class="app-action-btn app-action-btn--red" onclick="updateAppStatus(${a.id}, 'Declined')">Decline</button>
-              ` : a.status === 'Call Scheduled' ? `
-                <button class="app-action-btn app-action-btn--green" onclick="updateAppStatus(${a.id}, 'Accepted')">Accept</button>
-                <button class="app-action-btn" onclick="showToast('Call notes coming soon')">Notes</button>
-                <button class="app-action-btn app-action-btn--red" onclick="updateAppStatus(${a.id}, 'Declined')">Decline</button>
-              ` : a.status === 'Accepted' ? `
-                <button class="app-action-btn" onclick="showToast('Welcome message sent to ${a.name.split(' ')[0]}')">Send Welcome</button>
-                <button class="app-action-btn" onclick="showToast('Onboarding checklist coming soon')">Onboarding</button>
-              ` : a.status === 'Waitlisted' ? `
-                <button class="app-action-btn app-action-btn--green" onclick="updateAppStatus(${a.id}, 'Accepted')">Move to Accepted</button>
-                <button class="app-action-btn app-action-btn--red" onclick="updateAppStatus(${a.id}, 'Declined')">Decline</button>
-              ` : `
-                <button class="app-action-btn" onclick="updateAppStatus(${a.id}, 'Under Review')">Reopen</button>
-              `}
-              <button class="app-action-btn" onclick="showToast('Viewing full application…')">View</button>
+              <button class="app-action-btn" style="font-weight:600;" onclick="showToast('Viewing full application…')">Review</button>
             </div>
           </td>
         </tr>
