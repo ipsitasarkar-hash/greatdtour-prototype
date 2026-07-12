@@ -217,9 +217,9 @@
     .ap-sbq-required { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #374151; padding-top: 2px; white-space: nowrap; }
     .ap-sbq-required input[type=checkbox] { accent-color: #f54900; width: 15px; height: 15px; cursor: pointer; }
     .ap-sbq-required.is-checked { color: #f54900; font-weight: 600; }
-    .ap-sbq-ans-wrap { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-    .ap-sbq-pair { display: flex; align-items: center; gap: 10px; }
-    .ap-sbq-pair-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+    .ap-sbq-ans-wrap { display: flex; flex-direction: row; gap: 24px; align-items: center; }
+    .ap-sbq-pair { display: flex; align-items: center; gap: 8px; }
+    .ap-sbq-pair-label { font-size: 12px; font-weight: 600; color: #6b7280; white-space: nowrap; }
     .ap-sbq-proof { font-size: 12px; color: #2563eb; margin-top: 2px; }
 
     /* Cultural fit / non-skill question rows */
@@ -229,7 +229,7 @@
     .ap-psq-text { font-size: 14px; color: #374151; flex: 1; line-height: 1.5; }
     .ap-psq-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .ap-psq-ans-wrap { display: flex; align-items: center; gap: 10px; }
-    .ap-psq-ans-label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+    .ap-psq-ans-label { font-size: 12px; font-weight: 600; color: #6b7280; white-space: nowrap; }
 
     /* Badge counter */
     .ap-skill-badge-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #f3f4f6; font-size: 13px; font-weight: 700; color: #374151; flex-shrink: 0; }
@@ -1008,7 +1008,7 @@ function stepPreScreening() {
             <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes — Required</div>
           </div>
           <div class="ap-sbq-pair">
-            <span class="ap-sbq-pair-label">Proof type to attach</span>
+            <span class="ap-sbq-pair-label">Proof Type to Attach</span>
             <select class="ap-select" style="min-width:160px;">
               <option value="" disabled selected>Select proof type</option>
               <option>Certificate</option>
@@ -1035,7 +1035,7 @@ function stepPreScreening() {
             <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes — Required</div>
           </div>
           <div class="ap-sbq-pair">
-            <span class="ap-sbq-pair-label">Proof type to attach</span>
+            <span class="ap-sbq-pair-label">Proof Type to Attach</span>
             <select class="ap-select" style="min-width:160px;">
               <option value="" disabled selected>Select proof type</option>
               <option>Certificate</option>
@@ -1064,7 +1064,7 @@ function stepPreScreening() {
         <span class="ap-psq-text">Are you physically comfortable with sustained physical or outdoor work for the daily hours stated in this listing?</span>
         <div class="ap-psq-right">
           <div class="ap-psq-ans-wrap">
-            <div class="ap-psq-ans-label">Accepted answer</div>
+            <div class="ap-psq-ans-label">Accepted Answer</div>
             <select class="ap-select" style="min-width:150px;">
               <option>I will Decide</option>
               <option>Yes</option>
@@ -1091,7 +1091,7 @@ function stepPreScreening() {
         <span class="ap-psq-text">Are you comfortable performing repetitive or routine tasks where results build slowly over days or weeks?</span>
         <div class="ap-psq-right">
           <div class="ap-psq-ans-wrap">
-            <div class="ap-psq-ans-label">Accepted answer</div>
+            <div class="ap-psq-ans-label">Accepted Answer</div>
             <select class="ap-select" style="min-width:150px;">
               <option>I will Decide</option>
               <option selected>Yes</option>
@@ -1106,7 +1106,7 @@ function stepPreScreening() {
         <span class="ap-psq-text">Are you comfortable working in a cold / high-altitude climate for the duration?</span>
         <div class="ap-psq-right">
           <div class="ap-psq-ans-wrap">
-            <div class="ap-psq-ans-label">Accepted answer</div>
+            <div class="ap-psq-ans-label">Accepted Answer</div>
             <select class="ap-select" style="min-width:150px;">
               <option>I will Decide</option>
               <option>Yes</option>
