@@ -1573,7 +1573,7 @@
           .expand-cell { padding:0 !important; border-bottom:2px solid #e5e7eb !important; background:#f9fafb; width:100%; }
           .expand-inner { padding:16px 0 0 0; background:#f9fafb; width:100%; box-sizing:border-box; display:block; }
           .expand-title { font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;padding:0 16px; }
-          .batch-table { width:100%; border-collapse:collapse; min-width:100%; }
+          .batch-table { width:100%; border-collapse:collapse; table-layout:fixed; }
           .batch-table th { font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.4px;padding:6px 12px;text-align:left;border-bottom:1px solid #e5e7eb;background:#f3f4f6; }
           .batch-table td { font-size:12px;color:#374151;padding:9px 12px;border-bottom:1px solid #f3f4f6; }
           .batch-table td.batch-td-waste { } .batch-table td.batch-td-arrow { text-align:left; }
@@ -1700,7 +1700,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Booked</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('tour-1',6);event.stopPropagation()"><td><span class="batch-name-link">Batch 6</span></td><td>12 Jul–26 Jul 2026</td><td>12</td><td>9</td><td>8 left</td><td><span class="hd-badge hd-badge--ongoing" style="font-size:11px;">Ongoing</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('tour-1',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>14–28 Jun 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 2 empty</span></td><td class="batch-td-arrow">→</td></tr>
@@ -1738,7 +1738,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Booked</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('tour-2',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>15–29 Nov 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('tour-2',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>18 Jun–2 Jul 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
@@ -1774,7 +1774,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Booked</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('tour-3',7);event.stopPropagation()"><td><span class="batch-name-link">Batch 7</span></td><td>2–6 Oct 2026</td><td>8</td><td>7</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('tour-3',8);event.stopPropagation()"><td><span class="batch-name-link">Batch 8</span></td><td>6–10 Nov 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
@@ -1816,7 +1816,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Booked</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('tour-4',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>TBD</td><td>10</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Paused</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('tour-4',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>22–26 Feb 2026</td><td>10</td><td>9</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 1 empty</span></td><td class="batch-td-arrow">→</td></tr>
@@ -1851,7 +1851,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Booked</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('tour-5',6);event.stopPropagation()"><td><span class="batch-name-link">Batch 6</span></td><td>18–22 Jul 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('tour-5',7);event.stopPropagation()"><td><span class="batch-name-link">Batch 7</span></td><td>22–26 Aug 2026</td><td>8</td><td>1</td><td>7 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
@@ -1890,7 +1890,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Booked</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Booked</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('tour-6',7);event.stopPropagation()"><td><span class="batch-name-link">Batch 7</span></td><td>11–13 Jul 2026</td><td>15</td><td>9</td><td>6 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('tour-6',8);event.stopPropagation()"><td><span class="batch-name-link">Batch 8</span></td><td>15–17 Aug 2026</td><td>15</td><td>3</td><td>12 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
@@ -2683,7 +2683,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Accepted</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('prog-1',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>6 Jul–2 Aug 2026</td><td>12</td><td>11</td><td>1 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('prog-1',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>1–28 Mar 2026</td><td>12</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 2 empty</span></td><td class="batch-td-arrow">→</td></tr>
@@ -2724,7 +2724,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Accepted</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('prog-2',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>1–21 Sep 2026</td><td>10</td><td>7</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('prog-2',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>Feb–Mar 2026</td><td>10</td><td>10</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
@@ -2764,7 +2764,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Accepted</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('prog-3',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>10–23 Aug 2026</td><td>8</td><td>5</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('prog-3',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>20 Jun–3 Jul 2026</td><td>8</td><td>5</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"><span class="batch-waste">⚠ 3 empty</span></td><td class="batch-td-arrow">→</td></tr>
@@ -2807,7 +2807,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Accepted</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('prog-4',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>4–17 Aug 2026</td><td>8</td><td>4</td><td>4 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('prog-4',3);event.stopPropagation()"><td><span class="batch-name-link">Batch 3</span></td><td>2–15 Jun 2026</td><td>8</td><td>8</td><td>0 left</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Completed</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
@@ -2849,7 +2849,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Accepted</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('prog-5',4);event.stopPropagation()"><td><span class="batch-name-link">Batch 4</span></td><td>1–30 Sep 2026</td><td>6</td><td>3</td><td>3 left</td><td><span class="hd-badge hd-badge--green" style="font-size:11px;">Upcoming</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('prog-5',5);event.stopPropagation()"><td><span class="batch-name-link">Batch 5</span></td><td>2 Nov–1 Dec 2026</td><td>6</td><td>0</td><td>6 left</td><td><span class="hd-badge" style="font-size:11px;background:#f3f4f6;color:#6b7280;">Open</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
@@ -2893,7 +2893,7 @@
                   <div class="expand-inner">
                     <div class="expand-title">Batch Breakdown</div>
                     <table class="batch-table">
-                      <thead><tr><th>Batch</th><th>Dates</th><th>Capacity</th><th>Accepted</th><th>Fill Rate</th><th>Status</th><th style="width:48px;">Actions</th><th style="width:100%;"></th></tr></thead>
+                      <thead><tr><th style="width:12%">Batch</th><th style="width:18%">Dates</th><th style="width:10%">Capacity</th><th style="width:10%">Accepted</th><th style="width:15%">Fill Rate</th><th style="width:15%">Status</th><th style="width:7%">Actions</th><th style="width:13%"></th></tr></thead>
                       <tbody>
                         <tr class="batch-clickable" onclick="openRoster('prog-6',1);event.stopPropagation()"><td><span class="batch-name-link">Batch 1</span></td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
                         <tr class="batch-clickable" onclick="openRoster('prog-6',2);event.stopPropagation()"><td><span class="batch-name-link">Batch 2</span></td><td>TBD</td><td>8</td><td>0</td><td>—</td><td><span class="hd-badge hd-badge--gray" style="font-size:11px;">Draft</span></td><td class="batch-td-waste"></td><td class="batch-td-arrow">→</td></tr>
