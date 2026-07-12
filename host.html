@@ -403,7 +403,7 @@
         <a href="about.html" class="nav__link">About Us</a>
       </div>
       <div class="nav__actions">
-        <a href="host.html" class="nav__cta" style="opacity:0.7;pointer-events:none;">Become a Member</a>
+        <button class="nav__cta" onclick="openSignupModal()">Register</button>
         <button class="nav__cart" aria-label="Cart" onclick="showToast && showToast('Cart coming soon')">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 10a4 4 0 0 1-8 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -594,9 +594,8 @@
               <li>Commission-only model — no listing fees, no subscriptions</li>
             </ul>
             <div class="prog-card__cta">
-              <button class="btn-cta-travel" onclick="window.location='travel-host-application.html'">
-                Register for Travel Experiences
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <button class="btn-cta-travel" style="opacity:0.55;cursor:not-allowed;pointer-events:none;">
+                Register (Coming Soon)
               </button>
               <p class="prog-card__cta-note">Free to apply · Live within 3 weeks · ~10 min form</p>
             </div>
@@ -636,9 +635,8 @@
               <li>Founding Host status — permanently on your profile</li>
             </ul>
             <div class="prog-card__cta">
-              <button class="btn-cta-vol" onclick="window.location='volunteer-host-application.html'">
-                Register for Volunteer Programs
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <button class="btn-cta-vol" style="opacity:0.55;cursor:not-allowed;pointer-events:none;">
+                Register (Coming Soon)
               </button>
               <p class="prog-card__cta-note">First month free · 15 founding spots · ~15 min form</p>
             </div>
@@ -648,6 +646,53 @@
       </div>
     </div>
   </section>
+
+  <!-- ── SIGNUP MODAL ──────────────────────────────────── -->
+  <div class="app-modal-overlay" id="modal-signup">
+    <div class="app-modal" style="max-width:480px;">
+      <div class="app-modal__header">
+        <div>
+          <p class="app-modal__title">Register as a Host</p>
+          <p class="app-modal__sub">Tell us about yourself to get started</p>
+        </div>
+        <button class="app-modal__close" onclick="closeSignupModal()" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="app-modal__body">
+        <!-- Form -->
+        <div id="signup-form">
+          <div class="app-field-row">
+            <div class="app-field"><label>First Name</label><input type="text" id="signup-fname" placeholder="Arjun" /></div>
+            <div class="app-field"><label>Last Name</label><input type="text" id="signup-lname" placeholder="Sharma" /></div>
+          </div>
+          <div class="app-field"><label>Email</label><input type="email" id="signup-email" placeholder="you@example.com" /></div>
+          <div class="app-field"><label>Phone</label><input type="tel" id="signup-phone" placeholder="+91 98765 43210" /></div>
+          <div class="app-field">
+            <label>I want to register as</label>
+            <select id="signup-type">
+              <option value="">Select</option>
+              <option>Travel Experience Host</option>
+              <option>Volunteer Programme Host (NGO / Social Enterprise)</option>
+              <option>Both</option>
+            </select>
+          </div>
+          <div class="app-field"><label>City / Region</label><input type="text" id="signup-city" placeholder="Mumbai, Maharashtra" /></div>
+        </div>
+        <!-- Confirmation -->
+        <div class="app-success" id="signup-success" style="padding:32px 0 24px;">
+          <div class="app-success__icon">✉️</div>
+          <p class="app-success__title" style="font-family:'Inter',sans-serif;font-size:20px;">Check Your Inbox</p>
+          <p class="app-success__sub">We've sent a verification email to <strong id="signup-confirmed-email"></strong>. Please verify your email address to complete your registration. We'll be in touch within 3–5 business days.</p>
+          <button class="app-success__dismiss" onclick="closeSignupModal()">Close</button>
+        </div>
+      </div>
+      <div class="app-modal__footer" id="signup-footer">
+        <button class="app-btn-back" style="visibility:hidden;"></button>
+        <button class="app-btn-next-travel" onclick="submitSignup()">Submit Registration →</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ── TRAVEL HOST APPLICATION MODAL ─────────────────── -->
   <div class="app-modal-overlay" id="modal-travel">
@@ -864,8 +909,8 @@
   <!-- ── FAQ ────────────────────────────────────────────── -->
   <section class="host-faq">
     <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">FAQ</span>
+      <div class="section-header" style="text-align:left;">
+        <span class="overline-tag" style="display:inline-block;">FAQ</span>
         <h2>Frequently Asked Questions</h2>
       </div>
       <div class="faq-list">
@@ -954,18 +999,12 @@
   <section style="background:linear-gradient(160deg,#171717 0%,#262626 100%);padding:80px 0;text-align:center;">
     <div class="h-container" style="max-width:680px;">
       <span class="overline-tag" style="color:#ff7043;">Get Started</span>
-      <h2 style="font-family:'Inter',sans-serif;font-size:clamp(28px,3vw,38px);font-weight:600;color:#fff;line-height:1.18;margin-bottom:16px;">Ready to Share Your Passion?</h2>
+      <h2 style="font-family:'Inter',sans-serif;font-size:28px;font-weight:600;color:#fff;line-height:1.18;margin-bottom:16px;">Ready to Share Your Passion?</h2>
       <p style="font-size:18px;color:rgba(255,255,255,0.78);line-height:1.8;margin-bottom:36px;max-width:560px;margin-left:auto;margin-right:auto;">Join our community of hosts and start creating unforgettable cultural experiences or meaningful volunteer programs for people around the world.</p>
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn-hero-travel" onclick="window.location='travel-host-application.html'">
-          Register for Travel Experiences
-          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="btn-hero-vol" onclick="window.location='volunteer-host-application.html'">
-          Register for Volunteer Programs
-          <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
+      <button class="btn-hero-travel" onclick="openSignupModal()">
+        Register
+        <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </section>
 
@@ -1043,6 +1082,31 @@
 
   <script src="assets/main.js"></script>
   <script>
+    // Signup modal
+    function openSignupModal() {
+      // reset form
+      document.getElementById('signup-form').style.display = '';
+      document.getElementById('signup-success').classList.remove('active');
+      document.getElementById('signup-footer').style.display = 'flex';
+      document.getElementById('modal-signup').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSignupModal() {
+      document.getElementById('modal-signup').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function submitSignup() {
+      const email = document.getElementById('signup-email').value.trim();
+      const emailVal = email || 'your email address';
+      document.getElementById('signup-confirmed-email').textContent = emailVal;
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('signup-success').classList.add('active');
+      document.getElementById('signup-footer').style.display = 'none';
+    }
+    document.getElementById('modal-signup').addEventListener('click', function(e) {
+      if (e.target === this) closeSignupModal();
+    });
+
     // FAQ accordion
     document.addEventListener('click', function(e) {
       const btn = e.target.closest('.faq-item__btn');
