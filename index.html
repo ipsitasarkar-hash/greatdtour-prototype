@@ -8,6 +8,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* Reduced hero height */
+    .hero { min-height: 70vh; }
+    /* Secondary button */
+    .btn--secondary {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 14px 28px; border-radius: 4px;
+      border: 1.5px solid #d1d5dc; background: #fff;
+      font-size: 15px; font-weight: 600; color: #364153;
+      text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn--secondary:hover { border-color: #101828; color: #101828; }
+    /* Compact Field Notes section */
+    .fn-editorial { padding: 48px 0; }
+    .fn-editorial__feature-img { height: 220px; }
+    .fn-editorial__item-img { width: 88px; height: 64px; flex-shrink: 0; }
+    .fn-editorial__item-img img { width: 100%; height: 100%; object-fit: cover; }
+  </style>
 </head>
 <body>
 
@@ -72,13 +90,8 @@
       </h1>
       <p class="hero__sub">Join fully funded volunteer programs across India — real fieldwork, verified NGOs, and stories worth living.</p>
       <div class="hero__actions">
-        <a href="programs.html" class="btn btn--primary">Explore Programs</a>
-        <a href="field-notes.html" class="btn btn--ghost-icon">
-          <span class="btn__play">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="#F54900"/></svg>
-          </span>
-          Read Field Notes
-        </a>
+        <a href="programs.html" class="btn btn--primary" style="background:#2E7D32;border-color:#2E7D32;">Explore Programs</a>
+        <a href="field-notes.html" class="btn btn--secondary">Read Field Notes</a>
       </div>
     </div>
     <div class="hero__image">
@@ -152,31 +165,7 @@
     </div>
   </section>
 
-  <!-- ====== STATS ====== -->
-  <section class="stats">
-    <div class="container">
-      <div class="stats__grid">
-        <div class="stat">
-          <span class="stat__num">500+</span>
-          <span class="stat__label">Volunteers Placed</span>
-        </div>
-        <div class="stat">
-          <span class="stat__num">18</span>
-          <span class="stat__label">Active Programs</span>
-        </div>
-        <div class="stat">
-          <span class="stat__num">12</span>
-          <span class="stat__label">Verified NGO Partners</span>
-        </div>
-        <div class="stat">
-          <span class="stat__num">₹0</span>
-          <span class="stat__label">Program Fee — Fully Funded</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== VOLUNTEER PROGRAMS ====== -->
+  <!-- ====== VOLUNTEER PROGRAMS ====== --> -->
   <section class="section section--warm experiences">
     <div class="container">
       <div class="section__header">
@@ -375,47 +364,7 @@
     </div>
   </section>
 
-  <!-- ====== WHY GDT ====== -->
-  <section class="section section--sand why">
-    <div class="container">
-      <p class="overline overline--center">Why Great D'Tour</p>
-      <h2 class="section__heading section__heading--center">Built on trust, designed for wonder</h2>
-      <div class="why__grid">
-        <div class="why__item">
-          <span class="why__num">01</span>
-          <h3 class="why__title">Curated &amp; Verified Hosts</h3>
-          <p class="why__desc">Every host is personally vetted. No random listings — only proven experience creators.</p>
-        </div>
-        <div class="why__item">
-          <span class="why__num">02</span>
-          <h3 class="why__title">Small Group Format</h3>
-          <p class="why__desc">4–12 travelers max. Intimate enough to feel personal, social enough to make friends.</p>
-        </div>
-        <div class="why__item">
-          <span class="why__num">03</span>
-          <h3 class="why__title">Transparent Pricing</h3>
-          <p class="why__desc">What you see is what you pay. No hidden fees, no surprise charges.</p>
-        </div>
-        <div class="why__item">
-          <span class="why__num">04</span>
-          <h3 class="why__title">Safe &amp; Secure</h3>
-          <p class="why__desc">Protected payments, clear cancellation policies, and 24/7 support on every trip.</p>
-        </div>
-        <div class="why__item">
-          <span class="why__num">05</span>
-          <h3 class="why__title">GST-Registered</h3>
-          <p class="why__desc">A legitimate Indian company you can trust with proper documentation.</p>
-        </div>
-        <div class="why__item">
-          <span class="why__num">06</span>
-          <h3 class="why__title">Story-Worthy</h3>
-          <p class="why__desc">Every experience is designed to give you stories worth telling, not just photos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== CTA BANNER ====== -->
+  <!-- ====== CTA BANNER ====== --> -->
   <section class="cta-banner">
     <div class="cta-banner__overlay"></div>
     <div class="cta-banner__bg" style="background-image:url('assets/images/adventure1.jpg')"></div>
