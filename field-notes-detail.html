@@ -281,6 +281,78 @@
       margin-top: 12px;
     }
 
+    /* ── Related Notes ── */
+    .related-notes {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .related-notes__heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 28px;
+    }
+    .related-notes__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .rn-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow 0.18s, border-color 0.18s;
+    }
+    .rn-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.10); border-color: #d1d5db; }
+    .rn-card__img-wrap {
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .rn-card__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .rn-card:hover .rn-card__img-wrap img { transform: scale(1.04); }
+    .rn-card__body {
+      padding: 16px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .rn-card__cat {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .rn-card__title {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #101828;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .rn-card__meta {
+      font-size: 12px;
+      color: #6a7282;
+      margin-top: auto;
+    }
+    @media (max-width: 680px) {
+      .related-notes__grid { grid-template-columns: 1fr; }
+    }
+
     /* ── Author bio ── */
     .article-author-bio {
       display: flex;
@@ -549,6 +621,47 @@
       <p>This land changes you. It strips away the unnecessary and reminds you of what truly matters. The simple joy of a warm meal after a long day. The profound beauty of a sunrise over mountains. The deep satisfaction of pushing beyond what you thought possible.</p>
 
       <p>Patagonia taught me that the greatest adventures aren't about reaching a destination — they're about becoming someone new along the way. And as I packed my bags for the journey home, I knew a part of me would always remain here, walking among the winds and the wild.</p>
+    </div>
+
+    <!-- Related Notes -->
+    <div class="related-notes">
+      <h2 class="related-notes__heading">Related Notes</h2>
+      <div class="related-notes__grid">
+
+        <a href="field-notes-detail.html" class="rn-card">
+          <div class="rn-card__img-wrap">
+            <img src="assets/images/trek2.jpg" alt="Himalayan Monasteries" />
+          </div>
+          <div class="rn-card__body">
+            <span class="rn-card__cat">Culture</span>
+            <h3 class="rn-card__title">Himalayan Monasteries: A Week of Silence and Self-Discovery</h3>
+            <p class="rn-card__meta">Priya Nair &nbsp;·&nbsp; 8 min read</p>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="rn-card">
+          <div class="rn-card__img-wrap">
+            <img src="assets/images/landscape.jpg" alt="Cycling Kerala Backwaters" />
+          </div>
+          <div class="rn-card__body">
+            <span class="rn-card__cat">Adventure</span>
+            <h3 class="rn-card__title">Cycling the Kerala Backwaters: 500km Through God's Own Country</h3>
+            <p class="rn-card__meta">Kiran Mehta &nbsp;·&nbsp; 10 min read</p>
+          </div>
+        </a>
+
+        <a href="field-notes-detail.html" class="rn-card">
+          <div class="rn-card__img-wrap">
+            <img src="assets/images/trek1.jpg" alt="Spiti Valley Winter" />
+          </div>
+          <div class="rn-card__body">
+            <span class="rn-card__cat">Wildlife</span>
+            <h3 class="rn-card__title">Spiti Valley in Winter: Where Roads End and Stories Begin</h3>
+            <p class="rn-card__meta">Amit Sharma &nbsp;·&nbsp; 6 min read</p>
+          </div>
+        </a>
+
+      </div>
     </div>
 
     <!-- Author bio -->
