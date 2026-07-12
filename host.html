@@ -450,12 +450,8 @@
         <h1 class="host-hero__title">Become a Host with<br /><em>Great D'Tour.</em></h1>
         <p class="host-hero__sub">Share your passion for culture, adventure, and authentic travel experiences with a global community of discerning travelers — or connect volunteers with meaningful social impact opportunities.</p>
         <div class="host-hero__ctas">
-          <button class="btn-hero-travel" onclick="window.location='travel-host-application.html'">
-            Host Travel Experiences
-            <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <button class="btn-hero-vol" onclick="window.location='volunteer-host-application.html'">
-            Host Volunteer Programs
+          <button class="btn-hero-travel" onclick="openSignupModal()">
+            Register
             <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
@@ -635,8 +631,9 @@
               <li>Founding Host status — permanently on your profile</li>
             </ul>
             <div class="prog-card__cta">
-              <button class="btn-cta-vol" style="opacity:0.55;cursor:not-allowed;pointer-events:none;">
-                Register (Coming Soon)
+              <button class="btn-cta-vol" onclick="openSignupModal()">
+                Register as GDT Care Host
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
               <p class="prog-card__cta-note">First month free · 15 founding spots · ~15 min form</p>
             </div>
