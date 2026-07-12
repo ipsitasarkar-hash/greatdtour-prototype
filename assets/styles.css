@@ -78,7 +78,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 /* Logo */
@@ -93,7 +93,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 24px;
 }
 .nav__link {
   font-size: 15px;
@@ -111,12 +111,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav__cta {
   background: var(--orange);
   color: var(--white) !important;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  padding: 9px 18px;
+  padding: 8px 16px;
   border-radius: var(--radius-sm);
   white-space: nowrap;
   transition: background 0.2s, transform 0.2s;
+  flex-shrink: 0;
 }
 .nav__cta:hover { background: #d94000; transform: translateY(-1px); }
 
@@ -133,7 +134,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  min-width: 0;
 }
 .nav__cart {
   width: 34px;
