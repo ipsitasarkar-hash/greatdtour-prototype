@@ -646,11 +646,11 @@
 
   <!-- ── SIGNUP MODAL ──────────────────────────────────── -->
   <div class="app-modal-overlay" id="modal-signup">
-    <div class="app-modal" style="max-width:480px;">
+    <div class="app-modal" style="max-width:520px;">
       <div class="app-modal__header">
         <div>
-          <p class="app-modal__title">Register as a Host</p>
-          <p class="app-modal__sub">Tell us about yourself to get started</p>
+          <p class="app-modal__title" style="font-family:'Inter',sans-serif;">Register as a Host</p>
+          <p class="app-modal__sub" style="font-family:'Inter',sans-serif;">Create your GDT host account</p>
         </div>
         <button class="app-modal__close" onclick="closeSignupModal()" aria-label="Close">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -660,33 +660,65 @@
         <!-- Form -->
         <div id="signup-form">
           <div class="app-field-row">
-            <div class="app-field"><label>First Name</label><input type="text" id="signup-fname" placeholder="Arjun" /></div>
-            <div class="app-field"><label>Last Name</label><input type="text" id="signup-lname" placeholder="Sharma" /></div>
+            <div class="app-field">
+              <label style="font-family:'Inter',sans-serif;font-weight:600;color:#171717;">Full Name *</label>
+              <input type="text" id="signup-fname" placeholder="Enter your full name" />
+            </div>
+            <div class="app-field">
+              <label style="font-family:'Inter',sans-serif;font-weight:600;color:#171717;">Email ID *</label>
+              <input type="email" id="signup-email" placeholder="Enter your email" />
+            </div>
           </div>
-          <div class="app-field"><label>Email</label><input type="email" id="signup-email" placeholder="you@example.com" /></div>
-          <div class="app-field"><label>Phone</label><input type="tel" id="signup-phone" placeholder="+91 98765 43210" /></div>
-          <div class="app-field">
-            <label>I want to register as</label>
-            <select id="signup-type">
-              <option value="">Select</option>
-              <option>Travel Experience Host</option>
-              <option>Volunteer Programme Host (NGO / Social Enterprise)</option>
-              <option>Both</option>
-            </select>
+          <div class="app-field-row">
+            <div class="app-field">
+              <label style="font-family:'Inter',sans-serif;font-weight:600;color:#171717;">Organisation Type *</label>
+              <select id="signup-org">
+                <option value="">Select organisation type</option>
+                <option>Independent Host / Guide</option>
+                <option>Registered NGO / Trust</option>
+                <option>Section 8 Company</option>
+                <option>Social Enterprise</option>
+                <option>Travel Agency / Tour Operator</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="app-field">
+              <label style="font-family:'Inter',sans-serif;font-weight:600;color:#171717;">Role in Entity *</label>
+              <select id="signup-role">
+                <option value="">Select your role</option>
+                <option>Founder / Owner</option>
+                <option>Director</option>
+                <option>Manager</option>
+                <option>Other</option>
+              </select>
+            </div>
           </div>
-          <div class="app-field"><label>City / Region</label><input type="text" id="signup-city" placeholder="Mumbai, Maharashtra" /></div>
+          <div class="app-field-row">
+            <div class="app-field">
+              <label style="font-family:'Inter',sans-serif;font-weight:600;color:#171717;">Set Password *</label>
+              <input type="password" id="signup-password" placeholder="Create password" />
+            </div>
+            <div class="app-field">
+              <label style="font-family:'Inter',sans-serif;font-weight:600;color:#171717;">Confirm Password *</label>
+              <input type="password" id="signup-confirm-password" placeholder="Confirm password" />
+            </div>
+          </div>
+          <div class="app-checkboxes" style="margin-bottom:20px;">
+            <label class="app-checkbox-item">
+              <input type="checkbox" id="signup-privacy" />
+              <span style="font-family:'Inter',sans-serif;font-size:14px;color:#525252;">I have read and accept the <a href="#" style="color:var(--orange);font-weight:600;">Data Privacy</a></span>
+            </label>
+          </div>
+          <button onclick="submitSignup()" style="width:100%;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:17px;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.88" onmouseout="this.style.opacity=1">Sign Up</button>
+          <p style="text-align:center;font-size:13px;color:#9ca3af;margin-top:12px;font-family:'Inter',sans-serif;">Or continue with social login</p>
         </div>
         <!-- Confirmation -->
         <div class="app-success" id="signup-success" style="padding:32px 0 24px;">
           <div class="app-success__icon">✉️</div>
-          <p class="app-success__title" style="font-family:'Inter',sans-serif;font-size:20px;">Check Your Inbox</p>
+          <p class="app-success__title" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:600;">Check Your Inbox</p>
           <p class="app-success__sub">We've sent a verification email to <strong id="signup-confirmed-email"></strong>. Please verify your email address to complete your registration. We'll be in touch within 3–5 business days.</p>
           <button class="app-success__dismiss" onclick="closeSignupModal()">Close</button>
         </div>
-      </div>
-      <div class="app-modal__footer" id="signup-footer">
-        <button class="app-btn-back" style="visibility:hidden;"></button>
-        <button class="app-btn-next-travel" onclick="submitSignup()">Submit Registration →</button>
       </div>
     </div>
   </div>
@@ -993,7 +1025,7 @@
   </section>
 
   <!-- ── FINAL CTA ─────────────────────────────────────── -->
-  <section style="background:linear-gradient(160deg,#171717 0%,#262626 100%);padding:80px 0;text-align:center;">
+  <section style="background:#0a0a0a;padding:80px 0;text-align:center;">
     <div class="h-container" style="max-width:680px;">
       <span class="overline-tag" style="color:#ff7043;">Get Started</span>
       <h2 style="font-family:'Inter',sans-serif;font-size:28px;font-weight:600;color:#fff;line-height:1.18;margin-bottom:16px;">Ready to Share Your Passion?</h2>
@@ -1081,10 +1113,8 @@
   <script>
     // Signup modal
     function openSignupModal() {
-      // reset form
       document.getElementById('signup-form').style.display = '';
       document.getElementById('signup-success').classList.remove('active');
-      document.getElementById('signup-footer').style.display = 'flex';
       document.getElementById('modal-signup').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -1098,7 +1128,6 @@
       document.getElementById('signup-confirmed-email').textContent = emailVal;
       document.getElementById('signup-form').style.display = 'none';
       document.getElementById('signup-success').classList.add('active');
-      document.getElementById('signup-footer').style.display = 'none';
     }
     document.getElementById('modal-signup').addEventListener('click', function(e) {
       if (e.target === this) closeSignupModal();
