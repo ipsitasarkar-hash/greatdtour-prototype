@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Page — Wildlife Trust of India</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    body { background: #f9fafb; }
+
+    .partner-hero {
+      background: linear-gradient(168deg, #f3f4f6 0%, #e5e7eb 100%);
+      padding: 48px 0 40px;
+    }
+    .partner-hero__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .partner-hero__label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+    .partner-hero__title {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #101828;
+    }
+
+    .partner-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ── Left column ── */
+    .partner-profile-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .partner-avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .partner-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 6px;
+    }
+    .partner-since {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .partner-verif-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .partner-verif-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 18px;
+    }
+    .partner-verif-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .partner-verif-item:last-child { border-bottom: none; }
+    .partner-verif-item__left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #374151;
+    }
+    .partner-verif-item__icon {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+      background: #f3f4f6;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .verif-check {
+      color: #2E7D32;
+    }
+    .verif-x {
+      color: #ef4444;
+    }
+
+    /* ── Right column ── */
+    .partner-main { }
+
+    .partner-section {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .partner-section__title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #101828;
+      margin-bottom: 12px;
+    }
+    .partner-section__body {
+      font-size: 15px;
+      color: #4a5565;
+      line-height: 1.75;
+    }
+
+    .partner-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #e5e7eb;
+      margin-bottom: 20px;
+    }
+    .partner-tab {
+      padding: 10px 20px 10px 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .partner-tab.active {
+      color: #2E7D32;
+      border-bottom-color: #2E7D32;
+    }
+    .partner-empty {
+      font-size: 14px;
+      color: #9ca3af;
+      padding: 16px 0;
+    }
+
+    .partner-review-empty {
+      font-size: 14px;
+      color: #9ca3af;
+      padding: 20px 0;
+    }
+
+    /* Program cards */
+    .partner-program-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .partner-program-card:last-child { border-bottom: none; }
+    .partner-program-card__img {
+      width: 80px; height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .partner-program-card__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .partner-program-card__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 4px;
+    }
+    .partner-program-card__meta {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .partner-program-card__tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #2E7D32;
+      background: rgba(46,125,50,0.08);
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin-bottom: 6px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: #101828; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav nav--page" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/GDT_logo_black.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-dark" />
+      </a>
+      <div class="nav__links">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="programs.html" class="nav__link">Programs</a>
+        <a href="experiences.html" class="nav__link">Experiences</a>
+        <a href="field-notes.html" class="nav__link">Field Notes</a>
+        <a href="about.html" class="nav__link">About Us</a>
+      </div>
+      <div class="nav__actions">
+        <a href="host.html" class="nav__cta">Become a Host</a>
+        <div class="nav__user">
+          <button class="nav__avatar nav__avatar--loggedin" id="navAvatarBtn" aria-label="Account" onclick="toggleUserMenu()">AR</button>
+          <div class="nav__user-dropdown" id="userDropdown">
+            <div class="nav__dd-header">
+              <div class="nav__dd-name">Arjun Rao</div>
+              <div class="nav__dd-email">arjun.rao@gmail.com</div>
+            </div>
+            <a href="profile.html" class="nav__dd-item">My Profile</a>
+            <hr class="nav__dd-divider" />
+            <button class="nav__dd-item nav__dd-item--danger" onclick="window.location='index.html'">Sign Out</button>
+          </div>
+        </div>
+        <button class="nav__hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="partner-hero">
+    <div class="partner-hero__inner">
+      <p class="partner-hero__label">Partner Page</p>
+      <h1 class="partner-hero__title">Wildlife Trust of India</h1>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="partner-body">
+
+    <!-- Left: Profile + Verifications -->
+    <div>
+      <a href="volunteer-detail.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to Program
+      </a>
+
+      <!-- Profile card -->
+      <div class="partner-profile-card">
+        <div class="partner-avatar">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" fill="#9ca3af"/><path d="M3 20c0-3.9 4-7 9-7s9 3.1 9 7" fill="#9ca3af"/></svg>
+        </div>
+        <p class="partner-name">Wildlife Trust of India</p>
+        <p class="partner-since">Member since Jan 2024</p>
+      </div>
+
+      <!-- Verifications card -->
+      <div class="partner-verif-card">
+        <p class="partner-verif-title">Verifications</p>
+
+        <div class="partner-verif-item">
+          <div class="partner-verif-item__left">
+            <div class="partner-verif-item__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.32 2 2 0 0 1 3.6 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.74a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 16z"/></svg>
+            </div>
+            Phone number
+          </div>
+          <svg class="verif-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+
+        <div class="partner-verif-item">
+          <div class="partner-verif-item__left">
+            <div class="partner-verif-item__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
+            ID Card
+          </div>
+          <svg class="verif-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+
+        <div class="partner-verif-item">
+          <div class="partner-verif-item__left">
+            <div class="partner-verif-item__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            </div>
+            NGO Registration
+          </div>
+          <svg class="verif-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+
+        <div class="partner-verif-item">
+          <div class="partner-verif-item__left">
+            <div class="partner-verif-item__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+            </div>
+            Email
+          </div>
+          <svg class="verif-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+
+        <div class="partner-verif-item">
+          <div class="partner-verif-item__left">
+            <div class="partner-verif-item__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </div>
+            Social Media
+          </div>
+          <svg class="verif-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right: About + Programs + Reviews -->
+    <div class="partner-main">
+
+      <!-- About -->
+      <div class="partner-section">
+        <h2 class="partner-section__title">About</h2>
+        <p class="partner-section__body">Wildlife Trust of India (WTI) is one of India's leading conservation organisations, working to protect wildlife and its habitat through direct conservation action, policy advocacy, and community engagement. We partner with forest departments, government bodies, and local communities to preserve India's natural heritage.</p>
+
+        <!-- Programs tabs -->
+        <div style="margin-top:28px;">
+          <div class="partner-tabs">
+            <div class="partner-tab active">Programs</div>
+          </div>
+          <div class="partner-program-card">
+            <div class="partner-program-card__img">
+              <img src="assets/images/landscape.jpg" alt="Tiger Conservation" />
+            </div>
+            <div>
+              <p class="partner-program-card__tag">Wildlife</p>
+              <p class="partner-program-card__title">Tiger Conservation Program — Ranthambore</p>
+              <p class="partner-program-card__meta">4 weeks · Fully funded · 8 spots left</p>
+            </div>
+          </div>
+          <div class="partner-program-card">
+            <div class="partner-program-card__img">
+              <img src="assets/images/cultural1.jpg" alt="Elephant Corridor" />
+            </div>
+            <div>
+              <p class="partner-program-card__tag">Wildlife</p>
+              <p class="partner-program-card__title">Elephant Corridor Monitoring — Corbett</p>
+              <p class="partner-program-card__meta">6 weeks · Fully funded · 5 spots left</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="partner-section">
+        <h2 class="partner-section__title">Reviews</h2>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+
+          <div style="border:1px solid #e5e7eb;border-radius:10px;padding:20px 24px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#6b7280;flex-shrink:0;">PR</div>
+              <div>
+                <p style="font-size:14px;font-weight:600;color:#101828;">Priya R.</p>
+                <div style="display:flex;gap:2px;margin-top:2px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:14px;color:#4a5565;line-height:1.7;">An incredible experience working with WTI's field team. The organisation was incredibly professional, transparent, and deeply committed to the work. I came back a changed person.</p>
+          </div>
+
+          <div style="border:1px solid #e5e7eb;border-radius:10px;padding:20px 24px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#6b7280;flex-shrink:0;">AM</div>
+              <div>
+                <p style="font-size:14px;font-weight:600;color:#101828;">Aryan M.</p>
+                <div style="display:flex;gap:2px;margin-top:2px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#e5e7eb"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:14px;color:#4a5565;line-height:1.7;">Great program — well organised and the field biologists were knowledgeable. The stipend was paid on time. Would recommend to anyone serious about conservation.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="gdt-footer">
+    <div class="gdt-footer__inner">
+      <div class="gdt-footer__bottom" style="border-top:none;">
+        <p>© 2026 Field Notes. All Rights Reserved by Chomps Innovation Labs LLP, Bengaluru, India</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>
