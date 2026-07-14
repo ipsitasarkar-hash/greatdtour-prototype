@@ -107,6 +107,16 @@
       font-size: 14px; font-family: 'Inter', sans-serif; color: #101828;
       outline: none; transition: border-color 0.2s; background: #fff;
     }
+    .form-group select {
+      appearance: none; -webkit-appearance: none;
+      padding-right: 36px; width: 100%; cursor: pointer;
+    }
+    .select-wrap { position: relative; }
+    .select-wrap select { width: 100%; }
+    .select-wrap__chevron {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      pointer-events: none; color: #6b7280;
+    }
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus { border-color: #2E7D32; box-shadow: 0 0 0 3px rgba(46,125,50,0.10); }
@@ -368,7 +378,8 @@
       <div class="form-row">
         <div class="form-group">
           <label>State <span class="req">*</span></label>
-          <select>
+          <div class="select-wrap">
+            <select>
             <option value="">Select state</option>
             <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
             <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
@@ -386,6 +397,8 @@
             <option>Jammu and Kashmir</option><option>Ladakh</option>
             <option>Lakshadweep</option><option>Puducherry</option>
           </select>
+            <svg class="select-wrap__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
         </div>
         <div class="form-group">
           <label>District and nearest town <span class="req">*</span></label>
@@ -565,13 +578,16 @@
         <div class="conditional-field" id="cond-vol-count">
           <div class="form-group" style="margin-bottom:0;">
             <label>Approximately how many volunteers to date? <span class="req">*</span></label>
-            <select>
+            <div class="select-wrap">
+              <select>
               <option value="">Select range</option>
               <option>1–5</option>
               <option>6–15</option>
               <option>16–30</option>
               <option>More than 30</option>
             </select>
+              <svg class="select-wrap__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
           </div>
         </div>
       </div>
