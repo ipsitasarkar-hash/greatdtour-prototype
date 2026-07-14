@@ -712,6 +712,13 @@
       font-size: 14px; color: #0a0a0a; background: #fff; font-family: 'Inter', sans-serif;
       outline: none; transition: border-color 0.2s;
     }
+    select.acc-input {
+      appearance: none; -webkit-appearance: none;
+      padding-right: 36px; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
     .acc-input:focus { border-color: #f54900; box-shadow: 0 0 0 3px rgba(245,73,0,0.08); }
     .acc-input--disabled { background: #f3ede7; color: #0a0a0a; cursor: default; }
     .acc-input::placeholder { color: #717182; }
@@ -2210,10 +2217,13 @@
             <div class="hd-page-subtitle" style="margin-bottom:0;">Commission rates vary per tour · Updated daily</div>
           </div>
           <div style="display:flex;gap:8px;">
-            <select style="padding:7px 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;color:#374151;background:#fff;cursor:pointer;outline:none;">
-              <option>2026</option>
-              <option>2025</option>
-            </select>
+            <div style="position:relative;">
+              <select style="padding:7px 32px 7px 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;color:#374151;background:#fff;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
+                <option>2026</option>
+                <option>2025</option>
+              </select>
+              <svg style="position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <button class="hd-btn" onclick="showToast('Report downloaded')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               Export
