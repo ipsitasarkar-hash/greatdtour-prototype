@@ -382,310 +382,305 @@
     </div>
   </nav>
 
-  <!-- Announcement strip -->
-  <div class="fn-strip" id="fnStrip">
-    <span class="fn-strip__text">Have an amazing travel story to share? Request an invite to write. <strong>Learn More</strong></span>
-    <button class="fn-strip__close" onclick="document.getElementById('fnStrip').style.display='none'" aria-label="Dismiss">×</button>
-  </div>
-
-  <!-- Hero -->
-  <section class="about-hero">
-    <h1 class="about-hero__title">Our Story</h1>
-    <p class="about-hero__sub"><strong>Great D'Tour</strong> — an experience-first travel marketplace built for travellers who care about what they do, not just where they go. And for hosts who've built something worth experiencing.</p>
-  </section>
-
-  <!-- About Field Notes -->
-  <section class="about-fn">
-    <h2 class="about-fn__heading">About Field Notes</h2>
-    <div class="about-fn__body">
-      <p>Travel decisions deserve better information than what most of the internet offers.</p>
-      <p>Field Notes is GDT's travel journal. We started it because we noticed something: the best travel writing wasn't trying to sell you anything. It was honest, specific, and actually useful. So that's what we set out to publish — stories and research that help you plan, think, and choose. Whether you book through GDT or not.</p>
-      <p>No sponsored content. No listicles engineered for clicks. No FOMO bait. Just writing that respects your time and your curiosity.</p>
-    </div>
-    <div class="about-pillars">
-      <div class="pillar">
-        <div class="pillar__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F54900" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l4-2 4 2 4-2 4 2v14l-4-2-4 2-4-2-4 2V6z"/><path d="M7 4v14"/><path d="M11 6v14"/><path d="M15 4v14"/></svg>
+  <!-- ── HERO ── -->
+  <section style="background:linear-gradient(160deg,#faf9f3 0%,#fff7ed 60%,#fef3e2 100%);padding:72px 0 64px;">
+    <div class="container" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center;">
+      <div>
+        <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Our Story</p>
+        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,56px);font-weight:600;color:#101828;line-height:1.15;margin-bottom:24px;">Travel for the <em style="color:var(--orange);font-style:italic;">experience.</em></h1>
+        <p style="font-size:18px;color:#4a5565;line-height:1.8;margin-bottom:32px;max-width:520px;"><strong style="color:#101828;">Great D'Tour</strong> is an experience-first travel marketplace built for travellers who care about what they do, not just where they go — and for hosts who've built something worth sharing.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="programs.html" class="btn btn--primary" style="background:var(--orange);border-color:var(--orange);">Explore Programs</a>
+          <a href="host.html" style="display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#101828;text-decoration:none;padding:14px 24px;border:1.5px solid #d1d5db;border-radius:4px;">Become a Host</a>
         </div>
-        <p class="pillar__title">Trip Intelligence</p>
-        <p class="pillar__desc">Our most in-depth content. Research-driven guides built around regions, places, and experience types are designed to help you understand a destination before deciding to go.</p>
       </div>
-      <div class="pillar">
-        <div class="pillar__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F54900" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" rx="2"/><path d="M4 9h16"/><path d="M4 14h16"/><path d="M9 9v11"/></svg>
-        </div>
-        <p class="pillar__title">Travel News</p>
-        <p class="pillar__desc">What's changing and what matters. Destination updates, seasonal advisories, visa and regulatory changes, and travel trends worth knowing is kept current and concise.</p>
+      <div style="position:relative;">
+        <div style="position:absolute;inset:-12px;background:#fde8d0;border-radius:20px;z-index:0;"></div>
+        <img src="assets/images/hero-adventure.jpg" alt="Great D'Tour" style="position:relative;z-index:1;width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:16px;box-shadow:0 24px 56px rgba(0,0,0,0.14);" />
       </div>
-      <div class="pillar">
-        <div class="pillar__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F54900" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        </div>
-        <p class="pillar__title">Real Journeys</p>
-        <p class="pillar__desc">Stories from travellers and the hosts behind these experiences. The people who run treks, retreats, craft workshops, and off-road expeditions. Honest accounts worth reading.</p>
-      </div>
-      </div><!-- /nav__actions -->
     </div>
   </section>
 
-  <!-- Dark GDT section -->
-  <section class="about-gdt">
-    <h2 class="about-gdt__eyebrow">Introducing Great D'Tour</h2>
-    <p class="about-gdt__sub">Coming in 2026 — a revolutionary platform for discovering and booking niche travel experiences that go beyond the ordinary.</p>
-
-    <div class="about-cats">
-      <div class="about-cat">
-        <div class="about-cat__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 4 4 3-6 4 10"/><path d="M2 20h20"/></svg>
+  <!-- ── RECOGNITION STRIP ── -->
+  <section style="background:#fff;border-top:1px solid #f0ede8;border-bottom:1px solid #f0ede8;padding:20px 0;">
+    <div class="container" style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#fff7ed;border:1px solid #fed7aa;display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <p class="about-cat__title">Adventure Sports</p>
-        <p class="about-cat__desc">Expeditions into mountains, forests, deserts, and oceans. Trekking, mountaineering, cycling, self-drive journeys.</p>
+        <span style="font-size:13px;font-weight:600;color:#374151;">Recognised by Startup India</span>
       </div>
-      <div class="about-cat">
-        <div class="about-cat__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4"/><path d="M6 12c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M3 14c0 5 3.6 8 9 8s9-3 9-8"/><path d="M12 8v4"/><path d="M9 16c0 1.7 1.3 3 3 3s3-1.3 3-3"/></svg>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#fff7ed;border:1px solid #fed7aa;display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
         </div>
-        <p class="about-cat__title">Wellness Retreat</p>
-        <p class="about-cat__desc">Journeys of restoration — yoga retreats, meditation immersions, wellness stays, and slow travel escapes.</p>
+        <span style="font-size:13px;font-weight:600;color:#374151;">MSME Registered</span>
       </div>
-      <div class="about-cat">
-        <div class="about-cat__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v5"/><path d="M7 12h10"/><path d="M9 12l-2 6"/><path d="M15 12l2 6"/></svg>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#fff7ed;border:1px solid #fed7aa;display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
-        <p class="about-cat__title">Cultural Immersion</p>
-        <p class="about-cat__desc">Encounters with living traditions, festivals, heritage walks, food trails, pilgrimage routes, and cultural storytelling.</p>
+        <span style="font-size:13px;font-weight:600;color:#374151;">Supported by Zoho</span>
       </div>
-      <div class="about-cat">
-        <div class="about-cat__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M12 4l-7 8h5l-2 8 9-10h-5l3-6z"/></svg>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#fff7ed;border:1px solid #fed7aa;display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
         </div>
-        <p class="about-cat__title">Vocational Trip</p>
-        <p class="about-cat__desc">Learn something extraordinary. Paragliding, scuba diving, jungle survival, pottery, wilderness skills, and craft traditions.</p>
+        <span style="font-size:13px;font-weight:600;color:#374151;">Proudly Made in India</span>
       </div>
     </div>
+  </section>
 
-    <div class="about-cta-cards">
-      <div class="about-cta-card">
+  <!-- ── WHY WE EXIST (3 steps) ── -->
+  <section style="background:#fff;padding:96px 0;">
+    <div class="container" style="max-width:900px;">
+      <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:12px;text-align:center;">Why We Exist</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,44px);font-weight:600;color:#101828;text-align:center;margin-bottom:72px;line-height:1.2;">We built this because travel<br/>deserved better.</h2>
+
+      <!-- Step 01 -->
+      <div style="display:grid;grid-template-columns:120px 1fr;gap:40px;align-items:start;margin-bottom:64px;">
+        <div style="text-align:right;padding-top:6px;">
+          <span style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:#f0ede8;line-height:1;">01</span>
+        </div>
         <div>
-          <div class="about-cta-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:#101828;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--orange);display:inline-block;">The Problem</h3>
+          <p style="font-size:17px;color:#4a5565;line-height:1.8;margin-top:16px;">Most travel platforms sell you a destination. We think that's the wrong starting point. The best travel memories aren't about <em>where</em> you went — they're about <em>what you did</em> and <em>who you met</em> while you were there.</p>
+        </div>
+      </div>
+
+      <!-- Step 02 -->
+      <div style="display:grid;grid-template-columns:120px 1fr;gap:40px;align-items:start;margin-bottom:64px;">
+        <div style="text-align:right;padding-top:6px;">
+          <span style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:#f0ede8;line-height:1;">02</span>
+        </div>
+        <div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:#101828;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--orange);display:inline-block;">The Vision</h3>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:#101828;line-height:1.65;margin:16px 0 0;border-left:3px solid var(--orange);padding-left:24px;">"A world where every journey has a story worth telling — and every storyteller has a platform worth building on."</blockquote>
+        </div>
+      </div>
+
+      <!-- Step 03 -->
+      <div style="display:grid;grid-template-columns:120px 1fr;gap:40px;align-items:start;">
+        <div style="text-align:right;padding-top:6px;">
+          <span style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:#f0ede8;line-height:1;">03</span>
+        </div>
+        <div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:#101828;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--orange);display:inline-block;">The Mission</h3>
+          <ul style="list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:14px;">
+            <li style="display:flex;align-items:flex-start;gap:14px;font-size:16px;color:#4a5565;line-height:1.65;">
+              <span style="width:22px;height:22px;border-radius:50%;background:#fff7ed;border:1.5px solid var(--orange);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Connect curious travellers with verified, passionate hosts across India
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:14px;font-size:16px;color:#4a5565;line-height:1.65;">
+              <span style="width:22px;height:22px;border-radius:50%;background:#fff7ed;border:1.5px solid var(--orange);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Give volunteering its place at the centre of meaningful travel — not as an afterthought
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:14px;font-size:16px;color:#4a5565;line-height:1.65;">
+              <span style="width:22px;height:22px;border-radius:50%;background:#fff7ed;border:1.5px solid var(--orange);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Build a platform where honest content and curated experiences coexist
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT WE STAND FOR (dark section) ── -->
+  <section style="background:linear-gradient(143deg,#101828 0%,#1e2939 100%);padding:88px 0;">
+    <div class="container">
+      <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:12px;text-align:center;">What We Stand For</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:600;color:#fff;text-align:center;margin-bottom:56px;line-height:1.2;">Two ways to experience India.<br/>One platform.</h2>
+
+      <!-- GDT Cares card (full width green) -->
+      <div style="background:linear-gradient(130deg,#1a4731 0%,#2E7D32 100%);border-radius:16px;overflow:hidden;margin-bottom:24px;display:grid;grid-template-columns:1.05fr 0.95fr;">
+        <div style="padding:48px 48px 48px 48px;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#a7f3d0;margin-bottom:14px;">GDT Cares</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,32px);font-weight:600;color:#fff;margin-bottom:16px;line-height:1.25;">Volunteering that makes your journey mean something</h3>
+          <p style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.75;margin-bottom:28px;">Fully funded programs with verified NGOs across India. Real fieldwork, not guided tourism. Wildlife conservation, community development, marine ecology, and more.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;">
+            <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px;"><div style="font-size:24px;font-weight:700;color:#fff;margin-bottom:2px;">18</div><div style="font-size:12px;color:rgba(255,255,255,0.6);">Active programs</div></div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px;"><div style="font-size:24px;font-weight:700;color:#fff;margin-bottom:2px;">500+</div><div style="font-size:12px;color:rgba(255,255,255,0.6);">Volunteers placed</div></div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px;"><div style="font-size:24px;font-weight:700;color:#fff;margin-bottom:2px;">12</div><div style="font-size:12px;color:rgba(255,255,255,0.6);">NGO partners</div></div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px;"><div style="font-size:24px;font-weight:700;color:#fff;margin-bottom:2px;">₹0</div><div style="font-size:12px;color:rgba(255,255,255,0.6);">Program fee</div></div>
+          </div>
+          <a href="programs.html" style="display:inline-block;background:#fff;color:#1a4731;font-size:14px;font-weight:700;padding:12px 24px;border-radius:4px;text-decoration:none;">Browse Volunteer Programs →</a>
+        </div>
+        <div style="position:relative;overflow:hidden;min-height:340px;">
+          <img src="assets/images/landscape.jpg" alt="Volunteer programs" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(26,71,49,0.4) 0%,transparent 60%);"></div>
+        </div>
+      </div>
+
+      <!-- Experience categories 2x2 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:28px;display:flex;gap:18px;align-items:flex-start;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+          <div style="width:48px;height:48px;border-radius:10px;background:rgba(245,73,0,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 4 4 3-6 4 10"/><path d="M2 20h20"/></svg>
+          </div>
+          <div><h4 style="font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;">Adventure Sports</h4><p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.6;">Trekking, mountaineering, cycling, self-drive journeys.</p></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:28px;display:flex;gap:18px;align-items:flex-start;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+          <div style="width:48px;height:48px;border-radius:10px;background:rgba(245,73,0,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4"/><path d="M6 12c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M3 14c0 5 3.6 8 9 8s9-3 9-8"/></svg>
+          </div>
+          <div><h4 style="font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;">Wellness Retreat</h4><p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.6;">Yoga retreats, meditation immersions, slow travel escapes.</p></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:28px;display:flex;gap:18px;align-items:flex-start;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+          <div style="width:48px;height:48px;border-radius:10px;background:rgba(245,73,0,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v5"/><path d="M7 12h10"/><path d="M9 12l-2 6"/><path d="M15 12l2 6"/></svg>
+          </div>
+          <div><h4 style="font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;">Cultural Immersion</h4><p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.6;">Festivals, heritage walks, food trails, pilgrimage routes.</p></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:28px;display:flex;gap:18px;align-items:flex-start;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+          <div style="width:48px;height:48px;border-radius:10px;background:rgba(245,73,0,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M12 4l-7 8h5l-2 8 9-10h-5l3-6z"/></svg>
+          </div>
+          <div><h4 style="font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;">Vocational Trip</h4><p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.6;">Paragliding, scuba diving, pottery, wilderness skills.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ONE MARKETPLACE, TWO SIDES ── -->
+  <section style="background:#faf9f3;padding:88px 0;">
+    <div class="container">
+      <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:12px;text-align:center;">One Marketplace, Two Sides</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:600;color:#101828;text-align:center;margin-bottom:48px;line-height:1.2;">Whether you're exploring or hosting,<br/>GDT is built for you.</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <!-- For Travellers -->
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:40px;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;">For Travellers</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:#101828;margin-bottom:16px;line-height:1.3;">Discover experiences worth living</h3>
+          <p style="font-size:15px;color:#4a5565;line-height:1.75;margin-bottom:28px;">Browse curated volunteer programs and experiences across India. Every listing is verified — no tourist traps, no hidden costs, no compromises on authenticity.</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#4a5565;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#fff7ed" stroke="var(--orange)" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Curated &amp; verified hosts only</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#4a5565;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#fff7ed" stroke="var(--orange)" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Small group format, max 4–12 people</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#4a5565;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#fff7ed" stroke="var(--orange)" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Transparent pricing, secure booking</li>
+          </ul>
+          <a href="programs.html" class="btn btn--primary" style="background:var(--orange);border-color:var(--orange);">Explore Programs</a>
+        </div>
+        <!-- For Hosts -->
+        <div style="background:#101828;border-radius:16px;padding:40px;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;">For Hosts</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">Turn your expertise into an experience</h3>
+          <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:28px;">We handle marketing, booking, and payments. You focus entirely on delivering an unforgettable experience. Apply to join our growing network of verified hosts across India.</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.65);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Marketing &amp; booking handled by GDT</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.65);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Secure, on-time payouts</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.65);"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Growing community of verified hosts</li>
+          </ul>
+          <a href="host.html" style="display:inline-block;background:#fff;color:#101828;font-size:15px;font-weight:600;padding:13px 24px;border-radius:4px;text-decoration:none;">Apply to Host</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FIELD NOTES EDITORIAL ── -->
+  <section style="background:#fff;padding:88px 0;border-top:1px solid #f0ede8;">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <img src="assets/images/trek1.jpg" alt="Field Notes" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;box-shadow:0 20px 48px rgba(0,0,0,0.12);" />
+      </div>
+      <div>
+        <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;">From the Journal</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,38px);font-weight:600;color:#101828;margin-bottom:16px;line-height:1.25;">Field Notes — travel writing worth reading</h2>
+        <p style="font-size:16px;color:#4a5565;line-height:1.8;margin-bottom:28px;">Travel decisions deserve better information. Field Notes is GDT's editorial journal — no sponsored content, no listicles, no FOMO bait. Just honest, specific writing that helps you plan, think, and choose.</p>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px;">
+          <div style="display:flex;align-items:flex-start;gap:14px;">
+            <div style="width:40px;height:40px;border-radius:8px;background:#fff7ed;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l4-2 4 2 4-2 4 2v14l-4-2-4 2-4-2-4 2V6z"/></svg>
+            </div>
+            <div><p style="font-size:14px;font-weight:600;color:#101828;margin-bottom:2px;">Trip Intelligence</p><p style="font-size:13px;color:#6b7280;line-height:1.5;">Research-driven destination guides to help you decide before you go.</p></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;">
+            <div style="width:40px;height:40px;border-radius:8px;background:#fff7ed;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 9v12"/></svg>
+            </div>
+            <div><p style="font-size:14px;font-weight:600;color:#101828;margin-bottom:2px;">Travel News</p><p style="font-size:13px;color:#6b7280;line-height:1.5;">Destination updates, visa changes, and trends worth knowing.</p></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;">
+            <div style="width:40px;height:40px;border-radius:8px;background:#fff7ed;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div><p style="font-size:14px;font-weight:600;color:#101828;margin-bottom:2px;">Real Journeys</p><p style="font-size:13px;color:#6b7280;line-height:1.5;">First-hand stories from travellers and the hosts behind the experiences.</p></div>
           </div>
         </div>
-        <div>
-          <p class="about-cta-card__title">Share your Story</p>
-          <p class="about-cta-card__desc">Tell us about the experience that changed you. We're looking for authentic voices with compelling narratives that deserve to be heard.</p>
-        </div>
-        <a href="host.html" class="about-cta-btn--orange">Request Invite to Write</a>
-      </div>
-      <div class="about-cta-card">
-        <div>
-          <div class="about-cta-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-          </div>
-        </div>
-        <div>
-          <p class="about-cta-card__title">Become a Host</p>
-          <p class="about-cta-card__desc">We are now onboarding partners. Please fill in and submit the application form. For details please read the partnership guide.</p>
-          <a href="#" class="about-cta-card__link">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="#ffb900" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Download Partnership Guide (PDF)
-          </a>
-        </div>
-        <a href="host.html" class="about-cta-btn--white">Apply Now</a>
+        <a href="field-notes.html" style="display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--orange);text-decoration:none;">Explore Field Notes <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- ── WHY GDT TRUST GRID ── -->
+  <section style="background:#f9fafb;padding:88px 0;">
+    <div class="container">
+      <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:12px;text-align:center;">Why Great D'Tour</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:600;color:#101828;text-align:center;margin-bottom:48px;">Built on trust, designed for wonder</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:0;">
+        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;"><p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">01</p><h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Curated &amp; Verified Hosts</h3><p style="font-size:14px;color:#4a5565;line-height:1.65;">Every host is personally vetted. No random listings — only proven experience creators.</p></div>
+        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;"><p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">02</p><h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Small Group Format</h3><p style="font-size:14px;color:#4a5565;line-height:1.65;">4–12 travelers max. Intimate enough to feel personal, social enough to make friends.</p></div>
+        <div style="padding:32px 28px;border-bottom:1px solid #e5e7eb;"><p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">03</p><h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Transparent Pricing</h3><p style="font-size:14px;color:#4a5565;line-height:1.65;">What you see is what you pay. No hidden fees, no surprise charges.</p></div>
+        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;"><p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">04</p><h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Safe &amp; Secure</h3><p style="font-size:14px;color:#4a5565;line-height:1.65;">Protected payments, clear cancellation policies, and 24/7 support on every trip.</p></div>
+        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;"><p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">05</p><h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">GST-Registered</h3><p style="font-size:14px;color:#4a5565;line-height:1.65;">A legitimate Indian company you can trust with proper documentation.</p></div>
+        <div style="padding:32px 28px;"><p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">06</p><h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Story-Worthy</h3><p style="font-size:14px;color:#4a5565;line-height:1.65;">Every experience is designed to give you stories worth telling, not just photos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
   <section class="about-faq">
     <div class="about-faq__inner">
-
-      <!-- Why GDT grid (moved from homepage) -->
-      <div style="text-align:center;margin-bottom:48px;">
-        <p class="overline overline--center" style="color:var(--orange);text-align:center;letter-spacing:2px;font-size:11px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Why Great D'Tour</p>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:600;color:#101828;margin-bottom:40px;">Built on trust, designed for wonder</h2>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:80px;">
-        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;">
-          <p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">01</p>
-          <h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Curated &amp; Verified Hosts</h3>
-          <p style="font-size:14px;color:#4a5565;line-height:1.65;">Every host is personally vetted. No random listings — only proven experience creators.</p>
-        </div>
-        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;">
-          <p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">02</p>
-          <h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Small Group Format</h3>
-          <p style="font-size:14px;color:#4a5565;line-height:1.65;">4–12 travelers max. Intimate enough to feel personal, social enough to make friends.</p>
-        </div>
-        <div style="padding:32px 28px;border-bottom:1px solid #e5e7eb;">
-          <p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">03</p>
-          <h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Transparent Pricing</h3>
-          <p style="font-size:14px;color:#4a5565;line-height:1.65;">What you see is what you pay. No hidden fees, no surprise charges.</p>
-        </div>
-        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;">
-          <p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">04</p>
-          <h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Safe &amp; Secure</h3>
-          <p style="font-size:14px;color:#4a5565;line-height:1.65;">Protected payments, clear cancellation policies, and 24/7 support on every trip.</p>
-        </div>
-        <div style="padding:32px 28px;border-right:1px solid #e5e7eb;">
-          <p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">05</p>
-          <h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">GST-Registered</h3>
-          <p style="font-size:14px;color:#4a5565;line-height:1.65;">A legitimate Indian company you can trust with proper documentation.</p>
-        </div>
-        <div style="padding:32px 28px;">
-          <p style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;">06</p>
-          <h3 style="font-size:17px;font-weight:600;color:#101828;margin-bottom:10px;">Story-Worthy</h3>
-          <p style="font-size:14px;color:#4a5565;line-height:1.65;">Every experience is designed to give you stories worth telling, not just photos.</p>
-        </div>
-      </div>
-
-      <!-- GDT Cares section -->
-      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:16px;padding:48px 40px;margin-bottom:80px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
-          <div>
-            <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2E7D32;margin-bottom:12px;">GDT Cares</p>
-            <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,34px);font-weight:700;color:#101828;margin-bottom:16px;line-height:1.25;">Volunteering that makes your journey mean something</h2>
-            <p style="font-size:16px;color:#4a5565;line-height:1.75;margin-bottom:24px;">GDT Cares is our volunteering initiative — fully funded programs with verified NGOs across India. Real fieldwork, not guided tourism. Wildlife conservation, community development, marine ecology, and more.</p>
-            <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
-              <li style="display:flex;align-items:flex-start;gap:10px;font-size:15px;color:#4a5565;line-height:1.5;">
-                <span style="width:20px;height:20px;border-radius:50%;background:#2E7D32;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span><strong style="color:#101828;">Fully funded</strong> — ₹0 program fee, monthly stipend paid to volunteers</span>
-              </li>
-              <li style="display:flex;align-items:flex-start;gap:10px;font-size:15px;color:#4a5565;line-height:1.5;">
-                <span style="width:20px;height:20px;border-radius:50%;background:#2E7D32;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span><strong style="color:#101828;">Verified NGO partners</strong> — registered, audited, award-winning organisations</span>
-              </li>
-              <li style="display:flex;align-items:flex-start;gap:10px;font-size:15px;color:#4a5565;line-height:1.5;">
-                <span style="width:20px;height:20px;border-radius:50%;background:#2E7D32;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span><strong style="color:#101828;">Certificate + experience</strong> — professional recognition and skills development</span>
-              </li>
-              <li style="display:flex;align-items:flex-start;gap:10px;font-size:15px;color:#4a5565;line-height:1.5;">
-                <span style="width:20px;height:20px;border-radius:50%;background:#2E7D32;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span><strong style="color:#101828;">Open to all</strong> — no prior experience required, beginner to intermediate welcome</span>
-              </li>
-            </ul>
-            <a href="programs.html" style="display:inline-block;background:#2E7D32;color:#fff;font-size:15px;font-weight:600;padding:14px 28px;border-radius:4px;text-decoration:none;transition:background 0.2s;">Browse Volunteer Programs →</a>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-              <div style="background:#fff;border:1px solid #d1fae5;border-radius:10px;padding:20px;">
-                <div style="font-size:28px;font-weight:700;color:#2E7D32;margin-bottom:4px;">18</div>
-                <div style="font-size:13px;color:#4a5565;">Active programs across India</div>
-              </div>
-              <div style="background:#fff;border:1px solid #d1fae5;border-radius:10px;padding:20px;">
-                <div style="font-size:28px;font-weight:700;color:#2E7D32;margin-bottom:4px;">500+</div>
-                <div style="font-size:13px;color:#4a5565;">Volunteers placed</div>
-              </div>
-              <div style="background:#fff;border:1px solid #d1fae5;border-radius:10px;padding:20px;">
-                <div style="font-size:28px;font-weight:700;color:#2E7D32;margin-bottom:4px;">12</div>
-                <div style="font-size:13px;color:#4a5565;">Verified NGO partners</div>
-              </div>
-              <div style="background:#fff;border:1px solid #d1fae5;border-radius:10px;padding:20px;">
-                <div style="font-size:28px;font-weight:700;color:#2E7D32;margin-bottom:4px;">₹0</div>
-                <div style="font-size:13px;color:#4a5565;">Program fee — fully funded</div>
-              </div>
-            </div>
-            <div style="background:#fff;border:1px solid #d1fae5;border-radius:10px;padding:20px;display:flex;gap:16px;align-items:flex-start;">
-              <div style="width:44px;height:44px;border-radius:8px;overflow:hidden;flex-shrink:0;">
-                <img src="assets/images/landscape.jpg" alt="Tiger Conservation" style="width:100%;height:100%;object-fit:cover;" />
-              </div>
-              <div>
-                <p style="font-size:13px;font-weight:700;color:#101828;margin-bottom:2px;">Tiger Conservation — Ranthambore</p>
-                <p style="font-size:12px;color:#4a5565;">4 weeks · Wildlife · Fully funded · 8 spots left</p>
-                <a href="volunteer-detail.html" style="font-size:12px;font-weight:600;color:#2E7D32;text-decoration:none;">View &amp; Apply →</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <h2 class="about-faq__title">Frequently Asked Questions</h2>
 
       <div class="faq-group">
         <p class="faq-group__label">Field Notes</p>
         <div class="faq-item" id="faq1">
-          <button class="faq-item__btn" onclick="toggleFaq('faq1')">
-            What is Field Notes?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+          <button class="faq-item__btn" onclick="toggleFaq('faq1')">What is Field Notes?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">Field Notes is GDT's travel journal — honest, independent travel writing that helps you plan better trips. No sponsored content, no listicles, no FOMO bait.</div>
         </div>
         <div class="faq-item" id="faq2">
-          <button class="faq-item__btn" onclick="toggleFaq('faq2')">
-            Who can write for Field Notes?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+          <button class="faq-item__btn" onclick="toggleFaq('faq2')">Who can write for Field Notes?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">We welcome travellers, hosts, guides, and storytellers who have genuine experience to share. Submit a request to write and our editorial team will review your proposal.</div>
         </div>
         <div class="faq-item" id="faq3">
-          <button class="faq-item__btn" onclick="toggleFaq('faq3')">
-            How do I submit a story?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+          <button class="faq-item__btn" onclick="toggleFaq('faq3')">How do I submit a story?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">Click "Request Invite to Write" above, fill in your details and a brief pitch. Our editorial team reviews all submissions within 5–7 business days.</div>
-        </div>
-        <div class="faq-item" id="faq4">
-          <button class="faq-item__btn" onclick="toggleFaq('faq4')">
-            What categories does Field Notes cover?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <div class="faq-item__answer">We cover Adventure, Wellness &amp; Retreat, Cultural Immersion, Wildlife, Reflections, and Immersive experiences — always with honest, firsthand perspectives.</div>
         </div>
       </div>
 
       <div class="faq-group">
         <p class="faq-group__label">Travellers</p>
-        <div class="faq-item" id="faq5">
-          <button class="faq-item__btn" onclick="toggleFaq('faq5')">
-            What is Great D'Tour?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+        <div class="faq-item" id="faq4">
+          <button class="faq-item__btn" onclick="toggleFaq('faq4')">What is Great D'Tour?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">Great D'Tour is an experience-first travel marketplace connecting curious travellers with vetted, passionate hosts offering small-group niche experiences across India.</div>
         </div>
-        <div class="faq-item" id="faq6">
-          <button class="faq-item__btn" onclick="toggleFaq('faq6')">
-            How are experiences vetted?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+        <div class="faq-item" id="faq5">
+          <button class="faq-item__btn" onclick="toggleFaq('faq5')">How are experiences vetted?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">Every experience on GDT is personally reviewed by our team. We assess the host's credentials, the safety and quality of the experience, and whether it meets our authenticity standard.</div>
         </div>
-        <div class="faq-item" id="faq7">
-          <button class="faq-item__btn" onclick="toggleFaq('faq7')">
-            What is your cancellation policy?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+        <div class="faq-item" id="faq6">
+          <button class="faq-item__btn" onclick="toggleFaq('faq6')">What is your cancellation policy?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">Cancellation terms vary by experience and are clearly shown before booking. We always display full policies upfront — no hidden conditions.</div>
         </div>
       </div>
 
       <div class="faq-group">
         <p class="faq-group__label">Hosts</p>
-        <div class="faq-item" id="faq8">
-          <button class="faq-item__btn" onclick="toggleFaq('faq8')">
-            Who can become a host?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+        <div class="faq-item" id="faq7">
+          <button class="faq-item__btn" onclick="toggleFaq('faq7')">Who can become a host?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">Guides, experts, farmers, folk musicians, chefs, artists — anyone who has built something real and wants to share it with small, curious groups. Apply via the host application form.</div>
         </div>
-        <div class="faq-item" id="faq9">
-          <button class="faq-item__btn" onclick="toggleFaq('faq9')">
-            What does GDT handle for hosts?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+        <div class="faq-item" id="faq8">
+          <button class="faq-item__btn" onclick="toggleFaq('faq8')">What does GDT handle for hosts?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">We handle marketing, booking, payment collection, and traveller communications. You focus entirely on delivering a great experience.</div>
         </div>
-        <div class="faq-item" id="faq10">
-          <button class="faq-item__btn" onclick="toggleFaq('faq10')">
-            How do payouts work?
-            <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
+        <div class="faq-item" id="faq9">
+          <button class="faq-item__btn" onclick="toggleFaq('faq9')">How do payouts work?<svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg></button>
           <div class="faq-item__answer">Hosts receive secure, on-time payouts after each experience. Full payout schedule and commission details are in the Partnership Guide.</div>
         </div>
       </div>
