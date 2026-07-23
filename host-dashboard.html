@@ -1401,36 +1401,31 @@
           <!-- ── GDT CARE VIEW ── -->
           <div id="db-view-care" style="display:none;">
 
-            <!-- Care KPI cards — no earnings -->
-            <div class="db-kpi-grid">
+            <!-- Care KPI cards -->
+            <div class="db-kpi-grid" style="grid-template-columns:repeat(4,1fr);">
               <div class="db-kpi" style="border-color:#d1fae5;">
                 <div class="db-kpi__icon" style="background:#f0fdf4;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#16a34a" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#16a34a" stroke-width="1.8" stroke-linejoin="round"/></svg>
                 </div>
-                <div><div class="db-kpi__label">Total Applicants</div><div class="db-kpi__val">31</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 8 new this week</div></div>
+                <div><div class="db-kpi__label">Total Programs</div><div class="db-kpi__val">6</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 1 added this month</div></div>
               </div>
               <div class="db-kpi" style="border-color:#d1fae5;">
                 <div class="db-kpi__icon" style="background:#dcfce7;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                <div><div class="db-kpi__label">Accepted Volunteers</div><div class="db-kpi__val">11</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 3 this month</div></div>
+                <div><div class="db-kpi__label">Active Batches</div><div class="db-kpi__val">4</div><div class="db-kpi__delta db-kpi__delta--up">&#8593; 2 started this week</div></div>
               </div>
-              <div class="db-kpi" style="border-color:#d1fae5;">
+              <div class="db-kpi" style="border-color:#fef9c3;">
                 <div class="db-kpi__icon" style="background:#fef9c3;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="#ca8a04" stroke-width="1.8"/><path d="M3 9h18M8 2v4M16 2v4" stroke="#ca8a04" stroke-width="1.8" stroke-linecap="round"/></svg>
                 </div>
-                <div><div class="db-kpi__label">Active Programs</div><div class="db-kpi__val">2</div><div class="db-kpi__delta" style="color:#9ca3af;">Tiger Conservation &middot; Marine Turtle</div></div>
+                <div><div class="db-kpi__label">Upcoming Batches This Month</div><div class="db-kpi__val">3</div><div class="db-kpi__delta" style="color:#9ca3af;">Next: Jul 28, 2026</div></div>
               </div>
-            </div>
-
-            <!-- Care notice -->
-            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:flex-start;gap:16px;">
-              <div style="width:40px;height:40px;background:#f0fdf4;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#16a34a" stroke-width="2" stroke-linejoin="round"/></svg>
-              </div>
-              <div>
-                <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:4px;">GDT Care — Volunteer &amp; Conservation Programs</div>
-                <div style="font-size:13px;color:#6b7280;line-height:1.6;">This mode shows your <strong>volunteer &amp; social impact programs</strong>. These programs are <strong>fully funded</strong> — volunteers pay no fee and you receive no commercial earnings from this stream. Impact is measured through participation, community outcomes, and conservation data.</div>
+              <div class="db-kpi" style="border-color:#fee2e2;">
+                <div class="db-kpi__icon" style="background:#fef2f2;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#dc2626" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#dc2626" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div><div class="db-kpi__label">Programs Pending Approval</div><div class="db-kpi__val">2</div><div class="db-kpi__delta" style="color:#dc2626;">Action required</div></div>
               </div>
             </div>
 
@@ -1459,49 +1454,82 @@
             <div class="db-row2" style="margin-bottom:24px;">
               <div class="db-chart-card" style="padding:0;overflow:hidden;">
                 <div style="padding:16px 20px;border-bottom:1px solid #f3f4f6;font-size:14px;font-weight:700;color:#101828;">Active Programs</div>
-                <div style="padding:16px 20px;display:flex;flex-direction:column;gap:16px;">
+                <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px;">
+                  <!-- Program 1 -->
                   <div style="display:flex;gap:14px;align-items:flex-start;">
-                    <div style="width:48px;height:48px;border-radius:10px;background:#fef9c3;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🐯</div>
+                    <div style="width:44px;height:44px;border-radius:10px;background:#fef9c3;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🐯</div>
                     <div style="flex:1;">
-                      <div style="font-size:14px;font-weight:700;color:#101828;">Tiger Conservation Program</div>
-                      <div style="font-size:12px;color:#9ca3af;margin-top:2px;">Ranthambore NP, Rajasthan &middot; 4 Weeks</div>
-                      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-                        <span style="font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;padding:2px 8px;border-radius:999px;">11 Accepted</span>
-                        <span style="font-size:11px;font-weight:600;background:#fffbeb;color:#92400e;padding:2px 8px;border-radius:999px;">8 Pending</span>
-                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:999px;">Jul 2026</span>
+                      <div style="font-size:13px;font-weight:700;color:#101828;">Tiger Conservation Program</div>
+                      <div style="font-size:11px;color:#9ca3af;margin-top:1px;">Ranthambore NP, Rajasthan &middot; 4 Weeks</div>
+                      <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                        <span style="font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;padding:2px 7px;border-radius:999px;">2 Active Batches</span>
+                        <span style="font-size:11px;font-weight:600;background:#fffbeb;color:#92400e;padding:2px 7px;border-radius:999px;">8 Pending</span>
+                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:999px;">Jul 2026</span>
                       </div>
                     </div>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
+                    <button class="hd-btn" style="font-size:12px;padding:4px 10px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
                   </div>
                   <div style="height:1px;background:#f3f4f6;"></div>
+                  <!-- Program 2 -->
                   <div style="display:flex;gap:14px;align-items:flex-start;">
-                    <div style="width:48px;height:48px;border-radius:10px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🐢</div>
+                    <div style="width:44px;height:44px;border-radius:10px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🐢</div>
                     <div style="flex:1;">
-                      <div style="font-size:14px;font-weight:700;color:#101828;">Marine Turtle Monitoring</div>
-                      <div style="font-size:12px;color:#9ca3af;margin-top:2px;">Odisha Coast &middot; 3 Weeks</div>
-                      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-                        <span style="font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;padding:2px 8px;border-radius:999px;">7 Accepted</span>
-                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:999px;">Sep 2026</span>
-                        <span style="font-size:11px;font-weight:600;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:999px;">Applications Open</span>
+                      <div style="font-size:13px;font-weight:700;color:#101828;">Marine Turtle Monitoring</div>
+                      <div style="font-size:11px;color:#9ca3af;margin-top:1px;">Odisha Coast &middot; 3 Weeks</div>
+                      <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                        <span style="font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;padding:2px 7px;border-radius:999px;">1 Active Batch</span>
+                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:999px;">Sep 2026</span>
+                        <span style="font-size:11px;font-weight:600;background:#f3f4f6;color:#6b7280;padding:2px 7px;border-radius:999px;">Apps Open</span>
                       </div>
                     </div>
-                    <button class="hd-btn" style="font-size:12px;padding:5px 12px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
+                    <button class="hd-btn" style="font-size:12px;padding:4px 10px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
+                  </div>
+                  <div style="height:1px;background:#f3f4f6;"></div>
+                  <!-- Program 3 -->
+                  <div style="display:flex;gap:14px;align-items:flex-start;">
+                    <div style="width:44px;height:44px;border-radius:10px;background:#fce7f3;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🦁</div>
+                    <div style="flex:1;">
+                      <div style="font-size:13px;font-weight:700;color:#101828;">Wildlife Survey — Gir Forest</div>
+                      <div style="font-size:11px;color:#9ca3af;margin-top:1px;">Gir NP, Gujarat &middot; 2 Weeks</div>
+                      <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                        <span style="font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;padding:2px 7px;border-radius:999px;">1 Active Batch</span>
+                        <span style="font-size:11px;font-weight:600;background:#fffbeb;color:#92400e;padding:2px 7px;border-radius:999px;">4 Pending</span>
+                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:999px;">Aug 2026</span>
+                      </div>
+                    </div>
+                    <button class="hd-btn" style="font-size:12px;padding:4px 10px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
+                  </div>
+                  <div style="height:1px;background:#f3f4f6;"></div>
+                  <!-- Program 4 -->
+                  <div style="display:flex;gap:14px;align-items:flex-start;">
+                    <div style="width:44px;height:44px;border-radius:10px;background:#f3e8ff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌿</div>
+                    <div style="flex:1;">
+                      <div style="font-size:13px;font-weight:700;color:#101828;">Rainforest Restoration</div>
+                      <div style="font-size:11px;color:#9ca3af;margin-top:1px;">Coorg, Karnataka &middot; 3 Weeks</div>
+                      <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                        <span style="font-size:11px;font-weight:600;background:#f3f4f6;color:#6b7280;padding:2px 7px;border-radius:999px;">Upcoming Batch</span>
+                        <span style="font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:999px;">Oct 2026</span>
+                      </div>
+                    </div>
+                    <button class="hd-btn" style="font-size:12px;padding:4px 10px;white-space:nowrap;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View</button>
                   </div>
                 </div>
                 <div style="padding:12px 20px;border-top:1px solid #f3f4f6;text-align:center;">
                   <button style="font-size:13px;font-weight:600;color:#f54900;background:none;border:none;cursor:pointer;" onclick="switchTab('programs',document.getElementById('hn-programs'))">View all Programs &#8594;</button>
                 </div>
-
               </div><!-- /Active Programs card -->
 
-              <!-- Recent volunteer activity -->
+              <!-- Combined Recent Activity -->
               <div class="db-chart-card">
-                <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:16px;">Recent Volunteer Activity</div>
+                <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:16px;">Recent Activity</div>
+                <div style="font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:10px;">Today</div>
                 <div style="display:flex;flex-direction:column;gap:14px;">
                   <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#4ade80);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;">AR</div><div><div style="font-size:13px;color:#374151;"><strong>Arjun Rao</strong> <span style="color:#16a34a;font-weight:600;">accepted</span></div><div style="font-size:11px;color:#9ca3af;">Tiger Conservation &middot; 2 hrs ago</div></div></div>
                   <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;">SR</div><div><div style="font-size:13px;color:#374151;"><strong>Sneha Reddy</strong> applied</div><div style="font-size:11px;color:#9ca3af;">Tiger Conservation &middot; 5 hrs ago</div></div></div>
                   <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#f54900);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;">PK</div><div><div style="font-size:13px;color:#374151;"><strong>Priya K.</strong> submitted field report</div><div style="font-size:11px;color:#9ca3af;">Tiger Conservation &middot; Yesterday</div></div></div>
                   <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:#f3e8ff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#9333ea;flex-shrink:0;">+8</div><div><div style="font-size:13px;color:#374151;"><strong>8 new applications</strong> received</div><div style="font-size:11px;color:#9ca3af;">Wildlife Conservation &middot; Yesterday</div></div></div>
+                  <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#2563eb" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#2563eb" stroke-width="2"/></svg></div><div><div style="font-size:12px;color:#374151;"><strong>Vikram Nair</strong> confirmed attendance</div><div style="font-size:11px;color:#9ca3af;margin-top:1px;">Marine Turtle &middot; 9:30 AM</div></div></div>
+                  <div style="display:flex;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:#fef9c3;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="#ca8a04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div style="font-size:12px;color:#374151;"><strong>Meera S.</strong> left a 5&#9733; review</div><div style="font-size:11px;color:#9ca3af;margin-top:1px;">Tiger Conservation &middot; 8:00 AM</div></div></div>
                 </div>
                 <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f3f4f6;text-align:center;">
                   <button style="font-size:13px;font-weight:600;color:#f54900;background:none;border:none;cursor:pointer;" onclick="switchTab('applicants',document.getElementById('hn-applicants'))">View all Applications &#8594;</button>
@@ -1537,7 +1565,7 @@
           </div>
           <div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-              <div style="font-size:14px;font-weight:700;color:#101828;">Upcoming Trips</div>
+              <div style="font-size:14px;font-weight:700;color:#101828;">Upcoming Batches</div>
               <button style="width:26px;height:26px;border-radius:6px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#374151;">+</button>
             </div>
             <div class="db-trip-card">
@@ -1554,15 +1582,49 @@
             </div>
           </div>
           <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-              <div style="font-size:14px;font-weight:700;color:#101828;">Recent Activity</div>
-            </div>
-            <div style="font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:10px;">Today</div>
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div style="display:flex;gap:10px;"><div style="width:28px;height:28px;border-radius:50%;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#2563eb" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#2563eb" stroke-width="2"/></svg></div><div><div style="font-size:12px;color:#374151;"><strong>Sneha Reddy</strong> sent a booking request</div><div style="font-size:11px;color:#9ca3af;margin-top:1px;">Himalayan Trek &middot; 2 hrs ago</div></div></div>
-              <div style="display:flex;gap:10px;"><div style="width:28px;height:28px;border-radius:50%;background:#f0fdf4;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div style="font-size:12px;color:#374151;"><strong>Vikram Nair</strong> confirmed booking</div><div style="font-size:11px;color:#9ca3af;margin-top:1px;">GDT-2026-4821 &middot; 9:30 AM</div></div></div>
-              <div style="display:flex;gap:10px;"><div style="width:28px;height:28px;border-radius:50%;background:#fef9c3;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="#ca8a04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div style="font-size:12px;color:#374151;"><strong>Arjun Rao</strong> left a 4&#9733; review</div><div style="font-size:11px;color:#9ca3af;margin-top:1px;">Himalayan Trek &middot; 8:00 AM</div></div></div>
-              <div style="display:flex;gap:10px;"><div style="width:28px;height:28px;border-radius:50%;background:#f3e8ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#9333ea" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#9333ea" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#9333ea" stroke-width="2" stroke-linecap="round"/></svg></div><div><div style="font-size:12px;color:#374151;"><strong>8 new volunteer applications</strong></div><div style="font-size:11px;color:#9ca3af;margin-top:1px;">Wildlife Conservation &middot; Yesterday</div></div></div>
+            <div style="font-size:14px;font-weight:700;color:#101828;margin-bottom:12px;">Support</div>
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;">
+              <div style="padding:16px 18px;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:12px;">
+                <div style="width:36px;height:36px;border-radius:10px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#16a34a" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:#101828;">Care Host Support</div>
+                  <div style="font-size:11px;color:#9ca3af;margin-top:1px;">Usually replies within 2 hours</div>
+                </div>
+              </div>
+              <div style="padding:14px 18px;display:flex;flex-direction:column;gap:10px;">
+                <a href="mailto:care-support@greatdtour.com" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+                  <div style="width:28px;height:28px;border-radius:8px;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#2563eb" stroke-width="1.8"/><path d="M2 7l10 7 10-7" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:#374151;">Email Us</div>
+                    <div style="font-size:11px;color:#6b7280;">care-support@greatdtour.com</div>
+                  </div>
+                </a>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="width:28px;height:28px;border-radius:8px;background:#fef9c3;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="#ca8a04" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:#374151;">Call Us</div>
+                    <div style="font-size:11px;color:#6b7280;">+91 98765 43210</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="width:28px;height:28px;border-radius:8px;background:#f3e8ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#9333ea" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#9333ea" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:#374151;">Help Centre</div>
+                    <div style="font-size:11px;color:#6b7280;">Browse FAQs &amp; guides</div>
+                  </div>
+                </div>
+              </div>
+              <div style="padding:12px 18px;border-top:1px solid #f3f4f6;background:#f9fafb;">
+                <button style="width:100%;padding:8px;border-radius:8px;border:1.5px solid #d1fae5;background:#f0fdf4;font-size:13px;font-weight:600;color:#16a34a;cursor:pointer;">Chat with Support</button>
+              </div>
             </div>
           </div>
         </div><!-- /db-rail -->
