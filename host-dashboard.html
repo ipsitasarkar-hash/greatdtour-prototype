@@ -1227,7 +1227,6 @@
                   <div class="db-mode-btn__dot"></div>
                 </button>
               </div>
-              <button class="hd-btn hd-btn--primary" style="font-size:12px;padding:7px 14px;" onclick="switchTab('enquiries',document.getElementById('hn-enquiries'))">3 Pending Requests</button>
             </div>
           </div>
 
@@ -2060,7 +2059,18 @@
           <button class="hd-btn" onclick="exportApplicants()" style="flex-shrink:0;margin-top:4px;">⬇ Export CSV</button>
         </div>
 
-        <!-- Filters row -->
+        <!-- Pending requests notice -->
+        <div style="display:flex;align-items:center;gap:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:12px 16px;margin-bottom:16px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid #fed7aa;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f54900" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div style="flex:1;">
+            <span style="font-size:13px;font-weight:700;color:#c2410c;">3 applications are pending your review</span>
+            <span style="font-size:13px;color:#9a3412;"> — filter by </span>
+            <button onclick="document.getElementById('fStatus').value='New';applyFilters();" style="font-size:13px;font-weight:600;color:#f54900;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;">New</button>
+            <span style="font-size:13px;color:#9a3412;"> status to see them.</span>
+          </div>
+        </div>
         <div class="app-filters">
           <div class="app-search-wrap" style="flex:1;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#9ca3af" stroke-width="1.8"/><path d="M16.5 16.5L21 21" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/></svg>
