@@ -250,6 +250,37 @@
     .vol-glance__value { font-size: 14px; font-weight: 700; color: #101828; }
     .vol-glance__spots { color: var(--vol-green); font-weight: 700; }
 
+    /* Fee info icon + popover */
+    .fee-info {
+      position: relative; display: inline-flex; align-items: center; cursor: pointer;
+    }
+    .fee-popover {
+      display: none; position: absolute; left: 50%; bottom: calc(100% + 8px);
+      transform: translateX(-50%);
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 14px 16px;
+      min-width: 220px; z-index: 100; white-space: nowrap;
+    }
+    .fee-popover::after {
+      content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      border: 6px solid transparent; border-top-color: #fff;
+    }
+    .fee-popover::before {
+      content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      border: 7px solid transparent; border-top-color: #e5e7eb; margin-top: 1px;
+    }
+    .fee-info.open .fee-popover { display: block; }
+    .fee-popover__title {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #9ca3af; margin-bottom: 10px;
+    }
+    .fee-popover__row {
+      display: flex; justify-content: space-between; gap: 24px;
+      font-size: 13px; color: #4a5565; padding: 4px 0;
+    }
+    .fee-popover__divider { border: none; border-top: 1px solid #e5e7eb; margin: 8px 0; }
+    .fee-popover__total { font-weight: 700; color: #101828; font-size: 14px; }
+
     .exp-book-btn { display: block; width: 100%; background: var(--vol-green); color: var(--white); text-align: center; font-size: 17px; font-weight: 600; padding: 18px; border-radius: 4px; border: none; cursor: pointer; font-family: var(--font-sans); margin-bottom: 12px; transition: background 0.2s, transform 0.15s; }
     .exp-book-btn:hover { background: #1b5e20; transform: translateY(-1px); }
 
@@ -1088,7 +1119,19 @@
                 <span class="vol-glance__value">Required</span>
               </div>
               <div class="vol-glance__row">
-                <span class="vol-glance__label">Total Fee</span>
+                <span class="vol-glance__label">
+                  Total Fee
+                  <span class="fee-info" id="feeInfoBtn" aria-label="Fee breakdown" tabindex="0">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#6a7282" stroke-width="1.3"/><path d="M7 6.5v3.5" stroke="#6a7282" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="4.5" r="0.7" fill="#6a7282"/></svg>
+                    <div class="fee-popover" id="feePopover">
+                      <div class="fee-popover__title">Fee Breakdown</div>
+                      <div class="fee-popover__row"><span>Membership fee (per year)</span><span>₹199</span></div>
+                      <div class="fee-popover__row"><span>Confirmation fee</span><span>₹300</span></div>
+                      <div class="fee-popover__divider"></div>
+                      <div class="fee-popover__row fee-popover__total"><span>Total</span><span>₹499</span></div>
+                    </div>
+                  </span>
+                </span>
                 <span class="vol-glance__value">Rs.499 total</span>
               </div>
             </div>
@@ -1460,6 +1503,23 @@
         }).join('');
       }
     })();
+  </script>
+  <script>
+    // Fee info popover toggle
+    const feeBtn = document.getElementById('feeInfoBtn');
+    if (feeBtn) {
+      feeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        feeBtn.classList.toggle('open');
+      });
+      document.addEventListener('click', function() {
+        feeBtn.classList.remove('open');
+      });
+      feeBtn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); feeBtn.classList.toggle('open'); }
+        if (e.key === 'Escape') feeBtn.classList.remove('open');
+      });
+    }
   </script>
 </body>
 </html>
