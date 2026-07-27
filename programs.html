@@ -28,163 +28,73 @@
       white-space: nowrap;
     }
 
-    /* ── Filter bar (Field Notes style) ── */
-    .pgm-filter-bar {
-      background: #fff;
-      border-top: 1px solid #e5e7eb;
-      border-bottom: 1px solid #e5e7eb;
-      position: sticky;
-      top: 76px;
-      z-index: 90;
+    /* ── Brewing page ── */
+    .pgm-brewing {
+      background: #f9fafb; padding: 80px 0 100px;
     }
-    .pgm-filter-bar__inner {
-      max-width: 1280px; margin: 0 auto; padding: 0 80px;
-      display: flex; align-items: center; gap: 12px; flex-wrap: nowrap;
-      height: 64px;
+    .pgm-brewing__inner {
+      max-width: 760px; margin: 0 auto; padding: 0 40px; text-align: center;
+    }
+    .pgm-brewing__icon {
+      width: 72px; height: 72px; background: #f0fdf4; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+    }
+    .pgm-brewing__title {
+      font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 500;
+      color: #101828; line-height: 1.2; margin-bottom: 20px;
+    }
+    .pgm-brewing__lead {
+      font-size: 17px; color: #4a5565; line-height: 1.7; margin-bottom: 40px; max-width: 580px; margin-left: auto; margin-right: auto;
     }
 
-    /* Search */
-    .pgm-search { position: relative; flex-shrink: 0; }
-    .pgm-search__icon {
-      position: absolute; left: 14px; top: 50%; transform: translateY(-50%); pointer-events: none;
+    /* Status cards */
+    .pgm-status-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      margin-bottom: 56px;
     }
-    .pgm-search__input {
-      width: 200px; height: 38px;
-      border: 1px solid #d1d5dc; border-radius: 8px;
-      padding: 0 36px 0 40px;
-      font-size: 14px; font-family: 'Inter', sans-serif; color: #101828;
-      background: #fff; outline: none; transition: border-color 0.2s;
-    }
-    .pgm-search__input::placeholder { color: #99a1af; }
-    .pgm-search__input:focus { border-color: #2E7D32; }
-    .pgm-search__clear {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; cursor: pointer; padding: 2px; display: none; color: #6a7282;
-    }
-    .pgm-search__clear.visible { display: flex; }
-
-    /* Pills */
-    .pgm-pills { display: flex; gap: 8px; flex: 1; overflow-x: auto; scrollbar-width: none; }
-    .pgm-pills::-webkit-scrollbar { display: none; }
-    .pgm-pill {
-      height: 38px; padding: 0 16px; border-radius: 8px; border: none;
-      background: #f3f4f6; color: #364153;
-      font-size: 13px; font-weight: 500; font-family: 'Inter', sans-serif;
-      cursor: pointer; transition: background 0.15s, color 0.15s; white-space: nowrap; flex-shrink: 0;
-    }
-    .pgm-pill:hover { background: #e5e7eb; }
-    .pgm-pill--active { background: #101828; color: #fff; }
-
-    /* Right dropdowns */
-    .pgm-filter-actions { display: flex; gap: 8px; flex-shrink: 0; margin-left: auto; }
-    .pgm-dropdown { position: relative; }
-    .pgm-dropdown__btn {
-      height: 38px; padding: 0 14px; border-radius: 8px;
-      border: 1px solid #e5e7eb; background: #fff;
-      color: #364153; font-size: 13px; font-weight: 500; font-family: 'Inter', sans-serif;
-      cursor: pointer; display: flex; align-items: center; gap: 7px; white-space: nowrap;
-      transition: border-color 0.15s;
-    }
-    .pgm-dropdown__btn:hover,
-    .pgm-dropdown--open .pgm-dropdown__btn { border-color: #101828; }
-    .pgm-dropdown__btn.has-value { border-color: #2E7D32; color: #2E7D32; }
-    .pgm-dropdown__chevron { transition: transform 0.2s; flex-shrink: 0; }
-    .pgm-dropdown--open .pgm-dropdown__chevron { transform: rotate(180deg); }
-    .pgm-dropdown__menu {
-      position: absolute; top: calc(100% + 8px); right: 0;
+    .pgm-status-card {
       background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.10); padding: 6px; min-width: 180px;
-      opacity: 0; transform: translateY(6px); pointer-events: none;
-      transition: opacity 0.15s, transform 0.15s; z-index: 100;
+      padding: 24px 20px; text-align: left;
     }
-    .pgm-dropdown--open .pgm-dropdown__menu { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .pgm-dropdown__item {
-      display: block; width: 100%; padding: 9px 14px; border: none; background: none;
-      text-align: left; font-size: 14px; font-family: 'Inter', sans-serif;
-      color: #364153; border-radius: 8px; cursor: pointer; transition: background 0.12s;
+    .pgm-status-card__dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      display: inline-block; margin-bottom: 14px;
     }
-    .pgm-dropdown__item:hover { background: #f3f4f6; }
-    .pgm-dropdown__item--active { background: #f0fdf4; color: #2E7D32; font-weight: 500; }
+    .pgm-status-card__dot--active { background: #2E7D32; box-shadow: 0 0 0 4px rgba(46,125,50,0.15); }
+    .pgm-status-card__dot--pending { background: #f59e0b; box-shadow: 0 0 0 4px rgba(245,158,11,0.15); }
+    .pgm-status-card__dot--soon { background: #d1d5db; }
+    .pgm-status-card__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #9ca3af; display: block; margin-bottom: 6px;
+    }
+    .pgm-status-card__title {
+      font-size: 15px; font-weight: 600; color: #101828; margin-bottom: 6px;
+    }
+    .pgm-status-card__desc { font-size: 13px; color: #6a7282; line-height: 1.5; }
 
-    /* Active chips row */
-    .pgm-active-filters {
-      max-width: 1280px; margin: 0 auto; padding: 10px 80px 14px;
-      display: flex; gap: 8px; flex-wrap: wrap; min-height: 0;
+    /* Divider */
+    .pgm-brewing__divider {
+      border: none; border-top: 1px solid #e5e7eb; margin: 0 0 48px;
     }
-    .pgm-active-filters:empty { padding-bottom: 0; display: none; }
-    .pgm-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      height: 28px; padding: 0 10px 0 12px;
-      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 999px;
-      font-size: 12px; font-weight: 500; color: #2E7D32; cursor: default;
-    }
-    .pgm-chip__remove {
-      background: none; border: none; cursor: pointer; color: #2E7D32;
-      padding: 0; display: flex; opacity: 0.6; transition: opacity 0.15s;
-    }
-    .pgm-chip__remove:hover { opacity: 1; }
 
-    /* ── Grid ── */
-    .pgm-body { padding: 40px 0 80px; background: #f9fafb; }
-    .pgm-body__inner { max-width: 1280px; margin: 0 auto; padding: 0 80px; }
-    .pgm-results-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-    .pgm-results-count { font-size: 13px; color: #6a7282; }
-
-    .pgm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-
-    /* Program card */
-    .pgm-card {
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-      overflow: hidden; display: flex; flex-direction: column;
-      transition: box-shadow 0.18s, transform 0.18s;
+    /* Host CTA band */
+    .pgm-host-band {
+      background: #0d1a10; border-radius: 16px;
+      padding: 40px 40px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px; text-align: left;
     }
-    .pgm-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.10); transform: translateY(-3px); }
-    .pgm-card__img { height: 200px; overflow: hidden; position: relative; flex-shrink: 0; }
-    .pgm-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-    .pgm-card:hover .pgm-card__img img { transform: scale(1.04); }
-    .pgm-card__tag {
-      position: absolute; top: 14px; left: 14px;
-      background: #fff; color: #2E7D32; border: 1.5px solid #2E7D32;
-      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 4px;
+    .pgm-host-band__text h3 {
+      font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500;
+      color: #fff; margin-bottom: 8px;
     }
-    .pgm-card__funded {
-      position: absolute; top: 14px; right: 14px;
-      background: #2E7D32; color: #fff;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
-      padding: 4px 10px; border-radius: 4px;
+    .pgm-host-band__text p { font-size: 14px; color: #9ca3af; line-height: 1.5; max-width: 420px; }
+    .pgm-host-band__cta {
+      flex-shrink: 0; background: #2E7D32; color: #fff;
+      font-size: 14px; font-weight: 600; padding: 12px 28px;
+      border-radius: 999px; text-decoration: none; white-space: nowrap;
     }
-    .pgm-card__body { padding: 20px 20px 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
-    .pgm-card__cat {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: #2E7D32;
-    }
-    .pgm-card__title {
-      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700;
-      color: #101828; line-height: 1.4; margin: 0;
-    }
-    .pgm-card__desc { font-size: 14px; color: #4a5565; line-height: 1.6; margin: 0; }
-    .pgm-card__meta {
-      display: flex; flex-wrap: wrap; gap: 12px;
-      font-size: 13px; color: #6a7282;
-    }
-    .pgm-card__meta span { display: flex; align-items: center; gap: 5px; }
-    .pgm-card__footer {
-      margin-top: auto; padding-top: 14px; border-top: 1px solid #f3f4f6;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .pgm-card__apply { font-size: 14px; font-weight: 600; color: #2E7D32; text-decoration: none; }
-    .pgm-card__apply:hover { text-decoration: underline; }
-    .pgm-card__spots { font-size: 13px; color: #6a7282; }
-
-    /* Empty state */
-    .pgm-empty { text-align: center; padding: 80px 0; }
-    .pgm-empty svg { margin: 0 auto 20px; display: block; }
-    .pgm-empty__title { font-size: 18px; font-weight: 600; color: #101828; margin-bottom: 8px; }
-    .pgm-empty__sub { font-size: 14px; color: #6a7282; }
-    .pgm-empty__reset {
-      background: none; border: none; color: #2E7D32;
-      font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: underline;
-    }
+    .pgm-host-band__cta:hover { background: #256427; }
   </style>
 </head>
 <body>
@@ -245,218 +155,66 @@
     <div class="pgm-hero__inner">
       <p class="pgm-hero__overline">🌿 Volunteering Programs</p>
       <h1 class="pgm-hero__title">Make your journey mean something.</h1>
-      <p class="pgm-hero__sub">Join fully-funded conservation and community programs across India. Real fieldwork, real impact — alongside verified NGOs and expert biologists.</p>
+      <p class="pgm-hero__sub">Join conservation and community programs across India. Real fieldwork, real impact — alongside verified NGOs and expert biologists.</p>
     </div>
   </section>
 
-  <!-- Filter Bar -->
-  <div class="pgm-filter-bar" id="pgmFilterBar">
-    <div class="pgm-filter-bar__inner">
+  <!-- Brewing State -->
+  <div class="pgm-brewing">
+    <div class="pgm-brewing__inner">
 
-      <!-- Search -->
-      <div class="pgm-search">
-        <svg class="pgm-search__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#6a7282" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="#6a7282" stroke-width="1.4" stroke-linecap="round"/></svg>
-        <input class="pgm-search__input" id="pgmSearch" type="text" placeholder="Search programs…" autocomplete="off" />
-        <button class="pgm-search__clear" id="pgmSearchClear" aria-label="Clear search">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="#6a7282" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
+      <div class="pgm-brewing__icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M8 28s0-8 8-8 8 8 8 8" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M16 20V10" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M10 14c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="16" cy="7" r="2" fill="#2E7D32"/>
+        </svg>
       </div>
 
-      <!-- Category pills -->
-      <div class="pgm-pills" id="pgmPills">
-        <button class="pgm-pill pgm-pill--active" data-cat="all">All</button>
-        <button class="pgm-pill" data-cat="wildlife">Wildlife Conservation</button>
-        <button class="pgm-pill" data-cat="marine">Marine Conservation</button>
-        <button class="pgm-pill" data-cat="community">Community Development</button>
-        <button class="pgm-pill" data-cat="ecology">River Ecology</button>
-        <button class="pgm-pill" data-cat="altitude">High Altitude</button>
+      <h1 class="pgm-brewing__title">Something meaningful<br>is being built here.</h1>
+      <p class="pgm-brewing__lead">
+        We're actively working with hosts — conservation organisations, community-led initiatives, and field research teams — to bring their programmes onto GDT. Each one is being onboarded carefully, not quickly.
+      </p>
+
+      <!-- Status cards -->
+      <div class="pgm-status-grid">
+        <div class="pgm-status-card">
+          <span class="pgm-status-card__dot pgm-status-card__dot--active"></span>
+          <span class="pgm-status-card__label">In Progress</span>
+          <div class="pgm-status-card__title">Host Onboarding</div>
+          <p class="pgm-status-card__desc">We're in conversations with our first cohort of programme hosts. Listings are being built and verified.</p>
+        </div>
+        <div class="pgm-status-card">
+          <span class="pgm-status-card__dot pgm-status-card__dot--pending"></span>
+          <span class="pgm-status-card__label">Coming Next</span>
+          <div class="pgm-status-card__title">Programme Review</div>
+          <p class="pgm-status-card__desc">Each programme goes through a quality and safety review before going live on the platform.</p>
+        </div>
+        <div class="pgm-status-card">
+          <span class="pgm-status-card__dot pgm-status-card__dot--soon"></span>
+          <span class="pgm-status-card__label">After That</span>
+          <div class="pgm-status-card__title">Open for Applications</div>
+          <p class="pgm-status-card__desc">Verified programmes go live with open spots. You'll be notified as soon as the first ones are ready.</p>
+        </div>
       </div>
 
-      <!-- Right dropdowns -->
-      <div class="pgm-filter-actions">
+      <hr class="pgm-brewing__divider" />
 
-        <!-- Duration dropdown -->
-        <div class="pgm-dropdown" id="pgmDurationDd">
-          <button class="pgm-dropdown__btn" id="pgmDurationBtn">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Duration
-            <svg class="pgm-dropdown__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="pgm-dropdown__menu" id="pgmDurationMenu">
-            <button class="pgm-dropdown__item pgm-dropdown__item--active" data-dur="all">Any duration</button>
-            <button class="pgm-dropdown__item" data-dur="short">2–3 weeks</button>
-            <button class="pgm-dropdown__item" data-dur="medium">4 weeks</button>
-            <button class="pgm-dropdown__item" data-dur="long">5+ weeks</button>
-          </div>
+      <p style="font-size:15px;color:#6a7282;margin-bottom:24px;">Get notified when the first programmes go live.</p>
+      <a href="mailto:volunteer@gdtclub.com?subject=Notify me when programmes go live"
+        style="display:inline-flex;align-items:center;gap:8px;background:#2E7D32;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:999px;text-decoration:none;margin-bottom:64px;">
+        Get Notified
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <!-- Host CTA -->
+      <div class="pgm-host-band">
+        <div class="pgm-host-band__text">
+          <h3>Running a programme worth joining?</h3>
+          <p>If you lead a conservation effort, community initiative, or field research project and are looking for committed volunteers, we'd love to hear from you. We're onboarding founding hosts now.</p>
         </div>
-
-        <!-- Sort dropdown -->
-        <div class="pgm-dropdown" id="pgmSortDd">
-          <button class="pgm-dropdown__btn" id="pgmSortBtn">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M4 7h6M6 10h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Sort
-            <svg class="pgm-dropdown__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="pgm-dropdown__menu" id="pgmSortMenu">
-            <button class="pgm-dropdown__item pgm-dropdown__item--active" data-sort="featured">Featured</button>
-            <button class="pgm-dropdown__item" data-sort="spots-asc">Spots: Fewest first</button>
-            <button class="pgm-dropdown__item" data-sort="deadline">Deadline: Soonest</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- Active filter chips -->
-    <div class="pgm-active-filters" id="pgmActiveFilters"></div>
-  </div>
-
-  <!-- Grid -->
-  <div class="pgm-body">
-    <div class="pgm-body__inner">
-
-      <div class="pgm-results-bar">
-        <p class="pgm-results-count" id="pgmResultsCount">Showing 4 programs</p>
-      </div>
-
-      <div class="pgm-grid" id="pgmGrid">
-
-        <div class="pgm-card"
-          data-cat="wildlife"
-          data-dur="medium"
-          data-spots="8"
-          data-deadline="20250515">
-          <div class="pgm-card__img">
-            <img src="assets/images/landscape.jpg" alt="Tiger Conservation Program" />
-            <span class="pgm-card__tag">Wildlife Conservation</span>
-            <span class="pgm-card__funded">Fully Funded</span>
-          </div>
-          <div class="pgm-card__body">
-            <span class="pgm-card__cat">Wildlife Conservation</span>
-            <h3 class="pgm-card__title">Tiger Conservation Program — Ranthambore</h3>
-            <p class="pgm-card__desc">Monitor tiger populations, restore habitats, and engage local communities alongside wildlife biologists in Ranthambore National Park.</p>
-            <div class="pgm-card__meta">
-              <span>📍 Ranthambore NP, Rajasthan</span>
-              <span>🕐 4 Weeks</span>
-              <span>👥 12 spots</span>
-            </div>
-            <div class="pgm-card__footer">
-              <a href="volunteer-detail.html" class="pgm-card__apply">View &amp; Apply →</a>
-              <span class="pgm-card__spots">8 spots left</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="pgm-card"
-          data-cat="marine"
-          data-dur="long"
-          data-spots="10"
-          data-deadline="20250601">
-          <div class="pgm-card__img">
-            <img src="assets/images/retreat1.jpg" alt="Coral Reef Restoration" />
-            <span class="pgm-card__tag">Marine Conservation</span>
-            <span class="pgm-card__funded">Fully Funded</span>
-          </div>
-          <div class="pgm-card__body">
-            <span class="pgm-card__cat">Marine Conservation</span>
-            <h3 class="pgm-card__title">Coral Reef Restoration — Lakshadweep</h3>
-            <p class="pgm-card__desc">Dive into reef monitoring, coral transplantation, and ocean health surveys in the pristine waters of Lakshadweep.</p>
-            <div class="pgm-card__meta">
-              <span>📍 Lakshadweep</span>
-              <span>🕐 6 Weeks</span>
-              <span>👥 10 spots</span>
-            </div>
-            <div class="pgm-card__footer">
-              <a href="volunteer-detail.html" class="pgm-card__apply">View &amp; Apply →</a>
-              <span class="pgm-card__spots">10 spots left</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="pgm-card"
-          data-cat="altitude"
-          data-dur="short"
-          data-spots="6"
-          data-deadline="20250710">
-          <div class="pgm-card__img">
-            <img src="assets/images/trek2.jpg" alt="Snow Leopard Survey" />
-            <span class="pgm-card__tag">High Altitude</span>
-            <span class="pgm-card__funded">Fully Funded</span>
-          </div>
-          <div class="pgm-card__body">
-            <span class="pgm-card__cat">High Altitude Conservation</span>
-            <h3 class="pgm-card__title">Snow Leopard Survey — Spiti Valley</h3>
-            <p class="pgm-card__desc">Track elusive snow leopards across the high-altitude terrain of Spiti Valley, contributing to long-term population data.</p>
-            <div class="pgm-card__meta">
-              <span>📍 Spiti Valley, Himachal Pradesh</span>
-              <span>🕐 3 Weeks</span>
-              <span>👥 8 spots</span>
-            </div>
-            <div class="pgm-card__footer">
-              <a href="volunteer-detail.html" class="pgm-card__apply">View &amp; Apply →</a>
-              <span class="pgm-card__spots">6 spots left</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="pgm-card"
-          data-cat="community"
-          data-dur="medium"
-          data-spots="12"
-          data-deadline="20250801">
-          <div class="pgm-card__img">
-            <img src="assets/images/cultural1.jpg" alt="Rural Education Initiative" />
-            <span class="pgm-card__tag">Community Development</span>
-            <span class="pgm-card__funded">Fully Funded</span>
-          </div>
-          <div class="pgm-card__body">
-            <span class="pgm-card__cat">Community Development</span>
-            <h3 class="pgm-card__title">Rural Education Initiative — Sundarbans</h3>
-            <p class="pgm-card__desc">Run education workshops in remote Sundarbans villages, supporting children's literacy and environmental awareness.</p>
-            <div class="pgm-card__meta">
-              <span>📍 Sundarbans, West Bengal</span>
-              <span>🕐 4 Weeks</span>
-              <span>👥 12 spots</span>
-            </div>
-            <div class="pgm-card__footer">
-              <a href="volunteer-detail.html" class="pgm-card__apply">View &amp; Apply →</a>
-              <span class="pgm-card__spots">12 spots left</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="pgm-card"
-          data-cat="ecology"
-          data-dur="short"
-          data-spots="8"
-          data-deadline="20250820">
-          <div class="pgm-card__img">
-            <img src="assets/images/trek1.jpg" alt="Gangetic Dolphin Monitoring" />
-            <span class="pgm-card__tag">River Ecology</span>
-            <span class="pgm-card__funded">Fully Funded</span>
-          </div>
-          <div class="pgm-card__body">
-            <span class="pgm-card__cat">River Ecology</span>
-            <h3 class="pgm-card__title">Gangetic Dolphin Monitoring — Varanasi</h3>
-            <p class="pgm-card__desc">Survey endangered Gangetic dolphins along a critical river stretch, contributing to WWF-India's long-term monitoring program.</p>
-            <div class="pgm-card__meta">
-              <span>📍 Varanasi, Uttar Pradesh</span>
-              <span>🕐 2 Weeks</span>
-              <span>👥 8 spots</span>
-            </div>
-            <div class="pgm-card__footer">
-              <a href="volunteer-detail.html" class="pgm-card__apply">View &amp; Apply →</a>
-              <span class="pgm-card__spots">8 spots left</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Empty state -->
-      <div class="pgm-empty" id="pgmEmpty" style="display:none;">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#e5e5e5" stroke-width="2"/><path d="M16 24h16M24 16v16" stroke="#d1d1d1" stroke-width="2" stroke-linecap="round"/></svg>
-        <p class="pgm-empty__title">No programs found</p>
-        <p class="pgm-empty__sub">Try adjusting your filters or <button class="pgm-empty__reset" id="pgmReset">clear all</button></p>
+        <a href="host.html" class="pgm-host-band__cta">Apply to Host →</a>
       </div>
 
     </div>
@@ -502,133 +260,5 @@
   </footer>
 
   <script src="assets/main.js"></script>
-  <script>
-  (function () {
-    const grid     = document.getElementById('pgmGrid');
-    const cards    = Array.from(grid.querySelectorAll('.pgm-card'));
-    const countEl  = document.getElementById('pgmResultsCount');
-    const emptyEl  = document.getElementById('pgmEmpty');
-    const chipsEl  = document.getElementById('pgmActiveFilters');
-    const searchEl = document.getElementById('pgmSearch');
-    const clearBtn = document.getElementById('pgmSearchClear');
-    const resetBtn = document.getElementById('pgmReset');
-
-    const state = { cat: 'all', dur: 'all', sort: 'featured', search: '' };
-
-    // Pills
-    document.getElementById('pgmPills').addEventListener('click', e => {
-      const btn = e.target.closest('[data-cat]');
-      if (!btn) return;
-      state.cat = btn.dataset.cat;
-      document.querySelectorAll('[data-cat]').forEach(b => b.classList.toggle('pgm-pill--active', b === btn));
-      apply();
-    });
-
-    // Dropdowns
-    document.querySelectorAll('.pgm-dropdown').forEach(dd => {
-      const btn  = dd.querySelector('.pgm-dropdown__btn');
-      const menu = dd.querySelector('.pgm-dropdown__menu');
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const open = dd.classList.contains('pgm-dropdown--open');
-        document.querySelectorAll('.pgm-dropdown--open').forEach(d => d.classList.remove('pgm-dropdown--open'));
-        if (!open) dd.classList.add('pgm-dropdown--open');
-      });
-      menu.addEventListener('click', e => {
-        const item = e.target.closest('.pgm-dropdown__item');
-        if (!item) return;
-        menu.querySelectorAll('.pgm-dropdown__item').forEach(i => i.classList.remove('pgm-dropdown__item--active'));
-        item.classList.add('pgm-dropdown__item--active');
-        dd.classList.remove('pgm-dropdown--open');
-        if (item.dataset.dur !== undefined) {
-          state.dur = item.dataset.dur;
-          btn.classList.toggle('has-value', state.dur !== 'all');
-        } else if (item.dataset.sort !== undefined) {
-          state.sort = item.dataset.sort;
-          btn.classList.toggle('has-value', state.sort !== 'featured');
-        }
-        apply();
-      });
-    });
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.pgm-dropdown--open').forEach(d => d.classList.remove('pgm-dropdown--open'));
-    });
-
-    // Search
-    searchEl.addEventListener('input', () => {
-      state.search = searchEl.value.trim().toLowerCase();
-      clearBtn.classList.toggle('visible', state.search.length > 0);
-      apply();
-    });
-    clearBtn.addEventListener('click', () => {
-      searchEl.value = ''; state.search = '';
-      clearBtn.classList.remove('visible'); apply();
-    });
-    if (resetBtn) resetBtn.addEventListener('click', resetAll);
-
-    function resetAll() {
-      state.cat = 'all'; state.dur = 'all'; state.sort = 'featured'; state.search = '';
-      searchEl.value = ''; clearBtn.classList.remove('visible');
-      document.querySelectorAll('[data-cat]').forEach(b => b.classList.toggle('pgm-pill--active', b.dataset.cat === 'all'));
-      document.querySelectorAll('.pgm-dropdown__item').forEach(i => i.classList.toggle('pgm-dropdown__item--active', i.dataset.dur === 'all' || i.dataset.sort === 'featured'));
-      document.querySelectorAll('.pgm-dropdown__btn').forEach(b => b.classList.remove('has-value'));
-      apply();
-    }
-
-    function apply() {
-      let visible = cards.filter(card => {
-        if (state.cat !== 'all' && card.dataset.cat !== state.cat) return false;
-        if (state.dur !== 'all' && card.dataset.dur !== state.dur) return false;
-        if (state.search) {
-          if (!card.textContent.toLowerCase().includes(state.search)) return false;
-        }
-        return true;
-      });
-
-      if (state.sort === 'spots-asc') visible.sort((a,b) => +a.dataset.spots - +b.dataset.spots);
-      if (state.sort === 'deadline')  visible.sort((a,b) => +a.dataset.deadline - +b.dataset.deadline);
-
-      const visibleSet = new Set(visible);
-      cards.forEach(c => { c.style.display = visibleSet.has(c) ? '' : 'none'; });
-      visible.forEach(c => grid.appendChild(c));
-      countEl.textContent = `Showing ${visible.length} program${visible.length !== 1 ? 's' : ''}`;
-      emptyEl.style.display = visible.length === 0 ? 'block' : 'none';
-      renderChips();
-    }
-
-    const durLabels = { short: '2–3 weeks', medium: '4 weeks', long: '5+ weeks' };
-    const sortLabels = { 'spots-asc': 'Fewest spots first', deadline: 'Deadline soonest' };
-
-    function renderChips() {
-      chipsEl.innerHTML = '';
-      const add = (key, label) => {
-        const chip = document.createElement('span');
-        chip.className = 'pgm-chip';
-        chip.innerHTML = `${label}<button class="pgm-chip__remove" aria-label="Remove filter"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>`;
-        chip.querySelector('.pgm-chip__remove').addEventListener('click', () => {
-          if (key === 'cat') {
-            state.cat = 'all';
-            document.querySelectorAll('[data-cat]').forEach(b => b.classList.toggle('pgm-pill--active', b.dataset.cat === 'all'));
-          } else if (key === 'dur') {
-            state.dur = 'all';
-            document.querySelector('[data-dur="all"]').classList.add('pgm-dropdown__item--active');
-            document.getElementById('pgmDurationBtn').classList.remove('has-value');
-          } else if (key === 'sort') {
-            state.sort = 'featured';
-            document.querySelector('[data-sort="featured"]').classList.add('pgm-dropdown__item--active');
-            document.getElementById('pgmSortBtn').classList.remove('has-value');
-          }
-          apply();
-        });
-        chipsEl.appendChild(chip);
-      };
-      if (state.cat !== 'all') add('cat', state.cat.charAt(0).toUpperCase() + state.cat.slice(1));
-      if (state.dur !== 'all') add('dur', durLabels[state.dur]);
-      if (state.sort !== 'featured') add('sort', sortLabels[state.sort]);
-    }
-
-    apply();
-  })();
-  </script>
 </body>
 </html>
