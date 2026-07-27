@@ -58,21 +58,15 @@
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
       filter: blur(6px);
       pointer-events: none; user-select: none;
+      margin-bottom: 0;
     }
 
-    /* Overlay centred above blurred grid */
-    .pgm-overlay {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 20px; z-index: 2;
-    }
+    /* Badge + buttons */
     .pgm-overlay__badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 999px;
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 999px;
       padding: 8px 20px; font-size: 12px; font-weight: 700;
       letter-spacing: 1.5px; text-transform: uppercase; color: #2E7D32;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
     .pgm-overlay__pulse {
       width: 8px; height: 8px; border-radius: 50%; background: #2E7D32;
@@ -81,14 +75,6 @@
     @keyframes pulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(46,125,50,0.4); }
       50% { box-shadow: 0 0 0 6px rgba(46,125,50,0); }
-    }
-    .pgm-overlay__title {
-      font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 500;
-      color: #101828; text-align: center; line-height: 1.2;
-    }
-    .pgm-overlay__sub {
-      font-size: 15px; color: #4a5565; text-align: center;
-      max-width: 420px; line-height: 1.6;
     }
     .pgm-overlay__actions {
       display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
@@ -101,7 +87,7 @@
     .pgm-overlay__btn-outline {
       background: #fff; color: #101828; font-size: 14px; font-weight: 600;
       padding: 12px 28px; border-radius: 999px; text-decoration: none;
-      border: 1.5px solid #e5e7eb;
+      border: 1.5px solid #d1d5db;
       display: inline-flex; align-items: center; gap: 8px;
     }
 
@@ -210,96 +196,85 @@
     </div>
   </section>
 
-  <!-- Brewing State — blurred cards with overlay -->
+  <!-- Brewing State — text first, blurred cards below -->
   <div class="pgm-brewing">
     <div class="pgm-brewing__inner">
 
+      <!-- Text block -->
       <div class="pgm-brewing__intro">
-        <h2>Programmes being onboarded now.</h2>
-        <p>We're working with hosts to bring their conservation and community programmes onto GDT. Here's a preview of what listings will look like.</p>
+        <div class="pgm-overlay__badge" style="margin:0 auto 24px;">
+          <span class="pgm-overlay__pulse"></span>
+          Host Onboarding in Progress
+        </div>
+        <h2>Programmes are on their way.</h2>
+        <p>We're working directly with conservation hosts and community organisations to get them listed. Here's a preview of what listings will look like — be the first to know when spots open.</p>
+        <div class="pgm-overlay__actions" style="margin-top:28px;">
+          <a href="mailto:volunteer@gdtclub.com?subject=Notify me when programmes go live" class="pgm-overlay__btn-primary">
+            Get Notified
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="host.html" class="pgm-overlay__btn-outline">Host a Programme →</a>
+        </div>
       </div>
 
-      <div class="pgm-cards-wrap">
+      <!-- Blurred sample cards -->
+      <div class="pgm-grid-blur">
 
-        <!-- Blurred sample cards -->
-        <div class="pgm-grid-blur">
-
-          <div class="pgm-card">
-            <div class="pgm-card__img">
-              <img src="assets/images/wildlife-deer.jpg" alt="Wildlife Conservation" />
-              <span class="pgm-card__skill">Field Research</span>
-            </div>
-            <div class="pgm-card__body">
-              <h3 class="pgm-card__title">Wildlife Conservation Program — Ranthambore</h3>
-              <div class="pgm-card__meta">
-                <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4zm0 5.5A1.5 1.5 0 1 1 7 3a1.5 1.5 0 0 1 0 3z" fill="#6a7282"/></svg> Ranthambore, Rajasthan</span>
-                <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6a7282" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6a7282" stroke-width="1.2" stroke-linecap="round"/></svg> 4 Weeks</span>
-              </div>
-              <p class="pgm-card__desc">Monitor wildlife populations, restore critical habitats, and engage local communities alongside field biologists.</p>
-              <div class="pgm-card__footer">
-                <span style="display:inline-block;background:rgba(0,0,0,0.06);color:#737373;font-size:12px;font-weight:600;padding:5px 14px;border-radius:999px;">Coming Soon</span>
-              </div>
-            </div>
+        <div class="pgm-card">
+          <div class="pgm-card__img">
+            <img src="assets/images/wildlife-deer.jpg" alt="Wildlife Conservation" />
+            <span class="pgm-card__skill">Field Research</span>
           </div>
-
-          <div class="pgm-card">
-            <div class="pgm-card__img">
-              <img src="assets/images/coral-reef.jpg" alt="Coral Reef Restoration" />
-              <span class="pgm-card__skill">Marine Science</span>
+          <div class="pgm-card__body">
+            <h3 class="pgm-card__title">Wildlife Conservation Program — Ranthambore</h3>
+            <div class="pgm-card__meta">
+              <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4zm0 5.5A1.5 1.5 0 1 1 7 3a1.5 1.5 0 0 1 0 3z" fill="#6a7282"/></svg> Ranthambore, Rajasthan</span>
+              <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6a7282" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6a7282" stroke-width="1.2" stroke-linecap="round"/></svg> 4 Weeks</span>
             </div>
-            <div class="pgm-card__body">
-              <h3 class="pgm-card__title">Coral Reef Restoration — Lakshadweep</h3>
-              <div class="pgm-card__meta">
-                <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4zm0 5.5A1.5 1.5 0 1 1 7 3a1.5 1.5 0 0 1 0 3z" fill="#6a7282"/></svg> Lakshadweep</span>
-                <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6a7282" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6a7282" stroke-width="1.2" stroke-linecap="round"/></svg> 6 Weeks</span>
-              </div>
-              <p class="pgm-card__desc">Dive into coral restoration with marine biologists in one of India's most pristine reef ecosystems.</p>
-              <div class="pgm-card__footer">
-                <span style="display:inline-block;background:rgba(0,0,0,0.06);color:#737373;font-size:12px;font-weight:600;padding:5px 14px;border-radius:999px;">Coming Soon</span>
-              </div>
+            <p class="pgm-card__desc">Monitor wildlife populations, restore critical habitats, and engage local communities alongside field biologists.</p>
+            <div class="pgm-card__footer">
+              <span style="display:inline-block;background:rgba(0,0,0,0.06);color:#737373;font-size:12px;font-weight:600;padding:5px 14px;border-radius:999px;">Coming Soon</span>
             </div>
-          </div>
-
-          <div class="pgm-card">
-            <div class="pgm-card__img">
-              <img src="assets/images/rural-education.jpg" alt="Rural Education" />
-              <span class="pgm-card__skill">Teaching</span>
-            </div>
-            <div class="pgm-card__body">
-              <h3 class="pgm-card__title">Rural Education Initiative — Sundarbans</h3>
-              <div class="pgm-card__meta">
-                <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4zm0 5.5A1.5 1.5 0 1 1 7 3a1.5 1.5 0 0 1 0 3z" fill="#6a7282"/></svg> Sundarbans, West Bengal</span>
-                <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6a7282" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6a7282" stroke-width="1.2" stroke-linecap="round"/></svg> 4 Weeks</span>
-              </div>
-              <p class="pgm-card__desc">Teach in rural delta schools, build digital literacy, and support families living alongside the mangroves.</p>
-              <div class="pgm-card__footer">
-                <span style="display:inline-block;background:rgba(0,0,0,0.06);color:#737373;font-size:12px;font-weight:600;padding:5px 14px;border-radius:999px;">Coming Soon</span>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /pgm-grid-blur -->
-
-        <!-- Overlay -->
-        <div class="pgm-overlay">
-          <div class="pgm-overlay__badge">
-            <span class="pgm-overlay__pulse"></span>
-            Host Onboarding in Progress
-          </div>
-          <h2 class="pgm-overlay__title">Programmes are on their way.</h2>
-          <p class="pgm-overlay__sub">We're working directly with conservation hosts and community organisations to get them listed. Be the first to know when spots open.</p>
-          <div class="pgm-overlay__actions">
-            <a href="mailto:volunteer@gdtclub.com?subject=Notify me when programmes go live" class="pgm-overlay__btn-primary">
-              Get Notified
-              <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="host.html" class="pgm-overlay__btn-outline">
-              Host a Programme →
-            </a>
           </div>
         </div>
 
-      </div><!-- /pgm-cards-wrap -->
+        <div class="pgm-card">
+          <div class="pgm-card__img">
+            <img src="assets/images/coral-reef.jpg" alt="Coral Reef Restoration" />
+            <span class="pgm-card__skill">Marine Science</span>
+          </div>
+          <div class="pgm-card__body">
+            <h3 class="pgm-card__title">Coral Reef Restoration — Lakshadweep</h3>
+            <div class="pgm-card__meta">
+              <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4zm0 5.5A1.5 1.5 0 1 1 7 3a1.5 1.5 0 0 1 0 3z" fill="#6a7282"/></svg> Lakshadweep</span>
+              <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6a7282" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6a7282" stroke-width="1.2" stroke-linecap="round"/></svg> 6 Weeks</span>
+            </div>
+            <p class="pgm-card__desc">Dive into coral restoration with marine biologists in one of India's most pristine reef ecosystems.</p>
+            <div class="pgm-card__footer">
+              <span style="display:inline-block;background:rgba(0,0,0,0.06);color:#737373;font-size:12px;font-weight:600;padding:5px 14px;border-radius:999px;">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pgm-card">
+          <div class="pgm-card__img">
+            <img src="assets/images/rural-education.jpg" alt="Rural Education" />
+            <span class="pgm-card__skill">Teaching</span>
+          </div>
+          <div class="pgm-card__body">
+            <h3 class="pgm-card__title">Rural Education Initiative — Sundarbans</h3>
+            <div class="pgm-card__meta">
+              <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4zm0 5.5A1.5 1.5 0 1 1 7 3a1.5 1.5 0 0 1 0 3z" fill="#6a7282"/></svg> Sundarbans, West Bengal</span>
+              <span><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#6a7282" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#6a7282" stroke-width="1.2" stroke-linecap="round"/></svg> 4 Weeks</span>
+            </div>
+            <p class="pgm-card__desc">Teach in rural delta schools, build digital literacy, and support families living alongside the mangroves.</p>
+            <div class="pgm-card__footer">
+              <span style="display:inline-block;background:rgba(0,0,0,0.06);color:#737373;font-size:12px;font-weight:600;padding:5px 14px;border-radius:999px;">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /pgm-grid-blur -->
 
       <!-- Host band -->
       <div class="pgm-host-band">
