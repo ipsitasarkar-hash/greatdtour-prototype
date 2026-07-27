@@ -618,7 +618,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .exp-card__title {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 18px;
   font-weight: 500;
   line-height: 1.35;
