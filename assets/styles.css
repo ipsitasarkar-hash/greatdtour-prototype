@@ -126,7 +126,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav__cta:hover { background: #d94000; transform: translateY(-1px); }
 /* Mobile-injected CTA: hidden on desktop, shown only inside open mobile menu */
 .nav__cta--mobile { display: none; }
-.nav__links--open .nav__cta--mobile { display: inline-flex; align-self: flex-start; }
+.nav__links--open .nav__cta--mobile { display: inline-flex; align-self: center; }
 
 /* User avatar */
 .nav__user {
