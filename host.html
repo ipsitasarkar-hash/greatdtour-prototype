@@ -381,6 +381,10 @@
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .site-footer__grid { grid-template-columns: 1fr 1fr; }
     }
+    /* ── Responsive layout classes ── */
+    .h-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .h-feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
     @media (max-width: 500px) {
       .why-grid { grid-template-columns: 1fr; }
       .h-container { padding: 0 20px; }
@@ -390,6 +394,13 @@
     /* ── Additional mobile fixes ── */
     @media (max-width: 768px) {
       .host-hero__inner { grid-template-columns: 1fr !important; padding: 0 20px; }
+      .h-two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .h-feat-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
+      .h-feat-grid > div { padding: 18px !important; }
+      /* Reduce section vertical padding */
+      .host-why, section[style*="padding:88px 0"], section[style*="padding: 88px 0"] { padding-top: 48px !important; padding-bottom: 48px !important; }
+      /* Start With More section */
+      section[style*="background:#101828"] { padding: 56px 0 !important; }
       .host-hero__mosaic { display: none; }
       .host-hero__title { font-size: clamp(30px, 7vw, 44px); }
       .host-hero__sub { font-size: 16px; }
@@ -408,11 +419,14 @@
       .app-field-row { grid-template-columns: 1fr !important; }
       /* FAQs padding */
       .h-container { padding: 0 20px !important; }
+      /* Section headings */
+      .section-header h2 { font-size: clamp(24px, 6vw, 38px) !important; }
     }
     @media (max-width: 480px) {
       .process-unified { grid-template-columns: 1fr !important; }
-      [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+      .h-feat-grid { grid-template-columns: 1fr !important; }
       .host-hero__ctas { flex-direction: column !important; }
+      .h-two-col { gap: 28px !important; }
     }
   </style>
 </head>
@@ -687,7 +701,7 @@
         <p style="font-size:12px;color:#c4c9d0;">Placeholder — replace with actual dashboard screenshot</p>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+      <div class="h-feat-grid">
         <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
           <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -752,7 +766,7 @@
   </section> ──────────────────────────────────────── -->
   <section style="background:#101828;padding:88px 0;">
     <div class="h-container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
+      <div class="h-two-col">
         <div>
           <span class="overline-tag" style="color:#ff7043;">Join Early</span>
           <h2 style="font-family:'Playfair Display',serif;font-size:42px;font-weight:500;color:#fff;line-height:1.18;margin-bottom:20px;">Start With More.</h2>
