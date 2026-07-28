@@ -329,21 +329,39 @@
       /* Split layout 2-col → 1-col */
       [style*="grid-template-columns:1.05fr 0.95fr"],
       [style*="grid-template-columns: 1.05fr 0.95fr"] { grid-template-columns: 1fr !important; }
+      /* 2-col → 1-col */
+      [style*="grid-template-columns:1fr 1fr"],
+      [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 32px !important; }
       /* Pillar/cat 3-col → 1-col */
       [style*="grid-template-columns:repeat(3,1fr)"],
       [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+      /* Number + content layout (120px 1fr) */
+      [style*="grid-template-columns:120px 1fr"],
+      [style*="grid-template-columns: 120px 1fr"] { grid-template-columns: 1fr !important; gap: 8px !important; }
+      /* Hide large decorative numbers on mobile */
+      [style*="font-size:52px"][style*="color:#c9c2b8"] { display: none !important; }
       /* Section paddings */
       [style*="padding: 80px 0"], [style*="padding:80px 0"],
-      [style*="padding: 88px 0"], [style*="padding:88px 0"] { padding-left: 20px !important; padding-right: 20px !important; }
+      [style*="padding: 88px 0"], [style*="padding:88px 0"],
+      [style*="padding: 96px 0"], [style*="padding:96px 0"] { padding-top: 52px !important; padding-bottom: 52px !important; padding-left: 20px !important; padding-right: 20px !important; }
       /* Container padding */
       .container { padding-left: 20px !important; padding-right: 20px !important; }
       /* Heading sizes */
       [style*="font-size:42px"], [style*="font-size: 42px"] { font-size: 28px !important; }
+      [style*="font-size:48px"], [style*="font-size: 48px"] { font-size: 30px !important; }
       [style*="font-size:52px"], [style*="font-size: 52px"] { font-size: 32px !important; }
+      /* About hero top padding */
+      section[style*="padding:136px"] { padding-top: 100px !important; padding-bottom: 48px !important; }
+      /* Reorder: image after text on mobile */
+      .about-first-img { order: 2; }
+      /* SDG cards 3-col → 2-col on mobile */
+      .sdg-grid { grid-template-columns: repeat(2, 1fr) !important; }
     }
     @media (max-width: 600px) {
       .about-pillars, .about-cats { flex-direction: column; align-items: center; }
       .fn-footer__grid { grid-template-columns: 1fr; }
+      .sdg-grid { grid-template-columns: 1fr !important; }
+      .about-cta-cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -403,7 +421,7 @@
     <div class="container" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center;">
       <div>
         <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">About Great D'Tour</p>
-        <h1 style="font-family:'Playfair Display',serif;font-size:64px;font-weight:500;color:#101828;line-height:1.05;margin-bottom:28px;">The trip you<br/>can't Google.</h1>
+        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,64px);font-weight:500;color:#101828;line-height:1.05;margin-bottom:28px;">The trip you<br/>can't Google.</h1>
         <p style="font-size:16px;color:#4a5565;line-height:1.75;margin-bottom:0;max-width:520px;">Great D'Tour is where hidden expertise meets curious travellers. From wildlife naturalists and master artisans to wellness practitioners and local storytellers, discover multi-day experiences you won't find on Google, only through the people who live them. For travellers who want more than a destination. For the experts who deserve more than a WhatsApp inbox.</p>
 
       </div>
@@ -486,7 +504,7 @@
       <!-- SDG grid + UN card wrapper — UN card width matches grid -->
       <div style="display:inline-block;width:100%;">
         <!-- SDG cards 3×2 -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:16px;">
+        <div class="sdg-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:16px;">
 
           <!-- SDG 8 -->
           <div style="background:#9B1D3A;border-radius:12px;padding:24px 24px 20px;">
@@ -675,13 +693,13 @@
           <a href="host.html" style="display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--orange);text-decoration:none;">Read More → Become a Host</a>
         </div>
       </div>
-      <p style="font-size:16px;font-style:italic;color:#6b7280;text-align:center;white-space:nowrap;margin:0 auto;">Two sides. One shared belief - that the best way to travel is with the people who know it best.</p>
+      <p style="font-size:16px;font-style:italic;color:#6b7280;text-align:center;margin:0 auto;">Two sides. One shared belief - that the best way to travel is with the people who know it best.</p>
     </div>
   </section>
 
   <!-- ── SECTION 6: FIELD NOTES EDITORIAL ── -->
   <section style="background:#faf9f3;padding:88px 0;border-top:1px solid #f0ede8;">
-    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
       <div>
         <img src="assets/images/hampi-traveller.jpg" alt="Field Notes" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;box-shadow:0 20px 48px rgba(0,0,0,0.12);" />
       </div>
