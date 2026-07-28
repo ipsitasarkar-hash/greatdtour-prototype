@@ -346,22 +346,23 @@
       .fn-secondary__card { height: 160px; }
       /* Latest Stories below hero on mobile */
       .fn-latest { display: block; padding-bottom: 32px; }
-      .fn-latest__list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+      .fn-latest__list { display: flex; flex-direction: column; gap: 0; }
       .fn-stories__inner { padding: 0 20px !important; }
       .fn-write-cta-wrap { padding: 40px 20px 60px !important; }
-      /* Filter bar: stack search + pills, hide dropdowns or wrap */
+      /* Filter bar: 3 rows — search / pills / sorts */
       .fn-filter-bar__inner {
-        padding: 0 20px !important;
+        padding: 12px 20px !important;
         height: auto !important;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding-top: 12px !important;
-        padding-bottom: 12px !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
       }
-      .fn-search { flex: 1 1 100%; }
-      .fn-search__input { width: 100% !important; max-width: none !important; }
-      .fn-pills { overflow-x: auto; flex-wrap: nowrap; gap: 6px; padding-bottom: 2px; }
-      .fn-filter-actions { margin-left: 0; }
+      .fn-search { width: 100%; }
+      .fn-search__input { width: 100% !important; max-width: none !important; box-sizing: border-box; }
+      .fn-pills { overflow-x: auto; flex-wrap: nowrap; gap: 6px; padding-bottom: 2px; width: 100%; }
+      .fn-filter-actions { margin-left: 0; width: 100%; display: flex; gap: 8px; }
+      .fn-filter-actions .fn-dropdown { flex: 1; }
+      .fn-filter-actions .fn-dropdown__btn { width: 100%; justify-content: center; }
       .fn-strip { padding: 8px 20px; }
       .fn-trending__inner { padding: 0 20px; }
       .fn-write-cta { padding: 40px 24px; }
