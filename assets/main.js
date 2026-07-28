@@ -29,6 +29,7 @@ if (hamburger && navLinks) {
     mobileCta.href = 'host.html';
     mobileCta.className = 'nav__cta nav__cta--mobile';
     mobileCta.textContent = 'Become a Host';
+    // Only visible inside the open mobile menu (hidden otherwise via CSS)
     navLinks.appendChild(mobileCta);
   }
   hamburger.addEventListener('click', () => {

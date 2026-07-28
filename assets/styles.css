@@ -124,6 +124,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   flex-shrink: 0;
 }
 .nav__cta:hover { background: #d94000; transform: translateY(-1px); }
+/* Mobile-injected CTA: hidden on desktop, shown only inside open mobile menu */
+.nav__cta--mobile { display: none; }
+.nav__links--open .nav__cta--mobile { display: inline-flex; align-self: flex-start; }
 
 /* User avatar */
 .nav__user {
@@ -1351,7 +1354,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     gap: 20px; z-index: 999;
   }
   .nav__links.nav__links--open .nav__link { color: var(--dark); font-size: 16px; }
-  .nav__links.nav__links--open .nav__cta { display: inline-flex; align-self: flex-start; }
   .nav__links.nav__links--open .nav__cta  { display: inline-flex; align-self: flex-start; }
   .nav__hamburger { display: flex; }
   .nav__cta { display: none; }
@@ -1427,7 +1429,6 @@ html, body { overflow-x: hidden; }
     gap: 20px; z-index: 999;
   }
   .nav__links.nav__links--open .nav__link { color: var(--dark); font-size: 16px; }
-  .nav__links.nav__links--open .nav__cta { display: inline-flex; align-self: flex-start; }
 
   /* ── HERO: stack image below content on mobile ── */
   .hero {
