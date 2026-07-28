@@ -23,6 +23,14 @@ if (nav) {
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('.nav__links');
 if (hamburger && navLinks) {
+  // Inject "Become a Host" CTA into mobile menu if not already present
+  if (!navLinks.querySelector('.nav__cta--mobile')) {
+    const mobileCta = document.createElement('a');
+    mobileCta.href = 'host.html';
+    mobileCta.className = 'nav__cta nav__cta--mobile';
+    mobileCta.textContent = 'Become a Host';
+    navLinks.appendChild(mobileCta);
+  }
   hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('nav__links--open');
   });

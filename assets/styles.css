@@ -1351,7 +1351,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     gap: 20px; z-index: 999;
   }
   .nav__links.nav__links--open .nav__link { color: var(--dark); font-size: 16px; }
-  .nav__links.nav__links--open .nav__cta  { align-self: flex-start; }
+  .nav__links.nav__links--open .nav__cta { display: inline-flex; align-self: flex-start; }
+  .nav__links.nav__links--open .nav__cta  { display: inline-flex; align-self: flex-start; }
   .nav__hamburger { display: flex; }
   .nav__cta { display: none; }
 
@@ -1426,6 +1427,7 @@ html, body { overflow-x: hidden; }
     gap: 20px; z-index: 999;
   }
   .nav__links.nav__links--open .nav__link { color: var(--dark); font-size: 16px; }
+  .nav__links.nav__links--open .nav__cta { display: inline-flex; align-self: flex-start; }
 
   /* ── HERO: stack image below content on mobile ── */
   .hero {
