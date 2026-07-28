@@ -29,10 +29,12 @@
     /* ── Mobile ── */
     @media (max-width: 768px) {
       .pgm-hero__inner { padding: 0 20px; }
-      .pgm-brewing__inner { padding: 0 20px; }
+      .pgm-brewing { padding: 48px 0 64px; }
+      .pgm-brewing__inner { padding: 0 16px; }
       .pgm-grid-blur { grid-template-columns: 1fr !important; max-width: 100%; }
-      .pgm-host-band { flex-direction: column; align-items: flex-start; padding: 32px 24px; gap: 20px; }
-      .pgm-host-band__cta { width: 100%; text-align: center; justify-content: center; display: flex; }
+      .pgm-host-band { flex-direction: column; align-items: flex-start; padding: 28px 24px; gap: 20px; margin-top: 40px; }
+      .pgm-host-band__text h3 { font-size: 22px; }
+      .pgm-host-band__cta { width: 100%; text-align: center; justify-content: center; display: flex; padding: 14px 24px; }
       .pgm-brewing__intro h2 { font-size: 28px; }
     }
 
@@ -128,7 +130,7 @@
     /* Host band */
     .pgm-host-band {
       background: #0d1a10; border-radius: 16px; margin-top: 64px;
-      padding: 40px; display: flex; align-items: center;
+      padding: 48px 56px; display: flex; align-items: center;
       justify-content: space-between; gap: 24px;
     }
     .pgm-host-band__text h3 {
