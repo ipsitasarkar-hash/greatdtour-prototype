@@ -328,21 +328,45 @@
       .fn-articles-grid { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 900px) {
-      .fn-hero__inner { grid-template-columns: 1fr; }
-      .fn-latest { display: none; }
+      .fn-hero__inner { grid-template-columns: 1fr; gap: 32px; }
+      .fn-latest { display: block; }
       .fn-articles-grid { grid-template-columns: repeat(2, 1fr); }
       .fn-footer__grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 640px) {
       .fn-articles-grid { grid-template-columns: 1fr; }
       .fn-footer__grid { grid-template-columns: 1fr; }
-      .fn-search__input { width: 100%; max-width: 220px; }
     }
     @media (max-width: 768px) {
-      .fn-hero__inner { padding: 0 20px !important; }
+      .fn-hero { padding: 32px 0 0; }
+      .fn-hero__inner { padding: 0 20px !important; grid-template-columns: 1fr; gap: 24px; }
+      .fn-featured__img { height: 360px; }
+      .fn-featured__title { font-size: 22px; }
+      .fn-secondary { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .fn-secondary__card { height: 160px; }
+      /* Latest Stories below hero on mobile */
+      .fn-latest { display: block; padding-bottom: 32px; }
+      .fn-latest__list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
       .fn-stories__inner { padding: 0 20px !important; }
       .fn-write-cta-wrap { padding: 40px 20px 60px !important; }
-      .fn-filter-bar__inner { padding: 0 20px !important; }
+      /* Filter bar: stack search + pills, hide dropdowns or wrap */
+      .fn-filter-bar__inner {
+        padding: 0 20px !important;
+        height: auto !important;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+      }
+      .fn-search { flex: 1 1 100%; }
+      .fn-search__input { width: 100% !important; max-width: none !important; }
+      .fn-pills { overflow-x: auto; flex-wrap: nowrap; gap: 6px; padding-bottom: 2px; }
+      .fn-filter-actions { margin-left: 0; }
+      .fn-strip { padding: 8px 20px; }
+      .fn-trending__inner { padding: 0 20px; }
+      .fn-write-cta { padding: 40px 24px; }
+      .fn-write-cta__heading { font-size: 22px; }
+      .fn-write-cta__sub { font-size: 14px; }
     }
   </style>
 </head>
