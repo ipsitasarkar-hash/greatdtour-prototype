@@ -1473,6 +1473,9 @@ html, body { overflow-x: hidden; }
   /* exp-card grids */
   .exp-grid { grid-template-columns: 1fr !important; }
   .fn-grid { grid-template-columns: 1fr !important; }
+  /* Cards: fill full column width */
+  .exp-card { width: 100% !important; }
+  .exp-grid .exp-card { width: auto !important; }
 
   /* Section vertical padding */
   .section { padding-top: 48px !important; padding-bottom: 48px !important; }
