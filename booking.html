@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book: Himalayan Trek &amp; Yoga Immersion — Great D'Tour</title>
+  <title>Book: Himalayan Trek &amp; Yoga Immersion   Great D'Tour</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -950,7 +950,7 @@
                 <div class="bk-pkg-radio"></div>
                 <div class="bk-pkg-card__body">
                   <div class="bk-pkg-card__name">Double Sharing</div>
-                  <div class="bk-pkg-card__desc">Shared room with 1 other traveller — comfortable twin-sharing</div>
+                  <div class="bk-pkg-card__desc">Shared room with 1 other traveller   comfortable twin-sharing</div>
                 </div>
                 <div class="bk-pkg-card__right">
                   <div class="bk-pkg-card__price">₹31,500</div>
@@ -962,7 +962,7 @@
                 <div class="bk-pkg-radio"></div>
                 <div class="bk-pkg-card__body">
                   <div class="bk-pkg-card__name">Triple Sharing</div>
-                  <div class="bk-pkg-card__desc">Budget-friendly option — shared room with 2 others</div>
+                  <div class="bk-pkg-card__desc">Budget-friendly option   shared room with 2 others</div>
                 </div>
                 <div class="bk-pkg-card__right">
                   <div class="bk-pkg-card__price">₹35,000</div>
@@ -974,7 +974,7 @@
                 <div class="bk-pkg-radio"></div>
                 <div class="bk-pkg-card__body">
                   <div class="bk-pkg-card__name">Solo Occupancy</div>
-                  <div class="bk-pkg-card__desc">Private room — maximum privacy (subject to availability)</div>
+                  <div class="bk-pkg-card__desc">Private room   maximum privacy (subject to availability)</div>
                 </div>
                 <div class="bk-pkg-card__right">
                   <div class="bk-pkg-card__price">₹45,000</div>
@@ -1133,7 +1133,7 @@
                 <div class="bk-pay-method__icon">📅</div>
                 <div>
                   <div class="bk-pay-method__label">No-Cost EMI</div>
-                  <div class="bk-pay-method__sub">HDFC, ICICI, SBI, Axis — 3, 6, 9 months</div>
+                  <div class="bk-pay-method__sub">HDFC, ICICI, SBI, Axis   3, 6, 9 months</div>
                 </div>
               </div>
             </div>
@@ -1247,7 +1247,7 @@
 
           <div class="bk-summary-line">
             <span>Dates</span>
-            <strong id="sbDates">—</strong>
+            <strong id="sbDates"> </strong>
           </div>
           <div class="bk-summary-line">
             <span>Travellers</span>
@@ -1478,13 +1478,13 @@
     function setSummary1() {
       const el = document.getElementById('summary1');
       el.innerHTML = `
-        <span class="bk-summary-tag">📅 ${selectedDate || '—'}</span>
+        <span class="bk-summary-tag">📅 ${selectedDate || ' '}</span>
         <span class="bk-summary-tag">👤 ${adults} Adult${adults > 1 ? 's' : ''}${children ? ' · ' + children + ' Child' + (children > 1 ? 'ren' : '') : ''}</span>`;
     }
 
     function setSummary2() {
       const el = document.getElementById('summary2');
-      el.innerHTML = `<span class="bk-summary-tag">${selectedPkg.label} — ₹${selectedPkg.price.toLocaleString('en-IN')}/person</span>`;
+      el.innerHTML = `<span class="bk-summary-tag">${selectedPkg.label}   ₹${selectedPkg.price.toLocaleString('en-IN')}/person</span>`;
     }
 
     // ---- Contact submit ----
@@ -1542,7 +1542,7 @@
 
       document.getElementById('bkSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-      // Update progress — all done
+      // Update progress   all done
       for (let i = 1; i <= 4; i++) {
         document.getElementById('sp' + i).className = 'bk-step done';
         document.getElementById('sp' + i).querySelector('.bk-step__num').textContent = '✓';
@@ -1556,7 +1556,7 @@
       const advance = Math.round(discounted * 0.3);
 
       document.getElementById('sidebarTotal').textContent = '₹' + discounted.toLocaleString('en-IN');
-      document.getElementById('sbDates').textContent = selectedDate || '—';
+      document.getElementById('sbDates').textContent = selectedDate || ' ';
       document.getElementById('sbTravellers').textContent =
         adults + ' Adult' + (adults > 1 ? 's' : '') + (children ? ' + ' + children + ' Child' + (children > 1 ? 'ren' : '') : '');
       document.getElementById('sbPackage').textContent = selectedPkg.label;
@@ -1571,8 +1571,8 @@
     }
     function applyBkCoupon() {
       const code = document.getElementById('sbCouponInput').value.trim().toUpperCase();
-      if (code === 'ADVENTURE10') { discountPct = 10; alert('✓ ADVENTURE10 applied — 10% off!'); }
-      else if (code === 'FIRST15') { discountPct = 15; alert('✓ FIRST15 applied — 15% off!'); }
+      if (code === 'ADVENTURE10') { discountPct = 10; alert('✓ ADVENTURE10 applied   10% off!'); }
+      else if (code === 'FIRST15') { discountPct = 15; alert('✓ FIRST15 applied   15% off!'); }
       else if (code) { alert('Invalid coupon code.'); return; }
       updateSidebar();
     }

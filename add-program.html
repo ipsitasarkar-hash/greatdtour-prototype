@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add New Program — Great D'Tour</title>
+  <title>Add New Program   Great D'Tour</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -343,7 +343,7 @@
   <div class="ap-header">
     <div>
       <h1>Add New Program</h1>
-      <div class="ap-header__sub" id="apHeaderSub">Step 1 of 10 — Details</div>
+      <div class="ap-header__sub" id="apHeaderSub">Step 1 of 10   Details</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
       <button style="padding:7px 16px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;font-size:13px;font-weight:500;color:#374151;cursor:pointer;" onclick="window.location='host-dashboard.html'">Save Draft</button>
@@ -369,7 +369,7 @@
 <div class="ap-modal-overlay" id="apModal" style="display:none" onclick="if(event.target===this)closeModal()">
   <div class="ap-modal">
     <div class="ap-modal__head">
-      <div class="ap-modal__title" id="modalTitle">—</div>
+      <div class="ap-modal__title" id="modalTitle"> </div>
       <button class="ap-modal__close" onclick="closeModal()">✕</button>
     </div>
     <div class="ap-modal__sub" id="modalSub"></div>
@@ -415,7 +415,7 @@ function renderStepper() {
     el.innerHTML = html;
   }
   const sub = document.getElementById('apHeaderSub');
-  if (sub) sub.textContent = 'Step ' + (currentStep + 1) + ' of ' + STEPS.length + ' — ' + STEPS[currentStep].label;
+  if (sub) sub.textContent = 'Step ' + (currentStep + 1) + ' of ' + STEPS.length + '   ' + STEPS[currentStep].label;
 }
 
 function goToStep(n) {
@@ -728,7 +728,7 @@ function stepRequirements() {
         ? `<div class="ap-quality-grid">${selectedQualities.map((q, i) =>
             `<div class="ap-quality-card">
               <span class="ap-quality-card__num">${i + 1}</span>
-              <span class="ap-quality-card__text">${q.replace(/ — /g, ' \u2014 ')}</span>
+              <span class="ap-quality-card__text">${q.replace(/   /g, ' \u2014 ')}</span>
               <button class="ap-quality-card__remove" onclick="removeQuality('${q.replace(/'/g, "\\'")}')">×</button>
             </div>`).join('')}
           </div>`
@@ -807,7 +807,7 @@ function stepSchedule() {
     <div class="ap-field-group ap-field-group--3">
       <div class="ap-field">
         <label class="ap-label">Mobile Signal</label>
-        <input class="ap-input" type="text" value="Good — All major Indian carriers.">
+        <input class="ap-input" type="text" value="Good   All major Indian carriers.">
       </div>
       <div class="ap-field">
         <label class="ap-label">Wi-Fi</label>
@@ -993,19 +993,19 @@ function stepPreScreening() {
   <!-- SKILL-BASED QUESTIONS -->
   <div class="ap-card" style="margin-bottom:16px;">
     <div class="ap-section-title" style="margin:0 0 6px;">SKILL-BASED QUESTIONS</div>
-    <div style="font-size:13px;color:#6b7280;margin-bottom:20px;">Questions are generated automatically from the proof type of each selected primary and secondary skill. These are required — applicants must answer Yes and attach the relevant proof.</div>
+    <div style="font-size:13px;color:#6b7280;margin-bottom:20px;">Questions are generated automatically from the proof type of each selected primary and secondary skill. These are required   applicants must answer Yes and attach the relevant proof.</div>
 
     <div class="ap-sbq-row">
       <span class="ap-sbq-num">1</span>
       <div class="ap-sbq-body">
         <div class="ap-sbq-text">Do you have prior experience or practice in <u>Animal behaviour observation</u>?</div>
-        <div class="ap-sbq-source">Primary Skill — EXPERIENCE</div>
+        <div class="ap-sbq-source">Primary Skill   EXPERIENCE</div>
       </div>
       <div class="ap-sbq-right">
         <div class="ap-sbq-ans-wrap">
           <div class="ap-sbq-pair">
             <span class="ap-sbq-pair-label">Accepted Answer</span>
-            <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes — Required</div>
+            <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes   Required</div>
           </div>
           <div class="ap-sbq-pair">
             <span class="ap-sbq-pair-label">Proof Type to Attach</span>
@@ -1026,13 +1026,13 @@ function stepPreScreening() {
       <span class="ap-sbq-num">2</span>
       <div class="ap-sbq-body">
         <div class="ap-sbq-text">Do you have a portfolio or work samples demonstrating your <u>Birdwatching / ornithology</u>?</div>
-        <div class="ap-sbq-source">Secondary Skill — PORTFOLIO</div>
+        <div class="ap-sbq-source">Secondary Skill   PORTFOLIO</div>
       </div>
       <div class="ap-sbq-right">
         <div class="ap-sbq-ans-wrap">
           <div class="ap-sbq-pair">
             <span class="ap-sbq-pair-label">Accepted Answer</span>
-            <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes — Required</div>
+            <div style="padding:7px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;font-weight:600;color:#16a34a;white-space:nowrap;">Yes   Required</div>
           </div>
           <div class="ap-sbq-pair">
             <span class="ap-sbq-pair-label">Proof Type to Attach</span>
@@ -1124,7 +1124,7 @@ function stepPreScreening() {
     <div class="ap-auto-asked-card">
       <div style="padding:16px 20px;border-bottom:1px solid #e5e7eb;">
         <div class="ap-section-title" style="margin:0 0 4px;">REQUIRED QUESTIONS</div>
-        <div style="font-size:13px;color:#6b7280;">These questions are fixed and mandatory — always shown to every applicant. They cannot be edited or removed.</div>
+        <div style="font-size:13px;color:#6b7280;">These questions are fixed and mandatory   always shown to every applicant. They cannot be edited or removed.</div>
       </div>
       <div class="ap-auto-q">
         <span class="ap-auto-q__num">1</span>
@@ -1169,8 +1169,8 @@ function stepAvailability() {
         const label = r.start ? `Batch ${i+1} · ${formatDate(r.start)}` : `Batch ${i+1}`;
         return `<div class="ap-avail-added-row">
           <span class="ap-avail-batch-name">${label}</span>
-          <span class="ap-avail-batch-date">${r.start || '—'}</span>
-          <span class="ap-avail-batch-date">${r.end || '—'}</span>
+          <span class="ap-avail-batch-date">${r.start || ' '}</span>
+          <span class="ap-avail-batch-date">${r.end || ' '}</span>
           <span class="ap-avail-batch-cap">${r.cap} seat${r.cap != 1 ? 's' : ''}</span>
           <button class="ap-avail-del" onclick="removeAvailRow(${i})">×</button>
         </div>`;
@@ -1264,17 +1264,17 @@ function handleSBQChange(sel, proofId) {
 
 // Qualities modal
 const QUALITIES = [
-  'Adaptable — comfortable when plans change',
+  'Adaptable   comfortable when plans change',
   'Comfortable with basic and simple living conditions',
   'Comfortable with early mornings and physical daily routines',
   'Comfortable with silence, solitude, and low stimulation',
   'Comfortable working with children',
   'Culturally curious and sensitive',
-  'Detail-focused — comfortable with precise, careful tasks',
+  'Detail-focused   comfortable with precise, careful tasks',
   'Emotionally resilient in challenging environments',
-  'Humble learner — takes direction and asks good questions',
-  'Patient — comfortable with slow progress and repetitive tasks',
-  'Physically active — comfortable with sustained physical work',
+  'Humble learner   takes direction and asks good questions',
+  'Patient   comfortable with slow progress and repetitive tasks',
+  'Physically active   comfortable with sustained physical work',
   'Reliable and punctual',
   'Strong communicator across language and cultural differences',
   'Thrives in collaborative team environments',
@@ -1370,8 +1370,8 @@ function addAvailRow() {
     div.className = 'ap-avail-added-row';
     div.dataset.idx = i;
     div.innerHTML = `<span class="ap-avail-batch-name">${label}</span>
-      <span class="ap-avail-batch-date">${r.start || '—'}</span>
-      <span class="ap-avail-batch-date">${r.end || '—'}</span>
+      <span class="ap-avail-batch-date">${r.start || ' '}</span>
+      <span class="ap-avail-batch-date">${r.end || ' '}</span>
       <span class="ap-avail-batch-cap">${cap} seat${cap !== 1 ? 's' : ''}</span>
       <button class="ap-avail-del" onclick="removeAvailRowEl(this)">×</button>`;
     list.appendChild(div);
