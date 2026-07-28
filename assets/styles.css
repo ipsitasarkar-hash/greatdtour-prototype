@@ -1400,3 +1400,35 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .gdt-footer__bottom { border-top: 1px solid #1e2d40; padding: 24px 0; font-size: 13px; color: #8a9ab0; }
 @media (max-width: 900px) { .gdt-footer__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .gdt-footer__grid { grid-template-columns: 1fr; } .gdt-footer__inner { padding: 0 20px; } }
+
+/* ===================================================
+   GLOBAL MOBILE OVERRIDES (shared across all pages)
+   =================================================== */
+
+/* Prevent horizontal overflow site-wide */
+html, body { overflow-x: hidden; }
+
+/* Shared container padding */
+@media (max-width: 768px) {
+  :root { --pad-x: 20px; }
+
+  /* Nav: hide desktop links, show hamburger */
+  .nav__links { display: none; }
+  .nav__hamburger { display: flex; }
+  .nav__cta { display: none; }
+  .nav__links.nav__links--open {
+    display: flex; flex-direction: column;
+    position: fixed; top: var(--nav-h); left: 0; right: 0;
+    background: var(--white); padding: 20px 20px 28px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    gap: 20px; z-index: 999;
+  }
+  .nav__links.nav__links--open .nav__link { color: var(--dark); font-size: 16px; }
+
+  /* Section headings */
+  .section__heading { font-size: clamp(24px, 6vw, 36px) !important; }
+  .heading--inter { font-size: clamp(24px, 6vw, 36px) !important; }
+
+  /* exp-card grids used on index.html */
+  .exp-cards-grid { grid-template-columns: 1fr !important; }
+}

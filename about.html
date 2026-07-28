@@ -325,6 +325,22 @@
       .about-pillars, .about-cats { gap: 32px; }
       .fn-footer__grid { grid-template-columns: 1fr 1fr; }
     }
+    @media (max-width: 768px) {
+      /* Split layout 2-col → 1-col */
+      [style*="grid-template-columns:1.05fr 0.95fr"],
+      [style*="grid-template-columns: 1.05fr 0.95fr"] { grid-template-columns: 1fr !important; }
+      /* Pillar/cat 3-col → 1-col */
+      [style*="grid-template-columns:repeat(3,1fr)"],
+      [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+      /* Section paddings */
+      [style*="padding: 80px 0"], [style*="padding:80px 0"],
+      [style*="padding: 88px 0"], [style*="padding:88px 0"] { padding-left: 20px !important; padding-right: 20px !important; }
+      /* Container padding */
+      .container { padding-left: 20px !important; padding-right: 20px !important; }
+      /* Heading sizes */
+      [style*="font-size:42px"], [style*="font-size: 42px"] { font-size: 28px !important; }
+      [style*="font-size:52px"], [style*="font-size: 52px"] { font-size: 32px !important; }
+    }
     @media (max-width: 600px) {
       .about-pillars, .about-cats { flex-direction: column; align-items: center; }
       .fn-footer__grid { grid-template-columns: 1fr; }

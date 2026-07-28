@@ -335,6 +335,17 @@
       .vp-form-row { grid-template-columns: 1fr 1fr; }
       .vp-form-row .vp-field--span3 { grid-column: span 2; }
     }
+    @media (max-width: 768px) {
+      .vp-layout { flex-direction: column; }
+      .vp-sidebar { width: 100%; height: auto; position: static; flex-direction: row; flex-wrap: wrap; padding: 16px 20px; min-height: auto; }
+      .vp-sidebar__logo { margin-bottom: 0; padding-bottom: 0; border: none; }
+      .vp-sidebar__nav { flex-direction: row; flex-wrap: wrap; gap: 4px; flex: 1; }
+      .vp-sidebar__link { padding: 8px 12px; font-size: 13px; }
+      .vp-main { margin-left: 0; padding: 20px 16px 80px; }
+      .vp-form-row { grid-template-columns: 1fr !important; }
+      .vp-form-row .vp-field--span3 { grid-column: span 1; }
+      .saved-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>

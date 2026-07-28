@@ -386,6 +386,34 @@
       .h-container { padding: 0 20px; }
       .prog-card__stats { grid-template-columns: repeat(3, 1fr); }
     }
+
+    /* ── Additional mobile fixes ── */
+    @media (max-width: 768px) {
+      .host-hero__inner { grid-template-columns: 1fr !important; padding: 0 20px; }
+      .host-hero__mosaic { display: none; }
+      .host-hero__title { font-size: clamp(30px, 7vw, 44px); }
+      .host-hero__sub { font-size: 16px; }
+      .section-header h2 { font-size: clamp(24px, 6vw, 36px); }
+      /* Two program cards → stack */
+      .prog-grid { grid-template-columns: 1fr !important; }
+      /* Process 4-col → 2-col */
+      .process-unified { grid-template-columns: repeat(2, 1fr) !important; }
+      /* Why grid 3-col → 2-col */
+      .why-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      /* Platform features 4-col → 2-col */
+      [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+      /* Start With More: 2-col → 1-col */
+      [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; gap: 40px !important; }
+      /* Modal form rows */
+      .app-field-row { grid-template-columns: 1fr !important; }
+      /* FAQs padding */
+      .h-container { padding: 0 20px !important; }
+    }
+    @media (max-width: 480px) {
+      .process-unified { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+      .host-hero__ctas { flex-direction: column !important; }
+    }
   </style>
 </head>
 <body>

@@ -165,6 +165,20 @@
       font-weight: 700;
       color: #101828;
     }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .exp-cs__cards { gap: 12px; }
+      .exp-cs__card { width: 160px; }
+      /* Coming soon hero section padding */
+      [style*="padding: 80px 0"] { padding: 48px 20px !important; }
+      [style*="padding:80px 0"] { padding: 48px 20px !important; }
+      /* Section headings */
+      [style*="font-size:clamp(28px,3.5vw,42px)"] { font-size: 26px !important; }
+    }
+    @media (max-width: 480px) {
+      .exp-cs__card { width: 140px; }
+    }
   </style>
 
   <div class="exp-cs" style="margin-top:76px;">

@@ -27,6 +27,24 @@
     .fn-editorial__feature-img { height: 220px; }
     .fn-editorial__item-img { width: 88px; height: 64px; flex-shrink: 0; }
     .fn-editorial__item-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      /* GDT Cares 2-col → 1-col */
+      .section--white [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+      /* Volunteer Programs 3-col grid → 1-col */
+      .section [style*="grid-template-columns:repeat(3,1fr)"],
+      [style*="repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+      /* Field Notes 3-col → 1-col */
+      [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+      /* Experiences Coming Soon cards */
+      [style*="display:flex"][style*="gap:20px"] { flex-wrap: wrap !important; }
+    }
+    @media (max-width: 480px) {
+      .heading--inter { font-size: 28px !important; }
+      /* Hero CTA row */
+      .hero__ctas { flex-direction: column !important; gap: 12px !important; }
+    }
   </style>
 </head>
 <body>

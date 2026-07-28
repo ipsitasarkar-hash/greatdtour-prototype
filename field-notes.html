@@ -336,7 +336,13 @@
     @media (max-width: 640px) {
       .fn-articles-grid { grid-template-columns: 1fr; }
       .fn-footer__grid { grid-template-columns: 1fr; }
-      .fn-search__input { width: 220px; }
+      .fn-search__input { width: 100%; max-width: 220px; }
+    }
+    @media (max-width: 768px) {
+      .fn-hero__inner { padding: 0 20px !important; }
+      .fn-stories__inner { padding: 0 20px !important; }
+      .fn-write-cta-wrap { padding: 40px 20px 60px !important; }
+      .fn-filter-bar__inner { padding: 0 20px !important; }
     }
   </style>
 </head>
