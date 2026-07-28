@@ -3452,7 +3452,7 @@
 
             <div class="acc-plan-grid">
 
-              <!-- GDT Care -->
+              <!-- GDT Care Standard -->
               <div class="acc-plan-card acc-plan-card--added" style="position:relative;">
                 <div class="acc-plan-card__badge">Added Plan</div>
                 <div class="acc-plan-card__img-placeholder" style="background:#f0fdf4;">
@@ -3463,12 +3463,48 @@
                   </svg>
                 </div>
                 <div class="acc-plan-card__body">
-                  <div class="acc-plan-card__tag">Volunteering</div>
-                  <div class="acc-plan-card__name">GDT Care</div>
-                  <div class="acc-plan-card__desc">List volunteer opportunities, manage applications, and connect with purpose-driven travellers.</div>
+                  <div class="acc-plan-card__tag">Volunteering · GDT Care</div>
+                  <div class="acc-plan-card__name">GDT Care Standard</div>
+                  <div style="font-size:15px;font-weight:700;color:#16a34a;margin-bottom:6px;">Free</div>
+                  <div class="acc-plan-card__desc">Everything you need to create, manage, and run volunteer programme listings on GDT.</div>
+                  <div style="font-size:12px;color:#6b7280;margin-bottom:14px;">
+                    <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#16a34a;font-weight:700;">✓</span> 1 programme listing per year</div>
+                    <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#16a34a;font-weight:700;">✓</span> Smart volunteer pre-screening</div>
+                    <div style="display:flex;align-items:flex-start;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> Verified volunteers &amp; booking management <span style="color:#9ca3af;">and more…</span></div>
+                  </div>
                   <div class="acc-plan-card__actions">
                     <button class="acc-plan-card__btn acc-plan-card__btn--added" disabled>Added</button>
-                    <button class="acc-plan-card__btn--know" onclick="openPlanModal('care')">Know More</button>
+                    <button class="acc-plan-card__btn--know" onclick="openPlanModal('care-standard')">Know More</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GDT Care Premium -->
+              <div class="acc-plan-card" style="position:relative;border-color:#f54900;">
+                <div class="acc-plan-card__img-placeholder" style="background:#fff7ed;">
+                  <svg width="64" height="56" viewBox="0 0 160 130" fill="none">
+                    <ellipse cx="80" cy="105" rx="72" ry="22" fill="#fed7aa"/>
+                    <circle cx="80" cy="55" r="38" fill="#ffedd5"/>
+                    <polygon points="80,30 88,52 112,52 93,65 100,87 80,74 60,87 67,65 48,52 72,52" fill="#f54900" opacity="0.85"/>
+                  </svg>
+                </div>
+                <div class="acc-plan-card__body">
+                  <div class="acc-plan-card__tag">Volunteering · GDT Care</div>
+                  <div class="acc-plan-card__name">GDT Care Premium</div>
+                  <div style="margin-bottom:6px;">
+                    <span style="font-size:15px;font-weight:700;color:#16a34a;">Free</span>
+                    <span style="font-size:12px;color:#9ca3af;text-decoration:line-through;margin-left:6px;">₹1,999/year</span>
+                  </div>
+                  <div style="font-size:11px;color:#f54900;font-weight:600;margin-bottom:8px;">Free for our Founding Hosts <span style="color:#9ca3af;font-weight:400;">and more…</span></div>
+                  <div class="acc-plan-card__desc">Everything in Standard, with more visibility, trust, and support.</div>
+                  <div style="font-size:12px;color:#6b7280;margin-bottom:14px;">
+                    <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#16a34a;font-weight:700;">✓</span> Unlimited programme listings</div>
+                    <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;"><span style="color:#16a34a;font-weight:700;">✓</span> Trusted Host Badge &amp; Featured listing</div>
+                    <div style="display:flex;align-items:flex-start;gap:6px;"><span style="color:#16a34a;font-weight:700;">✓</span> Dedicated Relationship Manager <span style="color:#9ca3af;">and more…</span></div>
+                  </div>
+                  <div class="acc-plan-card__actions">
+                    <button class="acc-plan-card__btn" onclick="showToast('Premium activated!')">Activate Premium</button>
+                    <button class="acc-plan-card__btn--know" onclick="openPlanModal('care-premium')">Know More</button>
                   </div>
                 </div>
               </div>
@@ -3642,9 +3678,12 @@
       <button class="plan-modal__close" onclick="closePlanModal(true)">&#x2715;</button>
       <div class="plan-modal__tag" id="planModalTag"></div>
       <div class="plan-modal__title" id="planModalTitle"></div>
+      <div id="planModalPricing"></div>
       <div class="plan-modal__subtitle" id="planModalSubtitle"></div>
-      <div class="plan-modal__section">What's Included</div>
+      <div class="plan-modal__section">Features</div>
       <ul class="plan-modal__features" id="planModalFeatures"></ul>
+      <div id="planModalBestFor" style="font-size:13px;color:#6b7280;margin-bottom:20px;"></div>
+      <div id="planModalExtra"></div>
       <button class="plan-modal__cta" id="planModalCta"></button>
     </div>
   </div>
@@ -4210,37 +4249,92 @@
     }
 
     const PLAN_DATA = {
+      'care-standard': {
+        tag: 'Volunteering · GDT Care',
+        title: 'GDT Care Standard — Know More',
+        pricing: '<span style="font-size:20px;font-weight:700;color:#16a34a;">Free</span>',
+        subtitle: 'Everything you need to create, manage, and run volunteer programme listings on GDT.',
+        features: [
+          '1 programme listing per year',
+          'Create &amp; manage programme listings',
+          'Shareable programme listing link',
+          'Smart volunteer pre-screening feature',
+          'Verified volunteers',
+          'Volunteer booking management',
+          'Instant application decisions',
+          'Volunteer commitment mechanism',
+          'Real-time notifications',
+          'Email support channel'
+        ],
+        bestFor: '<strong>Best for:</strong> Organisations with seasonal or occasional volunteer needs.',
+        extra: null,
+        cta: 'Added Plan',
+        ctaAdded: true
+      },
+      'care-premium': {
+        tag: 'Volunteering · GDT Care',
+        title: 'GDT Care Premium — Know More',
+        pricing: '<span style="font-size:20px;font-weight:700;color:#16a34a;">Free</span> <span style="font-size:13px;color:#9ca3af;text-decoration:line-through;margin-left:4px;">₹1,999/year</span> <span style="font-size:12px;color:#f54900;font-weight:600;margin-left:6px;">· Free for our Founding Hosts</span>',
+        subtitle: 'Everything in Standard, with more visibility, trust, and support.',
+        features: [
+          'Unlimited programme listings',
+          'Free profile verification',
+          'Trusted Host Badge',
+          'Featured programme listing',
+          'Waitlist feature for programme listings',
+          'Dedicated Relationship Manager for priority support'
+        ],
+        bestFor: '<strong>Best for:</strong> Organisations, cooperatives, and businesses with year-round volunteer and work exchange needs.',
+        extra: `<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:16px 18px;margin-bottom:20px;">
+          <div style="font-size:12px;font-weight:700;color:#f54900;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Founding Host Benefits</div>
+          <ul class="plan-modal__features" style="margin-bottom:12px;">
+            <li style="color:#374151;">GDT Care Premium, free for life</li>
+            <li style="color:#374151;">Story coverage &amp; co-marketing opportunities</li>
+            <li style="color:#374151;">Free feature upgrades</li>
+            <li style="color:#374151;">Priority access to the GDT Marketplace</li>
+          </ul>
+          <div style="font-size:12px;color:#92400e;line-height:1.6;">Enjoy GDT Care Premium free as a Founding Host. Keep your Founding benefits for life by maintaining your GDT Host Performance Score, with GDT Marketplace access subject to eligibility.</div>
+        </div>`,
+        cta: 'Activate Premium',
+        ctaAdded: false
+      },
       care: {
         tag: 'Volunteering · GDT Care',
         title: 'GDT Care',
-        subtitle: 'Connect with purpose-driven travellers who want to contribute meaningfully. List volunteer opportunities, manage applications, communicate with candidates, and build a verified impact record on your host profile.',
+        pricing: '<span style="font-size:20px;font-weight:700;color:#16a34a;">Free</span>',
+        subtitle: 'Connect with purpose-driven travellers who want to contribute meaningfully.',
         features: [
           'List unlimited volunteer programmes',
           'Volunteer application management dashboard',
           'Messaging with applicants',
           'Verified Impact Badge on host profile',
-          'Volunteer review & rating system',
+          'Volunteer review &amp; rating system',
           'Programme visibility on GDT Explore',
           'Monthly impact report',
           'Care Host Acknowledgement certification'
         ],
+        bestFor: null,
+        extra: null,
         cta: 'Added Plan',
         ctaAdded: true
       },
       marketplace: {
         tag: 'Tours · GDT Marketplace',
         title: 'GDT Marketplace',
+        pricing: null,
         subtitle: 'Sell your tour packages to thousands of conscious travellers. Manage bookings, track revenue, and grow your tour business with built-in tools for pricing, availability, and guest communication.',
         features: [
           'List unlimited tour packages',
-          'Real-time booking & availability calendar',
+          'Real-time booking &amp; availability calendar',
           'Secure payment processing',
-          'Guest communication & pre-arrival emails',
-          'Booking confirmation & e-tickets',
-          'Revenue dashboard & payouts',
-          'Tour review & rating system',
+          'Guest communication &amp; pre-arrival emails',
+          'Booking confirmation &amp; e-tickets',
+          'Revenue dashboard &amp; payouts',
+          'Tour review &amp; rating system',
           'Priority placement in search results'
         ],
+        bestFor: null,
+        extra: null,
         cta: 'Add Plan',
         ctaAdded: false
       }
@@ -4251,16 +4345,21 @@
       if (!data) return;
       document.getElementById('planModalTag').textContent = data.tag;
       document.getElementById('planModalTitle').textContent = data.title;
+      const pricing = document.getElementById('planModalPricing');
+      pricing.innerHTML = data.pricing ? `<div style="margin-bottom:10px;">${data.pricing}</div>` : '';
       document.getElementById('planModalSubtitle').textContent = data.subtitle;
       const ul = document.getElementById('planModalFeatures');
       ul.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+      const bestFor = document.getElementById('planModalBestFor');
+      bestFor.innerHTML = data.bestFor ? `<div style="background:#f9fafb;border-radius:8px;padding:10px 14px;font-size:13px;color:#374151;">${data.bestFor}</div>` : '';
+      document.getElementById('planModalExtra').innerHTML = data.extra || '';
       const cta = document.getElementById('planModalCta');
       cta.textContent = data.cta;
       cta.disabled = data.ctaAdded;
       cta.style.opacity = data.ctaAdded ? '0.55' : '1';
       cta.style.cursor = data.ctaAdded ? 'default' : 'pointer';
       if (!data.ctaAdded) {
-        cta.onclick = () => { showToast('Plan added!'); closePlanModal(true); };
+        cta.onclick = () => { showToast('Plan activated!'); closePlanModal(true); };
       } else {
         cta.onclick = null;
       }
