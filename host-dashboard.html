@@ -834,7 +834,7 @@
     .acc-outline-btn:hover { background: #f9fafb; }
     /* Plan cards */
     .acc-plan-grid { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
-    .acc-plan-card { border: 2px solid #e5e7eb; border-radius: 14px; overflow: hidden; position: relative; width: 240px; flex-shrink: 0; background: #fff; }
+    .acc-plan-card { border: 2px solid #e5e7eb; border-radius: 14px; overflow: hidden; position: relative; width: 300px; flex-shrink: 0; background: #fff; }
     .acc-plan-card--added { border-color: #f54900; }
     .acc-plan-card__badge {
       position: absolute; top: 10px; right: 10px;
@@ -3510,12 +3510,13 @@
               </div>
 
               <!-- GDT Marketplace -->
-              <div class="acc-plan-card">
-                <div class="acc-plan-card__img-placeholder" style="background:#eff6ff;">
+              <div class="acc-plan-card" style="opacity:0.7;pointer-events:none;">
+                <div style="position:absolute;top:10px;right:10px;background:#6b7280;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:0.4px;">Coming Soon</div>
+                <div class="acc-plan-card__img-placeholder" style="background:#f3f4f6;">
                   <svg width="64" height="56" viewBox="0 0 160 130" fill="none">
-                    <ellipse cx="80" cy="105" rx="72" ry="22" fill="#bfdbfe"/>
-                    <circle cx="80" cy="55" r="38" fill="#dbeafe"/>
-                    <path d="M60 55 h40 M80 35 v40" stroke="#2563eb" stroke-width="5" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="80" cy="105" rx="72" ry="22" fill="#d1d5db"/>
+                    <circle cx="80" cy="55" r="38" fill="#e5e7eb"/>
+                    <path d="M60 55 h40 M80 35 v40" stroke="#9ca3af" stroke-width="5" stroke-linecap="round" fill="none"/>
                   </svg>
                 </div>
                 <div class="acc-plan-card__body">
@@ -3523,8 +3524,7 @@
                   <div class="acc-plan-card__name">GDT Marketplace</div>
                   <div class="acc-plan-card__desc">List and sell tour packages, manage bookings, and reach thousands of conscious travellers.</div>
                   <div class="acc-plan-card__actions">
-                    <button class="acc-plan-card__btn" onclick="showToast('Plan added!')">Add Plan</button>
-                    <button class="acc-plan-card__btn--know" onclick="openPlanModal('marketplace')">Know More</button>
+                    <button class="acc-plan-card__btn" style="background:#9ca3af;cursor:not-allowed;" disabled>Coming Soon</button>
                   </div>
                 </div>
               </div>
