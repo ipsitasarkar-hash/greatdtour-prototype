@@ -1,5 +1,5 @@
 /* ===================================================
-   Great D'Tour — Prototype Stylesheet v2
+   Great D'Tour   Prototype Stylesheet v2
    Design: #F54900 orange · Playfair Display + Inter
    =================================================== */
 
@@ -88,7 +88,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav.nav--scrolled .nav__logo-white { display: none; }
 .nav.nav--scrolled .nav__logo-dark  { display: block; }
 
-/* Links — center column */
+/* Links   center column */
 .nav__links {
   display: flex;
   align-items: center;
@@ -1167,7 +1167,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ===================================================
-   EXPERIENCES PAGE — GRID + FILTERS
+   EXPERIENCES PAGE   GRID + FILTERS
    =================================================== */
 .filter-bar {
   display: flex; gap: 8px; flex-wrap: wrap;

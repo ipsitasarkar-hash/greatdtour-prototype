@@ -1,4 +1,4 @@
-// Great D'Tour Prototype — main.js
+// Great D'Tour Prototype   main.js
 
 // ---- Nav scroll behaviour ----
 const nav = document.getElementById('nav');
@@ -77,17 +77,17 @@ if (carousel && prevBtn && nextBtn) {
 // ---- Testimonial switcher ----
 const testimonialData = [
   {
-    text: '"The Himalayan trek was transformative. I arrived a stressed professional and left with perspective I couldn\'t have bought. The guide was extraordinary — part mountaineer, part philosopher."',
+    text: '"The Himalayan trek was transformative. I arrived a stressed professional and left with perspective I couldn\'t have bought. The guide was extraordinary   part mountaineer, part philosopher."',
     name: 'Priya Sharma',
     trip: 'Himachal Pradesh Trek'
   },
   {
-    text: '"Sleeping under desert stars, learning folk songs from a 70-year-old musician — this wasn\'t a tour, it was a homecoming."',
+    text: '"Sleeping under desert stars, learning folk songs from a 70-year-old musician   this wasn\'t a tour, it was a homecoming."',
     name: 'Rahul Mehta',
     trip: 'Rajasthan Safari'
   },
   {
-    text: '"Kerala was everything I needed. Quiet mornings on the houseboat, real Ayurveda — not the spa kind — and a rhythm that the rest of my life had forgotten."',
+    text: '"Kerala was everything I needed. Quiet mornings on the houseboat, real Ayurveda   not the spa kind   and a rhythm that the rest of my life had forgotten."',
     name: 'Ananya Desai',
     trip: 'Kerala Retreat'
   }
