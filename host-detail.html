@@ -9,7 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
-    body { background: #f9fafb; }
+    body { background: #f9fafb; overflow-x: hidden; }
+    * { box-sizing: border-box; }
 
     .partner-hero {
       background: linear-gradient(168deg, #f3f4f6 0%, #e5e7eb 100%);
@@ -43,6 +44,9 @@
       grid-template-columns: 340px 1fr;
       gap: 32px;
       align-items: start;
+    }
+    .partner-body > * {
+      min-width: 0;
     }
 
     /* ── Left column ── */
@@ -221,6 +225,54 @@
       transition: color 0.15s;
     }
     .back-link:hover { color: #101828; }
+
+    /* Hide mobile-only elements on desktop */
+    .back-link--mobile {
+      display: none;
+    }
+    .partner-mobile-back {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .partner-hero {
+        padding: 32px 0 24px;
+      }
+      .partner-hero__inner {
+        padding: 0 20px;
+      }
+      .partner-hero__title {
+        font-size: 24px;
+      }
+      .partner-body {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        padding: 24px 20px 60px;
+        gap: 20px;
+      }
+      .back-link {
+        display: none;
+      }
+      .partner-mobile-back {
+        display: block;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 16px 20px 0;
+      }
+      .back-link--mobile {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6b7280;
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .partner-section {
+        padding: 20px 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -265,6 +317,12 @@
   </div>
 
   <!-- Body -->
+  <div class="partner-mobile-back">
+    <a href="volunteer-detail.html" class="back-link--mobile">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Program
+    </a>
+  </div>
   <div class="partner-body">
 
     <!-- Left: Profile + Verifications -->
