@@ -120,22 +120,22 @@
     /* ── Right column ── */
     .partner-main { }
 
-    /* Tabbed card */
-    .partner-tabcard {
+    /* Sticky anchor nav */
+    .partner-anchor-nav {
       background: #fff;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
-      overflow: hidden;
-    }
-    .partner-tabs {
+      position: sticky;
+      top: 72px;
+      z-index: 10;
+      margin-bottom: 20px;
       display: flex;
-      border-bottom: 2px solid #e5e7eb;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
-    .partner-tabs::-webkit-scrollbar { display: none; }
-    .partner-tab {
+    .partner-anchor-nav::-webkit-scrollbar { display: none; }
+    .partner-anchor-tab {
       flex-shrink: 0;
       padding: 14px 24px;
       font-size: 14px;
@@ -143,30 +143,31 @@
       color: #6b7280;
       cursor: pointer;
       border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
       white-space: nowrap;
+      text-decoration: none;
       transition: color 0.15s;
     }
-    .partner-tab:hover { color: #374151; }
-    .partner-tab.active {
+    .partner-anchor-tab:hover { color: #374151; }
+    .partner-anchor-tab.active {
       color: #2E7D32;
       border-bottom-color: #2E7D32;
     }
 
-    /* Tab panels */
-    .partner-tab-panels { }
-    .partner-tab-panel {
-      display: none;
+    /* Sections */
+    .partner-section {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
       padding: 28px 32px;
+      margin-bottom: 20px;
+      scroll-margin-top: 130px;
     }
-    .partner-tab-panel.active { display: block; }
-
     .partner-section__title {
       font-family: 'Inter', sans-serif;
       font-size: 18px;
       font-weight: 700;
       color: #101828;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .partner-section__body {
       font-size: 15px;
@@ -270,24 +271,16 @@
     }
 
     @media (max-width: 768px) {
-      .partner-hero {
-        padding: 32px 0 24px;
-      }
-      .partner-hero__inner {
-        padding: 0 20px;
-      }
-      .partner-hero__title {
-        font-size: 24px;
-      }
+      .partner-hero { padding: 32px 0 24px; }
+      .partner-hero__inner { padding: 0 20px; }
+      .partner-hero__title { font-size: 24px; }
       .partner-body {
         grid-template-columns: 1fr !important;
         width: 100%;
-        padding: 24px 20px 60px;
-        gap: 20px;
+        padding: 16px 16px 60px;
+        gap: 16px;
       }
-      .back-link {
-        display: none;
-      }
+      .back-link { display: none; }
       .partner-mobile-back {
         display: block;
         max-width: 1100px;
@@ -304,11 +297,14 @@
         text-decoration: none;
         transition: color 0.15s;
       }
-      .partner-tab-panel {
-        padding: 20px 16px;
+      .partner-anchor-nav {
+        top: 60px;
+        border-radius: 8px;
       }
-      .partner-tab {
-        padding: 12px 16px;
+      .partner-anchor-tab { padding: 11px 16px; font-size: 13px; }
+      .partner-section {
+        padding: 20px 16px;
+        scroll-margin-top: 110px;
       }
       .partner-gallery {
         grid-template-columns: 1fr 1fr;
@@ -414,116 +410,118 @@
       </div>
     </div>
 
-    <!-- Right: Tabbed card -->
+    <!-- Right: Scrolling sections with sticky anchor nav -->
     <div class="partner-main">
-      <div class="partner-tabcard">
 
-        <!-- Tab bar -->
-        <div class="partner-tabs" role="tablist">
-          <div class="partner-tab active" role="tab" onclick="switchTab('about')">About</div>
-          <div class="partner-tab" role="tab" onclick="switchTab('gallery')">Gallery</div>
-          <div class="partner-tab" role="tab" onclick="switchTab('programs')">Programs</div>
-          <div class="partner-tab" role="tab" onclick="switchTab('reviews')">Reviews</div>
-        </div>
+      <!-- Sticky anchor nav -->
+      <nav class="partner-anchor-nav" id="partnerAnchorNav">
+        <a class="partner-anchor-tab active" href="#section-about">About</a>
+        <a class="partner-anchor-tab" href="#section-gallery">Gallery</a>
+        <a class="partner-anchor-tab" href="#section-programs">Programs</a>
+        <a class="partner-anchor-tab" href="#section-reviews">Reviews</a>
+      </nav>
 
-        <!-- About panel -->
-        <div class="partner-tab-panel active" id="tab-about">
-          <p class="partner-section__body">Wildlife Trust of India (WTI) is one of India's leading conservation organisations, working to protect wildlife and its habitat through direct conservation action, policy advocacy, and community engagement. We partner with forest departments, government bodies, and local communities to preserve India's natural heritage.</p>
-          <p class="partner-section__body" style="margin-top:14px;">Founded in 1998, WTI has been at the forefront of protecting endangered species and critical ecosystems across India — from the mangroves of the Sundarbans to the grasslands of Kaziranga. Our volunteer programs place passionate individuals alongside expert field teams to contribute meaningfully to ongoing conservation projects.</p>
-        </div>
-
-        <!-- Gallery panel -->
-        <div class="partner-tab-panel" id="tab-gallery">
-          <div class="partner-gallery">
-            <div class="partner-gallery__item partner-gallery__item--large">
-              <img src="assets/images/wildlife-deer.jpg" alt="Wildlife in the field" />
-            </div>
-            <div class="partner-gallery__item">
-              <img src="assets/images/landscape.jpg" alt="Field landscape" />
-            </div>
-            <div class="partner-gallery__item">
-              <img src="assets/images/vol-wetland.jpg" alt="Wetland conservation" />
-            </div>
-            <div class="partner-gallery__item">
-              <img src="assets/images/cultural1.jpg" alt="Community engagement" />
-            </div>
-            <div class="partner-gallery__item">
-              <img src="assets/images/immersion1.jpg" alt="Field immersion" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Programs panel -->
-        <div class="partner-tab-panel" id="tab-programs">
-          <div class="partner-program-card">
-            <div class="partner-program-card__img">
-              <img src="assets/images/landscape.jpg" alt="Tiger Conservation" />
-            </div>
-            <div>
-              <p class="partner-program-card__tag">Wildlife</p>
-              <p class="partner-program-card__title">Tiger Conservation Program — Ranthambore</p>
-              <p class="partner-program-card__meta">4 weeks · Fully funded · 8 spots left</p>
-            </div>
-          </div>
-          <div class="partner-program-card">
-            <div class="partner-program-card__img">
-              <img src="assets/images/cultural1.jpg" alt="Elephant Corridor" />
-            </div>
-            <div>
-              <p class="partner-program-card__tag">Wildlife</p>
-              <p class="partner-program-card__title">Elephant Corridor Monitoring — Corbett</p>
-              <p class="partner-program-card__meta">6 weeks · Fully funded · 5 spots left</p>
-            </div>
-          </div>
-          <div class="partner-program-card">
-            <div class="partner-program-card__img">
-              <img src="assets/images/vol-wetland.jpg" alt="Wetland Bird Survey" />
-            </div>
-            <div>
-              <p class="partner-program-card__tag">Conservation</p>
-              <p class="partner-program-card__title">Wetland Bird Survey — Bharatpur</p>
-              <p class="partner-program-card__meta">2 weeks · Stipend provided · 12 spots left</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Reviews panel -->
-        <div class="partner-tab-panel" id="tab-reviews">
-          <div class="partner-review-card">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-              <div style="width:36px;height:36px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#6b7280;flex-shrink:0;">PR</div>
-              <div>
-                <p style="font-size:14px;font-weight:600;color:#101828;">Priya R.</p>
-                <div style="display:flex;gap:2px;margin-top:2px;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                </div>
-              </div>
-            </div>
-            <p style="font-size:14px;color:#4a5565;line-height:1.7;">An incredible experience working with WTI's field team. The organisation was incredibly professional, transparent, and deeply committed to the work. I came back a changed person.</p>
-          </div>
-          <div class="partner-review-card">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-              <div style="width:36px;height:36px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#6b7280;flex-shrink:0;">AM</div>
-              <div>
-                <p style="font-size:14px;font-weight:600;color:#101828;">Aryan M.</p>
-                <div style="display:flex;gap:2px;margin-top:2px;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="#e5e7eb"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                </div>
-              </div>
-            </div>
-            <p style="font-size:14px;color:#4a5565;line-height:1.7;">Great program — well organised and the field biologists were knowledgeable. The stipend was paid on time. Would recommend to anyone serious about conservation.</p>
-          </div>
-        </div>
-
+      <!-- About -->
+      <div class="partner-section" id="section-about">
+        <h2 class="partner-section__title">About</h2>
+        <p class="partner-section__body">Wildlife Trust of India (WTI) is one of India's leading conservation organisations, working to protect wildlife and its habitat through direct conservation action, policy advocacy, and community engagement. We partner with forest departments, government bodies, and local communities to preserve India's natural heritage.</p>
+        <p class="partner-section__body" style="margin-top:14px;">Founded in 1998, WTI has been at the forefront of protecting endangered species and critical ecosystems across India — from the mangroves of the Sundarbans to the grasslands of Kaziranga. Our volunteer programs place passionate individuals alongside expert field teams to contribute meaningfully to ongoing conservation projects.</p>
       </div>
+
+      <!-- Gallery -->
+      <div class="partner-section" id="section-gallery">
+        <h2 class="partner-section__title">Gallery</h2>
+        <div class="partner-gallery">
+          <div class="partner-gallery__item partner-gallery__item--large">
+            <img src="assets/images/wildlife-deer.jpg" alt="Wildlife in the field" />
+          </div>
+          <div class="partner-gallery__item">
+            <img src="assets/images/landscape.jpg" alt="Field landscape" />
+          </div>
+          <div class="partner-gallery__item">
+            <img src="assets/images/vol-wetland.jpg" alt="Wetland conservation" />
+          </div>
+          <div class="partner-gallery__item">
+            <img src="assets/images/cultural1.jpg" alt="Community engagement" />
+          </div>
+          <div class="partner-gallery__item">
+            <img src="assets/images/immersion1.jpg" alt="Field immersion" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Programs -->
+      <div class="partner-section" id="section-programs">
+        <h2 class="partner-section__title">Programs</h2>
+        <div class="partner-program-card">
+          <div class="partner-program-card__img">
+            <img src="assets/images/landscape.jpg" alt="Tiger Conservation" />
+          </div>
+          <div>
+            <p class="partner-program-card__tag">Wildlife</p>
+            <p class="partner-program-card__title">Tiger Conservation Program — Ranthambore</p>
+            <p class="partner-program-card__meta">4 weeks · Fully funded · 8 spots left</p>
+          </div>
+        </div>
+        <div class="partner-program-card">
+          <div class="partner-program-card__img">
+            <img src="assets/images/cultural1.jpg" alt="Elephant Corridor" />
+          </div>
+          <div>
+            <p class="partner-program-card__tag">Wildlife</p>
+            <p class="partner-program-card__title">Elephant Corridor Monitoring — Corbett</p>
+            <p class="partner-program-card__meta">6 weeks · Fully funded · 5 spots left</p>
+          </div>
+        </div>
+        <div class="partner-program-card">
+          <div class="partner-program-card__img">
+            <img src="assets/images/vol-wetland.jpg" alt="Wetland Bird Survey" />
+          </div>
+          <div>
+            <p class="partner-program-card__tag">Conservation</p>
+            <p class="partner-program-card__title">Wetland Bird Survey — Bharatpur</p>
+            <p class="partner-program-card__meta">2 weeks · Stipend provided · 12 spots left</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="partner-section" id="section-reviews">
+        <h2 class="partner-section__title">Reviews</h2>
+        <div class="partner-review-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#6b7280;flex-shrink:0;">PR</div>
+            <div>
+              <p style="font-size:14px;font-weight:600;color:#101828;">Priya R.</p>
+              <div style="display:flex;gap:2px;margin-top:2px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:14px;color:#4a5565;line-height:1.7;">An incredible experience working with WTI's field team. The organisation was incredibly professional, transparent, and deeply committed to the work. I came back a changed person.</p>
+        </div>
+        <div class="partner-review-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#6b7280;flex-shrink:0;">AM</div>
+            <div>
+              <p style="font-size:14px;font-weight:600;color:#101828;">Aryan M.</p>
+              <div style="display:flex;gap:2px;margin-top:2px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#e5e7eb"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:14px;color:#4a5565;line-height:1.7;">Great program — well organised and the field biologists were knowledgeable. The stipend was paid on time. Would recommend to anyone serious about conservation.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -537,12 +535,32 @@
 
   <script src="assets/main.js"></script>
   <script>
-    function switchTab(name) {
-      document.querySelectorAll('.partner-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.partner-tab-panel').forEach(p => p.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-      document.getElementById('tab-' + name).classList.add('active');
+    // Smooth scroll with offset, then update active tab
+    document.querySelectorAll('.partner-anchor-tab').forEach(function(tab) {
+      tab.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Scroll spy — highlight tab as sections enter view
+    var sections = ['about','gallery','programs','reviews'].map(function(id) {
+      return document.getElementById('section-' + id);
+    });
+    var tabs = document.querySelectorAll('.partner-anchor-tab');
+
+    function onScroll() {
+      var scrollY = window.scrollY + 160;
+      var active = 0;
+      sections.forEach(function(sec, i) {
+        if (sec && sec.offsetTop <= scrollY) active = i;
+      });
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tabs[active].classList.add('active');
     }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
   </script>
 </body>
 </html>
