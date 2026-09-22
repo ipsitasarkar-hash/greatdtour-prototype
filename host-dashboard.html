@@ -4363,6 +4363,7 @@
       if (!row) return;
       const isOpen = row.classList.toggle('is-open');
       if (chev) chev.classList.toggle('is-open', isOpen);
+      setTimeout(buildBatchMobileCards, 0);
     }
 
     function toggleBatchMenu(btn, e) {
@@ -5411,12 +5412,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', buildBatchMobileCards);
-    // Also run when a panel tab is opened (batch rows may not exist until expand)
-    const _origToggleExpand = toggleExpand;
-    function toggleExpand(id) {
-      _origToggleExpand(id);
-      setTimeout(buildBatchMobileCards, 0);
-    }
 
   </script>
 </html>
