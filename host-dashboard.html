@@ -908,6 +908,44 @@
       .hd-panel.is-active#panel-overview { padding: 0; }
       .app-table th:nth-child(4), .app-table td:nth-child(4), .app-table th:nth-child(5), .app-table td:nth-child(5) { display: none; }
       .listing-grid { grid-template-columns: 1fr; }
+
+      /* Program Bookings — card layout on mobile */
+      #pbTable thead { display: none; }
+      #pbTable, #pbTable tbody, #pbTable tr, #pbTable td { display: block; width: 100%; }
+      #pbTable tr {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        padding: 14px 14px 10px;
+      }
+      #pbTable tr:hover td { background: transparent; }
+      #pbTable td {
+        padding: 4px 0;
+        border: none;
+        font-size: 13px;
+      }
+      #panel-prog-bookings .app-table-wrap {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        overflow: visible;
+      }
+      #pbTable td[data-label]::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: #9ca3af;
+        margin-bottom: 2px;
+      }
+      #pbTable td:first-child { margin-bottom: 6px; }
+      #pbTable td:first-child [data-label] { display: none; }
+      .app-filter-group { min-width: 0; flex: 1; }
+      .app-filters { flex-wrap: wrap; gap: 8px; }
+      .app-search-wrap { min-width: 100%; }
     }
   </style>
 </head>
@@ -4759,11 +4797,11 @@
               <div><div class="app-name">${b.name}</div><div class="app-email">${b.email}</div></div>
             </div>
           </td>
-          <td>${b.location}</td>
-          <td>${b.programme}</td>
-          <td>${b.batch}</td>
-          <td><span class="app-badge ${badgeClass}">${b.status}</span></td>
-          <td><div class="app-row-actions">${actionBtn}</div></td>
+          <td data-label="Location">${b.location}</td>
+          <td data-label="Program">${b.programme}</td>
+          <td data-label="Batch">${b.batch}</td>
+          <td data-label="Status"><span class="app-badge ${badgeClass}">${b.status}</span></td>
+          <td data-label="Action"><div class="app-row-actions">${actionBtn}</div></td>
         </tr>`;
       }).join('');
 
