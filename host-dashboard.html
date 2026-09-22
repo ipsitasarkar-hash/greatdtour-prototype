@@ -2991,123 +2991,87 @@
 
       <!-- Program Bookings -->
       <div class="hd-panel" id="panel-prog-bookings">
-        <div class="hd-sec-head">
-          <h2 class="hd-page-title">Program Bookings</h2>
-          <div class="hd-sec-head__actions">
-            <button class="hd-table__btn">Export CSV</button>
-          </div>
-        </div>
-        <div class="hd-page-subtitle">Review booking requests for your volunteering programs.</div>
 
-        <!-- Summary chips -->
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
-          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
-            <div style="font-size:22px;font-weight:700;color:#101828;">18</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Total Bookings</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;">
+          <div>
+            <h2 class="hd-page-title" style="margin-bottom:2px;">Program Bookings</h2>
+            <div class="hd-page-subtitle" style="margin-bottom:0;">Review booking requests for your volunteering programs.</div>
           </div>
-          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
-            <div style="font-size:22px;font-weight:700;color:#f54900;">4</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Pending Review</div>
+          <button class="hd-btn" onclick="exportBookings()" style="flex-shrink:0;margin-top:4px;">⬇ Export CSV</button>
+        </div>
+
+        <!-- Pending notice -->
+        <div style="display:flex;align-items:center;gap:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:12px 16px;margin-bottom:16px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid #fed7aa;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f54900" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"/></svg>
           </div>
-          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
-            <div style="font-size:22px;font-weight:700;color:#16a34a;">12</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Confirmed</div>
-          </div>
-          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
-            <div style="font-size:22px;font-weight:700;color:#6b7280;">2</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Cancelled</div>
+          <div style="flex:1;">
+            <span style="font-size:13px;font-weight:700;color:#c2410c;">4 bookings are awaiting confirmation</span>
+            <span style="font-size:13px;color:#9a3412;">   filter by </span>
+            <button onclick="document.getElementById('pbStatus').value='Pending';applyPbFilters();" style="font-size:13px;font-weight:600;color:#f54900;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;">Pending</button>
+            <span style="font-size:13px;color:#9a3412;"> status to see them.</span>
           </div>
         </div>
 
-        <div class="hd-table-wrap">
-          <table class="hd-table">
+        <!-- Filters -->
+        <div class="app-filters">
+          <div class="app-search-wrap" style="flex:1;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#9ca3af" stroke-width="1.8"/><path d="M16.5 16.5L21 21" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" class="app-search" id="pbSearch" placeholder="Search traveller or program…" oninput="applyPbFilters()" />
+          </div>
+          <div class="app-filter-group">
+            <label>Program</label>
+            <select class="app-filter-select" id="pbProgram" onchange="applyPbFilters()">
+              <option value="">All programs</option>
+              <option value="Wildlife Conservation – Kanha">Wildlife Conservation</option>
+              <option value="Marine Turtle Watch – Goa">Marine Turtle Watch</option>
+              <option value="Forest Restoration – Coorg">Forest Restoration</option>
+              <option value="Community Teaching – Rajasthan">Community Teaching</option>
+            </select>
+          </div>
+          <div class="app-filter-group">
+            <label>Status</label>
+            <select class="app-filter-select" id="pbStatus" onchange="applyPbFilters()">
+              <option value="">All statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="Withdrawn">Withdrawn</option>
+            </select>
+          </div>
+          <button class="hd-btn" onclick="applyPbFilters()">Filter</button>
+          <button class="hd-btn" onclick="resetPbFilters()">Reset</button>
+        </div>
+
+        <!-- Results meta -->
+        <div class="app-results-meta" id="pbResultsMeta">Showing <strong>10</strong> of 18 bookings</div>
+
+        <!-- Table -->
+        <div class="app-table-wrap">
+          <table class="app-table" id="pbTable">
             <thead>
               <tr>
-                <th>Booking ID</th>
                 <th>Traveller</th>
+                <th>Location</th>
                 <th>Program</th>
-                <th>Batch / Dates</th>
-                <th>Participants</th>
-                <th>Amount</th>
+                <th>Batch</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><span class="hd-table__primary">#PB-1041</span><div class="hd-table__sub">22 Sep 2026</div></td>
-                <td><span class="hd-table__primary">Meera Pillai</span><div class="hd-table__sub">meera.pillai@gmail.com</div></td>
-                <td><span class="hd-table__primary">Wildlife Conservation – Kanha</span><div class="hd-table__sub">14-day volunteer</div></td>
-                <td>Batch 3<div class="hd-table__sub">10 Oct – 24 Oct 2026</div></td>
-                <td>2</td>
-                <td><span class="hd-table__primary">₹28,000</span></td>
-                <td><span class="hd-badge hd-badge--yellow">Pending</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary">Confirm</button><button class="hd-table__btn">Decline</button></div></td>
-              </tr>
-              <tr>
-                <td><span class="hd-table__primary">#PB-1038</span><div class="hd-table__sub">19 Sep 2026</div></td>
-                <td><span class="hd-table__primary">Rohan Desai</span><div class="hd-table__sub">rohan.d@outlook.com</div></td>
-                <td><span class="hd-table__primary">Marine Turtle Watch – Goa</span><div class="hd-table__sub">7-day volunteer</div></td>
-                <td>Batch 2<div class="hd-table__sub">1 Nov – 8 Nov 2026</div></td>
-                <td>1</td>
-                <td><span class="hd-table__primary">₹12,500</span></td>
-                <td><span class="hd-badge hd-badge--yellow">Pending</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary">Confirm</button><button class="hd-table__btn">Decline</button></div></td>
-              </tr>
-              <tr>
-                <td><span class="hd-table__primary">#PB-1035</span><div class="hd-table__sub">14 Sep 2026</div></td>
-                <td><span class="hd-table__primary">Ananya Krishnan</span><div class="hd-table__sub">ananya.k@gmail.com</div></td>
-                <td><span class="hd-table__primary">Wildlife Conservation – Kanha</span><div class="hd-table__sub">14-day volunteer</div></td>
-                <td>Batch 2<div class="hd-table__sub">5 Sep – 19 Sep 2026</div></td>
-                <td>1</td>
-                <td><span class="hd-table__primary">₹14,000</span></td>
-                <td><span class="hd-badge hd-badge--green">Confirmed</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
-              </tr>
-              <tr>
-                <td><span class="hd-table__primary">#PB-1029</span><div class="hd-table__sub">3 Sep 2026</div></td>
-                <td><span class="hd-table__primary">Siddharth Nair</span><div class="hd-table__sub">sid.nair@yahoo.com</div></td>
-                <td><span class="hd-table__primary">Forest Restoration – Coorg</span><div class="hd-table__sub">10-day volunteer</div></td>
-                <td>Batch 4<div class="hd-table__sub">20 Sep – 30 Sep 2026</div></td>
-                <td>3</td>
-                <td><span class="hd-table__primary">₹33,000</span></td>
-                <td><span class="hd-badge hd-badge--green">Confirmed</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
-              </tr>
-              <tr>
-                <td><span class="hd-table__primary">#PB-1021</span><div class="hd-table__sub">18 Aug 2026</div></td>
-                <td><span class="hd-table__primary">Priya Sharma</span><div class="hd-table__sub">priya.s@gmail.com</div></td>
-                <td><span class="hd-table__primary">Marine Turtle Watch – Goa</span><div class="hd-table__sub">7-day volunteer</div></td>
-                <td>Batch 1<div class="hd-table__sub">1 Sep – 8 Sep 2026</div></td>
-                <td>2</td>
-                <td><span class="hd-table__primary">₹25,000</span></td>
-                <td><span class="hd-badge hd-badge--gray">Completed</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
-              </tr>
-              <tr>
-                <td><span class="hd-table__primary">#PB-1016</span><div class="hd-table__sub">5 Aug 2026</div></td>
-                <td><span class="hd-table__primary">Vikram Joshi</span><div class="hd-table__sub">vjoshi@proton.me</div></td>
-                <td><span class="hd-table__primary">Forest Restoration – Coorg</span><div class="hd-table__sub">10-day volunteer</div></td>
-                <td>Batch 3<div class="hd-table__sub">15 Aug – 25 Aug 2026</div></td>
-                <td>1</td>
-                <td><span class="hd-table__primary">₹11,000</span></td>
-                <td><span class="hd-badge hd-badge--red">Cancelled</span></td>
-                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
-              </tr>
+            <tbody id="pbTableBody">
+              <!-- rows injected by JS -->
             </tbody>
           </table>
         </div>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#6b7280;">
-          <span>Showing <strong style="color:#374151;">6</strong> of <strong style="color:#374151;">18</strong> bookings</span>
-          <div style="display:flex;gap:6px;">
-            <button class="hd-table__btn" disabled style="opacity:0.4;">← Prev</button>
-            <button class="hd-table__btn" style="background:#f54900;color:#fff;border-color:#f54900;">1</button>
-            <button class="hd-table__btn">2</button>
-            <button class="hd-table__btn">3</button>
-            <button class="hd-table__btn">Next →</button>
-          </div>
+        <!-- Pagination -->
+        <div class="app-pagination" id="pbPagination">
+          <span id="pbPageInfo">Page 1 of 2</span>
+          <div class="app-page-btns" id="pbPageBtns"></div>
         </div>
+
       </div>
 
       <!-- ══ SETTINGS TAB ══ -->
@@ -3962,7 +3926,8 @@
         if (nb) nb.classList.add('is-active');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (tab === 'applicants') renderTable();
+      if (tab === 'applicants')    renderTable();
+      if (tab === 'prog-bookings') renderPbTable();
     }
 
     // ── DASHBOARD MODE TOGGLE (Marketplace ↔ Care) ──
@@ -4691,7 +4656,141 @@
       showToast('CSV export coming soon');
     }
 
-    // ── ROSTER DATA ──
+    function exportBookings() {
+      showToast('CSV export coming soon');
+    }
+
+    // ── PROGRAM BOOKINGS DATA ──
+    const BOOKINGS = [
+      { name:'Suhana V',        email:'suhana.v@gmail.com',       location:'Kolkata',    programme:'Building Basics: WASH & Masonry, Rural Bengal', batch:'Batch 4', booked:'2026-09-18', status:'Expired',    avatar:'#6366f1' },
+      { name:'Suhana V',        email:'suhana.v@gmail.com',       location:'Kolkata',    programme:'Sound & Soul: Music and Art Therapy, Rishikesh', batch:'Batch 1', booked:'2026-09-10', status:'Expired',    avatar:'#6366f1' },
+      { name:'Prisha S',        email:'prisha.s@outlook.com',     location:'Indore',     programme:'Sound & Soul: Music and Art Therapy, Rishikesh', batch:'Batch 1', booked:'2026-09-08', status:'Expired',    avatar:'#9ca3af' },
+      { name:'Prisha S',        email:'prisha.s@outlook.com',     location:'Indore',     programme:'Sound & Soul: Music and Art Therapy, Rishikesh', batch:'Batch 1', booked:'2026-09-07', status:'Expired',    avatar:'#9ca3af' },
+      { name:'User A',          email:'usera@gmail.com',           location:'Kolkata',    programme:'Sound & Soul: Music and Art Therapy, Rishikesh', batch:'Batch 1', booked:'2026-09-05', status:'Withdrawn',  avatar:'#f59e0b' },
+      { name:'Suhana V',        email:'suhana.v@gmail.com',       location:'Bangalore',  programme:'Building Basics: WASH & Masonry, Rural Bengal', batch:'Batch 4', booked:'2026-09-02', status:'Withdrawn',  avatar:'#6366f1' },
+      { name:'Suhana V',        email:'suhana.v@gmail.com',       location:'Bangalore',  programme:'Cultural Food Tour of Rajasthan',                batch:'Batch 4', booked:'2026-08-28', status:'Expired',    avatar:'#6366f1' },
+      { name:'Meera Iyer',      email:'meera.iyer@gmail.com',     location:'Bangalore',  programme:'Wildlife Conservation – Kanha',                  batch:'Batch 3', booked:'2026-08-20', status:'Confirmed',  avatar:'#16a34a' },
+      { name:'Rohan Desai',     email:'rohan.d@outlook.com',      location:'Mumbai',     programme:'Marine Turtle Watch – Goa',                      batch:'Batch 2', booked:'2026-08-15', status:'Confirmed',  avatar:'#0891b2' },
+      { name:'Ananya Krishnan', email:'ananya.k@gmail.com',       location:'Chennai',    programme:'Forest Restoration – Coorg',                     batch:'Batch 2', booked:'2026-08-10', status:'Confirmed',  avatar:'#7c3aed' },
+      { name:'Siddharth Nair',  email:'sid.nair@yahoo.com',       location:'Kochi',      programme:'Community Teaching – Rajasthan',                 batch:'Batch 4', booked:'2026-08-05', status:'Pending',    avatar:'#ea580c' },
+      { name:'Priya Sharma',    email:'priya.s@gmail.com',        location:'Delhi',      programme:'Marine Turtle Watch – Goa',                      batch:'Batch 1', booked:'2026-07-28', status:'Pending',    avatar:'#dc2626' },
+      { name:'Vikram Joshi',    email:'vjoshi@proton.me',         location:'Pune',       programme:'Forest Restoration – Coorg',                     batch:'Batch 3', booked:'2026-07-20', status:'Pending',    avatar:'#b45309' },
+      { name:'Kavita Mehta',    email:'kavita.m@gmail.com',       location:'Jaipur',     programme:'Wildlife Conservation – Kanha',                  batch:'Batch 2', booked:'2026-07-15', status:'Pending',    avatar:'#be185d' },
+      { name:'Thomas Müller',   email:'t.mueller@gmail.com',      location:'Berlin',     programme:'Sound & Soul: Music and Art Therapy, Rishikesh', batch:'Batch 2', booked:'2026-07-10', status:'Completed',  avatar:'#0284c7' },
+      { name:'Rekha Nambiar',   email:'rekha.n@gmail.com',        location:'Calicut',    programme:'Community Teaching – Rajasthan',                 batch:'Batch 1', booked:'2026-06-25', status:'Completed',  avatar:'#16a34a' },
+      { name:'Emma Larsson',    email:'emma.larsson@gmail.com',   location:'Stockholm',  programme:'Wildlife Conservation – Kanha',                  batch:'Batch 1', booked:'2026-06-18', status:'Completed',  avatar:'#0891b2' },
+      { name:'Geeta Chauhan',   email:'geeta.chauhan@gmail.com',  location:'Shimla',     programme:'Forest Restoration – Coorg',                     batch:'Batch 1', booked:'2026-06-05', status:'Cancelled',  avatar:'#9ca3af' },
+    ];
+
+    const PB_STATUS_CLASS = {
+      'Pending':   'app-badge--review',
+      'Confirmed': 'app-badge--accepted',
+      'Completed': 'app-badge--shortlist',
+      'Cancelled': 'app-badge--declined',
+      'Expired':   'app-badge app-badge--new',
+      'Withdrawn': 'app-badge--waitlist',
+    };
+
+    let pbCurrentPage = 1;
+    const PB_PER_PAGE = 10;
+    let pbFiltered = [...BOOKINGS];
+
+    function applyPbFilters() {
+      const fStatus  = document.getElementById('pbStatus').value;
+      const fProg    = document.getElementById('pbProgram').value;
+      const fSearch  = document.getElementById('pbSearch').value.toLowerCase().trim();
+      pbFiltered = BOOKINGS.filter(b => {
+        if (fStatus && b.status !== fStatus) return false;
+        if (fProg   && b.programme !== fProg) return false;
+        if (fSearch && !b.name.toLowerCase().includes(fSearch) &&
+                       !b.programme.toLowerCase().includes(fSearch) &&
+                       !b.location.toLowerCase().includes(fSearch)) return false;
+        return true;
+      });
+      pbCurrentPage = 1;
+      renderPbTable();
+    }
+
+    function resetPbFilters() {
+      document.getElementById('pbStatus').value  = '';
+      document.getElementById('pbProgram').value = '';
+      document.getElementById('pbSearch').value  = '';
+      pbFiltered = [...BOOKINGS];
+      pbCurrentPage = 1;
+      renderPbTable();
+    }
+
+    function renderPbTable() {
+      const tbody   = document.getElementById('pbTableBody');
+      const meta    = document.getElementById('pbResultsMeta');
+      const pgInfo  = document.getElementById('pbPageInfo');
+      const pgBtns  = document.getElementById('pbPageBtns');
+      const total   = pbFiltered.length;
+      const pages   = Math.max(1, Math.ceil(total / PB_PER_PAGE));
+      if (pbCurrentPage > pages) pbCurrentPage = pages;
+      const start = (pbCurrentPage - 1) * PB_PER_PAGE;
+      const slice = pbFiltered.slice(start, start + PB_PER_PAGE);
+
+      meta.innerHTML = total === 0
+        ? 'No bookings match your filters'
+        : `Showing <strong>${start + 1}–${Math.min(start + PB_PER_PAGE, total)}</strong> of <strong>${total}</strong> booking${total !== 1 ? 's' : ''}`;
+
+      if (total === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px 16px;color:#9ca3af;">
+          <div style="font-size:28px;margin-bottom:8px;">🔍</div>
+          <div style="font-size:14px;font-weight:500;color:#374151;">No bookings found</div>
+          <div style="font-size:13px;margin-top:4px;">Try adjusting your filters</div></td></tr>`;
+        pgBtns.innerHTML = '';
+        pgInfo.textContent = 'Page 0 of 0';
+        return;
+      }
+
+      tbody.innerHTML = slice.map(b => {
+        const initials = b.name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase();
+        const badgeClass = PB_STATUS_CLASS[b.status] || 'app-badge--new';
+        const actionBtn = (b.status === 'Pending')
+          ? `<button class="app-action-btn app-action-btn--green" onclick="showToast('Booking confirmed')">Confirm</button>
+             <button class="app-action-btn app-action-btn--red"   onclick="showToast('Booking declined')">Decline</button>`
+          : `<button class="app-action-btn" onclick="showToast('Details coming soon')">View</button>`;
+        return `<tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="app-row-avatar" style="background:${b.avatar};">${initials}</span>
+              <div><div class="app-name">${b.name}</div><div class="app-email">${b.email}</div></div>
+            </div>
+          </td>
+          <td>${b.location}</td>
+          <td>${b.programme}</td>
+          <td>${b.batch}</td>
+          <td><span class="app-badge ${badgeClass}">${b.status}</span></td>
+          <td><div class="app-row-actions">${actionBtn}</div></td>
+        </tr>`;
+      }).join('');
+
+      pgInfo.textContent = `Page ${pbCurrentPage} of ${pages}`;
+      pgBtns.innerHTML = '';
+      if (pbCurrentPage > 1) {
+        const prev = document.createElement('button');
+        prev.className = 'app-page-btn'; prev.textContent = '←';
+        prev.onclick = () => { pbCurrentPage--; renderPbTable(); };
+        pgBtns.appendChild(prev);
+      }
+      for (let i = 1; i <= pages; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'app-page-btn' + (i === pbCurrentPage ? ' active' : '');
+        btn.textContent = i;
+        btn.onclick = ((_i) => () => { pbCurrentPage = _i; renderPbTable(); })(i);
+        pgBtns.appendChild(btn);
+      }
+      if (pbCurrentPage < pages) {
+        const nxt = document.createElement('button');
+        nxt.className = 'app-page-btn'; nxt.textContent = '→';
+        nxt.onclick = () => { pbCurrentPage++; renderPbTable(); };
+        pgBtns.appendChild(nxt);
+      }
+    }
+
+
     const LISTING_NAMES = {
       'tour-1': 'Himalayan Trek & Yoga Immersion',
       'tour-2': 'Spiti Valley Winter Expedition',
@@ -4853,6 +4952,9 @@
         </table>`;
       window.print();
     }
+
+    // Init bookings table on page load
+    renderPbTable();
 
   </script>
 </html>
