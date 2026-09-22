@@ -1057,55 +1057,45 @@
       #panel-prog-bookings .hd-btn { height: 38px; font-size: 13px; }
     }
 
-    /* ── Batch table mobile cards ── */
+    /* ── Batch mobile cards (pure divs injected by JS) ── */
     @media (max-width: 640px) {
-      .batch-table { display:block !important; width:100% !important; border-collapse:unset !important; table-layout:unset !important; }
-      .batch-table thead { display:none !important; }
-      .batch-table tbody { display:block !important; }
-      .batch-table tbody tr.batch-clickable {
-        display:block !important;
-        background:#fff !important;
-        border:1px solid #e5e7eb !important;
-        border-radius:10px !important;
-        margin-bottom:10px !important;
-        padding:0 !important;
-        cursor:pointer !important;
+      .bcm-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 10px;
+        cursor: pointer;
       }
-      /* JS builds a single .batch-mobile-card td */
-      .batch-mobile-card {
-        display:block !important;
-        padding:12px !important;
-        border:none !important;
+      .bcm-card:active { background: #f9fafb; }
+      .bcm-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 4px;
       }
-      .bmc-header {
-        display:flex;
-        align-items:baseline;
-        justify-content:space-between;
-        margin-bottom:4px;
+      .bcm-name { font-weight: 700; font-size: 15px; color: #101828; }
+      .bcm-dates { font-size: 12px; color: #6b7280; flex-shrink: 0; margin-left: 8px; }
+      .bcm-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        font-size: 12px;
+        color: #6b7280;
+        margin-bottom: 12px;
       }
-      .bmc-name { font-weight:700; font-size:14px; color:#101828; }
-      .bmc-dates { font-size:12px; color:#6b7280; }
-      .bmc-meta {
-        display:flex;
-        align-items:center;
-        gap:4px;
-        font-size:12px;
-        color:#6b7280;
-        margin-bottom:10px;
-        flex-wrap:wrap;
+      .bcm-meta b { color: #374151; font-weight: 600; }
+      .bcm-sep { color: #d1d5db; }
+      .bcm-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        border-top: 1px solid #f3f4f6;
       }
-      .bmc-meta strong { color:#374151; }
-      .bmc-dot { color:#d1d5db; }
-      .bmc-footer {
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        padding-top:8px;
-        border-top:1px solid #f3f4f6;
-      }
-      .bmc-status { display:flex; align-items:center; gap:8px; }
-      .bmc-waste { font-size:11px; color:#b45309; }
-      .bmc-arrow { font-size:16px; color:#9ca3af; }
+      .bcm-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .bcm-waste { font-size: 11px; color: #b45309; font-weight: 500; }
+      .bcm-arrow { font-size: 18px; color: #9ca3af; }
     }
   </style>
 </head>
@@ -5366,54 +5356,56 @@
     renderPbTable();
 
     // ── Mobile batch cards ──────────────────────────────────────────
-    // On mobile, replace batch table rows with single-cell card layout
+    // On mobile, inject a <div> card list AFTER each batch table and hide the table
     function buildBatchMobileCards() {
       if (window.innerWidth > 640) return;
-      document.querySelectorAll('.batch-table tbody tr.batch-clickable').forEach(tr => {
-        // Skip if already rebuilt
-        if (tr.querySelector('.batch-mobile-card')) return;
-        const cells = Array.from(tr.querySelectorAll('td'));
-        if (!cells.length) return;
-        const name    = cells[0] ? cells[0].textContent.trim() : '';
-        const dates   = cells[1] ? cells[1].textContent.trim() : '';
-        const cap     = cells[2] ? cells[2].textContent.trim() : '';
-        const accepted= cells[3] ? cells[3].textContent.trim() : '';
-        const fill    = cells[4] ? cells[4].innerHTML.trim() : '';
-        const statusHTML = cells[5] ? cells[5].innerHTML.trim() : '';
-        const wasteHTML  = cells[6] ? cells[6].innerHTML.trim() : '';
-        const onclick = tr.getAttribute('onclick') || '';
+      document.querySelectorAll('table.batch-table').forEach(table => {
+        if (table.nextElementSibling && table.nextElementSibling.classList.contains('batch-cards-mobile')) return;
+        const rows = Array.from(table.querySelectorAll('tbody tr.batch-clickable'));
+        if (!rows.length) return;
 
-        // Build single card td
-        const card = document.createElement('td');
-        card.setAttribute('colspan', '8');
-        card.className = 'batch-mobile-card';
-        card.innerHTML = `
-          <div class="bmc-header">
-            <span class="bmc-name">${name}</span>
-            <span class="bmc-dates">${dates}</span>
-          </div>
-          <div class="bmc-meta">
-            <span><strong>Cap:</strong> ${cap}</span>
-            <span class="bmc-dot">·</span>
-            <span><strong>Accepted:</strong> ${accepted}</span>
-            <span class="bmc-dot">·</span>
-            <span>${fill}</span>
-          </div>
-          <div class="bmc-footer">
-            <div class="bmc-status">${statusHTML}${wasteHTML ? `<span class="bmc-waste">${wasteHTML}</span>` : ''}</div>
-            <span class="bmc-arrow">→</span>
-          </div>`;
+        const container = document.createElement('div');
+        container.className = 'batch-cards-mobile';
 
-        // Replace all cells with the single card cell
-        while (tr.firstChild) tr.removeChild(tr.firstChild);
-        tr.appendChild(card);
-        // Re-attach onclick (lost when cells removed)
-        tr.setAttribute('onclick', onclick);
+        rows.forEach(tr => {
+          const cells = Array.from(tr.querySelectorAll('td'));
+          const name       = cells[0] ? cells[0].textContent.trim() : '';
+          const dates      = cells[1] ? cells[1].textContent.trim() : '';
+          const cap        = cells[2] ? cells[2].textContent.trim() : '';
+          const accepted   = cells[3] ? cells[3].textContent.trim() : '';
+          const fill       = cells[4] ? cells[4].textContent.trim() : '';
+          const statusHTML = cells[5] ? cells[5].innerHTML.trim() : '';
+          const wasteText  = cells[6] ? cells[6].textContent.trim() : '';
+          const onclick    = tr.getAttribute('onclick') || '';
+
+          const card = document.createElement('div');
+          card.className = 'bcm-card';
+          card.setAttribute('onclick', onclick);
+          card.innerHTML = `
+            <div class="bcm-top">
+              <span class="bcm-name">${name}</span>
+              <span class="bcm-dates">${dates}</span>
+            </div>
+            <div class="bcm-meta">
+              <span><b>Cap:</b> ${cap}</span>
+              <span class="bcm-sep">·</span>
+              <span><b>Accepted:</b> ${accepted}</span>
+              <span class="bcm-sep">·</span>
+              <span>${fill}</span>
+            </div>
+            <div class="bcm-bottom">
+              <div class="bcm-left">${statusHTML}${wasteText ? `<span class="bcm-waste">⚠ ${wasteText.replace(/^⚠\s*/,'')}</span>` : ''}</div>
+              <span class="bcm-arrow">→</span>
+            </div>`;
+          container.appendChild(card);
+        });
+
+        table.parentNode.insertBefore(container, table.nextSibling);
+        table.style.display = 'none';
       });
     }
 
     document.addEventListener('DOMContentLoaded', buildBatchMobileCards);
-    // Also call immediately in case DOMContentLoaded already fired
     buildBatchMobileCards();
 
   </script>
