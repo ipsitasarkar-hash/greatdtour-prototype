@@ -1005,43 +1005,56 @@
       .app-table th:nth-child(4), .app-table td:nth-child(4), .app-table th:nth-child(5), .app-table td:nth-child(5) { display: none; }
       .listing-grid { grid-template-columns: 1fr; }
 
-      /* Program Bookings — card layout on mobile */
+      /* ── Program Bookings: compact card layout on mobile ── */
+      #panel-prog-bookings .app-table-wrap {
+        background: transparent; border: none; border-radius: 0; overflow: visible;
+      }
       #pbTable thead { display: none; }
-      #pbTable, #pbTable tbody, #pbTable tr, #pbTable td { display: block; width: 100%; }
+      #pbTable, #pbTable tbody { display: block; }
       #pbTable tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "person person"
+          "loc    prog"
+          "batch  status"
+          "action action";
         background: #fff;
         border: 1px solid #e5e7eb;
         border-radius: 12px;
         margin-bottom: 10px;
-        padding: 14px 14px 10px;
+        padding: 12px;
+        gap: 0 12px;
+        row-gap: 6px;
       }
       #pbTable tr:hover td { background: transparent; }
-      #pbTable td {
-        padding: 4px 0;
-        border: none;
-        font-size: 13px;
-      }
-      #panel-prog-bookings .app-table-wrap {
-        background: transparent;
-        border: none;
-        border-radius: 0;
-        overflow: visible;
-      }
+      #pbTable td { display: block; padding: 0; border: none; font-size: 13px; }
+      #pbTable td:nth-child(1) { grid-area: person; padding-bottom: 6px; border-bottom: 1px solid #f3f4f6; margin-bottom: 4px; }
+      #pbTable td:nth-child(2) { grid-area: loc; }
+      #pbTable td:nth-child(3) { grid-area: prog; }
+      #pbTable td:nth-child(4) { grid-area: batch; }
+      #pbTable td:nth-child(5) { grid-area: status; }
+      #pbTable td:nth-child(6) { grid-area: action; padding-top: 6px; border-top: 1px solid #f3f4f6; margin-top: 2px; }
       #pbTable td[data-label]::before {
         content: attr(data-label);
-        display: block;
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-        color: #9ca3af;
-        margin-bottom: 2px;
+        display: block; font-size: 10px; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.6px;
+        color: #9ca3af; margin-bottom: 2px;
       }
-      #pbTable td:first-child { margin-bottom: 6px; }
-      #pbTable td:first-child [data-label] { display: none; }
-      .app-filter-group { min-width: 0; flex: 1; }
-      .app-filters { flex-wrap: wrap; gap: 8px; }
-      .app-search-wrap { min-width: 100%; }
+
+      /* ── Filter bar: stack nicely on mobile ── */
+      #panel-prog-bookings .app-filters {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      #panel-prog-bookings .app-search-wrap {
+        grid-column: 1 / -1;
+      }
+      #panel-prog-bookings .app-filter-group { width: 100%; }
+      #panel-prog-bookings .app-filter-group label { font-size: 11px; }
+      #panel-prog-bookings .app-filter-select { width: 100%; }
+      #panel-prog-bookings .hd-btn { height: 38px; font-size: 13px; }
     }
   </style>
 </head>
