@@ -1,950 +1,1842 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Profile   Great D'Tour</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css" />
-  <style>
-    body { background: #f3f4f6; margin: 0; padding: 0; min-height: 100vh; font-family: 'Inter', sans-serif; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile – Great D'Tour</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ─── BASE (from host-detail) ──────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f9fafb; font-family: 'Inter', sans-serif; overflow-x: hidden; color: #374151; }
 
-    /* ── LAYOUT ── */
-    .vp-layout { display: flex; min-height: 100vh; }
+/* ─── GLOBAL NAV (matching site nav style) ─────────────────── */
+.site-nav {
+  background: #101828;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.site-nav__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.site-nav__links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.site-nav__links a:hover { color: #fff; }
+.site-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f54900, #fe9a00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
 
-    /* ── DARK SIDEBAR ── */
-    .vp-sidebar {
-      position: fixed; left: 0; top: 0; bottom: 0; width: 240px;
-      background: #101828; display: flex; flex-direction: column; z-index: 100;
-      overflow-y: auto;
-    }
-    .vp-sidebar__logo {
-      padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .vp-sidebar__logo-text {
-      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #fff;
-    }
+/* ─── HERO (matching .partner-hero exactly) ────────────────── */
+.profile-hero {
+  background: linear-gradient(168deg, #f3f4f6 0%, #e5e7eb 100%);
+  padding: 48px 0 40px;
+}
+.profile-hero__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.profile-hero__left {}
+.profile-hero__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+.profile-hero__name {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #101828;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-verified {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f54900;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.profile-hero__sub {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+.hero-chip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+.profile-hero__stats {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px 24px;
+}
+.hero-stat {}
+.hero-stat__val {
+  font-size: 22px;
+  font-weight: 700;
+  color: #101828;
+}
+.hero-stat__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
 
-    /* Volunteer identity block */
-    .vp-sidebar__identity {
-      padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: flex; align-items: center; gap: 12px;
-    }
-    .vp-sidebar__avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, #f54900, #fe9a00);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0;
-    }
-    .vp-sidebar__name { font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3; }
-    .vp-sidebar__since { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+/* ─── BODY GRID (matching .partner-body exactly) ───────────── */
+.profile-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.profile-body > * { min-width: 0; }
 
-    /* Nav */
-    .vp-sidebar__nav { flex: 1; padding: 12px 12px; }
-    .vp-nav__label {
-      font-size: 10px; font-weight: 700; color: #6b7280;
-      text-transform: uppercase; letter-spacing: 1px;
-      padding: 8px 10px 4px;
-    }
-    .vp-nav__item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 0 12px; height: 42px; border-radius: 8px;
-      font-size: 13px; font-weight: 400; color: #9ca3af;
-      cursor: pointer; border: none; background: none; width: 100%; text-align: left;
-      transition: all 0.15s; position: relative;
-    }
-    .vp-nav__item:hover { background: rgba(255,255,255,0.06); color: #fff; }
-    .vp-nav__item.is-active { background: rgba(245,73,0,0.15); color: #f54900; font-weight: 600; }
-    .vp-nav__item.is-active::before {
-      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
-      width: 3px; border-radius: 0 3px 3px 0; background: #f54900;
-    }
-    .vp-nav__item svg { flex-shrink: 0; opacity: 0.7; }
-    .vp-nav__item.is-active svg { opacity: 1; }
-    .vp-nav__badge {
-      margin-left: auto; background: #f54900; color: #fff;
-      font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 999px;
-    }
-    .vp-nav__divider { height: 1px; background: rgba(255,255,255,0.08); margin: 6px 0; }
-    .vp-nav__item--danger { color: #f87171; }
-    .vp-nav__item--danger:hover { background: rgba(239,68,68,0.1); color: #ef4444; }
+/* ─── SIDEBAR PROFILE CARD (matching .partner-profile-card) ── */
+.partner-profile-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.profile-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.partner-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f54900, #fe9a00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 auto;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+.profile-edit-btn {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #101828;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.partner-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.partner-since {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+.profile-bio {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.ptag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  padding: 3px 9px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.ptag--orange {
+  color: #f54900;
+  background: rgba(245,73,0,0.08);
+}
+.ptag--gray {
+  color: #6b7280;
+  background: #f3f4f6;
+}
+.ptag--green {
+  color: #2E7D32;
+  background: rgba(46,125,50,0.08);
+}
+.profile-card-divider {
+  height: 1px;
+  background: #f3f4f6;
+  margin: 0 -24px 16px;
+}
+.profile-mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 0 -24px -32px;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.mini-stat {
+  padding: 14px 8px;
+  text-align: center;
+  border-right: 1px solid #f3f4f6;
+}
+.mini-stat:last-child { border-right: none; }
+.mini-stat__val {
+  font-size: 18px;
+  font-weight: 700;
+  color: #101828;
+}
+.mini-stat__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
 
-    /* Travel passport mini in sidebar */
-    .vp-sidebar__passport {
-      margin: 0 12px 16px; background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;
-    }
-    .vp-sidebar__passport-head {
-      padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.07);
-      font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.8px;
-    }
-    .vp-pp-item { display: flex; align-items: center; gap: 8px; padding: 7px 14px; }
-    .vp-pp-item__flag { font-size: 16px; flex-shrink: 0; }
-    .vp-pp-item__loc { font-size: 11px; font-weight: 600; color: #d1d5dc; line-height: 1.3; }
-    .vp-pp-item__date { font-size: 10px; color: #6b7280; }
-    .vp-pp-item__badge {
-      margin-left: auto; font-size: 9px; font-weight: 700;
-      padding: 2px 6px; border-radius: 999px; white-space: nowrap; flex-shrink: 0;
-    }
-    .vp-pp-item__badge--done     { background: rgba(22,163,74,0.2); color: #4ade80; }
-    .vp-pp-item__badge--upcoming { background: rgba(245,158,11,0.2); color: #fbbf24; }
+/* ─── VERIFICATION CARD (matching .partner-verif-card exactly) */
+.partner-verif-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.partner-verif-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 18px;
+}
+.partner-verif-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.partner-verif-item:last-child { border-bottom: none; }
+.partner-verif-item__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #374151;
+}
+.partner-verif-item__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.verif-check { color: #2E7D32; font-weight: 700; }
+.verif-x { color: #ef4444; font-weight: 700; }
 
-    /* ── MAIN ── */
-    .vp-main { margin-left: 240px; flex: 1; padding: 32px 36px 80px; min-height: 100vh; }
+/* ─── PROFILE STRENGTH CARD ─────────────────────────────────── */
+.strength-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.strength-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.strength-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #101828;
+}
+.strength-pct {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f54900;
+}
+.profile-completion {
+  padding: 14px 0 0;
+}
+.profile-completion__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+.profile-completion__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+.profile-completion__pct {
+  font-size: 12px;
+  font-weight: 700;
+  color: #f54900;
+}
+.progress-bar {
+  height: 6px;
+  background: #f3f4f6;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f54900, #fe9a00);
+  border-radius: 99px;
+  transition: width 0.7s ease;
+  width: 0%;
+}
+.strength-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 13px;
+  color: #374151;
+}
+.strength-item:last-child { border-bottom: none; }
+.strength-item__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
 
-    /* ── ACCOUNT HEADER STRIP ── */
-    .vp-header {
-      display: flex; align-items: center; gap: 18px;
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-      padding: 14px 22px; margin-bottom: 20px;
-    }
-    .vp-header__avatar {
-      width: 50px; height: 50px; border-radius: 50%;
-      background: linear-gradient(135deg, #f54900, #fe9a00);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0;
-    }
-    .vp-header__identity { min-width: 140px; }
-    .vp-header__name { font-size: 15px; font-weight: 700; color: #101828; display: flex; align-items: center; gap: 5px; }
-    .vp-header__email { font-size: 12px; color: #6b7280; margin-top: 2px; }
-    .vp-verified { display: inline-flex; align-items: center; flex-shrink: 0; }
-    .vp-verified svg { width: 15px; height: 15px; }
-    .vp-sidebar__name { font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3; display: flex; align-items: center; gap: 5px; }
-    .vp-header__divider { width: 1px; background: #e5e7eb; align-self: stretch; flex-shrink: 0; margin: 0 4px; }
-    .vp-header__stats { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
-    .vp-header__stat { display: flex; flex-direction: column; gap: 3px; }
-    .vp-header__stat-label { font-size: 10px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
-    .vp-header__stat-val { font-size: 13px; font-weight: 600; color: #101828; }
-    .vp-chip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; border: 1px solid #e5e7eb; background: #f9fafb; padding: 2px 9px; font-size: 11px; font-weight: 500; color: #374151; }
-    .vp-chip--green { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
-    .vp-chip__dot { width: 6px; height: 6px; border-radius: 50%; background: #16a34a; }
+/* ─── TRAVEL PASSPORT CARD ──────────────────────────────────── */
+.passport-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.passport-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 18px;
+}
+.pp-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.pp-item:last-child { border-bottom: none; }
+.pp-item__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.pp-item__info { flex: 1; }
+.pp-item__loc {
+  font-size: 13px;
+  font-weight: 600;
+  color: #101828;
+}
+.pp-item__date {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 1px;
+}
+.pp-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.pp-badge--done { background: rgba(46,125,50,0.08); color: #2E7D32; }
+.pp-badge--upcoming { background: rgba(245,158,11,0.1); color: #92400e; }
 
-    /* ── PAGE TITLE / SUBTITLE ── */
-    .vp-page-title { font-size: 22px; font-weight: 700; color: #101828; margin-bottom: 4px; }
-    .vp-page-subtitle { font-size: 13px; color: #6b7280; margin-bottom: 20px; }
+/* ─── SIDEBAR NAV CARD ──────────────────────────────────────── */
+.nav-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+}
+.nav-btn:hover { background: #f9fafb; color: #101828; }
+.nav-btn.is-active {
+  background: rgba(245,73,0,0.08);
+  color: #f54900;
+  font-weight: 600;
+}
+.nav-btn__icon { font-size: 15px; flex-shrink: 0; }
+.nav-btn__badge {
+  margin-left: auto;
+  background: #f54900;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+.nav-divider {
+  height: 1px;
+  background: #f3f4f6;
+  margin: 4px 14px;
+}
+.nav-btn--danger { color: #ef4444; }
+.nav-btn--danger:hover { background: #fef2f2; color: #dc2626; }
+.nav-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: currentColor;
+}
+.nav-card__label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #9ca3af;
+  padding: 8px 14px 4px;
+}
 
-    /* ── PANEL VISIBILITY ── */
-    .vp-panel { display: none; }
-    .vp-panel.is-active { display: block; }
+/* ─── ANCHOR NAV (matching .partner-anchor-nav exactly) ─────── */
+.partner-anchor-nav {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  position: sticky;
+  top: 72px;
+  z-index: 10;
+  margin-bottom: 20px;
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.partner-anchor-nav::-webkit-scrollbar { display: none; }
+.partner-anchor-tab {
+  flex-shrink: 0;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.15s;
+  border: none;
+  background: none;
+  font-family: 'Inter', sans-serif;
+}
+.partner-anchor-tab:hover { color: #374151; }
+.partner-anchor-tab.active { color: #f54900; border-bottom-color: #f54900; }
 
-    /* ── ACCOUNT SETTINGS TABS ── */
-    .vp-tabs {
-      display: flex; gap: 0; border-bottom: 2px solid #e5e7eb; margin-bottom: 24px;
-      overflow-x: auto; scrollbar-width: none;
-    }
-    .vp-tabs::-webkit-scrollbar { display: none; }
-    .vp-tab {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 16px; font-size: 13px; font-weight: 500;
-      color: #6b7280; white-space: nowrap;
-      border: none; background: none; cursor: pointer;
-      border-bottom: 2px solid transparent; margin-bottom: -2px;
-      transition: all 0.15s;
-    }
-    .vp-tab:hover { color: #374151; }
-    .vp-tab.is-active { color: #f54900; border-bottom-color: #f54900; font-weight: 600; }
+/* ─── SECTIONS (matching .partner-section exactly) ──────────── */
+.partner-section {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  scroll-margin-top: 140px;
+}
+.partner-section__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 20px;
+}
+.partner-section__body {
+  font-size: 15px;
+  color: #4a5565;
+  line-height: 1.75;
+}
 
-    /* ── FORM CARD ── */
-    .vp-card {
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
-      padding: 22px 24px; margin-bottom: 16px;
-    }
-    .vp-section-title {
-      font-size: 14px; font-weight: 700; color: #101828;
-      margin-bottom: 18px; padding-bottom: 12px;
-      border-bottom: 1px solid #f3f4f6;
-    }
-    .vp-form-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .vp-form-row--2 { grid-template-columns: 1fr 1fr; }
-    .vp-form-row--halfleft { grid-template-columns: 1fr 2fr; }
-    .vp-field { display: flex; flex-direction: column; gap: 5px; }
-    .vp-field label { font-size: 12px; font-weight: 600; color: #374151; }
-    .vp-field label .req { color: #f54900; margin-left: 2px; }
-    .vp-input {
-      height: 38px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px;
-      font-size: 13px; font-family: 'Inter', sans-serif; color: #101828; outline: none;
-      transition: border-color 0.2s; background: #fff;
-    }
-    .vp-input:focus { border-color: #f54900; box-shadow: 0 0 0 3px rgba(245,73,0,0.08); }
-    .vp-textarea {
-      padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px;
-      font-size: 13px; font-family: 'Inter', sans-serif; color: #101828; outline: none;
-      resize: vertical; min-height: 88px; transition: border-color 0.2s; width: 100%; box-sizing: border-box;
-    }
-    .vp-textarea:focus { border-color: #f54900; box-shadow: 0 0 0 3px rgba(245,73,0,0.08); }
-    .vp-field--span2 { grid-column: span 2; }
-    .vp-field--span3 { grid-column: span 3; }
+/* ─── SUB SECTION HEADS ─────────────────────────────────────── */
+.sub-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.sub-head__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+}
+.sub-head__link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f54900;
+  text-decoration: none;
+}
+.sub-head__link:hover { text-decoration: underline; }
 
-    /* Avatar upload row */
-    .vp-avatar-row {
-      display: flex; align-items: center; gap: 16px;
-      padding: 14px 0; border-top: 1px solid #f3f4f6; margin-top: 4px;
-    }
-    .vp-avatar-preview {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: linear-gradient(135deg, #f54900, #fe9a00);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0;
-      border: 2px solid #e5e7eb;
-    }
-    .vp-avatar-row__info { flex: 1; }
-    .vp-avatar-row__title { font-size: 13px; font-weight: 600; color: #374151; }
-    .vp-avatar-row__hint { font-size: 11px; color: #9ca3af; margin-top: 2px; }
-    .vp-upload-btn {
-      padding: 8px 16px; border: 1px solid #d1d5db; border-radius: 8px;
-      background: #fff; font-size: 13px; font-weight: 500; color: #374151;
-      cursor: pointer; transition: all 0.15s; flex-shrink: 0;
-    }
-    .vp-upload-btn:hover { background: #f3f4f6; }
+/* ─── PROGRAM-STYLE BOOKING CARDS (matching .partner-program-card) */
+.booking-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.booking-item:last-child { border-bottom: none; }
+.booking-item__img {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #e5e7eb;
+}
+.booking-item__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.booking-item__body { flex: 1; min-width: 0; }
+.booking-item__tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-bottom: 6px;
+}
+.booking-item__tag--upcoming { color: #92400e; background: rgba(245,158,11,0.1); }
+.booking-item__tag--completed { color: #6b7280; background: #f3f4f6; }
+.booking-item__tag--confirmed { color: #2E7D32; background: rgba(46,125,50,0.08); }
+.booking-item__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #101828;
+  margin-bottom: 4px;
+}
+.booking-item__meta {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.booking-item__ref {
+  font-size: 11px;
+  color: #9ca3af;
+  font-family: monospace;
+  margin-bottom: 8px;
+}
+.booking-item__actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-    /* Privacy checkbox */
-    .vp-privacy-row {
-      display: flex; align-items: center; gap: 8px; margin-top: 4px;
-    }
-    .vp-privacy-row input[type="checkbox"] { accent-color: #f54900; width: 14px; height: 14px; flex-shrink: 0; }
-    .vp-privacy-row span { font-size: 12px; color: #6b7280; }
+/* ─── VOLUNTEER CARDS (matching program card layout) ─────────── */
+.vol-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.vol-item:last-child { border-bottom: none; }
+.vol-item__icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: rgba(46,125,50,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.vol-item__body { flex: 1; min-width: 0; }
+.vol-item__tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #2E7D32;
+  background: rgba(46,125,50,0.08);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-bottom: 6px;
+}
+.vol-item__tag--amber { color: #92400e; background: rgba(245,158,11,0.1); }
+.vol-item__tag--blue { color: #1d4ed8; background: rgba(29,78,216,0.08); }
+.vol-item__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #101828;
+  margin-bottom: 4px;
+}
+.vol-item__meta { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+.vol-item__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
 
-    /* Footer bar */
-    .vp-footer-bar {
-      display: flex; justify-content: flex-end; gap: 10px;
-      padding: 14px 0 0; border-top: 1px solid #e5e7eb; margin-top: 4px;
-    }
-    .vp-save-btn {
-      padding: 9px 24px; background: #101828; color: #fff;
-      border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
-      cursor: pointer; transition: background 0.15s;
-    }
-    .vp-save-btn:hover { background: #1e2d40; }
-    .vp-cancel-btn {
-      padding: 9px 18px; background: #fff; color: #374151;
-      border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; font-weight: 500;
-      cursor: pointer; transition: background 0.15s;
-    }
-    .vp-cancel-btn:hover { background: #f9fafb; }
+/* ─── WISHLIST GRID ──────────────────────────────────────────── */
+.wish-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
 
-    /* ── BOOKINGS / SAVED / REVIEWS (reuse existing styles) ── */
-    .bk-list { display: flex; flex-direction: column; gap: 14px; }
-    .bk-card {
-      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
-      padding: 18px; display: flex; gap: 18px; align-items: flex-start;
-      transition: box-shadow 0.2s;
-    }
-    .bk-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-    .bk-card__img {
-      width: 88px; height: 74px; border-radius: 10px;
-      object-fit: cover; flex-shrink: 0; background: #f3f4f6;
-    }
-    .bk-card__body { flex: 1; min-width: 0; }
-    .bk-card__status {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 11px; font-weight: 600; border-radius: 999px;
-      padding: 3px 8px; margin-bottom: 6px;
-    }
-    .bk-card__status--confirmed { background: #f0fdf4; color: #166534; }
-    .bk-card__status--upcoming  { background: #fffbeb; color: #92400e; }
-    .bk-card__status--completed { background: #f3f4f6; color: #6b7280; }
-    .bk-card__title { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .bk-card__meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: #6b7280; margin-bottom: 4px; }
-    .bk-card__ref { font-size: 11px; color: #9ca3af; font-family: monospace; margin-bottom: 10px; }
-    .bk-card__actions { display: flex; gap: 7px; flex-wrap: wrap; }
-    .bk-btn {
-      padding: 6px 13px; border-radius: 6px; font-size: 12px; font-weight: 600;
-      cursor: pointer; transition: all 0.15s; border: 1px solid #e5e7eb;
-      background: #fff; color: #374151;
-    }
-    .bk-btn:hover { background: #f9fafb; }
-    .bk-btn--primary { background: #101828; color: #fff; border-color: #101828; }
-    .bk-btn--primary:hover { background: #1e2d40; }
-    .bk-btn--orange { background: #f54900; color: #fff; border-color: #f54900; }
-    .bk-btn--orange:hover { background: #d43e00; }
+/* ─── REVIEW CARDS (matching .partner-review-card exactly) ──── */
+.partner-review-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.partner-review-card:last-child { margin-bottom: 0; }
+.review-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.review-exp {
+  font-size: 14px;
+  font-weight: 700;
+  color: #101828;
+}
+.review-stars { color: #f59e0b; font-size: 14px; letter-spacing: 1px; margin-top: 3px; }
+.review-date { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+.review-img {
+  width: 64px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #e5e7eb;
+}
+.review-body {
+  font-size: 14px;
+  color: #4a5565;
+  line-height: 1.7;
+}
 
-    .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; margin-top: 24px; }
-    .sec-head:first-child { margin-top: 0; }
-    .sec-head h2 { font-size: 14px; font-weight: 700; color: #374151; }
-    .sec-head__link { font-size: 13px; font-weight: 500; color: #f54900; }
-    .sec-head__link:hover { text-decoration: underline; }
+/* ─── WISHLIST ITEM CARD ────────────────────────────────────── */
+.wish-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.wish-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+.wish-card__img {
+  height: 130px;
+  position: relative;
+  overflow: hidden;
+}
+.wish-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.wish-card:hover .wish-card__img img { transform: scale(1.04); }
+.wish-card__cat {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.wish-card__unsave {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #f54900;
+  transition: background 0.15s;
+}
+.wish-card__unsave:hover { background: #fff; }
+.wish-card__body { padding: 14px; }
+.wish-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 4px;
+}
+.wish-card__meta { font-size: 12px; color: #9ca3af; margin-bottom: 8px; }
+.wish-card__price { font-size: 15px; font-weight: 700; color: #101828; }
+.wish-card__price-old {
+  font-size: 11px;
+  color: #9ca3af;
+  text-decoration: line-through;
+  margin-left: 5px;
+  font-weight: 400;
+}
+.wish-card__cta {
+  display: block;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.wish-card__cta:hover { background: #f54900; color: #fff; border-color: #f54900; }
 
-    .saved-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-    .saved-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; transition: box-shadow 0.2s; }
-    .saved-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .saved-card__img { height: 120px; overflow: hidden; position: relative; }
-    .saved-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-    .saved-card:hover .saved-card__img img { transform: scale(1.04); }
-    .saved-card__cat { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.55); color: #fff; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 999px; }
-    .saved-card__unsave { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.92); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.15s; color: #f54900; }
-    .saved-card__unsave:hover { background: #fff; }
-    .saved-card__body { padding: 12px 14px; }
-    .saved-card__title { font-size: 13px; font-weight: 700; color: #101828; margin-bottom: 4px; }
-    .saved-card__meta { font-size: 11px; color: #9ca3af; margin-bottom: 6px; }
-    .saved-card__price { font-size: 14px; font-weight: 700; color: #101828; }
-    .saved-card__price--old { font-size: 11px; color: #9ca3af; text-decoration: line-through; margin-left: 4px; font-weight: 400; }
-    .saved-card__cta { display: block; margin-top: 8px; padding: 7px; border-radius: 6px; background: #f9fafb; border: 1px solid #e5e7eb; text-align: center; font-size: 12px; font-weight: 600; color: #374151; transition: all 0.15s; }
-    .saved-card__cta:hover { background: #f54900; color: #fff; border-color: #f54900; }
+/* ─── FORM ELEMENTS ─────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-grid--3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-field { display: flex; flex-direction: column; gap: 5px; }
+.form-field--full { grid-column: 1 / -1; }
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+.form-label .req { color: #f54900; margin-left: 2px; }
+.f-input {
+  height: 40px;
+  padding: 0 13px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #101828;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
+  width: 100%;
+}
+.f-input:focus {
+  border-color: #f54900;
+  box-shadow: 0 0 0 3px rgba(245,73,0,0.08);
+}
+.f-textarea {
+  padding: 11px 13px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #101828;
+  outline: none;
+  resize: vertical;
+  min-height: 88px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  line-height: 1.6;
+}
+.f-textarea:focus {
+  border-color: #f54900;
+  box-shadow: 0 0 0 3px rgba(245,73,0,0.08);
+}
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 8px;
+}
+.privacy-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+.privacy-row input[type="checkbox"] { accent-color: #f54900; }
+.privacy-row label { font-size: 13px; color: #6b7280; cursor: pointer; }
 
-    .review-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; }
-    .review-card + .review-card { margin-top: 12px; }
-    .review-card__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
-    .review-card__exp { font-size: 14px; font-weight: 700; color: #101828; }
-    .review-card__stars { color: #f59e0b; font-size: 14px; letter-spacing: 1px; }
-    .review-card__date { font-size: 12px; color: #9ca3af; margin-top: 2px; }
-    .review-card__text { font-size: 13px; color: #374151; line-height: 1.6; }
-    .review-card__img { width: 64px; height: 54px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+/* Avatar upload strip */
+.avatar-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.avatar-strip__preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f54900, #fe9a00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.avatar-strip__info { flex: 1; }
+.avatar-strip__title { font-size: 13px; font-weight: 600; color: #374151; }
+.avatar-strip__hint { font-size: 11px; color: #9ca3af; margin-top: 2px; }
 
-    /* Notification toggles */
-    .notif-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f9fafb; }
-    .notif-row:last-child { border-bottom: none; }
-    .notif-row__label { font-size: 13px; color: #374151; }
-    .notif-row__sub { font-size: 11px; color: #9ca3af; margin-top: 2px; }
-    .notif-toggle { width: 36px; height: 20px; border-radius: 999px; border: none; cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0; }
-    .notif-toggle.on { background: #f54900; }
-    .notif-toggle.off { background: #d1d5db; }
-    .notif-toggle::after { content: ''; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #fff; top: 3px; transition: left 0.2s; }
-    .notif-toggle.on::after  { left: 19px; }
-    .notif-toggle.off::after { left: 3px; }
+/* Check grid */
+.check-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+.check-item input[type="checkbox"] { accent-color: #f54900; }
 
-    /* Volunteer history table */
-    .vp-table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid #e5e7eb; }
-    .vp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .vp-table th { background: #f9fafb; padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e5e7eb; white-space: nowrap; }
-    .vp-table td { padding: 12px 14px; border-bottom: 1px solid #f3f4f6; color: #374151; vertical-align: middle; }
-    .vp-table tr:last-child td { border-bottom: none; }
-    .vp-table tr:hover td { background: #fafafa; }
-    .vp-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
-    .vp-badge--green  { background: #f0fdf4; color: #166534; }
-    .vp-badge--amber  { background: #fffbeb; color: #92400e; }
-    .vp-badge--blue   { background: #eff6ff; color: #1d4ed8; }
-    .vp-badge--gray   { background: #f3f4f6; color: #6b7280; }
+/* Notification toggles */
+.notif-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.notif-row:last-child { border-bottom: none; }
+.notif-row__label { font-size: 14px; color: #374151; font-weight: 500; }
+.notif-row__sub { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+.toggle {
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.toggle.on { background: #f54900; }
+.toggle.off { background: #d1d5db; }
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  top: 3px;
+  transition: left 0.2s;
+}
+.toggle.on::after { left: 19px; }
+.toggle.off::after { left: 3px; }
 
-    /* Empty state */
-    .vp-empty { text-align: center; padding: 48px 20px; background: #fff; border: 1px dashed #e5e7eb; border-radius: 14px; }
-    .vp-empty__icon { font-size: 32px; margin-bottom: 10px; }
-    .vp-empty h3 { font-size: 15px; font-weight: 600; color: #374151; margin-bottom: 6px; }
-    .vp-empty p { font-size: 13px; color: #9ca3af; }
+/* Danger zone */
+.danger-zone {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 20px;
+}
+.danger-zone__title { font-weight: 700; font-size: 14px; color: #dc2626; margin-bottom: 6px; }
+.danger-zone__body { font-size: 13px; color: #991b1b; margin-bottom: 12px; line-height: 1.5; }
 
-    /* Toast */
-    .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: #101828; color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; opacity: 0; transition: all 0.3s; z-index: 9999; pointer-events: none; white-space: nowrap; }
-    .toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* ─── BUTTONS ───────────────────────────────────────────────── */
+.btn {
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+  font-family: 'Inter', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn--dark { background: #101828; color: #fff; border-color: #101828; }
+.btn--dark:hover { background: #1e2d40; }
+.btn--ghost { background: #fff; color: #374151; border-color: #e5e7eb; }
+.btn--ghost:hover { background: #f9fafb; }
+.btn--danger-outline { background: #fff; color: #dc2626; border-color: #dc2626; }
+.btn--sm { padding: 6px 13px; font-size: 12px; }
 
-    @media (max-width: 900px) {
-      .vp-sidebar { width: 200px; }
-      .vp-main { margin-left: 200px; padding: 20px 20px 60px; }
-      .saved-grid { grid-template-columns: 1fr 1fr; }
-      .vp-form-row { grid-template-columns: 1fr 1fr; }
-      .vp-form-row .vp-field--span3 { grid-column: span 2; }
-    }
-    @media (max-width: 768px) {
-      .vp-layout { flex-direction: column; }
-      .vp-sidebar { width: 100%; height: auto; position: static; flex-direction: row; flex-wrap: wrap; padding: 16px 20px; min-height: auto; }
-      .vp-sidebar__logo { margin-bottom: 0; padding-bottom: 0; border: none; }
-      .vp-sidebar__nav { flex-direction: row; flex-wrap: wrap; gap: 4px; flex: 1; }
-      .vp-sidebar__link { padding: 8px 12px; font-size: 13px; }
-      .vp-main { margin-left: 0; padding: 20px 16px 80px; }
-      .vp-form-row { grid-template-columns: 1fr !important; }
-      .vp-form-row .vp-field--span3 { grid-column: span 1; }
-      .saved-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+/* ─── MOBILE NAV STRIP (only visible on mobile) ──────────────── */
+.mobile-nav-strip {
+  display: none;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 60px;
+  z-index: 100;
+}
+.mobile-nav-strip::-webkit-scrollbar { display: none; }
+.mobile-nav-strip__inner {
+  display: flex;
+  padding: 0 16px;
+  white-space: nowrap;
+}
+.mobile-nav-pill {
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.mobile-nav-pill.is-active { color: #f54900; border-bottom-color: #f54900; font-weight: 600; }
+
+/* ─── PANELS ────────────────────────────────────────────────── */
+.panel { display: none; }
+.panel.is-active { display: block; }
+
+/* ─── TOAST ─────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: #101828;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ─── ACC SUB TABS ──────────────────────────────────────────── */
+.acc-tabs-row {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #f3f4f6;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.acc-tabs-row::-webkit-scrollbar { display: none; }
+.acc-tab {
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.acc-tab:hover { color: #374151; }
+.acc-tab.is-active { color: #f54900; border-bottom-color: #f54900; font-weight: 600; }
+.acc-panel { display: none; }
+.acc-panel.is-active { display: block; }
+
+/* section divider title */
+.form-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #101828;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  margin-bottom: 18px;
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .profile-body { grid-template-columns: 260px 1fr; gap: 20px; padding: 24px 20px 60px; }
+  .wish-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid--3 { grid-template-columns: 1fr 1fr; }
+  .profile-hero__stats { display: none; }
+}
+
+@media (max-width: 680px) {
+  .site-nav { padding: 0 16px; }
+  .site-nav__links { display: none; }
+  .user-name { display: none; }
+
+  .mobile-nav-strip { display: block; }
+
+  .profile-hero { padding: 28px 0 20px; }
+  .profile-hero__inner { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .profile-hero__name { font-size: 24px; }
+
+  .profile-body {
+    grid-template-columns: 1fr;
+    padding: 16px 16px 60px;
+    gap: 14px;
+  }
+
+  /* Collapse sidebar cards to compact versions on mobile */
+  .nav-card { display: none; }
+  .passport-card { display: none; }
+  .strength-card { display: none; }
+
+  /* Profile card — compact */
+  .partner-profile-card { padding: 20px 16px; margin-bottom: 0; }
+  .partner-avatar { width: 64px; height: 64px; font-size: 20px; }
+
+  .partner-section { padding: 20px 16px; scroll-margin-top: 120px; }
+  .partner-anchor-nav { top: 104px; }
+
+  .wish-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid--3 { grid-template-columns: 1fr; }
+  .check-grid { grid-template-columns: 1fr; }
+
+  .booking-item { flex-direction: column; }
+  .booking-item__img { width: 100%; height: 140px; }
+
+  .profile-hero__stats { display: none; }
+}
+
+@media (max-width: 400px) {
+  .wish-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-<div class="vp-layout">
+<!-- ─── SITE NAV ──────────────────────────────────────────────── -->
+<nav class="site-nav">
+  <a href="index.html" class="site-nav__logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="#f54900" stroke-width="2.5"/>
+      <path d="M7 12c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5" stroke="#fe9a00" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    great D'tour
+  </a>
+  <div class="site-nav__links">
+    <a href="index.html">Home</a>
+    <a href="programs.html">Programs</a>
+    <a href="experiences.html">Experiences</a>
+    <a href="field-notes.html">Field Notes</a>
+    <a href="about.html">About Us</a>
+  </div>
+  <div class="site-nav__right">
+    <span class="user-name">Arjun Rao</span>
+    <div class="user-avatar">AR</div>
+  </div>
+</nav>
 
-  <!-- ════ DARK SIDEBAR ════ -->
-  <aside class="vp-sidebar">
+<!-- ─── MOBILE NAV STRIP ─────────────────────────────────────── -->
+<div class="mobile-nav-strip">
+  <div class="mobile-nav-strip__inner">
+    <button class="mobile-nav-pill is-active" onclick="switchPanel('account',this,'mobile')">Account</button>
+    <button class="mobile-nav-pill" onclick="switchPanel('bookings',this,'mobile')">Bookings</button>
+    <button class="mobile-nav-pill" onclick="switchPanel('volunteer',this,'mobile')">Volunteer</button>
+    <button class="mobile-nav-pill" onclick="switchPanel('wishlist',this,'mobile')">Wishlist</button>
+    <button class="mobile-nav-pill" onclick="switchPanel('reviews',this,'mobile')">Reviews</button>
+  </div>
+</div>
 
-    <!-- Logo -->
-    <div class="vp-sidebar__logo">
-      <img src="assets/GDT_logo_white.svg" alt="Great D'Tour" style="height:28px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
-      <span class="vp-sidebar__logo-text" style="display:none;">great D'tour</span>
+<!-- ─── HERO ──────────────────────────────────────────────────── -->
+<div class="profile-hero">
+  <div class="profile-hero__inner">
+    <div class="profile-hero__left">
+      <p class="profile-hero__label">Traveller Profile</p>
+      <h1 class="profile-hero__name">
+        Arjun Rao
+        <span class="hero-verified" title="Verified">✓</span>
+      </h1>
+      <div class="profile-hero__sub">
+        <span class="hero-chip"><span class="hero-chip__dot"></span> Active Member</span>
+        <span>arjun.rao@gmail.com</span>
+        <span>Since Jan 2024</span>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- Identity -->
-    <div class="vp-sidebar__identity">
-      <div class="vp-sidebar__avatar" id="sbAvatar">AR</div>
-      <div>
-        <div class="vp-sidebar__name" id="sbName">Arjun Rao <span class="vp-verified" title="Verified volunteer"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#22c55e"/><path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-        <div class="vp-sidebar__since">Since: Jan 2024</div>
+<!-- ─── BODY ──────────────────────────────────────────────────── -->
+<div class="profile-body">
+
+  <!-- ══ SIDEBAR ═════════════════════════════════════════════════ -->
+  <aside>
+
+    <!-- Profile card -->
+    <div class="partner-profile-card">
+      <div class="profile-avatar-wrap">
+        <div class="partner-avatar">AR</div>
+        <div class="profile-edit-btn">✎</div>
+      </div>
+      <h2 class="partner-name">
+        Arjun Rao
+        <span class="hero-verified" title="Verified" style="width:18px;height:18px;font-size:9px;">✓</span>
+      </h2>
+      <p class="partner-since">Member since Jan 2024</p>
+      <p class="profile-bio">Chasing altitude and stillness. Software engineer by day, deliberate traveller always.</p>
+      <div class="profile-tags">
+        <span class="ptag ptag--green">🌿 Volunteer</span>
+        <span class="ptag ptag--orange">🏔️ Adventure</span>
+        <span class="ptag ptag--gray">📍 Bengaluru</span>
+      </div>
+      <div class="profile-completion">
+        <div class="profile-completion__head">
+          <span class="profile-completion__label">Profile completion</span>
+          <span class="profile-completion__pct" id="pctLabel">65%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar__fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="profile-mini-stats">
+        <div class="mini-stat">
+          <div class="mini-stat__val">4</div>
+          <div class="mini-stat__label">Bookings</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat__val">1</div>
+          <div class="mini-stat__label">Done</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat__val">2</div>
+          <div class="mini-stat__label">Reviews</div>
+        </div>
       </div>
     </div>
 
-    <!-- Nav -->
-    <nav class="vp-sidebar__nav">
-      <div class="vp-nav__label">My Account</div>
-      <button class="vp-nav__item is-active" id="vnav-account" onclick="switchPanel('account', this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <!-- Nav card -->
+    <div class="nav-card">
+      <div class="nav-card__label">My Account</div>
+      <button class="nav-btn is-active" onclick="switchPanel('account',this,'sidebar')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
         Account Settings
       </button>
-      <button class="vp-nav__item" id="vnav-bookings" onclick="switchPanel('bookings', this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <button class="nav-btn" onclick="switchPanel('bookings',this,'sidebar')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Booking History
       </button>
-      <button class="vp-nav__item" id="vnav-volunteer" onclick="switchPanel('volunteer', this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.5"/></svg>
+      <button class="nav-btn" onclick="switchPanel('volunteer',this,'sidebar')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Volunteer Applications
-        <span class="vp-nav__badge">2</span>
+        <span class="nav-btn__badge">2</span>
       </button>
-      <button class="vp-nav__item" id="vnav-saved" onclick="switchPanel('saved', this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+      <button class="nav-btn" onclick="switchPanel('wishlist',this,'sidebar')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
         Wishlist
       </button>
-      <button class="vp-nav__item" id="vnav-reviews" onclick="switchPanel('reviews', this)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+      <button class="nav-btn" onclick="switchPanel('reviews',this,'sidebar')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Reviews
       </button>
-
-      <div class="vp-nav__divider"></div>
-
-      <button class="vp-nav__item" onclick="window.location='index.html'">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 3l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 21V12h6v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="nav-divider"></div>
+      <button class="nav-btn" onclick="window.location='index.html'">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Back to Homepage
       </button>
-      <button class="vp-nav__item vp-nav__item--danger" onclick="handleSignOut()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <button class="nav-btn nav-btn--danger" onclick="handleSignOut()">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         Log Out
       </button>
-    </nav>
+    </div>
 
     <!-- Travel Passport -->
-    <div class="vp-sidebar__passport">
-      <div class="vp-sidebar__passport-head">Travel Passport</div>
-      <div class="vp-pp-item">
-        <span class="vp-pp-item__flag">🏔️</span>
-        <div><div class="vp-pp-item__loc">Himachal Pradesh</div><div class="vp-pp-item__date">Sep 2026</div></div>
-        <span class="vp-pp-item__badge vp-pp-item__badge--upcoming">Soon</span>
+    <div class="passport-card">
+      <div class="passport-title">✈️ Travel Passport</div>
+      <div class="pp-item">
+        <div class="pp-item__icon">🏔️</div>
+        <div class="pp-item__info">
+          <div class="pp-item__loc">Himachal Pradesh</div>
+          <div class="pp-item__date">Sep 2026</div>
+        </div>
+        <span class="pp-badge pp-badge--upcoming">Upcoming</span>
       </div>
-      <div class="vp-pp-item">
-        <span class="vp-pp-item__flag">🐯</span>
-        <div><div class="vp-pp-item__loc">Madhya Pradesh</div><div class="vp-pp-item__date">Jul 2025</div></div>
-        <span class="vp-pp-item__badge vp-pp-item__badge--done">Done</span>
+      <div class="pp-item">
+        <div class="pp-item__icon">🐯</div>
+        <div class="pp-item__info">
+          <div class="pp-item__loc">Madhya Pradesh</div>
+          <div class="pp-item__date">Jul 2025</div>
+        </div>
+        <span class="pp-badge pp-badge--done">Done</span>
       </div>
-      <div class="vp-pp-item">
-        <span class="vp-pp-item__flag">🌴</span>
-        <div><div class="vp-pp-item__loc">Kerala</div><div class="vp-pp-item__date">Nov 2025</div></div>
-        <span class="vp-pp-item__badge vp-pp-item__badge--done">Done</span>
+      <div class="pp-item">
+        <div class="pp-item__icon">🌴</div>
+        <div class="pp-item__info">
+          <div class="pp-item__loc">Kerala</div>
+          <div class="pp-item__date">Nov 2025</div>
+        </div>
+        <span class="pp-badge pp-badge--done">Done</span>
       </div>
     </div>
 
   </aside>
 
-  <!-- ════ MAIN CONTENT ════ -->
-  <main class="vp-main">
+  <!-- ══ MAIN ════════════════════════════════════════════════════ -->
+  <main>
 
-    <!-- Account header strip -->
-    <div class="vp-header">
-      <div class="vp-header__avatar" id="hdrAvatar">AR</div>
-      <div class="vp-header__identity">
-        <div class="vp-header__name" id="hdrName">Arjun Rao <span class="vp-verified" title="Verified volunteer"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#22c55e"/><path d="M7 12.5l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-        <div class="vp-header__email">arjun.rao@gmail.com</div>
-      </div>
-      <div class="vp-header__divider"></div>
-      <div class="vp-header__stats">
-        <div class="vp-header__stat">
-          <div class="vp-header__stat-label">Status</div>
-          <div class="vp-header__stat-val"><span class="vp-chip vp-chip--green"><span class="vp-chip__dot"></span>Active</span></div>
-        </div>
-        <div class="vp-header__stat">
-          <div class="vp-header__stat-label">Member Since</div>
-          <div class="vp-header__stat-val">Jan 2024</div>
-        </div>
-        <div class="vp-header__stat">
-          <div class="vp-header__stat-label">Programmes</div>
-          <div class="vp-header__stat-val">1 Completed</div>
-        </div>
-        <div class="vp-header__stat">
-          <div class="vp-header__stat-label">Bookings</div>
-          <div class="vp-header__stat-val">4</div>
-        </div>
-        <div class="vp-header__stat" id="profileCompletionStat" style="display:none;min-width:110px;">
-          <div class="vp-header__stat-label">Profile Completion</div>
-          <div style="display:flex;align-items:center;gap:8px;margin-top:2px;">
-            <div style="flex:1;height:4px;background:#e5e7eb;border-radius:999px;overflow:hidden;min-width:72px;">
-              <div id="profileCompletionBar" style="height:100%;border-radius:999px;background:#f59e0b;width:0%;transition:width 0.6s ease;"></div>
-            </div>
-            <span id="profileCompletionPct" style="font-size:12px;font-weight:700;color:#101828;white-space:nowrap;"></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- ─── ACCOUNT PANEL ───────────────────────────────────────── -->
+    <div class="panel is-active" id="panel-account">
 
-    <!-- ══ ACCOUNT SETTINGS PANEL ══ -->
-    <div class="vp-panel is-active" id="panel-account">
-
-      <div class="vp-page-title">Account Settings</div>
-      <div class="vp-page-subtitle">Manage your personal details, location, and preferences.</div>
-
-      <!-- Sub-tabs -->
-      <div class="vp-tabs">
-        <button class="vp-tab is-active" id="atab-personal" onclick="switchAccTab('personal', this)">Personal Information</button>
-        <button class="vp-tab" id="atab-location" onclick="switchAccTab('location', this)">Location</button>
-        <button class="vp-tab" id="atab-volunteer" onclick="switchAccTab('volunteerprefs', this)">Volunteer Preferences</button>
-        <button class="vp-tab" id="atab-notifications" onclick="switchAccTab('notifications', this)">Notifications</button>
+      <!-- Anchor tabs -->
+      <div class="partner-anchor-nav" id="acc-anchor-nav">
+        <button class="partner-anchor-tab active" onclick="switchAccTab('personal',this)">Personal Info</button>
+        <button class="partner-anchor-tab" onclick="switchAccTab('location',this)">Location</button>
+        <button class="partner-anchor-tab" onclick="switchAccTab('volpref',this)">Volunteer Preferences</button>
+        <button class="partner-anchor-tab" onclick="switchAccTab('notif',this)">Notifications</button>
       </div>
 
-      <!-- ── Personal Information ── -->
-      <div class="vp-acc-panel is-active" id="apanel-personal">
-        <div class="vp-card">
-          <div class="vp-section-title">Personal Information</div>
+      <!-- Personal Info -->
+      <div class="partner-section acc-panel is-active" id="apanel-personal">
+        <h2 class="partner-section__title">Personal Information</h2>
 
-          <div class="vp-form-row vp-form-row--2">
-            <div class="vp-field">
-              <label>Username</label>
-              <input type="text" class="vp-input" value="arjunrao_gdt" />
-            </div>
-            <div class="vp-field">
-              <label>E-mail <span class="req">*</span></label>
-              <input type="email" class="vp-input" value="arjun.rao@gmail.com" />
-            </div>
+        <div class="form-grid form-grid--3" style="margin-bottom:16px;">
+          <div class="form-field">
+            <label class="form-label">Username</label>
+            <input type="text" class="f-input" value="Arjun Rao">
           </div>
-
-          <div class="vp-form-row vp-form-row--2" style="margin-bottom:0;">
-            <div class="vp-field">
-              <label>Phone Number</label>
-              <input type="tel" class="vp-input" value="+91 98765 43210" />
-            </div>
-            <div class="vp-field">
-              <label>PayPal Email</label>
-              <input type="email" class="vp-input" placeholder="PayPal email for refunds" />
-            </div>
+          <div class="form-field">
+            <label class="form-label">E-mail <span class="req">*</span></label>
+            <input type="email" class="f-input" value="arjun.rao@gmail.com">
           </div>
-        </div>
-
-        <div class="vp-card">
-          <div class="vp-section-title">About Yourself</div>
-          <div class="vp-field" style="margin-bottom:14px;">
-            <label>Bio</label>
-            <textarea class="vp-textarea" rows="4" placeholder="Tell hosts and the GDT community a bit about yourself…">Chasing altitude and stillness. Software engineer by day, deliberate traveller always. Passionate about wildlife conservation and slow travel.</textarea>
+          <div class="form-field">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="f-input" placeholder="+91">
           </div>
-
-          <div class="vp-form-row" style="margin-bottom:14px;">
-            <div class="vp-field">
-              <label>Nationality</label>
-              <select class="vp-input" style="height:38px;cursor:pointer;">
-                <option>Indian</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="vp-field">
-              <label>Languages Spoken</label>
-              <input type="text" class="vp-input" value="English, Hindi, Kannada" placeholder="e.g. English, Hindi" />
-            </div>
-            <div class="vp-field">
-              <label>Date of Birth</label>
-              <input type="date" class="vp-input" value="1992-08-14" />
-            </div>
+          <div class="form-field">
+            <label class="form-label">Nationality</label>
+            <select class="f-input"><option>Indian</option><option>Other</option></select>
           </div>
-
-          <div class="vp-privacy-row">
-            <input type="checkbox" id="showContactPrivacy" checked />
-            <label for="showContactPrivacy"><span>Show email and phone number to other accounts</span></label>
+          <div class="form-field">
+            <label class="form-label">Date of birth</label>
+            <input type="date" class="f-input">
+          </div>
+          <div class="form-field">
+            <label class="form-label">PayPal email</label>
+            <input type="email" class="f-input" placeholder="paypal@email.com">
+          </div>
+          <div class="form-field form-field--full">
+            <label class="form-label">Languages spoken</label>
+            <input type="text" class="f-input" placeholder="e.g. English, Hindi, Spanish">
+          </div>
+          <div class="form-field form-field--full">
+            <label class="form-label">About yourself</label>
+            <textarea class="f-textarea">Chasing altitude and stillness. Software engineer by day, deliberate traveller always. Passionate about wildlife conservation and slow travel.</textarea>
           </div>
         </div>
 
-        <div class="vp-card">
-          <div class="vp-section-title">Profile Photo</div>
-          <div class="vp-avatar-row">
-            <div class="vp-avatar-preview" id="accAvatarPreview">AR</div>
-            <div class="vp-avatar-row__info">
-              <div class="vp-avatar-row__title">Change Avatar</div>
-              <div class="vp-avatar-row__hint">JPG or PNG · Max 2 MB · Recommended 400×400px</div>
-            </div>
-            <button class="vp-upload-btn" onclick="showToast('Upload flow coming soon')">Upload Photo</button>
-          </div>
+        <div class="privacy-row">
+          <input type="checkbox" id="showContact" checked>
+          <label for="showContact">Show email and phone number to other accounts</label>
         </div>
 
-        <div class="vp-footer-bar">
-          <button class="vp-cancel-btn" onclick="showToast('Changes discarded')">Cancel</button>
-          <button class="vp-save-btn" onclick="showToast('Changes saved')">Save Changes</button>
+        <div class="form-footer">
+          <button class="btn btn--ghost">Cancel</button>
+          <button class="btn btn--dark" onclick="showToast('Changes saved!')">Save Changes</button>
         </div>
       </div>
 
-      <!-- ── Location ── -->
-      <div class="vp-acc-panel" id="apanel-location" style="display:none;">
-        <div class="vp-card">
-          <div class="vp-section-title">Location</div>
-
-          <div class="vp-form-row" style="margin-bottom:16px;">
-            <div class="vp-field">
-              <label>Home Airport</label>
-              <input type="text" class="vp-input" placeholder="e.g. BLR   Bengaluru" />
-            </div>
-            <div class="vp-field">
-              <label>Address</label>
-              <input type="text" class="vp-input" placeholder="Street address" />
-            </div>
-            <div class="vp-field">
-              <label>City</label>
-              <input type="text" class="vp-input" value="Bengaluru" />
-            </div>
+      <!-- Location -->
+      <div class="partner-section acc-panel" id="apanel-location">
+        <h2 class="partner-section__title">Location</h2>
+        <div class="form-grid" style="margin-bottom:16px;">
+          <div class="form-field">
+            <label class="form-label">Home airport</label>
+            <input type="text" class="f-input" placeholder="e.g. DEL – Delhi">
           </div>
-
-          <div class="vp-form-row" style="margin-bottom:0;">
-            <div class="vp-field">
-              <label>State / Province / Region</label>
-              <input type="text" class="vp-input" value="Karnataka" />
-            </div>
-            <div class="vp-field">
-              <label>ZIP / Postal Code</label>
-              <input type="text" class="vp-input" value="560001" />
-            </div>
-            <div class="vp-field">
-              <label>Country</label>
-              <select class="vp-input" style="height:38px;cursor:pointer;">
-                <option selected>India</option>
-                <option>Other</option>
-              </select>
-            </div>
+          <div class="form-field form-field--full">
+            <label class="form-label">Address</label>
+            <input type="text" class="f-input" placeholder="Street address">
+          </div>
+          <div class="form-field">
+            <label class="form-label">City</label>
+            <input type="text" class="f-input" placeholder="City">
+          </div>
+          <div class="form-field">
+            <label class="form-label">State / Province</label>
+            <input type="text" class="f-input" placeholder="State">
+          </div>
+          <div class="form-field">
+            <label class="form-label">ZIP / Postal code</label>
+            <input type="text" class="f-input" placeholder="ZIP">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Country</label>
+            <select class="f-input"><option>India</option><option>Other</option></select>
           </div>
         </div>
-
-        <div class="vp-footer-bar">
-          <button class="vp-cancel-btn" onclick="showToast('Changes discarded')">Cancel</button>
-          <button class="vp-save-btn" onclick="showToast('Changes saved')">Save Changes</button>
+        <div class="form-footer">
+          <button class="btn btn--ghost">Cancel</button>
+          <button class="btn btn--dark" onclick="showToast('Location saved!')">Save Changes</button>
         </div>
       </div>
 
-      <!-- ── Volunteer Preferences ── -->
-      <div class="vp-acc-panel" id="apanel-volunteerprefs" style="display:none;">
-        <div class="vp-card">
-          <div class="vp-section-title">Volunteer Interests</div>
+      <!-- Volunteer Preferences -->
+      <div class="partner-section acc-panel" id="apanel-volpref">
+        <h2 class="partner-section__title">Volunteer Preferences</h2>
+        <p class="partner-section__body" style="margin-bottom:20px;">Tell us what kinds of programmes you're looking for so we can match you with the right opportunities.</p>
 
-          <div class="vp-form-row vp-form-row--2" style="margin-bottom:16px;">
-            <div class="vp-field">
-              <label>Preferred Programme Type</label>
-              <select class="vp-input" style="height:38px;cursor:pointer;">
-                <option>Wildlife Conservation</option>
-                <option>Community Teaching</option>
-                <option>Organic Farming</option>
-                <option>Environmental Restoration</option>
-              </select>
-            </div>
-            <div class="vp-field">
-              <label>Preferred Duration</label>
-              <select class="vp-input" style="height:38px;cursor:pointer;">
-                <option>1 week</option>
-                <option selected>2 weeks</option>
-                <option>1 month</option>
-                <option>3+ months</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="vp-form-row vp-form-row--2" style="margin-bottom:0;">
-            <div class="vp-field">
-              <label>Availability From</label>
-              <input type="date" class="vp-input" />
-            </div>
-            <div class="vp-field">
-              <label>Availability To</label>
-              <input type="date" class="vp-input" />
-            </div>
-          </div>
+        <div class="form-section-title">Preferred programme type</div>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" checked> Wildlife Conservation</label>
+          <label class="check-item"><input type="checkbox"> Community Teaching</label>
+          <label class="check-item"><input type="checkbox"> Organic Farming</label>
+          <label class="check-item"><input type="checkbox"> Environmental Restoration</label>
         </div>
 
-        <div class="vp-card">
-          <div class="vp-section-title">Skills &amp; Background</div>
-          <div class="vp-field" style="margin-bottom:14px;">
-            <label>Relevant Skills</label>
-            <input type="text" class="vp-input" value="Wildlife tracking, Photography, First aid" placeholder="e.g. Teaching, Farming, Medical" />
-          </div>
-          <div class="vp-field">
-            <label>Previous Volunteer Experience</label>
-            <textarea class="vp-textarea" rows="3" placeholder="Describe any relevant volunteer experience…">14-day Tiger Conservation programme with Wild Trails India, Madhya Pradesh (2025).</textarea>
-          </div>
+        <div class="form-section-title">Preferred duration</div>
+        <div class="check-grid" style="margin-bottom:20px;">
+          <label class="check-item"><input type="checkbox"> 1 week</label>
+          <label class="check-item"><input type="checkbox"> 2 weeks</label>
+          <label class="check-item"><input type="checkbox"> 1 month</label>
+          <label class="check-item"><input type="checkbox"> 3+ months</label>
         </div>
 
-        <div class="vp-footer-bar">
-          <button class="vp-cancel-btn" onclick="showToast('Changes discarded')">Cancel</button>
-          <button class="vp-save-btn" onclick="showToast('Changes saved')">Save Changes</button>
+        <div class="form-grid" style="margin-bottom:16px;">
+          <div class="form-field">
+            <label class="form-label">Available from</label>
+            <input type="date" class="f-input">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Available to</label>
+            <input type="date" class="f-input">
+          </div>
+          <div class="form-field form-field--full">
+            <label class="form-label">Relevant skills</label>
+            <textarea class="f-textarea" placeholder="e.g. Photography, Data Analysis, Language skills…"></textarea>
+          </div>
+          <div class="form-field form-field--full">
+            <label class="form-label">Previous volunteer experience</label>
+            <textarea class="f-textarea">14-day Tiger Conservation programme with Wild Trails India, Madhya Pradesh (2025).</textarea>
+          </div>
+        </div>
+        <div class="form-footer">
+          <button class="btn btn--ghost">Cancel</button>
+          <button class="btn btn--dark" onclick="showToast('Preferences saved!')">Save Changes</button>
         </div>
       </div>
 
-      <!-- ── Notifications ── -->
-      <div class="vp-acc-panel" id="apanel-notifications" style="display:none;">
-        <div class="vp-card">
-          <div class="vp-section-title">Notification Preferences</div>
-          <div class="notif-row">
-            <div><div class="notif-row__label">Booking confirmations</div><div class="notif-row__sub">Receive confirmation emails when you book an experience</div></div>
-            <button class="notif-toggle on" onclick="toggleNotif(this)"></button>
+      <!-- Notifications -->
+      <div class="partner-section acc-panel" id="apanel-notif">
+        <h2 class="partner-section__title">Notifications</h2>
+        <div class="notif-row">
+          <div>
+            <div class="notif-row__label">Booking confirmations</div>
+            <div class="notif-row__sub">Receive confirmation emails when you book an experience</div>
           </div>
-          <div class="notif-row">
-            <div><div class="notif-row__label">New volunteer programme openings</div><div class="notif-row__sub">Get notified when new GDT Care programmes match your interests</div></div>
-            <button class="notif-toggle on" onclick="toggleNotif(this)"></button>
-          </div>
-          <div class="notif-row">
-            <div><div class="notif-row__label">Application status updates</div><div class="notif-row__sub">Updates on your volunteer application progress</div></div>
-            <button class="notif-toggle on" onclick="toggleNotif(this)"></button>
-          </div>
-          <div class="notif-row">
-            <div><div class="notif-row__label">Field Notes articles</div><div class="notif-row__sub">New stories from the GDT community</div></div>
-            <button class="notif-toggle off" onclick="toggleNotif(this)"></button>
-          </div>
-          <div class="notif-row">
-            <div><div class="notif-row__label">Promotional offers</div><div class="notif-row__sub">Discounts and seasonal deals</div></div>
-            <button class="notif-toggle off" onclick="toggleNotif(this)"></button>
-          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
         </div>
-
-        <div class="vp-card" style="border-color:#fecaca;">
-          <div class="vp-section-title" style="color:#dc2626;">Danger Zone</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
-            <div>
-              <div style="font-size:14px;font-weight:600;color:#374151;">Delete Account</div>
-              <div style="font-size:13px;color:#9ca3af;margin-top:2px;">Permanently remove your account and all associated data. This cannot be undone.</div>
-            </div>
-            <button style="padding:9px 16px;border:1px solid #fecaca;border-radius:8px;font-size:13px;font-weight:600;color:#dc2626;background:#fff;cursor:pointer;white-space:nowrap;" onclick="showToast('Contact support@greatdtour.com to delete your account')">Delete Account</button>
+        <div class="notif-row">
+          <div>
+            <div class="notif-row__label">New volunteer programme openings</div>
+            <div class="notif-row__sub">Get notified when new programmes match your interests</div>
           </div>
+          <button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        </div>
+        <div class="notif-row">
+          <div>
+            <div class="notif-row__label">Application status updates</div>
+            <div class="notif-row__sub">Updates on your volunteer application progress</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        </div>
+        <div class="notif-row">
+          <div>
+            <div class="notif-row__label">Field Notes articles</div>
+            <div class="notif-row__sub">New stories from the GDT community</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        </div>
+        <div class="notif-row">
+          <div>
+            <div class="notif-row__label">Promotional offers</div>
+            <div class="notif-row__sub">Discounts and seasonal deals</div>
+          </div>
+          <button class="toggle off" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
         </div>
       </div>
 
     </div><!-- /panel-account -->
 
-    <!-- ══ BOOKING HISTORY ══ -->
-    <div class="vp-panel" id="panel-bookings">
-      <div class="vp-page-title">Booking History</div>
-      <div class="vp-page-subtitle">Your upcoming and past experiences with Great D'Tour.</div>
+    <!-- ─── BOOKINGS PANEL ───────────────────────────────────────── -->
+    <div class="panel" id="panel-bookings">
 
-      <div class="sec-head" style="margin-top:0;"><h2>Upcoming</h2></div>
-      <div class="bk-list">
-        <div class="bk-card">
-          <img class="bk-card__img" src="assets/images/yoga-retreat.jpg" alt="Trek" onerror="this.style.background='#e8f5e9'" />
-          <div class="bk-card__body">
-            <span class="bk-card__status bk-card__status--upcoming">⏳ Confirmed · Upcoming</span>
-            <div class="bk-card__title">Himalayan Trek &amp; Yoga Immersion</div>
-            <div class="bk-card__meta">
+      <div class="partner-section">
+        <div class="sub-head">
+          <span class="sub-head__title" style="font-size:18px;font-weight:700;color:#101828;">Booking History</span>
+        </div>
+        <p class="partner-section__body" style="margin-bottom:20px;">Your upcoming and past experiences with Great D'Tour.</p>
+
+        <div class="sub-head">
+          <span class="sub-head__title">Upcoming</span>
+        </div>
+
+        <div class="booking-item">
+          <div class="booking-item__img">
+            <img src="assets/images/yoga-retreat.jpg" alt="Trek" onerror="this.parentNode.style.background='#e5e7eb';this.remove()">
+          </div>
+          <div class="booking-item__body">
+            <span class="booking-item__tag booking-item__tag--upcoming">⏳ Confirmed · Upcoming</span>
+            <div class="booking-item__title">Himalayan Trek &amp; Yoga Immersion</div>
+            <div class="booking-item__meta">
               <span>📍 Himachal Pradesh</span>
               <span>📅 14–22 Sep 2026</span>
               <span>👥 2 travellers</span>
               <span>💰 ₹70,000</span>
             </div>
-            <div class="bk-card__ref">Ref: GDT-2026-4821</div>
-            <div class="bk-card__actions">
-              <button class="bk-btn bk-btn--primary">View Details</button>
-              <button class="bk-btn">Download Voucher</button>
-              <button class="bk-btn">Contact Host</button>
+            <div class="booking-item__ref">Ref: GDT-2026-4821</div>
+            <div class="booking-item__actions">
+              <button class="btn btn--dark btn--sm">View Details</button>
+              <button class="btn btn--ghost btn--sm">Download Voucher</button>
+              <button class="btn btn--ghost btn--sm">Contact Host</button>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="sec-head"><h2>Past Experiences</h2><a href="experiences.html" class="sec-head__link">Book again →</a></div>
-      <div class="bk-list">
-        <div class="bk-card">
-          <img class="bk-card__img" src="assets/images/desert.jpg" alt="Desert" onerror="this.style.background='#fef3c7'" />
-          <div class="bk-card__body">
-            <span class="bk-card__status bk-card__status--completed">✓ Completed</span>
-            <div class="bk-card__title">Desert Safari &amp; Folk Culture</div>
-            <div class="bk-card__meta"><span>📍 Rajasthan</span><span>📅 Mar 2026</span><span>👥 2 travellers</span><span>💰 ₹56,000</span></div>
-            <div class="bk-card__ref">Ref: GDT-2026-3107</div>
-            <div class="bk-card__actions">
-              <button class="bk-btn bk-btn--orange">Write a Review</button>
-              <button class="bk-btn">Book Again</button>
+        <div class="sub-head" style="margin-top:20px;">
+          <span class="sub-head__title">Past Experiences</span>
+          <a href="experiences.html" class="sub-head__link">Book again →</a>
+        </div>
+
+        <div class="booking-item">
+          <div class="booking-item__img">
+            <img src="assets/images/desert.jpg" alt="Desert" onerror="this.parentNode.style.background='#e5e7eb';this.remove()">
+          </div>
+          <div class="booking-item__body">
+            <span class="booking-item__tag booking-item__tag--completed">✓ Completed</span>
+            <div class="booking-item__title">Desert Safari &amp; Folk Culture</div>
+            <div class="booking-item__meta">
+              <span>📍 Rajasthan</span>
+              <span>📅 Mar 2026</span>
+              <span>👥 2 travellers</span>
+              <span>💰 ₹56,000</span>
+            </div>
+            <div class="booking-item__ref">Ref: GDT-2026-3107</div>
+            <div class="booking-item__actions">
+              <button class="btn btn--ghost btn--sm">Write a Review</button>
+              <button class="btn btn--ghost btn--sm">Book Again</button>
             </div>
           </div>
         </div>
-        <div class="bk-card">
-          <img class="bk-card__img" src="assets/images/kerala.jpg" alt="Kerala" onerror="this.style.background='#d1fae5'" />
-          <div class="bk-card__body">
-            <span class="bk-card__status bk-card__status--completed">✓ Completed</span>
-            <div class="bk-card__title">Kerala Backwaters &amp; Ayurveda</div>
-            <div class="bk-card__meta"><span>📍 Kerala</span><span>📅 Nov 2025</span><span>👥 1 traveller</span><span>💰 ₹18,000</span></div>
-            <div class="bk-card__ref">Ref: GDT-2025-1892</div>
-            <div class="bk-card__actions">
-              <button class="bk-btn">View Review</button>
-              <button class="bk-btn">Book Again</button>
+
+        <div class="booking-item">
+          <div class="booking-item__img">
+            <img src="assets/images/kerala.jpg" alt="Kerala" onerror="this.parentNode.style.background='#e5e7eb';this.remove()">
+          </div>
+          <div class="booking-item__body">
+            <span class="booking-item__tag booking-item__tag--completed">✓ Completed</span>
+            <div class="booking-item__title">Kerala Backwaters &amp; Ayurveda</div>
+            <div class="booking-item__meta">
+              <span>📍 Kerala</span>
+              <span>📅 Nov 2025</span>
+              <span>👥 1 traveller</span>
+              <span>💰 ₹18,000</span>
+            </div>
+            <div class="booking-item__ref">Ref: GDT-2025-1892</div>
+            <div class="booking-item__actions">
+              <button class="btn btn--ghost btn--sm">View Review</button>
+              <button class="btn btn--ghost btn--sm">Book Again</button>
             </div>
           </div>
         </div>
+
       </div>
     </div><!-- /panel-bookings -->
 
-    <!-- ══ VOLUNTEER APPLICATIONS ══ -->
-    <div class="vp-panel" id="panel-volunteer">
-      <div class="vp-page-title">Volunteer Applications</div>
-      <div class="vp-page-subtitle">Track the status of your GDT Care volunteer programme applications.</div>
+    <!-- ─── VOLUNTEER PANEL ──────────────────────────────────────── -->
+    <div class="panel" id="panel-volunteer">
 
-      <div class="vp-card" style="padding:0;overflow:hidden;">
-        <div class="vp-table-wrap" style="border:none;border-radius:0;">
-          <table class="vp-table">
-            <thead>
-              <tr>
-                <th>Programme</th>
-                <th>Host</th>
-                <th>Location</th>
-                <th>Duration</th>
-                <th>Applied</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-weight:600;color:#101828;">Tiger Conservation</td>
-                <td>Wild Trails India</td>
-                <td>📍 Madhya Pradesh</td>
-                <td>2 weeks</td>
-                <td>15 Jun 2026</td>
-                <td><span class="vp-badge vp-badge--amber">Under Review</span></td>
-                <td><button class="bk-btn" style="font-size:11px;padding:4px 10px;">View</button></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600;color:#101828;">Organic Farming Stay</td>
-                <td>Soil &amp; Soul Farm</td>
-                <td>📍 Himachal Pradesh</td>
-                <td>1 month</td>
-                <td>20 Jun 2026</td>
-                <td><span class="vp-badge vp-badge--blue">New</span></td>
-                <td><button class="bk-btn" style="font-size:11px;padding:4px 10px;">View</button></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600;color:#101828;">Tiger Conservation</td>
-                <td>Wild Trails India</td>
-                <td>📍 Madhya Pradesh</td>
-                <td>14 days</td>
-                <td>Jun 2025</td>
-                <td><span class="vp-badge vp-badge--green">✔ Completed</span></td>
-                <td><button class="bk-btn" style="font-size:11px;padding:4px 10px;">Certificate</button></td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="partner-section">
+        <h2 class="partner-section__title">Volunteer Applications</h2>
+        <p class="partner-section__body" style="margin-bottom:20px;">Track the status of your GDT Care volunteer programme applications.</p>
+
+        <div class="vol-item">
+          <div class="vol-item__icon-wrap">🐯</div>
+          <div class="vol-item__body">
+            <span class="vol-item__tag vol-item__tag--amber">Under Review</span>
+            <div class="vol-item__title">Tiger Conservation</div>
+            <div class="vol-item__meta">Wild Trails India &nbsp;·&nbsp; 📍 Madhya Pradesh &nbsp;·&nbsp; ⏱ 2 weeks &nbsp;·&nbsp; Applied 15 Jun 2026</div>
+            <div style="font-size:12px;color:#9ca3af;">Response expected within 5 business days</div>
+          </div>
+          <div class="vol-item__right">
+            <a href="#" style="color:#f54900;font-size:13px;font-weight:600;text-decoration:none;">View →</a>
+          </div>
         </div>
+
+        <div class="vol-item">
+          <div class="vol-item__icon-wrap">🌱</div>
+          <div class="vol-item__body">
+            <span class="vol-item__tag vol-item__tag--blue">New</span>
+            <div class="vol-item__title">Organic Farming Stay</div>
+            <div class="vol-item__meta">Soil &amp; Soul Farm &nbsp;·&nbsp; 📍 Himachal Pradesh &nbsp;·&nbsp; ⏱ 1 month &nbsp;·&nbsp; Applied 20 Jun 2026</div>
+            <div style="font-size:12px;color:#9ca3af;">Application received</div>
+          </div>
+          <div class="vol-item__right">
+            <a href="#" style="color:#f54900;font-size:13px;font-weight:600;text-decoration:none;">View →</a>
+          </div>
+        </div>
+
+        <div class="vol-item">
+          <div class="vol-item__icon-wrap" style="background:rgba(46,125,50,0.08);">🐯</div>
+          <div class="vol-item__body">
+            <span class="vol-item__tag">✔ Completed</span>
+            <div class="vol-item__title">Tiger Conservation</div>
+            <div class="vol-item__meta">Wild Trails India &nbsp;·&nbsp; 📍 Madhya Pradesh &nbsp;·&nbsp; ⏱ 14 days &nbsp;·&nbsp; Jun 2025</div>
+            <div style="font-size:12px;color:#6b7280;">Programme completed successfully</div>
+          </div>
+          <div class="vol-item__right">
+            <a href="#" style="color:#f54900;font-size:13px;font-weight:600;text-decoration:none;">Certificate →</a>
+          </div>
+        </div>
+
       </div>
     </div><!-- /panel-volunteer -->
 
-    <!-- ══ WISHLIST ══ -->
-    <div class="vp-panel" id="panel-saved">
-      <div class="vp-page-title">Wishlist</div>
-      <div class="vp-page-subtitle">Experiences and programmes you're thinking about.</div>
+    <!-- ─── WISHLIST PANEL ───────────────────────────────────────── -->
+    <div class="panel" id="panel-wishlist">
 
-      <div class="saved-grid">
-        <div class="saved-card">
-          <div class="saved-card__img">
-            <img src="assets/images/spiti.jpg" alt="Spiti" onerror="this.style.background='linear-gradient(135deg,#667eea,#764ba2)'" />
-            <span class="saved-card__cat">Adventure</span>
-            <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
+      <div class="partner-section">
+        <h2 class="partner-section__title">Wishlist</h2>
+        <p class="partner-section__body" style="margin-bottom:20px;">Experiences and programmes you're thinking about.</p>
+
+        <div class="wish-grid">
+          <div class="wish-card">
+            <div class="wish-card__img">
+              <img src="assets/images/spiti.jpg" alt="Spiti" onerror="this.parentNode.style.background='#d1d5db';this.remove()">
+              <span class="wish-card__cat">Adventure</span>
+              <button class="wish-card__unsave" onclick="unsave(this)">♥</button>
+            </div>
+            <div class="wish-card__body">
+              <div class="wish-card__title">Spiti Valley Winter Expedition</div>
+              <div class="wish-card__meta">📍 Himachal Pradesh · 10 Days</div>
+              <div class="wish-card__price">₹45,000<span class="wish-card__price-old">₹52,000</span></div>
+              <a href="experiences.html" class="wish-card__cta">View Experience</a>
+            </div>
           </div>
-          <div class="saved-card__body">
-            <div class="saved-card__title">Spiti Valley Winter Expedition</div>
-            <div class="saved-card__meta">📍 Himachal Pradesh &nbsp;·&nbsp; 10 Days</div>
-            <div><span class="saved-card__price">₹45,000</span><span class="saved-card__price--old">₹52,000</span></div>
-            <a href="experiences.html" class="saved-card__cta">View Experience</a>
+
+          <div class="wish-card">
+            <div class="wish-card__img">
+              <img src="assets/images/coorg.jpg" alt="Coorg" onerror="this.parentNode.style.background='#d1d5db';this.remove()">
+              <span class="wish-card__cat">Retreat</span>
+              <button class="wish-card__unsave" onclick="unsave(this)">♥</button>
+            </div>
+            <div class="wish-card__body">
+              <div class="wish-card__title">Coorg Coffee Estate Retreat</div>
+              <div class="wish-card__meta">📍 Karnataka · 4 Days</div>
+              <div class="wish-card__price">₹22,000</div>
+              <a href="experiences.html" class="wish-card__cta">View Experience</a>
+            </div>
+          </div>
+
+          <div class="wish-card">
+            <div class="wish-card__img">
+              <img src="assets/images/andaman.jpg" alt="Andaman" onerror="this.parentNode.style.background='#d1d5db';this.remove()">
+              <span class="wish-card__cat">Adventure</span>
+              <button class="wish-card__unsave" onclick="unsave(this)">♥</button>
+            </div>
+            <div class="wish-card__body">
+              <div class="wish-card__title">Andaman Scuba &amp; Marine Life</div>
+              <div class="wish-card__meta">📍 Andaman Islands · 7 Days</div>
+              <div class="wish-card__price">₹62,000</div>
+              <a href="experiences.html" class="wish-card__cta">View Experience</a>
+            </div>
           </div>
         </div>
-        <div class="saved-card">
-          <div class="saved-card__img">
-            <img src="assets/images/coorg.jpg" alt="Coorg" onerror="this.style.background='linear-gradient(135deg,#2E7D32,#66bb6a)'" />
-            <span class="saved-card__cat">Retreat</span>
-            <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
-          </div>
-          <div class="saved-card__body">
-            <div class="saved-card__title">Coorg Coffee Estate Retreat</div>
-            <div class="saved-card__meta">📍 Karnataka &nbsp;·&nbsp; 4 Days</div>
-            <div><span class="saved-card__price">₹22,000</span></div>
-            <a href="experiences.html" class="saved-card__cta">View Experience</a>
-          </div>
-        </div>
-        <div class="saved-card">
-          <div class="saved-card__img">
-            <img src="assets/images/andaman.jpg" alt="Andaman" onerror="this.style.background='linear-gradient(135deg,#0891b2,#67e8f9)'" />
-            <span class="saved-card__cat">Adventure</span>
-            <button class="saved-card__unsave" title="Remove" onclick="unsave(this)">♥</button>
-          </div>
-          <div class="saved-card__body">
-            <div class="saved-card__title">Andaman Scuba &amp; Marine Life</div>
-            <div class="saved-card__meta">📍 Andaman Islands &nbsp;·&nbsp; 7 Days</div>
-            <div><span class="saved-card__price">₹62,000</span></div>
-            <a href="experiences.html" class="saved-card__cta">View Experience</a>
-          </div>
-        </div>
+
       </div>
-    </div><!-- /panel-saved -->
+    </div><!-- /panel-wishlist -->
 
-    <!-- ══ REVIEWS ══ -->
-    <div class="vp-panel" id="panel-reviews">
-      <div class="vp-page-title">Reviews</div>
-      <div class="vp-page-subtitle">What you've shared with the Great D'Tour community.</div>
+    <!-- ─── REVIEWS PANEL ────────────────────────────────────────── -->
+    <div class="panel" id="panel-reviews">
 
-      <div class="sec-head" style="margin-top:0;"><h2>Written by you</h2></div>
-      <div class="review-card">
-        <div class="review-card__head">
-          <div>
-            <div class="review-card__exp">Kerala Backwaters &amp; Ayurveda</div>
-            <div class="review-card__stars">★★★★★</div>
-            <div class="review-card__date">November 2025</div>
-          </div>
-          <img class="review-card__img" src="assets/images/kerala.jpg" alt="" onerror="this.style.display='none'" />
-        </div>
-        <p class="review-card__text">One of the most restorative weeks of my life. The Ayurveda consultations were genuinely tailored, and the houseboat journey through the backwaters was everything I hoped for.</p>
-      </div>
-      <div class="review-card">
-        <div class="review-card__head">
-          <div>
-            <div class="review-card__exp">Tiger Conservation Volunteer Programme</div>
-            <div class="review-card__stars">★★★★★</div>
-            <div class="review-card__date">July 2025</div>
-          </div>
-        </div>
-        <p class="review-card__text">Two weeks that genuinely changed how I think about conservation. The fieldwork was demanding and real   not tourist-facing. The team treated volunteers as contributors, not spectators.</p>
-      </div>
+      <div class="partner-section">
+        <h2 class="partner-section__title">Reviews</h2>
+        <p class="partner-section__body" style="margin-bottom:20px;">What you've shared with the Great D'Tour community.</p>
 
-      <div class="sec-head"><h2>Pending</h2></div>
-      <div class="bk-card">
-        <img class="bk-card__img" src="assets/images/desert.jpg" alt="" onerror="this.style.background='#fef3c7'" />
-        <div class="bk-card__body">
-          <span class="bk-card__status bk-card__status--upcoming">✏️ Awaiting your review</span>
-          <div class="bk-card__title">Desert Safari &amp; Folk Culture</div>
-          <div class="bk-card__meta"><span>📍 Rajasthan</span><span>📅 Completed Mar 2026</span></div>
-          <div class="bk-card__actions">
-            <button class="bk-btn bk-btn--primary" onclick="showToast('Review form coming soon')">Write Review</button>
-          </div>
+        <div class="sub-head">
+          <span class="sub-head__title">Written by you</span>
         </div>
+
+        <div class="partner-review-card">
+          <div class="review-head">
+            <div>
+              <div class="review-exp">Kerala Backwaters &amp; Ayurveda</div>
+              <div class="review-stars">★★★★★</div>
+              <div class="review-date">November 2025</div>
+            </div>
+            <img src="assets/images/kerala.jpg" alt="" class="review-img" onerror="this.style.background='#e5e7eb';this.removeAttribute('src')">
+          </div>
+          <p class="review-body">One of the most restorative weeks of my life. The Ayurveda consultations were genuinely tailored, and the houseboat journey through the backwaters was everything I hoped for.</p>
+        </div>
+
+        <div class="partner-review-card">
+          <div class="review-head">
+            <div>
+              <div class="review-exp">Tiger Conservation Volunteer Programme</div>
+              <div class="review-stars">★★★★★</div>
+              <div class="review-date">July 2025</div>
+            </div>
+          </div>
+          <p class="review-body">Two weeks that genuinely changed how I think about conservation. The fieldwork was demanding and real — not tourist-facing. The team treated volunteers as contributors, not spectators.</p>
+        </div>
+
+        <div class="sub-head" style="margin-top:24px;">
+          <span class="sub-head__title">Pending</span>
+        </div>
+
+        <div class="partner-review-card">
+          <div class="review-head">
+            <div>
+              <div class="review-exp">✏️ Awaiting your review</div>
+              <div style="font-size:14px;color:#6b7280;margin-top:4px;">Desert Safari &amp; Folk Culture</div>
+              <div style="font-size:12px;color:#9ca3af;margin-top:4px;">📍 Rajasthan · Completed Mar 2026</div>
+            </div>
+            <img src="assets/images/desert.jpg" alt="" class="review-img" onerror="this.style.background='#e5e7eb';this.removeAttribute('src')">
+          </div>
+          <button class="btn btn--dark btn--sm">Write Review</button>
+        </div>
+
       </div>
     </div><!-- /panel-reviews -->
 
   </main>
-</div>
+</div><!-- /profile-body -->
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
 
-<script src="assets/main.js"></script>
 <script>
-  // Profile completion bar
-  (function() {
-    const completion = 65;
-    if (completion < 100) {
-      const stat = document.getElementById('profileCompletionStat');
-      const bar  = document.getElementById('profileCompletionBar');
-      const pct  = document.getElementById('profileCompletionPct');
-      if (stat) stat.style.display = 'flex';
-      if (pct)  pct.textContent = completion + '%';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        if (bar) bar.style.width = completion + '%';
-      }));
-    }
-  })();
+  // Animate progress bar
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.getElementById('progressFill').style.width = '65%';
+  }));
 
-  function switchPanel(name, btnEl) {
-    document.querySelectorAll('.vp-panel').forEach(p => p.classList.remove('is-active'));
-    document.querySelectorAll('.vp-nav__item').forEach(b => b.classList.remove('is-active'));
+  // Panel switching (sidebar + mobile nav)
+  function switchPanel(name, clickedEl, source) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('is-active'));
     const panel = document.getElementById('panel-' + name);
     if (panel) panel.classList.add('is-active');
-    if (btnEl) btnEl.classList.add('is-active');
+
+    if (source === 'sidebar') {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('is-active'));
+      if (clickedEl) clickedEl.classList.add('is-active');
+      // sync mobile
+      document.querySelectorAll('.mobile-nav-pill').forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + name + "'")) {
+          b.classList.add('is-active');
+        } else {
+          b.classList.remove('is-active');
+        }
+      });
+    } else if (source === 'mobile') {
+      document.querySelectorAll('.mobile-nav-pill').forEach(b => b.classList.remove('is-active'));
+      if (clickedEl) clickedEl.classList.add('is-active');
+      // sync sidebar
+      document.querySelectorAll('.nav-btn').forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + name + "'")) {
+          b.classList.add('is-active');
+        } else {
+          b.classList.remove('is-active');
+        }
+      });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // Account sub-tabs
   function switchAccTab(name, btnEl) {
-    document.querySelectorAll('.vp-acc-panel').forEach(p => { p.style.display = 'none'; });
-    document.querySelectorAll('.vp-tab').forEach(b => b.classList.remove('is-active'));
+    document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('is-active'));
+    document.querySelectorAll('.partner-anchor-tab').forEach(b => b.classList.remove('active'));
     const panel = document.getElementById('apanel-' + name);
-    if (panel) panel.style.display = 'block';
-    if (btnEl) btnEl.classList.add('is-active');
+    if (panel) panel.classList.add('is-active');
+    if (btnEl) btnEl.classList.add('active');
   }
 
+  // Unsave wishlist item
   function unsave(btn) {
-    const card = btn.closest('.saved-card');
+    const card = btn.closest('.wish-card');
     card.style.transition = 'all 0.2s';
     card.style.opacity = '0';
     card.style.transform = 'scale(0.95)';
@@ -952,11 +1844,7 @@
     showToast('Removed from wishlist');
   }
 
-  function toggleNotif(btn) {
-    btn.classList.toggle('on');
-    btn.classList.toggle('off');
-  }
-
+  // Toast
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
@@ -964,8 +1852,9 @@
     setTimeout(() => t.classList.remove('is-visible'), 2800);
   }
 
+  // Sign out
   function handleSignOut() {
-    showToast('Signed out   redirecting…');
+    showToast('Signed out — redirecting…');
     setTimeout(() => window.location = 'index.html', 1400);
   }
 </script>
