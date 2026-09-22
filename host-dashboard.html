@@ -2825,6 +2825,105 @@
           .prog-status--open    { background:#eff6ff; color:#1d4ed8; }
           .prog-status--paused  { background:#f9fafb; color:#6b7280; border:1px solid #e5e7eb; }
           .prog-status--draft   { background:#fefce8; color:#92400e; }
+
+          /* ── Mobile: program cards + compact batch ── */
+          @media (max-width: 640px) {
+            .prog-table-wrap { background:transparent; border:none; border-radius:0; overflow:visible; }
+            .prog-table thead { display:none; }
+            .prog-table, .prog-table tbody { display:block; }
+
+            /* Main program row → card */
+            .prog-table tr:not(.expand-row) {
+              display:block;
+              background:#fff;
+              border:1px solid #e5e7eb;
+              border-radius:12px;
+              margin-bottom:8px;
+              padding:12px;
+              cursor:pointer;
+            }
+            .prog-table tr:not(.expand-row):hover td { background:transparent; }
+            .prog-table tr:not(.expand-row) td {
+              display:inline-block;
+              padding:0;
+              border:none;
+              vertical-align:middle;
+            }
+            /* Hide less-important cols on mobile */
+            .prog-table tr:not(.expand-row) td:nth-child(1) { display:none; } /* chevron — moved into card header */
+            .prog-table tr:not(.expand-row) td:nth-child(4),
+            .prog-table tr:not(.expand-row) td:nth-child(5),
+            .prog-table tr:not(.expand-row) td:nth-child(6) { display:none; } /* category, duration, capacity */
+
+            /* Card header row: icon+name full width */
+            .prog-table tr:not(.expand-row) td:nth-child(2) {
+              display:flex; align-items:center; justify-content:space-between;
+              width:100%; margin-bottom:8px;
+              padding-bottom:8px; border-bottom:1px solid #f3f4f6;
+            }
+            /* Chevron indicator via pseudo-element on name cell */
+            .prog-table tr:not(.expand-row) td:nth-child(2)::after {
+              content: '›';
+              font-size: 18px; color: #9ca3af; margin-left: 8px; flex-shrink:0;
+              transition: transform 0.2s;
+            }
+            /* Location */
+            .prog-table tr:not(.expand-row) td:nth-child(3) {
+              display:block; width:100%; font-size:12px; color:#9ca3af; margin-bottom:6px;
+            }
+            /* Applications + Status side by side */
+            .prog-table tr:not(.expand-row) td:nth-child(7),
+            .prog-table tr:not(.expand-row) td:nth-child(8) {
+              display:inline-flex; align-items:center; margin-right:10px; font-size:12px;
+            }
+            /* Actions full width */
+            .prog-table tr:not(.expand-row) td:nth-child(9) {
+              display:flex; width:100%; margin-top:8px;
+              padding-top:8px; border-top:1px solid #f3f4f6;
+            }
+            .prog-table tr:not(.expand-row) td:nth-child(9) .row-actions { width:100%; }
+            .prog-table tr:not(.expand-row) td:nth-child(9) .hd-table__btn { flex:1; text-align:center; }
+
+            /* Expand row → full-width block */
+            .expand-row.is-open { display:block !important; }
+            .expand-row td.expand-cell {
+              display:block; padding:0 !important;
+            }
+            .expand-inner { padding:12px; }
+            .expand-title { padding:0 0 8px; }
+
+            /* Batch table → compact stacked rows */
+            .batch-table { display:block; }
+            .batch-table thead { display:none; }
+            .batch-table tbody { display:block; }
+            .batch-table tr.batch-clickable {
+              display:grid;
+              grid-template-columns:1fr 1fr;
+              grid-template-areas:
+                "name   dates"
+                "fill   status"
+                "waste  arrow";
+              background:#fff;
+              border:1px solid #e5e7eb;
+              border-radius:10px;
+              margin-bottom:8px;
+              padding:10px;
+              gap:4px 12px;
+              cursor:pointer;
+            }
+            .batch-table td { display:block; padding:0; border:none; font-size:12px; }
+            .batch-table td:nth-child(1) { grid-area:name; font-weight:700; color:#101828; }
+            .batch-table td:nth-child(2) { grid-area:dates; color:#6b7280; text-align:right; }
+            .batch-table td:nth-child(3),
+            .batch-table td:nth-child(4) { display:none; } /* capacity/accepted hidden */
+            .batch-table td:nth-child(5) { grid-area:fill; }
+            .batch-table td:nth-child(6) { grid-area:status; text-align:right; }
+            .batch-table td:nth-child(7) { grid-area:waste; }
+            .batch-table td:nth-child(8) { grid-area:arrow; text-align:right; font-size:16px; color:#9ca3af; }
+
+            /* KPI strip: 2 cols on mobile */
+            #panel-programs .kpi-grid { grid-template-columns:1fr 1fr !important; }
+          }
         </style>
 
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
@@ -2839,7 +2938,7 @@
         </div>
 
         <!-- Summary KPIs -->
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;">
+        <div class="kpi-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;">
           <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;">
             <div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Total Programs</div>
             <div style="font-size:26px;font-weight:800;color:#101828;">6</div>
