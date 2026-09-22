@@ -2828,101 +2828,153 @@
 
           /* ── Mobile: program cards + compact batch ── */
           @media (max-width: 640px) {
-            .prog-table-wrap { background:transparent; border:none; border-radius:0; overflow:visible; }
-            .prog-table thead { display:none; }
-            .prog-table, .prog-table tbody { display:block; }
+            /* KPI grid: 2 cols */
+            .kpi-grid { grid-template-columns: 1fr 1fr !important; }
 
-            /* Main program row → card */
-            .prog-table tr:not(.expand-row) {
-              display:block;
+            /* Hide table, show cards */
+            .prog-table-wrap { background:transparent !important; border:none !important; border-radius:0 !important; overflow:visible !important; }
+            .prog-table { display:block !important; }
+            .prog-table thead { display:none !important; }
+            .prog-table tbody { display:block !important; }
+
+            /* Each program row → card with relative positioning for chevron */
+            .prog-table tbody > tr:not(.expand-row) {
+              display:block !important;
+              position:relative !important;
               background:#fff;
               border:1px solid #e5e7eb;
               border-radius:12px;
               margin-bottom:8px;
-              padding:12px;
-              cursor:pointer;
+              padding:12px 12px 12px 40px;
             }
-            .prog-table tr:not(.expand-row):hover td { background:transparent; }
-            .prog-table tr:not(.expand-row) td {
-              display:inline-block;
-              padding:0;
-              border:none;
-              vertical-align:middle;
+            .prog-table tbody > tr:not(.expand-row) > td {
+              display:none !important;
             }
-            /* Hide less-important cols on mobile */
-            .prog-table tr:not(.expand-row) td:nth-child(1) { display:none; } /* chevron — moved into card header */
-            .prog-table tr:not(.expand-row) td:nth-child(4),
-            .prog-table tr:not(.expand-row) td:nth-child(5),
-            .prog-table tr:not(.expand-row) td:nth-child(6) { display:none; } /* category, duration, capacity */
-
-            /* Card header row: icon+name full width */
-            .prog-table tr:not(.expand-row) td:nth-child(2) {
-              display:flex; align-items:center; justify-content:space-between;
-              width:100%; margin-bottom:8px;
-              padding-bottom:8px; border-bottom:1px solid #f3f4f6;
+            /* Show chevron (1), name(2), location(3), applications(7), status(8), actions(9) */
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(1) {
+              display:block !important;
+              position:absolute !important;
+              left:10px !important;
+              top:14px !important;
+              padding:0 !important;
+              border:none !important;
+              width:20px !important;
             }
-            /* Chevron indicator via pseudo-element on name cell */
-            .prog-table tr:not(.expand-row) td:nth-child(2)::after {
-              content: '›';
-              font-size: 18px; color: #9ca3af; margin-left: 8px; flex-shrink:0;
-              transition: transform 0.2s;
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(2),
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(3),
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(7),
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(8),
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(9) {
+              display:block !important;
+              border:none !important;
+              padding:0 !important;
+            }
+            /* Name cell: icon + name */
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(2) {
+              padding-bottom:8px !important;
+              border-bottom:1px solid #f3f4f6 !important;
+              margin-bottom:8px;
             }
             /* Location */
-            .prog-table tr:not(.expand-row) td:nth-child(3) {
-              display:block; width:100%; font-size:12px; color:#9ca3af; margin-bottom:6px;
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(3) {
+              font-size:12px; color:#9ca3af; margin-bottom:6px;
             }
-            /* Applications + Status side by side */
-            .prog-table tr:not(.expand-row) td:nth-child(7),
-            .prog-table tr:not(.expand-row) td:nth-child(8) {
-              display:inline-flex; align-items:center; margin-right:10px; font-size:12px;
+            /* Apps + Status inline */
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(7),
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(8) {
+              display:inline-block !important;
+              margin-right:10px; font-size:12px;
             }
-            /* Actions full width */
-            .prog-table tr:not(.expand-row) td:nth-child(9) {
-              display:flex; width:100%; margin-top:8px;
-              padding-top:8px; border-top:1px solid #f3f4f6;
+            /* Actions row */
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(9) {
+              margin-top:8px;
+              padding-top:8px !important;
+              border-top:1px solid #f3f4f6 !important;
             }
-            .prog-table tr:not(.expand-row) td:nth-child(9) .row-actions { width:100%; }
-            .prog-table tr:not(.expand-row) td:nth-child(9) .hd-table__btn { flex:1; text-align:center; }
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(9) .row-actions {
+              display:flex; gap:6px;
+            }
+            .prog-table tbody > tr:not(.expand-row) > td:nth-child(9) .hd-table__btn {
+              flex:1; text-align:center; justify-content:center;
+            }
 
-            /* Expand row → full-width block */
+            /* Expand row */
+            .expand-row { display:none !important; }
             .expand-row.is-open { display:block !important; }
-            .expand-row td.expand-cell {
-              display:block; padding:0 !important;
-            }
-            .expand-inner { padding:12px; }
-            .expand-title { padding:0 0 8px; }
+            .expand-row > td.expand-cell { display:block !important; padding:0 !important; }
+            .expand-inner { padding:12px !important; }
+            .expand-title { padding:0 0 8px !important; }
 
-            /* Batch table → compact stacked rows */
-            .batch-table { display:block; }
-            .batch-table thead { display:none; }
-            .batch-table tbody { display:block; }
-            .batch-table tr.batch-clickable {
-              display:grid;
-              grid-template-columns:1fr 1fr;
-              grid-template-areas:
-                "name   dates"
-                "fill   status"
-                "waste  arrow";
+            /* Batch table → compact cards */
+            .batch-table { display:block !important; width:100% !important; }
+            .batch-table thead { display:none !important; }
+            .batch-table tbody { display:block !important; }
+            /* Each batch row becomes a flex card */
+            .batch-table tbody tr.batch-clickable {
+              display:flex !important;
+              flex-wrap:wrap !important;
               background:#fff;
               border:1px solid #e5e7eb;
               border-radius:10px;
               margin-bottom:8px;
-              padding:10px;
-              gap:4px 12px;
-              cursor:pointer;
+              padding:10px 12px;
+              gap:4px 0;
+              align-items:center;
             }
-            .batch-table td { display:block; padding:0; border:none; font-size:12px; }
-            .batch-table td:nth-child(1) { grid-area:name; font-weight:700; color:#101828; }
-            .batch-table td:nth-child(2) { grid-area:dates; color:#6b7280; text-align:right; }
-            .batch-table td:nth-child(3),
-            .batch-table td:nth-child(4) { display:none; } /* capacity/accepted hidden */
-            .batch-table td:nth-child(5) { grid-area:fill; }
-            .batch-table td:nth-child(6) { grid-area:status; text-align:right; }
-            .batch-table td:nth-child(7) { grid-area:waste; }
-            .batch-table td:nth-child(8) { grid-area:arrow; text-align:right; font-size:16px; color:#9ca3af; }
-
-            /* KPI strip: 2 cols on mobile */
-            #panel-programs .kpi-grid { grid-template-columns:1fr 1fr !important; }
+            /* Hide all cells by default */
+            .batch-table tbody tr.batch-clickable td {
+              display:none !important;
+              padding:0 !important;
+              border:none !important;
+              font-size:12px !important;
+            }
+            /* Row 1: batch name (left) + dates (right) */
+            .batch-table tbody tr.batch-clickable td:nth-child(1) {
+              display:block !important;
+              font-weight:700 !important;
+              color:#101828 !important;
+              flex:1 !important;
+              min-width:50% !important;
+            }
+            .batch-table tbody tr.batch-clickable td:nth-child(2) {
+              display:block !important;
+              color:#6b7280 !important;
+              text-align:right !important;
+              flex:1 !important;
+              min-width:50% !important;
+            }
+            /* Row 2: fill rate (left) + status (right) — force new line */
+            .batch-table tbody tr.batch-clickable td:nth-child(5) {
+              display:block !important;
+              color:#6b7280 !important;
+              flex:1 !important;
+              min-width:50% !important;
+              margin-top:4px !important;
+            }
+            .batch-table tbody tr.batch-clickable td:nth-child(6) {
+              display:flex !important;
+              justify-content:flex-end !important;
+              flex:1 !important;
+              min-width:50% !important;
+              margin-top:4px !important;
+            }
+            /* Row 3: waste warning (left) + arrow (right) */
+            .batch-table tbody tr.batch-clickable td:nth-child(7) {
+              display:block !important;
+              flex:1 !important;
+              min-width:50% !important;
+              margin-top:4px !important;
+            }
+            .batch-table tbody tr.batch-clickable td:nth-child(8) {
+              display:flex !important;
+              justify-content:flex-end !important;
+              align-items:center !important;
+              flex:1 !important;
+              min-width:50% !important;
+              font-size:16px !important;
+              color:#9ca3af !important;
+              margin-top:4px !important;
+            }
           }
         </style>
 
