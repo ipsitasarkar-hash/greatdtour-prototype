@@ -1056,6 +1056,71 @@
       #panel-prog-bookings .app-filter-select { width: 100%; }
       #panel-prog-bookings .hd-btn { height: 38px; font-size: 13px; }
     }
+
+    /* ── Batch table mobile cards (global scope for full specificity) ── */
+    @media (max-width: 640px) {
+      .batch-table { display:block !important; width:100% !important; border-collapse:unset !important; }
+      .batch-table thead { display:none !important; }
+      .batch-table tbody { display:block !important; }
+      .batch-table tbody tr.batch-clickable {
+        display:flex !important;
+        flex-wrap:wrap !important;
+        background:#fff !important;
+        border:1px solid #e5e7eb !important;
+        border-radius:10px !important;
+        margin-bottom:8px !important;
+        padding:10px 12px !important;
+        gap:0 !important;
+        align-items:center !important;
+        cursor:pointer !important;
+      }
+      /* Hide all td by default, then show specific ones */
+      .batch-table tbody tr.batch-clickable > td {
+        display:none !important;
+        padding:0 !important;
+        border:none !important;
+      }
+      /* Col 1: Batch name — top left */
+      .batch-table tbody tr.batch-clickable > td:nth-child(1) {
+        display:block !important;
+        font-weight:700 !important;
+        font-size:13px !important;
+        color:#101828 !important;
+        width:50% !important;
+      }
+      /* Col 2: Dates — top right */
+      .batch-table tbody tr.batch-clickable > td:nth-child(2) {
+        display:block !important;
+        font-size:12px !important;
+        color:#6b7280 !important;
+        text-align:right !important;
+        width:50% !important;
+      }
+      /* Col 5: Fill rate — second row left */
+      .batch-table tbody tr.batch-clickable > td:nth-child(5) {
+        display:block !important;
+        font-size:12px !important;
+        color:#6b7280 !important;
+        width:50% !important;
+        margin-top:6px !important;
+      }
+      /* Col 6: Status — second row right */
+      .batch-table tbody tr.batch-clickable > td:nth-child(6) {
+        display:flex !important;
+        justify-content:flex-end !important;
+        width:50% !important;
+        margin-top:6px !important;
+      }
+      /* Col 8: Arrow — bottom right */
+      .batch-table tbody tr.batch-clickable > td:nth-child(8) {
+        display:flex !important;
+        justify-content:flex-end !important;
+        width:100% !important;
+        font-size:16px !important;
+        color:#9ca3af !important;
+        margin-top:4px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2905,76 +2970,7 @@
             .expand-inner { padding:12px !important; }
             .expand-title { padding:0 0 8px !important; }
 
-            /* Batch table → compact cards */
-            .batch-table { display:block !important; width:100% !important; }
-            .batch-table thead { display:none !important; }
-            .batch-table tbody { display:block !important; }
-            /* Each batch row becomes a flex card */
-            .batch-table tbody tr.batch-clickable {
-              display:flex !important;
-              flex-wrap:wrap !important;
-              background:#fff;
-              border:1px solid #e5e7eb;
-              border-radius:10px;
-              margin-bottom:8px;
-              padding:10px 12px;
-              gap:4px 0;
-              align-items:center;
-            }
-            /* Hide all cells by default */
-            .batch-table tbody tr.batch-clickable td {
-              display:none !important;
-              padding:0 !important;
-              border:none !important;
-              font-size:12px !important;
-            }
-            /* Row 1: batch name (left) + dates (right) */
-            .batch-table tbody tr.batch-clickable td:nth-child(1) {
-              display:block !important;
-              font-weight:700 !important;
-              color:#101828 !important;
-              flex:1 !important;
-              min-width:50% !important;
-            }
-            .batch-table tbody tr.batch-clickable td:nth-child(2) {
-              display:block !important;
-              color:#6b7280 !important;
-              text-align:right !important;
-              flex:1 !important;
-              min-width:50% !important;
-            }
-            /* Row 2: fill rate (left) + status (right) — force new line */
-            .batch-table tbody tr.batch-clickable td:nth-child(5) {
-              display:block !important;
-              color:#6b7280 !important;
-              flex:1 !important;
-              min-width:50% !important;
-              margin-top:4px !important;
-            }
-            .batch-table tbody tr.batch-clickable td:nth-child(6) {
-              display:flex !important;
-              justify-content:flex-end !important;
-              flex:1 !important;
-              min-width:50% !important;
-              margin-top:4px !important;
-            }
-            /* Row 3: waste warning (left) + arrow (right) */
-            .batch-table tbody tr.batch-clickable td:nth-child(7) {
-              display:block !important;
-              flex:1 !important;
-              min-width:50% !important;
-              margin-top:4px !important;
-            }
-            .batch-table tbody tr.batch-clickable td:nth-child(8) {
-              display:flex !important;
-              justify-content:flex-end !important;
-              align-items:center !important;
-              flex:1 !important;
-              min-width:50% !important;
-              font-size:16px !important;
-              color:#9ca3af !important;
-              margin-top:4px !important;
-            }
+            /* Batch table mobile styles moved to global <head> style block */
           }
         </style>
 
