@@ -5370,15 +5370,16 @@
     function buildBatchMobileCards() {
       if (window.innerWidth > 640) return;
       document.querySelectorAll('.batch-table tbody tr.batch-clickable').forEach(tr => {
-        if (tr.dataset.mobileBuilt) return;
-        tr.dataset.mobileBuilt = '1';
-        const cells = tr.querySelectorAll('td');
-        const name    = cells[0] ? cells[0].innerText.trim() : '';
-        const dates   = cells[1] ? cells[1].innerText.trim() : '';
-        const cap     = cells[2] ? cells[2].innerText.trim() : '';
-        const accepted= cells[3] ? cells[3].innerText.trim() : '';
-        const fill    = cells[4] ? cells[4].innerText.trim() : '';
-        const statusHTML = cells[5] ? cells[5].innerHTML : '';
+        // Skip if already rebuilt
+        if (tr.querySelector('.batch-mobile-card')) return;
+        const cells = Array.from(tr.querySelectorAll('td'));
+        if (!cells.length) return;
+        const name    = cells[0] ? cells[0].textContent.trim() : '';
+        const dates   = cells[1] ? cells[1].textContent.trim() : '';
+        const cap     = cells[2] ? cells[2].textContent.trim() : '';
+        const accepted= cells[3] ? cells[3].textContent.trim() : '';
+        const fill    = cells[4] ? cells[4].innerHTML.trim() : '';
+        const statusHTML = cells[5] ? cells[5].innerHTML.trim() : '';
         const wasteHTML  = cells[6] ? cells[6].innerHTML.trim() : '';
         const onclick = tr.getAttribute('onclick') || '';
 
@@ -5412,6 +5413,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', buildBatchMobileCards);
+    // Also call immediately in case DOMContentLoaded already fired
+    buildBatchMobileCards();
 
   </script>
 </html>
