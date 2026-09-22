@@ -2989,11 +2989,125 @@
 
       </div>
 
-      <!-- Program Bookings placeholder -->
+      <!-- Program Bookings -->
       <div class="hd-panel" id="panel-prog-bookings">
-        <div class="hd-sec-head"><h2 class="hd-page-title">Program Bookings</h2></div>
+        <div class="hd-sec-head">
+          <h2 class="hd-page-title">Program Bookings</h2>
+          <div class="hd-sec-head__actions">
+            <button class="hd-table__btn">Export CSV</button>
+          </div>
+        </div>
         <div class="hd-page-subtitle">Review booking requests for your volunteering programs.</div>
-        <p style="color:#6b7280;font-size:15px;">Program booking requests will appear here.</p>
+
+        <!-- Summary chips -->
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
+            <div style="font-size:22px;font-weight:700;color:#101828;">18</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Total Bookings</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
+            <div style="font-size:22px;font-weight:700;color:#f54900;">4</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Pending Review</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
+            <div style="font-size:22px;font-weight:700;color:#16a34a;">12</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Confirmed</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 20px;min-width:120px;">
+            <div style="font-size:22px;font-weight:700;color:#6b7280;">2</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:2px;">Cancelled</div>
+          </div>
+        </div>
+
+        <div class="hd-table-wrap">
+          <table class="hd-table">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Traveller</th>
+                <th>Program</th>
+                <th>Batch / Dates</th>
+                <th>Participants</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="hd-table__primary">#PB-1041</span><div class="hd-table__sub">22 Sep 2026</div></td>
+                <td><span class="hd-table__primary">Meera Pillai</span><div class="hd-table__sub">meera.pillai@gmail.com</div></td>
+                <td><span class="hd-table__primary">Wildlife Conservation – Kanha</span><div class="hd-table__sub">14-day volunteer</div></td>
+                <td>Batch 3<div class="hd-table__sub">10 Oct – 24 Oct 2026</div></td>
+                <td>2</td>
+                <td><span class="hd-table__primary">₹28,000</span></td>
+                <td><span class="hd-badge hd-badge--yellow">Pending</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary">Confirm</button><button class="hd-table__btn">Decline</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="hd-table__primary">#PB-1038</span><div class="hd-table__sub">19 Sep 2026</div></td>
+                <td><span class="hd-table__primary">Rohan Desai</span><div class="hd-table__sub">rohan.d@outlook.com</div></td>
+                <td><span class="hd-table__primary">Marine Turtle Watch – Goa</span><div class="hd-table__sub">7-day volunteer</div></td>
+                <td>Batch 2<div class="hd-table__sub">1 Nov – 8 Nov 2026</div></td>
+                <td>1</td>
+                <td><span class="hd-table__primary">₹12,500</span></td>
+                <td><span class="hd-badge hd-badge--yellow">Pending</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn hd-table__btn--primary">Confirm</button><button class="hd-table__btn">Decline</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="hd-table__primary">#PB-1035</span><div class="hd-table__sub">14 Sep 2026</div></td>
+                <td><span class="hd-table__primary">Ananya Krishnan</span><div class="hd-table__sub">ananya.k@gmail.com</div></td>
+                <td><span class="hd-table__primary">Wildlife Conservation – Kanha</span><div class="hd-table__sub">14-day volunteer</div></td>
+                <td>Batch 2<div class="hd-table__sub">5 Sep – 19 Sep 2026</div></td>
+                <td>1</td>
+                <td><span class="hd-table__primary">₹14,000</span></td>
+                <td><span class="hd-badge hd-badge--green">Confirmed</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="hd-table__primary">#PB-1029</span><div class="hd-table__sub">3 Sep 2026</div></td>
+                <td><span class="hd-table__primary">Siddharth Nair</span><div class="hd-table__sub">sid.nair@yahoo.com</div></td>
+                <td><span class="hd-table__primary">Forest Restoration – Coorg</span><div class="hd-table__sub">10-day volunteer</div></td>
+                <td>Batch 4<div class="hd-table__sub">20 Sep – 30 Sep 2026</div></td>
+                <td>3</td>
+                <td><span class="hd-table__primary">₹33,000</span></td>
+                <td><span class="hd-badge hd-badge--green">Confirmed</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="hd-table__primary">#PB-1021</span><div class="hd-table__sub">18 Aug 2026</div></td>
+                <td><span class="hd-table__primary">Priya Sharma</span><div class="hd-table__sub">priya.s@gmail.com</div></td>
+                <td><span class="hd-table__primary">Marine Turtle Watch – Goa</span><div class="hd-table__sub">7-day volunteer</div></td>
+                <td>Batch 1<div class="hd-table__sub">1 Sep – 8 Sep 2026</div></td>
+                <td>2</td>
+                <td><span class="hd-table__primary">₹25,000</span></td>
+                <td><span class="hd-badge hd-badge--gray">Completed</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="hd-table__primary">#PB-1016</span><div class="hd-table__sub">5 Aug 2026</div></td>
+                <td><span class="hd-table__primary">Vikram Joshi</span><div class="hd-table__sub">vjoshi@proton.me</div></td>
+                <td><span class="hd-table__primary">Forest Restoration – Coorg</span><div class="hd-table__sub">10-day volunteer</div></td>
+                <td>Batch 3<div class="hd-table__sub">15 Aug – 25 Aug 2026</div></td>
+                <td>1</td>
+                <td><span class="hd-table__primary">₹11,000</span></td>
+                <td><span class="hd-badge hd-badge--red">Cancelled</span></td>
+                <td><div class="hd-table__actions"><button class="hd-table__btn">View Details</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#6b7280;">
+          <span>Showing <strong style="color:#374151;">6</strong> of <strong style="color:#374151;">18</strong> bookings</span>
+          <div style="display:flex;gap:6px;">
+            <button class="hd-table__btn" disabled style="opacity:0.4;">← Prev</button>
+            <button class="hd-table__btn" style="background:#f54900;color:#fff;border-color:#f54900;">1</button>
+            <button class="hd-table__btn">2</button>
+            <button class="hd-table__btn">3</button>
+            <button class="hd-table__btn">Next →</button>
+          </div>
+        </div>
       </div>
 
       <!-- ══ SETTINGS TAB ══ -->
