@@ -468,7 +468,103 @@
     .em-save { padding: 10px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; color: #fff; background: #2E7D32; cursor: pointer; }
     .em-save:hover { background: #1b5e20; }
 
-    /* ── TOAST ── */
+    /* ── BOOKING DETAIL OVERLAY ── */
+    .bd-overlay {
+      display: none; position: fixed; inset: 0; z-index: 600;
+      background: rgba(0,0,0,0.45); overflow-y: auto;
+    }
+    .bd-overlay.is-open { display: block; }
+    .bd-sheet {
+      background: #f9fafb; min-height: 100vh;
+      margin-left: 260px; /* match sidebar width */
+      padding: 0 0 60px;
+    }
+    .bd-topbar {
+      background: #fff; border-bottom: 1px solid #e5e7eb;
+      padding: 14px 28px; display: flex; align-items: center; gap: 12px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .bd-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: #374151;
+      background: none; border: none; cursor: pointer; padding: 0;
+    }
+    .bd-back:hover { color: #101828; }
+    .bd-body {
+      display: grid; grid-template-columns: 300px 1fr;
+      gap: 20px; padding: 24px 28px; max-width: 1100px;
+    }
+    /* Left profile card */
+    .bd-profile-card {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+      padding: 24px 20px; text-align: center; align-self: start;
+    }
+    .bd-avatar-img {
+      width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+      margin: 0 auto 10px; display: block;
+      background: linear-gradient(135deg,#6366f1,#8b5cf6);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 700; color: #fff;
+    }
+    .bd-name { font-size: 17px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .bd-city { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
+    .bd-stars { color: #d1d5db; font-size: 16px; margin-bottom: 2px; }
+    .bd-reviews { font-size: 12px; color: #9ca3af; margin-bottom: 16px; }
+    .bd-meta-block { text-align: left; border-top: 1px solid #f3f4f6; padding-top: 14px; margin-bottom: 14px; }
+    .bd-meta-row { margin-bottom: 10px; }
+    .bd-meta-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; margin-bottom: 2px; }
+    .bd-meta-val { font-size: 13px; font-weight: 500; color: #101828; }
+    .bd-batch-chip {
+      display: inline-block; background: #f9fafb; border: 1px solid #e5e7eb;
+      border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600;
+      color: #374151; width: 100%; text-align: center; margin-top: 4px;
+    }
+    .bd-about { text-align: left; border-top: 1px solid #f3f4f6; padding-top: 14px; }
+    .bd-about-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #9ca3af; margin-bottom: 6px; }
+    .bd-about-text { font-size: 13px; color: #374151; line-height: 1.6; }
+    /* Right Q&A panel */
+    .bd-qa-panel { display: flex; flex-direction: column; gap: 16px; }
+    .bd-qa-header {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+      padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .bd-qa-header-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .bd-tag-app { background: #101828; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; }
+    .bd-prog-name { font-size: 14px; font-weight: 600; color: #101828; }
+    .bd-submitted { font-size: 12px; color: #9ca3af; }
+    .bd-status-pass { background: #dcfce7; color: #14532d; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+    .bd-status-expired { background: #eff6ff; color: #1d4ed8; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+    .bd-status-withdrawn { background: #fff7ed; color: #c2410c; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+    .bd-qa-section {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; overflow: hidden;
+    }
+    .bd-qa-section-title {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+      color: #9ca3af; padding: 14px 20px 10px; border-bottom: 1px solid #f3f4f6;
+    }
+    .bd-qa-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 20px; border-bottom: 1px solid #f9fafb;
+    }
+    .bd-qa-row:last-child { border-bottom: none; }
+    .bd-qa-q { font-size: 13px; color: #374151; flex: 1; line-height: 1.5; }
+    .bd-qa-q a { color: #2563eb; font-size: 12px; display: block; margin-top: 2px; }
+    .bd-qa-yes { background: #dcfce7; color: #14532d; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; flex-shrink: 0; }
+    .bd-qa-no  { background: #fef2f2; color: #dc2626; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; flex-shrink: 0; }
+    .bd-qa-answer-box {
+      margin: 0 20px 14px; background: #f9fafb; border: 1px solid #e5e7eb;
+      border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #374151;
+    }
+    @media (max-width: 900px) {
+      .bd-sheet { margin-left: 0; }
+      .bd-body { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .bd-topbar { padding: 12px 16px; }
+      .bd-body { padding: 16px; gap: 14px; }
+    }
+
+    /* ── BOOKING DETAIL OVERLAY ── */
     .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: #101828; color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; opacity: 0; transition: all 0.3s; z-index: 9999; pointer-events: none; white-space: nowrap; }
     .toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
     .cancel-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:10000; align-items:center; justify-content:center; }
@@ -3859,6 +3955,104 @@
   <!-- ── TOAST ── -->
   <div class="toast" id="toast"></div>
 
+  <!-- ════ BOOKING DETAIL OVERLAY ════ -->
+  <div class="bd-overlay" id="bdOverlay">
+    <div class="bd-sheet">
+      <div class="bd-topbar">
+        <button class="bd-back" onclick="closeBdOverlay()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to bookings
+        </button>
+      </div>
+      <div class="bd-body">
+        <!-- Left profile -->
+        <div>
+          <div class="bd-profile-card">
+            <div class="bd-avatar-img" id="bdAvatar">SV</div>
+            <div class="bd-name" id="bdName">Suhana V</div>
+            <div class="bd-city" id="bdCity">📍 Kolkata</div>
+            <div class="bd-stars">★★★★★</div>
+            <div class="bd-reviews">0.0 (0 reviews)</div>
+            <div class="bd-meta-block">
+              <div class="bd-meta-row"><div class="bd-meta-label">Application</div><div class="bd-meta-val" id="bdAppId">GDT-VOL-M-20260917084005-98-800</div></div>
+              <div class="bd-meta-row"><div class="bd-meta-label">GDT Volunteering</div><div class="bd-meta-val">0 Programs</div></div>
+              <div class="bd-meta-row"><div class="bd-meta-label">Age</div><div class="bd-meta-val">2 Years</div></div>
+            </div>
+            <div class="bd-meta-block">
+              <div class="bd-meta-label" style="margin-bottom:8px;">Profile Details</div>
+              <div class="bd-meta-row"><div class="bd-meta-label">City</div><div class="bd-meta-val" id="bdPCity">Kolkata</div></div>
+              <div class="bd-meta-row"><div class="bd-meta-label">Country</div><div class="bd-meta-val">India</div></div>
+              <div class="bd-meta-row"><div class="bd-meta-label">Occupation</div><div class="bd-meta-val">Software Engineer</div></div>
+              <div class="bd-meta-row"><div class="bd-meta-label">Languages Spoken</div><div class="bd-meta-val">English, Hindi, Bengali</div></div>
+              <div class="bd-meta-row"><div class="bd-meta-label">Physical Fitness</div><div class="bd-meta-val">Light</div></div>
+            </div>
+            <div class="bd-batch-chip" id="bdBatch">Batch 4 – December 25, 2026</div>
+            <div class="bd-about">
+              <div class="bd-about-title">About Me</div>
+              <div class="bd-about-text">This for testing volunteer side features</div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Q&A -->
+        <div class="bd-qa-panel">
+          <div class="bd-qa-header">
+            <div class="bd-qa-header-left">
+              <span class="bd-tag-app">Application</span>
+              <span class="bd-prog-name" id="bdProgName">Building Basics: WASH &amp; Masonry, Rural Bengal</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="bd-submitted" id="bdSubmitted">Submitted: September 17, 2026 2:10 pm</span>
+              <span class="bd-status-expired" id="bdQaStatus">Expired</span>
+            </div>
+          </div>
+
+          <div class="bd-qa-section">
+            <div class="bd-qa-section-title">Skill-Based Questions</div>
+            <div class="bd-qa-row">
+              <div class="bd-qa-q">Do you have relevant knowledge or experience in Masonry required for this program?<br><strong>View Degree/Certificate/Experience Letter proof</strong><br><a href="#" onclick="return false;">https://www.linkedin.com/in/shanapodder/</a></div>
+              <span class="bd-qa-yes">Yes</span>
+            </div>
+            <div class="bd-qa-row">
+              <div class="bd-qa-q">Do you have relevant knowledge or experience in WASH programme design required for this program?<br><a href="#" onclick="return false;">https://www.gdtclub.com/volunteer-programs/</a></div>
+              <span class="bd-qa-yes">Yes</span>
+            </div>
+          </div>
+
+          <div class="bd-qa-section">
+            <div class="bd-qa-section-title">General Questions</div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Are you physically comfortable with sustained physical or outdoor work for the daily hours stated in this listing?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Are you comfortable working in a hot / humid climate for the duration?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Are you comfortable working with limited or basic tools and equipment?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Do you have dietary requirements that differ from what this program provides?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Do you have any medical condition that may affect your participation?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Are you comfortable sharing accommodation with other volunteers?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Are you comfortable staying in a rural or remote environment for the program duration?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Are you comfortable with early starts and a structured daily routine?</div><span class="bd-qa-yes">Yes</span></div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Will you be able to provide the following identity proof(s) to the Host as requested? Aadhaar Card, PAN Card, Passport (for foreign nationals)</div><span class="bd-qa-yes">Yes</span></div>
+          </div>
+
+          <div class="bd-qa-section">
+            <div class="bd-qa-section-title">Volunteer Motivation</div>
+            <div class="bd-qa-row"><div class="bd-qa-q"><strong>Why do you want to volunteer for this program?</strong></div></div>
+            <div class="bd-qa-answer-box">testing bugs</div>
+          </div>
+
+          <div class="bd-qa-section">
+            <div class="bd-qa-section-title">Auto Asked</div>
+            <div class="bd-qa-row"><div class="bd-qa-q">What is your intended start date?</div></div>
+            <div class="bd-qa-answer-box">December 15, 2026</div>
+            <div class="bd-qa-row"><div class="bd-qa-q">How many days do you intend to stay?</div></div>
+            <div class="bd-qa-answer-box">3</div>
+            <div class="bd-qa-row"><div class="bd-qa-q">Are you accompanied by a guest?</div></div>
+            <div class="bd-qa-answer-box">Yes - No. of Guests: 1; Gender: Female; Age of the Guest: Senior Citizen; Relationship with Guest: mother</div>
+            <div class="bd-qa-row"><div class="bd-qa-q">What languages do you speak?</div></div>
+            <div class="bd-qa-answer-box">Bengali</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── CANCEL CONFIRMATION DIALOG ── -->
   <div class="cancel-overlay" id="cancelOverlay" onclick="closeCancelDialog(event)">
     <div class="cancel-dialog">
@@ -4698,6 +4892,35 @@
       showToast('CSV export coming soon');
     }
 
+    function openBdOverlay(b) {
+      const initials = b.name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase();
+      document.getElementById('bdAvatar').textContent    = initials;
+      document.getElementById('bdAvatar').style.background = b.avatar;
+      document.getElementById('bdName').textContent      = b.name;
+      document.getElementById('bdCity').textContent      = '📍 ' + b.location;
+      document.getElementById('bdPCity').textContent     = b.location;
+      document.getElementById('bdProgName').textContent  = b.programme;
+      document.getElementById('bdBatch').textContent     = b.batch + ' – ' + (b.dates || 'TBC');
+      document.getElementById('bdAppId').textContent     = 'GDT-VOL-' + Math.floor(Math.random()*9e12+1e12);
+      document.getElementById('bdSubmitted').textContent = 'Submitted: ' + new Date(b.booked).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+      const statusEl = document.getElementById('bdQaStatus');
+      statusEl.textContent = b.status;
+      statusEl.className = b.status === 'Expired' ? 'bd-status-expired'
+                         : b.status === 'Withdrawn' ? 'bd-status-withdrawn'
+                         : b.status === 'Confirmed' ? 'bd-status-pass'
+                         : b.status === 'Completed' ? 'bd-status-pass'
+                         : 'bd-status-expired';
+      document.getElementById('bdOverlay').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBdOverlay() {
+      document.getElementById('bdOverlay').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBdOverlay(); });
+
     // ── PROGRAM BOOKINGS DATA ──
     const BOOKINGS = [
       { name:'Suhana V',        email:'suhana.v@gmail.com',       location:'Kolkata',    programme:'Building Basics: WASH & Masonry, Rural Bengal', batch:'Batch 4', booked:'2026-09-18', status:'Expired',    avatar:'#6366f1' },
@@ -4789,7 +5012,7 @@
         const actionBtn = (b.status === 'Pending')
           ? `<button class="app-action-btn app-action-btn--green" onclick="showToast('Booking confirmed')">Confirm</button>
              <button class="app-action-btn app-action-btn--red"   onclick="showToast('Booking declined')">Decline</button>`
-          : `<button class="app-action-btn" onclick="showToast('Details coming soon')">View</button>`;
+          : `<button class="app-action-btn" onclick='openBdOverlay(${JSON.stringify(b)})'>View</button>`;
         return `<tr>
           <td>
             <div style="display:flex;align-items:center;gap:8px;">
