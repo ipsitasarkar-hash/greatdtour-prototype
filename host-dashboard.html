@@ -1059,66 +1059,97 @@
 
     /* ── Batch table mobile cards (global scope for full specificity) ── */
     @media (max-width: 640px) {
-      .batch-table { display:block !important; width:100% !important; border-collapse:unset !important; }
+      .batch-table { display:block !important; width:100% !important; border-collapse:unset !important; table-layout:unset !important; }
       .batch-table thead { display:none !important; }
       .batch-table tbody { display:block !important; }
+
+      /* Each batch row → full-info card */
       .batch-table tbody tr.batch-clickable {
-        display:flex !important;
-        flex-wrap:wrap !important;
+        display:block !important;
         background:#fff !important;
         border:1px solid #e5e7eb !important;
         border-radius:10px !important;
-        margin-bottom:8px !important;
-        padding:10px 12px !important;
-        gap:0 !important;
-        align-items:center !important;
+        margin-bottom:10px !important;
+        padding:12px !important;
         cursor:pointer !important;
       }
-      /* Hide all td by default, then show specific ones */
+      /* All cells: reset table display */
       .batch-table tbody tr.batch-clickable > td {
-        display:none !important;
+        display:block !important;
         padding:0 !important;
         border:none !important;
-      }
-      /* Col 1: Batch name — top left */
-      .batch-table tbody tr.batch-clickable > td:nth-child(1) {
-        display:block !important;
-        font-weight:700 !important;
         font-size:13px !important;
+        color:#374151 !important;
+      }
+
+      /* Col 1: Batch name — bold header */
+      .batch-table tbody tr.batch-clickable > td:nth-child(1) {
+        font-weight:700 !important;
+        font-size:14px !important;
         color:#101828 !important;
-        width:50% !important;
+        margin-bottom:3px !important;
       }
-      /* Col 2: Dates — top right */
+
+      /* Col 2: Dates — muted subtitle */
       .batch-table tbody tr.batch-clickable > td:nth-child(2) {
-        display:block !important;
         font-size:12px !important;
         color:#6b7280 !important;
-        text-align:right !important;
-        width:50% !important;
+        margin-bottom:10px !important;
       }
-      /* Col 5: Fill rate — second row left */
+
+      /* Cols 3, 4, 5: inline meta strip — Capacity · Accepted · Fill */
+      .batch-table tbody tr.batch-clickable > td:nth-child(3),
+      .batch-table tbody tr.batch-clickable > td:nth-child(4),
       .batch-table tbody tr.batch-clickable > td:nth-child(5) {
-        display:block !important;
+        display:inline !important;
         font-size:12px !important;
         color:#6b7280 !important;
-        width:50% !important;
-        margin-top:6px !important;
       }
-      /* Col 6: Status — second row right */
+      .batch-table tbody tr.batch-clickable > td:nth-child(3)::before {
+        content:'Cap: ' !important; font-weight:600 !important; color:#374151 !important;
+      }
+      .batch-table tbody tr.batch-clickable > td:nth-child(4)::before {
+        content:'\00a0 · \00a0Accepted: ' !important; font-weight:600 !important; color:#374151 !important;
+      }
+      .batch-table tbody tr.batch-clickable > td:nth-child(5)::before {
+        content:'\00a0 · \00a0' !important;
+      }
+
+      /* Col 6: Status badge — own line, right-aligned */
       .batch-table tbody tr.batch-clickable > td:nth-child(6) {
         display:flex !important;
         justify-content:flex-end !important;
-        width:50% !important;
-        margin-top:6px !important;
+        margin-top:8px !important;
+        padding-top:8px !important;
+        border-top:1px solid #f3f4f6 !important;
       }
+
+      /* Col 7: Waste warning — left side before status line */
+      .batch-table tbody tr.batch-clickable > td.batch-td-waste {
+        display:block !important;
+        font-size:11px !important;
+        color:#b45309 !important;
+        margin-top:8px !important;
+        padding-top:8px !important;
+        border-top:1px solid #f3f4f6 !important;
+      }
+      .batch-table tbody tr.batch-clickable > td.batch-td-waste:empty {
+        display:none !important;
+        margin:0 !important;
+        padding:0 !important;
+        border:none !important;
+      }
+
       /* Col 8: Arrow — bottom right */
-      .batch-table tbody tr.batch-clickable > td:nth-child(8) {
+      .batch-table tbody tr.batch-clickable > td:nth-child(8),
+      .batch-table tbody tr.batch-clickable > td.batch-td-arrow {
         display:flex !important;
         justify-content:flex-end !important;
-        width:100% !important;
         font-size:16px !important;
         color:#9ca3af !important;
         margin-top:4px !important;
+        padding-top:0 !important;
+        border-top:none !important;
       }
     }
   </style>
