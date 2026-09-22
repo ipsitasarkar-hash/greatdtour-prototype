@@ -1,74 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>My Profile – Great D'Tour</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
 <style>
 /* ─── BASE (from host-detail) ──────────────────────────────── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #f9fafb; font-family: 'Inter', sans-serif; overflow-x: hidden; color: #374151; }
-
-/* ─── GLOBAL NAV (matching site nav style) ─────────────────── */
-.site-nav {
-  background: #101828;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 32px;
-  position: sticky;
-  top: 0;
-  z-index: 200;
-}
-.site-nav__logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-.site-nav__links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-.site-nav__links a {
-  font-size: 13px;
-  font-weight: 500;
-  color: #9ca3af;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.site-nav__links a:hover { color: #fff; }
-.site-nav__right {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.user-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f54900, #fe9a00);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.user-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-}
 
 /* ─── HERO (matching .partner-hero exactly) ────────────────── */
 .profile-hero {
@@ -1139,19 +1082,10 @@ body { background: #f9fafb; font-family: 'Inter', sans-serif; overflow-x: hidden
   .profile-body { grid-template-columns: 260px 1fr; gap: 20px; padding: 24px 20px 60px; }
   .wish-grid { grid-template-columns: 1fr 1fr; }
   .form-grid--3 { grid-template-columns: 1fr 1fr; }
-  .profile-hero__stats { display: none; }
 }
 
 @media (max-width: 680px) {
-  .site-nav { padding: 0 16px; }
-  .site-nav__links { display: none; }
-  .user-name { display: none; }
-
   .mobile-nav-strip { display: block; }
-
-  .profile-hero { padding: 28px 0 20px; }
-  .profile-hero__inner { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
-  .profile-hero__name { font-size: 24px; }
 
   .profile-body {
     grid-template-columns: 1fr;
@@ -1178,8 +1112,6 @@ body { background: #f9fafb; font-family: 'Inter', sans-serif; overflow-x: hidden
 
   .booking-item { flex-direction: column; }
   .booking-item__img { width: 100%; height: 140px; }
-
-  .profile-hero__stats { display: none; }
 }
 
 @media (max-width: 400px) {
@@ -1190,24 +1122,47 @@ body { background: #f9fafb; font-family: 'Inter', sans-serif; overflow-x: hidden
 <body>
 
 <!-- ─── SITE NAV ──────────────────────────────────────────────── -->
-<nav class="site-nav">
-  <a href="index.html" class="site-nav__logo">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10" stroke="#f54900" stroke-width="2.5"/>
-      <path d="M7 12c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5" stroke="#fe9a00" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    great D'tour
-  </a>
-  <div class="site-nav__links">
-    <a href="index.html">Home</a>
-    <a href="programs.html">Programs</a>
-    <a href="experiences.html">Experiences</a>
-    <a href="field-notes.html">Field Notes</a>
-    <a href="about.html">About Us</a>
-  </div>
-  <div class="site-nav__right">
-    <span class="user-name">Arjun Rao</span>
-    <div class="user-avatar">AR</div>
+<nav class="nav nav--page" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="assets/GDT_logo_white.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-white" />
+      <img src="assets/GDT_logo_black.svg" alt="Great D'Tour" class="nav__logo-img nav__logo-dark" />
+    </a>
+    <div class="nav__links">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="programs.html" class="nav__link">Programs</a>
+      <a href="experiences.html" class="nav__link">Experiences</a>
+      <a href="field-notes.html" class="nav__link">Field Notes</a>
+      <a href="about.html" class="nav__link">About Us</a>
+    </div>
+    <div class="nav__actions">
+      <a href="host.html" class="nav__cta">Become a Host</a>
+      <div class="nav__user">
+        <button class="nav__avatar nav__avatar--loggedin" id="navAvatarBtn" aria-label="Account" onclick="toggleUserMenu()">AR</button>
+        <div class="nav__user-dropdown" id="userDropdown">
+          <div class="nav__dd-header">
+            <div class="nav__dd-name">Arjun Rao</div>
+            <div class="nav__dd-email">arjun.rao@gmail.com</div>
+          </div>
+          <a href="profile.html" class="nav__dd-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" stroke="currentColor" stroke-width="1.5"/><path d="M3 20c0-3.9 4-7 9-7s9 3.1 9 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            My Profile
+          </a>
+          <a href="experiences.html" class="nav__dd-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13 21l2-2 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="currentColor" stroke-width="1.5"/></svg>
+            Browse Experiences
+          </a>
+          <hr class="nav__dd-divider" />
+          <button class="nav__dd-item nav__dd-item--danger" onclick="handleSignOut()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Sign Out
+          </button>
+        </div>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -1219,24 +1174,6 @@ body { background: #f9fafb; font-family: 'Inter', sans-serif; overflow-x: hidden
     <button class="mobile-nav-pill" onclick="switchPanel('volunteer',this,'mobile')">Volunteer</button>
     <button class="mobile-nav-pill" onclick="switchPanel('wishlist',this,'mobile')">Wishlist</button>
     <button class="mobile-nav-pill" onclick="switchPanel('reviews',this,'mobile')">Reviews</button>
-  </div>
-</div>
-
-<!-- ─── HERO ──────────────────────────────────────────────────── -->
-<div class="profile-hero">
-  <div class="profile-hero__inner">
-    <div class="profile-hero__left">
-      <p class="profile-hero__label">Traveller Profile</p>
-      <h1 class="profile-hero__name">
-        Arjun Rao
-        <span class="hero-verified" title="Verified">✓</span>
-      </h1>
-      <div class="profile-hero__sub">
-        <span class="hero-chip"><span class="hero-chip__dot"></span> Active Member</span>
-        <span>arjun.rao@gmail.com</span>
-        <span>Since Jan 2024</span>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1858,5 +1795,6 @@ body { background: #f9fafb; font-family: 'Inter', sans-serif; overflow-x: hidden
     setTimeout(() => window.location = 'index.html', 1400);
   }
 </script>
+<script src="assets/main.js"></script>
 </body>
 </html>
