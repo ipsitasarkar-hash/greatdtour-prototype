@@ -4423,9 +4423,11 @@
         const nb = document.getElementById('hn-' + tab) || document.getElementById('hn-' + tab + '2');
         if (nb) nb.classList.add('is-active');
       }
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo({ top: 0 });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
+      document.documentElement.style.scrollBehavior = '';
       if (tab === 'applicants')    renderTable();
       if (tab === 'prog-bookings') renderPbTable();
     }
