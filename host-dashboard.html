@@ -405,6 +405,7 @@
     .hd-panel { display: none; }
     .hd-panel.is-active { display: block; padding: 36px 40px 80px; }
     .hd-panel.is-active#panel-overview { padding: 0; }
+    .hd-panel.is-active#panel-prog-bookings { padding-top: 24px; }
 
     /* ── PANEL HEADER ── */
     .hd-panel-head {
@@ -4422,7 +4423,7 @@
         const nb = document.getElementById('hn-' + tab) || document.getElementById('hn-' + tab + '2');
         if (nb) nb.classList.add('is-active');
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
       if (tab === 'applicants')    renderTable();
       if (tab === 'prog-bookings') renderPbTable();
     }
