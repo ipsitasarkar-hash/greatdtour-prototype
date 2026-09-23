@@ -4384,6 +4384,10 @@
 
   <script src="assets/main.js"></script>
   <script>
+    // Disable browser scroll restoration so GitHub Pages doesn't restore a stale scroll position
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // Profile completion bar   only shown when < 100%
     (function() {
       const completion = 72;
