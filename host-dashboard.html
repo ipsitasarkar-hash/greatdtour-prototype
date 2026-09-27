@@ -73,6 +73,8 @@
       border: none; background: none; width: 100%; text-align: left;
     }
     .hd-nav__group-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .hd-nav__group-btn.is-active { background: rgba(255,255,255,0.10); color: #fff; font-weight: 500; }
+    .hd-nav__group-btn.is-active svg { opacity: 1; }
     .hd-nav__group-btn svg { flex-shrink: 0; width: 20px; height: 20px; opacity: 0.8; }
     .hd-nav__group-chevron {
       margin-left: auto; width: 16px; height: 16px; opacity: 0.5;
@@ -1149,11 +1151,24 @@
         Account Settings
       </button>
 
-      <!-- Dashboard -->
-      <button class="hd-nav__item is-active" id="hn-overview" onclick="switchTab('overview', this)">
-        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg>
-        Dashboard
-      </button>
+      <!-- Dashboard group -->
+      <div class="hd-nav__group is-open" id="navgroup-dashboard">
+        <button class="hd-nav__group-btn is-active" id="hn-overview" onclick="toggleNavGroup('dashboard')">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg>
+          Dashboard
+          <svg class="hd-nav__group-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="hd-nav__sub">
+          <button class="hd-nav__sub-item is-active" id="hn-dash-marketplace" onclick="switchTab('overview', document.getElementById('hn-overview')); setDashMode('marketplace'); setDashSubActive(this)">
+            <svg viewBox="0 0 24 24" fill="none" style="width:14px;height:14px;flex-shrink:0"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" stroke="currentColor" stroke-width="1.8"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.8"/><path d="M16 10a4 4 0 0 1-8 0" stroke="currentColor" stroke-width="1.8"/></svg>
+            GDT Marketplace
+          </button>
+          <button class="hd-nav__sub-item" id="hn-dash-care" onclick="switchTab('overview', document.getElementById('hn-overview')); setDashMode('care'); setDashSubActive(this)">
+            <svg viewBox="0 0 24 24" fill="none" style="width:14px;height:14px;flex-shrink:0"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="currentColor" stroke-width="1.8"/></svg>
+            GDT Care
+          </button>
+        </div>
+      </div>
 
       <!-- Tours group -->
       <div class="hd-nav__group" id="navgroup-tours">
@@ -1317,7 +1332,8 @@
         }
         .db-last-visited button:hover { opacity:1; }
 
-        /* ── MODE TOGGLE ── */
+
+        /* ── MODE TOGGLE (removed – now in sidebar) ── */
         .db-header-row {
           display:flex; align-items:flex-start; justify-content:space-between;
           flex-wrap:wrap; gap:12px; margin-bottom:20px;
@@ -1325,57 +1341,29 @@
         .db-header-row h2 { margin:0; font-size:22px; font-weight:700; color:#101828; }
         .db-header-row .db-header-sub { font-size:13px; color:#6b7280; margin-top:3px; }
 
-        .db-mode-toggle {
-          display:flex; align-items:stretch; gap:8px;
-        }
-        .db-mode-btn {
-          display:flex; align-items:center; gap:10px;
-          padding:10px 18px; border-radius:12px; border:2px solid #e5e7eb;
-          cursor:pointer; font-size:13px; font-weight:500; color:#6b7280;
-          background:#fff; transition:all 0.2s; position:relative; overflow:hidden;
-          min-width:160px;
-        }
-        .db-mode-btn::before {
-          content:''; position:absolute; inset:0; opacity:0; transition:opacity 0.2s;
-        }
-        .db-mode-btn:hover { border-color:#d1d5db; color:#374151; background:#fafafa; }
-        .db-mode-btn__icon {
-          width:34px; height:34px; border-radius:9px;
-          display:flex; align-items:center; justify-content:center; flex-shrink:0;
-          background:#f3f4f6; transition:background 0.2s;
-        }
-        .db-mode-btn__icon svg { width:17px; height:17px; }
-        .db-mode-btn__text { display:flex; flex-direction:column; gap:1px; text-align:left; }
-        .db-mode-btn__label { font-size:13px; font-weight:600; line-height:1.2; }
-        .db-mode-btn__sub { font-size:11px; font-weight:400; opacity:0.65; line-height:1.2; }
-        .db-mode-btn__dot {
-          width:8px; height:8px; border-radius:50%; background:#d1d5db;
-          flex-shrink:0; margin-left:auto; transition:background 0.2s;
-        }
+        /* ── CARE VIEW KPI grid (4-col) ── */
+        .db-care-kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
 
-        /* Marketplace active */
-        .db-mode-btn--marketplace.db-mode-btn--active {
-          border-color:#f54900; background:#fff7ed; color:#101828;
-          box-shadow:0 2px 12px rgba(245,73,0,0.12);
+        /* ── MOBILE: dashboard ── */
+        @media (max-width: 768px) {
+          .db-layout { grid-template-columns:1fr; }
+          .db-rail { width:100%; height:auto; position:static; border-left:none; border-top:1px solid #e5e7eb; }
+          .db-main { padding:16px 16px 48px; }
+          .db-kpi-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+          .db-care-kpi-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+          .db-row2 { grid-template-columns:1fr; }
+          .db-trip-bar { flex-direction:column; align-items:flex-start; gap:12px; }
+          .db-trip-bar__divider { width:100%; height:1px; }
+          .db-trip-bar__track { width:100%; }
+          .db-bk-table { font-size:12px; }
+          .db-bk-table th, .db-bk-table td { padding:8px 10px; }
         }
-        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__icon {
-          background:#f54900;
+        @media (max-width: 480px) {
+          .db-kpi-grid { grid-template-columns:1fr; }
+          .db-care-kpi-grid { grid-template-columns:1fr; }
+          .db-kpi { padding:14px 16px; }
+          .db-kpi__val { font-size:20px; }
         }
-        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__icon svg { stroke:#fff; }
-        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__dot { background:#f54900; }
-        .db-mode-btn--marketplace.db-mode-btn--active .db-mode-btn__label { color:#c2390a; }
-
-        /* Care active */
-        .db-mode-btn--care.db-mode-btn--active {
-          border-color:#16a34a; background:#f0fdf4; color:#101828;
-          box-shadow:0 2px 12px rgba(22,163,74,0.12);
-        }
-        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__icon {
-          background:#16a34a;
-        }
-        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__icon svg { stroke:#fff; }
-        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__dot { background:#16a34a; }
-        .db-mode-btn--care.db-mode-btn--active .db-mode-btn__label { color:#15803d; }
       </style>
 
         <div class="db-layout">
@@ -1394,31 +1382,6 @@
             <div>
               <div class="hd-page-title">Dashboard</div>
               <div style="font-size:13px;color:#6b7280;">Welcome back, Wild Trails India   Tuesday, 1 July 2026</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-              <!-- Mode toggle -->
-              <div class="db-mode-toggle" id="dbModeToggle">
-                <button class="db-mode-btn db-mode-btn--marketplace db-mode-btn--active" id="btnMarketplace" onclick="setDashMode('marketplace')">
-                  <div class="db-mode-btn__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                  </div>
-                  <div class="db-mode-btn__text">
-                    <div class="db-mode-btn__label">GDT Marketplace</div>
-                    <div class="db-mode-btn__sub">Tours &amp; bookings</div>
-                  </div>
-                  <div class="db-mode-btn__dot"></div>
-                </button>
-                <button class="db-mode-btn db-mode-btn--care" id="btnCare" onclick="setDashMode('care')">
-                  <div class="db-mode-btn__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z"/></svg>
-                  </div>
-                  <div class="db-mode-btn__text">
-                    <div class="db-mode-btn__label">GDT Care</div>
-                    <div class="db-mode-btn__sub">Volunteering &amp; conservation</div>
-                  </div>
-                  <div class="db-mode-btn__dot"></div>
-                </button>
-              </div>
             </div>
           </div>
 
@@ -1593,7 +1556,7 @@
           <div id="db-view-care" style="display:none;">
 
             <!-- Care KPI cards -->
-            <div class="db-kpi-grid" style="grid-template-columns:repeat(4,1fr);">
+            <div class="db-care-kpi-grid">
               <div class="db-kpi" style="border-color:#d1fae5;">
                 <div class="db-kpi__icon" style="background:#f0fdf4;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#16a34a" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -4477,26 +4440,18 @@
     function setDashMode(mode) {
       const marketplace = document.getElementById('db-view-marketplace');
       const care = document.getElementById('db-view-care');
-      const btnM = document.getElementById('btnMarketplace');
-      const btnC = document.getElementById('btnCare');
-      // Update icon stroke colors
-      const mIcon = btnM && btnM.querySelector('.db-mode-btn__icon svg');
-      const cIcon = btnC && btnC.querySelector('.db-mode-btn__icon svg');
       if (mode === 'marketplace') {
         if (marketplace) marketplace.style.display = '';
         if (care) care.style.display = 'none';
-        if (btnM) btnM.classList.add('db-mode-btn--active');
-        if (btnC) btnC.classList.remove('db-mode-btn--active');
-        if (mIcon) mIcon.setAttribute('stroke', '#f54900');
-        if (cIcon) cIcon.setAttribute('stroke', '#6b7280');
       } else {
         if (marketplace) marketplace.style.display = 'none';
         if (care) care.style.display = '';
-        if (btnC) btnC.classList.add('db-mode-btn--active');
-        if (btnM) btnM.classList.remove('db-mode-btn--active');
-        if (cIcon) cIcon.setAttribute('stroke', '#16a34a');
-        if (mIcon) mIcon.setAttribute('stroke', '#6b7280');
       }
+    }
+
+    function setDashSubActive(btn) {
+      document.querySelectorAll('#navgroup-dashboard .hd-nav__sub-item').forEach(el => el.classList.remove('is-active'));
+      btn.classList.add('is-active');
     }
 
     // ── LAST VISITED TRACKING ──
