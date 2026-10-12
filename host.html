@@ -188,8 +188,8 @@
     }
     .btn-cta-travel:hover { opacity: 0.88; }
     .btn-cta-vol {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; background: var(--green); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      width: auto; background: var(--green); color: #fff;
       font-size: 15px; font-weight: 700; padding: 16px 24px;
       border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s;
     }
@@ -428,6 +428,491 @@
       .host-hero__ctas { flex-direction: column !important; }
       .h-two-col { gap: 28px !important; }
     }
+
+    /* ── FEATURE ACCORDION ─────────────────────────────── */
+    .care-feat-item { background: #fff; border-bottom: 1px solid #f0f0f0; }
+    .care-feat-btn {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; background: none; border: none; cursor: pointer; gap: 16px;
+      transition: background 0.15s;
+    }
+    .care-feat-btn:hover { background: #fafafa; }
+    .care-feat-chevron { flex-shrink: 0; transition: transform 0.22s; }
+    .care-feat-item--open .care-feat-chevron { transform: rotate(180deg); }
+    .care-feat-item--open .care-feat-chevron path { stroke: #2E7D32; }
+    .care-feat-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+    }
+    .care-feat-item--open .care-feat-body { max-height: 400px; }
+
+    /* ── RESPONSIVE ADDITIONS ──────────────────────────── */
+    .care-hero-grid, .mkt-hero-grid { grid-template-columns: 1fr 1fr; }
+    .before-after-grid { grid-template-columns: 1fr 1fr; }
+    .who-grid { grid-template-columns: repeat(3,1fr); }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: repeat(3,1fr); }
+
+    @media (max-width: 960px) {
+      .care-hero-grid, .mkt-hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .pricing-grid { grid-template-columns: 1fr !important; max-width: 420px !important; }
+    }
+    @media (max-width: 768px) {
+      .before-after-grid { grid-template-columns: 1fr !important; }
+      .who-grid { grid-template-columns: 1fr 1fr !important; }
+      .benefits-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 500px) {
+      .who-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ══════════════════════════════════════════════════
+       CARE HERO SECTION
+    ══════════════════════════════════════════════════ */
+    .care-hero-section {
+      background: linear-gradient(160deg, #0b1a0b 0%, #0d1f0d 55%, #132013 100%);
+      padding: 88px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Two-column grid: text left, visual right */
+    .care-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 64px;
+      align-items: center;
+      padding-bottom: 72px;
+    }
+
+    /* ── Left: hero body ── */
+    .care-hero-body { }
+
+    /* ── Opening type chips ── */
+    .care-chip {
+      display: inline-flex; align-items: center;
+      background: rgba(46,125,50,0.18); border: 1px solid rgba(46,125,50,0.35);
+      color: #a5d6a7; font-size: 12px; font-weight: 500;
+      padding: 5px 12px; border-radius: 999px;
+    }
+
+    /* ── Right: image cluster + snippet box ── */
+    .care-hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── Image cluster ── */
+    .care-img-cluster {
+      position: relative;
+      height: 280px;
+    }
+    .cic-img {
+      position: absolute;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .cic-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    /* Main image — large, center */
+    .cic-img--main {
+      width: 300px; height: 200px;
+      left: 50%; top: 30px;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    /* Flanking images */
+    .cic-img--float-right {
+      width: 190px; height: 155px;
+      right: 0; top: 0;
+      transform: rotate(2.5deg);
+      z-index: 1;
+    }
+    .cic-img--float-left {
+      width: 175px; height: 145px;
+      left: 0; top: 55px;
+      transform: rotate(-2deg);
+      z-index: 1;
+    }
+    /* Founding spots pill */
+    .cic-stat {
+      position: absolute;
+      bottom: 6px; right: 14%;
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+      display: flex; flex-direction: column; align-items: flex-start;
+      z-index: 3; white-space: nowrap;
+    }
+    .cic-stat__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700; color: #0d1f0d; line-height: 1;
+    }
+    .cic-stat__label {
+      font-size: 10px; color: #737373; margin-top: 2px; font-weight: 500;
+    }
+
+    /* ── Snippet box ── */
+    .care-snippet-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: center;
+      padding: 20px 24px;
+      gap: 0;
+    }
+    .care-snippet-item {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 0 8px;
+    }
+    .care-snippet-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 700; color: #66bb6a; line-height: 1;
+    }
+    .care-snippet-label {
+      font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 4px; line-height: 1.4;
+    }
+    .care-snippet-divider {
+      width: 1px; height: 36px; background: rgba(255,255,255,0.12); flex-shrink: 0;
+    }
+
+    /* ── Trust strip ── */
+    .care-trust-strip {
+      background: #fff;
+      border-top: 1px solid #e5e5e5;
+      padding: 24px 0;
+    }
+    .care-trust-inner {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 0;
+    }
+    .care-trust-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 32px; flex-shrink: 0;
+    }
+    .care-trust-logo {
+      height: 40px; width: auto; object-fit: contain; display: block;
+    }
+    .care-trust-logo--zoho { height: 32px; }
+    .care-trust-title {
+      font-size: 11px; font-weight: 500; color: #737373;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .care-trust-sub {
+      font-size: 13px; color: #171717; margin-top: 1px;
+    }
+    .care-trust-divider {
+      width: 1px; height: 36px; background: #e5e5e5; flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .care-hero-grid { grid-template-columns: 1fr 420px; gap: 48px; }
+    }
+    @media (max-width: 900px) {
+      .care-hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .care-img-cluster { height: 240px; }
+      .cic-img--main { width: 250px; height: 170px; }
+      .cic-img--float-right { width: 160px; height: 130px; }
+      .cic-img--float-left { width: 150px; height: 120px; }
+      .care-trust-item { padding: 10px 20px; }
+    }
+    @media (max-width: 640px) {
+      .care-hero-grid { padding-bottom: 52px; }
+      .care-img-cluster { height: 200px; }
+      .cic-img--main { width: 200px; height: 140px; top: 20px; }
+      .cic-img--float-right { width: 130px; height: 105px; }
+      .cic-img--float-left { width: 120px; height: 100px; top: 35px; }
+      .cic-stat { right: 8px; padding: 8px 12px; }
+      .care-snippet-box { grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px; }
+      .care-snippet-divider { display: none; }
+      .care-trust-divider { display: none; }
+      .care-trust-item { padding: 10px 14px; }
+      .care-trust-inner { justify-content: flex-start; }
+    }
+    /* ── BEFORE / AFTER TABLE ─────────────────────────── */
+    .ba-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+    }
+    .ba-header {
+      display: flex; align-items: center; gap: 9px;
+      padding: 20px 32px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.3px;
+    }
+    .ba-header--bad  { background: #2a2a2a; color: rgba(255,255,255,0.7); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .ba-header--good { background: #1e4a1e; color: #81c784; border-left: 1px solid rgba(46,125,50,0.3); border-bottom: 1px solid rgba(46,125,50,0.2); }
+    .ba-cell {
+      padding: 18px 32px;
+      font-size: 14px; line-height: 1.65;
+      border-bottom: 1px solid #f0f0f0;
+      position: relative;
+    }
+    .ba-cell--bad  { background: #fff; color: #737373; }
+    .ba-cell--bad::before {
+      content: '✕';
+      display: inline-block; margin-right: 10px;
+      color: #ef4444; font-size: 11px; font-weight: 700;
+    }
+    .ba-cell--good { background: #f6fbf6; color: #2a2a2a; border-left: 1px solid rgba(46,125,50,0.15); }
+    .ba-cell--good::before {
+      content: '✓';
+      display: inline-block; margin-right: 10px;
+      color: #2E7D32; font-size: 12px; font-weight: 700;
+    }
+    .ba-cell--last { border-bottom: none; }
+
+    @media (max-width: 640px) {
+      .ba-table { grid-template-columns: 1fr; border-radius: 14px; }
+      .ba-header--good { border-left: none; border-top: 3px solid #2E7D32; }
+      .ba-cell--good { border-left: none; border-top: 1px solid rgba(46,125,50,0.1); }
+      .ba-cell--last.ba-cell--bad { border-bottom: 1px solid #f0f0f0; }
+      .ba-cell--last.ba-cell--good { border-bottom: none; }
+    }
+    /* ── BENEFIT ROWS ─────────────────────────────────── */
+    .benefits-rows { display: flex; flex-direction: column; gap: 0; }
+
+    .benefit-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      border: 1px solid #e5e5e5;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .benefit-row--flip { direction: rtl; }
+    .benefit-row--flip > * { direction: ltr; }
+
+    .benefit-row__text {
+      padding: 48px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+      background: #fff;
+    }
+    .benefit-row--flip .benefit-row__text {
+      background: #fafafa;
+    }
+
+    .benefit-row__icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(46,125,50,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; flex-shrink: 0;
+    }
+    .benefit-row__num {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      color: #2E7D32; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .benefit-row__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 600; color: #171717;
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    .benefit-row__desc {
+      font-size: 15px; color: #525252; line-height: 1.75; margin-bottom: 20px;
+    }
+    .benefit-row__link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: #2E7D32; text-decoration: none;
+    }
+    .benefit-row__link:hover { text-decoration: underline; }
+
+    .benefit-row__img {
+      background: #f0f4f0;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; min-height: 320px;
+    }
+    .benefit-row__img img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: top left;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .benefit-row { grid-template-columns: 1fr; direction: ltr; }
+      .benefit-row--flip { direction: ltr; }
+      .benefit-row__img { min-height: 220px; order: -1; }
+      .benefit-row__text { padding: 32px 28px; }
+    }
+    /* ── WHO IT'S FOR (light, photo+grid layout) ──────── */
+    .who-section {
+      background: #fafafa;
+      padding: 88px 0;
+    }
+    .who-section::before { display: none; }
+    .who-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 40px;
+    }
+    .who-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: #e5e5e5;
+    }
+    .who-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .who-grid-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .who-item {
+      padding: 22px 20px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .who-item:nth-child(odd) { border-right: 1px solid #e5e5e5; }
+    .who-item__icon {
+      color: #2E7D32;
+      margin-bottom: 12px;
+    }
+    .who-item__title { font-size: 14px; font-weight: 700; color: #171717; margin-bottom: 4px; }
+    .who-item__desc  { font-size: 13px; color: #737373; line-height: 1.6; }
+
+    /* ── HOW IT WORKS — large step cards ──────────────── */
+    .hiw-steps {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 2px; margin-bottom: 52px;
+      background: #e5e5e5; border-radius: 20px; overflow: hidden;
+    }
+    .hiw-step {
+      background: #fff; padding: 36px 28px;
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+    .hiw-step:first-child { border-radius: 20px 0 0 20px; }
+    .hiw-step:last-child  { border-radius: 0 20px 20px 0; }
+    .hiw-step__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px; font-weight: 700; line-height: 1;
+      color: rgba(46,125,50,0.12); margin-bottom: 16px;
+    }
+    .hiw-step__icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(46,125,50,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .hiw-step__time {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      color: #2E7D32; text-transform: uppercase; letter-spacing: 0.5px;
+      background: rgba(46,125,50,0.1); border-radius: 999px;
+      padding: 3px 10px; margin-bottom: 10px; width: fit-content;
+    }
+    .hiw-step__title { font-size: 16px; font-weight: 700; color: #171717; margin-bottom: 8px; }
+    .hiw-step__desc  { font-size: 13px; color: #525252; line-height: 1.65; flex: 1; }
+
+    @media (max-width: 768px) {
+      .hiw-steps { grid-template-columns: 1fr 1fr; }
+      .hiw-step:first-child { border-radius: 20px 0 0 0; }
+      .hiw-step:last-child  { border-radius: 0 0 20px 0; }
+    }
+    @media (max-width: 500px) {
+      .hiw-steps { grid-template-columns: 1fr; border-radius: 16px; }
+      .hiw-step:first-child { border-radius: 16px 16px 0 0; }
+      .hiw-step:last-child  { border-radius: 0 0 16px 16px; }
+    }
+
+    /* ── FAQ TWO-COLUMN ────────────────────────────────── */
+    .care-faq-section {
+      background: #fafafa; padding: 88px 0;
+    }
+    .care-faq-section .h-container { max-width: 1200px; }
+    .care-faq-grid {
+      display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: start;
+    }
+    .care-faq-aside {
+      background: linear-gradient(160deg, #0d1f0d 0%, #1a2f1a 100%);
+      border-radius: 20px; padding: 36px 32px;
+      position: sticky; top: 90px;
+    }
+    .care-faq-cta-card {
+      background: #fff; border-radius: 14px; padding: 24px 22px; margin-top: 28px;
+    }
+    .care-faq-list {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .care-faq-list .faq-item {
+      border-radius: 12px; border: 1px solid #e5e5e5;
+    }
+    .care-faq-list .faq-item--open {
+      border-color: rgba(46,125,50,0.3);
+      box-shadow: 0 2px 12px rgba(46,125,50,0.08);
+    }
+    .care-faq-list .faq-item--open .faq-item__icon { color: #2E7D32; }
+
+    /* ── HOW IT WORKS CAROUSEL ────────────────────────── */
+    .hiw-carousel { position: relative; overflow: hidden; border-radius: 20px; }
+    .hiw-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .hiw-slide {
+      min-width: 100%; display: grid;
+      grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .hiw-slide__img {
+      background: #e5e5e5; overflow: hidden; min-height: 400px;
+    }
+    .hiw-slide__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hiw-slide__steps {
+      padding: 40px 36px; background: #fff;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .hiw-slide__phase {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: #2E7D32; margin-bottom: 24px;
+    }
+    .hiw-slide__step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 0; border-bottom: 1px solid #f0f0f0;
+    }
+    .hiw-slide__step:last-child { border-bottom: none; }
+    .hiw-slide__num {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(46,125,50,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: #2E7D32;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .hiw-slide__title { font-size: 14px; font-weight: 700; color: #171717; margin-bottom: 4px; }
+    .hiw-slide__desc  { font-size: 13px; color: #737373; line-height: 1.65; }
+    .hiw-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 20px; padding: 0 4px;
+    }
+    .hiw-dots { display: flex; gap: 8px; }
+    .hiw-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #d4d4d4; border: none; cursor: pointer;
+      padding: 0; transition: background 0.2s, width 0.2s;
+    }
+    .hiw-dot--active { background: #2E7D32; width: 24px; border-radius: 4px; }
+    .hiw-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #fff; border: 1.5px solid #e5e5e5;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: #171717;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .hiw-arrow:hover { border-color: #2E7D32; color: #2E7D32; }
+    .hiw-arrow:disabled { opacity: 0.35; cursor: default; }
+
+    @media (max-width: 900px) {
+      .care-faq-grid { grid-template-columns: 1fr; gap: 36px; }
+      .care-faq-aside { position: static; }
+    }
   </style>
 </head>
 <body>
@@ -472,320 +957,712 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             Sign Out
           </button>
-        </div>
-      </div>
+        </div><!-- /nav__user-dropdown -->
+      </div><!-- /nav__user -->
+      </div><!-- /nav__actions -->
       <button class="nav__hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ── HERO ───────────────────────────────────────────── -->
-  <section class="host-hero">
-    <div class="host-hero__inner">
-      <div class="host-hero__text">
-        <div class="host-hero__badge">
-          <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#ff7043"/></svg>
-          Founding host intake open
+  <!-- ════════════════════════════════════════════════════
+       GDT CARE SECTION
+  ════════════════════════════════════════════════════ -->
+  <div id="gdt-care">
+
+  <!-- ── CARE HERO ──────────────────────────────────────── -->
+  <section class="care-hero-section">
+    <!-- background glows -->
+    <div style="position:absolute;top:-120px;right:-60px;width:520px;height:520px;border-radius:50%;background:rgba(46,125,50,0.10);filter:blur(110px);pointer-events:none;z-index:0;"></div>
+    <div style="position:absolute;bottom:-80px;left:-40px;width:360px;height:360px;border-radius:50%;background:rgba(46,125,50,0.07);filter:blur(90px);pointer-events:none;z-index:0;"></div>
+
+    <div class="h-container care-hero-grid" style="position:relative;z-index:1;">
+
+      <!-- ── LEFT: headline + copy + CTAs + chips ── -->
+      <div class="care-hero-body">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(46,125,50,0.2);border:1px solid rgba(46,125,50,0.4);border-radius:999px;padding:5px 14px;margin-bottom:20px;font-size:11px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;color:#66bb6a;">
+          <svg width="7" height="7" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#66bb6a"/></svg>
+          GDT Care · Founding spots open · Free to start
         </div>
-        <h1 class="host-hero__title">For hosts whose work<br />is meant to be<br /><em>experienced.</em></h1>
-        <p class="host-hero__sub">Built to support your program, so you stay independent and in control.</p>
-        <div class="host-hero__ctas">
-          <button class="btn-hero-travel" onclick="openSignupModal()">
-            Sign Up
-            <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(34px,3.6vw,52px);font-weight:600;color:#fff;line-height:1.1;margin-bottom:18px;">Shortlist the right people.<br /><em style="color:#66bb6a;">Skip everything else.</em></h1>
+        <p style="font-size:17px;color:rgba(255,255,255,0.75);line-height:1.8;max-width:520px;margin-bottom:32px;">GDT Care is the shortlisting app for volunteer programmes, internships, fellowships and seasonal teams. Applications from every channel arrive in one place, already screened. You make the final call.</p>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:32px;">
+          <button class="btn-cta-vol" onclick="openSignupModal()">
+            List your first opening, free
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
+          <a href="#care-how-it-works" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:15px;font-weight:500;padding:14px 22px;border-radius:8px;text-decoration:none;white-space:nowrap;">See how it works ↓</a>
         </div>
-        <p style="margin-top:18px;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.3px;">Free to join &nbsp;·&nbsp; Limited founding spots &nbsp;·&nbsp; Quick onboarding</p>
-      </div>
-      <div class="hero-mosaic-wrap">
-        <div class="host-hero__mosaic">
-          <div class="hero-col">
-            <div class="hero-img hero-img--tall"><img src="assets/images/vol-ocean-cleanup.jpg" alt="Volunteers at work" /></div>
-            <div class="hero-img hero-img--short"><img src="assets/images/immersion2.jpg" alt="" /></div>
-          </div>
-          <div class="hero-col hero-col--offset">
-            <div class="hero-img hero-img--short"><img src="assets/images/vol-wetland.jpg" alt="Wetland conservation volunteers" /></div>
-            <div class="hero-img hero-img--tall"><img src="assets/images/landscape.jpg" alt="" /></div>
-          </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="care-chip">Volunteer</span>
+          <span class="care-chip">Work Exchange</span>
+          <span class="care-chip">Internship</span>
+          <span class="care-chip">Fellowship</span>
+          <span class="care-chip">Residency</span>
+          <span class="care-chip">Seasonal Role</span>
         </div>
       </div>
-      </div><!-- /nav__actions -->
+
+      <!-- ── RIGHT: overlapping images + snippet box ── -->
+      <div class="care-hero-visual">
+        <!-- overlapping image cluster -->
+        <div class="care-img-cluster" aria-hidden="true">
+          <div class="cic-img cic-img--main">
+            <img src="assets/images/vol-ocean-cleanup.jpg" alt="" />
+          </div>
+          <div class="cic-img cic-img--float-right">
+            <img src="assets/images/vol-wetland.jpg" alt="" />
+          </div>
+          <div class="cic-img cic-img--float-left">
+            <img src="assets/images/immersion2.jpg" alt="" />
+          </div>
+        </div>
+
+        <!-- snippet / perks box -->
+        <div class="care-snippet-box">
+          <div class="care-snippet-item">
+            <span class="care-snippet-val">0%</span>
+            <span class="care-snippet-label">Commission — always</span>
+          </div>
+          <div class="care-snippet-divider"></div>
+          <div class="care-snippet-item">
+            <span class="care-snippet-val">50</span>
+            <span class="care-snippet-label">Founding host slots</span>
+          </div>
+          <div class="care-snippet-divider"></div>
+          <div class="care-snippet-item">
+            <span class="care-snippet-val">Free</span>
+            <span class="care-snippet-label">For NGOs &amp; non-profits</span>
+          </div>
+          <div class="care-snippet-divider"></div>
+          <div class="care-snippet-item">
+            <span class="care-snippet-val">1-click</span>
+            <span class="care-snippet-label">Shortlist &amp; reject</span>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
 
-  <!-- ── SHARED WHY ─────────────────────────────────────── -->
-  <section class="host-why">
-    <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">Why GDT</span>
-        <h2 style="font-family:'Playfair Display',serif;font-size:42px;font-weight:500;">The Best Experiences Shouldn't Be Hard to Find.</h2>
-        <p style="max-width:680px;margin-left:auto;margin-right:auto;">Some of the most thoughtful programs are built quietly, by people focused on creating great experiences, not promoting them. We built GDT to help those hosts connect with travellers who came looking with intention.</p>
-      </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-card__icon">
-            <svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M14 4C9.6 4 6 7.6 6 12c0 3.2 1.8 6 4.5 7.5L14 22l3.5-2.5C20.2 18 22 15.2 22 12c0-4.4-3.6-8-8-8z" stroke="#f54900" stroke-width="1.8"/><circle cx="14" cy="12" r="2.5" fill="#f54900"/></svg>
-          </div>
-          <p class="why-card__title">Intentional Discovery</p>
-          <p class="why-card__desc">Every traveller and volunteer on GDT is looking for something specific. You're found because you're the right fit, not because you paid for placement.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card__icon">
-            <svg width="22" height="22" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="3" stroke="#f54900" stroke-width="1.8"/><path d="M4 11h20" stroke="#f54900" stroke-width="1.8"/><path d="M9 16h4M9 19h6" stroke="#f54900" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <p class="why-card__title">Confirmed Bookings, Not Enquiries</p>
-          <p class="why-card__desc">GDT is a conversion platform. You receive paid, confirmed bookings. Enquiries, deposits, and abandoned leads are not our model.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card__icon">
-            <svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5L14 17l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="#f54900" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="why-card__title">Merit Over Money</p>
-          <p class="why-card__desc">No promoted slots, no pay-to-be-seen. Every host is verified before going live. After that, reviews and quality do the ranking.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── TWO PROGRAM CARDS ────────────────────────────── -->
-  <section class="host-programmes" id="apply">
-    <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">Two Ways to Host</span>
-        <h2>Most hosts will do both. Start with either.</h2>
-        <p>Pick the path that fits what you've built. You can move between both, and if you join Care now, you enter the Marketplace ahead of the queue.</p>
-      </div>
-      <div class="prog-grid">
-
-        <!-- GDT CARE CARD -->
-        <div class="prog-card prog-card--vol">
-          <div class="prog-card__header">
-            <div class="prog-card__pill">
-              <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#66bb6a"/></svg>
-              Open Now
-            </div>
-            <h2 class="prog-card__title">Your Program Deserves<br /><em>to Be Found.</em></h2>
-            <p class="prog-card__sub">Volunteering with the essence put back in. GDT Care connects your conservation project, craft workshop, or skills-exchange program with deliberate travellers who are actively looking.</p>
-          </div>
-          <div class="prog-card__body">
-            <div class="prog-card__stats">
-              <div class="prog-stat prog-stat--vol">
-                <p class="prog-stat__num">15</p>
-                <p class="prog-stat__label">founding host spots</p>
-              </div>
-              <div class="prog-stat prog-stat--vol">
-                <p class="prog-stat__num">0%</p>
-                <p class="prog-stat__label">commission</p>
-              </div>
-              <div class="prog-stat prog-stat--vol">
-                <p class="prog-stat__num">3 wks</p>
-                <p class="prog-stat__label">to go live</p>
-              </div>
-            </div>
-            <ul class="prog-card__perks">
-              <li>Screened, intentional applicants, not open inbox enquiries</li>
-              <li>Payment after confirmation, not before you meet them</li>
-              <li>Real-time waitlist conversion when a slot opens up</li>
-              <li>Zero commission, volunteer tourism listed free</li>
-              <li>Your story published on Field Notes before your listing goes live</li>
-              <li>Founding Host status, permanently on your profile</li>
-            </ul>
-            <div class="prog-card__cta">
-              <button class="btn-cta-vol" onclick="openSignupModal()">
-                Register as a Care Host, First Year Free
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <p class="prog-card__cta-note">First year free · 15 founding spots · ~15 min form</p>
-            </div>
+    <!-- ── trust strip ── -->
+    <div class="care-trust-strip">
+      <div class="h-container care-trust-inner">
+        <div class="care-trust-item">
+          <img src="assets/images/logo-startupindia.png" alt="Startup India" class="care-trust-logo" />
+          <div>
+            <p class="care-trust-sub">Recognised</p>
           </div>
         </div>
-
-        <!-- MARKETPLACE CARD -->
-        <div class="prog-card prog-card--travel">
-          <div class="prog-card__header">
-            <div class="prog-card__pill">
-              <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" stroke="#ff7043" stroke-width="1.5" fill="none"/></svg>
-              Opening Soon
-            </div>
-            <h2 class="prog-card__title">Share Your World.<br /><em>Earn Doing It.</em></h2>
-            <p class="prog-card__sub">Day trips and multi-day experiences, sold to travellers who pick the experience first, not the destination. Your pricing, your dates, your identity, intact.</p>
-          </div>
-          <div class="prog-card__body">
-            <div class="prog-card__stats">
-              <div class="prog-stat prog-stat--travel">
-                <p class="prog-stat__num">24 mo</p>
-                <p class="prog-stat__label">founder rate locked</p>
-              </div>
-              <div class="prog-stat prog-stat--travel">
-                <p class="prog-stat__num">&#8377;0</p>
-                <p class="prog-stat__label">listing fees</p>
-              </div>
-              <div class="prog-stat prog-stat--travel">
-                <p class="prog-stat__num">3 wks</p>
-                <p class="prog-stat__label">to go live</p>
-              </div>
-            </div>
-            <ul class="prog-card__perks">
-              <li>Full control over pricing, dates, slots, and confirmation method</li>
-              <li>Commission-only, no charge until a booking completes and pays</li>
-              <li>GST handled on your behalf, non-registered operators welcome</li>
-              <li>Your host story on Field Notes from day one</li>
-              <li>Founder cohort rates locked at listing level for 24 months</li>
-            </ul>
-            <div class="prog-card__cta">
-              <button class="btn-cta-travel" onclick="openSignupModal()">
-                Join the Founding Cohort
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <p class="prog-card__cta-note">Join Care now and you enter the Marketplace ahead of the queue.</p>
-            </div>
+        <div class="care-trust-divider"></div>
+        <div class="care-trust-item">
+          <img src="assets/images/logo-zoho.png" alt="Zoho" class="care-trust-logo care-trust-logo--zoho" />
+          <div>
+            <p class="care-trust-sub">Built on</p>
           </div>
         </div>
-
+        <div class="care-trust-divider"></div>
+        <div class="care-trust-item">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l10 4v8c0 5.5-4.4 10.6-10 12C10.4 26.6 6 21.5 6 16V8l10-4z"/><path d="M11 16l3 3 7-6"/></svg>
+          <div>
+            <p class="care-trust-title">Every host</p>
+            <p class="care-trust-sub" style="font-weight:700;">Verified</p>
+          </div>
+        </div>
+        <div class="care-trust-divider"></div>
+        <div class="care-trust-item">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 6c-5.5 0-10 4-10 9 0 3.5 2 6.6 5 8.3V26h10v-2.7c3-1.7 5-4.8 5-8.3 0-5-4.5-9-10-9z"/><path d="M13 26h6"/></svg>
+          <div>
+            <p class="care-trust-title">Free for</p>
+            <p class="care-trust-sub" style="font-weight:700;">Non-profits</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── HOW IT WORKS ───────────────────────────────────── -->
-  <section class="host-process">
+  <!-- ── BEFORE / AFTER ──────────────────────────────────── -->
+  <section style="background:#fff;padding:80px 0;">
     <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">The Process</span>
-        <h2>Fifteen Minutes to Start. Three Weeks to Live.</h2>
-        <p>From registering interest to your first booking, straightforward, guided, and done in under a month.</p>
+      <div class="section-header" style="margin-bottom:44px;">
+        <span class="overline-tag" style="color:#2E7D32;">Same applicants. A completely different intake.</span>
+        <h2 style="font-size:clamp(28px,3vw,40px);">What changes when you use GDT Care</h2>
       </div>
-      <div class="process-unified">
+      <div class="ba-table">
+        <!-- Header row -->
+        <div class="ba-header ba-header--bad">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#ef4444" stroke-width="1.4"/><path d="M5 5l6 6M11 5L5 11" stroke="#ef4444" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Without GDT Care
+        </div>
+        <div class="ba-header ba-header--good">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#2E7D32" stroke-width="1.4"/><path d="M4.5 8l2.5 2.5L11.5 5.5" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          With GDT Care
+        </div>
+        <!-- Row 1 -->
+        <div class="ba-cell ba-cell--bad">Enquiries scattered across WhatsApp, Instagram, email and your website</div>
+        <div class="ba-cell ba-cell--good">One link on every channel. Every application in one place</div>
+        <!-- Row 2 -->
+        <div class="ba-cell ba-cell--bad">The same questions answered again and again</div>
+        <div class="ba-cell ba-cell--good">Programme details, terms and FAQs answered on your listing</div>
+        <!-- Row 3 -->
+        <div class="ba-cell ba-cell--bad">Reading through every profile to find a few who fit</div>
+        <div class="ba-cell ba-cell--good">Screening filters out people who don't fit before they reach you</div>
+        <!-- Row 4 -->
+        <div class="ba-cell ba-cell--bad">Matching skills, dates and locations in spreadsheets</div>
+        <div class="ba-cell ba-cell--good">Applicants apply against your actual slots, batches and locations</div>
+        <!-- Row 5 -->
+        <div class="ba-cell ba-cell--bad">Confirmed applicants who never show up</div>
+        <div class="ba-cell ba-cell--good">Commitment fee on confirmation. If they don't show, the fee comes to you</div>
+        <!-- Row 6 -->
+        <div class="ba-cell ba-cell--bad">Chasing people for updates and reminders</div>
+        <div class="ba-cell ba-cell--good">Status updates, reminders and notifications sent automatically</div>
+        <!-- Row 7 -->
+        <div class="ba-cell ba-cell--bad ba-cell--last">Negotiating fees and chasing payments</div>
+        <div class="ba-cell ba-cell--good ba-cell--last">Training, stay and meal fees collected through the platform, with a clear breakdown</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHO IS IT FOR ───────────────────────────────────── -->
+  <section class="who-section">
+    <div class="h-container">
+      <span class="overline-tag" style="color:#2E7D32;">Who it's for</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,3.5vw,48px);font-weight:700;color:#171717;line-height:1.15;margin-top:12px;margin-bottom:16px;">Built for programmes,<br>not job boards.</h2>
+      <p style="font-size:15px;color:#525252;line-height:1.75;max-width:560px;">GDT Care is designed for organisations that take in people in batches, seasons or cohorts, often with a stay, a purpose and a defined commitment. Standard hiring platforms aren't built for that.</p>
+
+      <div class="who-layout">
+        <!-- Left: photo -->
+        <div class="who-photo">
+          <img src="assets/images/vol-ocean-cleanup.jpg" alt="Programme hosts" />
+        </div>
+
+        <!-- Right: 2×3 grid -->
+        <div class="who-grid-right">
+          <div class="who-item">
+            <div class="who-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+            </div>
+            <p class="who-item__title">Nature &amp; Conservation</p>
+            <p class="who-item__desc">Organic farms, conservation projects, eco-camps</p>
+          </div>
+          <div class="who-item">
+            <div class="who-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <p class="who-item__title">Community, People &amp; Livelihoods</p>
+            <p class="who-item__desc">NGOs, education programmes, rural development</p>
+          </div>
+          <div class="who-item">
+            <div class="who-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <p class="who-item__title">Craft, Heritage &amp; Culture</p>
+            <p class="who-item__desc">Craft collectives, heritage stays, cultural trusts</p>
+          </div>
+          <div class="who-item">
+            <div class="who-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <p class="who-item__title">Wellness &amp; Traditional Practice</p>
+            <p class="who-item__desc">Ashrams, retreats, traditional practice centres</p>
+          </div>
+          <div class="who-item">
+            <div class="who-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+            <p class="who-item__title">Hospitality &amp; Business Operations</p>
+            <p class="who-item__desc">Hostels, homestays, cafés, eco-resorts</p>
+          </div>
+          <div class="who-item">
+            <div class="who-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+            </div>
+            <p class="who-item__title">Sustainable Living &amp; Renewable Resources</p>
+            <p class="who-item__desc">Eco-villages, natural building, clean-energy social enterprises</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOUR BENEFITS ───────────────────────────────────── -->
+  <section style="background:#fff;padding:80px 0;">
+    <div class="h-container">
+      <div class="section-header" style="margin-bottom:52px;">
+        <span class="overline-tag" style="color:#2E7D32;">The four benefits</span>
+        <h2>Control. Less work.<br />Better shortlists. More reach.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e5e5e5;border-radius:20px;overflow:hidden;">
+
+        <!-- Benefit 1 -->
+        <div style="background:#fff;padding:40px 36px;">
+          <div style="width:48px;height:48px;border-radius:12px;background:rgba(46,125,50,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin-bottom:8px;">01</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#171717;line-height:1.2;margin-bottom:12px;">You stay in control</h3>
+          <p style="font-size:15px;color:#525252;line-height:1.75;">You set the opening, the terms, the screening, the schedule and the commitment. Every confirmation is your decision. Your programme carries your name.</p>
+          <a href="#care-features" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#2E7D32;text-decoration:none;margin-top:16px;">See the features →</a>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div style="background:#fafafa;padding:40px 36px;">
+          <div style="width:48px;height:48px;border-radius:12px;background:rgba(46,125,50,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin-bottom:8px;">02</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#171717;line-height:1.2;margin-bottom:12px;">Far less manual work</h3>
+          <p style="font-size:15px;color:#525252;line-height:1.75;">DMs become structured applications. Reminders, status updates, and fee collection happen automatically. You stop being the help desk and the accounts desk.</p>
+          <a href="#care-features" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#2E7D32;text-decoration:none;margin-top:16px;">See the features →</a>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div style="background:#fafafa;padding:40px 36px;">
+          <div style="width:48px;height:48px;border-radius:12px;background:rgba(46,125,50,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </div>
+          <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin-bottom:8px;">03</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#171717;line-height:1.2;margin-bottom:12px;">Better shortlists, faster</h3>
+          <p style="font-size:15px;color:#525252;line-height:1.75;">Screening, your own quiz, and slot-based applications mean the people who reach your desk already fit your skills, dates and location.</p>
+          <a href="#care-features" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#2E7D32;text-decoration:none;margin-top:16px;">See the features →</a>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div style="background:#fff;padding:40px 36px;">
+          <div style="width:48px;height:48px;border-radius:12px;background:rgba(46,125,50,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.4 2 2 0 0 1 3.55 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.74a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z"/></svg>
+          </div>
+          <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin-bottom:8px;">04</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#171717;line-height:1.2;margin-bottom:12px;">More people find you</h3>
+          <p style="font-size:15px;color:#525252;line-height:1.75;">Every opening gets a professional listing on Great D'Tour, backed by content, community outreach and co-marketing. On top of your own channels, not instead of them.</p>
+          <a href="#care-features" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#2E7D32;text-decoration:none;margin-top:16px;">See the features →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURE DEEP-DIVES ─────────────────────────────── -->
+  <section id="care-features" style="background:#fafafa;padding:80px 0;overflow:hidden;">
+    <div class="h-container">
+      <div class="section-header" style="margin-bottom:52px;">
+        <span class="overline-tag" style="color:#2E7D32;">How it works in detail</span>
+        <h2>Every part of the intake, handled.</h2>
+      </div>
+
+      <div class="hiw-carousel" id="featCarousel">
+        <div class="hiw-track" id="featTrack">
+
+          <!-- Slide 1: Getting applications in -->
+          <div class="hiw-slide">
+            <div class="hiw-slide__img">
+              <img src="assets/images/dashboard-1.png" alt="GDT Care — intake and screening" />
+            </div>
+            <div class="hiw-slide__steps">
+              <p class="hiw-slide__phase">Getting applications in</p>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">One intake for every channel</p>
+                  <p class="hiw-slide__desc">Share one programme link on Instagram, WhatsApp, your website, college networks and partner groups. Every application arrives in one dashboard, whichever channel it came from.</p>
+                </div>
+              </div>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Screening that works for you</p>
+                  <p class="hiw-slide__desc">Set eligibility, skills, minimum commitment and screening questions. Upload your own quiz. Applicants who don't meet your criteria are filtered out before you spend a minute on them.</p>
+                </div>
+              </div>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Values and programme fit</p>
+                  <p class="hiw-slide__desc">Ask what matters to your work: motivation, experience, how they handle community living, what they want from the stay. You'll read answers to the questions you care about, not generic CVs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Matching and managing -->
+          <div class="hiw-slide">
+            <div class="hiw-slide__img">
+              <img src="assets/images/dashboard-2.png" alt="GDT Care — batch and fee management" />
+            </div>
+            <div class="hiw-slide__steps">
+              <p class="hiw-slide__phase">Matching and managing</p>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Skills, locations and batches, matched</p>
+                  <p class="hiw-slide__desc">Running more than one location or batch? Create a programme once, clone it, and adjust each copy. Applicants pick the slot, batch and location that suits them.</p>
+                </div>
+              </div>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Commitment that protects your programme</p>
+                  <p class="hiw-slide__desc">You set a commitment fee. Applicants pay it when they confirm. If they show up and complete, it's refunded. If they don't show up, it's paid to you.</p>
+                </div>
+              </div>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Fee collection without the back-and-forth</p>
+                  <p class="hiw-slide__desc">If your programme charges for training, stay or meals, applicants see the full breakdown upfront and pay through the platform on confirmation. No haggling, no chasing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Staying organised -->
+          <div class="hiw-slide">
+            <div class="hiw-slide__img">
+              <img src="assets/images/dashboard-3.png" alt="GDT Care — mobile app and reputation" />
+            </div>
+            <div class="hiw-slide__steps">
+              <p class="hiw-slide__phase">Staying organised</p>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Your programme in your pocket</p>
+                  <p class="hiw-slide__desc">Get notified the moment someone applies. Review profiles and accept or decline from the GDT Care Android app, or manage every programme from one desktop dashboard.</p>
+                </div>
+              </div>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Waitlists that keep people engaged</p>
+                  <p class="hiw-slide__desc">Applicants can see their status at every stage. When a slot opens, your waitlist is ready — and nobody has to chase anybody.</p>
+                </div>
+              </div>
+              <div class="hiw-slide__step">
+                <span class="hiw-slide__num">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+                </span>
+                <div>
+                  <p class="hiw-slide__title">Reviews that build your reputation</p>
+                  <p class="hiw-slide__desc">Hosts and volunteers review each other after every programme. Strong reviews raise your listing's visibility and help the right applicants find you.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /featTrack -->
+
+        <!-- Controls -->
+        <div class="hiw-controls">
+          <div class="hiw-dots">
+            <button class="hiw-dot hiw-dot--active" onclick="featGoTo(0)" aria-label="Slide 1"></button>
+            <button class="hiw-dot" onclick="featGoTo(1)" aria-label="Slide 2"></button>
+            <button class="hiw-dot" onclick="featGoTo(2)" aria-label="Slide 3"></button>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="hiw-arrow" id="featPrev" onclick="featPrev()" aria-label="Previous">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="hiw-arrow" id="featNext" onclick="featNext()" aria-label="Next">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /featCarousel -->
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS (CARE) ────────────────────────────── -->
+  <section id="care-how-it-works" style="background:#fff;padding:80px 0;">
+    <div class="h-container">
+      <div class="section-header" style="margin-bottom:52px;">
+        <span class="overline-tag" style="color:#2E7D32;">How it works</span>
+        <h2>Live in an afternoon.</h2>
+      </div>
+      <div class="process-unified" style="margin-bottom:48px;">
         <div class="process-step-uni">
-          <div class="process-step-uni__num">1</div>
+          <div class="process-step-uni__num" style="border-color:#2E7D32;color:#2E7D32;">1</div>
           <span class="process-step-uni__time">~15 min</span>
-          <p class="process-step-uni__title">Register Your Interest</p>
-          <p class="process-step-uni__desc">Tell us about your program, who it serves, and how you run it.</p>
+          <p class="process-step-uni__title">Sign up &amp; get verified</p>
+          <p class="process-step-uni__desc">Create your host profile and complete a quick identity and organisation check.</p>
         </div>
         <div class="process-step-uni">
-          <div class="process-step-uni__num">2</div>
+          <div class="process-step-uni__num" style="border-color:#2E7D32;color:#2E7D32;">2</div>
           <span class="process-step-uni__time">3–5 days</span>
-          <p class="process-step-uni__title">Verification</p>
-          <p class="process-step-uni__desc">We confirm who you are, not how good you are.</p>
+          <p class="process-step-uni__title">Create your opening</p>
+          <p class="process-step-uni__desc">Add opening type, slots, batches, terms, fees, and screening questions.</p>
         </div>
         <div class="process-step-uni">
-          <div class="process-step-uni__num">3</div>
+          <div class="process-step-uni__num" style="border-color:#2E7D32;color:#2E7D32;">3</div>
           <span class="process-step-uni__time">Guided setup</span>
-          <p class="process-step-uni__title">Build Your Listing</p>
-          <p class="process-step-uni__desc">Program details, policies, availability, pricing, and your short link.</p>
+          <p class="process-step-uni__title">Share one link</p>
+          <p class="process-step-uni__desc">Post it everywhere you already have an audience. Your GDT listing goes live too.</p>
         </div>
         <div class="process-step-uni">
-          <div class="process-step-uni__num">4</div>
+          <div class="process-step-uni__num" style="border-color:#2E7D32;color:#2E7D32;">4</div>
           <span class="process-step-uni__time">Within 3 weeks</span>
-          <p class="process-step-uni__title">Go Live</p>
-          <p class="process-step-uni__desc">Start receiving screened, confirmed participants, not cold enquiries.</p>
+          <p class="process-step-uni__title">Shortlist &amp; confirm</p>
+          <p class="process-step-uni__desc">Review screened applicants and confirm the right ones. Commitments and fees are collected on confirmation.</p>
         </div>
+      </div>
+      <div style="text-align:center;">
+        <button class="btn-cta-vol" onclick="openSignupModal()" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;">
+          Create your first opening
+          <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- ── ON YOUR SIDE ───────────────────────────────────── -->
-  <section style="background:#fafafa;padding:88px 0;">
+  <!-- ── WHAT STAYS YOURS ───────────────────────────────── -->
+  <section style="background:#0d1f0d;padding:80px 0;">
     <div class="h-container">
-      <div class="section-header">
-        <span class="overline-tag">Platform Features</span>
-        <h2>You Focus on the Experience. We Handle the Rest.</h2>
-        <p style="font-size:17px;color:#364153;line-height:1.8;max-width:860px;margin:0 auto;">The tools and support that used to require a marketing department.</p>
-      </div>
-
-      <!-- Dashboard image -->
-      <div style="margin-bottom:56px;">
-        <img src="assets/images/dashboard-1.png" alt="Host Dashboard" style="width:100%;height:auto;display:block;border-radius:12px;border:1px solid #e5e5e5;" />
-      </div>
-
-      <div class="h-feat-grid">
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">Screening you control</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">Write your own screening questions, set your own bar. Applications arrive pre-filtered and comparable, ready for a yes or a no, not a conversation.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">Confirmed means committed</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">Volunteers and travellers pay on confirmation, not on promises. A name on your calendar is a person who is coming.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">A calendar that manages itself</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">Confirmations, receipts, reminders and pre-trip messages go out on their own. Cancellations trigger the waitlist; the spot refills without you touching it.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">Enquiries answered before they reach you</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">The routine questions get handled by our team. What reaches you is intent, not traffic.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">A listing that does the selling</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">Full program or itinerary, policies, live availability, bookable, with a short link you can share anywhere your audience already is.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">Reviews that build something</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">Only people who actually came can rate you. Your reputation compounds on the platform instead of evaporating in a chat thread.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">Charge for what you provide</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">Meals, stays, training, materials. If your program includes a service, you can price it. Contribution and cost-recovery can coexist, cleanly.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;padding:24px;">
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,73,0,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f54900" stroke-width="1.8" stroke-linecap="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-          </div>
-          <p style="font-size:15px;font-weight:600;color:#171717;margin-bottom:6px;">Marketing that finds your people</p>
-          <p style="font-size:13px;color:#525252;line-height:1.7;">Field Notes, search and campaigns run by our team bring high-intent travellers and volunteers. You don't buy ads or chase reach.</p>
-        </div>
-      </div>
-      <div style="margin-top:32px;text-align:center;">
-        <p style="font-size:15px;color:#525252;line-height:1.7;">Every host here is verified before going live, and ranking is earned, never sold. No promoted slots, no pay-to-be-seen. The room stays clean, and the only way up is to be good.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Start With More section -->
-  <section style="background:#101828;padding:88px 0;">
-    <div class="h-container">
-      <div class="h-two-col">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
+        <!-- Left: headline -->
         <div>
-          <span class="overline-tag" style="color:#ff7043;">Join Early</span>
-          <h2 style="font-family:'Playfair Display',serif;font-size:42px;font-weight:500;color:#fff;line-height:1.18;margin-bottom:20px;">Start With More.</h2>
-          <p style="font-size:16px;color:rgba(255,255,255,0.72);line-height:1.8;margin-bottom:28px;">We're intentionally starting with a small group of hosts. That means hands-on onboarding, direct access to our team, every feature we release during your first year, and a closer relationship with the people building GDT. It's an experience reserved for our earliest hosts.</p>
-          <p style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px;">Built for hosts who:</p>
-          <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:10px;">
-            <li style="display:flex;align-items:flex-start;gap:10px;font-size:15px;color:rgba(255,255,255,0.75);line-height:1.6;"><span style="color:#ff7043;margin-top:4px;">•</span> Run their own programs, not someone else's.</li>
-            <li style="display:flex;align-items:flex-start;gap:10px;font-size:15px;color:rgba(255,255,255,0.75);line-height:1.6;"><span style="color:#ff7043;margin-top:4px;">•</span> Value quality over volume.</li>
-            <li style="display:flex;align-items:flex-start;gap:10px;font-size:15px;color:rgba(255,255,255,0.75);line-height:1.6;"><span style="color:#ff7043;margin-top:4px;">•</span> Welcome verification and honest reviews.</li>
+          <span style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#66bb6a;display:block;margin-bottom:16px;">Your programme. Your rules.</span>
+          <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,3.5vw,48px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:20px;">GDT Care is not a volunteer agency.</h2>
+          <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:1.75;">We run the infrastructure. You keep your name on the door, your selection criteria, and every relationship you've built.</p>
+          <p style="font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;margin-top:32px;">GDT Care is a shortlisting app. Hosts make all selection decisions. GDT is not an agency.</p>
+        </div>
+        <!-- Right: stacked cards -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px 22px;display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:rgba(102,187,106,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#66bb6a" stroke-width="1.8" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <p style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">You choose every person who joins</p>
+              <p style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;">GDT never selects for you. Your criteria, your shortlist, your call.</p>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px 22px;display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:rgba(102,187,106,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#66bb6a" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18M3 15h18"/></svg>
+            </div>
+            <div>
+              <p style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Your brand stays on your programme</p>
+              <p style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;">Your channels keep working. GDT Care is a backend tool, not a rebrand.</p>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px 22px;display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:rgba(102,187,106,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#66bb6a" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <p style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">We give you the tool, not the people</p>
+              <p style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;">We don't supply volunteers or promise numbers. We streamline your application management.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ─────────────────────────────────────────── -->
+  <section style="background:#fafafa;padding:80px 0;">
+    <div class="h-container">
+      <div class="section-header" style="margin-bottom:44px;">
+        <span class="overline-tag" style="color:#2E7D32;">Pricing</span>
+        <h2>Start free. Grow when you're ready.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto;" class="pricing-grid">
+        <!-- Free -->
+        <div style="background:#fff;border:1px solid #e5e5e5;border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#737373;margin-bottom:12px;">Free</p>
+          <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#171717;line-height:1;margin-bottom:4px;">₹0</p>
+          <p style="font-size:12px;color:#737373;margin-bottom:20px;">Forever, for non-profits</p>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:9px;flex:1;">
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>1 active opening</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>GDT listing</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic screening</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Commitment fee collection</li>
           </ul>
-          <div style="display:flex;gap:14px;flex-wrap:wrap;">
-            <button class="btn-proc-travel" onclick="openSignupModal()">Sign Up Now →</button>
-          </div>
+          <button onclick="openSignupModal()" style="margin-top:24px;width:100%;background:transparent;border:1.5px solid #e5e5e5;color:#171717;font-size:13px;font-weight:600;padding:12px;border-radius:8px;cursor:pointer;transition:border-color 0.15s;" onmouseover="this.style.borderColor='#2E7D32'" onmouseout="this.style.borderColor='#e5e5e5'">Get started free</button>
         </div>
+        <!-- Growth — Founder -->
+        <div style="background:#0d1f0d;border:1.5px solid rgba(46,125,50,0.5);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:12px;right:12px;background:#2E7D32;color:#fff;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:3px 8px;border-radius:999px;">Founding Host</div>
+          <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#66bb6a;margin-bottom:12px;">Growth</p>
+          <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;line-height:1;margin-bottom:4px;">Free</p>
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:20px;">First year, then affordable</p>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:9px;flex:1;">
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#66bb6a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited openings</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#66bb6a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom screening quiz</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#66bb6a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Batch &amp; location cloning</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#66bb6a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Android app access</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#66bb6a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Field Notes story feature</li>
+          </ul>
+          <button onclick="openSignupModal()" class="btn-cta-vol" style="margin-top:24px;width:100%;font-size:13px;padding:12px;">Claim founding spot</button>
+        </div>
+        <!-- Enterprise -->
+        <div style="background:#fff;border:1px solid #e5e5e5;border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#737373;margin-bottom:12px;">Enterprise</p>
+          <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#171717;line-height:1;margin-bottom:4px;">Custom</p>
+          <p style="font-size:12px;color:#737373;margin-bottom:20px;">For larger organisations</p>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:9px;flex:1;">
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Growth</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated account support</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Multi-programme dashboard</li>
+            <li style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#525252;line-height:1.5;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><path d="M2 7l3 3 7-6" stroke="#2E7D32" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom co-marketing</li>
+          </ul>
+          <a href="https://wa.me/919999999999?text=Hi%2C+I'm+interested+in+GDT+Care+Enterprise" target="_blank" rel="noopener" style="margin-top:24px;width:100%;background:transparent;border:1.5px solid #e5e5e5;color:#171717;font-size:13px;font-weight:600;padding:12px;border-radius:8px;cursor:pointer;text-align:center;text-decoration:none;display:block;transition:border-color 0.15s;" onmouseover="this.style.borderColor='#2E7D32'" onmouseout="this.style.borderColor='#e5e5e5'">Talk to us</a>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:13px;color:#737373;margin-top:20px;">Not sure which plan fits? <a href="https://wa.me/919999999999?text=Hi%2C+I+want+to+know+more+about+GDT+Care+pricing" target="_blank" rel="noopener" style="color:#2E7D32;font-weight:600;text-decoration:none;">Talk to us on WhatsApp</a></p>
+    </div>
+  </section>
+
+  <!-- ── FAQ (CARE) ─────────────────────────────────────── -->
+  <section class="host-faq care-faq-section">
+    <div class="h-container care-faq-grid">
+
+      <!-- LEFT: sticky heading + CTA callout -->
+      <div class="care-faq-aside">
+        <span class="overline-tag" style="color:#66bb6a;">FAQs</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,2.8vw,36px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:16px;margin-top:8px;">Common questions about GDT Care</h2>
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:32px;">Can't find your answer? We're happy to walk you through it.</p>
+        <!-- CTA callout card -->
+        <div class="care-faq-cta-card">
+          <p class="overline-tag" style="color:#2E7D32;margin-bottom:10px;">Founding Host · 15 spots</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#171717;line-height:1.25;margin-bottom:8px;">Your next batch starts with a better shortlist.</h3>
+          <p style="font-size:13px;color:#525252;line-height:1.65;margin-bottom:20px;">Free to start. Free forever for non-profits.</p>
+          <button class="btn-cta-vol" onclick="openSignupModal()" style="padding:13px 22px;font-size:14px;width:100%;justify-content:center;">
+            Become a host →
+          </button>
+          <a href="https://wa.me/919999999999?text=Hi%2C+I%27d+like+to+know+more+about+GDT+Care" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;background:transparent;border:none;color:#525252;font-size:13px;font-weight:500;text-decoration:none;padding:8px 0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M11.5 2.5C6.254 2.5 2 6.754 2 12c0 1.792.475 3.47 1.306 4.921L2 22l5.234-1.372A9.45 9.45 0 0 0 11.5 21.5C16.746 21.5 21 17.246 21 12S16.746 2.5 11.5 2.5z"/></svg>
+            Talk to us on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: accordion -->
+      <div class="care-faq-list">
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">Is GDT Care a job portal?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">No. It's a shortlisting tool for programme-based openings in our six categories. You list an opening, applicants apply, you decide. We don't send you volunteers — we help the right people find your programme and apply through one structured route.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">Will you send me volunteers?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">No. Your listing is promoted on Great D'Tour, but we don't supply people or promise numbers. Most of the value is in managing applicants from all your channels in one place.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">Can I keep using WhatsApp and Instagram?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">Yes. Share your GDT Care link there. Applicants still find you the same way — they just apply through one structured route. All your existing channels keep working; they just funnel into one dashboard.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">How does the commitment fee work?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">You set the amount. Applicants pay it when they confirm their place. If they show up and complete as agreed, it's refunded to them in full. If they don't show up, it's paid to you. It's designed to protect your programme from last-minute dropouts.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">I charge for training or stay. Can I collect it through GDT Care?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">Yes. Add your fees when you create the opening. Applicants see the full breakdown, including applicable taxes, and pay through the platform when they confirm. Your fee replaces the commitment fee in this case.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">When do I receive collected fees?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">Payout timing and conditions are being finalised. For the most current information, write to us at <a href="mailto:info@greatdtour.com" style="color:#2E7D32;font-weight:600;">info@greatdtour.com</a> and our team will respond with the current policy.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">What does verification involve?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">A quick check of your identity and organisation, so applicants know every host on GDT Care is real. It typically takes 3–5 days and is required before your listing goes live.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">Is it really free for non-profits?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">Yes. NGOs, Trusts, Societies and Section 8 companies get every Premium feature at no cost. This is a permanent policy, not a trial.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__btn"><span class="faq-item__q">Do I have to use the app?</span><svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-item__answer">No. Everything works from the web dashboard. The Android app is there for notifications and decisions on the go — useful if you're in the field and can't always be at a desk.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  </div><!-- /gdt-care -->
+
+
+  <!-- ════════════════════════════════════════════════════
+       GDT MARKETPLACE SECTION
+  ════════════════════════════════════════════════════ -->
+  <div id="gdt-marketplace">
+
+  <section style="background:linear-gradient(160deg,#171717 0%,#262626 100%);padding:96px 0 80px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-160px;left:-80px;width:480px;height:480px;border-radius:50%;background:rgba(245,73,0,0.08);filter:blur(100px);pointer-events:none;"></div>
+    <div class="h-container" style="position:relative;z-index:1;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;" class="mkt-hero-grid">
         <div>
-          <img src="assets/images/map-planning.jpg" alt="Plan your hosting journey" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;" />
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(245,73,0,0.12);border:1px solid rgba(245,73,0,0.25);border-radius:999px;padding:5px 14px;margin-bottom:24px;font-size:11px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;color:#ff7043;">
+            <svg width="7" height="7" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" fill="none" stroke="#ff7043" stroke-width="1.5"/></svg>
+            Coming Soon &nbsp;·&nbsp; Register your interest
+          </div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:clamp(34px,3.8vw,50px);font-weight:600;color:#fff;line-height:1.14;margin-bottom:18px;">Share your world.<br /><em style="color:#ff7043;">Earn doing it.</em></h2>
+          <p style="font-size:17px;color:rgba(255,255,255,0.75);line-height:1.8;max-width:480px;margin-bottom:32px;">GDT Marketplace is where independent guides, craft artisans, wellness practitioners, and expedition leaders list day trips and multi-day experiences. Your pricing, your dates, your identity — intact.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.7);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff7043" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0"/></svg>
+              Commission-only — no listing fees, no charge until a booking completes
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.7);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff7043" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0"/></svg>
+              24-month founder rate lock for early partners
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.7);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff7043" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0"/></svg>
+              GST handled by GDT for non-registered operators
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.7);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff7043" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0"/></svg>
+              Full control over pricing, dates, slots, and confirmation method
+            </div>
+          </div>
+          <button onclick="openSignupModal()" class="btn-hero-travel" style="display:inline-flex;align-items:center;gap:8px;">
+            Register your interest early
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p style="margin-top:12px;font-size:12px;color:rgba(255,255,255,0.4);">Join Care now and you enter the Marketplace ahead of the queue.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:20px;">
+          <p style="font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:4px;">What's coming to Marketplace</p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="padding:16px;background:rgba(255,255,255,0.05);border-radius:10px;">
+              <p style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;">Day trips &amp; multi-day experiences</p>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5;">Curated by category, bookable with confirmed payment — no enquiries.</p>
+            </div>
+            <div style="padding:16px;background:rgba(255,255,255,0.05);border-radius:10px;">
+              <p style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;">Operator dashboard</p>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5;">Manage pricing, slots, availability and confirmations in one place.</p>
+            </div>
+            <div style="padding:16px;background:rgba(255,255,255,0.05);border-radius:10px;">
+              <p style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;">Field Notes integration</p>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5;">Your host story published before your listing goes live — content-first discovery.</p>
+            </div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:18px;">
+            <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;font-style:italic;">Full details coming soon. Register your interest to be notified first and secure founding-partner rates.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  </div><!-- /gdt-marketplace -->
 
   <!-- ── SIGNUP MODAL ──────────────────────────────────── -->
   <div class="app-modal-overlay" id="modal-signup">
@@ -1107,7 +1984,7 @@
     <div class="h-container">
       <div class="section-header" style="text-align:left;">
         <span class="overline-tag" style="display:inline-block;">FAQ</span>
-        <h2>Frequently Asked Questions</h2>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:700;">Frequently Asked Questions</h2>
       </div>
       <div class="faq-list">
         <div class="faq-item">
@@ -1281,6 +2158,28 @@
 
   <script src="assets/main.js"></script>
   <script>
+    // ── Feature deep-dive carousel ─────────────────────
+    let featCurrent = 0;
+    const featTotal = 3;
+    function featGoTo(index) {
+      featCurrent = index;
+      document.getElementById('featTrack').style.transform = 'translateX(-' + (index * 100) + '%)';
+      document.querySelectorAll('#featCarousel .hiw-dot').forEach((d,i) => d.classList.toggle('hiw-dot--active', i === index));
+      document.getElementById('featPrev').disabled = index === 0;
+      document.getElementById('featNext').disabled = index === featTotal - 1;
+    }
+    function featPrev() { if (featCurrent > 0) featGoTo(featCurrent - 1); }
+    function featNext() { if (featCurrent < featTotal - 1) featGoTo(featCurrent + 1); }
+    document.addEventListener('DOMContentLoaded', () => featGoTo(0));
+
+    // ── Feature accordion ──────────────────────────────
+    function toggleFeat(btn) {
+      const item = btn.closest('.care-feat-item');
+      const isOpen = item.classList.contains('care-feat-item--open');
+      document.querySelectorAll('.care-feat-item').forEach(i => i.classList.remove('care-feat-item--open'));
+      if (!isOpen) item.classList.add('care-feat-item--open');
+    }
+
     // Signup modal
     function openSignupModal() {
       document.getElementById('signup-form').style.display = '';
